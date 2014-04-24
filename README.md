@@ -1,1 +1,4 @@
-# This is my README.
+# graphs-dict
+
+Python implementation of graphs is presented. 
+
