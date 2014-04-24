@@ -1,0 +1,25 @@
+# This file tells git what files to ignore.
+
+# Regular Python bytecode files.
+*.pyc
+
+# Optimized Python bytecode files.
+*.pyo
+
+# Auxiliary LaTeX files.
+*.dvi
+*.log
+*.aux
+*.toc
+*.lof
+*.lot
+*.ps
+# Beamer
+*.nav
+*.out
+*.snm
+*.vrb
+# listings
+*.lol
+
+# EOF
