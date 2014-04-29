@@ -39,7 +39,7 @@ class Graph(dict):
     def add_node(self, node):
         """Add a node to the graph."""
         if node not in self:
-            self[node] = {}
+            self[node] = dict()
 
     def has_node(self, node):
         """Test if a node exists."""
@@ -129,17 +129,14 @@ class Graph(dict):
         if self.v() != other.v():
             #print "|V1| != |V2|"
             return False
-        alist = list(self.iternodes())
-        alist.sort()
-        blist = list(other.iternodes())
-        blist.sort()
-        if alist != blist:
-            #print "V1 != V2"
-            return False
+        for node in self.iternodes():   # time O(V)
+            if not other.has_node(node):
+                #print "V1 != V2"
+                return False
         if self.e() != other.e():   # inefficient, time O(E)
             #print "|E1| != |E2|"
             return False
-        for edge in self.iteredges():
+        for edge in self.iteredges():   # time O(E)
             if not other.has_edge(edge):
                 #print "E1 != E2"
                 return False
