@@ -31,6 +31,9 @@ class TestGraphDirected(unittest.TestCase):
         self.G.del_node("B")
         self.assertEqual(self.G.e(), 2)
 
+    def test_cmp(self):
+        T = Graph(self.N, directed=True)
+
     def tearDown(self): pass
 
 

@@ -73,6 +73,7 @@ class Graph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists."""
+        # edge.weight is not checked!
         return edge.target in self[edge.source]
 
     def weight(self, source, target):
@@ -112,7 +113,8 @@ class Graph(dict):
                 if self.is_directed() or source < target:
                     yield Edge(source, target, self[source][target])
 
-    def show(self):                 # propozycja wyswietlania grafu
+    def show(self):
+        """Graph presentation."""
         for source in self.iternodes():
             print source, ":",
             for target in self.iteradjacent(source):
@@ -121,7 +123,22 @@ class Graph(dict):
 
     def __eq__(self, other):
         """Test if the graphs are equal."""
-        pass
+        if self.is_directed() is not other.is_directed():
+            return False
+        if self.v() != other.v():
+            return False
+        if self.e() != other.e():   # inefficient, time O(E)
+            return False
+        alist = list(self.iternodes())
+        alist.sort()
+        blist = list(other.iternodes())
+        blist.sort()
+        if alist != blist:
+            return False
+        for edge in self.iteredges():
+            if not other.has_edge(edge):
+                return False
+        return True
 
     def __ne__(self, other):
         """Test if the graphs are not equal."""
