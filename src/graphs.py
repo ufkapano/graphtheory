@@ -73,8 +73,8 @@ class Graph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists."""
-        # edge.weight is not checked!
-        return edge.target in self[edge.source]
+        return (edge.target in self[edge.source] and
+        edge.weight == self[edge.source][edge.target])
 
     def weight(self, source, target):
         """Returns the edge weight or zero."""
@@ -124,19 +124,24 @@ class Graph(dict):
     def __eq__(self, other):
         """Test if the graphs are equal."""
         if self.is_directed() is not other.is_directed():
+            #print "directed and undirected graphs"
             return False
         if self.v() != other.v():
-            return False
-        if self.e() != other.e():   # inefficient, time O(E)
+            #print "|V1| != |V2|"
             return False
         alist = list(self.iternodes())
         alist.sort()
         blist = list(other.iternodes())
         blist.sort()
         if alist != blist:
+            #print "V1 != V2"
+            return False
+        if self.e() != other.e():   # inefficient, time O(E)
+            #print "|E1| != |E2|"
             return False
         for edge in self.iteredges():
             if not other.has_edge(edge):
+                #print "E1 != E2"
                 return False
         return True
 

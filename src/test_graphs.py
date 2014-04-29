@@ -32,7 +32,28 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.e(), 2)
 
     def test_cmp(self):
+        T = Graph(self.N)
+        self.assertFalse(T == self.G, "directed and undirected graphs")
         T = Graph(self.N, directed=True)
+        for node in ["A", "B", "C", "X"]:
+            T.add_node(node)
+        self.assertFalse(T == self.G, "nodes are different")
+        T.del_node("X")
+        self.assertFalse(T == self.G, "numbers of nodes are different")
+        T.add_node("D")
+        T.add_edge(Edge("A", "B", 2))
+        T.add_edge(Edge("B", "C", 4))
+        T.add_edge(Edge("C", "A", 6))
+        T.add_edge(Edge("C", "D", 3))
+        self.assertFalse(T == self.G, "edge numbers are different")
+        T.add_edge(Edge("D", "B", 7))
+        self.assertFalse(T == self.G, "edge weights are different")
+        T.del_edge(Edge("D", "B", 7))
+        T.add_edge(Edge("B", "D", 5))
+        self.assertFalse(T == self.G, "edge directions are different")
+        T.del_edge(Edge("B", "D", 5))
+        T.add_edge(Edge("D", "B", 5))
+        self.assertTrue(T == self.G, "graphs are the same")
 
     def tearDown(self): pass
 
