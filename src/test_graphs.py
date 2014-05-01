@@ -55,14 +55,50 @@ class TestGraphDirected(unittest.TestCase):
         T.add_edge(Edge("D", "B", 5))
         self.assertTrue(T == self.G, "graphs are the same")
 
+    def test_add_graph_directed(self):
+        T = Graph(self.N, directed=True)
+        T.add_edge(Edge("E", "B", 8))
+        T.add_edge(Edge("E", "D", 9))
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 2)
+        self.G.add_graph(T)
+        self.assertEqual(self.G.v(), 5)
+        self.assertEqual(self.G.e(), 7)
+
     def tearDown(self): pass
 
+# A --- B
+# |  /  |
+# | /   |
+# C --- D
 
 class TestGraphUndirected(unittest.TestCase):
 
-    def setUp(self): pass
+    def setUp(self):
+        self.N = 4           # number of nodes
+        self.G = Graph(self.N)
+        self.edges = [Edge("A", "B", 2), Edge("B", "C", 4), Edge("C", "A", 6),
+                      Edge("C", "D", 3), Edge("D", "B", 5)]
+        for edge in self.edges:
+            self.G.add_edge(edge)
 
-    def test_undirected(self): pass
+    def test_undirected(self):
+        self.assertFalse(self.G.is_directed())
+        self.assertEqual(self.G.v(), self.N)
+        self.assertEqual(self.G.e(), 5)
+        self.G.del_node("B")
+        self.assertEqual(self.G.v(), 3)
+        self.assertEqual(self.G.e(), 2)
+
+    def test_add_graph_undirected(self):
+        T = Graph(self.N)
+        T.add_edge(Edge("E", "B", 8))
+        T.add_edge(Edge("E", "D", 9))
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 2)
+        self.G.add_graph(T)
+        self.assertEqual(self.G.v(), 5)
+        self.assertEqual(self.G.e(), 7)
 
     def tearDown(self): pass
 

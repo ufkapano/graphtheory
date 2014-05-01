@@ -146,4 +146,11 @@ class Graph(dict):
         """Test if the graphs are not equal."""
         return not self == other
 
+    def add_graph(self, other):
+        """Add a graph to this graph."""
+        for node in other.iternodes():
+            self.add_node(node)
+        for edge in other.iteredges():
+            self.add_edge(edge)
+
 # EOF
