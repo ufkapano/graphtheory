@@ -2,8 +2,7 @@
 #
 # test_graphs.py
 #
-# Testy moga byc niezalezne od implementacji, bo jest wspolny
-# interfejs.
+# Tests for graphs.
 
 import unittest
 from edges import Edge
@@ -29,6 +28,7 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 5)
         self.G.del_node("B")
+        self.assertEqual(self.G.v(), 3)
         self.assertEqual(self.G.e(), 2)
 
     def test_cmp(self):
@@ -107,8 +107,7 @@ class TestGraphLadder(unittest.TestCase):
         for node in self.G.iteradjacent(2):
             self.assertTrue(node in [0, 3, 4])
 
-    def tearDown(self):
-        pass
+    def tearDown(self): pass
 
 if __name__ == "__main__":
 

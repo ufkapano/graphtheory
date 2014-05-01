@@ -22,8 +22,10 @@ class TestBoruvka(unittest.TestCase):
         Edge("D", "F", 6), Edge("F", "E", 12), Edge("F", "G", 13), Edge("E", "G", 8)]
         for edge in self.edges:
             self.G.add_edge(edge)
+        #print self.G
 
     def test_mst(self):
+        self.assertEqual(self.G.v(), self.N)
         boruvka = BoruvkaMST(self.G)
         boruvka.run()
         self.assertEqual(boruvka.mst.v(), self.N)

@@ -22,6 +22,7 @@ class Testprim(unittest.TestCase):
             self.G.add_edge(edge)
 
     def test_mst(self):
+        self.assertEqual(self.G.v(), self.N)
         prim = PrimMST(self.G)
         prim.run()
         self.assertEqual(prim.mst.v(), self.N)

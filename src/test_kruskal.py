@@ -22,6 +22,7 @@ class TestKruskal(unittest.TestCase):
             self.G.add_edge(edge)
 
     def test_mst(self):
+        self.assertEqual(self.G.v(), self.N)
         kruskal = KruskalMST(self.G)
         kruskal.run()
         self.assertEqual(kruskal.mst.v(), self.N)

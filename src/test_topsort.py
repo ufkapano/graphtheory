@@ -23,6 +23,7 @@ class TestTopologicalSorting(unittest.TestCase):
             self.G.add_edge(edge)
 
     def test_topsort(self):
+        self.assertEqual(self.G.v(), self.N)
         #self.G.show()
         ts = TopologicalSort(self.G)
         ts.run()
