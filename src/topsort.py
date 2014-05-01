@@ -12,12 +12,14 @@ from Queue import Queue
 class TopologicalSort:
 
     def __init__(self, graph):
+        """The algorithm initialization."""
         self.graph = graph
         self.in_edges = dict((node, 0) for node in self.graph.iternodes())
         self.sorted_nodes = []
         self.Q = Queue()
 
     def run(self):
+        """Executable pseudocode."""
         # Calculate indegree of nodes.
         for edge in self.graph.iteredges():
             self.in_edges[edge.target] = self.in_edges[edge.target] + 1
