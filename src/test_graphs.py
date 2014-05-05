@@ -55,6 +55,13 @@ class TestGraphDirected(unittest.TestCase):
         T.add_edge(Edge("D", "B", 5))
         self.assertTrue(T == self.G, "graphs are the same")
 
+    def test_iteredges(self):
+        inedges_B = list(self.G.iterinedges("B"))
+        outedges_B = list(self.G.iteroutedges("B"))
+        #print inedges_B, outedges_B
+        self.assertEqual(len(inedges_B), 2)
+        self.assertEqual(len(outedges_B), 1)
+
     def test_add_graph_directed(self):
         T = Graph(self.N, directed=True)
         T.add_edge(Edge("E", "B", 8))
@@ -89,6 +96,13 @@ class TestGraphUndirected(unittest.TestCase):
         self.G.del_node("B")
         self.assertEqual(self.G.v(), 3)
         self.assertEqual(self.G.e(), 2)
+
+    def test_iteredges(self):
+        inedges_B = list(self.G.iterinedges("B"))
+        outedges_B = list(self.G.iteroutedges("B"))
+        #print inedges_B, outedges_B
+        self.assertEqual(len(inedges_B), 3)
+        self.assertEqual(len(outedges_B), 3)
 
     def test_add_graph_undirected(self):
         T = Graph(self.N)

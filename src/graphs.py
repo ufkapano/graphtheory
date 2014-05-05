@@ -102,9 +102,9 @@ class Graph(dict):
             for (target, sources_dict) in self.iteritems():
                 if source in sources_dict:
                     yield Edge(target, source, sources_dict[source])
-        else:    # iteroutedges
+        else:
             for target in self[source]:
-                yield Edge(source, target, self[source][target])
+                yield Edge(target, source, self[target][source])
 
     def iteredges(self):
         """Generates edges from the graph on demand."""
