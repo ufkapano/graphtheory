@@ -15,12 +15,9 @@ class PrimMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.dist = dict((node, float("inf"))
-            for node in self.graph.iternodes())
-        self.prev = dict((node, None)
-            for node in self.graph.iternodes()) # MST as a dict
-        self.in_queue = dict((node, True)
-            for node in self.graph.iternodes())
+        self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
+        self.in_queue = dict((node, True) for node in self.graph.iternodes())
         self.mst = Graph()   # MST as a graph
         self.pq = PriorityQueue()
 

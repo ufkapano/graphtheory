@@ -147,7 +147,7 @@ class Graph(dict):
         return not self == other
 
     def add_graph(self, other):
-        """Add a graph to this graph."""
+        """Add a graph to this graph (the current graph is modified)."""
         for node in other.iternodes():
             self.add_node(node)
         for edge in other.iteredges():

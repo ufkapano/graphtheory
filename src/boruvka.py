@@ -28,7 +28,7 @@ class BoruvkaMST:
             for edge in self.graph.iteroutedges(node):
                 if source != self.uf.find(edge.target):
                     # edge to a node outside of the component
-                    if edge.weight < min_edge.weight:
+                    if edge < min_edge:
                         min_edge = edge
         return min_edge
 
