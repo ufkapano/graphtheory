@@ -97,11 +97,11 @@ class Graph(dict):
             yield Edge(source, target, self[source][target])
 
     def iterinedges(self, source):
-        """Generates outedges from the graph on demand."""
-        if self.is_directed():   # inefficient, time O(E)
-            for edge in self.iteredges():
-                if edge.target == source:
-                    yield edge
+        """Generates inedges from the graph on demand."""
+        if self.is_directed():   # time O(V)
+            for (target, sources_dict) in self.iteritems():
+                if source in sources_dict:
+                    yield Edge(target, source, sources_dict[source])
         else:    # iteroutedges
             for target in self[source]:
                 yield Edge(source, target, self[source][target])
