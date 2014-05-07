@@ -10,7 +10,7 @@ from Queue import PriorityQueue
 
 
 class PrimMST:
-    """Prim's algorithm for finding MST."""
+    """Prim's algorithm for finding MST in time O(E lg V)."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -47,7 +47,7 @@ class PrimMST:
                     self.pq.put((edge.weight, edge.target))
 
 class PrimMatrixMST:
-    """Prim's algorithm for finding MST, version with time O(V**2)."""
+    """Prim's algorithm for finding MST in time O(V**2)."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -64,9 +64,9 @@ class PrimMatrixMST:
         self.source = source
         self.dist[source] = 0
         for step in range(self.graph.v()):    # V times
-            # find min node in graph - time O(V)
-            weight, node = min(((self.dist[node], node) 
-            for node in self.graph.iternodes() if self.in_queue[node]))
+            # find min node in the graph - time O(V)
+            node = min((node for node in self.graph.iternodes() 
+            if self.in_queue[node]), key=self.dist.get)
             self.in_queue[node] = False
             for edge in self.graph.iteroutedges(node):  # time O(V)
                 if (self.in_queue[edge.target] 
