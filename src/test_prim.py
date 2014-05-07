@@ -6,11 +6,11 @@
 
 from edges import Edge
 from graphs import Graph
-from prim import PrimMST
+from prim import PrimMST, PrimMatrixMST
 import unittest
 
 
-class Testprim(unittest.TestCase):
+class TestPrim(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
@@ -24,6 +24,20 @@ class Testprim(unittest.TestCase):
     def test_mst(self):
         self.assertEqual(self.G.v(), self.N)
         prim = PrimMST(self.G)
+        prim.run()
+        self.assertEqual(prim.mst.v(), self.N)
+        self.assertEqual(prim.mst.e(), self.N-1)
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in prim.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [Edge('A', 'B', 7), Edge('A', 'D', 4), 
+        Edge('C', 'E', 5), Edge('B', 'E', 10), Edge('E', 'G', 8), Edge('D', 'F', 6)]
+        for edge in mst_edges_expected:
+            self.assertTrue(prim.mst.has_edge(edge))
+
+    def test_mst_matrix(self):
+        self.assertEqual(self.G.v(), self.N)
+        prim = PrimMatrixMST(self.G)
         prim.run()
         self.assertEqual(prim.mst.v(), self.N)
         self.assertEqual(prim.mst.e(), self.N-1)
