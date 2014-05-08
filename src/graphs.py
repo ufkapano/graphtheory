@@ -73,13 +73,12 @@ class Graph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists."""
-        return (edge.target in self[edge.source] and
-        edge.weight == self[edge.source][edge.target])
+        return edge.source in self and edge.target in self[edge.source]
 
-    def weight(self, source, target):
+    def weight(self, edge):
         """Returns the edge weight or zero."""
-        if source in self and target in self[source]:
-            return self[source][target]
+        if edge.source in self and edge.target in self[edge.source]:
+            return self[edge.source][edge.target]
         else:
             return 0
 
@@ -139,6 +138,8 @@ class Graph(dict):
         for edge in self.iteredges():   # time O(E)
             if not other.has_edge(edge):
                 #print "E1 != E2"
+                return False
+            if edge.weight != other.weight(edge):
                 return False
         return True
 

@@ -140,9 +140,9 @@ class TestGraphLadder(unittest.TestCase):
     def test_edges(self):
         for edge in self.edges:
             self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(self.G.weight(edge.source, edge.target), edge.weight)
+            self.assertEqual(self.G.weight(edge), edge.weight)
         self.assertFalse(self.G.has_edge(Edge(0, 3)))
-        self.assertEqual(self.G.weight(0, 3), 0)  # no edge
+        self.assertEqual(self.G.weight(Edge(0, 3)), 0)  # no edge
 
     def test_del(self):
         self.assertEqual(self.G.e(), 10)
