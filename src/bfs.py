@@ -2,7 +2,7 @@
 #
 # bfs.py
 #
-# Breadth First Search.
+# Breadth-First Search.
 
 from edges import Edge
 from graphs import Graph
@@ -12,6 +12,7 @@ from Queue import Queue
 class BFSWithQueue:
 
     def __init__(self, graph):
+        """The algorithm initialization."""
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.dist = dict(((node, float("inf")) for node in self.graph.iternodes()))
@@ -19,6 +20,7 @@ class BFSWithQueue:
         self.tree = Graph()   # spanning tree
 
     def run(self, source=None, action=None):
+        """Executable pseudocode."""
         if source is not None:
             self.visit(source, action)
         else:
@@ -32,6 +34,7 @@ class BFSWithQueue:
                 self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, action=None):
+        """Explore the connected component,"""
         self.color[node] = "GREY"
         self.dist[node] = 0
         self.prev[node] = None
@@ -52,7 +55,7 @@ class BFSWithQueue:
             self.color[source] = "BLACK"
 
     def to_dag(self):
-        # Graf poprzednikow (skierowany).
+        """Returns the spanning tree as a dag."""
         dag = Graph(directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:

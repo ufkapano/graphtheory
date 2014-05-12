@@ -2,6 +2,7 @@
 #
 # dfs.py
 #
+# Depth-First Search.
 
 from edges import Edge
 from graphs import Graph
@@ -11,6 +12,7 @@ from Queue import LifoQueue
 class DFSWithStack:
 
     def __init__(self, graph):
+        """The algorithm initialization."""
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
@@ -20,18 +22,20 @@ class DFSWithStack:
         self.tree = Graph()   # undirected graph
 
     def run(self, source=None, pre_action=None, post_action=None):
+        """Executable pseudocode."""
         if source is not None:
             self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
-                    self.dfs_visit(node, pre_action, post_action)
+                    self.visit(node, pre_action, post_action)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
                 # Edge(parent, node)
                 self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, pre_action=None, post_action=None):
+        """Explore the connected component,"""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
@@ -57,6 +61,7 @@ class DFSWithStack:
                 post_action(source)
 
     def to_dag(self):
+        """Returns the spanning tree as a dag."""
         dag = Graph(directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
@@ -69,6 +74,7 @@ class DFSWithStack:
 class DFSWithRecursion:
 
     def __init__(self, graph):
+        """The algorithm initialization."""
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
@@ -82,18 +88,20 @@ class DFSWithRecursion:
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
 
     def run(self, source=None, pre_action=None, post_action=None):
+        """Executable pseudocode."""
         if source is not None:
             self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
-                    self.dfs_visit(node, pre_action, post_action)
+                    self.visit(node, pre_action, post_action)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
                 # Edge(parent, node)
                 self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, pre_action=None, post_action=None):
+        """Explore recursively the connected component."""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
@@ -110,6 +118,7 @@ class DFSWithRecursion:
             post_action(node)
 
     def to_dag(self):
+        """Returns the spanning tree as a dag."""
         dag = Graph(directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
