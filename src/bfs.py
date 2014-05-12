@@ -20,18 +20,18 @@ class BFSWithQueue:
 
     def run(self, source=None, action=None):
         if source is not None:
-            self.bfs_visit(source, action)
+            self.visit(source, action)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
-                    self.bfs_visit(node, action)
+                    self.visit(node, action)
         # budujemy spanning tree
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
                 # krawedz drzewowa (parent, node)
                 self.tree.add_edge(Edge(self.prev[node], node))
 
-    def bfs_visit(self, node, action=None):
+    def visit(self, node, action=None):
         self.color[node] = "GREY"
         self.dist[node] = 0
         self.prev[node] = None

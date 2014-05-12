@@ -9,9 +9,9 @@ from graphs import Graph
 from bfs import BFSWithQueue
 import unittest
 
-# r - s   t - u
+# r---s   t---u
 # |   | / | / |
-# v   w - x - y
+# v   w---x---y
 
 class TestBFS(unittest.TestCase):
 
