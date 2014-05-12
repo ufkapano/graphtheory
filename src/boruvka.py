@@ -22,14 +22,12 @@ class BoruvkaMST:
         """Find the cheapest edge from the component to outside."""
         min_edge = Edge(None, None, float("inf"))
         source = self.uf.find(source)
-        component = [node for node in self.graph.iternodes()
-            if self.uf.find(node) == source]
-        for node in component:
-            for edge in self.graph.iteroutedges(node):
-                if source != self.uf.find(edge.target):
-                    # edge to a node outside of the component
-                    if edge < min_edge:
-                        min_edge = edge
+        for edge in self.graph.iteredges():
+            if ((self.uf.find(edge.source) == source) 
+            == (self.uf.find(edge.target) != source)):
+                # edge to a node outside of the component
+                if edge < min_edge:
+                    min_edge = edge
         return min_edge
 
     def run(self):
@@ -39,18 +37,19 @@ class BoruvkaMST:
         forest = set(node for node in self.graph.iternodes())
         while len(forest) > 1:
             new_edges = []
-            for node in forest:
+            for node in forest:  # total time O(V*E)
                 edge = self.find_cheapest_edge(node)
                 new_edges.append(edge)
             # Connecting components.
+            forest = set()
             for edge in new_edges:
                 source = self.uf.find(edge.source)
                 target = self.uf.find(edge.target)
                 if source != target:
                     self.uf.union(source, target)
+                    forest.add(self.uf.find(source))
                     self.mst.add_edge(edge)
-            forest = set()
-            for node in self.graph.iternodes():   # time O(V)
-                forest.add(self.uf.find(node))
+            # remove duplicates, total time O(V)
+            forest = set(self.uf.find(node) for node in forest)
 
 # EOF
