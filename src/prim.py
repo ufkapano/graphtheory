@@ -10,7 +10,7 @@ from Queue import PriorityQueue
 
 
 class PrimMST:
-    """Prim's algorithm for finding MST in time O(E lg V)."""
+    """Prim's algorithm for finding MST in time O(E*log(V))."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -45,6 +45,7 @@ class PrimMST:
                     self.prev[edge.target] = edge.source
                     # DECREASE-KEY
                     self.pq.put((edge.weight, edge.target))
+
 
 class PrimMatrixMST:
     """Prim's algorithm for finding MST in time O(V**2)."""
