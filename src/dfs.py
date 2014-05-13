@@ -122,7 +122,7 @@ class DFSWithRecursion:
         dag = Graph(directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
-                # Edge(parent, node)
+                # Edge(parent, node), out-tree
                 dag.add_edge(Edge(self.prev[node], node))
         return dag
 

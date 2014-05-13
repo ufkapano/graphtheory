@@ -34,7 +34,7 @@ class BFSWithQueue:
                 self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, action=None):
-        """Explore the connected component,"""
+        """Explore the connected component."""
         self.color[node] = "GREY"
         self.dist[node] = 0
         self.prev[node] = None
@@ -59,7 +59,7 @@ class BFSWithQueue:
         dag = Graph(directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
-                # Edge(parent, node)
+                # Edge(parent, node), out-tree
                 dag.add_edge(Edge(self.prev[node], node))
         return dag
 
