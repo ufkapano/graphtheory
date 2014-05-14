@@ -6,7 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from dijkstra import Dijkstra
+from dijkstra import Dijkstra, DijkstraMatrix
 import unittest
 
 #    1
@@ -35,6 +35,18 @@ class TestDijkstra(unittest.TestCase):
         source = "A"
         target = "D"
         dijkstra = Dijkstra(self.G)
+        dijkstra.run(source)
+        dist_expected = {'A': 0, 'C': 2, 'B': 1, 'D': 3}
+        self.assertEqual(dijkstra.dist, dist_expected)
+        prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
+        self.assertEqual(dijkstra.prev, prev_expected)
+        path_expected = ['A', 'B', 'C', 'D']
+        self.assertEqual(dijkstra.path_to(target), path_expected)
+
+    def test_dijkstra_matrix(self):
+        source = "A"
+        target = "D"
+        dijkstra = DijkstraMatrix(self.G)
         dijkstra.run(source)
         dist_expected = {'A': 0, 'C': 2, 'B': 1, 'D': 3}
         self.assertEqual(dijkstra.dist, dist_expected)

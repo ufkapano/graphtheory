@@ -33,9 +33,6 @@ class PrimMST:
             weight, node = self.pq.get()
             if self.in_queue[node]:
                 self.in_queue[node] = False
-                if self.prev[node] is not None:
-                    self.mst.add_edge(
-                    Edge(self.prev[node], node, self.dist[node]))
             else:
                 continue
             for edge in self.graph.iteroutedges(node):
@@ -45,6 +42,9 @@ class PrimMST:
                     self.prev[edge.target] = edge.source
                     # DECREASE-KEY
                     self.pq.put((edge.weight, edge.target))
+        for node in self.graph.iternodes():   # time O(V)
+            if self.prev[node] is not None:
+                self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 
 
 class PrimMatrixMST:
@@ -64,7 +64,7 @@ class PrimMatrixMST:
             source = self.graph.iternodes().next()
         self.source = source
         self.dist[source] = 0
-        for step in range(self.graph.v()):    # V times
+        for step in xrange(self.graph.v()):    # V times
             # find min node in the graph - time O(V)
             node = min((node for node in self.graph.iternodes() 
             if self.in_queue[node]), key=self.dist.get)
@@ -74,7 +74,7 @@ class PrimMatrixMST:
                 and edge.weight < self.dist[edge.target]):
                     self.dist[edge.target] = edge.weight
                     self.prev[edge.target] = edge.source
-        for node in self.graph.iternodes():
+        for node in self.graph.iternodes():   # time O(V)
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 
