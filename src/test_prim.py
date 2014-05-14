@@ -25,31 +25,31 @@ class TestPrim(unittest.TestCase):
 
     def test_mst(self):
         self.assertEqual(self.G.v(), self.N)
-        prim = PrimMST(self.G)
-        prim.run()
-        self.assertEqual(prim.mst.v(), self.N)
-        self.assertEqual(prim.mst.e(), self.N-1)
+        algorithm = PrimMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 40
-        mst_weight = sum(edge.weight for edge in prim.mst.iteredges())
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [Edge('A', 'B', 7), Edge('A', 'D', 4), 
         Edge('C', 'E', 5), Edge('B', 'E', 10), Edge('E', 'G', 8), Edge('D', 'F', 6)]
         for edge in mst_edges_expected:
-            self.assertTrue(prim.mst.has_edge(edge))
+            self.assertTrue(algorithm.mst.has_edge(edge))
 
     def test_mst_matrix(self):
         self.assertEqual(self.G.v(), self.N)
-        prim = PrimMatrixMST(self.G)
-        prim.run()
-        self.assertEqual(prim.mst.v(), self.N)
-        self.assertEqual(prim.mst.e(), self.N-1)
+        algorithm = PrimMatrixMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 40
-        mst_weight = sum(edge.weight for edge in prim.mst.iteredges())
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [Edge('A', 'B', 7), Edge('A', 'D', 4), 
         Edge('C', 'E', 5), Edge('B', 'E', 10), Edge('E', 'G', 8), Edge('D', 'F', 6)]
         for edge in mst_edges_expected:
-            self.assertTrue(prim.mst.has_edge(edge))
+            self.assertTrue(algorithm.mst.has_edge(edge))
 
     def tearDown(self): pass
 
@@ -74,33 +74,33 @@ class TestPrimCormen(unittest.TestCase):
 
     def test_mst_cormen(self):
         self.assertEqual(self.G.v(), self.N)
-        prim = PrimMST(self.G)
-        prim.run()
-        self.assertEqual(prim.mst.v(), self.N)
-        self.assertEqual(prim.mst.e(), self.N-1)
+        algorithm = PrimMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
-        mst_weight = sum(edge.weight for edge in prim.mst.iteredges())
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [Edge("A", "B", 4), Edge("A", "H", 8),
         Edge("I", "C", 2), Edge("H", "G", 1), Edge("C", "F", 5),
         Edge("G", "F", 3), Edge("D", "E", 9), Edge("F", "E", 10)]
         for edge in mst_edges_expected:
-            self.assertTrue(prim.mst.has_edge(edge))
+            self.assertTrue(algorithm.mst.has_edge(edge))
 
     def test_mst_matrix_cormen(self):
         self.assertEqual(self.G.v(), self.N)
-        prim = PrimMatrixMST(self.G)
-        prim.run()
-        self.assertEqual(prim.mst.v(), self.N)
-        self.assertEqual(prim.mst.e(), self.N-1)
+        algorithm = PrimMatrixMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
-        mst_weight = sum(edge.weight for edge in prim.mst.iteredges())
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [Edge("A", "B", 4), Edge("A", "H", 8),
         Edge("I", "C", 2), Edge("H", "G", 1), Edge("C", "F", 5),
         Edge("G", "F", 3), Edge("D", "E", 9), Edge("F", "E", 10)]
         for edge in mst_edges_expected:
-            self.assertTrue(prim.mst.has_edge(edge))
+            self.assertTrue(algorithm.mst.has_edge(edge))
 
     def tearDown(self): pass
 

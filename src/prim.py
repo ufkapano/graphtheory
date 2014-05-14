@@ -10,7 +10,7 @@ from Queue import PriorityQueue
 
 
 class PrimMST:
-    """Prim's algorithm for finding MST in time O(E*log(V))."""
+    """Prim's algorithm for finding MST."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -42,13 +42,13 @@ class PrimMST:
                     self.prev[edge.target] = edge.source
                     # DECREASE-KEY
                     self.pq.put((edge.weight, edge.target))
-        for node in self.graph.iternodes():   # time O(V)
+        for node in self.graph.iternodes():   # O(V) time
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 
 
 class PrimMatrixMST:
-    """Prim's algorithm for finding MST in time O(V**2)."""
+    """Prim's algorithm for finding MST in O(V**2) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -64,17 +64,17 @@ class PrimMatrixMST:
             source = self.graph.iternodes().next()
         self.source = source
         self.dist[source] = 0
-        for step in xrange(self.graph.v()):    # V times
-            # find min node in the graph - time O(V)
+        for step in xrange(self.graph.v()):    # |V| times
+            # find min node in the graph - O(V) time
             node = min((node for node in self.graph.iternodes() 
             if self.in_queue[node]), key=self.dist.get)
             self.in_queue[node] = False
-            for edge in self.graph.iteroutedges(node):  # time O(V)
+            for edge in self.graph.iteroutedges(node):  # O(V) time
                 if (self.in_queue[edge.target] 
                 and edge.weight < self.dist[edge.target]):
                     self.dist[edge.target] = edge.weight
                     self.prev[edge.target] = edge.source
-        for node in self.graph.iternodes():   # time O(V)
+        for node in self.graph.iternodes():   # O(V) time
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 

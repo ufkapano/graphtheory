@@ -2,7 +2,7 @@
 #
 # dijkstra.py
 #
-# Dijkstra's algorithm.
+# The Dijkstra's algorithm.
 
 from edges import Edge
 from graphs import Graph
@@ -10,7 +10,7 @@ from Queue import PriorityQueue
 
 
 class Dijkstra:
-    """Dijkstra's algorithm for the shortest path problem in time O(E*log(V))."""
+    """The Dijkstra's algorithm for the shortest path problem."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -57,7 +57,7 @@ class Dijkstra:
 
 
 class DijkstraMatrix:
-    """Dijkstra's algorithm for the shortest path problem in time O(V**2)."""
+    """The Dijkstra's algorithm with O(V**2) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -72,11 +72,11 @@ class DijkstraMatrix:
         self.source = source
         self.dist[source] = 0
         for step in xrange(self.graph.v()):   # |V| times
-            # find min node - time O(V)
+            # find min node - O(V) time
             node = min((node for node in self.graph.iternodes() 
                 if self.in_queue[node]), key=self.dist.get)
             self.in_queue[node] = False
-            for edge in self.graph.iteroutedges(node):   # time O(V)
+            for edge in self.graph.iteroutedges(node):   # O(V) time
                 if self.in_queue[edge.target]:
                     self.relax(edge)
 

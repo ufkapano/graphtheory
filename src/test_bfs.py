@@ -33,20 +33,20 @@ class TestBFS(unittest.TestCase):
     def test_bfs(self):
         self.assertEqual(self.G.v(), self.N)
         ordering = []
-        bfs = BFSWithQueue(self.G)
-        bfs.run("s", action=lambda node: ordering.append(node))
+        algorithm = BFSWithQueue(self.G)
+        algorithm.run("s", action=lambda node: ordering.append(node))
         ordering_expected = ['s', 'r', 'w', 'v', 'x', 't', 'y', 'u']
         self.assertEqual(ordering, ordering_expected)
         dist_expected = dict([('s', 0), ('r', 1), ('w', 1), 
         ('t', 2), ('v', 2), ('x', 2), ('u', 3), ('y', 3)])
-        self.assertEqual(bfs.dist, dist_expected)
+        self.assertEqual(algorithm.dist, dist_expected)
         prev_expected = dict([('s', None), ('r', 's'), ('u', 'x'), 
         ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
         # second possibility: (u,t) instead of (u,x)
-        self.assertEqual(bfs.prev, prev_expected)
-        #bfs.tree.show()
-        self.assertEqual(bfs.tree.v(), self.N)
-        self.assertEqual(bfs.tree.e(), self.N-1)
+        self.assertEqual(algorithm.prev, prev_expected)
+        #algorithm.tree.show()
+        self.assertEqual(algorithm.tree.v(), self.N)
+        self.assertEqual(algorithm.tree.e(), self.N-1)
 
     def tearDown(self): pass
 

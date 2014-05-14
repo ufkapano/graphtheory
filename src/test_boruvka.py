@@ -65,18 +65,18 @@ class TestBoruvkaCormen(unittest.TestCase):
 
     def test_mst_cormen(self):
         self.assertEqual(self.G.v(), self.N)
-        boruvka = BoruvkaMST(self.G)
-        boruvka.run()
-        self.assertEqual(boruvka.mst.v(), self.N)
-        self.assertEqual(boruvka.mst.e(), self.N-1)
+        algorithm = BoruvkaMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
-        mst_weight = sum(edge.weight for edge in boruvka.mst.iteredges())
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [Edge("A", "B", 4), Edge("A", "H", 8),
         Edge("I", "C", 2), Edge("H", "G", 1), Edge("C", "F", 5),
         Edge("G", "F", 3), Edge("D", "E", 9), Edge("F", "E", 10)]
         for edge in mst_edges_expected:
-            self.assertTrue(boruvka.mst.has_edge(edge))
+            self.assertTrue(algorithm.mst.has_edge(edge))
 
     def tearDown(self): pass
 

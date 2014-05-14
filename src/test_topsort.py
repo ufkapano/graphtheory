@@ -25,9 +25,9 @@ class TestTopologicalSorting(unittest.TestCase):
 
     def test_topsort(self):
         self.assertEqual(self.G.v(), self.N)
-        ts = TopologicalSort(self.G)
-        ts.run()
-        idx = dict((node, i) for (i, node) in enumerate(ts.sorted_nodes))
+        algorithm = TopologicalSort(self.G)
+        algorithm.run()
+        idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
         for edge in self.edges:
             self.assertTrue(idx[edge.source] < idx[edge.target])
 

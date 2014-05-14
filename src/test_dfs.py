@@ -34,8 +34,8 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         pre_ordering = []
         post_ordering = []
-        dfs = DFSWithStack(self.G)
-        dfs.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm = DFSWithStack(self.G)
+        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
             post_action=lambda node: post_ordering.append(node))
         pre_ordering_expected = ['s', 'r', 'w', 'x', 't', 'u', 'y', 'v']
         post_ordering_expected = ['s', 'w', 't', 'u', 'y', 'x', 'r', 'v']
@@ -45,22 +45,22 @@ class TestDFS(unittest.TestCase):
         'w': 3, 'v': 14, 'y': 10, 'x': 5}
         ff_expected = {'s': 4, 'r': 15, 'u': 11, 't': 9, 
         'w': 7, 'v': 16, 'y': 12, 'x': 13}
-        self.assertEqual(dfs.dd, dd_expected)
-        self.assertEqual(dfs.ff, ff_expected)
+        self.assertEqual(algorithm.dd, dd_expected)
+        self.assertEqual(algorithm.ff, ff_expected)
         prev_expected = {'s': None, 'r': 's', 'u': 't', 't': 'w', 
         'w': 's', 'v': 'r', 'y': 'u', 'x': 'w'}
         # second possibility: 
-        self.assertEqual(dfs.prev, prev_expected)
-        #dfs.tree.show()
-        self.assertEqual(dfs.tree.v(), self.N)
-        self.assertEqual(dfs.tree.e(), self.N-1)
+        self.assertEqual(algorithm.prev, prev_expected)
+        #algorithm.tree.show()
+        self.assertEqual(algorithm.tree.v(), self.N)
+        self.assertEqual(algorithm.tree.e(), self.N-1)
 
     def test_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
         pre_ordering = []
         post_ordering = []
-        dfs = DFSWithRecursion(self.G)
-        dfs.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm = DFSWithRecursion(self.G)
+        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
             post_action=lambda node: post_ordering.append(node))
         pre_ordering_expected = ['s', 'r', 'v', 'w', 'x', 'y', 'u', 't']
         post_ordering_expected = ['v', 'r', 't', 'u', 'y', 'x', 'w', 's']
@@ -70,15 +70,15 @@ class TestDFS(unittest.TestCase):
         'w': 6, 'v': 3, 'y': 8, 'x': 7}
         ff_expected = {'s': 16, 'r': 5, 'u': 12, 't': 11, 
         'w': 15, 'v': 4, 'y': 13, 'x': 14}
-        self.assertEqual(dfs.dd, dd_expected)
-        self.assertEqual(dfs.ff, ff_expected)
+        self.assertEqual(algorithm.dd, dd_expected)
+        self.assertEqual(algorithm.ff, ff_expected)
         prev_expected = {'s': None, 'r': 's', 'u': 'y', 't': 'u', 
         'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
         # second possibility: 
-        self.assertEqual(dfs.prev, prev_expected)
-        #dfs.tree.show()
-        self.assertEqual(dfs.tree.v(), self.N)
-        self.assertEqual(dfs.tree.e(), self.N-1)
+        self.assertEqual(algorithm.prev, prev_expected)
+        #algorithm.tree.show()
+        self.assertEqual(algorithm.tree.v(), self.N)
+        self.assertEqual(algorithm.tree.e(), self.N-1)
 
     def tearDown(self): pass
 
