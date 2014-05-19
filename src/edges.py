@@ -17,7 +17,7 @@ class Edge:
     def __repr__(self):
         """Computes the string representation of the edge."""
         return "Edge(%s, %s, %s)" % (
-        repr(self.source), repr(self.target), self.weight)
+        repr(self.source), repr(self.target), repr(self.weight))
 
     def __cmp__(self, other):
         """Comparing of edges (the weight first)."""

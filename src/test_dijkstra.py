@@ -36,7 +36,7 @@ class TestDijkstra(unittest.TestCase):
         target = "D"
         algorithm = Dijkstra(self.G)
         algorithm.run(source)
-        dist_expected = {'A': 0, 'C': 2, 'B': 1, 'D': 3}
+        dist_expected = dict(A=0, B=1, C=2, D=3)
         self.assertEqual(algorithm.dist, dist_expected)
         prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
         self.assertEqual(algorithm.prev, prev_expected)
@@ -48,7 +48,7 @@ class TestDijkstra(unittest.TestCase):
         target = "D"
         algorithm = DijkstraMatrix(self.G)
         algorithm.run(source)
-        dist_expected = {'A': 0, 'C': 2, 'B': 1, 'D': 3}
+        dist_expected = dict(A=0, B=1, C=2, D=3)
         self.assertEqual(algorithm.dist, dist_expected)
         prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
         self.assertEqual(algorithm.prev, prev_expected)
