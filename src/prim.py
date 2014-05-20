@@ -67,7 +67,7 @@ class PrimMatrixMST:
         for step in xrange(self.graph.v()):    # |V| times
             # find min node in the graph - O(V) time
             node = min((node for node in self.graph.iternodes() 
-            if self.in_queue[node]), key=self.dist.get)
+                if self.in_queue[node]), key=self.dist.get)
             self.in_queue[node] = False
             for edge in self.graph.iteroutedges(node):  # O(V) time
                 if (self.in_queue[edge.target] 
@@ -95,8 +95,9 @@ class PrimTrivial:
         self.source = source
         self.in_mst[source] = True
         for step in xrange(self.graph.v()-1):    # |V|-1 times
+            # finding min edge, O(E) time
             min_edge = min(edge for edge in self.graph.iteredges()
-            if self.in_mst[edge.source] != self.in_mst[edge.target])
+                if self.in_mst[edge.source] != self.in_mst[edge.target])
             self.mst.add_edge(min_edge)
             self.in_mst[min_edge.source] = True
             self.in_mst[min_edge.target] = True

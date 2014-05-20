@@ -10,7 +10,7 @@ from boruvka import BoruvkaMST
 import unittest
 
 
-class TestBoruvkaWiki(unittest.TestCase):
+class TestBoruvka(unittest.TestCase):
 
     def setUp(self):
         # The graph (unique weights) from
@@ -83,6 +83,10 @@ class TestBoruvkaCormen(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    unittest.main()
+    #unittest.main()
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestBoruvka)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestBoruvkaCormen)
+    suite = unittest.TestSuite([suite1, suite2])
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF

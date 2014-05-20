@@ -77,6 +77,10 @@ class TestKruskalCormen(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    unittest.main()
+    #unittest.main()
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestKruskal)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestKruskalCormen)
+    suite = unittest.TestSuite([suite1, suite2])
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
