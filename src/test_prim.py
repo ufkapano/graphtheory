@@ -6,7 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from prim import PrimMST, PrimMatrixMST
+from prim import PrimMST, PrimMatrixMST, PrimTrivial
 import unittest
 
 
@@ -40,6 +40,20 @@ class TestPrim(unittest.TestCase):
     def test_mst_matrix(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [Edge('A', 'B', 7), Edge('A', 'D', 4), 
+        Edge('C', 'E', 5), Edge('B', 'E', 10), Edge('E', 'G', 8), Edge('D', 'F', 6)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_mst_trivial(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = PrimTrivial(self.G)
         algorithm.run()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
@@ -90,6 +104,21 @@ class TestPrimCormen(unittest.TestCase):
     def test_mst_matrix_cormen(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 42
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [Edge("A", "B", 4), Edge("A", "H", 8),
+        Edge("I", "C", 2), Edge("H", "G", 1), Edge("C", "F", 5),
+        Edge("G", "F", 3), Edge("D", "E", 9), Edge("F", "E", 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_mst_trivial_cormen(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = PrimTrivial(self.G)
         algorithm.run()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)

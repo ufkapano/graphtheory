@@ -78,4 +78,27 @@ class PrimMatrixMST:
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 
+
+class PrimTrivial:
+    """Prim's algorithm for finding MST in O(V*E) time."""
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.in_mst = dict((node, False) for node in self.graph.iternodes())
+        self.mst = Graph()   # MST as a graph
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        if source is None:   # get first random node
+            source = self.graph.iternodes().next()
+        self.source = source
+        self.in_mst[source] = True
+        for step in xrange(self.graph.v()-1):    # |V|-1 times
+            min_edge = min(edge for edge in self.graph.iteredges()
+            if self.in_mst[edge.source] != self.in_mst[edge.target])
+            self.mst.add_edge(min_edge)
+            self.in_mst[min_edge.source] = True
+            self.in_mst[min_edge.target] = True
+
 # EOF
