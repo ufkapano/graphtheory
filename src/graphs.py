@@ -73,7 +73,7 @@ class Graph(dict):
             del self[edge.target][edge.source]
 
     def has_edge(self, edge):
-        """Test if an edge exists."""
+        """Test if an edge exists (the weight is not checked)."""
         return edge.source in self and edge.target in self[edge.source]
 
     def weight(self, edge):
@@ -185,9 +185,8 @@ class Graph(dict):
         n_edges = 0
         while n_edges < m:
             source, target = random.sample(nodes, 2)
-            if graph.weight(Edge(source, target)) == 0:
-                edge = Edge(source, target, weights.pop())
-                graph.add_edge(edge)
+            if not graph.has_edge(Edge(source, target)):
+                graph.add_edge(Edge(source, target, weights.pop()))
                 n_edges = n_edges + 1
         return graph
 
@@ -211,9 +210,8 @@ class Graph(dict):
         n_edges = n - 1
         while n_edges < m:
             source, target = random.sample(nodes, 2)
-            if graph.weight(Edge(source, target)) == 0:
-                edge = Edge(source, target, weights.pop())
-                graph.add_edge(edge)
+            if not graph.has_edge(Edge(source, target)):
+                graph.add_edge(Edge(source, target, weights.pop()))
                 n_edges = n_edges + 1
         return graph
 
