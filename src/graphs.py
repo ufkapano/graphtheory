@@ -13,6 +13,7 @@
 # "F":{}}
 
 from edges import Edge
+import random
 
 
 class Graph(dict):
@@ -153,5 +154,100 @@ class Graph(dict):
             self.add_node(node)
         for edge in other.iteredges():
             self.add_edge(edge)
+
+    @classmethod
+    def make_complete(cls, n=1, directed=False):
+        """Creates the complete graph."""
+        graph = cls(n, directed)
+        weights = range(1, n * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for source in xrange(n):
+            for target in xrange(source + 1, n):   # no loops
+                if random.random() > 0.5:
+                    graph.add_edge(Edge(source, target, weights.pop()))
+                else:
+                    graph.add_edge(Edge(target, source, weights.pop()))
+        return graph
+
+    @classmethod
+    def make_sparse(cls, n=1, directed=False, m=0):
+        """Creates the sparse graph."""
+        if m >= n*(n-1)/2:
+            raise ValueError("too mamy edges")
+        graph = cls(n, directed)
+        weights = range(1, n * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = range(n)
+        n_edges = 0
+        while n_edges < m:
+            source, target = random.sample(nodes, 2)
+            if graph.weight(Edge(source, target)) == 0:
+                edge = Edge(source, target, weights.pop())
+                graph.add_edge(edge)
+                n_edges = n_edges + 1
+        return graph
+
+    @classmethod
+    def make_connected(cls, n=1, directed=False, m=0):
+        """Creates the sparse graph."""
+        if m < n - 1 or m >= n * (n - 1)/2:
+            raise ValueError("bad number of edges for the connected graph")
+        graph = cls(n, directed)
+        weights = range(1, n * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = set([0])
+        # make a tree
+        for node in xrange(1, n):
+            parent = random.sample(nodes, 1)[0]
+            nodes.add(node)
+            graph.add_edge(Edge(parent, node, weights.pop()))
+        # the rest of edges
+        n_edges = n - 1
+        while n_edges < m:
+            source, target = random.sample(nodes, 2)
+            if graph.weight(Edge(source, target)) == 0:
+                edge = Edge(source, target, weights.pop())
+                graph.add_edge(edge)
+                n_edges = n_edges + 1
+        return graph
+
+    @classmethod
+    def make_tree(cls, n=1, directed=False):
+        """Creates the tree graph."""
+        graph = cls(n, directed)
+        weights = range(1, n * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = set([0])
+        for node in xrange(1, n):
+            parent = random.sample(nodes, 1)[0]
+            nodes.add(node)
+            graph.add_edge(Edge(parent, node, weights.pop()))
+        return graph
+
+    @classmethod
+    def make_random(cls, n=1, directed=False, edge_probability=0.5):
+        """Creates the tree graph."""
+        graph = cls(n, directed)
+        weights = range(1, n * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for source in xrange(n):
+            for target in xrange(source + 1, n):   # no loops
+                if random.random() > edge_probability:
+                    continue
+                if random.random() > 0.5:
+                    graph.add_edge(Edge(source, target, weights.pop()))
+                else:
+                    graph.add_edge(Edge(target, source, weights.pop()))
+        return graph
 
 # EOF

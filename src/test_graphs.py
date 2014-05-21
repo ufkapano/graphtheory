@@ -159,13 +159,61 @@ class TestGraphLadder(unittest.TestCase):
 
     def tearDown(self): pass
 
+
+class TestGraphFactory(unittest.TestCase):
+
+    def setUp(self):
+        self.N = 10
+
+    def test_complete(self):
+        G = Graph.make_complete(self.N)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), self.N*(self.N-1)/2)
+        #print
+        #G.show()
+
+    def test_sparse(self):
+        G = Graph.make_sparse(n=self.N, m=1*self.N)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), self.N*1)
+        #print
+        #G.show()
+
+    def test_tree(self):
+        G = Graph.make_tree(n=self.N)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), self.N-1)
+        #print
+        #G.show()
+
+    def test_connected(self):
+        G = Graph.make_connected(n=self.N, m=2*self.N)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), 2*self.N)
+        #print
+        #G.show()
+
+    def test_random(self):
+        G = Graph.make_random(n=self.N, directed=True, edge_probability=0.1)
+        self.assertTrue(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        #print
+        #G.show()
+
+    def tearDown(self): pass
+
 if __name__ == "__main__":
 
     #unittest.main()
     suite1 = unittest.TestLoader().loadTestsFromTestCase(TestGraphDirected)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestGraphUndirected)
     suite3 = unittest.TestLoader().loadTestsFromTestCase(TestGraphLadder)
-    suite = unittest.TestSuite([suite1, suite2, suite3])
+    suite4 = unittest.TestLoader().loadTestsFromTestCase(TestGraphFactory)
+    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
