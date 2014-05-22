@@ -159,7 +159,7 @@ class Graph(dict):
     def make_complete(cls, n=1, directed=False):
         """Creates the complete graph."""
         graph = cls(n, directed)
-        weights = range(1, n * n)
+        weights = range(1, 1 + n * (n-1)/2)
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -177,7 +177,7 @@ class Graph(dict):
         if m >= n*(n-1)/2:
             raise ValueError("too mamy edges")
         graph = cls(n, directed)
-        weights = range(1, n * n)
+        weights = range(1, 1 + m)
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -196,7 +196,7 @@ class Graph(dict):
         if m < n - 1 or m >= n * (n - 1)/2:
             raise ValueError("bad number of edges for the connected graph")
         graph = cls(n, directed)
-        weights = range(1, n * n)
+        weights = range(1, m + 1)
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -219,7 +219,7 @@ class Graph(dict):
     def make_tree(cls, n=1, directed=False):
         """Creates the tree graph."""
         graph = cls(n, directed)
-        weights = range(1, n * n)
+        weights = range(1, n)
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -234,7 +234,7 @@ class Graph(dict):
     def make_random(cls, n=1, directed=False, edge_probability=0.5):
         """Creates the tree graph."""
         graph = cls(n, directed)
-        weights = range(1, n * n)
+        weights = range(1, 1 + n * (n-1)/2)
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
