@@ -29,7 +29,7 @@ class Graph(dict):
         return len(self)
 
     def e(self):
-        """Returns the number of edges."""
+        """Returns the number of edges in O(V) time."""
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges / 2)
 
@@ -98,7 +98,7 @@ class Graph(dict):
 
     def iterinedges(self, source):
         """Generates inedges from the graph on demand."""
-        if self.is_directed():   # time O(V)
+        if self.is_directed():   # O(V) time
             for (target, sources_dict) in self.iteritems():
                 if source in sources_dict:
                     yield Edge(target, source, sources_dict[source])
@@ -129,14 +129,14 @@ class Graph(dict):
         if self.v() != other.v():
             #print "|V1| != |V2|"
             return False
-        for node in self.iternodes():   # time O(V)
+        for node in self.iternodes():   # O(V) time
             if not other.has_node(node):
                 #print "V1 != V2"
                 return False
-        if self.e() != other.e():   # inefficient, time O(E)
+        if self.e() != other.e():   # inefficient, O(E) time
             #print "|E1| != |E2|"
             return False
-        for edge in self.iteredges():   # time O(E)
+        for edge in self.iteredges():   # O(E) time
             if not other.has_edge(edge):
                 #print "E1 != E2"
                 return False
@@ -165,7 +165,7 @@ class Graph(dict):
             graph.add_node(node)
         for source in xrange(n):
             for target in xrange(source + 1, n):   # no loops
-                if random.random() > 0.5:
+                if random.random() > 0.5:   # random direction
                     graph.add_edge(Edge(source, target, weights.pop()))
                 else:
                     graph.add_edge(Edge(target, source, weights.pop()))
@@ -242,7 +242,7 @@ class Graph(dict):
             for target in xrange(source + 1, n):   # no loops
                 if random.random() > edge_probability:
                     continue
-                if random.random() > 0.5:
+                if random.random() > 0.5:   # random direction
                     graph.add_edge(Edge(source, target, weights.pop()))
                 else:
                     graph.add_edge(Edge(target, source, weights.pop()))

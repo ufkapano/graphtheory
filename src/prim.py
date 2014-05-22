@@ -79,7 +79,7 @@ class PrimMatrixMST:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
 
 
-class PrimTrivial:
+class PrimTrivialMST:
     """Prim's algorithm for finding MST in O(V*E) time."""
 
     def __init__(self, graph):

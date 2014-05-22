@@ -6,7 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from prim import PrimMST, PrimMatrixMST, PrimTrivial
+from prim import PrimMST, PrimMatrixMST, PrimTrivialMST
 import unittest
 
 
@@ -53,7 +53,7 @@ class TestPrim(unittest.TestCase):
 
     def test_mst_trivial(self):
         self.assertEqual(self.G.v(), self.N)
-        algorithm = PrimTrivial(self.G)
+        algorithm = PrimTrivialMST(self.G)
         algorithm.run()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
@@ -118,7 +118,7 @@ class TestPrimCormen(unittest.TestCase):
 
     def test_mst_trivial_cormen(self):
         self.assertEqual(self.G.v(), self.N)
-        algorithm = PrimTrivial(self.G)
+        algorithm = PrimTrivialMST(self.G)
         algorithm.run()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
