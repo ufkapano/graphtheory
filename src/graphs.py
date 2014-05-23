@@ -248,6 +248,14 @@ class Graph(dict):
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+#   |     |     |
+# --2s--(2s+1)-(2s+2)--
+#   |     |     |
+# --s---(s+1)-(s+2)--
+#   |     |     |
+# --0-----1-----2---
+#   |     |     |
+
     @classmethod
     def make_grid(cls, size=3):
         """Creates the grid graph with periodic boundary conditions.
@@ -266,6 +274,35 @@ class Graph(dict):
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
             graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+        return graph
+
+#   |  /  |  /  | /
+# --2s--(2s+1)-(2s+2)--
+# / |  /  |  /  | /
+# --s---(s+1)-(s+2)--
+# / |  /  |  /  | /
+# --0-----1-----2---
+# / |  /  |  /  |
+
+    @classmethod
+    def make_triangle(cls, size=3):
+        """Creates the triangle network with periodic boundary conditions.
+        |V| = size * size, |E| = 3 * |V|.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 3 * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + (col + 1) % size, weights.pop())) # line /
         return graph
 
 # EOF

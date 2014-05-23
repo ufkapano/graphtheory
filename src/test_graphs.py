@@ -216,6 +216,16 @@ class TestGraphFactory(unittest.TestCase):
         #print
         #G.show()
 
+    def test_triangle(self):
+        size = 4
+        G = Graph.make_triangle(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), size * size)
+        self.assertEqual(G.e(), 3 * size * size)
+        self.assertRaises(ValueError, lambda: Graph.make_grid(2))
+        #print
+        #G.show()
+
     def tearDown(self): pass
 
 if __name__ == "__main__":
