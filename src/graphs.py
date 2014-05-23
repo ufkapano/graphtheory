@@ -248,4 +248,24 @@ class Graph(dict):
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+    @classmethod
+    def make_grid(cls, size=3):
+        """Creates the grid graph with periodic boundary conditions.
+        |V| = size * size, |E| = 2 * |V|.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 2 * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+        return graph
+
 # EOF
