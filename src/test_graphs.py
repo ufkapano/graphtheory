@@ -116,9 +116,8 @@ class TestGraphUndirected(unittest.TestCase):
 
     def tearDown(self): pass
 
-
-# 0-2-4-6  graf nieskierowany z wagami
-# | | | |  drabina
+# 0-2-4-6
+# | | | |  ladder
 # 1-3-5-7
 
 class TestGraphLadder(unittest.TestCase):
@@ -222,7 +221,17 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), size * size)
         self.assertEqual(G.e(), 3 * size * size)
-        self.assertRaises(ValueError, lambda: Graph.make_grid(2))
+        self.assertRaises(ValueError, lambda: Graph.make_triangle(2))
+        #print
+        #G.show()
+
+    def test_ladder(self):
+        size = 4
+        G = Graph.make_ladder(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), 2 * size)
+        self.assertEqual(G.e(), 3 * size)
+        self.assertRaises(ValueError, lambda: Graph.make_ladder(2))
         #print
         #G.show()
 

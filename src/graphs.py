@@ -305,4 +305,28 @@ class Graph(dict):
             graph.add_edge(Edge(node, ((row + 1) % size) * size + (col + 1) % size, weights.pop())) # line /
         return graph
 
+# --1--3--5--...--(2s+1)-
+#   |  |  |         |
+# --0--2--4--...--(2s)---
+
+    @classmethod
+    def make_ladder(cls, size=3):
+        """Creates the ladder with periodic boundary conditions.
+        |V| = 2 * size, |E| = 3 * size.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = 2 * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 3 * size)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for i in xrange(size):
+            node = 2 * i
+            graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
+            graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
+            graph.add_edge(Edge(node + 1, (node + 3) % n, weights.pop())) # line ---
+        return graph
+
 # EOF
