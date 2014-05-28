@@ -4,8 +4,6 @@
 #
 # The Dijkstra's algorithm.
 
-from edges import Edge
-from graphs import Graph
 from Queue import PriorityQueue
 
 

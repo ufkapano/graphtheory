@@ -5,7 +5,6 @@
 # Boruvka's algorithm for finding MST.
 
 from edges import Edge
-from graphs import Graph
 from unionfind import UnionFind
 
 
@@ -15,7 +14,7 @@ class BoruvkaMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.mst = Graph()   # MST is a graph
+        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.uf = UnionFind()
 
     def run(self):

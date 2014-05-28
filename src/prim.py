@@ -5,7 +5,6 @@
 # Prim's algorithm for finding MST.
 
 from edges import Edge
-from graphs import Graph
 from Queue import PriorityQueue
 
 
@@ -15,10 +14,10 @@ class PrimMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
-        self.mst = Graph()   # MST as a graph
         self.pq = PriorityQueue()
 
     def run(self, source=None):
@@ -53,10 +52,10 @@ class PrimMatrixMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
-        self.mst = Graph()   # MST as a graph
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -85,8 +84,8 @@ class PrimTrivialMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.in_mst = dict((node, False) for node in self.graph.iternodes())
-        self.mst = Graph()   # MST as a graph
 
     def run(self, source=None):
         """Executable pseudocode."""
