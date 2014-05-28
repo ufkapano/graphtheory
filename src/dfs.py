@@ -5,7 +5,6 @@
 # Depth-First Search.
 
 from edges import Edge
-from graphs import Graph
 from Queue import LifoQueue
 
 
@@ -14,12 +13,12 @@ class DFSWithStack:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.tree = graph.__class__(self.graph.v()) # spanning tree
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
         self.time = 0    # time stamp
         self.dd = dict()
         self.ff = dict()
-        self.tree = Graph()   # undirected graph
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -62,7 +61,7 @@ class DFSWithStack:
 
     def to_dag(self):
         """Returns the spanning tree as a dag."""
-        dag = Graph(directed=True)
+        dag = graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
                 # Edge(parent, node)
@@ -76,12 +75,12 @@ class DFSWithRecursion:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.tree = graph.__class__(self.graph.v()) # spanning tree
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
         self.time = 0    # time stamp
         self.dd = dict()
         self.ff = dict()
-        self.tree = Graph()   # graf nieskierowany
         # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
@@ -119,7 +118,7 @@ class DFSWithRecursion:
 
     def to_dag(self):
         """Returns the spanning tree as a dag."""
-        dag = Graph(directed=True)
+        dag = graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.prev[node] is not None:
                 # Edge(parent, node), out-tree
