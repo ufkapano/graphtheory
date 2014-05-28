@@ -48,10 +48,21 @@ class TestBFS(unittest.TestCase):
         self.assertEqual(algorithm.tree.v(), self.N)
         self.assertEqual(algorithm.tree.e(), self.N-1)
 
+    def test_to_dag(self):
+        algorithm = BFSWithQueue(self.G)
+        algorithm.run("s")
+        dag = algorithm.to_dag()
+        self.assertTrue(dag.is_directed())
+        self.assertEqual(dag.v(), self.N)
+        self.assertEqual(dag.e(), self.N-1)
+
     def tearDown(self): pass
 
 if __name__ == "__main__":
 
-    unittest.main()
+    #unittest.main()
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestBFS)
+    suite = unittest.TestSuite([suite1])
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
