@@ -23,7 +23,10 @@ class BoruvkaMST:
             self.uf.create(node)
         forest = set(node for node in self.graph.iternodes())
         dummy_edge = Edge(None, None, float("inf"))
-        while len(forest) > 1:
+        new_len = len(forest)
+        old_len = new_len + 1
+        while old_len > new_len:
+            old_len = new_len
             min_edges = dict(((node, dummy_edge) for node in forest))
             # finding the cheapest eadges
             for edge in self.graph.iteredges(): # O(E) time
@@ -37,6 +40,8 @@ class BoruvkaMST:
             # connecting components, total time is O(V)
             forest = set()
             for edge in min_edges.itervalues():
+                if edge is dummy_edge: # a disconnected graph
+                    continue
                 source = self.uf.find(edge.source)
                 target = self.uf.find(edge.target)
                 if source != target:   # different components
@@ -45,5 +50,8 @@ class BoruvkaMST:
                     self.mst.add_edge(edge)
             # remove duplicates, total time is O(V)
             forest = set(self.uf.find(node) for node in forest)
+            new_len = len(forest)
+            if new_len == 1:   # a connected graph
+                break
 
 # EOF

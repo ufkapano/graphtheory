@@ -81,12 +81,48 @@ class TestBoruvkaCormen(unittest.TestCase):
     def tearDown(self): pass
 
 
+class TestBoruvkaDisconnectedGraph(unittest.TestCase):
+
+    def setUp(self):
+        # The modified graph (unique weights) from Cormen.
+        self.N = 9           # number of nodes
+        self.G = Graph(self.N)
+        self.nodes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+        self.edges = [Edge("A", "B", 4), Edge("A", "H", 8),
+        Edge("B", "H", 11), Edge("B", "C", 12), Edge("H", "I", 7),
+        Edge("I", "C", 2), Edge("I", "G", 6), Edge("H", "G", 1),
+        Edge("D", "F", 14), Edge("D", "E", 9), Edge("F", "E", 10)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #print self.G
+
+    def test_mst_disconnected(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = BoruvkaMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-2) # 2 components
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [Edge("A", "B", 4), Edge("A", "H", 8),
+        Edge("I", "C", 2), Edge("H", "G", 1), Edge("G", "I", 6),
+        Edge("D", "E", 9), Edge("F", "E", 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def tearDown(self): pass
+
+
 if __name__ == "__main__":
 
     #unittest.main()
     suite1 = unittest.TestLoader().loadTestsFromTestCase(TestBoruvka)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestBoruvkaCormen)
-    suite = unittest.TestSuite([suite1, suite2])
+    suite3 = unittest.TestLoader().loadTestsFromTestCase(TestBoruvkaDisconnectedGraph)
+    suite = unittest.TestSuite([suite1, suite2, suite3])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
