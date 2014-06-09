@@ -12,6 +12,8 @@ class Dijkstra:
 
     def __init__(self, graph):
         """The algorithm initialization."""
+        if not graph.is_directed():
+            raise ValueError("graph is not directed")
         self.graph = graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         # shortest path tree
@@ -59,6 +61,8 @@ class DijkstraMatrix:
 
     def __init__(self, graph):
         """The algorithm initialization."""
+        if not graph.is_directed():
+            raise ValueError("graph is not directed")
         self.graph = graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         # shortest path tree

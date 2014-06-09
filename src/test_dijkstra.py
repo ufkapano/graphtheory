@@ -10,18 +10,18 @@ from dijkstra import Dijkstra, DijkstraMatrix
 import unittest
 
 #    1
-# A --- B
+# A --> B
 # |   / |
 # |5 /1 |3
-# | /   |
-# C --- D
+# |./.  |.
+# C --> D
 #    1
 
 class TestDijkstra(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(self.N, directed=True)
         self.nodes = ["A", "B", "C", "D"]
         self.edges = [Edge("A", "B", 1), Edge("A", "C", 5), 
         Edge("B", "C", 1), Edge("B", "D", 3), Edge("C", "D", 1)]

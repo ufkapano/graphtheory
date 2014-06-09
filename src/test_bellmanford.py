@@ -10,18 +10,18 @@ from bellmanford import BellmanFord
 import unittest
 
 #    1
-# A --- B
+# A --> B
 # |   / |
 # |5 /1 |3
-# | /   |
-# C --- D
+# |./.  |.
+# C --> D
 #    1
 
 class TestBellmanFord(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N)     # undirected graph
+        self.G = Graph(self.N, directed=True) # directed graph
         self.nodes = ["A", "B", "C", "D"]
         self.edges = [Edge("A", "B", 1), Edge("A", "C", 5), 
         Edge("B", "C", 1), Edge("B", "D", 3), Edge("C", "D", 1)]
