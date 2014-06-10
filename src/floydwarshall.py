@@ -1,6 +1,10 @@
 #! /usr/bin/python
+#
+# floydwarshall.py
+#
+# The Floyd-Warshall algorithm.
 
-class FloydWarshall(object):
+class FloydWarshall:
     """The Floyd-Warshall algorithm."""
 
     def __init__(self, graph):
@@ -26,7 +30,7 @@ class FloydWarshall(object):
                         self.dist[source][node] + self.dist[node][target])
 
 
-class FloydWarshallPaths(object):
+class FloydWarshallPaths:
     """The Floyd-Warshall algorithm with path reconstruction."""
 
     def __init__(self, graph):
@@ -52,10 +56,9 @@ class FloydWarshallPaths(object):
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
-                    if (self.dist[source][node] + self.dist[node][target] 
-                        < self.dist[source][target]):
-                        self.dist[source][target] = (self.dist[source][node] 
-                                                   + self.dist[node][target])
+                    alt = self.dist[source][node] + self.dist[node][target]
+                    if alt < self.dist[source][target]:
+                        self.dist[source][target] = alt
                         self.prev[source][target] = self.prev[node][target]
 
     def path(self, source, target):
