@@ -42,7 +42,7 @@ class BellmanFord:
         if self.source == end:
             return [self.source]
         elif self.prev[end] is None:
-            raise Exception("no path to node")
+            raise ValueError("no path to target")
         else:
             return self.path_to(self.prev[end]) + [end]
 

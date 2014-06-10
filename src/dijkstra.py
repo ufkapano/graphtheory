@@ -51,7 +51,7 @@ class Dijkstra:
         if self.source == target:
             return [self.source]
         elif self.prev[target] is None:
-            raise Exception("no path to node")
+            raise ValueError("no path to target")
         else:
             return self.path_to(self.prev[target]) + [target]
 
@@ -96,7 +96,7 @@ class DijkstraMatrix:
         if self.source == target:
             return [self.source]
         elif self.prev[target] is None:
-            raise Exception("no path to node")
+            raise ValueError("no path to target")
         else:
             return self.path_to(self.prev[target]) + [target]
 
