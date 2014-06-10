@@ -41,7 +41,7 @@ class TestDijkstra(unittest.TestCase):
         prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
         self.assertEqual(algorithm.prev, prev_expected)
         path_expected = ['A', 'B', 'C', 'D']
-        self.assertEqual(algorithm.path_to(target), path_expected)
+        self.assertEqual(algorithm.path(target), path_expected)
 
     def test_dijkstra_matrix(self):
         source = "A"
@@ -53,7 +53,7 @@ class TestDijkstra(unittest.TestCase):
         prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
         self.assertEqual(algorithm.prev, prev_expected)
         path_expected = ['A', 'B', 'C', 'D']
-        self.assertEqual(algorithm.path_to(target), path_expected)
+        self.assertEqual(algorithm.path(target), path_expected)
 
     def tearDown(self): pass
 

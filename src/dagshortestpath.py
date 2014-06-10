@@ -35,13 +35,13 @@ class DAGShortestPath:
             return True
         return False
 
-    def path_to(self, target):
+    def path(self, target):
         """Construct a path from source to target."""
         if self.source == target:
             return [self.source]
         elif self.prev[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path_to(self.prev[target]) + [target]
+            return self.path(self.prev[target]) + [target]
 
 # EOF

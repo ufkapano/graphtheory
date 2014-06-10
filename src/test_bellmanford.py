@@ -41,7 +41,7 @@ class TestBellmanFord(unittest.TestCase):
         prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
         self.assertEqual(algorithm.prev, prev_expected)
         path_expected = ['A', 'B', 'C', 'D']
-        self.assertEqual(algorithm.path_to(target), path_expected)
+        self.assertEqual(algorithm.path(target), path_expected)
 
     def tearDown(self): pass
 
@@ -73,7 +73,7 @@ class TestBellmanFordCormen(unittest.TestCase):
         prev_expected = {'y': 's', 'x': 'y', 's': None, 'z': 't', 't': 'x'}
         self.assertEqual(algorithm.prev, prev_expected)
         path_expected = ['s', 'y', 'x', 't', 'z']
-        self.assertEqual(algorithm.path_to(target), path_expected)
+        self.assertEqual(algorithm.path(target), path_expected)
 
 
     def tearDown(self): pass

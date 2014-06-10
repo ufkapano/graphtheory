@@ -36,7 +36,7 @@ class TestDAGShortestPath(unittest.TestCase):
         'Y': 'T', 'X': 'T', 'Z': 'T'}
         self.assertEqual(algorithm.prev, prev_expected)
         path_expected = ['R', 'T', 'Z']
-        self.assertEqual(algorithm.path_to(target), path_expected)
+        self.assertEqual(algorithm.path(target), path_expected)
 
 
 if __name__ == "__main__":

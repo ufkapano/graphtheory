@@ -37,13 +37,13 @@ class BellmanFord:
             return True
         return False
 
-    def path_to(self, end):
+    def path(self, target):
         """Construct a path from source to target."""
-        if self.source == end:
+        if self.source == target:
             return [self.source]
-        elif self.prev[end] is None:
+        elif self.prev[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path_to(self.prev[end]) + [end]
+            return self.path(self.prev[target]) + [target]
 
 # EOF
