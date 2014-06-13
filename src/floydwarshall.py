@@ -18,16 +18,18 @@ class FloydWarshall:
             for target in self.graph.iternodes():
                 self.dist[source][target] = float("inf")
             self.dist[source][source] = 0
+        for edge in self.graph.iteredges():
+            self.dist[edge.source][edge.target] = edge.weight
 
     def run(self):
         """Executable pseudocode."""
-        for edge in self.graph.iteredges():
-            self.dist[edge.source][edge.target] = edge.weight
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
                     self.dist[source][target] = min(self.dist[source][target],
                         self.dist[source][node] + self.dist[node][target])
+        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+            raise ValueError("negative cycle")
 
 
 class FloydWarshallPaths:
@@ -47,12 +49,12 @@ class FloydWarshallPaths:
                 self.dist[source][target] = float("inf")
                 self.prev[source][target] = None
             self.dist[source][source] = 0
-
-    def run(self):
-        """Executable pseudocode."""
         for edge in self.graph.iteredges():
             self.dist[edge.source][edge.target] = edge.weight
             self.prev[edge.source][edge.target] = edge.source
+
+    def run(self):
+        """Executable pseudocode."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
@@ -60,6 +62,8 @@ class FloydWarshallPaths:
                     if alt < self.dist[source][target]:
                         self.dist[source][target] = alt
                         self.prev[source][target] = self.prev[node][target]
+        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+            raise ValueError("negative cycle")
 
     def path(self, source, target):
         """Path reconstruction."""
