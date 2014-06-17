@@ -75,11 +75,10 @@ class SlowAllPairsEdges:
         """O(V*(V+E)) time."""
         new_dist = dict()
         for source in self.graph.iternodes():
-            new_dist[source] = dict()
-            for target in self.graph.iternodes():
-                new_dist[source][target] = old_dist[source][target] # IMPORTANT
-            for edge in self.graph.iteredges():
-                new_dist[source][edge.target] = min(new_dist[source][edge.target],
+            new_dist[source] = dict(old_dist[source]) # IMPORTANT, O(V)
+            for edge in self.graph.iteredges():   # O(E) time
+                new_dist[source][edge.target] = min(
+                    new_dist[source][edge.target],
                     old_dist[source][edge.source] + edge.weight)
         return new_dist
 
@@ -110,7 +109,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
 
     def run(self):
         """Executable pseudocode."""
-        for m in xrange(2, self.graph.v()):
+        for m in xrange(2, self.graph.v()):   # |V|-2 times
             self.dist = self.extended_shortest_paths(self.dist)
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle")
@@ -119,12 +118,11 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
         """O(V**3) time."""
         new_dist = dict()
         for source in self.graph.iternodes():
-            new_dist[source] = dict()
+            new_dist[source] = dict(old_dist[source]) # IMPORTANT, copy
             for target in self.graph.iternodes():
-                new_dist[source][target] = old_dist[source][target] # IMPORTANT
                 for node in self.graph.iternodes():
                     alt = old_dist[source][node] + self.weights[node][target]
-                    if alt < new_dist[source][target]:
+                    if new_dist[source][target] > alt:
                         new_dist[source][target] = alt
                         self.prev[source][target] = node
         return new_dist
@@ -150,7 +148,7 @@ class FasterAllPairs:
     def run(self):
         """Executable pseudocode."""
         m = 1
-        while m < (self.graph.v() - 1):
+        while m < (self.graph.v() - 1):   # log(V) times
             self.dist = self.extended_shortest_paths(self.dist)
             m = 2 * m
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):

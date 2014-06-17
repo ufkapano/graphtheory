@@ -32,7 +32,7 @@ class TestAllPairsShortestPaths(unittest.TestCase):
         E={'A': 6, 'C': 3, 'B': 3, 'E': 0, 'D': 2})
         self.assertEqual(algorithm.dist, expected_dist)
 
-    def test_slow(self):
+    def test_slow_edges(self):
         algorithm = SlowAllPairsEdges(self.G)
         algorithm.run()
         expected_dist = dict(
