@@ -59,7 +59,7 @@ class FloydWarshallPaths:
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
                     alt = self.dist[source][node] + self.dist[node][target]
-                    if alt < self.dist[source][target]:
+                    if self.dist[source][target] > alt:
                         self.dist[source][target] = alt
                         self.prev[source][target] = self.prev[node][target]
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):

@@ -1,6 +1,7 @@
-#!/usr/bin/python
+#! /usr/bin/python
 
 class TransitiveClosure:
+    """Based on the Floyd-Warshall algorithm."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

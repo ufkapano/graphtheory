@@ -72,6 +72,10 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.v(), 5)
         self.assertEqual(self.G.e(), 7)
 
+    def test_exceptions(self):
+        self.assertRaises(ValueError, self.G.add_edge, Edge("A", "A", 1))
+        self.assertRaises(ValueError, self.G.add_edge, Edge("A", "B", 2))
+
     def tearDown(self): pass
 
 # A --- B

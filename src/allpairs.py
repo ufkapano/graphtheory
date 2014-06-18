@@ -74,7 +74,7 @@ class SlowAllPairsEdges:
     def extended_shortest_paths(self, old_dist):
         """O(V*(V+E)) time."""
         new_dist = dict()
-        for source in self.graph.iternodes():
+        for source in self.graph.iternodes():   # |V| times
             new_dist[source] = dict(old_dist[source]) # IMPORTANT, O(V)
             for edge in self.graph.iteredges():   # O(E) time
                 new_dist[source][edge.target] = min(
@@ -140,7 +140,7 @@ class FasterAllPairs:
         for source in self.graph.iternodes():   # O(V**2) time
             self.dist[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
+                self.dist[source][target] = float("inf") # IMPORTANT
             self.dist[source][source] = 0
         for edge in self.graph.iteredges():   # O(E) time
             self.dist[edge.source][edge.target] = edge.weight
