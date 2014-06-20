@@ -44,10 +44,10 @@ class Johnson:
         self.dist = dict()
         for source in self.old_nodes:
             self.dist[source] = dict()
-            alg = Dijkstra(self.graph)
-            alg.run(source)
+            algorithm = Dijkstra(self.graph)
+            algorithm.run(source)
             for target in self.old_nodes:
-                self.dist[source][target] = (alg.dist[target]
+                self.dist[source][target] = (algorithm.dist[target]
                 - self.bf.dist[source] + self.bf.dist[target])
 
 # EOF
