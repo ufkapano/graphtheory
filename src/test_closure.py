@@ -40,6 +40,11 @@ class TestTransitiveClosure(unittest.TestCase):
         algorithm.run()
         self.assertEqual(algorithm.T, self.expected_T)
 
+    def test_closure_dfs(self):
+        algorithm = TransitiveClosureDFS(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.T, self.expected_T)
+
 
 if __name__ == "__main__":
 
