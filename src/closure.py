@@ -1,5 +1,7 @@
 #! /usr/bin/python
 
+from bfs import BFSWithQueue
+
 class TransitiveClosureSimple:
     """Based on the matrix multiplication, O(V**2 E) time."""
 
@@ -48,5 +50,29 @@ class TransitiveClosure:
                 for target in self.graph.iternodes():
                     self.T[source][target] = self.T[source][target] or (
                         self.T[source][node] and self.T[node][target])
+
+
+class TransitiveClosureBFS:
+    """Based on the BFS, O(V*(V+E)) time."""
+
+    def __init__(self, graph):
+        """The algorithm initialization, O(V**2) time."""
+        if not graph.is_directed():
+            raise ValueError("graph is not directed")
+        self.graph = graph
+        self.T = dict()
+        for source in self.graph.iternodes():
+            self.T[source] = dict()
+            for target in self.graph.iternodes():
+                self.T[source][target] = False
+            self.T[source][source] = True
+
+    def run(self):
+        """Executable pseudocode."""
+        for source in self.graph.iternodes():
+            algorithm = BFSWithQueue(self.graph)
+            algorithm.run(source, action=
+            lambda node: self.T[source].__setitem__(node, True))
+
 
 # EOF
