@@ -4,7 +4,6 @@
 #
 # The Johnson algorithm.
 
-import copy
 from edges import Edge
 from bellmanford import BellmanFord
 from dijkstra import Dijkstra
