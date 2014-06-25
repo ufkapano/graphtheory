@@ -123,8 +123,8 @@ class Graph(dict):
         """Graph presentation."""
         for source in self.iternodes():
             print source, ":",
-            for target in self.iteradjacent(source):
-                print "%s(%s)" % (target, self[source][target]),
+            for edge in self.iteroutedges(source):
+                print "%s(%s)" % (edge.target, edge.weight),
             print
 
     def __eq__(self, other):
@@ -333,6 +333,33 @@ class Graph(dict):
             graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
             graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
             graph.add_edge(Edge(node + 1, (node + 3) % n, weights.pop())) # line ---
+        return graph
+
+    @classmethod
+    def make_flow_network(cls, n=1):
+        """Creates a flow network."""
+        graph = cls(n, True)
+        for node in xrange(n):
+            graph.add_node(node)
+        node_list = range(1, n)
+        source = 0
+        sink = n - 1
+        used = dict((node, False) for node in xrange(n))
+        used[source] = True
+        # create paths from source to sink
+        while any(used[node] == False for node in used):
+            random.shuffle(node_list)
+            start = source
+            for target in node_list:
+                edge = Edge(start, target, random.randint(1, n))
+                if not (graph.has_edge(edge) or graph.has_edge(Edge(target, start))):
+                    graph.add_edge(edge)
+                    used[target] = True
+                if target == sink:
+                    break
+                else:
+                    start = target
+        # all nodes are on paths; new edges can be added
         return graph
 
 # EOF

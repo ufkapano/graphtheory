@@ -239,6 +239,14 @@ class TestGraphFactory(unittest.TestCase):
         #print
         #G.show()
 
+    def test_flow_network(self):
+        G = Graph.make_flow_network(self.N)
+        self.assertTrue(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertTrue(G.e() > self.N - 2)
+        #print
+        #G.show()
+
     def tearDown(self): pass
 
 if __name__ == "__main__":

@@ -52,8 +52,8 @@ class EdmondsKarp:
                 target = node
                 print target
 
-    def find_path(self): # use BFS for the residual network
-        """Try to find an augmenting path in the residual network."""
+    def find_path(self): # use BFS
+        """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # capacity of found path to node
         capacity = {self.source: float("inf")}
