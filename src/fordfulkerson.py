@@ -1,14 +1,15 @@
 #!/usr/bin/python
 #
-# edmondskarp.py
+# fordfulkerson.py
 #
-# The Edmonds-Karp algorithm.
+# The Ford-Fulkerson algorithm.
 
 from edges import Edge
-from Queue import Queue
+from Queue import LifoQueue
 
-class EdmondsKarp:
-    """The Edmonds-Karp algorithm."""
+
+class FordFulkerson:
+    """The Ford-Fulkerson algorithm."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -52,12 +53,12 @@ class EdmondsKarp:
                 target = node
                 print target
 
-    def find_path(self): # use BFS for the residual network
+    def find_path(self): # use DFS
         """Try to find an augmenting path in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # capacity of found path to node
         capacity = {self.source: float("inf")}
-        Q = Queue()
+        Q = LifoQueue()
         Q.put(self.source)
         while not Q.empty():
             node = Q.get()

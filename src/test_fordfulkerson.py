@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from edmondskarp import EdmondsKarp
+from fordfulkerson import FordFulkerson
 from graphs import Graph
 from edges import Edge
 
@@ -13,7 +13,7 @@ from edges import Edge
 #  C ---> D
 #     10
 
-class TestEdmondsKarp(unittest.TestCase):
+class TestFordFulkerson(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
@@ -31,8 +31,8 @@ class TestEdmondsKarp(unittest.TestCase):
             self.G.add_edge(edge)
         self.G.show()
 
-    def test_edmondskarp(self):
-        algorithm = EdmondsKarp(self.G)
+    def test_fordfulkerson(self):
+        algorithm = FordFulkerson(self.G)
         algorithm.run("A", "D")
         expected_max_flow = 20
         expected_flow = {
@@ -43,8 +43,7 @@ class TestEdmondsKarp(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-
-class TestEdmondsKarpWiki(unittest.TestCase):
+class TestFordFulkersonWiki(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
@@ -69,7 +68,7 @@ class TestEdmondsKarpWiki(unittest.TestCase):
         self.G.show()
 
     def test_wiki(self):
-        algorithm = EdmondsKarp(self.G)
+        algorithm = FordFulkerson(self.G)
         algorithm.run("A", "G")
         expected_max_flow = 5
         expected_flow = {
