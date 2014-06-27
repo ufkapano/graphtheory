@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from edmondskarp import EdmondsKarp
+from edmondskarp import *
 from graphs import Graph
 from edges import Edge
 
@@ -29,7 +29,7 @@ class TestEdmondsKarp(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        self.G.show()
+        #self.G.show()
 
     def test_edmondskarp(self):
         algorithm = EdmondsKarp(self.G)
@@ -40,6 +40,18 @@ class TestEdmondsKarp(unittest.TestCase):
         'B': {'A': -10, 'C': 0, 'B': 0, 'D': 10}, 
         'C': {'A': -10, 'C': 0, 'B': 0, 'D': 10}, 
         'D': {'A': 0, 'C': -10, 'B': -10, 'D': 0}}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+    def test_edmondskarp_sparse(self):
+        algorithm = EdmondsKarpSparse(self.G)
+        algorithm.run("A", "D")
+        expected_max_flow = 20
+        expected_flow = {
+        'A': {'C': 10, 'B': 10}, 
+        'B': {'A': -10, 'D': 10}, 
+        'C': {'A': -10, 'D': 10}, 
+        'D': {'C': -10, 'B': -10}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
@@ -66,20 +78,20 @@ class TestEdmondsKarpWiki(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        self.G.show()
+        #self.G.show()
 
-    def test_wiki(self):
-        algorithm = EdmondsKarp(self.G)
+    def test_wiki_sparse(self):
+        algorithm = EdmondsKarpSparse(self.G)
         algorithm.run("A", "G")
         expected_max_flow = 5
         expected_flow = {
-        'A': {'A': 0, 'C': 0, 'B': 2, 'E': 0, 'D': 3, 'G': 0, 'F': 0}, 
-        'B': {'A': -2, 'C': 2, 'B': 0, 'E': 0, 'D': 0, 'G': 0, 'F': 0}, 
-        'C': {'A': 0, 'C': 0, 'B': -2, 'E': 1, 'D': 1, 'G': 0, 'F': 0}, 
-        'D': {'A': -3, 'C': -1, 'B': 0, 'E': 0, 'D': 0, 'G': 0, 'F': 4}, 
-        'E': {'A': 0, 'C': -1, 'B': 0, 'E': 0, 'D': 0, 'G': 1, 'F': 0}, 
-        'F': {'A': 0, 'C': 0, 'B': 0, 'E': 0, 'D': -4, 'G': 4, 'F': 0}, 
-        'G': {'A': 0, 'C': 0, 'B': 0, 'E': -1, 'D': 0, 'G': 0, 'F': -4}}
+        'A': {'B': 2, 'D': 3}, 
+        'B': {'A': -2, 'C': 2}, 
+        'C': {'B': -2, 'E': 1, 'D': 1}, 
+        'D': {'A': -3, 'C': -1, 'E': 0, 'F': 4}, 
+        'E': {'C': -1, 'D': 0, 'G': 1}, 
+        'F': {'D': -4, 'G': 4}, 
+        'G': {'E': -1, 'F': -4}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
