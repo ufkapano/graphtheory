@@ -29,7 +29,7 @@ class FloydWarshall:
                     self.dist[source][target] = min(self.dist[source][target],
                         self.dist[source][node] + self.dist[node][target])
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
-            raise ValueError("negative cycle")
+            raise ValueError("negative cycle detected")
 
 
 class FloydWarshallPaths:
