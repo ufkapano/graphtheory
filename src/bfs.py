@@ -1,46 +1,37 @@
 #!/usr/bin/python
-#
-# bfs.py
-#
-# Breadth-First Search.
 
 from edges import Edge
 from Queue import Queue
 
 
 class BFSWithQueue:
+    """Breadth-First Search."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.tree = self.graph.__class__(self.graph.v()) # spanning tree
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.dist = dict(((node, float("inf")) for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
 
-    def run(self, source=None, action=None):
+    def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
         if source is not None:
-            self.visit(source, action)
+            self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
-                    self.visit(node, action)
-        # budujemy spanning tree
-        for node in self.graph.iternodes():
-            if self.prev[node] is not None:
-                # krawedz drzewowa (parent, node)
-                self.tree.add_edge(Edge(self.prev[node], node))
+                    self.visit(node, pre_action, post_action)
 
-    def visit(self, node, action=None):
+    def visit(self, node, pre_action=None, post_action=None):
         """Explore the connected component."""
         self.color[node] = "GREY"
         self.dist[node] = 0
         self.prev[node] = None
-        if action:
-            action(node)
         Q = Queue()
-        Q.put(node)  # do kolejki ida szare
+        Q.put(node)  # node is GREY
+        if pre_action:   # when Q.put
+            pre_action(node)
         while not Q.empty():
             source = Q.get()
             for target in self.graph.iteradjacent(source):
@@ -48,10 +39,21 @@ class BFSWithQueue:
                     self.color[target] = "GREY"
                     self.dist[target] = self.dist[source] + 1
                     self.prev[target] = source
-                    if action:
-                        action(target)
-                    Q.put(target)  # do kolejki ida szare
+                    Q.put(target)  # target is GREY
+                    if pre_action:   # when Q.put
+                        pre_action(target)
             self.color[source] = "BLACK"
+            if post_action:   # source became BLACK
+                post_action(source)
+
+    def to_tree(self):
+        """The spanning tree is built."""
+        tree = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():
+            if self.prev[node] is not None:
+                # tree edge (parent, node)
+                tree.add_edge(Edge(self.prev[node], node))
+        return tree
 
     def to_dag(self):
         """Returns the spanning tree as a dag."""

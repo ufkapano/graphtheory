@@ -32,11 +32,14 @@ class TestBFS(unittest.TestCase):
 
     def test_bfs(self):
         self.assertEqual(self.G.v(), self.N)
-        ordering = []
+        pre_ordering = []
+        post_ordering = []
         algorithm = BFSWithQueue(self.G)
-        algorithm.run("s", action=lambda node: ordering.append(node))
+        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        post_action=lambda node: post_ordering.append(node))
         ordering_expected = ['s', 'r', 'w', 'v', 'x', 't', 'y', 'u']
-        self.assertEqual(ordering, ordering_expected)
+        self.assertEqual(pre_ordering, ordering_expected)
+        self.assertEqual(post_ordering, ordering_expected)
         dist_expected = dict([('s', 0), ('r', 1), ('w', 1), 
         ('t', 2), ('v', 2), ('x', 2), ('u', 3), ('y', 3)])
         self.assertEqual(algorithm.dist, dist_expected)
@@ -44,9 +47,14 @@ class TestBFS(unittest.TestCase):
         ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
         # second possibility: (u,t) instead of (u,x)
         self.assertEqual(algorithm.prev, prev_expected)
-        #algorithm.tree.show()
-        self.assertEqual(algorithm.tree.v(), self.N)
-        self.assertEqual(algorithm.tree.e(), self.N-1)
+
+    def test_to_tree(self):
+        algorithm = BFSWithQueue(self.G)
+        algorithm.run("s")
+        tree = algorithm.to_tree()
+        self.assertFalse(tree.is_directed())
+        self.assertEqual(tree.v(), self.N)
+        self.assertEqual(tree.e(), self.N-1)
 
     def test_to_dag(self):
         algorithm = BFSWithQueue(self.G)

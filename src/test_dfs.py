@@ -51,9 +51,6 @@ class TestDFS(unittest.TestCase):
         'w': 's', 'v': 'r', 'y': 'u', 'x': 'w'}
         # second possibility: 
         self.assertEqual(algorithm.prev, prev_expected)
-        #algorithm.tree.show()
-        self.assertEqual(algorithm.tree.v(), self.N)
-        self.assertEqual(algorithm.tree.e(), self.N-1)
 
     def test_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
@@ -76,9 +73,22 @@ class TestDFS(unittest.TestCase):
         'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
         # second possibility: 
         self.assertEqual(algorithm.prev, prev_expected)
-        #algorithm.tree.show()
-        self.assertEqual(algorithm.tree.v(), self.N)
-        self.assertEqual(algorithm.tree.e(), self.N-1)
+
+    def test_to_tree_stack(self):
+        algorithm = DFSWithStack(self.G)
+        algorithm.run("s")
+        tree = algorithm.to_tree()
+        self.assertFalse(tree.is_directed())
+        self.assertEqual(tree.v(), self.N)
+        self.assertEqual(tree.e(), self.N-1)
+
+    def test_to_tree_recursion(self):
+        algorithm = DFSWithRecursion(self.G)
+        algorithm.run("s")
+        tree = algorithm.to_tree()
+        self.assertFalse(tree.is_directed())
+        self.assertEqual(tree.v(), self.N)
+        self.assertEqual(tree.e(), self.N-1)
 
     def test_to_dag_stack(self):
         algorithm = DFSWithStack(self.G)

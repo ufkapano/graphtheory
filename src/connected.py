@@ -23,7 +23,7 @@ class ConnectedComponentsBFS:
             if source not in self.cc:
                 algorithm = BFSWithQueue(self.graph)
                 algorithm.run(source, 
-                action=lambda node: self.cc.__setitem__(node, self.n_cc))
+                pre_action=lambda node: self.cc.__setitem__(node, self.n_cc))
                 self.n_cc = self.n_cc + 1
 
 

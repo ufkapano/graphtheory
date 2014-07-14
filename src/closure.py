@@ -73,7 +73,7 @@ class TransitiveClosureBFS:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             algorithm = BFSWithQueue(self.graph)
-            algorithm.run(source, action=
+            algorithm.run(source, pre_action=
             lambda node: self.T[source].__setitem__(node, True))
 
 

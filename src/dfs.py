@@ -1,19 +1,15 @@
 #!/usr/bin/python
-#
-# dfs.py
-#
-# Depth-First Search.
 
 from edges import Edge
 from Queue import LifoQueue
 
 
 class DFSWithStack:
+    """Depth-First Search with a stack."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.tree = self.graph.__class__(self.graph.v()) # spanning tree
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
         self.time = 0    # time stamp
@@ -28,20 +24,16 @@ class DFSWithStack:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
                     self.visit(node, pre_action, post_action)
-        for node in self.graph.iternodes():
-            if self.prev[node] is not None:
-                # Edge(parent, node)
-                self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, pre_action=None, post_action=None):
         """Explore the connected component,"""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
-        if pre_action:
-            pre_action(node)
         Q = LifoQueue()
-        Q.put(node)   # na stos ida szare
+        Q.put(node)   # node is GREY
+        if pre_action:   # when Q.put
+            pre_action(node)
         while not Q.empty():
             source = Q.get()    # przetwarzam szary node
             for target in self.graph.iteradjacent(source):
@@ -50,14 +42,23 @@ class DFSWithStack:
                     self.time = self.time + 1
                     self.dd[target] = self.time
                     self.color[target] = "GREY"
-                    if pre_action:
+                    Q.put(target)   # target is GREY
+                    if pre_action:   # when Q.put
                         pre_action(target)
-                    Q.put(target)
             self.time = self.time + 1
             self.ff[source] = self.time
             self.color[source] = "BLACK"
-            if post_action:
+            if post_action:   # source became BLACK
                 post_action(source)
+
+    def to_tree(self):
+        """The spanning tree is built."""
+        tree = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():
+            if self.prev[node] is not None:
+                # tree edge (parent, node)
+                tree.add_edge(Edge(self.prev[node], node))
+        return tree
 
     def to_dag(self):
         """Returns the spanning tree as a dag."""
@@ -71,11 +72,11 @@ class DFSWithStack:
 #=====================================================================
 
 class DFSWithRecursion:
+    """Depth-First Search with a recursion."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.tree = self.graph.__class__(self.graph.v()) # spanning tree
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.prev = dict(((node, None) for node in self.graph.iternodes()))
         self.time = 0    # time stamp
@@ -94,17 +95,13 @@ class DFSWithRecursion:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
                     self.visit(node, pre_action, post_action)
-        for node in self.graph.iternodes():
-            if self.prev[node] is not None:
-                # Edge(parent, node)
-                self.tree.add_edge(Edge(self.prev[node], node))
 
     def visit(self, node, pre_action=None, post_action=None):
         """Explore recursively the connected component."""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
-        if pre_action:
+        if pre_action:   # visit started
             pre_action(node)
         for target in self.graph.iteradjacent(node):
             if self.color[target] == "WHITE":
@@ -113,8 +110,17 @@ class DFSWithRecursion:
         self.time = self.time + 1
         self.ff[node] = self.time
         self.color[node] = "BLACK"
-        if post_action:
+        if post_action:   # node became BLACK
             post_action(node)
+
+    def to_tree(self):
+        """The spanning tree is built."""
+        tree = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():
+            if self.prev[node] is not None:
+                # tree edge (parent, node)
+                tree.add_edge(Edge(self.prev[node], node))
+        return tree
 
     def to_dag(self):
         """Returns the spanning tree as a dag."""
