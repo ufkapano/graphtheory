@@ -6,8 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from topsort import TopologicalSort
-#from topsort2 import TopologicalSort
+from topsort import *
 import unittest
 
 
@@ -26,6 +25,14 @@ class TestTopologicalSorting(unittest.TestCase):
     def test_topsort(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = TopologicalSort(self.G)
+        algorithm.run()
+        idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
+        for edge in self.edges:
+            self.assertTrue(idx[edge.source] < idx[edge.target])
+
+    def test_topsort_dfs(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = TopologicalSortDFS(self.G)
         algorithm.run()
         idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
         for edge in self.edges:

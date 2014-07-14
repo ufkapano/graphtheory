@@ -6,7 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from dfs import DFSWithStack, DFSWithRecursion
+from dfs import *
 import unittest
 
 # r---s   t---u
@@ -69,6 +69,22 @@ class TestDFS(unittest.TestCase):
         'w': 15, 'v': 4, 'y': 13, 'x': 14}
         self.assertEqual(algorithm.dd, dd_expected)
         self.assertEqual(algorithm.ff, ff_expected)
+        prev_expected = {'s': None, 'r': 's', 'u': 'y', 't': 'u', 
+        'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
+        # second possibility: 
+        self.assertEqual(algorithm.prev, prev_expected)
+
+    def test_simple_dfs_with_recursion(self):
+        self.assertEqual(self.G.v(), self.N)
+        pre_ordering = []
+        post_ordering = []
+        algorithm = SimpleDFS(self.G)
+        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+            post_action=lambda node: post_ordering.append(node))
+        pre_ordering_expected = ['s', 'r', 'v', 'w', 'x', 'y', 'u', 't']
+        post_ordering_expected = ['v', 'r', 't', 'u', 'y', 'x', 'w', 's']
+        self.assertEqual(pre_ordering, pre_ordering_expected)
+        self.assertEqual(post_ordering, post_ordering_expected)
         prev_expected = {'s': None, 'r': 's', 'u': 'y', 't': 'u', 
         'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
         # second possibility: 

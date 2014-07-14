@@ -6,7 +6,7 @@
 
 from edges import Edge
 from graphs import Graph
-from bfs import BFSWithQueue
+from bfs import BFSWithQueue, SimpleBFS
 import unittest
 
 # r---s   t---u
@@ -43,6 +43,21 @@ class TestBFS(unittest.TestCase):
         dist_expected = dict([('s', 0), ('r', 1), ('w', 1), 
         ('t', 2), ('v', 2), ('x', 2), ('u', 3), ('y', 3)])
         self.assertEqual(algorithm.dist, dist_expected)
+        prev_expected = dict([('s', None), ('r', 's'), ('u', 'x'), 
+        ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
+        # second possibility: (u,t) instead of (u,x)
+        self.assertEqual(algorithm.prev, prev_expected)
+
+    def test_simple_bfs(self):
+        self.assertEqual(self.G.v(), self.N)
+        pre_ordering = []
+        post_ordering = []
+        algorithm = SimpleBFS(self.G)
+        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        post_action=lambda node: post_ordering.append(node))
+        ordering_expected = ['s', 'r', 'w', 'v', 'x', 't', 'y', 'u']
+        self.assertEqual(pre_ordering, ordering_expected)
+        self.assertEqual(post_ordering, ordering_expected)
         prev_expected = dict([('s', None), ('r', 's'), ('u', 'x'), 
         ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
         # second possibility: (u,t) instead of (u,x)

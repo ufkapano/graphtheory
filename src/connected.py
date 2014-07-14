@@ -4,8 +4,12 @@
 #
 # Connected components for undirected graphs.
 
-from bfs import BFSWithQueue
-from dfs import DFSWithStack
+#from bfs import BFSWithQueue as BFS
+from bfs import SimpleBFS as BFS
+
+#from dfs import DFSWithStack as DFS
+#from dfs import DFSWithRecursion as DFS
+from dfs import SimpleDFS as DFS
 
 class ConnectedComponentsBFS:
 
@@ -21,7 +25,7 @@ class ConnectedComponentsBFS:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             if source not in self.cc:
-                algorithm = BFSWithQueue(self.graph)
+                algorithm = BFS(self.graph)
                 algorithm.run(source, 
                 pre_action=lambda node: self.cc.__setitem__(node, self.n_cc))
                 self.n_cc = self.n_cc + 1
@@ -42,7 +46,7 @@ class ConnectedComponentsDFS:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             if not self.visited[source]:
-                algorithm = DFSWithStack(self.graph)
+                algorithm = DFS(self.graph)
                 algorithm.run(source, 
                 pre_action=lambda node: self.cc.__setitem__(node, self.n_cc),
                 post_action=lambda node: self.visited.__setitem__(node, True))

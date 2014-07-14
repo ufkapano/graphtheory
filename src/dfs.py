@@ -69,7 +69,6 @@ class DFSWithStack:
                 dag.add_edge(Edge(self.prev[node], node))
         return dag
 
-#=====================================================================
 
 class DFSWithRecursion:
     """Depth-First Search with a recursion."""
@@ -111,6 +110,59 @@ class DFSWithRecursion:
         self.ff[node] = self.time
         self.color[node] = "BLACK"
         if post_action:   # node became BLACK
+            post_action(node)
+
+    def to_tree(self):
+        """The spanning tree is built."""
+        tree = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():
+            if self.prev[node] is not None:
+                # tree edge (parent, node)
+                tree.add_edge(Edge(self.prev[node], node))
+        return tree
+
+    def to_dag(self):
+        """Returns the spanning tree as a dag."""
+        dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():
+            if self.prev[node] is not None:
+                # Edge(parent, node), out-tree
+                dag.add_edge(Edge(self.prev[node], node))
+        return dag
+
+
+class SimpleDFS:
+    """Depth-First Search with a recursion."""
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        # ciekawe ustawianie rekurencji
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
+
+    def run(self, source=None, pre_action=None, post_action=None):
+        """Executable pseudocode."""
+        self.prev = dict()
+        if source is not None:
+            self.prev[source] = None   # from X to source
+            self.visit(source, pre_action, post_action)
+        else:
+            for node in self.graph.iternodes():
+                if node not in self.prev:
+                    self.prev[node] = None   # from X to node
+                    self.visit(node, pre_action, post_action)
+
+    def visit(self, node, pre_action=None, post_action=None):
+        """Explore recursively the connected component."""
+        if pre_action:
+            pre_action(node)
+        for target in self.graph.iteradjacent(node):
+            if target not in self.prev:
+                self.prev[target] = node   # from X to target
+                self.visit(target, pre_action, post_action)
+        if post_action:
             post_action(node)
 
     def to_tree(self):
