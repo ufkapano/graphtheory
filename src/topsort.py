@@ -7,20 +7,19 @@
 from edges import Edge
 from graphs import Graph
 from Queue import Queue
-
-#from dfs import DFSWithRecursion as DFS
-from dfs import SimpleDFS as DFS
+#from dfs import DFSWithRecursion
+from dfs import SimpleDFS as DFSWithRecursion
 
 
 class TopologicalSortDFS:
 
     def __init__(self, graph):
         self.graph = graph
-        self.dfs = DFS(graph)
         self.sorted_nodes = []
 
     def run(self):
-        self.dfs.run(post_action=lambda node: self.sorted_nodes.append(node))
+        dfs = DFSWithRecursion(self.graph)
+        dfs.run(post_action=lambda node: self.sorted_nodes.append(node))
         self.sorted_nodes.reverse()
 
 
@@ -29,25 +28,52 @@ class TopologicalSort:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.in_edges = dict((node, 0) for node in self.graph.iternodes())
         self.sorted_nodes = []
-        self.Q = Queue()
+        self.inedges = dict((node, 0) for node in self.graph.iternodes())
+        self.Q = Queue()   # queue or stack or set
 
     def run(self):
         """Executable pseudocode."""
         # Calculate indegree of nodes.
         for edge in self.graph.iteredges():
-            self.in_edges[edge.target] = self.in_edges[edge.target] + 1
+            self.inedges[edge.target] = self.inedges[edge.target] + 1
         for node in self.graph.iternodes():
-            if self.in_edges[node] == 0:
+            if self.inedges[node] == 0:
                 self.Q.put(node)
         while not self.Q.empty():
             node = self.Q.get()
             self.sorted_nodes.append(node)
             # Remove all outedges.
             for target in self.graph.iteradjacent(node):
-                self.in_edges[target] = self.in_edges[target]-1
-                if self.in_edges[target] == 0:
+                self.inedges[target] = self.inedges[target]-1
+                if self.inedges[target] == 0:
                     self.Q.put(target)
+
+
+class TopologicalSortSet:
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.sorted_nodes = []
+        self.inedges = dict((node, 0) for node in self.graph.iternodes())
+        self.Q = set()   # queue or stack or set
+
+    def run(self):
+        """Executable pseudocode."""
+        # Calculate indegree of nodes.
+        for edge in self.graph.iteredges():
+            self.inedges[edge.target] = self.inedges[edge.target] + 1
+        for node in self.graph.iternodes():
+            if self.inedges[node] == 0:
+                self.Q.add(node)
+        while self.Q:
+            node = self.Q.pop()
+            self.sorted_nodes.append(node)
+            # Remove all outedges.
+            for target in self.graph.iteradjacent(node):
+                self.inedges[target] = self.inedges[target]-1
+                if self.inedges[target] == 0:
+                    self.Q.add(target)
 
 # EOF
