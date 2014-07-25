@@ -71,20 +71,21 @@ class SimpleBFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.prev = dict()
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
-        self.prev = dict()  # 
         if source is not None:
+            self.prev[source] = None   # before visit
             self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if node not in self.prev:
+                    self.prev[node] = None   # before visit
                     self.visit(node, pre_action, post_action)
 
     def visit(self, node, pre_action=None, post_action=None):
         """Explore the connected component."""
-        self.prev[node] = None
         Q = Queue()
         Q.put(node)
         if pre_action:   # when Q.put
@@ -93,7 +94,7 @@ class SimpleBFS:
             source = Q.get()
             for target in self.graph.iteradjacent(source):
                 if target not in self.prev:
-                    self.prev[target] = source
+                    self.prev[target] = source   # before Q.put
                     Q.put(target)
                     if pre_action:   # when Q.put
                         pre_action(target)

@@ -137,21 +137,21 @@ class SimpleDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.prev = dict()
         # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
-        sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
-        self.prev = dict()
         if source is not None:
-            self.prev[source] = None   # from X to source
+            self.prev[source] = None   # before visit
             self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if node not in self.prev:
-                    self.prev[node] = None   # from X to node
+                    self.prev[node] = None   # before visit
                     self.visit(node, pre_action, post_action)
 
     def visit(self, node, pre_action=None, post_action=None):
@@ -160,7 +160,7 @@ class SimpleDFS:
             pre_action(node)
         for target in self.graph.iteradjacent(node):
             if target not in self.prev:
-                self.prev[target] = node   # from X to target
+                self.prev[target] = node   # before visit
                 self.visit(target, pre_action, post_action)
         if post_action:
             post_action(node)
