@@ -14,7 +14,6 @@ class PrimMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -41,9 +40,14 @@ class PrimMST:
                     self.prev[edge.target] = edge.source
                     # DECREASE-KEY
                     self.pq.put((edge.weight, edge.target))
+
+    def to_tree(self):
+        """The minimum spanning tree is built."""
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # O(V) time
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
+        return self.mst
 
 
 class PrimMatrixMST:
@@ -52,7 +56,6 @@ class PrimMatrixMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.mst = graph.__class__(graph.v())   # MST as a graph
         self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
         self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -73,9 +76,14 @@ class PrimMatrixMST:
                 and edge.weight < self.dist[edge.target]):
                     self.dist[edge.target] = edge.weight
                     self.prev[edge.target] = edge.source
+
+    def to_tree(self):
+        """The minimum spanning tree is built."""
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # O(V) time
             if self.prev[node] is not None:
                 self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
+        return self.mst
 
 
 class PrimTrivialMST:
@@ -100,5 +108,9 @@ class PrimTrivialMST:
             self.mst.add_edge(min_edge)
             self.in_mst[min_edge.source] = True
             self.in_mst[min_edge.target] = True
+
+    def to_tree(self):
+        """Compatibility with other Prim classes."""
+        return self.mst
 
 # EOF

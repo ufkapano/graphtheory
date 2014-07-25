@@ -27,6 +27,7 @@ class TestPrim(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 40
@@ -41,6 +42,7 @@ class TestPrim(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 40
@@ -55,6 +57,7 @@ class TestPrim(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimTrivialMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 40
@@ -90,6 +93,7 @@ class TestPrimCormen(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
@@ -105,6 +109,7 @@ class TestPrimCormen(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
@@ -120,6 +125,7 @@ class TestPrimCormen(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimTrivialMST(self.G)
         algorithm.run()
+        algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)
         self.assertEqual(algorithm.mst.e(), self.N-1)
         mst_weight_expected = 42
