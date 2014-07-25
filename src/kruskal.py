@@ -30,4 +30,8 @@ class KruskalMST:
                 self.uf.union(edge.source, edge.target)
                 self.mst.add_edge(edge)
 
+    def to_tree(self):
+        """Compatibility with other classes."""
+        return self.mst
+
 # EOF

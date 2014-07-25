@@ -54,4 +54,8 @@ class BoruvkaMST:
             if new_len == 1:   # a connected graph
                 break
 
+    def to_tree(self):
+        """Compatibility with other classes."""
+        return self.mst
+
 # EOF
