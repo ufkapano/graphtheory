@@ -17,9 +17,12 @@ class TestPrim(unittest.TestCase):
         # http://en.wikipedia.org/wiki/Boruvka's_algorithm
         self.N = 7           # number of nodes
         self.G = Graph(self.N)
+        self.nodes = ["A", "B", "C", "D", "E", "F", "G"]
         self.edges = [Edge("A", "B", 7), Edge("B", "C", 11), Edge("A", "D", 4),
         Edge("D", "B", 9), Edge("E", "B", 10), Edge("C", "E", 5), Edge("D", "E", 15),
         Edge("D", "F", 6), Edge("F", "E", 12), Edge("F", "G", 13), Edge("E", "G", 8)]
+        for node in self.nodes:
+            self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
 

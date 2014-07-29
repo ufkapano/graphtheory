@@ -10,6 +10,8 @@ class FleuryDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        if not self.is_eulerian():
+            raise ValueError("the graph is not eulerian")
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -20,11 +22,13 @@ class FleuryDFS:
         self.graph_copy = self.graph.copy()
         while list(self.graph_copy.iteradjacent(node)):
             for edge in list(self.graph_copy.iteroutedges(node)):
+                # graph_copy is changing!
                 if not self.is_bridge(edge):
                     break
             self.graph_copy.del_edge(edge)
             self.euler_cycle.append(edge.target)
             node = edge.target
+        del self.graph_copy
 
     def is_bridge(self, edge):
         """Bridge test."""
@@ -37,6 +41,18 @@ class FleuryDFS:
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
 
+    def is_eulerian(self):
+        """Test if the graph is eulerian."""
+        if self.graph.is_directed():
+            for node in self.graph.iternodes():
+                if self.graph.indegree(node) != self.graph.outdegree(node):
+                    return False
+        else:
+            for node in self.graph.iternodes():
+                if self.graph.degree(node) % 2 == 1:
+                    return False
+        return True
+
 
 class FleuryBFS:
     """Fleury's algorithm for finding an Eulerian cycle."""
@@ -44,6 +60,8 @@ class FleuryBFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        if not self.is_eulerian():
+            raise ValueError("the graph is not eulerian")
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -54,11 +72,13 @@ class FleuryBFS:
         self.graph_copy = self.graph.copy()
         while list(self.graph_copy.iteradjacent(node)):
             for edge in list(self.graph_copy.iteroutedges(node)):
+                # graph_copy is changing!
                 if not self.is_bridge(edge):
                     break
             self.graph_copy.del_edge(edge)
             self.euler_cycle.append(edge.target)
             node = edge.target
+        del self.graph_copy
 
     def is_bridge(self, edge):
         """Bridge test."""
@@ -70,5 +90,17 @@ class FleuryBFS:
         dfs.run(edge.source, pre_action=lambda node: list2.append(node))
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
+
+    def is_eulerian(self):
+        """Test if the graph is eulerian."""
+        if self.graph.is_directed():
+            for node in self.graph.iternodes():
+                if self.graph.indegree(node) != self.graph.outdegree(node):
+                    return False
+        else:
+            for node in self.graph.iternodes():
+                if self.graph.degree(node) % 2 == 1:
+                    return False
+        return True
 
 # EOF
