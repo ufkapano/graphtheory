@@ -127,6 +127,34 @@ class Graph(dict):
                 print "%s(%s)" % (edge.target, edge.weight),
             print
 
+    def copy(self):
+        """Graph copy."""
+        new_graph = Graph(n=self.n, directed=self.directed)
+        for node in self.iternodes():
+            new_graph[node] = dict(self[node])
+        return new_graph
+
+    def degree(self, node):
+        """The degree of the node in the undirected graph."""
+        if self.is_directed():
+            raise ValueError("the graph is directed")
+        return len(self[node])
+
+    def outdegree(self, node):
+        """The outdegree of the node."""
+        return len(self[node])
+
+    def indegree(self, node):
+        """The indegree of the node."""
+        if self.is_directed():   # O(V) time
+            counter = 0
+            for sources_dict in self.itervalues():
+                if node in sources_dict:
+                    counter = counter + 1
+            return counter
+        else:
+            return len(self[node])
+
     def __eq__(self, other):
         """Test if the graphs are equal."""
         if self.is_directed() is not other.is_directed():

@@ -62,6 +62,15 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(len(inedges_B), 2)
         self.assertEqual(len(outedges_B), 1)
 
+    def test_copy(self):
+        T = self.G.copy()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+
     def test_add_graph_directed(self):
         T = Graph(self.N, directed=True)
         T.add_edge(Edge("E", "B", 8))
@@ -72,9 +81,20 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.v(), 5)
         self.assertEqual(self.G.e(), 7)
 
+    def test_degree(self):
+        self.assertEqual(self.G.indegree("A"), 1)
+        self.assertEqual(self.G.indegree("B"), 2)
+        self.assertEqual(self.G.indegree("C"), 1)
+        self.assertEqual(self.G.indegree("D"), 1)
+        self.assertEqual(self.G.outdegree("A"), 1)
+        self.assertEqual(self.G.outdegree("B"), 1)
+        self.assertEqual(self.G.outdegree("C"), 2)
+        self.assertEqual(self.G.outdegree("D"), 1)
+
     def test_exceptions(self):
         self.assertRaises(ValueError, self.G.add_edge, Edge("A", "A", 1))
         self.assertRaises(ValueError, self.G.add_edge, Edge("A", "B", 2))
+        self.assertRaises(ValueError, self.G.degree, "A")
 
     def tearDown(self): pass
 
@@ -107,6 +127,21 @@ class TestGraphUndirected(unittest.TestCase):
         #print inedges_B, outedges_B
         self.assertEqual(len(inedges_B), 3)
         self.assertEqual(len(outedges_B), 3)
+
+    def test_copy(self):
+        T = self.G.copy()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+
+    def test_degree(self):
+        self.assertEqual(self.G.degree("A"), 2)
+        self.assertEqual(self.G.degree("B"), 3)
+        self.assertEqual(self.G.degree("C"), 3)
+        self.assertEqual(self.G.degree("D"), 2)
 
     def test_add_graph_undirected(self):
         T = Graph(self.N)
