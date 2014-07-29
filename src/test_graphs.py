@@ -71,6 +71,15 @@ class TestGraphDirected(unittest.TestCase):
         for edge in T.iteredges():
             self.assertTrue(self.G.has_edge(edge))
 
+    def test_transpose(self):
+        T = self.G.transpose()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(~edge))
+
     def test_add_graph_directed(self):
         T = Graph(self.N, directed=True)
         T.add_edge(Edge("E", "B", 8))

@@ -134,6 +134,15 @@ class Graph(dict):
             new_graph[node] = dict(self[node])
         return new_graph
 
+    def transpose(self):
+        """Returns the transpose of the graph."""
+        new_graph = Graph(n=self.n, directed=self.directed)
+        for node in self.iternodes():
+            new_graph.add_node(node)
+        for edge in self.iteredges():
+            new_graph.add_edge(~edge)
+        return new_graph
+
     def degree(self, node):
         """The degree of the node in the undirected graph."""
         if self.is_directed():
