@@ -20,7 +20,7 @@ class FleuryDFS:
         node = source
         self.euler_cycle = [node]
         self.graph_copy = self.graph.copy()
-        while list(self.graph_copy.iteradjacent(node)):
+        while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
                 if not self.is_bridge(edge):
@@ -32,11 +32,12 @@ class FleuryDFS:
 
     def is_bridge(self, edge):
         """Bridge test."""
-        dfs = SimpleDFS(self.graph_copy)
         list1 = list()
         list2 = list()
+        dfs = SimpleDFS(self.graph_copy)
         dfs.run(edge.source, pre_action=lambda node: list1.append(node))
         self.graph_copy.del_edge(edge)
+        dfs = SimpleDFS(self.graph_copy)
         dfs.run(edge.source, pre_action=lambda node: list2.append(node))
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
@@ -70,7 +71,7 @@ class FleuryBFS:
         node = source
         self.euler_cycle = [node]
         self.graph_copy = self.graph.copy()
-        while list(self.graph_copy.iteradjacent(node)):
+        while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
                 if not self.is_bridge(edge):
@@ -82,11 +83,12 @@ class FleuryBFS:
 
     def is_bridge(self, edge):
         """Bridge test."""
-        dfs = SimpleBFS(self.graph_copy)
         list1 = list()
         list2 = list()
+        dfs = SimpleBFS(self.graph_copy)
         dfs.run(edge.source, pre_action=lambda node: list1.append(node))
         self.graph_copy.del_edge(edge)
+        dfs = SimpleBFS(self.graph_copy)
         dfs.run(edge.source, pre_action=lambda node: list2.append(node))
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
