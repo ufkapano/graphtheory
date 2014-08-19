@@ -29,7 +29,7 @@ class SlowAllPairs:
         for m in xrange(2, self.graph.v()):   # |V|-2 times
             self.dist = self.extended_shortest_paths(self.dist)
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
-            raise ValueError("negative cycle")
+            raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_dist):
         """O(V**3) time."""
@@ -69,7 +69,7 @@ class SlowAllPairsEdges:
         for m in xrange(2, self.graph.v()):   # |V|-2 times
             self.dist = self.extended_shortest_paths(self.dist)
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
-            raise ValueError("negative cycle")
+            raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_dist):
         """O(V*(V+E)) time."""
@@ -112,7 +112,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
         for m in xrange(2, self.graph.v()):   # |V|-2 times
             self.dist = self.extended_shortest_paths(self.dist)
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
-            raise ValueError("negative cycle")
+            raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_dist):
         """O(V**3) time."""
@@ -152,7 +152,7 @@ class FasterAllPairs:
             self.dist = self.extended_shortest_paths(self.dist)
             m = 2 * m
         if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
-            raise ValueError("negative cycle")
+            raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_dist):
         """O(V**3) time."""
