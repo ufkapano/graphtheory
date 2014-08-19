@@ -1,7 +1,11 @@
 #!/usr/bin/python
 
-from bfs import BFSWithQueue
-from dfs import DFSWithStack
+#from bfs import BFSWithQueue as SimpleBFS
+from bfs import SimpleBFS
+
+#from dfs import DFSWithStack as SimpleDFS
+#from dfs import DFSWithRecursion as SimpleDFS
+from dfs import SimpleDFS
 
 
 class TransitiveClosureSimple:
@@ -72,7 +76,7 @@ class TransitiveClosureBFS:
     def run(self):
         """Executable pseudocode."""
         for source in self.graph.iternodes():
-            algorithm = BFSWithQueue(self.graph)
+            algorithm = SimpleBFS(self.graph)
             algorithm.run(source, pre_action=
             lambda node: self.T[source].__setitem__(node, True))
 
@@ -95,7 +99,7 @@ class TransitiveClosureDFS:
     def run(self):
         """Executable pseudocode."""
         for source in self.graph.iternodes():
-            algorithm = DFSWithStack(self.graph)
+            algorithm = SimpleDFS(self.graph)
             algorithm.run(source, pre_action=
             lambda node: self.T[source].__setitem__(node, True))
 
