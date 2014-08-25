@@ -76,17 +76,16 @@ class SimpleBFS:
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
         if source is not None:
-            self.prev[source] = None   # before visit
             self.visit(source, pre_action, post_action)
         else:
             for node in self.graph.iternodes():
                 if node not in self.prev:
-                    self.prev[node] = None   # before visit
                     self.visit(node, pre_action, post_action)
 
     def visit(self, node, pre_action=None, post_action=None):
         """Explore the connected component."""
         Q = Queue()
+        self.prev[node] = None   # before Q.put
         Q.put(node)
         if pre_action:   # when Q.put
             pre_action(node)
