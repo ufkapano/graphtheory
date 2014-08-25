@@ -23,6 +23,7 @@ class AcyclicGraphDFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is not None:
+            # only one connected component will be checked!
             self.visit(source)
         else:
             for node in self.graph.iternodes():
