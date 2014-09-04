@@ -22,9 +22,9 @@ class TestTopologicalSorting(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_topsort(self):
+    def test_topsort_queue(self):
         self.assertEqual(self.G.v(), self.N)
-        algorithm = TopologicalSort(self.G)
+        algorithm = TopologicalSortQueue(self.G)
         algorithm.run()
         idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
         for edge in self.edges:

@@ -2,7 +2,7 @@
 
 from edges import Edge
 from graphs import Graph
-from bfs import BFSWithQueue, SimpleBFS
+from bfsfast import BFSWithQueue, SimpleBFS
 import unittest
 
 # r---s   t---u

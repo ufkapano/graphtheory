@@ -23,7 +23,7 @@ class TopologicalSortDFS:
         self.sorted_nodes.reverse()
 
 
-class TopologicalSort:
+class TopologicalSortQueue:
 
     def __init__(self, graph):
         """The algorithm initialization."""
