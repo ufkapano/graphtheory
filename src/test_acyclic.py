@@ -23,10 +23,10 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         # The graph from Cormen p.607 changed.
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = ["r", "s", "t", "u", "v", "w", "x", "y"]
-        self.edges = [Edge("r", "v"), Edge("r", "s"), Edge("s", "w"), 
-        Edge("w", "t"), Edge("t", "x"), Edge("x", "u"), Edge("x", "y")]
-        self.cycle_edges = [Edge("w", "x"), Edge("t", "u"), Edge("u", "y")]
+        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.edges = [Edge(0, 4), Edge(0, 1), Edge(1, 5), 
+        Edge(5, 2), Edge(2, 6), Edge(6, 3), Edge(6, 7)]
+        self.cycle_edges = [Edge(5, 6), Edge(2, 3), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -37,9 +37,9 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
     def test_detect_no_cycles(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = AcyclicGraphDFS(self.G)
-        algorithm.run("s")   # it is safe, because G is connected
-        prev_expected = {'s': None, 'r': 's', 'u': 'x', 
-        't': 'w', 'w': 's', 'v': 'r', 'y': 'x', 'x': 't'}
+        algorithm.run(1)   # it is safe, because G is connected
+        prev_expected = {1: None, 0: 1, 3: 6, 
+        2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_detect_cycle1(self):
@@ -62,16 +62,16 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
 
     def tearDown(self): pass
 
-#     A----------+
+#     0----------+
 #     | \        |
 #     |. \.      |
-# +-->B   E      |
+# +-->1   4      |
 # |   |    \     |
 # |   |.    \.  .|
-# |   C<-----F-->H
+# |   2<-----5-->7
 # |   |      |
 # |   |.     |.
-# +---D      G
+# +---3      6
 
 class TestAcyclicDirectedGraph(unittest.TestCase):
 
@@ -79,11 +79,11 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         # The graph from
         self.N = 8           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A","B","C","D","E","F","G","H"]
-        self.edges = [Edge("A", "B"), Edge("B", "C"), Edge("C", "D"),
-        Edge("A", "E"), Edge("E", "F"), Edge("F", "G"), Edge("F", "H"),
-        Edge("F", "C"), Edge("A", "H")]
-        self.cycle_edges = [Edge("D", "B"), Edge("F", "E")]
+        self.nodes = [0,1,2,3,4,5,6,7]
+        self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+        Edge(0, 4), Edge(4, 5), Edge(5, 6), Edge(5, 7),
+        Edge(5, 2), Edge(0, 7)]
+        self.cycle_edges = [Edge(3, 1), Edge(5, 4)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -94,9 +94,9 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
     def test_detect_no_directed_cycles(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = AcyclicGraphDFS(self.G)
-        algorithm.run("A")   # in order to easy test
-        prev_expected = {'A': None, 'C': 'B', 'B': 'A', 
-        'E': 'A', 'D': 'C', 'G': 'F', 'F': 'E', 'H': 'A'}
+        algorithm.run(0)   # in order to easy test
+        prev_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 5}
+        #prev_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 0}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_detect_directed_cycle1(self):

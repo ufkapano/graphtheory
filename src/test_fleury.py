@@ -9,20 +9,20 @@ from graphs import Graph
 from fleury import FleuryDFS, FleuryBFS
 import unittest
 
-# A --- B     C
+# 0 --- 1     2
 # |     |   / |
 # |     |  /  |
 # |     | /   |
-# D --- E --- F
+# 3 --- 4 --- 5
 
 class TestFleuryUndirectedGraph(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
-        self.nodes = ["A", "B", "C", "D", "E", "F"]
-        self.edges = [Edge("A", "B"), Edge("A", "D"), Edge("B", "E"),
-        Edge("D", "E"), Edge("E", "C"), Edge("E", "F"), Edge("C", "F")]
+        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.edges = [Edge(0, 1), Edge(0, 3), Edge(1, 4),
+        Edge(3, 4), Edge(4, 2), Edge(4, 5), Edge(2, 5)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -41,7 +41,7 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
         self.assertEqual(len(algorithm.euler_cycle), len(self.edges)+1)
 
     def test_eulerian(self):
-        self.G.add_edge(Edge("B", "C"))
+        self.G.add_edge(Edge(1, 2))
         self.assertRaises(ValueError, FleuryDFS, self.G)
         self.assertRaises(ValueError, FleuryBFS, self.G)
 
@@ -58,9 +58,9 @@ class TestFleuryDirectedGraph(unittest.TestCase):
     def setUp(self):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
-        self.nodes = ["A", "B", "C", "D", "E", "F"]
-        self.edges = [Edge("A", "B"), Edge("D", "A"), Edge("B", "E"),
-        Edge("E", "D"), Edge("C", "E"), Edge("E", "F"), Edge("C", "F")]
+        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.edges = [Edge(0, 1), Edge(3, 0), Edge(1, 4),
+        Edge(4, 3), Edge(2, 4), Edge(4, 5), Edge(2, 5)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -79,7 +79,7 @@ class TestFleuryDirectedGraph(unittest.TestCase):
         self.assertEqual(len(algorithm.euler_cycle), len(self.edges)+1)
 
     def test_eulerian(self):
-        self.G.add_edge(Edge("B", "C"))
+        self.G.add_edge(Edge(1, 2))
         self.assertRaises(ValueError, FleuryDFS, self.G)
         self.assertRaises(ValueError, FleuryBFS, self.G)
 

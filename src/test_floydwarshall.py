@@ -11,10 +11,10 @@ class TestFloydWarshall(unittest.TestCase):
     def setUp(self):
         self.N = 5           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A", "B", "C", "D", "E"]
-        self.edges = [Edge("A", "C", 6), Edge("A", "D", 3),
-        Edge("B", "A", 3), Edge("C", "D", 2), Edge("D", "B", 1),
-        Edge("D", "C", 1), Edge("E", "B", 4), Edge("E", "D", 2)]
+        self.nodes = [0, 1, 2, 3, 4]
+        self.edges = [Edge(0, 2, 6), Edge(0, 3, 3),
+        Edge(1, 0, 3), Edge(2, 3, 2), Edge(3, 1, 1),
+        Edge(3, 2, 1), Edge(4, 1, 4), Edge(4, 3, 2)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -24,34 +24,34 @@ class TestFloydWarshall(unittest.TestCase):
     def test_floydwarshall(self):
         algorithm = FloydWarshall(self.G)
         algorithm.run()
-        expected_dist = dict(
-        A={'A': 0, 'C': 4, 'B': 4, 'E': float("inf"), 'D': 3},
-        B={'A': 3, 'C': 7, 'B': 0, 'E': float("inf"), 'D': 6},
-        C={'A': 6, 'C': 0, 'B': 3, 'E': float("inf"), 'D': 2},
-        D={'A': 4, 'C': 1, 'B': 1, 'E': float("inf"), 'D': 0},
-        E={'A': 6, 'C': 3, 'B': 3, 'E': 0, 'D': 2})
+        expected_dist = {
+        0: {0: 0, 1: 4, 2: 4, 3: 3, 4: float("inf")}, 
+        1: {0: 3, 1: 0, 2: 7, 3: 6, 4: float("inf")}, 
+        2: {0: 6, 1: 3, 2: 0, 3: 2, 4: float("inf")}, 
+        3: {0: 4, 1: 1, 2: 1, 3: 0, 4: float("inf")}, 
+        4: {0: 6, 1: 3, 2: 3, 3: 2, 4: 0}}
         self.assertEqual(algorithm.dist, expected_dist)
 
     def test_floydwarshall_paths(self):
         algorithm = FloydWarshallPaths(self.G)
         algorithm.run()
-        expected_dist = dict(
-        A={'A': 0, 'C': 4, 'B': 4, 'E': float("inf"), 'D': 3},
-        B={'A': 3, 'C': 7, 'B': 0, 'E': float("inf"), 'D': 6},
-        C={'A': 6, 'C': 0, 'B': 3, 'E': float("inf"), 'D': 2},
-        D={'A': 4, 'C': 1, 'B': 1, 'E': float("inf"), 'D': 0},
-        E={'A': 6, 'C': 3, 'B': 3, 'E': 0, 'D': 2})
+        expected_dist = {
+        0: {0: 0, 1: 4, 2: 4, 3: 3, 4: float("inf")}, 
+        1: {0: 3, 1: 0, 2: 7, 3: 6, 4: float("inf")}, 
+        2: {0: 6, 1: 3, 2: 0, 3: 2, 4: float("inf")}, 
+        3: {0: 4, 1: 1, 2: 1, 3: 0, 4: float("inf")}, 
+        4: {0: 6, 1: 3, 2: 3, 3: 2, 4: 0}}
         expected_prev = {
-        'A': {'A': None, 'C': 'D', 'B': 'D', 'E': None, 'D': 'A'}, 
-        'B': {'A': 'B', 'C': 'D', 'B': None, 'E': None, 'D': 'A'}, 
-        'C': {'A': 'B', 'C': None, 'B': 'D', 'E': None, 'D': 'C'}, 
-        'D': {'A': 'B', 'C': 'D', 'B': 'D', 'E': None, 'D': None}, 
-        'E': {'A': 'B', 'C': 'D', 'B': 'D', 'E': None, 'D': 'E'}}
+        0: {0: None, 2: 3, 1: 3, 4: None, 3: 0}, 
+        1: {0: 1, 2: 3, 1: None, 4: None, 3: 0}, 
+        2: {0: 1, 2: None, 1: 3, 4: None, 3: 2}, 
+        3: {0: 1, 2: 3, 1: 3, 4: None, 3: None}, 
+        4: {0: 1, 2: 3, 1: 3, 4: None, 3: 4}}
         self.assertEqual(algorithm.dist, expected_dist)
         self.assertEqual(algorithm.prev, expected_prev)
 
     def test_floydwarshall_negative_cycle(self):
-        self.G.add_edge(Edge("B", "D", -2))
+        self.G.add_edge(Edge(1, 3, -2))
         algorithm = FloydWarshall(self.G)
         self.assertRaises(ValueError, algorithm.run)
 
@@ -61,10 +61,10 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A", "B", "C", "D"]
-        self.edges = [Edge("A", "B", 3), Edge("A", "C", 6),
-        Edge("B", "C", 4), Edge("B", "D", 5), Edge("C", "D", 2),
-        Edge("D", "A", -5), Edge("D", "B", -3)]
+        self.nodes = [0, 1, 2, 3]
+        self.edges = [Edge(0, 1, 3), Edge(0, 2, 6),
+        Edge(1, 2, 4), Edge(1, 3, 5), Edge(2, 3, 2),
+        Edge(3, 0, -5), Edge(3, 1, -3)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -74,31 +74,31 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
     def test_negative_edges(self):
         algorithm = FloydWarshall(self.G)
         algorithm.run()
-        expected_dist = dict(
-        A={'A': 0, 'C': 6, 'B': 3, 'D': 8}, 
-        B={'A': 0, 'C': 4, 'B': 0, 'D': 5}, 
-        C={'A': -3, 'C': 0, 'B': -1, 'D': 2},
-        D={'A': -5, 'C': 1, 'B': -3, 'D': 0})
+        expected_dist = {
+        0: {0: 0, 1: 3, 2: 6, 3: 8}, 
+        1: {0: 0, 1: 0, 2: 4, 3: 5}, 
+        2: {0: -3, 1: -1, 2: 0, 3: 2}, 
+        3: {0: -5, 1: -3, 2: 1, 3: 0}}
         self.assertEqual(algorithm.dist, expected_dist)
 
     def test_negative_edges_with_paths(self):
         algorithm = FloydWarshallPaths(self.G)
         algorithm.run()
-        expected_dist = dict(
-        A={'A': 0, 'C': 6, 'B': 3, 'D': 8}, 
-        B={'A': 0, 'C': 4, 'B': 0, 'D': 5}, 
-        C={'A': -3, 'C': 0, 'B': -1, 'D': 2},
-        D={'A': -5, 'C': 1, 'B': -3, 'D': 0})
+        expected_dist = {
+        0: {0: 0, 1: 3, 2: 6, 3: 8}, 
+        1: {0: 0, 1: 0, 2: 4, 3: 5}, 
+        2: {0: -3, 1: -1, 2: 0, 3: 2}, 
+        3: {0: -5, 1: -3, 2: 1, 3: 0}}
         expected_prev = {
-        'A': {'A': None, 'C': 'A', 'B': 'A', 'D': 'C'}, 
-        'B': {'A': 'D', 'C': 'B', 'B': None, 'D': 'B'}, 
-        'C': {'A': 'D', 'C': None, 'B': 'D', 'D': 'C'}, 
-        'D': {'A': 'D', 'C': 'A', 'B': 'D', 'D': None}}
+        0: {0: None, 1: 0, 2: 0, 3: 1}, 
+        1: {0: 3, 1: None, 2: 1, 3: 1}, 
+        2: {0: 3, 1: 3, 2: None, 3: 2}, 
+        3: {0: 3, 1: 3, 2: 0, 3: None}}
         self.assertEqual(algorithm.dist, expected_dist)
         self.assertEqual(algorithm.prev, expected_prev)
 
     def test_negative_cycle(self):
-        self.G.add_edge(Edge("A", "D", 2))
+        self.G.add_edge(Edge(0, 3, 2))
         algorithm = FloydWarshall(self.G)
         self.assertRaises(ValueError, algorithm.run)
 

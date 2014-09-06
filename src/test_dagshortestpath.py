@@ -9,33 +9,32 @@ from edges import Edge
 class TestDAGShortestPath(unittest.TestCase):
 
     def setUp(self):
-        self.N = 4           # number of nodes
+        self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["R", "S", "T", "X", "Y", "Z"]
+        self.nodes = [0, 1, 2, 3, 4, 5]
         for node in self.nodes:
             self.G.add_node(node)
-        self.G.add_edge(Edge("R", "S", 5))
-        self.G.add_edge(Edge("R", "T", 3))
-        self.G.add_edge(Edge("S", "X", 6))
-        self.G.add_edge(Edge("S", "T", 2))
-        self.G.add_edge(Edge("T", "Y", 4))
-        self.G.add_edge(Edge("T", "X", 7))
-        self.G.add_edge(Edge("T", "Z", 2))
-        self.G.add_edge(Edge("X", "Y", -1))
-        self.G.add_edge(Edge("X", "Z", 1))
-        self.G.add_edge(Edge("Y", "Z", -2))
+        self.G.add_edge(Edge(0, 1, 5))
+        self.G.add_edge(Edge(0, 2, 3))
+        self.G.add_edge(Edge(1, 3, 6))
+        self.G.add_edge(Edge(1, 2, 2))
+        self.G.add_edge(Edge(2, 4, 4))
+        self.G.add_edge(Edge(2, 3, 7))
+        self.G.add_edge(Edge(2, 5, 2))
+        self.G.add_edge(Edge(3, 4, -1))
+        self.G.add_edge(Edge(3, 5, 1))
+        self.G.add_edge(Edge(4, 5, -2))
 
     def test_shortest_path(self):
-        source = "R"
-        target = "Z"
+        source = 0
+        target = 5
         algorithm = DAGShortestPath(self.G)
         algorithm.run(source)
-        dist_expected = dict(R=0, S=5, T=3, X=10, Y=7, Z=5)
+        dist_expected = {0: 0, 1: 5, 2: 3, 3: 10, 4: 7, 5: 5}
         self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {'S': 'R', 'R': None, 'T': 'R', 
-        'Y': 'T', 'X': 'T', 'Z': 'T'}
+        prev_expected = {1: 0, 0: None, 2: 0, 4: 2, 3: 2, 5: 2}
         self.assertEqual(algorithm.prev, prev_expected)
-        path_expected = ['R', 'T', 'Z']
+        path_expected = [0, 2, 5]
         self.assertEqual(algorithm.path(target), path_expected)
 
 

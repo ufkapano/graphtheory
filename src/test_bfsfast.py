@@ -5,9 +5,9 @@ from graphs import Graph
 from bfsfast import BFSWithQueue, SimpleBFS
 import unittest
 
-# r---s   t---u
+# 0---1   2---3
 # |   | / | / |
-# v   w---x---y
+# 4   5---6---7
 
 class TestBFS(unittest.TestCase):
 
@@ -15,10 +15,10 @@ class TestBFS(unittest.TestCase):
         # The graph from Cormen p.607
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = ["r", "s", "t", "u", "v", "w", "x", "y"]
-        self.edges = [Edge("r", "v"), Edge("r", "s"), 
-        Edge("s", "w"), Edge("w", "t"), Edge("w", "x"), Edge("t", "x"),
-        Edge("t", "u"), Edge("x", "u"), Edge("x", "y"), Edge("u", "y")]
+        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.edges = [Edge(0, 4), Edge(0, 1), 
+        Edge(1, 5), Edge(5, 2), Edge(5, 6), Edge(2, 6),
+        Edge(2, 3), Edge(6, 3), Edge(6, 7), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -31,17 +31,15 @@ class TestBFS(unittest.TestCase):
         pre_ordering = []
         post_ordering = []
         algorithm = BFSWithQueue(self.G)
-        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
         post_action=lambda node: post_ordering.append(node))
-        ordering_expected = ['s', 'r', 'w', 'v', 'x', 't', 'y', 'u']
+        ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
         self.assertEqual(pre_ordering, ordering_expected)
         self.assertEqual(post_ordering, ordering_expected)
-        dist_expected = dict([('s', 0), ('r', 1), ('w', 1), 
-        ('t', 2), ('v', 2), ('x', 2), ('u', 3), ('y', 3)])
+        dist_expected = dict([(1, 0), (0, 1), (5, 1), 
+        (2, 2), (4, 2), (6, 2), (3, 3), (7, 3)])
         self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = dict([('s', None), ('r', 's'), ('u', 'x'), 
-        ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
-        # second possibility: (u,t) instead of (u,x)
+        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_simple_bfs(self):
@@ -49,19 +47,17 @@ class TestBFS(unittest.TestCase):
         pre_ordering = []
         post_ordering = []
         algorithm = SimpleBFS(self.G)
-        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
         post_action=lambda node: post_ordering.append(node))
-        ordering_expected = ['s', 'r', 'w', 'v', 'x', 't', 'y', 'u']
+        ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
         self.assertEqual(pre_ordering, ordering_expected)
         self.assertEqual(post_ordering, ordering_expected)
-        prev_expected = dict([('s', None), ('r', 's'), ('u', 'x'), 
-        ('t', 'w'), ('w', 's'), ('v', 'r'), ('y', 'x'), ('x', 'w')])
-        # second possibility: (u,t) instead of (u,x)
+        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_to_tree(self):
         algorithm = BFSWithQueue(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         tree = algorithm.to_tree()
         self.assertFalse(tree.is_directed())
         self.assertEqual(tree.v(), self.N)
@@ -69,7 +65,7 @@ class TestBFS(unittest.TestCase):
 
     def test_to_dag(self):
         algorithm = BFSWithQueue(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         dag = algorithm.to_dag()
         self.assertTrue(dag.is_directed())
         self.assertEqual(dag.v(), self.N)

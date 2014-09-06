@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from edges import Edge
-from topsort import TopologicalSort
+from topsort import TopologicalSortDFS
 
 
 class DAGShortestPath:
@@ -20,7 +20,7 @@ class DAGShortestPath:
         """Executable pseudocode."""
         self.source = source
         self.dist[source] = 0
-        ts = TopologicalSort(self.graph)
+        ts = TopologicalSortDFS(self.graph)
         ts.run()
         for source in ts.sorted_nodes:
             for edge in self.graph.iteroutedges(source):

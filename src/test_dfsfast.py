@@ -5,9 +5,9 @@ from graphs import Graph
 from dfsfast import *
 import unittest
 
-# r---s   t---u
+# 0---1   2---3
 # |   | / | / |
-# v   w---x---y
+# 4   5---6---7
 
 class TestDFS(unittest.TestCase):
 
@@ -15,10 +15,10 @@ class TestDFS(unittest.TestCase):
         # The graph from Cormen p.607
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = ["r", "s", "t", "u", "v", "w", "x", "y"]
-        self.edges = [Edge("r", "v"), Edge("r", "s"), 
-        Edge("s", "w"), Edge("w", "t"), Edge("w", "x"), Edge("t", "x"),
-        Edge("t", "u"), Edge("x", "u"), Edge("x", "y"), Edge("u", "y")]
+        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.edges = [Edge(0, 4), Edge(0, 1), 
+        Edge(1, 5), Edge(5, 2), Edge(5, 6), Edge(2, 6),
+        Edge(2, 3), Edge(6, 3), Edge(6, 7), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -31,21 +31,17 @@ class TestDFS(unittest.TestCase):
         pre_ordering = []
         post_ordering = []
         algorithm = DFSWithStack(self.G)
-        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
             post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = ['s', 'r', 'w', 'x', 't', 'u', 'y', 'v']
-        post_ordering_expected = ['s', 'w', 't', 'u', 'y', 'x', 'r', 'v']
+        pre_ordering_expected = [1, 0, 5, 2, 6, 3, 7, 4]
+        post_ordering_expected = [1, 5, 6, 7, 3, 2, 0, 4]
         self.assertEqual(pre_ordering, pre_ordering_expected)
         self.assertEqual(post_ordering, post_ordering_expected)
-        dd_expected = {'s': 1, 'r': 2, 'u': 8, 't': 6, 
-        'w': 3, 'v': 14, 'y': 10, 'x': 5}
-        ff_expected = {'s': 4, 'r': 15, 'u': 11, 't': 9, 
-        'w': 7, 'v': 16, 'y': 12, 'x': 13}
+        dd_expected = {0: 2, 1: 1, 2: 5, 3: 8, 4: 14, 5: 3, 6: 6, 7: 9}
+        ff_expected = {0: 15, 1: 4, 2: 13, 3: 12, 4: 16, 5: 7, 6: 10, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
         self.assertEqual(algorithm.ff, ff_expected)
-        prev_expected = {'s': None, 'r': 's', 'u': 't', 't': 'w', 
-        'w': 's', 'v': 'r', 'y': 'u', 'x': 'w'}
-        # second possibility: 
+        prev_expected = {0: 1, 1: None, 2: 5, 3: 6, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_dfs_with_recursion(self):
@@ -53,21 +49,17 @@ class TestDFS(unittest.TestCase):
         pre_ordering = []
         post_ordering = []
         algorithm = DFSWithRecursion(self.G)
-        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
             post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = ['s', 'r', 'v', 'w', 'x', 'y', 'u', 't']
-        post_ordering_expected = ['v', 'r', 't', 'u', 'y', 'x', 'w', 's']
+        pre_ordering_expected = [1, 0, 4, 5, 2, 3, 6, 7]
+        post_ordering_expected = [4, 0, 7, 6, 3, 2, 5, 1]
         self.assertEqual(pre_ordering, pre_ordering_expected)
         self.assertEqual(post_ordering, post_ordering_expected)
-        dd_expected = {'s': 1, 'r': 2, 'u': 9, 't': 10, 
-        'w': 6, 'v': 3, 'y': 8, 'x': 7}
-        ff_expected = {'s': 16, 'r': 5, 'u': 12, 't': 11, 
-        'w': 15, 'v': 4, 'y': 13, 'x': 14}
+        dd_expected = {0: 2, 1: 1, 2: 7, 3: 8, 4: 3, 5: 6, 6: 9, 7: 10}
+        ff_expected = {0: 5, 1: 16, 2: 14, 3: 13, 4: 4, 5: 15, 6: 12, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
         self.assertEqual(algorithm.ff, ff_expected)
-        prev_expected = {'s': None, 'r': 's', 'u': 'y', 't': 'u', 
-        'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
-        # second possibility: 
+        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_simple_dfs_with_recursion(self):
@@ -75,20 +67,18 @@ class TestDFS(unittest.TestCase):
         pre_ordering = []
         post_ordering = []
         algorithm = SimpleDFS(self.G)
-        algorithm.run("s", pre_action=lambda node: pre_ordering.append(node),
+        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
             post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = ['s', 'r', 'v', 'w', 'x', 'y', 'u', 't']
-        post_ordering_expected = ['v', 'r', 't', 'u', 'y', 'x', 'w', 's']
+        pre_ordering_expected = [1, 0, 4, 5, 2, 3, 6, 7]
+        post_ordering_expected = [4, 0, 7, 6, 3, 2, 5, 1]
         self.assertEqual(pre_ordering, pre_ordering_expected)
         self.assertEqual(post_ordering, post_ordering_expected)
-        prev_expected = {'s': None, 'r': 's', 'u': 'y', 't': 'u', 
-        'w': 's', 'v': 'r', 'y': 'x', 'x': 'w'}
-        # second possibility: 
+        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_to_tree_stack(self):
         algorithm = DFSWithStack(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         tree = algorithm.to_tree()
         self.assertFalse(tree.is_directed())
         self.assertEqual(tree.v(), self.N)
@@ -96,7 +86,7 @@ class TestDFS(unittest.TestCase):
 
     def test_to_tree_recursion(self):
         algorithm = DFSWithRecursion(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         tree = algorithm.to_tree()
         self.assertFalse(tree.is_directed())
         self.assertEqual(tree.v(), self.N)
@@ -104,7 +94,7 @@ class TestDFS(unittest.TestCase):
 
     def test_to_dag_stack(self):
         algorithm = DFSWithStack(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         dag = algorithm.to_dag()
         self.assertTrue(dag.is_directed())
         self.assertEqual(dag.v(), self.N)
@@ -112,7 +102,7 @@ class TestDFS(unittest.TestCase):
 
     def test_to_dag_recursion(self):
         algorithm = DFSWithRecursion(self.G)
-        algorithm.run("s")
+        algorithm.run(1)
         dag = algorithm.to_dag()
         self.assertTrue(dag.is_directed())
         self.assertEqual(dag.v(), self.N)

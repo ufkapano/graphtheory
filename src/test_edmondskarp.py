@@ -6,11 +6,11 @@ from graphs import Graph
 from edges import Edge
 
 #     10
-#  A ---> B
+#  0 ---> 1
 #  |   /  |
 #10|  /1  |10
 # .| /.   |.
-#  C ---> D
+#  2 ---> 3
 #     10
 
 class TestEdmondsKarp(unittest.TestCase):
@@ -18,13 +18,13 @@ class TestEdmondsKarp(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A", "B", "C", "D"]
+        self.nodes = [0, 1, 2, 3]
         self.edges = [
-        Edge("A", "B", 10), 
-        Edge("A", "C", 10),
-        Edge("B", "C", 1), 
-        Edge("B", "D", 10), 
-        Edge("C", "D", 10)]
+        Edge(0, 1, 10), 
+        Edge(0, 2, 10),
+        Edge(1, 2, 1), 
+        Edge(1, 3, 10), 
+        Edge(2, 3, 10)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -33,25 +33,25 @@ class TestEdmondsKarp(unittest.TestCase):
 
     def test_edmondskarp(self):
         algorithm = EdmondsKarp(self.G)
-        algorithm.run("A", "D")
+        algorithm.run(0, 3)
         expected_max_flow = 20
         expected_flow = {
-        'A': {'A': 0, 'C': 10, 'B': 10, 'D': 0}, 
-        'B': {'A': -10, 'C': 0, 'B': 0, 'D': 10}, 
-        'C': {'A': -10, 'C': 0, 'B': 0, 'D': 10}, 
-        'D': {'A': 0, 'C': -10, 'B': -10, 'D': 0}}
+        0: {0: 0, 2: 10, 1: 10, 3: 0}, 
+        1: {0: -10, 2: 0, 1: 0, 3: 10}, 
+        2: {0: -10, 2: 0, 1: 0, 3: 10}, 
+        3: {0: 0, 2: -10, 1: -10, 3: 0}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
     def test_edmondskarp_sparse(self):
         algorithm = EdmondsKarpSparse(self.G)
-        algorithm.run("A", "D")
+        algorithm.run(0, 3)
         expected_max_flow = 20
         expected_flow = {
-        'A': {'C': 10, 'B': 10}, 
-        'B': {'A': -10, 'D': 10}, 
-        'C': {'A': -10, 'D': 10}, 
-        'D': {'C': -10, 'B': -10}}
+        0: {2: 10, 1: 10}, 
+        1: {0: -10, 3: 10}, 
+        2: {0: -10, 3: 10}, 
+        3: {2: -10, 1: -10}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
@@ -61,19 +61,19 @@ class TestEdmondsKarpWiki(unittest.TestCase):
     def setUp(self):
         self.N = 7           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A", "B", "C", "D", "E", "F", "G"]
+        self.nodes = [0, 1, 2, 3, 4, 5, 6]
         self.edges = [
-        Edge("A", "B", 3), 
-        Edge("A", "D", 3),
-        Edge("B", "C", 4), 
-        Edge("C", "A", 3), 
-        Edge("C", "D", 1), 
-        Edge("C", "E", 2), 
-        Edge("D", "E", 2), 
-        Edge("D", "F", 6), 
-        Edge("E", "B", 1), 
-        Edge("E", "G", 1), 
-        Edge("F", "G", 9)]
+        Edge(0, 1, 3), 
+        Edge(0, 3, 3),
+        Edge(1, 2, 4), 
+        Edge(2, 0, 3), 
+        Edge(2, 3, 1), 
+        Edge(2, 4, 2), 
+        Edge(3, 4, 2), 
+        Edge(3, 5, 6), 
+        Edge(4, 1, 1), 
+        Edge(4, 6, 1), 
+        Edge(5, 6, 9)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -82,16 +82,16 @@ class TestEdmondsKarpWiki(unittest.TestCase):
 
     def test_wiki_sparse(self):
         algorithm = EdmondsKarpSparse(self.G)
-        algorithm.run("A", "G")
+        algorithm.run(0, 6)
         expected_max_flow = 5
         expected_flow = {
-        'A': {'B': 2, 'D': 3}, 
-        'B': {'A': -2, 'C': 2}, 
-        'C': {'B': -2, 'E': 1, 'D': 1}, 
-        'D': {'A': -3, 'C': -1, 'E': 0, 'F': 4}, 
-        'E': {'C': -1, 'D': 0, 'G': 1}, 
-        'F': {'D': -4, 'G': 4}, 
-        'G': {'E': -1, 'F': -4}}
+        0: {1: 2, 3: 3}, 
+        1: {0: -2, 2: 2}, 
+        2: {1: -2, 4: 1, 3: 1}, 
+        3: {0: -3, 2: -1, 4: 0, 5: 4}, 
+        4: {2: -1, 3: 0, 6: 1}, 
+        5: {3: -4, 6: 4}, 
+        6: {4: -1, 5: -4}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 

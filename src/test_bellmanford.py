@@ -10,11 +10,11 @@ from bellmanford import BellmanFord
 import unittest
 
 #    1
-# A --> B
+# 0 --> 1
 # |   / |
 # |5 /1 |3
 # |./.  |.
-# C --> D
+# 2 --> 3
 #    1
 
 class TestBellmanFord(unittest.TestCase):
@@ -22,9 +22,9 @@ class TestBellmanFord(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True) # directed graph
-        self.nodes = ["A", "B", "C", "D"]
-        self.edges = [Edge("A", "B", 1), Edge("A", "C", 5), 
-        Edge("B", "C", 1), Edge("B", "D", 3), Edge("C", "D", 1)]
+        self.nodes = [0, 1, 2, 3]
+        self.edges = [Edge(0, 1, 1), Edge(0, 2, 5), 
+        Edge(1, 2, 1), Edge(1, 3, 3), Edge(2, 3, 1)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -32,15 +32,15 @@ class TestBellmanFord(unittest.TestCase):
         #self.G.show()
 
     def test_shortest_path(self):
-        source = "A"
-        target = "D"
+        source = 0
+        target = 3
         algorithm = BellmanFord(self.G)
         algorithm.run(source)
-        dist_expected = {'A': 0, 'C': 2, 'B': 1, 'D': 3}
+        dist_expected = {0: 0, 2: 2, 1: 1, 3: 3}
         self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {'A': None, 'C': 'B', 'B': 'A', 'D': 'C'}
+        prev_expected = {0: None, 2: 1, 1: 0, 3: 2}
         self.assertEqual(algorithm.prev, prev_expected)
-        path_expected = ['A', 'B', 'C', 'D']
+        path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
 
     def tearDown(self): pass
@@ -52,11 +52,11 @@ class TestBellmanFordCormen(unittest.TestCase):
         # The graph from Cormen p.666, negative weights.
         self.N = 5           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["s", "t", "x", "y", "z"]
-        self.edges = [Edge("s", "t", 6), Edge("s", "y", 7),
-        Edge("t", "y", 8), Edge("t", "x", 5), Edge("t", "z", -4),
-        Edge("x", "t", -2), Edge("y", "x", -3), Edge("y", "z", 9),
-        Edge("z", "s", 2), Edge("z", "x", 7)]
+        self.nodes = [0, 1, 2, 3, 4]
+        self.edges = [Edge(0, 1, 6), Edge(0, 3, 7),
+        Edge(1, 3, 8), Edge(1, 2, 5), Edge(1, 4, -4),
+        Edge(2, 1, -2), Edge(3, 2, -3), Edge(3, 4, 9),
+        Edge(4, 0, 2), Edge(4, 2, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -64,15 +64,15 @@ class TestBellmanFordCormen(unittest.TestCase):
         #self.G.show()
 
     def test_shortest_path_cormen(self):
-        source = "s"
-        target = "z"
+        source = 0
+        target = 4
         algorithm = BellmanFord(self.G)
         algorithm.run(source)
-        dist_expected = {'y': 7, 'x': 4, 's': 0, 'z': -2, 't': 2}
+        dist_expected = {3: 7, 2: 4, 0: 0, 4: -2, 1: 2}
         self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {'y': 's', 'x': 'y', 's': None, 'z': 't', 't': 'x'}
+        prev_expected = {3: 0, 2: 3, 0: None, 4: 1, 1: 2}
         self.assertEqual(algorithm.prev, prev_expected)
-        path_expected = ['s', 'y', 'x', 't', 'z']
+        path_expected = [0, 3, 2, 1, 4]
         self.assertEqual(algorithm.path(target), path_expected)
 
 
