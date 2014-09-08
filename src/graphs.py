@@ -24,6 +24,10 @@ class Graph(dict):
         self.n = n              # compatibility
         self.directed = directed  # bool
 
+    def is_directed(self):
+        """Test if the graph is directed."""
+        return self.directed
+
     def v(self):
         """Returns the number of nodes (the graph order)."""
         return len(self)
@@ -32,10 +36,6 @@ class Graph(dict):
         """Returns the number of edges in O(V) time."""
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges / 2)
-
-    def is_directed(self):
-        """Test if the graph is directed."""
-        return self.directed
 
     def add_node(self, node):
         """Add a node to the graph."""
@@ -120,7 +120,7 @@ class Graph(dict):
                     yield Edge(source, target, self[source][target])
 
     def show(self):
-        """Graph presentation."""
+        """The graph presentation."""
         for source in self.iternodes():
             print source, ":",
             for edge in self.iteroutedges(source):
@@ -128,7 +128,7 @@ class Graph(dict):
             print
 
     def copy(self):
-        """Graph copy."""
+        """The graph copy."""
         new_graph = Graph(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph[node] = dict(self[node])

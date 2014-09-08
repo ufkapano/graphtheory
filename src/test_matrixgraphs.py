@@ -2,23 +2,20 @@
 
 import unittest
 from edges import Edge
-from graphs import Graph
+from matrixgraphs import Graph
 
-# A --> B
+# 0 --> 1
 # ^  /  ^
 # | /.  |
-# C --> D
+# 2 --> 3
 
 class TestGraphDirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = ["A", "B", "C", "D"]
-        self.edges = [Edge("A", "B", 2), Edge("B", "C", 4), 
-        Edge("C", "A", 6), Edge("C", "D", 3), Edge("D", "B", 5)]
-        for node in self.nodes:
-            self.G.add_node(node)
+        self.edges = [Edge(0, 1, 2), Edge(1, 2, 4), 
+        Edge(2, 0, 6), Edge(2, 3, 3), Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
 
@@ -26,37 +23,37 @@ class TestGraphDirected(unittest.TestCase):
         self.assertTrue(self.G.is_directed())
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 5)
-        self.G.del_node("B")
-        self.assertEqual(self.G.v(), 3)
+        self.G.del_node(1)
+        self.assertEqual(self.G.v(), self.N) # no changes
         self.assertEqual(self.G.e(), 2)
 
     def test_cmp(self):
         T = Graph(self.N)
         self.assertFalse(T == self.G, "directed and undirected graphs")
         T = Graph(self.N, directed=True)
-        for node in ["A", "B", "C", "X"]:
+        for node in [0, 1, 2, 3]:
             T.add_node(node)
         self.assertFalse(T == self.G, "nodes are different")
-        T.del_node("X")
+        T.del_node(3)
         self.assertFalse(T == self.G, "numbers of nodes are different")
-        T.add_node("D")
-        T.add_edge(Edge("A", "B", 2))
-        T.add_edge(Edge("B", "C", 4))
-        T.add_edge(Edge("C", "A", 6))
-        T.add_edge(Edge("C", "D", 3))
+        T.add_node(3)
+        T.add_edge(Edge(0, 1, 2))
+        T.add_edge(Edge(1, 2, 4))
+        T.add_edge(Edge(2, 0, 6))
+        T.add_edge(Edge(2, 3, 3))
         self.assertFalse(T == self.G, "edge numbers are different")
-        T.add_edge(Edge("D", "B", 7))
+        T.add_edge(Edge(3, 1, 7))
         self.assertFalse(T == self.G, "edge weights are different")
-        T.del_edge(Edge("D", "B", 7))
-        T.add_edge(Edge("B", "D", 5))
+        T.del_edge(Edge(3, 1, 7))
+        T.add_edge(Edge(1, 3, 5))
         self.assertFalse(T == self.G, "edge directions are different")
-        T.del_edge(Edge("B", "D", 5))
-        T.add_edge(Edge("D", "B", 5))
+        T.del_edge(Edge(1, 3, 5))
+        T.add_edge(Edge(3, 1, 5))
         self.assertTrue(T == self.G, "graphs are the same")
 
     def test_iteredges(self):
-        inedges_B = list(self.G.iterinedges("B"))
-        outedges_B = list(self.G.iteroutedges("B"))
+        inedges_B = list(self.G.iterinedges(1))
+        outedges_B = list(self.G.iteroutedges(1))
         #print inedges_B, outedges_B
         self.assertEqual(len(inedges_B), 2)
         self.assertEqual(len(outedges_B), 1)
@@ -81,9 +78,7 @@ class TestGraphDirected(unittest.TestCase):
 
     def test_add_graph_directed(self):
         T = Graph(self.N, directed=True)
-        for node in self.nodes:
-            T.add_node(node)
-        T.add_edge(Edge("A", "D", 9))
+        T.add_edge(Edge(0, 3, 9))
         self.assertEqual(T.v(), self.N)
         self.assertEqual(T.e(), 1)
         self.G.add_graph(T)
@@ -91,37 +86,34 @@ class TestGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.e(), 6)
 
     def test_degree(self):
-        self.assertEqual(self.G.indegree("A"), 1)
-        self.assertEqual(self.G.indegree("B"), 2)
-        self.assertEqual(self.G.indegree("C"), 1)
-        self.assertEqual(self.G.indegree("D"), 1)
-        self.assertEqual(self.G.outdegree("A"), 1)
-        self.assertEqual(self.G.outdegree("B"), 1)
-        self.assertEqual(self.G.outdegree("C"), 2)
-        self.assertEqual(self.G.outdegree("D"), 1)
+        self.assertEqual(self.G.indegree(0), 1)
+        self.assertEqual(self.G.indegree(1), 2)
+        self.assertEqual(self.G.indegree(2), 1)
+        self.assertEqual(self.G.indegree(3), 1)
+        self.assertEqual(self.G.outdegree(0), 1)
+        self.assertEqual(self.G.outdegree(1), 1)
+        self.assertEqual(self.G.outdegree(2), 2)
+        self.assertEqual(self.G.outdegree(3), 1)
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, self.G.add_edge, Edge("A", "A", 1))
-        self.assertRaises(ValueError, self.G.add_edge, Edge("A", "B", 2))
-        self.assertRaises(ValueError, self.G.degree, "A")
+        self.assertRaises(ValueError, self.G.add_edge, Edge(0, 0, 1))
+        self.assertRaises(ValueError, self.G.add_edge, Edge(0, 1, 2))
+        self.assertRaises(ValueError, self.G.degree, 0)
 
     def tearDown(self): pass
 
-# A --- B
+# 0 --- 1
 # |  /  |
 # | /   |
-# C --- D
+# 2 --- 3
 
 class TestGraphUndirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = ["A", "B", "C", "D"]
-        self.edges = [Edge("A", "B", 2), Edge("B", "C", 4), 
-        Edge("C", "A", 6), Edge("C", "D", 3), Edge("D", "B", 5)]
-        for node in self.nodes:
-            self.G.add_node(node)
+        self.edges = [Edge(0, 1, 2), Edge(1, 2, 4), 
+        Edge(2, 0, 6), Edge(2, 3, 3), Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
 
@@ -129,16 +121,16 @@ class TestGraphUndirected(unittest.TestCase):
         self.assertFalse(self.G.is_directed())
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 5)
-        self.G.del_node("B")
-        self.assertEqual(self.G.v(), 3)
+        self.G.del_node(1)   # node become isolated
+        self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 2)
 
     def test_iteredges(self):
-        inedges_B = list(self.G.iterinedges("B"))
-        outedges_B = list(self.G.iteroutedges("B"))
-        #print inedges_B, outedges_B
-        self.assertEqual(len(inedges_B), 3)
-        self.assertEqual(len(outedges_B), 3)
+        inedges = list(self.G.iterinedges(1))
+        outedges = list(self.G.iteroutedges(1))
+        #print inedges, outedges
+        self.assertEqual(len(inedges), 3)
+        self.assertEqual(len(outedges), 3)
 
     def test_copy(self):
         T = self.G.copy()
@@ -150,16 +142,14 @@ class TestGraphUndirected(unittest.TestCase):
             self.assertTrue(self.G.has_edge(edge))
 
     def test_degree(self):
-        self.assertEqual(self.G.degree("A"), 2)
-        self.assertEqual(self.G.degree("B"), 3)
-        self.assertEqual(self.G.degree("C"), 3)
-        self.assertEqual(self.G.degree("D"), 2)
+        self.assertEqual(self.G.degree(0), 2)
+        self.assertEqual(self.G.degree(1), 3)
+        self.assertEqual(self.G.degree(2), 3)
+        self.assertEqual(self.G.degree(3), 2)
 
     def test_add_graph_undirected(self):
         T = Graph(self.N)
-        for node in self.nodes:
-            T.add_node(node)
-        T.add_edge(Edge("A", "D", 9))
+        T.add_edge(Edge(0, 3, 9))
         self.assertEqual(T.v(), self.N)
         self.assertEqual(T.e(), 1)
         self.G.add_graph(T)
@@ -178,8 +168,8 @@ class TestGraphLadder(unittest.TestCase):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
         self.edges = [Edge(0, 1, 2), Edge(0, 2, 1), Edge(2, 3, 5),
-                      Edge(1, 3, 3), Edge(2, 4, 4), Edge(3, 5, 6), Edge(4, 6, 7),
-                      Edge(4, 5, 8), Edge(5, 7, 9), Edge(6, 7, 10)]
+        Edge(1, 3, 3), Edge(2, 4, 4), Edge(3, 5, 6), Edge(4, 6, 7),
+        Edge(4, 5, 8), Edge(5, 7, 9), Edge(6, 7, 10)]
         for edge in self.edges:
             self.G.add_edge(edge)
 
@@ -304,7 +294,8 @@ if __name__ == "__main__":
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestGraphUndirected)
     suite3 = unittest.TestLoader().loadTestsFromTestCase(TestGraphLadder)
     suite4 = unittest.TestLoader().loadTestsFromTestCase(TestGraphFactory)
-    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
+    #suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
+    suite = unittest.TestSuite([suite1, suite2, suite3])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF

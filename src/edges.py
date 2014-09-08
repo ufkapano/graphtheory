@@ -5,7 +5,7 @@
 # Hashable edges - the idea for __hash__ from
 # http://stackoverflow.com/questions/793761/built-in-python-hash-function
 
-class Edge:
+class Edge(object):
     """The class defining an edge."""
 
     def __init__(self, source, target, weight=1):
