@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_graphs.py
-#
-# Tests for graphs.
 
 import unittest
 from edges import Edge

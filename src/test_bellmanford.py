@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_bellmanford.py
-#
-# Tests for Bellman-Ford algorithm.
 
 from edges import Edge
 from graphs import Graph

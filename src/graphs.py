@@ -161,7 +161,7 @@ class Graph(dict):
                 if node in sources_dict:
                     counter = counter + 1
             return counter
-        else:
+        else:                   # O(1) time
             return len(self[node])
 
     def __eq__(self, other):

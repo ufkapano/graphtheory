@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_prim.py
-#
-# Prim's algorithm test.
 
 from edges import Edge
 from graphs import Graph

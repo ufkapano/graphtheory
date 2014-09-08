@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_acyclic.py
-#
-# Tests.
 
 from edges import Edge
 from graphs import Graph
@@ -38,8 +34,7 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = AcyclicGraphDFS(self.G)
         algorithm.run(1)   # it is safe, because G is connected
-        prev_expected = {1: None, 0: 1, 3: 6, 
-        2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
+        prev_expected = {1: None, 0: 1, 3: 6, 2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
         self.assertEqual(algorithm.prev, prev_expected)
 
     def test_detect_cycle1(self):
@@ -79,7 +74,7 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         # The graph from
         self.N = 8           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0,1,2,3,4,5,6,7]
+        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
         Edge(0, 4), Edge(4, 5), Edge(5, 6), Edge(5, 7),
         Edge(5, 2), Edge(0, 7)]

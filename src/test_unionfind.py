@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_unionfind.py
-#
-# Tests for Union-Find Problem.
 
 from unionfind import UnionFind
 import unittest

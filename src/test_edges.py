@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_edges.py
-#
-# Tests for edges.
 
 import unittest
 from edges import Edge

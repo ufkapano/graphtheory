@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_boruvka.py
-#
-# Boruvka's algorithm test.
 
 from edges import Edge
 from graphs import Graph

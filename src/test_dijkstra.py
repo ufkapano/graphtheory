@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_dijkstra.py
-#
-# Tests for Dijkstra.
 
 from edges import Edge
 from graphs import Graph

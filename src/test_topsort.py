@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_topsort.py
-#
-# Topological sorting test.
 
 from edges import Edge
 from graphs import Graph

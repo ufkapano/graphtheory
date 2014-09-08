@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# test_fleury.py
-#
-# Fleury's algorithm test.
 
 from edges import Edge
 from graphs import Graph
