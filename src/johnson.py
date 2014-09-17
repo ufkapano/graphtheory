@@ -20,12 +20,13 @@ class Johnson:
     def run(self):
         """Executable pseudocode."""
         # graph copy
-        self.new_graph = self.graph.__class__(self.graph.v()+1, directed=True)
+        size = self.graph.v()
+        self.new_graph = self.graph.__class__(size + 1, directed=True)
         for node in self.graph.iternodes():   # O(V) time
             self.new_graph.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
             self.new_graph.add_edge(edge)
-        self.new_node = self.graph.v()
+        self.new_node = size
         self.new_graph.add_node(self.new_node)
         for node in self.graph.iternodes():   # O(V) time
             self.new_graph.add_edge(Edge(self.new_node, node, 0))

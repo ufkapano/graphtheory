@@ -294,8 +294,7 @@ if __name__ == "__main__":
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestGraphUndirected)
     suite3 = unittest.TestLoader().loadTestsFromTestCase(TestGraphLadder)
     suite4 = unittest.TestLoader().loadTestsFromTestCase(TestGraphFactory)
-    #suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
-    suite = unittest.TestSuite([suite1, suite2, suite3])
+    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF

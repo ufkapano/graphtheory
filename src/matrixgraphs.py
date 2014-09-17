@@ -53,13 +53,12 @@ class Graph(object):
 
     def del_node(self, source):
         """Remove a node from the graph with edges.
-        In fact, the node become isolated.
-        It takes O(V) time."""
+        In fact, the node become isolated. It takes O(V) time."""
         for target in xrange(self.n):
             self.data[source][target] = 0
             self.data[target][source] = 0
 
-    def add_edge(self, edge):         # wstawienie krawedzi
+    def add_edge(self, edge):
         """Add an edge to the graph."""
         if edge.source == edge.target:
             raise ValueError("loops are forbidden")
@@ -95,7 +94,7 @@ class Graph(object):
 
     def iteradjacent(self, source):
         """Generates adjacent nodes from the graph on demand."""
-        for target in xrange(self.n):
+        for target in xrange(self.n):   # O(V) time
             if self.data[source][target] != 0:
                 yield target
 
@@ -128,7 +127,7 @@ class Graph(object):
             print
 
     def copy(self):
-        """The graph copy in O(V**2) time."""
+        """Returns the graph copy in O(V**2) time."""
         new_graph = Graph(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):
@@ -174,21 +173,11 @@ class Graph(object):
         if self.is_directed() is not other.is_directed():
             return False
         if self.v() != other.v():
-            #print "|V1| != |V2|"
             return False
-        for node in self.iternodes():   # time O(V)
-            if not other.has_node(node):
-                #print "V1 != V2"
-                return False
-        if self.e() != other.e():   # time O(V**2)
-            #print "|E1| != |E2|"
-            return False
-        for edge in self.iteredges():   # time O(V**2)
-            if not other.has_edge(edge):
-                #print "E1 != E2"
-                return False
-            if edge.weight != other.weight(edge):
-                return False
+        for source in xrange(self.n):   # time O(V**2)
+            for target in xrange(self.n):
+                if self.data[source][target] != other.data[source][target]:
+                    return False
         return True
 
     def __ne__(self, other):
@@ -197,9 +186,214 @@ class Graph(object):
 
     def add_graph(self, other):
         """Add a graph to this graph (the current graph is modified)."""
+        if self.is_directed() is not other.is_directed():
+            raise ValueError("directed vs undirected")
+        if self.v() != other.v():
+            raise ValueError("different numbers of nodes")
         for node in other.iternodes():
             self.add_node(node)
         for edge in other.iteredges():
             self.add_edge(edge)
+
+    @classmethod
+    def make_complete(cls, n=1, directed=False):
+        """Creates the complete graph."""
+        graph = cls(n, directed)
+        weights = range(1, 1 + n * (n-1)/2)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for source in xrange(n):
+            for target in xrange(source + 1, n):   # no loops
+                if random.random() > 0.5:   # random direction
+                    graph.add_edge(Edge(source, target, weights.pop()))
+                else:
+                    graph.add_edge(Edge(target, source, weights.pop()))
+        return graph
+
+    @classmethod
+    def make_sparse(cls, n=1, directed=False, m=0):
+        """Creates the sparse graph."""
+        if m >= n*(n-1)/2:
+            raise ValueError("too mamy edges")
+        graph = cls(n, directed)
+        weights = range(1, 1 + m)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = range(n)
+        n_edges = 0
+        while n_edges < m:
+            source, target = random.sample(nodes, 2)
+            if not graph.has_edge(Edge(source, target)):
+                graph.add_edge(Edge(source, target, weights.pop()))
+                n_edges = n_edges + 1
+        return graph
+
+    @classmethod
+    def make_connected(cls, n=1, directed=False, m=0):
+        """Creates the sparse graph."""
+        if m < n - 1 or m >= n * (n - 1)/2:
+            raise ValueError("bad number of edges for the connected graph")
+        graph = cls(n, directed)
+        weights = range(1, m + 1)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = set([0])
+        # make a tree
+        for node in xrange(1, n):
+            parent = random.sample(nodes, 1)[0]
+            nodes.add(node)
+            graph.add_edge(Edge(parent, node, weights.pop()))
+        # the rest of edges
+        n_edges = n - 1
+        while n_edges < m:
+            source, target = random.sample(nodes, 2)
+            if not graph.has_edge(Edge(source, target)):
+                graph.add_edge(Edge(source, target, weights.pop()))
+                n_edges = n_edges + 1
+        return graph
+
+    @classmethod
+    def make_tree(cls, n=1, directed=False):
+        """Creates the tree graph."""
+        graph = cls(n, directed)
+        weights = range(1, n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        nodes = set([0])
+        for node in xrange(1, n):
+            parent = random.sample(nodes, 1)[0]
+            nodes.add(node)
+            graph.add_edge(Edge(parent, node, weights.pop()))
+        return graph
+
+    @classmethod
+    def make_random(cls, n=1, directed=False, edge_probability=0.5):
+        """Creates the tree graph."""
+        graph = cls(n, directed)
+        weights = range(1, 1 + n * (n-1)/2)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for source in xrange(n):
+            for target in xrange(source + 1, n):   # no loops
+                if random.random() > edge_probability:
+                    continue
+                if random.random() > 0.5:   # random direction
+                    graph.add_edge(Edge(source, target, weights.pop()))
+                else:
+                    graph.add_edge(Edge(target, source, weights.pop()))
+        return graph
+
+#   |     |     |
+# --2s--(2s+1)-(2s+2)--
+#   |     |     |
+# --s---(s+1)-(s+2)--
+#   |     |     |
+# --0-----1-----2---
+#   |     |     |
+
+    @classmethod
+    def make_grid(cls, size=3):
+        """Creates the grid graph with periodic boundary conditions.
+        |V| = size * size, |E| = 2 * |V|.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 2 * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+        return graph
+
+#   |  /  |  /  | /
+# --2s--(2s+1)-(2s+2)--
+# / |  /  |  /  | /
+# --s---(s+1)-(s+2)--
+# / |  /  |  /  | /
+# --0-----1-----2---
+# / |  /  |  /  |
+
+    @classmethod
+    def make_triangle(cls, size=3):
+        """Creates the triangle network with periodic boundary conditions.
+        |V| = size * size, |E| = 3 * |V|.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 3 * n)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+            graph.add_edge(Edge(node, ((row + 1) % size) * size + (col + 1) % size, weights.pop())) # line /
+        return graph
+
+# --1--3--5--...--(2s+1)-
+#   |  |  |         |
+# --0--2--4--...--(2s)---
+
+    @classmethod
+    def make_ladder(cls, size=3):
+        """Creates the ladder with periodic boundary conditions.
+        |V| = 2 * size, |E| = 3 * size.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = 2 * size
+        graph = cls(n, directed=False)
+        weights = range(1, 1 + 3 * size)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for i in xrange(size):
+            node = 2 * i
+            graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
+            graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
+            graph.add_edge(Edge(node + 1, (node + 3) % n, weights.pop())) # line ---
+        return graph
+
+    @classmethod
+    def make_flow_network(cls, n=1):
+        """Creates a flow network."""
+        graph = cls(n, True)
+        for node in xrange(n):
+            graph.add_node(node)
+        node_list = range(1, n)
+        source = 0
+        sink = n - 1
+        used = dict((node, False) for node in xrange(n))
+        used[source] = True
+        # create paths from source to sink
+        while any(used[node] == False for node in used):
+            random.shuffle(node_list)
+            start = source
+            for target in node_list:
+                edge = Edge(start, target, random.randint(1, n))
+                if not (graph.has_edge(edge) or graph.has_edge(Edge(target, start))):
+                    graph.add_edge(edge)
+                    used[target] = True
+                if target == sink:
+                    break
+                else:
+                    start = target
+        # all nodes are on paths; new edges can be added
+        return graph
 
 # EOF

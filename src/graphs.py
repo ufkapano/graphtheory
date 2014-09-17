@@ -193,6 +193,8 @@ class Graph(dict):
 
     def add_graph(self, other):
         """Add a graph to this graph (the current graph is modified)."""
+        if self.is_directed() is not other.is_directed():
+            raise ValueError("directed vs undirected")
         for node in other.iternodes():
             self.add_node(node)
         for edge in other.iteredges():
