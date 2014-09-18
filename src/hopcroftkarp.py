@@ -3,10 +3,13 @@
 # hopcroftkarp.py
 #
 # The Hopcroft-Karp algorithm.
+# Based on pseudocode from:
+# http://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm
 
 from edges import Edge
 from Queue import Queue
-from bipartite import BipartiteGraphBFS
+#from bipartite import BipartiteGraphBFS as Bipartite
+from bipartite import BipartiteGraphDFS as Bipartite
 
 
 class HopcroftKarp:
@@ -18,7 +21,7 @@ class HopcroftKarp:
         self.pair = dict((node, None) for node in self.graph.iternodes())
         self.dist = dict()
         self.cardinality = 0
-        algorithm = BipartiteGraphBFS(self.graph)
+        algorithm = Bipartite(self.graph)
         algorithm.run()
         self.v1 = set()
         self.v2 = set()

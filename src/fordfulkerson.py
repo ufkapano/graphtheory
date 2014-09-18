@@ -108,10 +108,8 @@ class FordFulkersonSparse:
             target = self.sink
             while target != self.source:
                 node = parent[target]
-                self.flow[node][target] = (
-                    self.flow[node].get(target, 0) + min_capacity)
-                self.flow[target][node] = (
-                    self.flow[target].get(node, 0) - min_capacity)
+                self.flow[node][target] = self.flow[node].get(target, 0) + min_capacity
+                self.flow[target][node] = self.flow[target].get(node, 0) - min_capacity
                 target = node
 
     def find_path(self): # use DFS
