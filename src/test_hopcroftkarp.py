@@ -2,11 +2,11 @@
 
 from edges import Edge
 from graphs import Graph
-from matching import MatchingFordFulkerson
+from hopcroftkarp import HopcroftKarp
 import unittest
 
 
-class TestMatching(unittest.TestCase):
+class TestHopcroftKarp(unittest.TestCase):
 
     def setUp(self):
         # Wilson, ex. 25.1, bipartite graph
@@ -20,8 +20,8 @@ class TestMatching(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_matching_fordfulkerson(self):
-        algorithm = MatchingFordFulkerson(self.G)
+    def test_matching_hopcroftkarp(self):
+        algorithm = HopcroftKarp(self.G)
         algorithm.run()
         # 5 solutions
         expected_cardinality = 3
@@ -31,7 +31,7 @@ class TestMatching(unittest.TestCase):
         expected_pair4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
         expected_pair5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.pair, expected_pair5)
+        self.assertEqual(algorithm.pair, expected_pair2)
 
     def tearDown(self): pass
 

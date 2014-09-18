@@ -42,7 +42,6 @@ class FordFulkerson:
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
-            #print "new path, min_capacity", min_capacity
             # backtrack search and write flow
             target = self.sink
             #print target
@@ -51,7 +50,6 @@ class FordFulkerson:
                 self.flow[node][target] = self.flow[node][target] + min_capacity
                 self.flow[target][node] = self.flow[target][node] - min_capacity
                 target = node
-                #print target
 
     def find_path(self): # use DFS
         """Finding augmenting paths in the residual network."""
@@ -106,16 +104,15 @@ class FordFulkersonSparse:
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
-            #print "new path, min_capacity", min_capacity
             # backtrack search and write flow
             target = self.sink
-            #print target
             while target != self.source:
                 node = parent[target]
-                self.flow[node][target] = self.flow[node].get(target, 0) + min_capacity
-                self.flow[target][node] = self.flow[target].get(node, 0) - min_capacity
+                self.flow[node][target] = (
+                    self.flow[node].get(target, 0) + min_capacity)
+                self.flow[target][node] = (
+                    self.flow[target].get(node, 0) - min_capacity)
                 target = node
-                #print target
 
     def find_path(self): # use DFS
         """Finding augmenting paths in the residual network."""

@@ -11,7 +11,7 @@ class MatchingFordFulkerson:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.matching = set()   # set of edges
+        self.pair = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
         algorithm = BipartiteGraphBFS(self.graph)
         algorithm.run()
@@ -48,11 +48,8 @@ class MatchingFordFulkerson:
         for source in self.v1:
             for target in self.v2:
                 if algorithm.flow[source][target] == 1:
-                    if source < target:
-                        self.matching.add(Edge(source, target))
-                    else:
-                        self.matching.add(Edge(target, source))
+                    self.pair[source] = target
+                    self.pair[target] = source
         self.cardinality = algorithm.max_flow
-        #self.cardinality = len(self.matching)   # the same result
 
 # EOF
