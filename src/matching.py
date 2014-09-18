@@ -2,7 +2,7 @@
 
 from edges import Edge
 from bipartite import BipartiteGraphBFS
-from fordfulkerson import FordFulkerson
+from fordfulkerson import FordFulkersonSparse
 
 
 class MatchingFordFulkerson:
@@ -43,11 +43,11 @@ class MatchingFordFulkerson:
                 network.add_edge(Edge(edge.target, edge.source))
         for node in self.v2:   # edges from V2 to sink
             network.add_edge(Edge(node, self.sink))
-        algorithm = FordFulkerson(network)
+        algorithm = FordFulkersonSparse(network)
         algorithm.run(self.source, self.sink)   # O(V*E) time
         for source in self.v1:
             for target in self.v2:
-                if algorithm.flow[source][target] == 1:
+                if algorithm.flow[source].get(target, 0) == 1:
                     self.pair[source] = target
                     self.pair[target] = source
         self.cardinality = algorithm.max_flow

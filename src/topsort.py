@@ -12,18 +12,22 @@ from dfs import SimpleDFS as DFSWithRecursion
 
 
 class TopologicalSortDFS:
+    """Topological sorting of nodes from a dag."""
 
     def __init__(self, graph):
+        """The algorithm initialization."""
         self.graph = graph
         self.sorted_nodes = []
 
     def run(self):
+        """Executable pseudocode."""
         dfs = DFSWithRecursion(self.graph)
         dfs.run(post_action=lambda node: self.sorted_nodes.append(node))
         self.sorted_nodes.reverse()
 
 
 class TopologicalSortQueue:
+    """Topological sorting of nodes from a dag."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -51,6 +55,7 @@ class TopologicalSortQueue:
 
 
 class TopologicalSortSet:
+    """Topological sorting of nodes from a dag."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

@@ -38,6 +38,36 @@ class TestConnectedComponents(unittest.TestCase):
         self.assertEqual(algorithm.n_cc, self.expected_n_cc)
         self.assertEqual(algorithm.cc, self.expected_cc)
 
+# 0 -o 1 --o 2 o-o 3   Cormen, s.628 modified
+# o  / |     |     |
+# | o  o     o     o
+# 4 -o 5 o-o 6 --o 7
+
+class TestStronglyConnectedComponents(unittest.TestCase):
+
+    def setUp(self):
+        self.N = 8           # number of nodes
+        self.G = Graph(self.N, directed=True)
+        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.edges = [
+        Edge(0, 1), Edge(1, 4), Edge(4, 0), Edge(4, 5),
+        Edge(1, 5), Edge(1, 2), Edge(5, 6), Edge(6, 5),
+        Edge(2, 6), Edge(2, 3), Edge(3, 2), Edge(6, 7),
+        Edge(3, 7)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #self.G.show()
+        self.expected_scc = {0: 0, 1: 0, 2: 1, 3: 1, 4: 0, 5: 2, 6: 2, 7: 3}
+        self.expected_n_scc = 4
+
+    def test_scc(self):
+        algorithm = StronglyConnectedComponents(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.n_scc, self.expected_n_scc)
+        self.assertEqual(algorithm.scc, self.expected_scc)
+
 if __name__ == "__main__":
 
     unittest.main()

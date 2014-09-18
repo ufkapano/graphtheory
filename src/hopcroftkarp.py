@@ -13,7 +13,7 @@ from bipartite import BipartiteGraphDFS as Bipartite
 
 
 class HopcroftKarp:
-    """The Hopcroft-Karp algorithm."""
+    """Maximum-cardinality matching using the Hopcroft-Karp algorithm."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
