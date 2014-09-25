@@ -12,7 +12,7 @@ class FleuryDFS:
         self.graph = graph
         if not self.is_eulerian():
             raise ValueError("the graph is not eulerian")
-        self.eulerian_cycle = []
+        self.eulerian_cycle = list()
 
     def run(self, source=None):
         """Executable pseudocode."""
