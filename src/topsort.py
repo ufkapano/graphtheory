@@ -21,8 +21,8 @@ class TopologicalSortDFS:
 
     def run(self):
         """Executable pseudocode."""
-        dfs = DFSWithRecursion(self.graph)
-        dfs.run(post_action=lambda node: self.sorted_nodes.append(node))
+        algorythm = DFSWithRecursion(self.graph)
+        algorythm.run(post_action=lambda node: self.sorted_nodes.append(node))
         self.sorted_nodes.reverse()
 
 

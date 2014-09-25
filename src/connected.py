@@ -27,11 +27,12 @@ class StronglyConnectedComponents:
     def run(self):
         """Executable pseudocode."""
         algorithm = SimpleDFS(self.graph)
-        alist = []
-        algorithm.run(post_action=lambda node: alist.append(node))
-        alist.reverse()
+        ordering = []
+        # use post_action!
+        algorithm.run(post_action=lambda node: ordering.append(node))
+        ordering.reverse()
         algorithm = SimpleDFS(self.graph.transpose())
-        for source in alist:
+        for source in ordering:
             if self.scc[source] is None:
                 algorithm.run(source,
                 pre_action=lambda node: self.scc.__setitem__(node, self.n_scc))
