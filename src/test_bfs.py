@@ -36,10 +36,10 @@ class TestBFS(unittest.TestCase):
         ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
         self.assertEqual(pre_ordering, ordering_expected)
         self.assertEqual(post_ordering, ordering_expected)
-        dist_expected = {0: 1, 1: 0, 2: 2, 3: 3, 4: 2, 5: 1, 6: 2, 7: 3}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {0: 1, 1: 0, 2: 2, 3: 3, 4: 2, 5: 1, 6: 2, 7: 3}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_simple_bfs(self):
         self.assertEqual(self.G.v(), self.N)
@@ -51,8 +51,8 @@ class TestBFS(unittest.TestCase):
         ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
         self.assertEqual(pre_ordering, ordering_expected)
         self.assertEqual(post_ordering, ordering_expected)
-        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_to_tree(self):
         algorithm = BFSWithQueue(self.G)

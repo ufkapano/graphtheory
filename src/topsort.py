@@ -7,8 +7,8 @@
 from edges import Edge
 from graphs import Graph
 from Queue import Queue
-#from dfs import DFSWithRecursion
-from dfs import SimpleDFS as DFSWithRecursion
+#from dfs import DFSWithRecursion as SimpleDFS
+from dfs import SimpleDFS
 
 
 class TopologicalSortDFS:
@@ -21,8 +21,8 @@ class TopologicalSortDFS:
 
     def run(self):
         """Executable pseudocode."""
-        algorythm = DFSWithRecursion(self.graph)
-        algorythm.run(post_action=lambda node: self.sorted_nodes.append(node))
+        algorithm = SimpleDFS(self.graph)
+        algorithm.run(post_action=lambda node: self.sorted_nodes.append(node))
         self.sorted_nodes.reverse()
 
 
