@@ -30,10 +30,10 @@ class TestDAGShortestPath(unittest.TestCase):
         target = 5
         algorithm = DAGShortestPath(self.G)
         algorithm.run(source)
-        dist_expected = {0: 0, 1: 5, 2: 3, 3: 10, 4: 7, 5: 5}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {1: 0, 0: None, 2: 0, 4: 2, 3: 2, 5: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {0: 0, 1: 5, 2: 3, 3: 10, 4: 7, 5: 5}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {1: 0, 0: None, 2: 0, 4: 2, 3: 2, 5: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 2, 5]
         self.assertEqual(algorithm.path(target), path_expected)
 

@@ -23,24 +23,24 @@ class TestJohnson(unittest.TestCase):
     def test_johnson(self):
         algorithm = Johnson(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 2: 4, 1: 4, 4: float('inf'), 3: 3},
         1: {0: 3, 2: 7, 1: 0, 4: float('inf'), 3: 6},
         2: {0: 6, 2: 0, 1: 3, 4: float('inf'), 3: 2},
         3: {0: 4, 2: 1, 1: 1, 4: float('inf'), 3: 0},
         4: {0: 6, 2: 3, 1: 3, 4: 0, 3: 2}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_johnson_faster(self):
         algorithm = JohnsonFaster(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 2: 4, 1: 4, 4: float('inf'), 3: 3},
         1: {0: 3, 2: 7, 1: 0, 4: float('inf'), 3: 6},
         2: {0: 6, 2: 0, 1: 3, 4: float('inf'), 3: 2},
         3: {0: 4, 2: 1, 1: 1, 4: float('inf'), 3: 0},
         4: {0: 6, 2: 3, 1: 3, 4: 0, 3: 2}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(1, 3, -2))
@@ -64,22 +64,22 @@ class TestJohnsonNegativeEdges(unittest.TestCase):
     def test_johnson(self):
         algorithm = Johnson(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 2: 6, 1: 3, 3: 8}, 
         1: {0: 0, 2: 4, 1: 0, 3: 5}, 
         2: {0: -3, 2: 0, 1: -1, 3: 2},
         3: {0: -5, 2: 1, 1: -3, 3: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_johnson_faster(self):
         algorithm = JohnsonFaster(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 2: 6, 1: 3, 3: 8}, 
         1: {0: 0, 2: 4, 1: 0, 3: 5}, 
         2: {0: -3, 2: 0, 1: -1, 3: 2},
         3: {0: -5, 2: 1, 1: -3, 3: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(0, 3, 2))
@@ -103,22 +103,22 @@ class TestJohnsonWiki(unittest.TestCase):
     def test_johnson(self):
         algorithm = Johnson(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         1: {1: 0, 0: -2, 2: 5, 3: 4}, 
         0: {1: 3, 0: 0, 2: 8, 3: 6}, 
         2: {1: -4, 0: -7, 2: 0, 3: -1}, 
         3: {1: -2, 0: -5, 2: 2, 3: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_johnson_faster(self):
         algorithm = JohnsonFaster(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         1: {1: 0, 0: -2, 2: 5, 3: 4}, 
         0: {1: 3, 0: 0, 2: 8, 3: 6}, 
         2: {1: -4, 0: -7, 2: 0, 3: -1}, 
         3: {1: -2, 0: -5, 2: 2, 3: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
 if __name__ == '__main__':
 

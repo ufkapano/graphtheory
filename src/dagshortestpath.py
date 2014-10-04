@@ -12,14 +12,14 @@ class DAGShortestPath:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         # shortest path tree
-        self.prev = dict((node, None) for node in self.graph.iternodes())
+        self.parent = dict((node, None) for node in self.graph.iternodes())
 
     def run(self, source):
         """Executable pseudocode."""
         self.source = source
-        self.dist[source] = 0
+        self.distance[source] = 0
         ts = TopologicalSortDFS(self.graph)
         ts.run()
         for source in ts.sorted_nodes:
@@ -28,10 +28,10 @@ class DAGShortestPath:
 
     def relax(self, edge):
         """Edge relaxation."""
-        alt = self.dist[edge.source] + edge.weight
-        if self.dist[edge.target] > alt:
-            self.dist[edge.target] = alt
-            self.prev[edge.target] = edge.source
+        alt = self.distance[edge.source] + edge.weight
+        if self.distance[edge.target] > alt:
+            self.distance[edge.target] = alt
+            self.parent[edge.target] = edge.source
             return True
         return False
 
@@ -39,9 +39,9 @@ class DAGShortestPath:
         """Construct a path from source to target."""
         if self.source == target:
             return [self.source]
-        elif self.prev[target] is None:
+        elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(self.prev[target]) + [target]
+            return self.path(self.parent[target]) + [target]
 
 # EOF

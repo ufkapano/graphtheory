@@ -36,20 +36,20 @@ class Johnson:
         # edges are reweighted
         for edge in list(self.new_graph.iteredges()):   # O(E) time
             edge.weight = (edge.weight 
-                + self.bf.dist[edge.source] - self.bf.dist[edge.target])
+                + self.bf.distance[edge.source] - self.bf.distance[edge.target])
             self.new_graph.del_edge(edge)
             self.new_graph.add_edge(edge)
         # remove new_node with edges
         self.new_graph.del_node(self.new_node)
         # weights are modified!
-        self.dist = dict()
+        self.distance = dict()
         for source in self.graph.iternodes():
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             algorithm = Dijkstra(self.new_graph) # O(V*E*log(V)) total time
             algorithm.run(source)
             for target in self.graph.iternodes():   # O(V**2) total time
-                self.dist[source][target] = (algorithm.dist[target]
-                - self.bf.dist[source] + self.bf.dist[target])
+                self.distance[source][target] = (algorithm.distance[target]
+                - self.bf.distance[source] + self.bf.distance[target])
 
 
 class JohnsonFaster:
@@ -85,22 +85,22 @@ class JohnsonFaster:
             # edges are reweighted
             for edge in list(self.new_graph.iteredges()):   # O(E) time
                 edge.weight = (edge.weight 
-                    + self.bf.dist[edge.source] - self.bf.dist[edge.target])
+                    + self.bf.distance[edge.source] - self.bf.distance[edge.target])
                 self.new_graph.del_edge(edge)
                 self.new_graph.add_edge(edge)
             # remove new_node with edges
             self.new_graph.del_node(self.new_node)
 
-        self.dist = dict()
+        self.distance = dict()
         for source in self.graph.iternodes():
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             algorithm = Dijkstra(self.new_graph) # O(V*E*log(V)) total time
             algorithm.run(source)
             for target in self.graph.iternodes():   # O(V**2) total time
                 if self.positive_weights:
-                    self.dist[source][target] = algorithm.dist[target]
+                    self.distance[source][target] = algorithm.distance[target]
                 else:
-                    self.dist[source][target] = (algorithm.dist[target]
-                    - self.bf.dist[source] + self.bf.dist[target])
+                    self.distance[source][target] = (algorithm.distance[target]
+                    - self.bf.distance[source] + self.bf.distance[target])
 
 # EOF

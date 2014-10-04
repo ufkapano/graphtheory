@@ -12,23 +12,23 @@ class FloydWarshall:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
+        self.distance = dict()
         for source in self.graph.iternodes():
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf")
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():
-            self.dist[edge.source][edge.target] = edge.weight
+            self.distance[edge.source][edge.target] = edge.weight
 
     def run(self):
         """Executable pseudocode."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
-                    self.dist[source][target] = min(self.dist[source][target],
-                        self.dist[source][node] + self.dist[node][target])
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+                    self.distance[source][target] = min(self.distance[source][target],
+                        self.distance[source][node] + self.distance[node][target])
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
 
 
@@ -40,38 +40,38 @@ class FloydWarshallPaths:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
-        self.prev = dict()
+        self.distance = dict()
+        self.parent = dict()
         for source in self.graph.iternodes():
-            self.dist[source] = dict()
-            self.prev[source] = dict()
+            self.distance[source] = dict()
+            self.parent[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
-                self.prev[source][target] = None
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf")
+                self.parent[source][target] = None
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():
-            self.dist[edge.source][edge.target] = edge.weight
-            self.prev[edge.source][edge.target] = edge.source
+            self.distance[edge.source][edge.target] = edge.weight
+            self.parent[edge.source][edge.target] = edge.source
 
     def run(self):
         """Executable pseudocode."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
-                    alt = self.dist[source][node] + self.dist[node][target]
-                    if self.dist[source][target] > alt:
-                        self.dist[source][target] = alt
-                        self.prev[source][target] = self.prev[node][target]
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+                    alt = self.distance[source][node] + self.distance[node][target]
+                    if self.distance[source][target] > alt:
+                        self.distance[source][target] = alt
+                        self.parent[source][target] = self.parent[node][target]
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle")
 
     def path(self, source, target):
         """Path reconstruction."""
         if source == target:
             return [source]
-        elif self.prev[source][target] is None:
+        elif self.parent[source][target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.prev[target]) + [target]
+            return self.path(source, self.parent[target]) + [target]
 
 # EOF

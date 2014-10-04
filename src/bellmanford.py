@@ -22,13 +22,13 @@ class BellmanFord:
         self.distance[source] = 0
         for step in xrange(self.graph.v()-1):   # |V|-1 times
             for edge in self.graph.iteredges():   # O(E) time
-                self.relax(edge)
+                self._relax(edge)
         # check for negative cycles
         for edge in self.graph.iteredges():   # O(E) time
             if self.distance[edge.target] > self.distance[edge.source] + edge.weight:
                 raise ValueError("negative cycle")
 
-    def relax(self, edge):
+    def _relax(self, edge):
         """Edge relaxation."""
         alt = self.distance[edge.source] + edge.weight
         if self.distance[edge.target] > alt:

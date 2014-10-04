@@ -32,10 +32,10 @@ class TestDijkstra(unittest.TestCase):
         target = 3
         algorithm = Dijkstra(self.G)
         algorithm.run(source)
-        dist_expected = {0: 0, 1: 1, 2: 2, 3: 3}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {0: None, 2: 1, 1: 0, 3: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {0: 0, 1: 1, 2: 2, 3: 3}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: None, 2: 1, 1: 0, 3: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
 
@@ -44,10 +44,10 @@ class TestDijkstra(unittest.TestCase):
         target = 3
         algorithm = DijkstraMatrix(self.G)
         algorithm.run(source)
-        dist_expected = {0: 0, 1: 1, 2: 2, 3: 3}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {0: None, 2: 1, 1: 0, 3: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {0: 0, 1: 1, 2: 2, 3: 3}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: None, 2: 1, 1: 0, 3: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
 

@@ -24,31 +24,31 @@ class TestFloydWarshall(unittest.TestCase):
     def test_floydwarshall(self):
         algorithm = FloydWarshall(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 1: 4, 2: 4, 3: 3, 4: float("inf")}, 
         1: {0: 3, 1: 0, 2: 7, 3: 6, 4: float("inf")}, 
         2: {0: 6, 1: 3, 2: 0, 3: 2, 4: float("inf")}, 
         3: {0: 4, 1: 1, 2: 1, 3: 0, 4: float("inf")}, 
         4: {0: 6, 1: 3, 2: 3, 3: 2, 4: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_floydwarshall_paths(self):
         algorithm = FloydWarshallPaths(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 1: 4, 2: 4, 3: 3, 4: float("inf")}, 
         1: {0: 3, 1: 0, 2: 7, 3: 6, 4: float("inf")}, 
         2: {0: 6, 1: 3, 2: 0, 3: 2, 4: float("inf")}, 
         3: {0: 4, 1: 1, 2: 1, 3: 0, 4: float("inf")}, 
         4: {0: 6, 1: 3, 2: 3, 3: 2, 4: 0}}
-        expected_prev = {
+        expected_parent = {
         0: {0: None, 2: 3, 1: 3, 4: None, 3: 0}, 
         1: {0: 1, 2: 3, 1: None, 4: None, 3: 0}, 
         2: {0: 1, 2: None, 1: 3, 4: None, 3: 2}, 
         3: {0: 1, 2: 3, 1: 3, 4: None, 3: None}, 
         4: {0: 1, 2: 3, 1: 3, 4: None, 3: 4}}
-        self.assertEqual(algorithm.dist, expected_dist)
-        self.assertEqual(algorithm.prev, expected_prev)
+        self.assertEqual(algorithm.distance, expected_distance)
+        self.assertEqual(algorithm.parent, expected_parent)
 
     def test_floydwarshall_negative_cycle(self):
         self.G.add_edge(Edge(1, 3, -2))
@@ -74,34 +74,33 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
     def test_negative_edges(self):
         algorithm = FloydWarshall(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 1: 3, 2: 6, 3: 8}, 
         1: {0: 0, 1: 0, 2: 4, 3: 5}, 
         2: {0: -3, 1: -1, 2: 0, 3: 2}, 
         3: {0: -5, 1: -3, 2: 1, 3: 0}}
-        self.assertEqual(algorithm.dist, expected_dist)
+        self.assertEqual(algorithm.distance, expected_distance)
 
     def test_negative_edges_with_paths(self):
         algorithm = FloydWarshallPaths(self.G)
         algorithm.run()
-        expected_dist = {
+        expected_distance = {
         0: {0: 0, 1: 3, 2: 6, 3: 8}, 
         1: {0: 0, 1: 0, 2: 4, 3: 5}, 
         2: {0: -3, 1: -1, 2: 0, 3: 2}, 
         3: {0: -5, 1: -3, 2: 1, 3: 0}}
-        expected_prev = {
+        expected_parent = {
         0: {0: None, 1: 0, 2: 0, 3: 1}, 
         1: {0: 3, 1: None, 2: 1, 3: 1}, 
         2: {0: 3, 1: 3, 2: None, 3: 2}, 
         3: {0: 3, 1: 3, 2: 0, 3: None}}
-        self.assertEqual(algorithm.dist, expected_dist)
-        self.assertEqual(algorithm.prev, expected_prev)
+        self.assertEqual(algorithm.distance, expected_distance)
+        self.assertEqual(algorithm.parent, expected_parent)
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(0, 3, 2))
         algorithm = FloydWarshall(self.G)
         self.assertRaises(ValueError, algorithm.run)
-
 
 if __name__ == "__main__":
 
