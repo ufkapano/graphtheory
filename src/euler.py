@@ -22,19 +22,19 @@ class EulerianCycleDFS:
             source = self.multigraph.iternodes().next()
         self.multigraph_copy = self.multigraph.copy()
         self.stack = list()
-        self.visit(source)
+        self._visit(source)
         self.eulerian_cycle = self.stack[1:]
         self.eulerian_cycle.reverse()
         del self.stack
         del self.multigraph_copy
 
-    def visit(self, source):
+    def _visit(self, source):
         """Visiting node."""
         for target in self.multigraph_copy.iternodes():
             edge = Edge(source, target)
             while self.multigraph_copy.has_edge(edge):
                 self.multigraph_copy.del_edge(edge)
-                self.visit(target)
+                self._visit(target)
         self.stack.append(source)
 
     def is_eulerian(self):

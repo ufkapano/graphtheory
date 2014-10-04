@@ -38,7 +38,7 @@ class EdmondsKarp:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self.find_path()
+            min_capacity, parent = self._find_path()
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
@@ -53,7 +53,7 @@ class EdmondsKarp:
                 target = node
                 #print target
 
-    def find_path(self): # use BFS
+    def _find_path(self): # use BFS
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # capacity of found path to node
@@ -102,7 +102,7 @@ class EdmondsKarpSparse:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self.find_path()
+            min_capacity, parent = self._find_path()
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
@@ -117,7 +117,7 @@ class EdmondsKarpSparse:
                 target = node
                 #print target
 
-    def find_path(self): # use BFS
+    def _find_path(self): # use BFS
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # capacity of found path to node

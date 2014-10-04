@@ -45,7 +45,10 @@ class TestTransitiveClosure(unittest.TestCase):
         algorithm.run()
         self.assertEqual(algorithm.T, self.expected_T)
 
+    def tearDown(self): pass
 
 if __name__ == "__main__":
 
     unittest.main()
+
+# EOF

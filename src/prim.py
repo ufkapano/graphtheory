@@ -14,8 +14,8 @@ class PrimMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
-        self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.parent = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
         self.pq = PriorityQueue()
 
@@ -24,9 +24,9 @@ class PrimMST:
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
         self.source = source
-        self.dist[source] = 0
+        self.distance[source] = 0
         for node in self.graph.iternodes():
-            self.pq.put((self.dist[node], node))
+            self.pq.put((self.distance[node], node))
         while not self.pq.empty():
             weight, node = self.pq.get()
             if self.in_queue[node]:
@@ -35,9 +35,9 @@ class PrimMST:
                 continue
             for edge in self.graph.iteroutedges(node):
                 if (self.in_queue[edge.target] 
-                and edge.weight < self.dist[edge.target]):
-                    self.dist[edge.target] = edge.weight
-                    self.prev[edge.target] = edge.source
+                and edge.weight < self.distance[edge.target]):
+                    self.distance[edge.target] = edge.weight
+                    self.parent[edge.target] = edge.source
                     # DECREASE-KEY
                     self.pq.put((edge.weight, edge.target))
 
@@ -45,8 +45,8 @@ class PrimMST:
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # O(V) time
-            if self.prev[node] is not None:
-                self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
+            if self.parent[node] is not None:
+                self.mst.add_edge(Edge(self.parent[node], node, self.distance[node]))
         return self.mst
 
 
@@ -56,8 +56,8 @@ class PrimMatrixMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.dist = dict((node, float("inf")) for node in self.graph.iternodes())
-        self.prev = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.parent = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
 
     def run(self, source=None):
@@ -65,24 +65,24 @@ class PrimMatrixMST:
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
         self.source = source
-        self.dist[source] = 0
+        self.distance[source] = 0
         for step in xrange(self.graph.v()):    # |V| times
             # find min node in the graph - O(V) time
             node = min((node for node in self.graph.iternodes() 
-                if self.in_queue[node]), key=self.dist.get)
+                if self.in_queue[node]), key=self.distance.get)
             self.in_queue[node] = False
             for edge in self.graph.iteroutedges(node):  # O(V) time
                 if (self.in_queue[edge.target] 
-                and edge.weight < self.dist[edge.target]):
-                    self.dist[edge.target] = edge.weight
-                    self.prev[edge.target] = edge.source
+                and edge.weight < self.distance[edge.target]):
+                    self.distance[edge.target] = edge.weight
+                    self.parent[edge.target] = edge.source
 
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # O(V) time
-            if self.prev[node] is not None:
-                self.mst.add_edge(Edge(self.prev[node], node, self.dist[node]))
+            if self.parent[node] is not None:
+                self.mst.add_edge(Edge(self.parent[node], node, self.distance[node]))
         return self.mst
 
 

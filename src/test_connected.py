@@ -38,6 +38,8 @@ class TestConnectedComponents(unittest.TestCase):
         self.assertEqual(algorithm.n_cc, self.expected_n_cc)
         self.assertEqual(algorithm.cc, self.expected_cc)
 
+    def tearDown(self): pass
+
 # 0 -o 1 --o 2 o-o 3   Cormen, s.628 modified
 # o  / |     |     |
 # | o  o     o     o
@@ -68,6 +70,10 @@ class TestStronglyConnectedComponents(unittest.TestCase):
         self.assertEqual(algorithm.n_scc, self.expected_n_scc)
         self.assertEqual(algorithm.scc, self.expected_scc)
 
+    def tearDown(self): pass
+
 if __name__ == "__main__":
 
     unittest.main()
+
+# EOF

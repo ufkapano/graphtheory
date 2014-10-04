@@ -10,7 +10,7 @@ class FleuryDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        if not self.is_eulerian():
+        if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
 
@@ -24,7 +24,7 @@ class FleuryDFS:
         while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
-                if not self.is_bridge(edge):
+                if not self._is_bridge(edge):
                     break
             self.graph_copy.del_edge(edge)
             self.eulerian_cycle.append(edge.target)
@@ -32,19 +32,19 @@ class FleuryDFS:
         del self.graph_copy
         self.eulerian_cycle.pop()
 
-    def is_bridge(self, edge):
+    def _is_bridge(self, edge):
         """Bridge test."""
         list1 = list()
         list2 = list()
-        dfs = SimpleDFS(self.graph_copy)
-        dfs.run(edge.source, pre_action=lambda node: list1.append(node))
+        algorithm = SimpleDFS(self.graph_copy)
+        algorithm.run(edge.source, pre_action=lambda node: list1.append(node))
         self.graph_copy.del_edge(edge)
-        dfs = SimpleDFS(self.graph_copy)
-        dfs.run(edge.source, pre_action=lambda node: list2.append(node))
+        algorithm = SimpleDFS(self.graph_copy)
+        algorithm.run(edge.source, pre_action=lambda node: list2.append(node))
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
 
-    def is_eulerian(self):
+    def _is_eulerian(self):
         """Test if the graph is eulerian."""
         if self.graph.is_directed():
             # we assume that the graph is strongly connected
@@ -65,7 +65,7 @@ class FleuryBFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        if not self.is_eulerian():
+        if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
 
@@ -79,7 +79,7 @@ class FleuryBFS:
         while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
-                if not self.is_bridge(edge):
+                if not self._is_bridge(edge):
                     break
             self.graph_copy.del_edge(edge)
             self.eulerian_cycle.append(edge.target)
@@ -87,19 +87,19 @@ class FleuryBFS:
         del self.graph_copy
         self.eulerian_cycle.pop()
 
-    def is_bridge(self, edge):
+    def _is_bridge(self, edge):
         """Bridge test."""
         list1 = list()
         list2 = list()
-        dfs = SimpleBFS(self.graph_copy)
-        dfs.run(edge.source, pre_action=lambda node: list1.append(node))
+        algorithm = SimpleBFS(self.graph_copy)
+        algorithm.run(edge.source, pre_action=lambda node: list1.append(node))
         self.graph_copy.del_edge(edge)
-        dfs = SimpleBFS(self.graph_copy)
-        dfs.run(edge.source, pre_action=lambda node: list2.append(node))
+        algorithm = SimpleBFS(self.graph_copy)
+        algorithm.run(edge.source, pre_action=lambda node: list2.append(node))
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
 
-    def is_eulerian(self):
+    def _is_eulerian(self):
         """Test if the graph is eulerian."""
         if self.graph.is_directed():
             # we assume that the graph is strongly connected

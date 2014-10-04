@@ -95,6 +95,10 @@ class TestEdmondsKarpWiki(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
+    def tearDown(self): pass
+
 if __name__ == "__main__":
 
     unittest.main()
+
+# EOF

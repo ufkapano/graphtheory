@@ -71,7 +71,6 @@ class TestBellmanFordCormen(unittest.TestCase):
         path_expected = [0, 3, 2, 1, 4]
         self.assertEqual(algorithm.path(target), path_expected)
 
-
     def tearDown(self): pass
 
 if __name__ == "__main__":

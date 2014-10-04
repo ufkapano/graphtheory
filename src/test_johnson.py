@@ -128,3 +128,5 @@ if __name__ == '__main__':
     suite3 = unittest.TestLoader().loadTestsFromTestCase(TestJohnsonWiki)
     suite = unittest.TestSuite([suite1, suite2, suite3])
     unittest.TextTestRunner(verbosity=2).run(suite)
+
+# EOF
