@@ -18,13 +18,13 @@ class BipartiteGraphBFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is not None:
-            self.visit(source)
+            self._visit(source)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] is None:
-                    self.visit(node)
+                    self._visit(node)
 
-    def visit(self, node):
+    def _visit(self, node):
         """Explore the connected component."""
         Q = Queue()
         self.color[node] = 1   # before Q.put
@@ -58,20 +58,20 @@ class BipartiteGraphDFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is not None:
-            self.color[source] = 1   # before visit
-            self.visit(source)
+            self.color[source] = 1   # before _visit
+            self._visit(source)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] is None:
-                    self.color[node] = 1   # before visit
-                    self.visit(node)
+                    self.color[node] = 1   # before _visit
+                    self._visit(node)
 
-    def visit(self, node):
+    def _visit(self, node):
         """Explore recursively the connected component."""
         for target in self.graph.iteradjacent(node):
             if self.color[target] is None:
-                self.color[target] = -self.color[node]   # before visit
-                self.visit(target)
+                self.color[target] = -self.color[node]   # before _visit
+                self._visit(target)
             else:   # target was visited
                 if self.color[target] == self.color[node]:
                     raise ValueError("graph is not bipartite")

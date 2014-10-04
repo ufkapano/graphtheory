@@ -24,9 +24,9 @@ class DAGShortestPath:
         ts.run()
         for source in ts.sorted_nodes:
             for edge in self.graph.iteroutedges(source):
-                self.relax(edge)
+                self._relax(edge)
 
-    def relax(self, edge):
+    def _relax(self, edge):
         """Edge relaxation."""
         alt = self.distance[edge.source] + edge.weight
         if self.distance[edge.target] > alt:

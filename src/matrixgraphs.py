@@ -9,7 +9,7 @@ import copy
 import random
 
 
-class Graph(object):
+class Graph:
     """The class defining a graph."""
 
     def __init__(self, n, directed=False):

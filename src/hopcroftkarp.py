@@ -19,7 +19,7 @@ class HopcroftKarp:
         """The algorithm initialization."""
         self.graph = graph
         self.pair = dict((node, None) for node in self.graph.iternodes())
-        self.dist = dict()
+        self.distance = dict()
         self.cardinality = 0
         algorithm = Bipartite(self.graph)
         algorithm.run()
@@ -34,40 +34,40 @@ class HopcroftKarp:
 
     def run(self):
         """Executable pseudocode."""
-        while self.bfs_stage():
+        while self._bfs_stage():
             for node in self.v1:
-                if self.pair[node] is None and self.dfs_stage(node):
+                if self.pair[node] is None and self._dfs_stage(node):
                     self.cardinality = self.cardinality + 1
                     #print self.pair
 
-    def bfs_stage(self):
+    def _bfs_stage(self):
         """The BFS stage."""
         for node in self.v1:
             if self.pair[node] is None:
-                self.dist[node] = 0
+                self.distance[node] = 0
                 self.Q.put(node)
             else:
-                self.dist[node] = float("inf")
-        self.dist[None] = float("inf")
+                self.distance[node] = float("inf")
+        self.distance[None] = float("inf")
         while not self.Q.empty():
             node = self.Q.get()
-            if self.dist[node] < self.dist[None]:
+            if self.distance[node] < self.distance[None]:
                 for target in self.graph.iteradjacent(node):
-                    if self.dist[self.pair[target]] == float("inf"):
-                        self.dist[self.pair[target]] = self.dist[node] + 1
+                    if self.distance[self.pair[target]] == float("inf"):
+                        self.distance[self.pair[target]] = self.distance[node] + 1
                         self.Q.put(self.pair[target])
-        return self.dist[None] != float("inf")
+        return self.distance[None] != float("inf")
 
-    def dfs_stage(self, node):
+    def _dfs_stage(self, node):
         """The DFS stage."""
         if node is not None:
             for target in self.graph.iteradjacent(node):
-                if self.dist[self.pair[target]] == self.dist[node] + 1:
-                    if self.dfs_stage(self.pair[target]):
+                if self.distance[self.pair[target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.pair[target]):
                         self.pair[target] = node
                         self.pair[node] = target
                         return True
-            self.dist[node] = float("inf")
+            self.distance[node] = float("inf")
             return False
         return True
 
