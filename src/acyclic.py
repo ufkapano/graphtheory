@@ -14,7 +14,7 @@ class AcyclicGraphDFS:
         """The algorithm initialization."""
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
-        self.prev = dict(((node, None) for node in self.graph.iternodes()))
+        self.parent = dict(((node, None) for node in self.graph.iternodes()))
         # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
@@ -24,21 +24,21 @@ class AcyclicGraphDFS:
         """Executable pseudocode."""
         if source is not None:
             # only one connected component will be checked!
-            self.visit(source)
+            self._visit(source)
         else:
             for node in self.graph.iternodes():
                 if self.color[node] == "WHITE":
-                    self.visit(node)
+                    self._visit(node)
 
-    def visit(self, node):
+    def _visit(self, node):
         """Explore recursively the connected component."""
         self.color[node] = "GREY"
         for target in self.graph.iteradjacent(node):
             if self.color[target] == "WHITE":
-                self.prev[target] = node
-                self.visit(target)
+                self.parent[target] = node
+                self._visit(target)
             elif self.color[target] == "GREY":   # back edge
-                if self.graph.is_directed() or target != self.prev[node]:
+                if self.graph.is_directed() or target != self.parent[node]:
                     raise ValueError("a cycle detected")
             else:   # directed graph, cross or forward edge
                 pass

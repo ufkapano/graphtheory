@@ -34,8 +34,8 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = AcyclicGraphDFS(self.G)
         algorithm.run(1)   # it is safe, because G is connected
-        prev_expected = {1: None, 0: 1, 3: 6, 2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {1: None, 0: 1, 3: 6, 2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_detect_cycle1(self):
         self.assertEqual(self.G.v(), self.N)
@@ -90,9 +90,9 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         algorithm = AcyclicGraphDFS(self.G)
         algorithm.run(0)   # in order to easy test
-        prev_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 5}
-        #prev_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 0}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 5}
+        #parent_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 0}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_detect_directed_cycle1(self):
         self.assertEqual(self.G.v(), self.N)
