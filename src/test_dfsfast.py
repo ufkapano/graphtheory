@@ -41,8 +41,8 @@ class TestDFS(unittest.TestCase):
         ff_expected = {0: 15, 1: 4, 2: 13, 3: 12, 4: 16, 5: 7, 6: 10, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
         self.assertEqual(algorithm.ff, ff_expected)
-        prev_expected = {0: 1, 1: None, 2: 5, 3: 6, 4: 0, 5: 1, 6: 5, 7: 6}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {0: 1, 1: None, 2: 5, 3: 6, 4: 0, 5: 1, 6: 5, 7: 6}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
@@ -59,8 +59,8 @@ class TestDFS(unittest.TestCase):
         ff_expected = {0: 5, 1: 16, 2: 14, 3: 13, 4: 4, 5: 15, 6: 12, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
         self.assertEqual(algorithm.ff, ff_expected)
-        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_simple_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
@@ -73,8 +73,8 @@ class TestDFS(unittest.TestCase):
         post_ordering_expected = [4, 0, 7, 6, 3, 2, 5, 1]
         self.assertEqual(pre_ordering, pre_ordering_expected)
         self.assertEqual(post_ordering, post_ordering_expected)
-        prev_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
-        self.assertEqual(algorithm.prev, prev_expected)
+        parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
+        self.assertEqual(algorithm.parent, parent_expected)
 
     def test_to_tree_stack(self):
         algorithm = DFSWithStack(self.G)
