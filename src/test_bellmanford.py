@@ -32,10 +32,10 @@ class TestBellmanFord(unittest.TestCase):
         target = 3
         algorithm = BellmanFord(self.G)
         algorithm.run(source)
-        dist_expected = {0: 0, 2: 2, 1: 1, 3: 3}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {0: None, 2: 1, 1: 0, 3: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {0: 0, 2: 2, 1: 1, 3: 3}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: None, 2: 1, 1: 0, 3: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
 
@@ -64,10 +64,10 @@ class TestBellmanFordCormen(unittest.TestCase):
         target = 4
         algorithm = BellmanFord(self.G)
         algorithm.run(source)
-        dist_expected = {3: 7, 2: 4, 0: 0, 4: -2, 1: 2}
-        self.assertEqual(algorithm.dist, dist_expected)
-        prev_expected = {3: 0, 2: 3, 0: None, 4: 1, 1: 2}
-        self.assertEqual(algorithm.prev, prev_expected)
+        distance_expected = {3: 7, 2: 4, 0: 0, 4: -2, 1: 2}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {3: 0, 2: 3, 0: None, 4: 1, 1: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 3, 2, 1, 4]
         self.assertEqual(algorithm.path(target), path_expected)
 
