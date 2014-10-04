@@ -12,36 +12,36 @@ class SlowAllPairs:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
+        self.distance = dict()
         self.weights = dict()
         for source in self.graph.iternodes():   # O(V**2) time
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf")
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():   # O(E) time
-            self.dist[edge.source][edge.target] = edge.weight
+            self.distance[edge.source][edge.target] = edge.weight
         for source in self.graph.iternodes():
-            self.weights[source] = dict(self.dist[source])
+            self.weights[source] = dict(self.distance[source])
 
     def run(self):
         """Executable pseudocode."""
         for m in xrange(2, self.graph.v()):   # |V|-2 times
-            self.dist = self.extended_shortest_paths(self.dist)
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+            self.distance = self.extended_shortest_paths(self.distance)
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
 
-    def extended_shortest_paths(self, old_dist):
+    def extended_shortest_paths(self, old_distance):
         """O(V**3) time."""
-        new_dist = dict()
+        new_distance = dict()
         for source in self.graph.iternodes():
-            new_dist[source] = dict()
+            new_distance[source] = dict()
             for target in self.graph.iternodes():
-                new_dist[source][target] = float("inf")
+                new_distance[source][target] = float("inf")
                 for node in self.graph.iternodes():
-                    new_dist[source][target] = min(new_dist[source][target],
-                        old_dist[source][node] + self.weights[node][target])
-        return new_dist
+                    new_distance[source][target] = min(new_distance[source][target],
+                        old_distance[source][node] + self.weights[node][target])
+        return new_distance
 
 
 class SlowAllPairsEdges:
@@ -52,35 +52,35 @@ class SlowAllPairsEdges:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
+        self.distance = dict()
         self.weights = dict()
         for source in self.graph.iternodes():   # O(V**2) time
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf")
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():   # O(E) time
-            self.dist[edge.source][edge.target] = edge.weight
+            self.distance[edge.source][edge.target] = edge.weight
         for source in self.graph.iternodes():
-            self.weights[source] = dict(self.dist[source])
+            self.weights[source] = dict(self.distance[source])
 
     def run(self):
         """Executable pseudocode."""
         for m in xrange(2, self.graph.v()):   # |V|-2 times
-            self.dist = self.extended_shortest_paths(self.dist)
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+            self.distance = self.extended_shortest_paths(self.distance)
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
 
-    def extended_shortest_paths(self, old_dist):
+    def extended_shortest_paths(self, old_distance):
         """O(V*(V+E)) time."""
-        new_dist = dict()
+        new_distance = dict()
         for source in self.graph.iternodes():   # |V| times
-            new_dist[source] = dict(old_dist[source]) # IMPORTANT, O(V)
+            new_distance[source] = dict(old_distance[source]) # IMPORTANT, O(V)
             for edge in self.graph.iteredges():   # O(E) time
-                new_dist[source][edge.target] = min(
-                    new_dist[source][edge.target],
-                    old_dist[source][edge.source] + edge.weight)
-        return new_dist
+                new_distance[source][edge.target] = min(
+                    new_distance[source][edge.target],
+                    old_distance[source][edge.source] + edge.weight)
+        return new_distance
 
 
 class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
@@ -91,41 +91,41 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
+        self.distance = dict()
         self.weights = dict()
-        self.prev = dict()
+        self.parent = dict()
         for source in self.graph.iternodes():   # O(V**2) time
-            self.dist[source] = dict()
-            self.prev[source] = dict()
+            self.distance[source] = dict()
+            self.parent[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf")
-                self.prev[source][target] = None
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf")
+                self.parent[source][target] = None
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():   # O(E) time
-            self.dist[edge.source][edge.target] = edge.weight
-            self.prev[edge.source][edge.target] = edge.source
+            self.distance[edge.source][edge.target] = edge.weight
+            self.parent[edge.source][edge.target] = edge.source
         for source in self.graph.iternodes():
-            self.weights[source] = dict(self.dist[source])
+            self.weights[source] = dict(self.distance[source])
 
     def run(self):
         """Executable pseudocode."""
         for m in xrange(2, self.graph.v()):   # |V|-2 times
-            self.dist = self.extended_shortest_paths(self.dist)
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+            self.distance = self.extended_shortest_paths(self.distance)
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
 
-    def extended_shortest_paths(self, old_dist):
+    def extended_shortest_paths(self, old_distance):
         """O(V**3) time."""
-        new_dist = dict()
+        new_distance = dict()
         for source in self.graph.iternodes():
-            new_dist[source] = dict(old_dist[source]) # IMPORTANT, copy
+            new_distance[source] = dict(old_distance[source]) # IMPORTANT, copy
             for target in self.graph.iternodes():
                 for node in self.graph.iternodes():
-                    alt = old_dist[source][node] + self.weights[node][target]
-                    if new_dist[source][target] > alt:
-                        new_dist[source][target] = alt
-                        self.prev[source][target] = node
-        return new_dist
+                    alt = old_distance[source][node] + self.weights[node][target]
+                    if new_distance[source][target] > alt:
+                        new_distance[source][target] = alt
+                        self.parent[source][target] = node
+        return new_distance
 
 
 class FasterAllPairs:
@@ -136,34 +136,34 @@ class FasterAllPairs:
         if not graph.is_directed():
             raise ValueError("graph is not directed")
         self.graph = graph
-        self.dist = dict()
+        self.distance = dict()
         for source in self.graph.iternodes():   # O(V**2) time
-            self.dist[source] = dict()
+            self.distance[source] = dict()
             for target in self.graph.iternodes():
-                self.dist[source][target] = float("inf") # IMPORTANT
-            self.dist[source][source] = 0
+                self.distance[source][target] = float("inf") # IMPORTANT
+            self.distance[source][source] = 0
         for edge in self.graph.iteredges():   # O(E) time
-            self.dist[edge.source][edge.target] = edge.weight
+            self.distance[edge.source][edge.target] = edge.weight
 
     def run(self):
         """Executable pseudocode."""
         m = 1
         while m < (self.graph.v() - 1):   # log(V) times
-            self.dist = self.extended_shortest_paths(self.dist)
+            self.distance = self.extended_shortest_paths(self.distance)
             m = 2 * m
-        if any(self.dist[node][node] < 0 for node in self.graph.iternodes()):
+        if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
 
-    def extended_shortest_paths(self, old_dist):
+    def extended_shortest_paths(self, old_distance):
         """O(V**3) time."""
-        new_dist = dict()
+        new_distance = dict()
         for source in self.graph.iternodes():
-            new_dist[source] = dict()
+            new_distance[source] = dict()
             for target in self.graph.iternodes():
-                new_dist[source][target] = float("inf")
+                new_distance[source][target] = float("inf")
                 for node in self.graph.iternodes():
-                    new_dist[source][target] = min(new_dist[source][target],
-                        old_dist[source][node] + old_dist[node][target])
-        return new_dist
+                    new_distance[source][target] = min(new_distance[source][target],
+                        old_distance[source][node] + old_distance[node][target])
+        return new_distance
 
 # EOF
