@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from unionfind import UnionFind
 import unittest
+from unionfind import UnionFind
 
 
 class TestUnionFind(unittest.TestCase):

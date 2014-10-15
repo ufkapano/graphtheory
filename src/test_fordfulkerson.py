@@ -20,7 +20,7 @@ class TestFordFulkerson(unittest.TestCase):
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3]
         self.edges = [Edge(0, 1, 10), Edge(0, 2, 10),
-        Edge(1, 2, 1), Edge(1, 3, 10), Edge(2, 3, 10)]
+            Edge(1, 2, 1), Edge(1, 3, 10), Edge(2, 3, 10)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:

@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
 from bfsfast import BFSWithQueue, SimpleBFS
-import unittest
 
 # 0---1   2---3
 # |   | / | / |

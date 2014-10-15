@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# boruvka.py
-#
-# Boruvka's algorithm for finding MST.
 
 from edges import Edge
 from unionfind import UnionFind

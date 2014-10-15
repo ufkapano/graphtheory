@@ -12,7 +12,7 @@ class EulerianCycleDFS:
         if multigraph.is_directed():
             raise ValueError("graph is directed")
         self.multigraph = multigraph
-        if not self.is_eulerian():
+        if not self._is_eulerian():
             raise ValueError("the multigraph is not eulerian")
         self.eulerian_cycle = list()
 
@@ -37,7 +37,7 @@ class EulerianCycleDFS:
                 self._visit(target)
         self.stack.append(source)
 
-    def is_eulerian(self):
+    def _is_eulerian(self):
         """Test if the multigraph is eulerian."""
         if self.multigraph.is_directed():
             # we assume that the multigraph is strongly connected

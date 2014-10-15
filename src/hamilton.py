@@ -2,6 +2,7 @@
 
 from edges import Edge
 
+
 class HamiltonCycle:
     """Finding a Hamiltonian cycle in a Hamiltonian graph."""
 

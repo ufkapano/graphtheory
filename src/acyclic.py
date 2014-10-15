@@ -7,6 +7,7 @@
 from edges import Edge
 from graphs import Graph
 
+
 class AcyclicGraphDFS:
     """Cycles detection in graphs based on DFS."""
 

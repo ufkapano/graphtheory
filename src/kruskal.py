@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# kruskal.py
-#
-# Kruskal's algorithm for finding MST.
 
 from unionfind import UnionFind
 from Queue import PriorityQueue

@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# bellmanford.py
-#
-# The Bellman-Ford algorithm.
 
 class BellmanFord:
     """The Bellman-Ford algorithm for the shortest path problem."""

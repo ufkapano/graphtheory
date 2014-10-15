@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# edmondskarp.py
-#
-# The Edmonds-Karp algorithm.
 
 from edges import Edge
 from Queue import Queue

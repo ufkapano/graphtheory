@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
 from fleury import FleuryDFS, FleuryBFS
-import unittest
 
 # 0 --- 1     2
 # |     |   / |
@@ -18,7 +18,7 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
         self.G = Graph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3, 4, 5]
         self.edges = [Edge(0, 1), Edge(0, 3), Edge(1, 4),
-        Edge(3, 4), Edge(4, 2), Edge(4, 5), Edge(2, 5)]
+            Edge(3, 4), Edge(4, 2), Edge(4, 5), Edge(2, 5)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -58,7 +58,7 @@ class TestFleuryDirectedGraph(unittest.TestCase):
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5]
         self.edges = [Edge(0, 1), Edge(3, 0), Edge(1, 4),
-        Edge(4, 3), Edge(2, 4), Edge(4, 5), Edge(5, 2)]
+            Edge(4, 3), Edge(2, 4), Edge(4, 5), Edge(5, 2)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:

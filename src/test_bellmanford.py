@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
 from bellmanford import BellmanFord
-import unittest
 
 #    1
 # 0 --> 1

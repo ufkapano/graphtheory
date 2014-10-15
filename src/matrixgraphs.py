@@ -4,16 +4,16 @@
 #
 # Nodes are int from 0 to n-1.
 
-from edges import Edge
 import copy
 import random
+from edges import Edge
 
 
 class Graph:
     """The class defining a graph."""
 
     def __init__(self, n, directed=False):
-        """Loads up a Graph instance."""
+        """Load up a Graph instance."""
         self.n = n
         self.directed = directed  # bool
         self.data = [[0] * self.n for node in xrange(self.n)]
@@ -23,11 +23,11 @@ class Graph:
         return self.directed
 
     def v(self):
-        """Returns the number of nodes (the graph order)."""
+        """Return the number of nodes (the graph order)."""
         return self.n
 
     def e(self):
-        """Returns the number of edges in O(V**2) time."""
+        """Return the number of edges in O(V**2) time."""
         counter = 0
         for source in xrange(self.n):
             for target in xrange(self.n):
@@ -85,33 +85,33 @@ class Graph:
         return self.data[edge.source][edge.target] != 0
 
     def weight(self, edge):
-        """Returns the edge weight or zero."""
+        """Return the edge weight or zero."""
         return self.data[edge.source][edge.target]
 
     def iternodes(self):
-        """Generates nodes from the graph on demand."""
+        """Generate the nodes from the graph on demand."""
         return iter(xrange(self.n))
 
     def iteradjacent(self, source):
-        """Generates adjacent nodes from the graph on demand."""
+        """Generate the adjacent nodes from the graph on demand."""
         for target in xrange(self.n):   # O(V) time
             if self.data[source][target] != 0:
                 yield target
 
     def iteroutedges(self, source):   # O(V) time
-        """Generates outedges from the graph on demand."""
+        """Generate the outedges from the graph on demand."""
         for target in xrange(self.n):
             if self.data[source][target] != 0:
                 yield Edge(source, target, self.data[source][target])
 
     def iterinedges(self, source):   # O(V) time
-        """Generates inedges from the graph on demand."""
+        """Generate the inedges from the graph on demand."""
         for target in xrange(self.n):
             if self.data[target][source] != 0:
                 yield Edge(target, source, self.data[target][source])
 
     def iteredges(self):   # O(V**2) time
-        """Generates edges from the graph on demand."""
+        """Generate the edges from the graph on demand."""
         for source in xrange(self.n):
             for target in xrange(self.n):
                 if self.data[source][target] != 0 and (
@@ -127,7 +127,7 @@ class Graph:
             print
 
     def copy(self):
-        """Returns the graph copy in O(V**2) time."""
+        """Return the graph copy in O(V**2) time."""
         new_graph = Graph(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):
@@ -135,7 +135,7 @@ class Graph:
         return new_graph
 
     def transpose(self):
-        """Returns the transpose of the graph in O(V**2) time."""
+        """Return the transpose of the graph in O(V**2) time."""
         new_graph = Graph(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):
@@ -143,7 +143,7 @@ class Graph:
         return new_graph
 
     def degree(self, source):
-        """The degree of the node in the undirected graph."""
+        """Return the degree of the node in the undirected graph."""
         if self.is_directed():
             raise ValueError("the graph is directed")
         counter = 0
@@ -153,7 +153,7 @@ class Graph:
         return counter
 
     def outdegree(self, source):
-        """The outdegree of the node."""
+        """Return the outdegree of the node."""
         counter = 0
         for target in xrange(self.n):
             if self.data[source][target] != 0:
@@ -161,7 +161,7 @@ class Graph:
         return counter
 
     def indegree(self, source):
-        """The indegree of the node."""
+        """Return the indegree of the node."""
         counter = 0
         for target in xrange(self.n):
             if self.data[target][source] != 0:
@@ -197,7 +197,7 @@ class Graph:
 
     @classmethod
     def make_complete(cls, n=1, directed=False):
-        """Creates the complete graph."""
+        """Create the complete graph."""
         graph = cls(n, directed)
         weights = range(1, 1 + n * (n-1)/2)
         random.shuffle(weights)
@@ -213,7 +213,7 @@ class Graph:
 
     @classmethod
     def make_sparse(cls, n=1, directed=False, m=0):
-        """Creates the sparse graph."""
+        """Create a sparse graph."""
         if m >= n*(n-1)/2:
             raise ValueError("too mamy edges")
         graph = cls(n, directed)
@@ -232,7 +232,7 @@ class Graph:
 
     @classmethod
     def make_connected(cls, n=1, directed=False, m=0):
-        """Creates the sparse graph."""
+        """Create a connected graph."""
         if m < n - 1 or m >= n * (n - 1)/2:
             raise ValueError("bad number of edges for the connected graph")
         graph = cls(n, directed)
@@ -257,7 +257,7 @@ class Graph:
 
     @classmethod
     def make_tree(cls, n=1, directed=False):
-        """Creates the tree graph."""
+        """Create a tree graph."""
         graph = cls(n, directed)
         weights = range(1, n)
         random.shuffle(weights)
@@ -272,7 +272,7 @@ class Graph:
 
     @classmethod
     def make_random(cls, n=1, directed=False, edge_probability=0.5):
-        """Creates the tree graph."""
+        """Create a random graph."""
         graph = cls(n, directed)
         weights = range(1, 1 + n * (n-1)/2)
         random.shuffle(weights)
@@ -298,7 +298,7 @@ class Graph:
 
     @classmethod
     def make_grid(cls, size=3):
-        """Creates the grid graph with periodic boundary conditions.
+        """Create the grid graph with periodic boundary conditions.
         |V| = size * size, |E| = 2 * |V|.
         """
         if size < 3:
@@ -326,7 +326,7 @@ class Graph:
 
     @classmethod
     def make_triangle(cls, size=3):
-        """Creates the triangle network with periodic boundary conditions.
+        """Create the triangle network with periodic boundary conditions.
         |V| = size * size, |E| = 3 * |V|.
         """
         if size < 3:
@@ -351,7 +351,7 @@ class Graph:
 
     @classmethod
     def make_ladder(cls, size=3):
-        """Creates the ladder with periodic boundary conditions.
+        """Create the ladder with periodic boundary conditions.
         |V| = 2 * size, |E| = 3 * size.
         """
         if size < 3:
@@ -371,7 +371,7 @@ class Graph:
 
     @classmethod
     def make_flow_network(cls, n=1):
-        """Creates a flow network."""
+        """Create a flow network."""
         graph = cls(n, True)
         for node in xrange(n):
             graph.add_node(node)

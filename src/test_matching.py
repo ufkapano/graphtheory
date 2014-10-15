@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
 from matching import MatchingFordFulkerson
-import unittest
 
 
 class TestMatching(unittest.TestCase):

@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# dijkstra.py
-#
-# The Dijkstra's algorithm.
 
 from Queue import PriorityQueue
 

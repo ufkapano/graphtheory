@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# fordfulkerson.py
-#
-# The Ford-Fulkerson algorithm.
 
 from edges import Edge
 from Queue import LifoQueue

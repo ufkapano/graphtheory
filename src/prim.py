@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# prim.py
-#
-# Prim's algorithm for finding MST.
 
 from edges import Edge
 from Queue import PriorityQueue

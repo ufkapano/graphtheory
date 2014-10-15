@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# johnson.py
-#
-# The Johnson algorithm.
 
 from edges import Edge
 from bellmanford import BellmanFord

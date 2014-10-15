@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
 from topsort import *
-import unittest
 
 
 class TestTopologicalSorting(unittest.TestCase):

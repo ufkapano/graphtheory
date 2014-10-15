@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#
-# floydwarshall.py
-#
-# The Floyd-Warshall algorithm.
 
 class FloydWarshall:
     """The Floyd-Warshall algorithm."""
