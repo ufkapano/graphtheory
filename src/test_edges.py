@@ -13,10 +13,12 @@ class TestEdge(unittest.TestCase):
         self.edge4 = Edge(1, 2)
 
     def test_repr(self):
-        self.assertEqual(repr(self.edge1), "Edge(2, 4, 1)")
-        self.assertEqual(repr(~self.edge1), "Edge(4, 2, 1)")
+        self.assertEqual(repr(self.edge1), "Edge(2, 4)")
+        self.assertEqual(repr(~self.edge1), "Edge(4, 2)")
         self.assertEqual(repr(self.edge2), "Edge('A', 'B', 5)")
         self.assertEqual(repr(~self.edge2), "Edge('B', 'A', 5)")
+        self.assertEqual(repr(self.edge3), "Edge(1, 3, 2)")
+        self.assertEqual(repr(~self.edge3), "Edge(3, 1, 2)")
 
     def test_cmp(self):
         self.assertTrue(self.edge1 < self.edge3)
