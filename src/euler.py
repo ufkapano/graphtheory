@@ -30,11 +30,10 @@ class EulerianCycleDFS:
 
     def _visit(self, source):
         """Visiting node."""
-        for target in self.multigraph_copy.iternodes():
-            edge = Edge(source, target)
-            while self.multigraph_copy.has_edge(edge):
-                self.multigraph_copy.del_edge(edge)
-                self._visit(target)
+        while self.multigraph_copy.outdegree(source) > 0:
+            edge = self.multigraph_copy.iteroutedges(source).next()
+            self.multigraph_copy.del_edge(edge)
+            self._visit(edge.target)
         self.stack.put(source)
 
     def _is_eulerian(self):
