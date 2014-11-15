@@ -47,12 +47,12 @@ class FleuryDFS:
     def _is_eulerian(self):
         """Test if the graph is eulerian."""
         if self.graph.is_directed():
-            # we assume that the graph is strongly connected
+            # We assume that the graph is strongly connected.
             for node in self.graph.iternodes():
                 if self.graph.indegree(node) != self.graph.outdegree(node):
                     return False
         else:
-            # we assume that the graph is connected
+            # We assume that the graph is connected.
             for node in self.graph.iternodes():
                 if self.graph.degree(node) % 2 == 1:
                     return False
@@ -102,12 +102,12 @@ class FleuryBFS:
     def _is_eulerian(self):
         """Test if the graph is eulerian."""
         if self.graph.is_directed():
-            # we assume that the graph is strongly connected
+            # We assume that the graph is strongly connected.
             for node in self.graph.iternodes():
                 if self.graph.indegree(node) != self.graph.outdegree(node):
                     return False
         else:
-            # we assume that the graph is connected
+            # We assume that the graph is connected.
             for node in self.graph.iternodes():
                 if self.graph.degree(node) % 2 == 1:
                     return False

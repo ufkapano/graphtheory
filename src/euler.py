@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from Queue import LifoQueue
 from edges import Edge
 from dfs import SimpleDFS
 
@@ -9,8 +10,6 @@ class EulerianCycleDFS:
 
     def __init__(self, multigraph):
         """The algorithm initialization."""
-        if multigraph.is_directed():
-            raise ValueError("graph is directed")
         self.multigraph = multigraph
         if not self._is_eulerian():
             raise ValueError("the multigraph is not eulerian")
@@ -21,10 +20,11 @@ class EulerianCycleDFS:
         if source is None:   # get first random node
             source = self.multigraph.iternodes().next()
         self.multigraph_copy = self.multigraph.copy()
-        self.stack = list()
+        self.stack = LifoQueue()
         self._visit(source)
-        self.eulerian_cycle = self.stack[1:]
-        self.eulerian_cycle.reverse()
+        while not self.stack.empty():
+            self.eulerian_cycle.append(self.stack.get())
+        self.eulerian_cycle.pop()
         del self.stack
         del self.multigraph_copy
 
@@ -35,7 +35,7 @@ class EulerianCycleDFS:
             while self.multigraph_copy.has_edge(edge):
                 self.multigraph_copy.del_edge(edge)
                 self._visit(target)
-        self.stack.append(source)
+        self.stack.put(source)
 
     def _is_eulerian(self):
         """Test if the multigraph is eulerian."""
