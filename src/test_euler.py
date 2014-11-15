@@ -27,15 +27,15 @@ class TestEulerianCycleUndirected(unittest.TestCase):
     def test_euler_dfs(self):
         algorithm = EulerianCycleDFS(self.G)
         algorithm.run(0)
-        expected_cycle = [0, 1, 4, 2, 5, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_hierholzer(self):
         algorithm = Hierholzer(self.G)
         algorithm.run(0)
-        expected_cycle = [0, 1, 4, 2, 5, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
@@ -71,15 +71,15 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
     def test_euler_dfs(self):
         algorithm = EulerianCycleDFS(self.G)
         algorithm.run(6)
-        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_hierholzer(self):
         algorithm = Hierholzer(self.G)
         algorithm.run(6)
-        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
@@ -110,15 +110,15 @@ class TestEulerianCycleDirected(unittest.TestCase):
     def test_euler_dfs(self):
         algorithm = EulerianCycleDFS(self.G)
         algorithm.run(0)
-        expected_cycle = [0, 1, 4, 5, 2, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_hierholzer(self):
         algorithm = Hierholzer(self.G)
         algorithm.run(0)
-        expected_cycle = [0, 1, 4, 5, 2, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
@@ -154,15 +154,15 @@ class TestEulerianCycleDirected2(unittest.TestCase):
     def test_euler_dfs(self):
         algorithm = EulerianCycleDFS(self.G)
         algorithm.run(6)
-        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_hierholzer(self):
         algorithm = Hierholzer(self.G)
         algorithm.run(6)
-        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):

@@ -27,15 +27,15 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
     def test_fleury_dfs(self):
         algorithm = FleuryDFS(self.G)
         algorithm.run(0)
-        expected_cycle = [0, 1, 4, 2, 5, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_fleury_bfs(self):
         algorithm = FleuryBFS(self.G)
         algorithm.run()
-        expected_cycle = [0, 1, 4, 2, 5, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
@@ -67,15 +67,15 @@ class TestFleuryDirectedGraph(unittest.TestCase):
     def test_fleury_dfs(self):
         algorithm = FleuryDFS(self.G)
         algorithm.run()
-        expected_cycle = [0, 1, 4, 5, 2, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_fleury_bfs(self):
         algorithm = FleuryBFS(self.G)
         algorithm.run()
-        expected_cycle = [0, 1, 4, 5, 2, 4, 3]
-        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):

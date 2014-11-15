@@ -24,7 +24,7 @@ class EulerianCycleDFS:
         self._visit(source)
         while not self.stack.empty():
             self.eulerian_cycle.append(self.stack.get())
-        self.eulerian_cycle.pop()
+        #self.eulerian_cycle.pop()
         del self.stack
         del self.multigraph_copy
 
@@ -80,7 +80,7 @@ class Hierholzer:
             if self.stack.empty():
                 break
         self.eulerian_cycle.reverse()
-        self.eulerian_cycle.pop()
+        #self.eulerian_cycle.pop()
         del self.stack
         del self.multigraph_copy
 

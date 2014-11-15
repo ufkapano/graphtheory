@@ -30,7 +30,7 @@ class FleuryDFS:
             self.eulerian_cycle.append(edge.target)
             node = edge.target
         del self.multigraph_copy
-        self.eulerian_cycle.pop()
+        #self.eulerian_cycle.pop()
 
     def _is_bridge(self, edge):
         """Bridge test."""
@@ -85,7 +85,7 @@ class FleuryBFS:
             self.eulerian_cycle.append(edge.target)
             node = edge.target
         del self.multigraph_copy
-        self.eulerian_cycle.pop()
+        #self.eulerian_cycle.pop()
 
     def _is_bridge(self, edge):
         """Bridge test."""
