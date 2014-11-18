@@ -26,6 +26,15 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+    def make_cyclic(self, n=1, directed=False):
+        """Create the cyclic graph."""
+        graph = self.cls(n, directed)
+        for node in xrange(n):
+            graph.add_node(node)
+        for i in xrange(n):
+            graph.add_edge(Edge(i, (i+1) % n))
+        return graph
+
     def make_sparse(self, n=1, directed=False, m=0):
         """Create a sparse graph."""
         if m >= n*(n-1)/2:
