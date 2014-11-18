@@ -201,100 +201,13 @@ class TestGraphLadder(unittest.TestCase):
     def tearDown(self): pass
 
 
-class TestGraphFactory(unittest.TestCase):
-
-    def setUp(self):
-        self.N = 10
-
-    def test_complete(self):
-        G = Graph.make_complete(self.N)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), self.N * (self.N-1) / 2)
-        #print
-        #G.show()
-
-    def test_sparse(self):
-        m_edges = 2 * self.N
-        G = Graph.make_sparse(n=self.N, m=m_edges)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), m_edges)
-        #print
-        #G.show()
-
-    def test_tree(self):
-        G = Graph.make_tree(n=self.N)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), self.N-1)
-        #print
-        #G.show()
-
-    def test_connected(self):
-        m_edges = 2 * self.N
-        G = Graph.make_connected(n=self.N, m=m_edges)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), m_edges)
-        #print
-        #G.show()
-
-    def test_random(self):
-        G = Graph.make_random(n=self.N, directed=True, edge_probability=0.1)
-        self.assertTrue(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        #print
-        #G.show()
-
-    def test_grid(self):
-        size = 4
-        G = Graph.make_grid(size)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), size * size)
-        self.assertEqual(G.e(), 2 * size * size)
-        self.assertRaises(ValueError, lambda: Graph.make_grid(2))
-        #print
-        #G.show()
-
-    def test_triangle(self):
-        size = 4
-        G = Graph.make_triangle(size)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), size * size)
-        self.assertEqual(G.e(), 3 * size * size)
-        self.assertRaises(ValueError, lambda: Graph.make_triangle(2))
-        #print
-        #G.show()
-
-    def test_ladder(self):
-        size = 4
-        G = Graph.make_ladder(size)
-        self.assertFalse(G.is_directed())
-        self.assertEqual(G.v(), 2 * size)
-        self.assertEqual(G.e(), 3 * size)
-        self.assertRaises(ValueError, lambda: Graph.make_ladder(2))
-        #print
-        #G.show()
-
-    def test_flow_network(self):
-        G = Graph.make_flow_network(self.N)
-        self.assertTrue(G.is_directed())
-        self.assertEqual(G.v(), self.N)
-        self.assertTrue(G.e() > self.N - 2)
-        #print
-        #G.show()
-
-    def tearDown(self): pass
-
 if __name__ == "__main__":
 
     #unittest.main()
     suite1 = unittest.TestLoader().loadTestsFromTestCase(TestGraphDirected)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(TestGraphUndirected)
     suite3 = unittest.TestLoader().loadTestsFromTestCase(TestGraphLadder)
-    suite4 = unittest.TestLoader().loadTestsFromTestCase(TestGraphFactory)
-    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
+    suite = unittest.TestSuite([suite1, suite2, suite3])
     unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
