@@ -202,7 +202,7 @@ class GraphFactory:
             start = source
             for target in node_list:
                 edge = Edge(start, target, random.randint(1, n))
-                if not (graph.has_edge(edge) or graph.has_edge(Edge(target, start))):
+                if not (graph.has_edge(edge) or graph.has_edge(~edge)):
                     graph.add_edge(edge)
                     used[target] = True
                 if target == sink:
