@@ -38,7 +38,7 @@ class AcyclicGraphDFS:
             if self.color[target] == "WHITE":
                 self.parent[target] = node
                 self._visit(target)
-            elif self.color[target] == "GREY":   # back edge
+            elif self.color[target] == "GREY":   # back edge possible
                 if self.graph.is_directed() or target != self.parent[node]:
                     raise ValueError("a cycle detected")
             else:   # directed graph, cross or forward edge

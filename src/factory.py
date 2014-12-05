@@ -8,7 +8,7 @@ class GraphFactory:
     """The class for graph generators."""
 
     def __init__(self, graph_class):
-        """Get an empty graph (directed or undirected)."""
+        """Get a graph class."""
         self.cls = graph_class
 
     def make_complete(self, n=1, directed=False):
@@ -29,10 +29,12 @@ class GraphFactory:
     def make_cyclic(self, n=1, directed=False):
         """Create the cyclic graph."""
         graph = self.cls(n, directed)
+        weights = range(1, 1 + n)   # different weights
+        random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
         for i in xrange(n):
-            graph.add_edge(Edge(i, (i+1) % n))
+            graph.add_edge(Edge(i, (i+1) % n, weights.pop()))
         return graph
 
     def make_sparse(self, n=1, directed=False, m=0):
@@ -40,7 +42,7 @@ class GraphFactory:
         if m >= n*(n-1)/2:
             raise ValueError("too mamy edges")
         graph = self.cls(n, directed)
-        weights = range(1, 1 + m)
+        weights = range(1, 1 + m)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -56,7 +58,7 @@ class GraphFactory:
     def make_tree(self, n=1, directed=False):
         """Create a tree graph."""
         graph = self.cls(n, directed)
-        weights = range(1, n)
+        weights = range(1, n)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -72,7 +74,7 @@ class GraphFactory:
         if m < n - 1 or m >= n * (n - 1)/2:
             raise ValueError("bad number of edges for the connected graph")
         graph = self.cls(n, directed)
-        weights = range(1, m + 1)
+        weights = range(1, m + 1)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -94,7 +96,7 @@ class GraphFactory:
     def make_random(self, n=1, directed=False, edge_probability=0.5):
         """Create a random graph."""
         graph = self.cls(n, directed)
-        weights = range(1, 1 + n * (n-1)/2)
+        weights = range(1, 1 + n * (n-1)/2)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -124,7 +126,7 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = range(1, 1 + 2 * n)
+        weights = range(1, 1 + 2 * n)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -151,7 +153,7 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = range(1, 1 + 3 * n)
+        weights = range(1, 1 + 3 * n)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -175,7 +177,7 @@ class GraphFactory:
             raise ValueError("size too small")
         n = 2 * size
         graph = self.cls(n, directed=False)
-        weights = range(1, 1 + 3 * size)
+        weights = range(1, 1 + 3 * size)   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -211,7 +213,5 @@ class GraphFactory:
                     start = target
         # all nodes are on paths; new edges can be added
         return graph
-
-
 
 # EOF

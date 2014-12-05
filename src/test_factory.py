@@ -18,24 +18,32 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N * (self.N-1) / 2)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_complete_directed(self):
         G = self.graph_factory.make_complete(n=self.N, directed=True)
         self.assertTrue(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N * (self.N-1) / 2)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_cyclic(self):
         G = self.graph_factory.make_cyclic(n=self.N, directed=False)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_cyclic_directed(self):
         G = self.graph_factory.make_cyclic(n=self.N, directed=True)
         self.assertTrue(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_sparse(self):
         m_edges = 2 * self.N
@@ -43,12 +51,16 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), m_edges)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_tree(self):
         G = self.graph_factory.make_tree(n=self.N)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N-1)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_connected(self):
         m_edges = 2 * self.N
@@ -56,16 +68,22 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), m_edges)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_random(self):
         G = self.graph_factory.make_random(n=self.N, directed=False, edge_probability=0.1)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_random_directed(self):
         G = self.graph_factory.make_random(n=self.N, directed=True, edge_probability=0.1)
         self.assertTrue(G.is_directed())
         self.assertEqual(G.v(), self.N)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
 
     def test_grid(self):
         size = 4
