@@ -105,9 +105,9 @@ class Graph(dict):
     def iterinedges(self, source):
         """Generate the inedges from the graph on demand."""
         if self.is_directed():   # O(V) time
-            for (target, sources_dict) in self.iteritems():
-                if source in sources_dict:
-                    yield Edge(target, source, sources_dict[source])
+            for target in self.iternodes():
+                if source in self[target]:
+                    yield Edge(target, source, self[target][source])
         else:
             for target in self[source]:
                 yield Edge(target, source, self[target][source])
