@@ -55,7 +55,7 @@ class TestBFS(unittest.TestCase):
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
 
-    def test_to_tree(self):
+    def test_to_tree_queue(self):
         algorithm = BFSWithQueue(self.G)
         algorithm.run(1)
         tree = algorithm.to_tree()
@@ -66,8 +66,30 @@ class TestBFS(unittest.TestCase):
             self.assertTrue(self.G.has_edge(edge))
             self.assertEqual(edge.weight, self.G.weight(edge))
 
-    def test_to_dag(self):
+    def test_to_tree_simple(self):
+        algorithm = SimpleBFS(self.G)
+        algorithm.run(1)
+        tree = algorithm.to_tree()
+        self.assertFalse(tree.is_directed())
+        self.assertEqual(tree.v(), self.N)
+        self.assertEqual(tree.e(), self.N-1)
+        for edge in tree.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+            self.assertEqual(edge.weight, self.G.weight(edge))
+
+    def test_to_dag_queue(self):
         algorithm = BFSWithQueue(self.G)
+        algorithm.run(1)
+        dag = algorithm.to_dag()
+        self.assertTrue(dag.is_directed())
+        self.assertEqual(dag.v(), self.N)
+        self.assertEqual(dag.e(), self.N-1)
+        for edge in dag.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+            self.assertEqual(edge.weight, self.G.weight(edge))
+
+    def test_to_dag_simple(self):
+        algorithm = SimpleBFS(self.G)
         algorithm.run(1)
         dag = algorithm.to_dag()
         self.assertTrue(dag.is_directed())

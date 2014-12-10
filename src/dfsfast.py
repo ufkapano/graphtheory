@@ -56,7 +56,9 @@ class DFSWithStack:
         tree = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                tree.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                tree.add_edge(edge)
         return tree
 
     def to_dag(self):
@@ -64,7 +66,9 @@ class DFSWithStack:
         dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                dag.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                dag.add_edge(edge)
         return dag
 
 
@@ -115,7 +119,9 @@ class DFSWithRecursion:
         tree = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                tree.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                tree.add_edge(edge)
         return tree
 
     def to_dag(self):
@@ -123,7 +129,9 @@ class DFSWithRecursion:
         dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                dag.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                dag.add_edge(edge)
         return dag
 
 
@@ -166,7 +174,9 @@ class SimpleDFS:
         tree = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                tree.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                tree.add_edge(edge)
         return tree
 
     def to_dag(self):
@@ -174,7 +184,9 @@ class SimpleDFS:
         dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                dag.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                dag.add_edge(edge)
         return dag
 
 # EOF
