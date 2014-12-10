@@ -4,10 +4,11 @@ import unittest
 from edges import Edge
 from graphs import Graph
 
-# A --> B
-# ^  /  ^
-# | /.  |
-# C --> D
+# A --o B
+# o   / o
+# |  /  |
+# | o   |
+# C --o D
 
 class TestGraphDirected(unittest.TestCase):
 
@@ -148,6 +149,15 @@ class TestGraphUndirected(unittest.TestCase):
             self.assertTrue(self.G.has_node(node))
         for edge in T.iteredges():
             self.assertTrue(self.G.has_edge(edge))
+
+    def test_transpose(self):
+        T = self.G.transpose()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(~edge))
 
     def test_degree(self):
         self.assertEqual(self.G.degree("A"), 2)

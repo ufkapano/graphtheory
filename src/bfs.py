@@ -51,7 +51,9 @@ class BFSWithQueue:
         tree = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                tree.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                tree.add_edge(edge)
         return tree
 
     def to_dag(self):
@@ -59,7 +61,9 @@ class BFSWithQueue:
         dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                dag.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                dag.add_edge(edge)
         return dag
 
 
@@ -103,7 +107,9 @@ class SimpleBFS:
         tree = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                tree.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                tree.add_edge(edge)
         return tree
 
     def to_dag(self):
@@ -111,7 +117,9 @@ class SimpleBFS:
         dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             if self.parent[node] is not None:
-                dag.add_edge(Edge(self.parent[node], node))
+                edge = Edge(self.parent[node], node)
+                edge.weight = self.graph.weight(edge)
+                dag.add_edge(edge)
         return dag
 
 # EOF
