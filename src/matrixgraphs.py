@@ -14,6 +14,8 @@ class Graph:
 
     def __init__(self, n, directed=False):
         """Load up a Graph instance."""
+        if n < 1:
+            raise ValueError("incorrect number of nodes")
         self.n = n
         self.directed = directed  # bool
         self.data = [[0] * self.n for node in xrange(self.n)]
@@ -119,11 +121,12 @@ class Graph:
                     yield Edge(source, target, self.data[source][target])
 
     def show(self):
-        """The graph presentation."""
+        """The graph presentation in O(V**2) time."""
         for source in xrange(self.n):
             print source, ":",
-            for target in self.iteradjacent(source):
-                print "%s(%s)" % (target, self.data[source][target]),
+            for target in xrange(self.n):
+                if self.data[source][target] != 0:
+                    print "%s(%s)" % (target, self.data[source][target]),
             print
 
     def copy(self):
@@ -194,5 +197,38 @@ class Graph:
             self.add_node(node)
         for edge in other.iteredges():
             self.add_edge(edge)
+
+    def save(self, file_name, name="Graph"):
+        afile = open(file_name, "w")
+        afile.write("# NAME=%s\n" % name)
+        afile.write("# DIRECTED=%s\n" % self.directed)
+        afile.write("# V=%s\n" % self.v())
+        afile.write("# E=%s\n" % self.e())
+        for edge in self.iteredges():
+            afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+        afile.close()
+
+    @classmethod
+    def read(cls, file_name):
+        afile = open(file_name, "r")
+        n = 1
+        is_directed = False
+        for line in afile:
+            if line[0] == "#":
+                if "# NAME=" in line:
+                    name = line[7:-1]
+                elif line == "# DIRECTED=False\n":
+                    is_directed = False
+                elif line == "# DIRECTED=True\n":
+                    is_directed = True
+                elif "# V=" in line:
+                    n = int(line[4:-1])
+                else:   # ignore other
+                    graph = cls(n, is_directed)
+            else:
+                L = line.split()
+                graph.add_edge(Edge(int(L[0]), int(L[1]), int(L[2])))
+        afile.close()
+        return graph
 
 # EOF

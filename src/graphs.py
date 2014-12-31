@@ -143,26 +143,26 @@ class Graph(dict):
             new_graph.add_edge(~edge)
         return new_graph
 
-    def degree(self, node):
+    def degree(self, source):
         """Return the degree of the node in the undirected graph."""
         if self.is_directed():
             raise ValueError("the graph is directed")
-        return len(self[node])
+        return len(self[source])
 
-    def outdegree(self, node):
+    def outdegree(self, source):
         """Return the outdegree of the node."""
-        return len(self[node])
+        return len(self[source])
 
-    def indegree(self, node):
+    def indegree(self, source):
         """Return the indegree of the node."""
         if self.is_directed():   # O(V) time
             counter = 0
-            for sources_dict in self.itervalues():
-                if node in sources_dict:
+            for target in self.iternodes():
+                if source in self[target]:
                     counter = counter + 1
             return counter
         else:                   # O(1) time
-            return len(self[node])
+            return len(self[source])
 
     def __eq__(self, other):
         """Test if the graphs are equal."""
@@ -199,5 +199,38 @@ class Graph(dict):
             self.add_node(node)
         for edge in other.iteredges():
             self.add_edge(edge)
+
+    def save(self, file_name, name="Graph"):
+        afile = open(file_name, "w")
+        afile.write("# NAME=%s\n" % name)
+        afile.write("# DIRECTED=%s\n" % self.directed)
+        afile.write("# V=%s\n" % self.v())
+        afile.write("# E=%s\n" % self.e())
+        for edge in self.iteredges():
+            afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+        afile.close()
+
+    @classmethod
+    def read(cls, file_name):
+        afile = open(file_name, "r")
+        n = 1
+        is_directed = False
+        for line in afile:
+            if line[0] == "#":
+                if "# NAME=" in line:
+                    name = line[7:-1]
+                elif line == "# DIRECTED=False\n":
+                    is_directed = False
+                elif line == "# DIRECTED=True\n":
+                    is_directed = True
+                elif "# V=" in line:
+                    n = int(line[4:-1])
+                else:   # ignore other
+                    graph = cls(n, is_directed)
+            else:
+                L = line.split()
+                graph.add_edge(Edge(int(L[0]), int(L[1]), int(L[2])))
+        afile.close()
+        return graph
 
 # EOF
