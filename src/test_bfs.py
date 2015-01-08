@@ -40,6 +40,8 @@ class TestBFS(unittest.TestCase):
         self.assertEqual(algorithm.distance, distance_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
 
     def test_simple_bfs(self):
         self.assertEqual(self.G.v(), self.N)
@@ -53,6 +55,8 @@ class TestBFS(unittest.TestCase):
         self.assertEqual(post_ordering, ordering_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
 
     def test_to_tree_queue(self):
         algorithm = BFSWithQueue(self.G)

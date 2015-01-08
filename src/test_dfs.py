@@ -23,7 +23,7 @@ class TestDFS(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        #print self.G
+        print self.G
         #self.G.show()
 
     def test_dfs_with_stack(self):

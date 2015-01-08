@@ -1,6 +1,0 @@
-# NAME=Graph
-# DIRECTED=False
-# V=3
-# E=2
-1 2 3
-2 3 1

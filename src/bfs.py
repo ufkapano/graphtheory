@@ -46,6 +46,15 @@ class BFSWithQueue:
             if post_action:   # source became BLACK
                 post_action(source)
 
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
+
     def to_tree(self):
         """The spanning tree is built."""
         tree = self.graph.__class__(self.graph.v(), directed=False)
@@ -101,6 +110,15 @@ class SimpleBFS:
                         pre_action(target)
             if post_action:
                 post_action(source)
+
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
 
     def to_tree(self):
         """The spanning tree is built."""
