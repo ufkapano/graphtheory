@@ -91,7 +91,7 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), size * size)
         self.assertEqual(G.e(), 2 * size * size)
-        self.assertRaises(ValueError, lambda: self.graph_factory.make_grid(2))
+        self.assertRaises(ValueError, self.graph_factory.make_grid, 2)
 
     def test_triangle(self):
         size = 4
@@ -99,7 +99,7 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), size * size)
         self.assertEqual(G.e(), 3 * size * size)
-        self.assertRaises(ValueError, lambda: self.graph_factory.make_triangle(2))
+        self.assertRaises(ValueError, self.graph_factory.make_triangle, 2)
 
     def test_ladder(self):
         size = 4
@@ -107,7 +107,7 @@ class TestGraphFactory(unittest.TestCase):
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), 2 * size)
         self.assertEqual(G.e(), 3 * size)
-        self.assertRaises(ValueError, lambda: self.graph_factory.make_ladder(2))
+        self.assertRaises(ValueError, self.graph_factory.make_ladder, 2)
 
     def test_flow_network(self):
         G = self.graph_factory.make_flow_network(self.N)
