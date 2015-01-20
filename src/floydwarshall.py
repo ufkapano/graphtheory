@@ -76,13 +76,10 @@ class FloydWarshallPaths:
 
 
 class FloydWarshallAllGraphs:
-    """The Floyd-Warshall algorithm, nonnegatibe edge weights."""
+    """The Floyd-Warshall algorithm, nonnegative edge weights."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
-        if not graph.is_directed():
-            if any(edge.weight < 0 for edge in graph.iteredges()):
-                raise ValueError("negative edge weight")
         self.graph = graph
         self.distance = dict()
         for source in self.graph.iternodes():

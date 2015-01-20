@@ -4,10 +4,11 @@ import unittest
 from edges import Edge
 from matrixgraphs import Graph
 
-# 0 --> 1
-# ^  /  ^
-# | /.  |
-# 2 --> 3
+# 0 --o 1
+# o   / o
+# |  /  |
+# | o   |
+# 2 --o 3
 
 class TestGraphDirected(unittest.TestCase):
 
