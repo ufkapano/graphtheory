@@ -12,7 +12,7 @@ class Dijkstra:
             raise ValueError("graph is not directed")
         self.graph = graph
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
-        # shortest path tree
+        # Shortest path tree as a dictionary.
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
         self.pq = PriorityQueue()
@@ -24,7 +24,7 @@ class Dijkstra:
         for node in self.graph.iternodes():
             self.pq.put((self.distance[node], node))
         while not self.pq.empty():
-            pri, node = self.pq.get()
+            _, node = self.pq.get()
             if self.in_queue[node]:
                 self.in_queue[node] = False
             else:
@@ -61,7 +61,7 @@ class DijkstraMatrix:
             raise ValueError("graph is not directed")
         self.graph = graph
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
-        # shortest path tree
+        # Shortest path tree as a dictionary.
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self.in_queue = dict((node, True) for node in self.graph.iternodes())
 
@@ -70,7 +70,7 @@ class DijkstraMatrix:
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()):   # |V| times
-            # find min node - O(V) time
+            # Find min node, O(V) time.
             node = min((node for node in self.graph.iternodes() 
                 if self.in_queue[node]), key=self.distance.get)
             self.in_queue[node] = False

@@ -63,7 +63,7 @@ class PrimMatrixMST:
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()):    # |V| times
-            # find min node in the graph - O(V) time
+            # Find min node in the graph, O(V) time.
             node = min((node for node in self.graph.iternodes() 
                 if self.in_queue[node]), key=self.distance.get)
             self.in_queue[node] = False

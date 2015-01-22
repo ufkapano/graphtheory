@@ -13,16 +13,16 @@ class DAGShortestPath:
             raise ValueError("graph is not directed")
         self.graph = graph
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
-        # shortest path tree
+        # Shortest path tree as a dictionary.
         self.parent = dict((node, None) for node in self.graph.iternodes())
 
     def run(self, source):
         """Executable pseudocode."""
         self.source = source
         self.distance[source] = 0
-        ts = TopologicalSortDFS(self.graph)
-        ts.run()
-        for source in ts.sorted_nodes:
+        algorithm = TopologicalSortDFS(self.graph)
+        algorithm.run()
+        for source in algorithm.sorted_nodes:
             for edge in self.graph.iteroutedges(source):
                 self._relax(edge)
 

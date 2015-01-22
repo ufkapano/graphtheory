@@ -9,7 +9,7 @@ class BellmanFord:
             raise ValueError("graph is not directed")
         self.graph = graph
         self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
-        # shortest path tree
+        # Shortest path tree as a dictionary.
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
 
     def run(self, source):
@@ -19,7 +19,7 @@ class BellmanFord:
         for step in xrange(self.graph.v()-1):   # |V|-1 times
             for edge in self.graph.iteredges():   # O(E) time
                 self._relax(edge)
-        # check for negative cycles
+        # Check for negative cycles.
         for edge in self.graph.iteredges():   # O(E) time
             if self.distance[edge.target] > self.distance[edge.source] + edge.weight:
                 raise ValueError("negative cycle")
