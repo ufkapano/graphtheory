@@ -6,10 +6,10 @@
 # http://stackoverflow.com/questions/793761/built-in-python-hash-function
 
 class Edge:
-    """The class defining an edge."""
+    """The class defining a directed edge."""
 
     def __init__(self, source, target, weight=1):
-        """Load up an Edge instance."""
+        """Load up an edge instance."""
         self.source = source
         self.target = target
         self.weight = weight
@@ -17,11 +17,16 @@ class Edge:
     def __repr__(self):
         """Compute the string representation of the edge."""
         if self.weight == 1:
-            return "Edge(%s, %s)" % (
-                repr(self.source), repr(self.target))
+            return "%s(%s, %s)" % (
+                self.__class__.__name__,
+                repr(self.source),
+                repr(self.target))
         else:
-            return "Edge(%s, %s, %s)" % (
-                repr(self.source), repr(self.target), repr(self.weight))
+            return "%s(%s, %s, %s)" % (
+                self.__class__.__name__,
+                repr(self.source),
+                repr(self.target),
+                repr(self.weight))
 
     def __cmp__(self, other):
         """Comparing of edges (the weight first)."""
@@ -48,8 +53,26 @@ class Edge:
 
     def __invert__(self):
         """Return the edge with the opposite direction."""
-        return Edge(self.target, self.source, self.weight)
+        return self.__class__(self.target, self.source, self.weight)
 
     inverted = __invert__
+
+
+class UndirectedEdge(Edge):
+    """The class defining an undirected edge."""
+
+    def __init__(self, source, target, weight=1):
+        """Load up an edge instance."""
+        if source > target:
+            self.source = target
+            self.target = source
+        else:
+            self.source = source
+            self.target = target
+        self.weight = weight
+
+    def __invert__(self):
+        """Return the edge with the opposite direction."""
+        return self
 
 # EOF
