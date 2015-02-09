@@ -42,6 +42,14 @@ class TestTopologicalSorting(unittest.TestCase):
         for edge in self.edges:
             self.assertTrue(idx[edge.source] < idx[edge.target])
 
+    def test_topsort_list(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = TopologicalSortList(self.G)
+        algorithm.run()
+        idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
+        for edge in self.edges:
+            self.assertTrue(idx[edge.source] < idx[edge.target])
+
     def tearDown(self): pass
 
 if __name__ == "__main__":
