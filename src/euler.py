@@ -2,7 +2,6 @@
 
 from Queue import LifoQueue
 from edges import Edge
-from dfs import SimpleDFS
 
 
 class EulerianCycleDFS:
