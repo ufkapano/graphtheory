@@ -5,11 +5,11 @@
 # Nodes can be numbers, string, or any hashable objects.
 # We would like also to compare nodes.
 #
-# {"A":{"B":Edge("A","B",1),"C":Edge("A","C",2)}, 
-# "B":{"C":Edge("B","C",3),"D":Edge("B","D",4)}, 
-# "C":{"D":Edge("C","D",5)}, 
-# "D":{"C":Edge("D","C",6)}, 
-# "E":{"C":Edge("E","C",7)}, 
+# {"A":{"B":1,"C":2}, 
+# "B":{"C":3,"D":4}, 
+# "C":{"D":5}, 
+# "D":{"C":6}, 
+# "E":{"C":7}, 
 # "F":{}}
 
 import random
@@ -63,12 +63,12 @@ class Graph(dict):
         self.add_node(edge.source)
         self.add_node(edge.target)
         if edge.target not in self[edge.source]:
-            self[edge.source][edge.target] = edge
+            self[edge.source][edge.target] = edge.weight
         else:
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
             if edge.source not in self[edge.target]:
-                self[edge.target][edge.source] = edge
+                self[edge.target][edge.source] = edge.weight
             else:
                 raise ValueError("parallel edges are forbidden")
 
@@ -85,7 +85,7 @@ class Graph(dict):
     def weight(self, edge):
         """Return the edge weight or zero."""
         if edge.source in self and edge.target in self[edge.source]:
-            return self[edge.source][edge.target].weight
+            return self[edge.source][edge.target]
         else:
             return 0
 
@@ -100,24 +100,24 @@ class Graph(dict):
     def iteroutedges(self, source):
         """Generate the outedges from the graph on demand."""
         for target in self[source]:
-            yield self[source][target]
+            yield Edge(source, target, self[source][target])
 
     def iterinedges(self, source):
         """Generate the inedges from the graph on demand."""
         if self.is_directed():   # O(V) time
             for target in self.iternodes():
                 if source in self[target]:
-                    yield self[target][source]
+                    yield Edge(target, source, self[target][source])
         else:
             for target in self[source]:
-                yield self[target][source]
+                yield Edge(target, source, self[target][source])
 
     def iteredges(self):
         """Generate the edges from the graph on demand."""
         for source in self.iternodes():
             for target in self[source]:
                 if self.is_directed() or source < target:
-                    yield self[source][target]
+                    yield Edge(source, target, self[source][target])
 
     def show(self):
         """The graph presentation."""
