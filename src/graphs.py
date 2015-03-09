@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# graphs.py
-#
 # Nodes can be numbers, string, or any hashable objects.
 # We would like also to compare nodes.
 #
@@ -68,7 +66,7 @@ class Graph(dict):
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
             if edge.source not in self[edge.target]:
-                self[edge.target][edge.source] = edge
+                self[edge.target][edge.source] = ~edge
             else:
                 raise ValueError("parallel edges are forbidden")
 

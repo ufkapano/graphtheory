@@ -41,6 +41,7 @@ class FleuryDFS:
         self.graph_copy.del_edge(edge)
         algorithm = SimpleDFS(self.graph_copy)
         algorithm.run(edge.source, pre_action=lambda node: list2.append(node))
+        # Restore the edge.
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
 
@@ -96,6 +97,7 @@ class FleuryBFS:
         self.graph_copy.del_edge(edge)
         algorithm = SimpleBFS(self.graph_copy)
         algorithm.run(edge.source, pre_action=lambda node: list2.append(node))
+        # Restore the edge.
         self.graph_copy.add_edge(edge)
         return len(list1) != len(list2)
 

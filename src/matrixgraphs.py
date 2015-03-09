@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# matrixgraphs.py
-#
 # Nodes are int from 0 to n-1.
 
 import copy

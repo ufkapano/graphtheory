@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# graphs.py
-#
 # Nodes can be numbers, string, or any hashable objects.
 # We would like also to compare nodes.
 #

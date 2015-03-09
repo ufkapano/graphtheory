@@ -33,7 +33,7 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
 
     def test_fleury_bfs(self):
         algorithm = FleuryBFS(self.G)
-        algorithm.run()
+        algorithm.run(0)
         expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
@@ -66,14 +66,14 @@ class TestFleuryDirectedGraph(unittest.TestCase):
 
     def test_fleury_dfs(self):
         algorithm = FleuryDFS(self.G)
-        algorithm.run()
+        algorithm.run(0)
         expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_fleury_bfs(self):
         algorithm = FleuryBFS(self.G)
-        algorithm.run()
+        algorithm.run(0)
         expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
@@ -87,6 +87,10 @@ class TestFleuryDirectedGraph(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    unittest.main()
+    #unittest.main()
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestFleuryUndirectedGraph)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestFleuryDirectedGraph)
+    suite = unittest.TestSuite([suite1, suite2])
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF
