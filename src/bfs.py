@@ -13,6 +13,7 @@ class BFSWithQueue:
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
+        self.dag = self.graph.__class__(self.graph.v(), directed=True)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -34,14 +35,15 @@ class BFSWithQueue:
             pre_action(node)
         while not Q.empty():
             source = Q.get()
-            for target in self.graph.iteradjacent(source):
-                if self.color[target] == "WHITE":
-                    self.color[target] = "GREY"
-                    self.distance[target] = self.distance[source] + 1
-                    self.parent[target] = source
-                    Q.put(target)  # target is GREY
+            for edge in self.graph.iteroutedges(source):
+                if self.color[edge.target] == "WHITE":
+                    self.color[edge.target] = "GREY"
+                    self.distance[edge.target] = self.distance[source] + 1
+                    self.parent[edge.target] = source
+                    self.dag.add_edge(edge)
+                    Q.put(edge.target)  # target is GREY
                     if pre_action:   # when Q.put
-                        pre_action(target)
+                        pre_action(edge.target)
             self.color[source] = "BLACK"
             if post_action:   # source became BLACK
                 post_action(source)
@@ -55,26 +57,6 @@ class BFSWithQueue:
         else:
             return self.path(source, self.parent[target]) + [target]
 
-    def to_tree(self):
-        """The spanning tree is built."""
-        tree = self.graph.__class__(self.graph.v(), directed=False)
-        for node in self.graph.iternodes():
-            if self.parent[node] is not None:
-                edge = Edge(self.parent[node], node)
-                edge.weight = self.graph.weight(edge)
-                tree.add_edge(edge)
-        return tree
-
-    def to_dag(self):
-        """Returns the spanning tree as a dag."""
-        dag = self.graph.__class__(self.graph.v(), directed=True)
-        for node in self.graph.iternodes():
-            if self.parent[node] is not None:
-                edge = Edge(self.parent[node], node)
-                edge.weight = self.graph.weight(edge)
-                dag.add_edge(edge)
-        return dag
-
 
 class SimpleBFS:
     """Breadth-First Search."""
@@ -83,6 +65,7 @@ class SimpleBFS:
         """The algorithm initialization."""
         self.graph = graph
         self.parent = dict()
+        self.dag = self.graph.__class__(self.graph.v(), directed=True)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -102,12 +85,13 @@ class SimpleBFS:
             pre_action(node)
         while not Q.empty():
             source = Q.get()
-            for target in self.graph.iteradjacent(source):
-                if target not in self.parent:
-                    self.parent[target] = source   # before Q.put
-                    Q.put(target)
+            for edge in self.graph.iteroutedges(source):
+                if edge.target not in self.parent:
+                    self.parent[edge.target] = source   # before Q.put
+                    self.dag.add_edge(edge)
+                    Q.put(edge.target)
                     if pre_action:   # when Q.put
-                        pre_action(target)
+                        pre_action(edge.target)
             if post_action:
                 post_action(source)
 
@@ -119,25 +103,5 @@ class SimpleBFS:
             raise ValueError("no path to target")
         else:
             return self.path(source, self.parent[target]) + [target]
-
-    def to_tree(self):
-        """The spanning tree is built."""
-        tree = self.graph.__class__(self.graph.v(), directed=False)
-        for node in self.graph.iternodes():
-            if self.parent[node] is not None:
-                edge = Edge(self.parent[node], node)
-                edge.weight = self.graph.weight(edge)
-                tree.add_edge(edge)
-        return tree
-
-    def to_dag(self):
-        """Returns the spanning tree as a dag."""
-        dag = self.graph.__class__(self.graph.v(), directed=True)
-        for node in self.graph.iternodes():
-            if self.parent[node] is not None:
-                edge = Edge(self.parent[node], node)
-                edge.weight = self.graph.weight(edge)
-                dag.add_edge(edge)
-        return dag
 
 # EOF

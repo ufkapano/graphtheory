@@ -43,6 +43,13 @@ class TestBFS(unittest.TestCase):
         self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
         self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
         self.assertRaises(ValueError, algorithm.path, 4, 7)
+        #algorithm.dag.show()
+        self.assertEqual(algorithm.dag.v(), self.N)
+        self.assertEqual(algorithm.dag.e(), self.N-1)
+        self.assertTrue(algorithm.dag.is_directed())
+        for edge in algorithm.dag.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+            self.assertEqual(edge.weight, self.G.weight(edge))
 
     def test_simple_bfs(self):
         self.assertEqual(self.G.v(), self.N)
@@ -59,48 +66,11 @@ class TestBFS(unittest.TestCase):
         self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
         self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
         self.assertRaises(ValueError, algorithm.path, 4, 7)
-
-    def test_to_tree_queue(self):
-        algorithm = BFSWithQueue(self.G)
-        algorithm.run(1)
-        tree = algorithm.to_tree()
-        self.assertFalse(tree.is_directed())
-        self.assertEqual(tree.v(), self.N)
-        self.assertEqual(tree.e(), self.N-1)
-        for edge in tree.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_tree_simple(self):
-        algorithm = SimpleBFS(self.G)
-        algorithm.run(1)
-        tree = algorithm.to_tree()
-        self.assertFalse(tree.is_directed())
-        self.assertEqual(tree.v(), self.N)
-        self.assertEqual(tree.e(), self.N-1)
-        for edge in tree.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_dag_queue(self):
-        algorithm = BFSWithQueue(self.G)
-        algorithm.run(1)
-        dag = algorithm.to_dag()
-        self.assertTrue(dag.is_directed())
-        self.assertEqual(dag.v(), self.N)
-        self.assertEqual(dag.e(), self.N-1)
-        for edge in dag.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_dag_simple(self):
-        algorithm = SimpleBFS(self.G)
-        algorithm.run(1)
-        dag = algorithm.to_dag()
-        self.assertTrue(dag.is_directed())
-        self.assertEqual(dag.v(), self.N)
-        self.assertEqual(dag.e(), self.N-1)
-        for edge in dag.iteredges():
+        #algorithm.dag.show()
+        self.assertEqual(algorithm.dag.v(), self.N)
+        self.assertEqual(algorithm.dag.e(), self.N-1)
+        self.assertTrue(algorithm.dag.is_directed())
+        for edge in algorithm.dag.iteredges():
             self.assertTrue(self.G.has_edge(edge))
             self.assertEqual(edge.weight, self.G.weight(edge))
 

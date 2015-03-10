@@ -43,6 +43,13 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(algorithm.ff, ff_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 6, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        #algorithm.dag.show()
+        self.assertEqual(algorithm.dag.v(), self.N)
+        self.assertEqual(algorithm.dag.e(), self.N-1)
+        self.assertTrue(algorithm.dag.is_directed())
+        for edge in algorithm.dag.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+            self.assertEqual(edge.weight, self.G.weight(edge))
 
     def test_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
@@ -61,6 +68,13 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(algorithm.ff, ff_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        #algorithm.dag.show()
+        self.assertEqual(algorithm.dag.v(), self.N)
+        self.assertEqual(algorithm.dag.e(), self.N-1)
+        self.assertTrue(algorithm.dag.is_directed())
+        for edge in algorithm.dag.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+            self.assertEqual(edge.weight, self.G.weight(edge))
 
     def test_simple_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
@@ -75,70 +89,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(post_ordering, post_ordering_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
-
-    def test_to_tree_stack(self):
-        algorithm = DFSWithStack(self.G)
-        algorithm.run(1)
-        tree = algorithm.to_tree()
-        self.assertFalse(tree.is_directed())
-        self.assertEqual(tree.v(), self.N)
-        self.assertEqual(tree.e(), self.N-1)
-        for edge in tree.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_tree_recursion(self):
-        algorithm = DFSWithRecursion(self.G)
-        algorithm.run(1)
-        tree = algorithm.to_tree()
-        self.assertFalse(tree.is_directed())
-        self.assertEqual(tree.v(), self.N)
-        self.assertEqual(tree.e(), self.N-1)
-        for edge in tree.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_tree_simple(self):
-        algorithm = SimpleDFS(self.G)
-        algorithm.run(1)
-        tree = algorithm.to_tree()
-        self.assertFalse(tree.is_directed())
-        self.assertEqual(tree.v(), self.N)
-        self.assertEqual(tree.e(), self.N-1)
-        for edge in tree.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_dag_stack(self):
-        algorithm = DFSWithStack(self.G)
-        algorithm.run(1)
-        dag = algorithm.to_dag()
-        self.assertTrue(dag.is_directed())
-        self.assertEqual(dag.v(), self.N)
-        self.assertEqual(dag.e(), self.N-1)
-        for edge in dag.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_dag_recursion(self):
-        algorithm = DFSWithRecursion(self.G)
-        algorithm.run(1)
-        dag = algorithm.to_dag()
-        self.assertTrue(dag.is_directed())
-        self.assertEqual(dag.v(), self.N)
-        self.assertEqual(dag.e(), self.N-1)
-        for edge in dag.iteredges():
-            self.assertTrue(self.G.has_edge(edge))
-            self.assertEqual(edge.weight, self.G.weight(edge))
-
-    def test_to_dag_simple(self):
-        algorithm = SimpleDFS(self.G)
-        algorithm.run(1)
-        dag = algorithm.to_dag()
-        self.assertTrue(dag.is_directed())
-        self.assertEqual(dag.v(), self.N)
-        self.assertEqual(dag.e(), self.N-1)
-        for edge in dag.iteredges():
+        #algorithm.dag.show()
+        self.assertEqual(algorithm.dag.v(), self.N)
+        self.assertEqual(algorithm.dag.e(), self.N-1)
+        self.assertTrue(algorithm.dag.is_directed())
+        for edge in algorithm.dag.iteredges():
             self.assertTrue(self.G.has_edge(edge))
             self.assertEqual(edge.weight, self.G.weight(edge))
 
