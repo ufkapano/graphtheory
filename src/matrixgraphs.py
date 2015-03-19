@@ -123,7 +123,9 @@ class Graph:
         for source in xrange(self.n):
             print source, ":",
             for target in xrange(self.n):
-                if self.data[source][target] != 0:
+                if self.data[source][target] == 1:
+                    print target,
+                elif self.data[source][target] != 0:
                     print "%s(%s)" % (target, self.data[source][target]),
             print
 
@@ -203,7 +205,10 @@ class Graph:
         afile.write("# V=%s\n" % self.v())
         afile.write("# E=%s\n" % self.e())
         for edge in self.iteredges():
-            afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+            if edge.weight == 1:
+                afile.write("%s %s\n" % (edge.source, edge.target))
+            else:
+                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
         afile.close()
 
     @classmethod
@@ -224,8 +229,9 @@ class Graph:
                 else:   # ignore other
                     graph = cls(n, is_directed)
             else:
-                L = line.split()
-                graph.add_edge(Edge(int(L[0]), int(L[1]), int(L[2])))
+                alist = [int(x) for x in line.split()]
+                #alist = [eval(x) for x in line.split()]
+                graph.add_edge(Edge(*alist))
         afile.close()
         return graph
 
