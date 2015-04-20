@@ -21,7 +21,7 @@ class KruskalMST:
         for edge in self.graph.iteredges():
             self.pq.put((edge.weight, edge))
         while not self.pq.empty():
-            weight, edge = self.pq.get()
+            _, edge = self.pq.get()
             if self.uf.find(edge.source) != self.uf.find(edge.target):
                 self.uf.union(edge.source, edge.target)
                 self.mst.add_edge(edge)

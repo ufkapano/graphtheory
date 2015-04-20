@@ -52,4 +52,27 @@ class MatchingFordFulkerson:
                     self.pair[target] = source
         self.cardinality = algorithm.max_flow
 
+
+class MaximalMatching:
+    """Find a maximal cardinality matching using a greedy method."""
+    # Based on NetworkX library:
+    # http://networkx.github.io/documentation/networkx-1.9.1/
+    #_modules/networkx/algorithms/matching.html#maximal_matching
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.pair = dict((node, None) for node in self.graph.iternodes())
+        self.cardinality = 0
+
+    def run(self):
+        """Executable pseudocode."""
+        for edge in self.graph.iteredges():   # O(E) time
+            if (self.pair[edge.source] is None and 
+                self.pair[edge.target] is None):
+                    self.pair[edge.source] = edge.target
+                    self.pair[edge.target] = edge.source
+                    self.cardinality += 1
+
+
 # EOF

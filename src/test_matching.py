@@ -3,13 +3,17 @@
 import unittest
 from edges import Edge
 from graphs import Graph
-from matching import MatchingFordFulkerson
+from matching import MatchingFordFulkerson, MaximalMatching
 
 
 class TestMatching(unittest.TestCase):
 
     def setUp(self):
         # Wilson, ex. 25.1, bipartite graph
+        # 0 : 4 5 6
+        # 1 : 3 5
+        # 2 : 3 4
+        # ...
         self.N = 7
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
@@ -19,6 +23,7 @@ class TestMatching(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_matching_fordfulkerson(self):
         algorithm = MatchingFordFulkerson(self.G)
@@ -32,6 +37,15 @@ class TestMatching(unittest.TestCase):
         expected_pair5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         self.assertEqual(algorithm.pair, expected_pair5)
+
+    def test_maximal_matching(self):
+        algorithm = MaximalMatching(self.G)
+        algorithm.run()
+        # 5 solutions
+        expected_cardinality = 2   # max 3
+        expected_pair = {0: 4, 4: 0, 1: 3, 3: 1, 2: None, 5: None, 6: None}
+        self.assertEqual(algorithm.cardinality, expected_cardinality)
+        self.assertEqual(algorithm.pair, expected_pair)
 
     def tearDown(self): pass
 

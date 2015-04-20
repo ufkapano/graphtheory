@@ -24,7 +24,7 @@ class PrimMST:
         for node in self.graph.iternodes():
             self.pq.put((self.distance[node], node))
         while not self.pq.empty():
-            weight, node = self.pq.get()
+            _, node = self.pq.get()
             if self.in_queue[node]:
                 self.in_queue[node] = False
             else:
