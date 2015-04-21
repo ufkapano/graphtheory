@@ -55,9 +55,9 @@ class MatchingFordFulkerson:
 
 class MaximalMatching:
     """Find a maximal cardinality matching using a greedy method."""
-    # Based on NetworkX library:
+    # Based on ideas from NetworkX library:
     # http://networkx.github.io/documentation/networkx-1.9.1/
-    #_modules/networkx/algorithms/matching.html#maximal_matching
+    # _modules/networkx/algorithms/matching.html#maximal_matching
 
     def __init__(self, graph):
         """The algorithm initialization."""

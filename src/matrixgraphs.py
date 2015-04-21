@@ -199,6 +199,7 @@ class Graph:
             self.add_edge(edge)
 
     def save(self, file_name, name="Graph"):
+        """Export the graph to the adjacency list format with comments."""
         afile = open(file_name, "w")
         afile.write("# NAME=%s\n" % name)
         afile.write("# DIRECTED=%s\n" % self.directed)
@@ -212,7 +213,8 @@ class Graph:
         afile.close()
 
     @classmethod
-    def read(cls, file_name):
+    def load(cls, file_name):
+        """Import the graph from the adjacency list format with comments."""
         afile = open(file_name, "r")
         n = 1
         is_directed = False
@@ -229,10 +231,36 @@ class Graph:
                 else:   # ignore other
                     graph = cls(n, is_directed)
             else:
-                alist = [int(x) for x in line.split()]
-                #alist = [eval(x) for x in line.split()]
+                #alist = [int(x) for x in line.split()]
+                alist = [eval(x) for x in line.split()]
                 graph.add_edge(Edge(*alist))
         afile.close()
         return graph
+
+    def save_lgl(self, file_name="graph.lgl"):
+        """Export the graph to the adjacency list format (LGL)."""
+        if self.is_directed():
+            raise ValueError("the graph is directed")
+        afile = open(file_name, "w")
+        for edge in self.iteredges():
+            if edge.weight == 1:
+                afile.write("%s %s\n" % (edge.source, edge.target))
+            else:
+                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+        afile.close()
+
+    def save_ncol(self, file_name="graph.ncol"):
+        """Export the graph to the labelled edge list format (NCOL)."""
+        if self.is_directed():
+            raise ValueError("the graph is directed")
+        afile = open(file_name, "w")
+        for node in self.iternodes():
+            afile.write("# %s\n" % str(node))
+            for edge in self.iteroutedges(node):
+                if edge.source < edge.target and edge.weight == 1:
+                    afile.write("%s\n" % str(edge.target))
+                elif edge.source < edge.target:
+                    afile.write("%s %s\n" % (edge.target, edge.weight))
+        afile.close()
 
 # EOF
