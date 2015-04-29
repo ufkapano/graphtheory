@@ -13,17 +13,16 @@ class EulerianCycleDFS:
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
+        self.graph_copy = self.graph.copy()
+        self.stack = LifoQueue()
 
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
-        self.graph_copy = self.graph.copy()
-        self.stack = LifoQueue()
         self._visit(source)
         while not self.stack.empty():
             self.eulerian_cycle.append(self.stack.get())
-        #self.eulerian_cycle.pop()
         del self.stack
         del self.graph_copy
 

@@ -13,6 +13,7 @@ class FleuryDFS:
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
+        self.graph_copy = self.graph.copy()
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -20,7 +21,6 @@ class FleuryDFS:
             source = self.graph.iternodes().next()
         node = source
         self.eulerian_cycle.append(node)
-        self.graph_copy = self.graph.copy()
         while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
@@ -69,6 +69,7 @@ class FleuryBFS:
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
+        self.graph_copy = self.graph.copy()
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -76,7 +77,6 @@ class FleuryBFS:
             source = self.graph.iternodes().next()
         node = source
         self.eulerian_cycle.append(node)
-        self.graph_copy = self.graph.copy()
         while self.graph_copy.outdegree(node) > 0:
             for edge in list(self.graph_copy.iteroutedges(node)):
                 # graph_copy is changing!
@@ -86,7 +86,6 @@ class FleuryBFS:
             self.eulerian_cycle.append(edge.target)
             node = edge.target
         del self.graph_copy
-        #self.eulerian_cycle.pop()
 
     def _is_bridge(self, edge):
         """Bridge test."""

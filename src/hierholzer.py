@@ -13,13 +13,13 @@ class Hierholzer:
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
+        self.graph_copy = self.graph.copy()
+        self.stack = LifoQueue()
 
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
-        self.graph_copy = self.graph.copy()
-        self.stack = LifoQueue()
         self.eulerian_cycle.append(source)
         while True:
             if self.graph_copy.outdegree(source) > 0:
@@ -33,7 +33,6 @@ class Hierholzer:
             if self.stack.empty():
                 break
         self.eulerian_cycle.reverse()
-        #self.eulerian_cycle.pop()
         del self.stack
         del self.graph_copy
 
