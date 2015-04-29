@@ -4,7 +4,7 @@ from Queue import LifoQueue
 from edges import Edge
 
 
-class EulerianCycleDFS:
+class Hierholzer:
     """Finding an Eulerian cycle in a multigraph."""
 
     def __init__(self, graph):
@@ -20,20 +20,22 @@ class EulerianCycleDFS:
             source = self.graph.iternodes().next()
         self.graph_copy = self.graph.copy()
         self.stack = LifoQueue()
-        self._visit(source)
-        while not self.stack.empty():
-            self.eulerian_cycle.append(self.stack.get())
+        self.eulerian_cycle.append(source)
+        while True:
+            if self.graph_copy.outdegree(source) > 0:
+                edge = self.graph_copy.iteroutedges(source).next()
+                self.stack.put(source)
+                self.graph_copy.del_edge(edge)
+                source = edge.target
+            else:
+                source = self.stack.get()
+                self.eulerian_cycle.append(source)
+            if self.stack.empty():
+                break
+        self.eulerian_cycle.reverse()
         #self.eulerian_cycle.pop()
         del self.stack
         del self.graph_copy
-
-    def _visit(self, source):
-        """Visiting node."""
-        while self.graph_copy.outdegree(source) > 0:
-            edge = self.graph_copy.iteroutedges(source).next()
-            self.graph_copy.del_edge(edge)
-            self._visit(edge.target)
-        self.stack.put(source)
 
     def _is_eulerian(self):
         """Test if the graph is eulerian."""
