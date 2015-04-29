@@ -85,29 +85,29 @@ class TestGraphFactory(unittest.TestCase):
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
 
-    def test_grid(self):
+    def test_grid_periodic(self):
         size = 4
-        G = self.graph_factory.make_grid(size)
+        G = self.graph_factory.make_grid_periodic(size)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), size * size)
         self.assertEqual(G.e(), 2 * size * size)
-        self.assertRaises(ValueError, self.graph_factory.make_grid, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_grid_periodic, 2)
 
-    def test_triangle(self):
+    def test_triangle_periodic(self):
         size = 4
-        G = self.graph_factory.make_triangle(size)
+        G = self.graph_factory.make_triangle_periodic(size)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), size * size)
         self.assertEqual(G.e(), 3 * size * size)
-        self.assertRaises(ValueError, self.graph_factory.make_triangle, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_triangle_periodic, 2)
 
-    def test_ladder(self):
+    def test_ladder_periodic(self):
         size = 4
-        G = self.graph_factory.make_ladder(size)
+        G = self.graph_factory.make_ladder_periodic(size)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), 2 * size)
         self.assertEqual(G.e(), 3 * size)
-        self.assertRaises(ValueError, self.graph_factory.make_ladder, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_ladder_periodic, 2)
 
     def test_flow_network(self):
         G = self.graph_factory.make_flow_network(self.N)

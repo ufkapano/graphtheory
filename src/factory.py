@@ -118,7 +118,7 @@ class GraphFactory:
 # --0-----1-----2---
 #   |     |     |
 
-    def make_grid(self, size=3):
+    def make_grid_periodic(self, size=3):
         """Create the grid graph with periodic boundary conditions.
         |V| = size * size, |E| = 2 * |V|.
         """
@@ -145,7 +145,7 @@ class GraphFactory:
 # --0-----1-----2---
 # / |  /  |  /  |
 
-    def make_triangle(self, size=3):
+    def make_triangle_periodic(self, size=3):
         """Create the triangle network with periodic boundary conditions.
         |V| = size * size, |E| = 3 * |V|.
         """
@@ -169,7 +169,7 @@ class GraphFactory:
 #   |  |  |         |
 # --0--2--4--...--(2s)---
 
-    def make_ladder(self, size=3):
+    def make_ladder_periodic(self, size=3):
         """Create the ladder with periodic boundary conditions.
         |V| = 2 * size, |E| = 3 * size.
         """
