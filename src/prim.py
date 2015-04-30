@@ -30,8 +30,7 @@ class PrimMST:
             else:
                 continue
             for edge in self.graph.iteroutedges(node):
-                if (self.in_queue[edge.target] 
-                and edge.weight < self.distance[edge.target]):
+                if self.in_queue[edge.target] and edge.weight < self.distance[edge.target]:
                     self.distance[edge.target] = edge.weight
                     self.parent[edge.target] = edge.source
                     # DECREASE-KEY
@@ -68,8 +67,7 @@ class PrimMatrixMST:
                 if self.in_queue[node]), key=self.distance.get)
             self.in_queue[node] = False
             for edge in self.graph.iteroutedges(node):  # O(V) time
-                if (self.in_queue[edge.target] 
-                and edge.weight < self.distance[edge.target]):
+                if self.in_queue[edge.target] and edge.weight < self.distance[edge.target]:
                     self.distance[edge.target] = edge.weight
                     self.parent[edge.target] = edge.source
 
