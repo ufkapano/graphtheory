@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from Queue import LifoQueue
-from edges import Edge
 
 
 class EulerianCycleDFS:

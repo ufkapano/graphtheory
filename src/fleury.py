@@ -30,7 +30,6 @@ class FleuryDFS:
             self.eulerian_cycle.append(edge.target)
             node = edge.target
         del self.graph_copy
-        #self.eulerian_cycle.pop()
 
     def _is_bridge(self, edge):
         """Bridge test."""

@@ -29,6 +29,7 @@ class HamiltonCycleDFS:
             # Hamiltonian path is possible.
             for edge in self.graph.iteroutedges(self.stack[-1]):
                 if edge.target == self.source:
+                    self.stack.append(self.source)
                     self.hamilton_cycle = list(self.stack)
         else:
             self.used.add(node)
