@@ -3,7 +3,7 @@
 import unittest
 from edges import Edge
 from graphs import Graph
-from hamilton import HamiltonCycleDFS
+from hamilton import *
 
 # 0 --------- 5
 # | \       / |
@@ -25,15 +25,19 @@ class TestHamiltonCycle(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_graph(self):
-        self.assertEqual(self.G.v(), self.N)
-        self.assertEqual(self.G.e(), len(self.edges))
-
     def test_hamilton(self):
         algorithm = HamiltonCycleDFS(self.G)
         algorithm.run(0)
         # 5 solutions
-        expected_cycle = self.nodes
+        expected_cycle = [0, 1, 2, 3, 4, 5]
+        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+
+    def test_hamilton_with_edges(self):
+        algorithm = HamiltonCycleDFSWithEdges(self.G)
+        algorithm.run(0)
+        # 5 solutions
+        expected_cycle = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+            Edge(3, 4), Edge(4, 5), Edge(5, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
 
     def tearDown(self): pass
@@ -60,15 +64,17 @@ class TestHamiltonCycleDirected(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_graph(self):
-        self.assertEqual(self.G.v(), self.N)
-        self.assertEqual(self.G.e(), len(self.edges))
-
     def test_hamilton(self):
         algorithm = HamiltonCycleDFS(self.G)
         algorithm.run(0)
-        # 5 solutions
         expected_cycle = [0, 1, 4, 5, 3, 2]
+        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+
+    def test_hamilton_with_edges(self):
+        algorithm = HamiltonCycleDFSWithEdges(self.G)
+        algorithm.run(0)
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+            Edge(5, 3), Edge(3, 2), Edge(2, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
 
     def tearDown(self): pass
