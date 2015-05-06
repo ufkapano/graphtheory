@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
+import unittest
 from edges import Edge
 from graphs import Graph
-from hamilton import HamiltonCycle
-import unittest
+from hamilton import HamiltonCycleDFS
 
 # 0 --------- 5
 # | \       / |
@@ -30,7 +30,7 @@ class TestHamiltonCycle(unittest.TestCase):
         self.assertEqual(self.G.e(), len(self.edges))
 
     def test_hamilton(self):
-        algorithm = HamiltonCycle(self.G)
+        algorithm = HamiltonCycleDFS(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = self.nodes
@@ -65,7 +65,7 @@ class TestHamiltonCycleDirected(unittest.TestCase):
         self.assertEqual(self.G.e(), len(self.edges))
 
     def test_hamilton(self):
-        algorithm = HamiltonCycle(self.G)
+        algorithm = HamiltonCycleDFS(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = [0, 1, 4, 5, 3, 2]
