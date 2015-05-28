@@ -5,7 +5,7 @@ from topsort import TopologicalSortDFS
 
 
 class DAGShortestPath:
-    """The shortest path problem for DAG."""
+    """The shortest path problem for a dag."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

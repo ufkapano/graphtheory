@@ -31,7 +31,7 @@ class TestHopcroftKarp(unittest.TestCase):
         expected_pair4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
         expected_pair5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.pair, expected_pair2)
+        self.assertEqual(algorithm.pair, expected_pair1)
 
     def tearDown(self): pass
 
