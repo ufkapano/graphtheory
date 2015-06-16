@@ -40,6 +40,16 @@ class TestHamiltonCycle(unittest.TestCase):
             Edge(3, 4), Edge(4, 5), Edge(5, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
 
+    def test_hamilton_with_cycle_graph(self):
+        algorithm = HamiltonCycleDFSWithGraph(self.G)
+        algorithm.run(0)
+        # 5 solutions
+        expected_cycle = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+            Edge(3, 4), Edge(4, 5), Edge(5, 0)]
+        #print "undirected", list(algorithm.hamilton_cycle.iteredges())
+        for edge in expected_cycle:
+            self.assertTrue(algorithm.hamilton_cycle.has_edge(edge))
+
     def tearDown(self): pass
 
 # 0 ----------o 5
@@ -76,6 +86,16 @@ class TestHamiltonCycleDirected(unittest.TestCase):
         expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 3), Edge(3, 2), Edge(2, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+
+    def test_hamilton_with_cycle_graph(self):
+        algorithm = HamiltonCycleDFSWithGraph(self.G)
+        algorithm.run(0)
+        # 5 solutions
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+            Edge(5, 3), Edge(3, 2), Edge(2, 0)]
+        #print "directed", list(algorithm.hamilton_cycle.iteredges())
+        for edge in expected_cycle:
+            self.assertTrue(algorithm.hamilton_cycle.has_edge(edge))
 
     def tearDown(self): pass
 
