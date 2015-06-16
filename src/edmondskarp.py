@@ -13,7 +13,7 @@ class EdmondsKarp:
             raise ValueError("graph is not directed")
         self.graph = graph
         # residual network
-        self.residual = graph.__class__(graph.v(), directed=True)
+        self.residual = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # initial capacities for the residual network
@@ -79,7 +79,7 @@ class EdmondsKarpSparse:
             raise ValueError("graph is not directed")
         self.graph = graph
         # residual network
-        self.residual = graph.__class__(graph.v(), directed=True)
+        self.residual = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # initial capacities for the residual network

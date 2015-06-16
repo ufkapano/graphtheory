@@ -86,7 +86,7 @@ class PrimTrivialMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.mst = graph.__class__(graph.v())   # MST as a graph
+        self.mst = self.graph.__class__(self.graph.v())   # MST as a graph
         self.in_mst = dict((node, False) for node in self.graph.iternodes())
 
     def run(self, source=None):

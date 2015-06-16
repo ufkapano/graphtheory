@@ -10,7 +10,7 @@ class KruskalMST:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.mst = graph.__class__(graph.v())   # MST as a graph
+        self.mst = self.graph.__class__(self.graph.v())   # MST as a graph
         self.uf = UnionFind()
         self.pq = PriorityQueue()
 

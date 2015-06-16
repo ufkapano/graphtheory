@@ -11,7 +11,7 @@ class HamiltonCycleDFS:
         self.graph = graph
         self.hamilton_cycle = list()
         self.stack = list()
-        self.used = set()
+        self.used = dict((node, False) for node in self.graph.iternodes())
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -24,20 +24,21 @@ class HamiltonCycleDFS:
         """Modified DFS from the node."""
         if self.hamilton_cycle:
             return
-        self.stack.append(node)
+        self.stack.append(node)   # at the beginning of _hamilton_dfs
         if len(self.stack) == self.graph.v():
             # Hamiltonian path is possible.
-            for edge in self.graph.iteroutedges(self.stack[-1]):
+            for edge in self.graph.iteroutedges(node):
                 if edge.target == self.source:
                     self.stack.append(self.source)
                     self.hamilton_cycle = list(self.stack)
+                    self.stack.pop()
         else:
-            self.used.add(node)
+            self.used[node] = True
             for edge in self.graph.iteroutedges(node):
-                if edge.target not in self.used:
+                if not self.used[edge.target]:
                     self._hamilton_dfs(edge.target)
-            self.used.discard(node)
-        self.stack.pop()
+            self.used[node] = False
+        self.stack.pop()   # at the end of _hamilton_dfs
 
 
 class HamiltonCycleDFSWithEdges:
@@ -48,7 +49,7 @@ class HamiltonCycleDFSWithEdges:
         self.graph = graph
         self.hamilton_cycle = list()
         self.stack = list()
-        self.used = set()
+        self.used = dict((node, False) for node in self.graph.iternodes())
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -63,17 +64,18 @@ class HamiltonCycleDFSWithEdges:
             return
         if len(self.stack) == self.graph.v()-1:
             # Hamiltonian path is possible.
-            for edge in self.graph.iteroutedges(self.stack[-1].target):
+            for edge in self.graph.iteroutedges(node):
                 if edge.target == self.source:
                     self.stack.append(edge)
                     self.hamilton_cycle = list(self.stack)
+                    self.stack.pop()
         else:
-            self.used.add(node)
+            self.used[node] = True
             for edge in self.graph.iteroutedges(node):
-                if edge.target not in self.used:
+                if not self.used[edge.target]:
                     self.stack.append(edge)
                     self._hamilton_dfs(edge.target)
-            self.used.discard(node)
-        self.stack.pop()
+                    self.stack.pop()
+            self.used[node] = False
 
 # EOF
