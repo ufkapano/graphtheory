@@ -14,6 +14,9 @@ class EulerianCycleDFS:
         self.eulerian_cycle = list()
         self.graph_copy = self.graph.copy()
         self.stack = LifoQueue()
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""

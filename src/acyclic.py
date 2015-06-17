@@ -16,7 +16,6 @@ class AcyclicGraphDFS:
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
-        # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))

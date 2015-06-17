@@ -66,7 +66,6 @@ class DFSWithRecursion:
         self.dd = dict()
         self.ff = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
-        # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
@@ -107,7 +106,6 @@ class SimpleDFS:
         self.graph = graph
         self.parent = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
-        # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))

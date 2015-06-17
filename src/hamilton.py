@@ -13,6 +13,9 @@ class HamiltonCycleDFS:
         self.hamilton_cycle = list()
         self.stack = list()
         self.used = dict((node, False) for node in self.graph.iternodes())
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -52,6 +55,9 @@ class HamiltonCycleDFSWithEdges:
         self.hamilton_cycle = list()
         self.stack = list()
         self.used = dict((node, False) for node in self.graph.iternodes())
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -91,6 +97,9 @@ class HamiltonCycleDFSWithGraph:
         self.hamilton_cycle = None
         self.path = self.graph.__class__(self.graph.v(), self.graph.is_directed())
         self.used = dict((node, False) for node in self.graph.iternodes())
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""

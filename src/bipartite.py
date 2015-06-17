@@ -50,7 +50,6 @@ class BipartiteGraphDFS:
         self.graph = graph
         # colors are 0 and 1
         self.color = dict(((node, None) for node in self.graph.iternodes()))
-        # ciekawe ustawianie rekurencji
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
