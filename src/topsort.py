@@ -1,11 +1,5 @@
 #!/usr/bin/python
-#
-# topsort.py
-#
-# Topological sorting of nodes from a dag.
 
-from edges import Edge
-from graphs import Graph
 from Queue import Queue
 #from dfs import DFSWithRecursion as SimpleDFS
 from dfs import SimpleDFS

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# Nodes can be numbers, string, or any hashable objects.
-# We would like also to compare nodes.
+# Nodes can be numbers, strings, or any hashable objects.
+# We would like to compare nodes.
 #
 # {"A":{"B":1,"C":2}, 
 # "B":{"C":3,"D":4}, 

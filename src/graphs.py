@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# Nodes can be numbers, string, or any hashable objects.
-# We would like also to compare nodes.
+# Nodes can be numbers, strings, or any hashable objects.
+# We would like to compare nodes.
 #
 # {"A":{"B":Edge("A","B",1),"C":Edge("A","C",2)}, 
 # "B":{"C":Edge("B","C",3),"D":Edge("B","D",4)}, 
