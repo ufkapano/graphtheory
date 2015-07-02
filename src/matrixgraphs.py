@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #
-# Nodes are int from 0 to n-1.
+# Graph class with list-of-list structure (the adjacency matrix
+# representation). Nodes are int from 0 to n-1.
 
 import copy
 import random

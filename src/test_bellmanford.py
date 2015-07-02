@@ -6,11 +6,11 @@ from graphs import Graph
 from bellmanford import BellmanFord
 
 #    1
-# 0 --> 1
+# 0 --o 1
 # |   / |
 # |5 /1 |3
-# |./.  |.
-# 2 --> 3
+# o o   o
+# 2 --o 3
 #    1
 
 class TestBellmanFord(unittest.TestCase):
