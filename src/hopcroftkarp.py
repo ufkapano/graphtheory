@@ -23,13 +23,13 @@ class HopcroftKarp:
         self.cardinality = 0
         algorithm = Bipartite(self.graph)
         algorithm.run()
-        self.v1 = set()
-        self.v2 = set()
+        self.v1 = list()   # or set()
+        self.v2 = list()   # or set()
         for node in self.graph.iternodes():
             if algorithm.color[node] == 1:
-                self.v1.add(node)
+                self.v1.append(node)   # or add()
             else:
-                self.v2.add(node)
+                self.v2.append(node)   # or add()
         self.Q = Queue()   # for nodes from self.v1
 
     def run(self):
@@ -52,20 +52,20 @@ class HopcroftKarp:
         while not self.Q.empty():
             node = self.Q.get()
             if self.distance[node] < self.distance[None]:
-                for target in self.graph.iteradjacent(node):
-                    if self.distance[self.pair[target]] == float("inf"):
-                        self.distance[self.pair[target]] = self.distance[node] + 1
-                        self.Q.put(self.pair[target])
+                for edge in self.graph.iteroutedges(node):
+                    if self.distance[self.pair[edge.target]] == float("inf"):
+                        self.distance[self.pair[edge.target]] = self.distance[node] + 1
+                        self.Q.put(self.pair[edge.target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):
         """The DFS stage."""
         if node is not None:
-            for target in self.graph.iteradjacent(node):
-                if self.distance[self.pair[target]] == self.distance[node] + 1:
-                    if self._dfs_stage(self.pair[target]):
-                        self.pair[target] = node
-                        self.pair[node] = target
+            for edge in self.graph.iteroutedges(node):
+                if self.distance[self.pair[edge.target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.pair[edge.target]):
+                        self.pair[edge.target] = node
+                        self.pair[node] = edge.target
                         return True
             self.distance[node] = float("inf")
             return False

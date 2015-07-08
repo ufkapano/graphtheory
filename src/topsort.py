@@ -46,10 +46,10 @@ class TopologicalSortQueue:
             node = Q.get()
             self.sorted_nodes.append(node)
             # Remove all outedges.
-            for target in self.graph.iteradjacent(node):
-                inedges[target] = inedges[target]-1
-                if inedges[target] == 0:
-                    Q.put(target)
+            for edge in self.graph.iteroutedges(node):
+                inedges[edge.target] = inedges[edge.target]-1
+                if inedges[edge.target] == 0:
+                    Q.put(edge.target)
 
 
 class TopologicalSortSet:
@@ -76,10 +76,10 @@ class TopologicalSortSet:
             node = Q.pop()
             self.sorted_nodes.append(node)
             # Remove all outedges.
-            for target in self.graph.iteradjacent(node):
-                inedges[target] = inedges[target]-1
-                if inedges[target] == 0:
-                    Q.add(target)
+            for edge in self.graph.iteroutedges(node):
+                inedges[edge.target] = inedges[edge.target]-1
+                if inedges[edge.target] == 0:
+                    Q.add(edge.target)
 
 
 class TopologicalSortList:
@@ -108,10 +108,10 @@ class TopologicalSortList:
             source = self.sorted_nodes[qstart]
             qstart += 1
             # Remove all outedges.
-            for target in self.graph.iteradjacent(source):
-                inedges[target] = inedges[target]-1
-                if inedges[target] == 0:
-                    self.sorted_nodes[qend] = target
+            for edge in self.graph.iteroutedges(source):
+                inedges[edge.target] = inedges[edge.target]-1
+                if inedges[edge.target] == 0:
+                    self.sorted_nodes[qend] = edge.target
                     qend += 1
 
 # EOF
