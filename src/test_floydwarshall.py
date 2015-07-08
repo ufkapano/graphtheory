@@ -49,6 +49,7 @@ class TestFloydWarshall(unittest.TestCase):
             4: {0: 1, 2: 3, 1: 3, 4: None, 3: 4}}
         self.assertEqual(algorithm.distance, expected_distance)
         self.assertEqual(algorithm.parent, expected_parent)
+        self.assertEqual(algorithm.path(0, 1), [0, 3, 1])
 
     def test_floydwarshall_negative_cycle(self):
         self.G.add_edge(Edge(1, 3, -2))
@@ -96,6 +97,7 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
             3: {0: 3, 1: 3, 2: 0, 3: None}}
         self.assertEqual(algorithm.distance, expected_distance)
         self.assertEqual(algorithm.parent, expected_parent)
+        self.assertEqual(algorithm.path(0, 3), [0, 1, 3])
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(0, 3, 2))
@@ -137,7 +139,7 @@ class TestFloydWarshallAllGraphs(unittest.TestCase):
         self.assertEqual(algorithm.distance, expected_distance)
 
     def test_negative_edge(self):
-        # An edge with negative weight gives a negative cycle.
+        # An edge with the negative weight gives a negative cycle.
         self.G.add_edge(Edge(2, 4, -1))
         algorithm = FloydWarshallAllGraphs(self.G)
         self.assertRaises(ValueError, algorithm.run)

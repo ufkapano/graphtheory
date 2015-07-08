@@ -1,9 +1,4 @@
 #!/usr/bin/python
-#
-# Klasa dla multigrafow z wagami.
-
-from edges import Edge
-
 
 class MultiGraph(dict):
     """The class defining a weighted multigraph."""

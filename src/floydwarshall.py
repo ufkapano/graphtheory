@@ -73,7 +73,7 @@ class FloydWarshallPaths:
         elif self.parent[source][target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            return self.path(source, self.parent[source][target]) + [target]
 
 
 class FloydWarshallAllGraphs:
