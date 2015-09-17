@@ -10,7 +10,7 @@ class FordFulkerson:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         # residual network
         self.residual = self.graph.__class__(self.graph.v(), directed=True)
@@ -74,7 +74,7 @@ class FordFulkersonSparse:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         # residual network
         self.residual = self.graph.__class__(self.graph.v(), directed=True)

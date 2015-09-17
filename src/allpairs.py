@@ -10,7 +10,7 @@ class SlowAllPairs:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         self.weights = dict()
@@ -50,7 +50,7 @@ class SlowAllPairsEdges:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         self.weights = dict()
@@ -89,7 +89,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         self.weights = dict()
@@ -134,7 +134,7 @@ class FasterAllPairs:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         for source in self.graph.iternodes():   # O(V**2) time

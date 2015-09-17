@@ -19,7 +19,7 @@ class StronglyConnectedComponents:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.scc = dict((node, None) for node in self.graph.iternodes())
         self.n_scc = 0
@@ -45,7 +45,7 @@ class ConnectedComponentsBFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
-            raise ValueError("graph is directed")
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.cc = dict((node, None) for node in self.graph.iternodes())
         self.n_cc = 0
@@ -66,7 +66,7 @@ class ConnectedComponentsDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
-            raise ValueError("graph is directed")
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.cc = dict((node, None) for node in self.graph.iternodes())
         self.n_cc = 0

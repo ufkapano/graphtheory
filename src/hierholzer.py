@@ -11,7 +11,7 @@ class Hierholzer:
         self.graph = graph
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
-        self.eulerian_cycle = list()
+        self.eulerian_cycle = list()   # list of nodes
         self.graph_copy = self.graph.copy()
         self.stack = LifoQueue()
 
@@ -58,7 +58,7 @@ class HierholzerWithEdges:
         self.graph = graph
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
-        self.eulerian_cycle = list()
+        self.eulerian_cycle = list()   # list of edges
         self.graph_copy = self.graph.copy()
         self.stack = LifoQueue()
 

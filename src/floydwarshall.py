@@ -6,7 +6,7 @@ class FloydWarshall:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         for source in self.graph.iternodes():
@@ -37,7 +37,7 @@ class FloydWarshallPaths:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
         self.parent = dict()

@@ -14,7 +14,7 @@ class TransitiveClosureSimple:
     def __init__(self, graph):
         """The algorithm initialization, O(V**2) time."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.T = dict()
         for source in self.graph.iternodes():
@@ -38,7 +38,7 @@ class TransitiveClosure:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.T = dict()
         for source in self.graph.iternodes():
@@ -64,7 +64,7 @@ class TransitiveClosureBFS:
     def __init__(self, graph):
         """The algorithm initialization, O(V**2) time."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.T = dict()
         for source in self.graph.iternodes():
@@ -87,7 +87,7 @@ class TransitiveClosureDFS:
     def __init__(self, graph):
         """The algorithm initialization, O(V**2) time."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.T = dict()
         for source in self.graph.iternodes():

@@ -12,7 +12,7 @@ class FleuryDFS:
         self.graph = graph
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
-        self.eulerian_cycle = list()
+        self.eulerian_cycle = list()   # list of nodes
         self.graph_copy = self.graph.copy()
 
     def run(self, source=None):
@@ -67,7 +67,7 @@ class FleuryBFS:
         self.graph = graph
         if not self._is_eulerian():
             raise ValueError("the graph is not eulerian")
-        self.eulerian_cycle = list()
+        self.eulerian_cycle = list()   # list of nodes
         self.graph_copy = self.graph.copy()
 
     def run(self, source=None):

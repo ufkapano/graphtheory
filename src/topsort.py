@@ -11,7 +11,7 @@ class TopologicalSortDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.sorted_nodes = list()
 
@@ -28,7 +28,7 @@ class TopologicalSortQueue:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.sorted_nodes = list()
 
@@ -58,7 +58,7 @@ class TopologicalSortSet:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.sorted_nodes = list()
 
@@ -88,7 +88,7 @@ class TopologicalSortList:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.sorted_nodes = [None] * self.graph.v()
 

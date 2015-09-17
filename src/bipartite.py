@@ -10,7 +10,7 @@ class BipartiteGraphBFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
-            raise ValueError("graph is directed")
+            raise ValueError("the graph is directed")
         self.graph = graph
         # colors are 0 and 1
         self.color = dict(((node, None) for node in self.graph.iternodes()))
@@ -37,7 +37,7 @@ class BipartiteGraphBFS:
                     Q.put(edge.target)
                 else:   # target was visited
                     if self.color[edge.target] == self.color[source]:
-                        raise ValueError("graph is not bipartite")
+                        raise ValueError("the graph is not bipartite")
 
 
 class BipartiteGraphDFS:
@@ -46,7 +46,7 @@ class BipartiteGraphDFS:
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
-            raise ValueError("graph is directed")
+            raise ValueError("the graph is directed")
         self.graph = graph
         # colors are 0 and 1
         self.color = dict(((node, None) for node in self.graph.iternodes()))
@@ -73,6 +73,6 @@ class BipartiteGraphDFS:
                 self._visit(edge.target)
             else:   # target was visited
                 if self.color[edge.target] == self.color[node]:
-                    raise ValueError("graph is not bipartite")
+                    raise ValueError("the graph is not bipartite")
 
 # EOF

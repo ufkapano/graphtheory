@@ -10,7 +10,7 @@ class Johnson:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
 
     def run(self):
@@ -54,7 +54,7 @@ class JohnsonFaster:
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         self.positive_weights = all(edge.weight >= 0
             for edge in self.graph.iteredges())   # O(E) time

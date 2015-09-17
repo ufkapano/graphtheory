@@ -4,16 +4,16 @@ class MultiGraph(dict):
     """The class defining a weighted multigraph."""
 
     def __init__(self, n=0, directed=False):
-        """Loads up a MultiGraph instance."""
+        """Load up a MultiGraph instance."""
         self.n = n              # compatibility
         self.directed = directed  # bool
 
     def v(self):
-        """Returns the number of nodes (the multigraph order)."""
+        """Return the number of nodes (the multigraph order)."""
         return len(self)
 
     def e(self):
-        """Returns the number of edges."""
+        """Return the number of edges."""
         loops = 0
         for node in self:
             if node in self[node]:
@@ -87,21 +87,21 @@ class MultiGraph(dict):
             return 0
 
     def iternodes(self):
-        """Generates nodes from the multigraph on demand."""
+        """Generate nodes from the multigraph on demand."""
         return self.iterkeys()
 
     def iteradjacent(self, source):
-        """Generates adjacent nodes from the multigraph on demand."""
+        """Generate adjacent nodes from the multigraph on demand."""
         return self[source].iterkeys()
 
     def iteroutedges(self, source):
-        """Generates outedges from the multigraph on demand."""
+        """Generate outedges from the multigraph on demand."""
         for target in self[source]:
             for edge in self[source][target]:
                 yield edge
 
     def iterinedges(self, source):
-        """Generates inedges from the multigraph on demand."""
+        """Generate inedges from the multigraph on demand."""
         if self.is_directed():
             for target in self.iternodes():
                 if source in self[target]:
@@ -113,7 +113,7 @@ class MultiGraph(dict):
                     yield ~edge   # inverted
 
     def iteredges(self):
-        """Generates edges from the multigraph on demand."""
+        """Generate edges from the multigraph on demand."""
         for source in self.iternodes():
             for target in self[source]:
                 # source <= target, because loops are possible.
