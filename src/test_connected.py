@@ -38,6 +38,11 @@ class TestConnectedComponents(unittest.TestCase):
         self.assertEqual(algorithm.n_cc, self.expected_n_cc)
         self.assertEqual(algorithm.cc, self.expected_cc)
 
+    def test_is_connected(self):
+        self.assertFalse(is_connected(self.G))
+        self.G.add_edge(Edge(5, 6))
+        self.assertTrue(is_connected(self.G))
+
     def tearDown(self): pass
 
 # 0 -o 1 --o 2 o-o 3   Cormen, s.628 modified
