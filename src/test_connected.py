@@ -31,17 +31,20 @@ class TestConnectedComponents(unittest.TestCase):
         algorithm.run()
         self.assertEqual(algorithm.n_cc, self.expected_n_cc)
         self.assertEqual(algorithm.cc, self.expected_cc)
+        self.assertRaises(ValueError, ConnectedComponentsBFS, Graph(1, True))
 
     def test_cc_dfs(self):
         algorithm = ConnectedComponentsDFS(self.G)
         algorithm.run()
         self.assertEqual(algorithm.n_cc, self.expected_n_cc)
         self.assertEqual(algorithm.cc, self.expected_cc)
+        self.assertRaises(ValueError, ConnectedComponentsDFS, Graph(1, True))
 
     def test_is_connected(self):
         self.assertFalse(is_connected(self.G))
         self.G.add_edge(Edge(5, 6))
         self.assertTrue(is_connected(self.G))
+        self.assertRaises(ValueError, is_connected, Graph(1, True))
 
     def tearDown(self): pass
 
@@ -74,6 +77,7 @@ class TestStronglyConnectedComponents(unittest.TestCase):
         algorithm.run()
         self.assertEqual(algorithm.n_scc, self.expected_n_scc)
         self.assertEqual(algorithm.scc, self.expected_scc)
+        self.assertRaises(ValueError, StronglyConnectedComponents, Graph(1, False))
 
     def tearDown(self): pass
 
