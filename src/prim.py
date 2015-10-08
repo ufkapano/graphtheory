@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from edges import Edge
 from Queue import PriorityQueue
 
 
@@ -39,9 +38,13 @@ class PrimMST:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
-        for node in self.graph.iternodes():   # O(V) time
-            if self.parent[node] is not None:
-                self.mst.add_edge(Edge(self.parent[node], node, self.distance[node]))
+        for edge in self.graph.iteredges():   # O(E) time
+            if (self.parent[edge.source] is edge.target and
+                self.distance[edge.source] == edge.weight):
+                    self.mst.add_edge(edge)
+            elif (self.parent[edge.target] is edge.source and
+                self.distance[edge.target] == edge.weight):
+                    self.mst.add_edge(edge)
         return self.mst
 
 
@@ -74,9 +77,13 @@ class PrimMatrixMST:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
-        for node in self.graph.iternodes():   # O(V) time
-            if self.parent[node] is not None:
-                self.mst.add_edge(Edge(self.parent[node], node, self.distance[node]))
+        for edge in self.graph.iteredges():   # O(E) time
+            if (self.parent[edge.source] is edge.target and
+                self.distance[edge.source] == edge.weight):
+                    self.mst.add_edge(edge)
+            elif (self.parent[edge.target] is edge.source and
+                self.distance[edge.target] == edge.weight):
+                    self.mst.add_edge(edge)
         return self.mst
 
 
