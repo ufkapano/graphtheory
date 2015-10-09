@@ -1,10 +1,5 @@
 #!/usr/bin/python
-#
-# acyclic.py
-#
-# Cycles detection.
 
-from edges import Edge
 from graphs import Graph
 
 
@@ -18,12 +13,12 @@ class AcyclicGraphDFS:
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
         import sys
         recursionlimit = sys.getrecursionlimit()
-        sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""
         if source is not None:
-            # only one connected component will be checked!
+            # Only one connected component will be checked!
             self._visit(source)
         else:
             for node in self.graph.iternodes():

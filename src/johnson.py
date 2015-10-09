@@ -32,7 +32,8 @@ class Johnson:
         # edges are reweighted
         for edge in list(self.new_graph.iteredges()):   # O(E) time
             edge.weight = (edge.weight 
-                + self.bf.distance[edge.source] - self.bf.distance[edge.target])
+                + self.bf.distance[edge.source] 
+                - self.bf.distance[edge.target])
             self.new_graph.del_edge(edge)
             self.new_graph.add_edge(edge)
         # remove new_node with edges
@@ -45,7 +46,7 @@ class Johnson:
             algorithm.run(source)
             for target in self.graph.iternodes():   # O(V**2) total time
                 self.distance[source][target] = (algorithm.distance[target]
-                - self.bf.distance[source] + self.bf.distance[target])
+                    - self.bf.distance[source] + self.bf.distance[target])
 
 
 class JohnsonFaster:
@@ -81,7 +82,8 @@ class JohnsonFaster:
             # edges are reweighted
             for edge in list(self.new_graph.iteredges()):   # O(E) time
                 edge.weight = (edge.weight 
-                    + self.bf.distance[edge.source] - self.bf.distance[edge.target])
+                    + self.bf.distance[edge.source] 
+                    - self.bf.distance[edge.target])
                 self.new_graph.del_edge(edge)
                 self.new_graph.add_edge(edge)
             # remove new_node with edges
@@ -97,6 +99,6 @@ class JohnsonFaster:
                     self.distance[source][target] = algorithm.distance[target]
                 else:
                     self.distance[source][target] = (algorithm.distance[target]
-                    - self.bf.distance[source] + self.bf.distance[target])
+                        - self.bf.distance[source] + self.bf.distance[target])
 
 # EOF

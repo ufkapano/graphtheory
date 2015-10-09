@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from edges import Edge
 from Queue import Queue
 
 

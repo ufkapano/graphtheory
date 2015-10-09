@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# allpairs.py
-#
 # All-pairs shorted paths algorithms.
 
 class SlowAllPairs:

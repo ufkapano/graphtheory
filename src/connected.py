@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# connected.py
-#
 # Connected components for undirected graphs.
 # Strongly connected components for directed graphs.
 
@@ -34,8 +32,8 @@ class StronglyConnectedComponents:
         algorithm = SimpleDFS(self.graph.transpose())
         for source in order:
             if self.scc[source] is None:
-                algorithm.run(source,
-                pre_action=lambda node: self.scc.__setitem__(node, self.n_scc))
+                algorithm.run(source, pre_action=lambda
+                    node: self.scc.__setitem__(node, self.n_scc))
                 self.n_scc = self.n_scc + 1
 
 
@@ -55,8 +53,8 @@ class ConnectedComponentsBFS:
         algorithm = SimpleBFS(self.graph)
         for source in self.graph.iternodes():
             if self.cc[source] is None:
-                algorithm.run(source, 
-                pre_action=lambda node: self.cc.__setitem__(node, self.n_cc))
+                algorithm.run(source, pre_action=lambda node:
+                    self.cc.__setitem__(node, self.n_cc))
                 self.n_cc = self.n_cc + 1
 
 
@@ -76,8 +74,8 @@ class ConnectedComponentsDFS:
         algorithm = SimpleDFS(self.graph)
         for source in self.graph.iternodes():
             if self.cc[source] is None:
-                algorithm.run(source, 
-                pre_action=lambda node: self.cc.__setitem__(node, self.n_cc))
+                algorithm.run(source, pre_action=lambda node:
+                    self.cc.__setitem__(node, self.n_cc))
                 self.n_cc = self.n_cc + 1
 
 

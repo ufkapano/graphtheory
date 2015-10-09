@@ -29,7 +29,8 @@ class TransitiveClosureSimple:
             for node in self.graph.iternodes():
                 for edge in self.graph.iteredges():
                     self.T[node][edge.target] = (
-                    self.T[node][edge.target] or self.T[node][edge.source])
+                        self.T[node][edge.target] or
+                        self.T[node][edge.source])
 
 
 class TransitiveClosure:
@@ -77,8 +78,8 @@ class TransitiveClosureBFS:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             algorithm = SimpleBFS(self.graph)
-            algorithm.run(source, pre_action=
-            lambda node: self.T[source].__setitem__(node, True))
+            algorithm.run(source, pre_action=lambda node:
+                self.T[source].__setitem__(node, True))
 
 
 class TransitiveClosureDFS:
@@ -100,7 +101,7 @@ class TransitiveClosureDFS:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             algorithm = SimpleDFS(self.graph)
-            algorithm.run(source, pre_action=
-            lambda node: self.T[source].__setitem__(node, True))
+            algorithm.run(source, pre_action=lambda node:
+                self.T[source].__setitem__(node, True))
 
 # EOF

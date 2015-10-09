@@ -3,7 +3,7 @@
 import unittest
 from edges import Edge
 from graphs import Graph
-from fleury import FleuryDFS, FleuryBFS
+from fleury import *
 
 # 0 --- 1     2
 # |     |   / |
@@ -38,10 +38,30 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
+    def test_fleury_dfs_with_edges(self):
+        algorithm = FleuryDFSWithEdges(self.G)
+        algorithm.run(0)
+        #expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 2),
+            Edge(2, 5), Edge(5, 4), Edge(4, 3), Edge(3, 0)]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
+
+    def test_fleury_bfs_with_edges(self):
+        algorithm = FleuryBFSWithEdges(self.G)
+        algorithm.run(0)
+        #expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 2),
+            Edge(2, 5), Edge(5, 4), Edge(4, 3), Edge(3, 0)]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
+
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
         self.assertRaises(ValueError, FleuryDFS, self.G)
         self.assertRaises(ValueError, FleuryBFS, self.G)
+        self.assertRaises(ValueError, FleuryDFSWithEdges, self.G)
+        self.assertRaises(ValueError, FleuryBFSWithEdges, self.G)
 
     def tearDown(self): pass
 
@@ -78,10 +98,30 @@ class TestFleuryDirectedGraph(unittest.TestCase):
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
+    def test_fleury_dfs_with_edges(self):
+        algorithm = FleuryDFSWithEdges(self.G)
+        algorithm.run(0)
+        #expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+            Edge(5, 2), Edge(2, 4), Edge(4, 3), Edge(3, 0)]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
+
+    def test_fleury_bfs_with_edges(self):
+        algorithm = FleuryBFSWithEdges(self.G)
+        algorithm.run(0)
+        #expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
+        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+            Edge(5, 2), Edge(2, 4), Edge(4, 3), Edge(3, 0)]
+        self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
+        self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
+
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
         self.assertRaises(ValueError, FleuryDFS, self.G)
         self.assertRaises(ValueError, FleuryBFS, self.G)
+        self.assertRaises(ValueError, FleuryDFSWithEdges, self.G)
+        self.assertRaises(ValueError, FleuryBFSWithEdges, self.G)
 
     def tearDown(self): pass
 
