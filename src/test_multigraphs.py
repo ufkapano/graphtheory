@@ -18,9 +18,9 @@ class TestMultiGraphDirected(unittest.TestCase):
         self.N = 4   # number of nodes
         self.G = MultiGraph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3]
-        self.edges = [Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4),
-            Edge(1, 1, 11), Edge(3, 1, 31), Edge(2, 1, 21),
-            Edge(2, 2, 220), Edge(2, 2, 221)]
+        self.edges = [
+            Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4), Edge(1, 1, 11), 
+            Edge(3, 1, 31), Edge(2, 1, 21), Edge(2, 2, 220), Edge(2, 2, 221)]
         # 0-3 parallel edge
         # 1-1 loop
         # 2-2 parallel loop
@@ -99,9 +99,9 @@ class TestMultiGraphUndirected(unittest.TestCase):
         self.N = 4   # number of nodes
         self.G = MultiGraph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3]
-        self.edges = [Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4),
-            Edge(1, 1, 11), Edge(3, 1, 31), Edge(2, 1, 21),
-            Edge(2, 2, 220), Edge(2, 2, 221)]
+        self.edges = [
+            Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4), Edge(1, 1, 11), 
+            Edge(3, 1, 31), Edge(2, 1, 21), Edge(2, 2, 220), Edge(2, 2, 221)]
         # 0-3 parallel edge
         # 1-1 loop
         # 2-2 parallel loop

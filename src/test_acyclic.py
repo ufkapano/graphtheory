@@ -20,8 +20,9 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
-        self.edges = [Edge(0, 4), Edge(0, 1), Edge(1, 5), 
-        Edge(5, 2), Edge(2, 6), Edge(6, 3), Edge(6, 7)]
+        self.edges = [
+            Edge(0, 4), Edge(0, 1), Edge(1, 5), Edge(5, 2), Edge(2, 6), 
+            Edge(6, 3), Edge(6, 7)]
         self.cycle_edges = [Edge(5, 6), Edge(2, 3), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -75,9 +76,9 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         self.N = 8           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
-        self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
-        Edge(0, 4), Edge(4, 5), Edge(5, 6), Edge(5, 7),
-        Edge(5, 2), Edge(0, 7)]
+        self.edges = [
+            Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 4), Edge(4, 5), 
+            Edge(5, 6), Edge(5, 7), Edge(5, 2), Edge(0, 7)]
         self.cycle_edges = [Edge(3, 1), Edge(5, 4)]
         for node in self.nodes:
             self.G.add_node(node)

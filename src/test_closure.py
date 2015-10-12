@@ -20,10 +20,10 @@ class TestTransitiveClosure(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
         self.expected_T = {
-        0: {0: True, 1: True, 2: True, 3: True}, 
-        1: {0: False, 1: True, 2: True, 3: True}, 
-        2: {0: False, 1: False, 2: True, 3: True}, 
-        3: {0: False, 1: False, 2: False, 3: True}}
+            0: {0: True, 1: True, 2: True, 3: True}, 
+            1: {0: False, 1: True, 2: True, 3: True}, 
+            2: {0: False, 1: False, 2: True, 3: True}, 
+            3: {0: False, 1: False, 2: False, 3: True}}
 
     def test_closure(self):
         algorithm = TransitiveClosure(self.G)

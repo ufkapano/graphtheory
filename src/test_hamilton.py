@@ -18,7 +18,8 @@ class TestHamiltonCycle(unittest.TestCase):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3, 4, 5]
-        self.edges = [Edge(0, 1), Edge(0, 2), Edge(0, 5), Edge(1, 2),
+        self.edges = [
+            Edge(0, 1), Edge(0, 2), Edge(0, 5), Edge(1, 2),
             Edge(1, 4), Edge(2, 3), Edge(3, 4), Edge(3, 5), Edge(4, 5)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -36,7 +37,8 @@ class TestHamiltonCycle(unittest.TestCase):
         algorithm = HamiltonCycleDFSWithEdges(self.G)
         algorithm.run(0)
         # 5 solutions
-        expected_cycle = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 2), Edge(2, 3),
             Edge(3, 4), Edge(4, 5), Edge(5, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
 
@@ -44,7 +46,8 @@ class TestHamiltonCycle(unittest.TestCase):
         algorithm = HamiltonCycleDFSWithGraph(self.G)
         algorithm.run(0)
         # 5 solutions
-        expected_cycle = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 2), Edge(2, 3),
             Edge(3, 4), Edge(4, 5), Edge(5, 0)]
         #print "undirected", list(algorithm.hamilton_cycle.iteredges())
         for edge in expected_cycle:
@@ -67,7 +70,8 @@ class TestHamiltonCycleDirected(unittest.TestCase):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5]
-        self.edges = [Edge(0, 1), Edge(2, 0), Edge(0, 5), Edge(2, 1),
+        self.edges = [
+            Edge(0, 1), Edge(2, 0), Edge(0, 5), Edge(2, 1),
             Edge(1, 4), Edge(3, 2), Edge(3, 4), Edge(5, 3), Edge(4, 5)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -83,7 +87,8 @@ class TestHamiltonCycleDirected(unittest.TestCase):
     def test_hamilton_with_edges(self):
         algorithm = HamiltonCycleDFSWithEdges(self.G)
         algorithm.run(0)
-        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 3), Edge(3, 2), Edge(2, 0)]
         self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
 
@@ -91,7 +96,8 @@ class TestHamiltonCycleDirected(unittest.TestCase):
         algorithm = HamiltonCycleDFSWithGraph(self.G)
         algorithm.run(0)
         # 5 solutions
-        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 3), Edge(3, 2), Edge(2, 0)]
         #print "directed", list(algorithm.hamilton_cycle.iteredges())
         for edge in expected_cycle:

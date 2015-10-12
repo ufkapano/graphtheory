@@ -19,8 +19,9 @@ class TestEdmondsKarp(unittest.TestCase):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3]
-        self.edges = [Edge(0, 1, 10), Edge(0, 2, 10), Edge(1, 2, 1), 
-            Edge(1, 3, 10), Edge(2, 3, 10)]
+        self.edges = [
+            Edge(0, 1, 10), Edge(0, 2, 10), Edge(1, 2, 1), Edge(1, 3, 10), 
+            Edge(2, 3, 10)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -58,10 +59,10 @@ class TestEdmondsKarpWiki(unittest.TestCase):
         self.N = 7           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
-        self.edges = [Edge(0, 1, 3), Edge(0, 3, 3), Edge(1, 2, 4), 
-            Edge(2, 0, 3), Edge(2, 3, 1), Edge(2, 4, 2), 
-            Edge(3, 4, 2), Edge(3, 5, 6), Edge(4, 1, 1), 
-            Edge(4, 6, 1), Edge(5, 6, 9)]
+        self.edges = [
+            Edge(0, 1, 3), Edge(0, 3, 3), Edge(1, 2, 4), Edge(2, 0, 3), 
+            Edge(2, 3, 1), Edge(2, 4, 2), Edge(3, 4, 2), Edge(3, 5, 6), 
+            Edge(4, 1, 1), Edge(4, 6, 1), Edge(5, 6, 9)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:

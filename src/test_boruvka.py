@@ -14,10 +14,10 @@ class TestBoruvka(unittest.TestCase):
         self.N = 7           # number of nodes
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
-        self.edges = [Edge(0, 1, 7), Edge(1, 2, 11), 
-        Edge(0, 3, 4), Edge(3, 1, 9), Edge(4, 1, 10), 
-        Edge(2, 4, 5), Edge(3, 4, 15), Edge(3, 5, 6), 
-        Edge(5, 4, 12), Edge(5, 6, 13), Edge(4, 6, 8)]
+        self.edges = [
+            Edge(0, 1, 7), Edge(1, 2, 11), Edge(0, 3, 4), Edge(3, 1, 9), 
+            Edge(4, 1, 10), Edge(2, 4, 5), Edge(3, 4, 15), Edge(3, 5, 6), 
+            Edge(5, 4, 12), Edge(5, 6, 13), Edge(4, 6, 8)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -33,8 +33,9 @@ class TestBoruvka(unittest.TestCase):
         mst_weight_expected = 40
         mst_weight = sum(edge.weight for edge in boruvka.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
-        mst_edges_expected = [Edge(0, 1, 7), Edge(0, 3, 4), 
-        Edge(2, 4, 5), Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
+        mst_edges_expected = [
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), Edge(1, 4, 10), 
+            Edge(4, 6, 8), Edge(3, 5, 6)]
         for edge in mst_edges_expected:
             self.assertTrue(boruvka.mst.has_edge(edge))
 
@@ -48,11 +49,11 @@ class TestBoruvkaCormen(unittest.TestCase):
         self.N = 9           # number of nodes
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-        self.edges = [Edge(0, 1, 4), Edge(0, 7, 8),
-        Edge(1, 7, 11), Edge(1, 2, 12), Edge(7, 8, 7),
-        Edge(8, 2, 2), Edge(8, 6, 6), Edge(7, 6, 1),
-        Edge(2, 3, 13), Edge(2, 5, 5), Edge(6, 5, 3),
-        Edge(3, 5, 14), Edge(3, 4, 9), Edge(5, 4, 10)]
+        self.edges = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(1, 7, 11), Edge(1, 2, 12), 
+            Edge(7, 8, 7), Edge(8, 2, 2), Edge(8, 6, 6), Edge(7, 6, 1),
+            Edge(2, 3, 13), Edge(2, 5, 5), Edge(6, 5, 3), Edge(3, 5, 14), 
+            Edge(3, 4, 9), Edge(5, 4, 10)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -68,9 +69,9 @@ class TestBoruvkaCormen(unittest.TestCase):
         mst_weight_expected = 42
         mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
-        mst_edges_expected = [Edge(0, 1, 4), Edge(0, 7, 8),
-        Edge(8, 2, 2), Edge(7, 6, 1), Edge(2, 5, 5),
-        Edge(6, 5, 3), Edge(3, 4, 9), Edge(5, 4, 10)]
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(2, 5, 5), Edge(6, 5, 3), Edge(3, 4, 9), Edge(5, 4, 10)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
@@ -84,10 +85,10 @@ class TestBoruvkaDisconnectedGraph(unittest.TestCase):
         self.N = 9           # number of nodes
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-        self.edges = [Edge(0, 1, 4), Edge(0, 7, 8),
-        Edge(1, 7, 11), Edge(1, 2, 12), Edge(7, 8, 7),
-        Edge(8, 2, 2), Edge(8, 6, 6), Edge(7, 6, 1),
-        Edge(3, 5, 14), Edge(3, 4, 9), Edge(5, 4, 10)]
+        self.edges = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(1, 7, 11), Edge(1, 2, 12), 
+            Edge(7, 8, 7), Edge(8, 2, 2), Edge(8, 6, 6), Edge(7, 6, 1),
+            Edge(3, 5, 14), Edge(3, 4, 9), Edge(5, 4, 10)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -103,9 +104,9 @@ class TestBoruvkaDisconnectedGraph(unittest.TestCase):
         mst_weight_expected = 40
         mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
-        mst_edges_expected = [Edge(0, 1, 4), Edge(0, 7, 8),
-        Edge(8, 2, 2), Edge(7, 6, 1), Edge(6, 8, 6),
-        Edge(3, 4, 9), Edge(5, 4, 10)]
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(6, 8, 6), Edge(3, 4, 9), Edge(5, 4, 10)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 

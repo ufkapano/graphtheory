@@ -15,8 +15,9 @@ class TestGraphDirected(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.edges = [Edge(0, 1, 2), Edge(1, 2, 4), 
-        Edge(2, 0, 6), Edge(2, 3, 3), Edge(3, 1, 5)]
+        self.edges = [
+            Edge(0, 1, 2), Edge(1, 2, 4), Edge(2, 0, 6), Edge(2, 3, 3), 
+            Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
 
@@ -113,8 +114,9 @@ class TestGraphUndirected(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N)
-        self.edges = [Edge(0, 1, 2), Edge(1, 2, 4), 
-        Edge(2, 0, 6), Edge(2, 3, 3), Edge(3, 1, 5)]
+        self.edges = [
+            Edge(0, 1, 2), Edge(1, 2, 4), Edge(2, 0, 6), Edge(2, 3, 3), 
+            Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
 
@@ -178,9 +180,10 @@ class TestGraphLadder(unittest.TestCase):
     def setUp(self):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.edges = [Edge(0, 1, 2), Edge(0, 2, 1), Edge(2, 3, 5),
-        Edge(1, 3, 3), Edge(2, 4, 4), Edge(3, 5, 6), Edge(4, 6, 7),
-        Edge(4, 5, 8), Edge(5, 7, 9), Edge(6, 7, 10)]
+        self.edges = [
+            Edge(0, 1, 2), Edge(0, 2, 1), Edge(2, 3, 5), Edge(1, 3, 3), 
+            Edge(2, 4, 4), Edge(3, 5, 6), Edge(4, 6, 7), Edge(4, 5, 8), 
+            Edge(5, 7, 9), Edge(6, 7, 10)]
         for edge in self.edges:
             self.G.add_edge(edge)
 

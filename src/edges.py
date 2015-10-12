@@ -1,7 +1,5 @@
 #!/usr/bin/python
 #
-# edges.py
-#
 # Hashable edges - the idea for __hash__ from
 # http://stackoverflow.com/questions/793761/built-in-python-hash-function
 
@@ -72,7 +70,7 @@ class UndirectedEdge(Edge):
         self.weight = weight
 
     def __invert__(self):
-        """Return the edge with the opposite direction."""
+        """The edge direction is not defined."""
         return self
 
 # EOF

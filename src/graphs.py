@@ -3,12 +3,13 @@
 # Nodes can be numbers, strings, or any hashable objects.
 # We would like to compare nodes.
 #
-# {"A":{"B":Edge("A","B",1),"C":Edge("A","C",2)}, 
-# "B":{"C":Edge("B","C",3),"D":Edge("B","D",4)}, 
-# "C":{"D":Edge("C","D",5)}, 
-# "D":{"C":Edge("D","C",6)}, 
-# "E":{"C":Edge("E","C",7)}, 
-# "F":{}}
+# An exemplary graph structure:
+# {"A": {"B": Edge("A","B",1), "C": Edge("A","C",2)}, 
+# "B": {"C": Edge("B","C",3), "D": Edge("B","D",4)}, 
+# "C": {"D": Edge("C","D",5)}, 
+# "D": {"C": Edge("D","C",6)}, 
+# "E": {"C": Edge("E","C",7)}, 
+# "F": {}}
 
 import random
 from edges import Edge
@@ -46,7 +47,7 @@ class Graph(dict):
 
     def del_node(self, node):
         """Remove a node from the graph (with edges)."""
-        # dictionary changes size during iteration.
+        # The dictionary changes size during iteration.
         for edge in list(self.iterinedges(node)):
             self.del_edge(edge)
         if self.is_directed():

@@ -17,7 +17,8 @@ class TestMatching(unittest.TestCase):
         self.N = 7
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
-        self.edges = [Edge(0, 4), Edge(0, 5), Edge(0, 6), 
+        self.edges = [
+            Edge(0, 4), Edge(0, 5), Edge(0, 6), 
             Edge(1, 3), Edge(1, 5), Edge(2, 3), Edge(2, 4)]
         for node in self.nodes:
             self.G.add_node(node)

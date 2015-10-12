@@ -12,9 +12,9 @@ class TestFloydWarshall(unittest.TestCase):
         self.N = 5           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4]
-        self.edges = [Edge(0, 2, 6), Edge(0, 3, 3),
-            Edge(1, 0, 3), Edge(2, 3, 2), Edge(3, 1, 1),
-            Edge(3, 2, 1), Edge(4, 1, 4), Edge(4, 3, 2)]
+        self.edges = [
+            Edge(0, 2, 6), Edge(0, 3, 3), Edge(1, 0, 3), Edge(2, 3, 2), 
+            Edge(3, 1, 1), Edge(3, 2, 1), Edge(4, 1, 4), Edge(4, 3, 2)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -63,9 +63,9 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3]
-        self.edges = [Edge(0, 1, 3), Edge(0, 2, 6),
-            Edge(1, 2, 4), Edge(1, 3, 5), Edge(2, 3, 2),
-            Edge(3, 0, -5), Edge(3, 1, -3)]
+        self.edges = [
+            Edge(0, 1, 3), Edge(0, 2, 6), Edge(1, 2, 4), Edge(1, 3, 5), 
+            Edge(2, 3, 2), Edge(3, 0, -5), Edge(3, 1, -3)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -118,9 +118,9 @@ class TestFloydWarshallAllGraphs(unittest.TestCase):
         self.N = 5           # number of nodes
         self.G = Graph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3, 4]
-        self.edges = [Edge(0, 2, 6), Edge(0, 3, 3),
-            Edge(1, 0, 3), Edge(2, 3, 2), Edge(3, 1, 1),
-            Edge(4, 1, 4), Edge(4, 3, 2)]
+        self.edges = [
+            Edge(0, 2, 6), Edge(0, 3, 3), Edge(1, 0, 3), Edge(2, 3, 2), 
+            Edge(3, 1, 1), Edge(4, 1, 4), Edge(4, 3, 2)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -131,11 +131,11 @@ class TestFloydWarshallAllGraphs(unittest.TestCase):
         algorithm = FloydWarshallAllGraphs(self.G)
         algorithm.run()
         expected_distance = {
-        0: {0: 0, 1: 3, 2: 5, 3: 3, 4: 5}, 
-        1: {0: 3, 1: 0, 2: 3, 3: 1, 4: 3}, 
-        2: {0: 5, 1: 3, 2: 0, 3: 2, 4: 4}, 
-        3: {0: 3, 1: 1, 2: 2, 3: 0, 4: 2}, 
-        4: {0: 5, 1: 3, 2: 4, 3: 2, 4: 0}}
+            0: {0: 0, 1: 3, 2: 5, 3: 3, 4: 5}, 
+            1: {0: 3, 1: 0, 2: 3, 3: 1, 4: 3}, 
+            2: {0: 5, 1: 3, 2: 0, 3: 2, 4: 4}, 
+            3: {0: 3, 1: 1, 2: 2, 3: 0, 4: 2}, 
+            4: {0: 5, 1: 3, 2: 4, 3: 2, 4: 0}}
         self.assertEqual(algorithm.distance, expected_distance)
 
     def test_negative_edge(self):

@@ -17,7 +17,8 @@ class TestEulerianCycleUndirected(unittest.TestCase):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3, 4, 5]
-        self.edges = [Edge(0, 1), Edge(0, 3), Edge(1, 4),
+        self.edges = [
+            Edge(0, 1), Edge(0, 3), Edge(1, 4),
             Edge(3, 4), Edge(4, 2), Edge(4, 5), Edge(2, 5)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -35,7 +36,8 @@ class TestEulerianCycleUndirected(unittest.TestCase):
         algorithm = HierholzerWithEdges(self.G)
         algorithm.run(0)
         #expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
-        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 2),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 4), Edge(4, 2),
             Edge(2, 5), Edge(5, 4), Edge(4, 3), Edge(3, 0)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
@@ -62,9 +64,9 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
         self.N = 7           # number of nodes
         self.G = Graph(self.N, directed=False)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
-        self.edges = [Edge(0, 1), Edge(0, 4), Edge(1, 4),
-            Edge(2, 3), Edge(2, 5), Edge(3, 5), Edge(4, 5),
-            Edge(4, 6), Edge(5, 6)]
+        self.edges = [
+            Edge(0, 1), Edge(0, 4), Edge(1, 4), Edge(2, 3), Edge(2, 5), 
+            Edge(3, 5), Edge(4, 5), Edge(4, 6), Edge(5, 6)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -81,7 +83,8 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
         algorithm = HierholzerWithEdges(self.G)
         algorithm.run(6)
         #expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
-        expected_cycle = [Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4),
+        expected_cycle = [
+            Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4),
             Edge(4, 5), Edge(5, 2), Edge(2, 3), Edge(3, 5), Edge(5, 6)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
@@ -104,7 +107,8 @@ class TestEulerianCycleDirected(unittest.TestCase):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5]
-        self.edges = [Edge(0, 1), Edge(3, 0), Edge(1, 4),
+        self.edges = [
+            Edge(0, 1), Edge(3, 0), Edge(1, 4),
             Edge(4, 3), Edge(2, 4), Edge(4, 5), Edge(5, 2)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -122,7 +126,8 @@ class TestEulerianCycleDirected(unittest.TestCase):
         algorithm = HierholzerWithEdges(self.G)
         algorithm.run(0)
         #expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
-        expected_cycle = [Edge(0, 1), Edge(1, 4), Edge(4, 5),
+        expected_cycle = [
+            Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 2), Edge(2, 4), Edge(4, 3), Edge(3, 0)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
@@ -149,9 +154,9 @@ class TestEulerianCycleDirected2(unittest.TestCase):
         self.N = 7           # number of nodes
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5, 6]
-        self.edges = [Edge(0, 1), Edge(4, 0), Edge(1, 4),
-            Edge(2, 3), Edge(5, 2), Edge(3, 5), Edge(4, 5),
-            Edge(6, 4), Edge(5, 6)]
+        self.edges = [
+            Edge(0, 1), Edge(4, 0), Edge(1, 4), Edge(2, 3), Edge(5, 2), 
+            Edge(3, 5), Edge(4, 5), Edge(6, 4), Edge(5, 6)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -168,7 +173,8 @@ class TestEulerianCycleDirected2(unittest.TestCase):
         algorithm = HierholzerWithEdges(self.G)
         algorithm.run(6)
         #expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
-        expected_cycle = [Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4),
+        expected_cycle = [
+            Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4),
             Edge(4, 5), Edge(5, 2), Edge(2, 3), Edge(3, 5), Edge(5, 6)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)

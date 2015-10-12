@@ -15,9 +15,9 @@ class TestConnectedComponents(unittest.TestCase):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
-        self.edges = [Edge(0, 4), Edge(0, 1),
-        Edge(1, 5), Edge(2, 6), Edge(2, 3),
-        Edge(6, 3), Edge(6, 7), Edge(3, 7)]
+        self.edges = [
+            Edge(0, 4), Edge(0, 1), Edge(1, 5), Edge(2, 6), Edge(2, 3),
+            Edge(6, 3), Edge(6, 7), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -60,10 +60,9 @@ class TestStronglyConnectedComponents(unittest.TestCase):
         self.G = Graph(self.N, directed=True)
         self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
         self.edges = [
-        Edge(0, 1), Edge(1, 4), Edge(4, 0), Edge(4, 5),
-        Edge(1, 5), Edge(1, 2), Edge(5, 6), Edge(6, 5),
-        Edge(2, 6), Edge(2, 3), Edge(3, 2), Edge(6, 7),
-        Edge(3, 7)]
+            Edge(0, 1), Edge(1, 4), Edge(4, 0), Edge(4, 5), Edge(1, 5), 
+            Edge(1, 2), Edge(5, 6), Edge(6, 5), Edge(2, 6), Edge(2, 3), 
+            Edge(3, 2), Edge(6, 7), Edge(3, 7)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -77,7 +76,8 @@ class TestStronglyConnectedComponents(unittest.TestCase):
         algorithm.run()
         self.assertEqual(algorithm.n_scc, self.expected_n_scc)
         self.assertEqual(algorithm.scc, self.expected_scc)
-        self.assertRaises(ValueError, StronglyConnectedComponents, Graph(1, False))
+        self.assertRaises(
+            ValueError, StronglyConnectedComponents, Graph(1, False))
 
     def tearDown(self): pass
 
