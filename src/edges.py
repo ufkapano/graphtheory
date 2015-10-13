@@ -1,13 +1,29 @@
 #!/usr/bin/python
-#
-# Hashable edges - the idea for __hash__ from
-# http://stackoverflow.com/questions/793761/built-in-python-hash-function
 
 class Edge:
     """The class defining a directed edge."""
 
     def __init__(self, source, target, weight=1):
-        """Load up an edge instance."""
+        """Load up a directed edge instance.
+        
+        Parameters
+        ----------
+        source : starting node
+        target : ending node
+        weight : number, optional (default 1)
+        
+        Examples
+        --------
+        >>> from edges import Edge
+        >>> edge = Edge(1, 2, 5)
+        >>> ~edge
+        Edge(2, 1, 5)
+        
+        Notes
+        -----
+        Hashable edges - the idea for __hash__ from
+        http://stackoverflow.com/questions/793761/built-in-python-hash-function
+        """
         self.source = source
         self.target = target
         self.weight = weight
