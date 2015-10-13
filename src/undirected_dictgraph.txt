@@ -1,9 +1,0 @@
-# NAME=Graph
-# DIRECTED=False
-# V=4
-# E=5
-A C 6
-A B 2
-C D 3
-B C 4
-B D 5
