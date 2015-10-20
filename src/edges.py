@@ -5,10 +5,9 @@ class Edge:
     
     Attributes
     ----------
-    
     source : starting node
     target : ending node
-    weight : number
+    weight : number (edge weight)
     
     Examples
     --------
@@ -20,6 +19,7 @@ class Edge:
     Notes
     -----
     Hashable edges - the idea for __hash__ from
+    
     http://stackoverflow.com/questions/793761/built-in-python-hash-function
     """
 

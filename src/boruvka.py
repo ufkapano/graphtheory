@@ -9,8 +9,8 @@ class BoruvkaMST:
     
     Attributes
     ----------
-    graph : input graph or multigraph
-    mst : graph or multigraph (MST)
+    graph : input undirected graph or multigraph
+    mst : graph (MST)
     _uf : disjoint-set data structure, private
     
     Examples

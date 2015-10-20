@@ -6,11 +6,13 @@ from Queue import PriorityQueue
 class PrimMST:
     """Prim's algorithm for finding a minimum spanning tree.
     
+    The algorithm runs in O(E log V) time.
+    
     Attributes
     ----------
-    graph : input graph or multigraph
-    distance : dict
-    parent : dict (MST)
+    graph : input undirected weighted graph or multigraph
+    distance : dict with nodes
+    parent : dict with nodes (MST)
     _in_queue : dict, private
     _pq : priority queue, private
     
@@ -29,13 +31,13 @@ class PrimMST:
     Notes
     -----
     Based on:
-
+    
     Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
         Introduction to Algorithms, third edition, The MIT Press, 
         Cambridge, London.
-
+    
     https://en.wikipedia.org/wiki/Prim's_algorithm.
-
+    
     https://en.wikipedia.org/wiki/Minimum_spanning_tree
     """
 
@@ -89,13 +91,15 @@ class PrimMST:
 
 
 class PrimMatrixMST:
-    """Prim's algorithm for finding MST in O(V**2) time.
+    """Prim's algorithm for finding a minimum spanning tree.
+    
+    The algorithm runs in O(V**2) time. It is suitable for dense graphs.
     
     Attributes
     ----------
-    graph : input graph or multigraph
-    distance : dict
-    parent : dict (MST)
+    graph : input undirected weighted graph or multigraph
+    distance : dict with nodes
+    parent : dict with nodes (MST)
     _in_queue : dict, private
     
     Examples
@@ -118,9 +122,9 @@ class PrimMatrixMST:
     Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
         Introduction to Algorithms, third edition, The MIT Press, 
         Cambridge, London.
-
+    
     https://en.wikipedia.org/wiki/Prim's_algorithm.
-
+    
     https://en.wikipedia.org/wiki/Minimum_spanning_tree
     """
 
@@ -168,12 +172,14 @@ class PrimMatrixMST:
 
 
 class PrimTrivialMST:
-    """Prim's algorithm for finding MST in O(V*E) time.
+    """Prim's algorithm for finding a minimum spanning tree.
+    
+    The algorithm runs in O(V*E) time.
     
     Attributes
     ----------
-    graph : undirected weighted graph or multigraph
-    mst : graph or multigraph (MST)
+    graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
     _in_mst : dict, private
     """
 

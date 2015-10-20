@@ -5,12 +5,12 @@ from Queue import PriorityQueue
 
 
 class KruskalMST:
-    """Kruskal's algorithm for finding a minimu spanning tree.
+    """Kruskal's algorithm for finding a minimum spanning tree.
     
     Attributes
     ----------
-    graph : input graph or multigraph
-    mst : graph or multigraph (MST)
+    graph : input undirected graph or multigraph
+    mst : graph (MST)
     _uf : disjoint-set data structure, private
     _pq : priority queue, private
     
@@ -33,7 +33,7 @@ class KruskalMST:
         Introduction to Algorithms, third edition, The MIT Press, 
         Cambridge, London.
     
-    https://en.wikipedia.org/wiki/Kruskal's_algorithm,
+    https://en.wikipedia.org/wiki/Kruskal's_algorithm
     
     Kruskal, J. B., 1956, On the shortest spanning subtree of a graph 
     and the traveling salesman prob lem, Proc. Amer. Math. Soc. 7, 48-50. 

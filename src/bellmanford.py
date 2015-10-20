@@ -1,16 +1,52 @@
 #!/usr/bin/python
 
 class BellmanFord:
-    """The Bellman-Ford algorithm for the shortest path problem."""
+    """The Bellman-Ford algorithm for the shortest path problem.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    parent : dict with nodes (shortest path tree)
+    distance : dict with nodes (distabces to source node)
+    source : node
+    
+    Examples
+    --------
+    >>> from edges import Edge
+    >>> from graphs import Graph
+    >>> from bellmanford import BellmanFord
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = BellmanFord(G)     # initialization
+    >>> algorithm.run(source)     # calculations
+    >>> algorithm.parent   # shortest path tree as a dict
+    >>> algorithm.distance[target]   # distance from source to target
+    >>> algorithm.path(target)   # path from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Bellman-Ford_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
         # Shortest path tree as a dictionary.
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
+        self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
 
     def run(self, source):
         """Executable pseudocode."""
