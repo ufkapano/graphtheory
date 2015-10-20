@@ -1,7 +1,27 @@
 #!/usr/bin/python
 
 class Edge:
-    """The class defining a directed edge."""
+    """The class defining a directed edge.
+    
+    Attributes
+    ----------
+    
+    source : starting node
+    target : ending node
+    weight : number
+    
+    Examples
+    --------
+    >>> from edges import Edge
+    >>> edge = Edge(1, 2, 5)
+    >>> ~edge
+    Edge(2, 1, 5)
+    
+    Notes
+    -----
+    Hashable edges - the idea for __hash__ from
+    http://stackoverflow.com/questions/793761/built-in-python-hash-function
+    """
 
     def __init__(self, source, target, weight=1):
         """Load up a directed edge instance.
@@ -10,19 +30,7 @@ class Edge:
         ----------
         source : starting node
         target : ending node
-        weight : number, optional (default 1)
-        
-        Examples
-        --------
-        >>> from edges import Edge
-        >>> edge = Edge(1, 2, 5)
-        >>> ~edge
-        Edge(2, 1, 5)
-        
-        Notes
-        -----
-        Hashable edges - the idea for __hash__ from
-        http://stackoverflow.com/questions/793761/built-in-python-hash-function
+        weight : number, optional (default=1)
         """
         self.source = source
         self.target = target

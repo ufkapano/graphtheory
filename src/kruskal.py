@@ -5,25 +5,64 @@ from Queue import PriorityQueue
 
 
 class KruskalMST:
-    """Kruskal's algorithm for finding MST."""
+    """Kruskal's algorithm for finding a minimu spanning tree.
+    
+    Attributes
+    ----------
+    graph : input graph or multigraph
+    mst : graph or multigraph (MST)
+    _uf : disjoint-set data structure, private
+    _pq : priority queue, private
+    
+    Examples
+    --------
+    >>> from edges import Edge
+    >>> from graphs import Graph
+    >>> from kruskal import KruskalMST
+    >>> G = Graph(n=10, False) # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> algorithm = KruskalMST(G)     # initialization
+    >>> algorithm.run()         # calculations
+    >>> algorithm.mst.show()   # MST as an undirected graph
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Kruskal's_algorithm,
+    
+    Kruskal, J. B., 1956, On the shortest spanning subtree of a graph 
+    and the traveling salesman prob lem, Proc. Amer. Math. Soc. 7, 48-50. 
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected weighted graph or multigraph
+        """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v())   # MST as a graph
-        self.uf = UnionFind()
-        self.pq = PriorityQueue()
+        self.mst = self.graph.__class__(self.graph.v())
+        self._uf = UnionFind()
+        self._pq = PriorityQueue()
 
     def run(self):
         """Executable pseudocode."""
         for node in self.graph.iternodes():
-            self.uf.create(node)
+            self._uf.create(node)
         for edge in self.graph.iteredges():
-            self.pq.put((edge.weight, edge))
-        while not self.pq.empty():
-            _, edge = self.pq.get()
-            if self.uf.find(edge.source) != self.uf.find(edge.target):
-                self.uf.union(edge.source, edge.target)
+            self._pq.put((edge.weight, edge))
+        while not self._pq.empty():
+            _, edge = self._pq.get()
+            if self._uf.find(edge.source) != self._uf.find(edge.target):
+                self._uf.union(edge.source, edge.target)
                 self.mst.add_edge(edge)
 
     def to_tree(self):

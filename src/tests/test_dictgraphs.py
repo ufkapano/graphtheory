@@ -2,7 +2,7 @@
 
 import unittest
 from edges import Edge
-from graphs import Graph
+from dictgraphs import Graph
 
 # A --o B
 # o   / o

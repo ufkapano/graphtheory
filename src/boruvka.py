@@ -5,18 +5,51 @@ from unionfind import UnionFind
 
 
 class BoruvkaMST:
-    """Boruvka's algorithm for finding MST."""
+    """Boruvka's algorithm for finding a minimum spanning tree.
+    
+    Attributes
+    ----------
+    graph : input graph or multigraph
+    mst : graph or multigraph (MST)
+    _uf : disjoint-set data structure, private
+    
+    Examples
+    --------
+    >>> from edges import Edge
+    >>> from graphs import Graph
+    >>> from boruvka import BoruvkaMST
+    >>> G = Graph(n=10, False) # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> algorithm = BoruvkaMST(G)
+    >>> algorithm.run()     # calculations
+    >>> algorithm.mst.show()     # MST as an undirected graph
+    
+    Notes
+    -----
+    Based on pseudocode from Wikipedia:
+    
+    https://en.wikipedia.org/wiki/Boruvka's_algorithm
+    
+    https://en.wikipedia.org/wiki/Minimum_spanning_tree
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected weighted graph or multigraph
+        """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v())   # MST as a graph
-        self.uf = UnionFind()
+        self.mst = self.graph.__class__(self.graph.v())
+        self._uf = UnionFind()
 
     def run(self):
         """Executable pseudocode."""
         for node in self.graph.iternodes():
-            self.uf.create(node)
+            self._uf.create(node)
         forest = set(node for node in self.graph.iternodes())
         dummy_edge = Edge(None, None, float("inf"))
         new_len = len(forest)
@@ -24,34 +57,34 @@ class BoruvkaMST:
         while old_len > new_len:
             old_len = new_len
             min_edges = dict(((node, dummy_edge) for node in forest))
-            # finding the cheapest eadges
+            # Finding the cheapest eadges.
             for edge in self.graph.iteredges(): # O(E) time
-                source = self.uf.find(edge.source)
-                target = self.uf.find(edge.target)
+                source = self._uf.find(edge.source)
+                target = self._uf.find(edge.target)
                 if source != target:   # different components
                     if edge < min_edges[source]:
                         min_edges[source] = edge
                     if edge < min_edges[target]:
                         min_edges[target] = edge
-            # connecting components, total time is O(V)
+            # Connecting components, total time is O(V).
             forest = set()
             for edge in min_edges.itervalues():
                 if edge is dummy_edge: # a disconnected graph
                     continue
-                source = self.uf.find(edge.source)
-                target = self.uf.find(edge.target)
+                source = self._uf.find(edge.source)
+                target = self._uf.find(edge.target)
                 if source != target:   # different components
-                    self.uf.union(source, target)
+                    self._uf.union(source, target)
                     forest.add(source)
                     self.mst.add_edge(edge)
-            # remove duplicates, total time is O(V)
-            forest = set(self.uf.find(node) for node in forest)
+            # Remove duplicates, total time is O(V).
+            forest = set(self._uf.find(node) for node in forest)
             new_len = len(forest)
             if new_len == 1:   # a connected graph
                 break
 
     def to_tree(self):
-        """Compatibility with other classes."""
+        """Return the minimum spanning tree."""
         return self.mst
 
 # EOF

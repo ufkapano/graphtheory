@@ -4,18 +4,32 @@ from Queue import Queue
 
 
 class BipartiteGraphBFS:
-    """Bipartite graphs detection based on BFS, O(V+E) time."""
+    """Bipartite graphs detection based on BFS, O(V+E) time.
+    
+    Attributes
+    ----------
+    graph : input graph or multigraph
+    color : dict with node colors
+    
+    Notes
+    -----
+    Colors are 0 and 1.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected graph or multigraph
+        """
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        # colors are 0 and 1
         self.color = dict(((node, None) for node in self.graph.iternodes()))
 
     def run(self, source=None):
-        """Executable pseudocode."""
+        """Node coloring using BFS."""
         if source is not None:
             self._visit(source)
         else:
@@ -40,21 +54,35 @@ class BipartiteGraphBFS:
 
 
 class BipartiteGraphDFS:
-    """Bipartite graphs detection based on DFS, O(V+E) time."""
+    """Bipartite graphs detection based on DFS, O(V+E) time.
+    
+    Attributes
+    ----------
+    graph : input graph or multigraph
+    color : dict with node colors
+    
+    Notes
+    -----
+    Colors are 0 and 1.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected graph or multigraph
+        """
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        # colors are 0 and 1
         self.color = dict(((node, None) for node in self.graph.iternodes()))
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None):
-        """Executable pseudocode."""
+        """Node coloring using DFS."""
         if source is not None:
             self.color[source] = 0   # before _visit
             self._visit(source)
