@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from hamilton import *
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.algorithms.hamilton import *
 
 # 0 --------- 5
 # | \       / |

@@ -98,10 +98,15 @@ class MatchingFordFulkersonColor:
 
 
 class MaximalMatching:
-    """Find a maximal cardinality matching using a greedy method."""
-    # Based on ideas from NetworkX library:
-    # http://networkx.github.io/documentation/networkx-1.9.1/
-    # _modules/networkx/algorithms/matching.html#maximal_matching
+    """Find a maximal cardinality matching using a greedy method.
+    
+    Notes
+    -----
+    Based on ideas from NetworkX library:
+    
+    http://networkx.github.io/documentation/networkx-1.9.1/
+    _modules/networkx/algorithms/matching.html#maximal_matching
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

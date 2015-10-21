@@ -1,10 +1,14 @@
 #!/usr/bin/python
-#
-# Based on the description from:
-# http://edu.i-lo.tarnow.pl/inf/alg/001_search/0136.php
 
 class HamiltonCycleDFS:
-    """Finding a Hamiltonian cycle in a Hamiltonian graph."""
+    """Finding a Hamiltonian cycle in a Hamiltonian graph.
+    
+    Notes
+    -----
+    Based on the description from:
+    
+    http://edu.i-lo.tarnow.pl/inf/alg/001_search/0136.php
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -46,7 +50,14 @@ class HamiltonCycleDFS:
 
 
 class HamiltonCycleDFSWithEdges:
-    """Finding a Hamiltonian cycle in a Hamiltonian graph."""
+    """Finding a Hamiltonian cycle in a Hamiltonian graph.
+    
+    Notes
+    -----
+    Based on the description from:
+    
+    http://edu.i-lo.tarnow.pl/inf/alg/001_search/0136.php
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -88,7 +99,14 @@ class HamiltonCycleDFSWithEdges:
 
 
 class HamiltonCycleDFSWithGraph:
-    """Finding a Hamiltonian cycle in a Hamiltonian graph."""
+    """Finding a Hamiltonian cycle in a Hamiltonian graph.
+    
+    Notes
+    -----
+    Based on the description from:
+    
+    http://edu.i-lo.tarnow.pl/inf/alg/001_search/0136.php
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

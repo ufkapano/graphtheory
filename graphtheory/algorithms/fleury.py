@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from dfs import SimpleDFS
-from bfs import SimpleBFS
+from graphtheory.traversing.dfs import SimpleDFS
+from graphtheory.traversing.bfs import SimpleBFS
 
 
 class FleuryDFS:

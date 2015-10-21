@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from hierholzer import Hierholzer, HierholzerWithEdges
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.algorithms.hierholzer import Hierholzer, HierholzerWithEdges
 
 # 0 --- 1     2
 # |     |   / |
