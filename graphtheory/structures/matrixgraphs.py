@@ -1,18 +1,25 @@
 #!/usr/bin/python
-#
-# Graph class with list-of-list structure (the adjacency matrix
-# representation). Nodes are int from 0 to n-1.
 
 import copy
 import random
-from edges import Edge
+from graphtheory.structures.edges import Edge
 
 
 class Graph:
-    """The class defining a graph."""
+    """The class defining a graph.
+    
+    Graph class with list-of-list structure (the adjacency matrix
+    representation). Nodes are int from 0 to n-1.
+    """
 
     def __init__(self, n, directed=False):
-        """Load up a Graph instance."""
+        """Load up a Graph instance.
+        
+        Parameters
+        ----------
+        n : int (positive)
+        directed : bool, optional (default=False)
+        """
         if n < 1:
             raise ValueError("incorrect number of nodes")
         self.n = n

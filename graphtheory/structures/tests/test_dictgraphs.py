@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from dictgraphs import Graph
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.dictgraphs import Graph
 
 # A --o B
 # o   / o

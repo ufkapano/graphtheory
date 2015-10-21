@@ -1,26 +1,34 @@
 #!/usr/bin/python
-#
-# Nodes can be numbers, strings, or any hashable objects.
-# We would like to compare nodes.
-#
-# {"A":{"B":1,"C":2}, 
-# "B":{"C":3,"D":4}, 
-# "C":{"D":5}, 
-# "D":{"C":6}, 
-# "E":{"C":7}, 
-# "F":{}}
 
 import random
-from edges import Edge
+from graphtheory.structures.edges import Edge
 
 
 class Graph(dict):
-    """The class defining a graph."""
+    """The class defining a graph.
+    
+    Nodes can be numbers, strings, or any hashable objects.
+    We would like to compare nodes.
+    
+    Internal structure of an exemplary directed graph:
+    {"A": {"B": 1, "C": 2}, 
+    "B": {"C": 3, "D": 4}, 
+    "C": {"D": 5}, 
+    "D": {"C": 6}, 
+    "E": {"C": 7}, 
+    "F": {}}
+    """
 
     def __init__(self, n=0, directed=False):
-        """Load up a Graph instance."""
-        self.n = n              # compatibility
-        self.directed = directed  # bool
+        """Load up a Graph instance.
+        
+        Parameters
+        ----------
+        n : int (positive; not used, for compatibility only)
+        directed : bool, optional (default=False)
+        """
+        self.n = n
+        self.directed = directed
 
     def is_directed(self):
         """Test if the graph is directed."""

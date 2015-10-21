@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from multigraphs import MultiGraph
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.multigraphs import MultiGraph
 
 # o     o
 # |     |
