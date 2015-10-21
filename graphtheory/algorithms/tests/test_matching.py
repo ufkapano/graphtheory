@@ -31,35 +31,112 @@ class TestMatching(unittest.TestCase):
         algorithm.run()
         # 5 solutions
         expected_cardinality = 3
-        expected_pair1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
-        expected_pair2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
-        expected_pair3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
-        expected_pair4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
-        expected_pair5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
+        expected_mate1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
+        expected_mate2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
+        expected_mate3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
+        expected_mate4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
+        expected_mate5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.pair, expected_pair5)
+        self.assertEqual(algorithm.mate, expected_mate5)
 
     def test_matching_fordfulkerson_color(self):
         algorithm = MatchingFordFulkersonColor(self.G)
         algorithm.run()
         # 5 solutions
         expected_cardinality = 3
-        expected_pair1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
-        expected_pair2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
-        expected_pair3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
-        expected_pair4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
-        expected_pair5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
+        expected_mate1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
+        expected_mate2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
+        expected_mate3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
+        expected_mate4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
+        expected_mate5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.pair, expected_pair5)
+        self.assertEqual(algorithm.mate, expected_mate5)
 
     def test_maximal_matching(self):
         algorithm = MaximalMatching(self.G)
         algorithm.run()
         # 5 solutions
         expected_cardinality = 2   # max 3
-        expected_pair = {0: 4, 4: 0, 1: 3, 3: 1, 2: None, 5: None, 6: None}
+        expected_mate = {0: 4, 4: 0, 1: 3, 3: 1, 2: None, 5: None, 6: None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.pair, expected_pair)
+        self.assertEqual(algorithm.mate, expected_mate)
+
+    def test_maximal_matching_with_edges(self):
+        algorithm = MaximalMatchingWithEdges(self.G)
+        algorithm.run()
+        # 5 solutions
+        expected_cardinality = 2   # max 3
+        expected_mate = {0: Edge(0, 4), 1: Edge(1, 3), 2: None,
+            3: Edge(3, 1), 4: Edge(4, 0), 5: None, 6: None}
+        self.assertEqual(algorithm.cardinality, expected_cardinality)
+        self.assertEqual(algorithm.mate, expected_mate)
+
+    def tearDown(self): pass
+
+
+class TestMatchingWithWeights(unittest.TestCase):
+
+    def setUp(self):
+        # Graf pelny z kolejnymi wagami.
+        self.N = 4
+        self.G = Graph(self.N)
+        self.nodes = [0, 1, 2, 3]
+        self.edges = [Edge(0, 1, 5), Edge(0, 2, 7), Edge(0, 3, 2),
+            Edge(1, 2, 3), Edge(1, 3, 6), Edge(2, 3, 4)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #self.G.show()
+
+    def test_min_weight_matching(self):
+        algorithm = MinimumWeightMatchingWithEdges(self.G)
+        algorithm.run()
+        expected_cardinality = 2
+        expected_weight = 5
+        expected_mate = {0: Edge(0, 3, 2), 1: Edge(1, 2, 3),
+            2: Edge(2, 1, 3), 3: Edge(3, 0, 2)}
+        self.assertEqual(algorithm.cardinality, expected_cardinality)
+        # Krawedzie sa po dwa razy w slowniku.
+        weight = sum(algorithm.mate[node].weight
+            for node in algorithm.mate if algorithm.mate[node]) / 2
+        self.assertEqual(weight, expected_weight)
+        self.assertEqual(algorithm.mate, expected_mate)
+
+    def tearDown(self): pass
+
+
+class TestMatchingWithWeights2(unittest.TestCase):
+
+    def setUp(self):
+        # Graf pelny z kolejnymi wagami.
+        self.N = 4
+        self.G = Graph(self.N)
+        self.nodes = [0, 1, 2, 3]
+        self.edges = [Edge(0, 1, 4), Edge(0, 2, 3), Edge(0, 3, 2),
+            Edge(1, 2, 7), Edge(1, 3, 5), Edge(2, 3, 6)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #self.G.show()
+
+    def test_min_weight_matching(self):
+        algorithm = MinimumWeightMatchingWithEdges(self.G)
+        algorithm.run()
+        expected_cardinality = 2
+        expected_weight = 9   # best minimum 8
+        # Best solution.
+        #expected_mate = {0: Edge(0, 2, 3), 1: Edge(1, 3, 5),
+        #    2: Edge(2, 0, 3), 3: Edge(3, 1, 5)}
+        expected_mate = {0: Edge(0, 3, 2), 1: Edge(1, 2, 7),
+            2: Edge(2, 1, 7), 3: Edge(3, 0, 2)}
+        self.assertEqual(algorithm.cardinality, expected_cardinality)
+        # Krawedzie sa po dwa razy w slowniku.
+        weight = sum(algorithm.mate[node].weight
+            for node in algorithm.mate if algorithm.mate[node]) / 2
+        self.assertEqual(weight, expected_weight)
+        self.assertEqual(algorithm.mate, expected_mate)
 
     def tearDown(self): pass
 

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from Queue import PriorityQueue
 from graphtheory.structures.edges import Edge
 from graphtheory.algorithms.bipartite import BipartiteGraphBFS
 from graphtheory.flow.fordfulkerson import FordFulkersonSparse
@@ -11,7 +12,7 @@ class MatchingFordFulkersonSet:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.pair = dict((node, None) for node in self.graph.iternodes())
+        self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
         algorithm = BipartiteGraphBFS(self.graph)
         algorithm.run()
@@ -48,8 +49,8 @@ class MatchingFordFulkersonSet:
         for source in self.v1:
             for target in self.v2:
                 if algorithm.flow[source].get(target, 0) == 1:
-                    self.pair[source] = target
-                    self.pair[target] = source
+                    self.mate[source] = target
+                    self.mate[target] = source
         self.cardinality = algorithm.max_flow
 
 
@@ -60,7 +61,7 @@ class MatchingFordFulkersonColor:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.pair = dict((node, None) for node in self.graph.iternodes())
+        self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
         algorithm = BipartiteGraphBFS(self.graph)
         algorithm.run()
@@ -92,8 +93,8 @@ class MatchingFordFulkersonColor:
             for target in self.graph.iternodes():
                 if self.color[source] == 1 and self.color[target] != 1 \
                     and algorithm.flow[source].get(target, 0) == 1:
-                        self.pair[source] = target
-                        self.pair[target] = source
+                        self.mate[source] = target
+                        self.mate[target] = source
         self.cardinality = algorithm.max_flow
 
 
@@ -111,16 +112,67 @@ class MaximalMatching:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
-        self.pair = dict((node, None) for node in self.graph.iternodes())
+        self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
 
     def run(self):
         """Executable pseudocode."""
         for edge in self.graph.iteredges():   # O(E) time
-            if (self.pair[edge.source] is None and 
-                self.pair[edge.target] is None):
-                    self.pair[edge.source] = edge.target
-                    self.pair[edge.target] = edge.source
+            if (self.mate[edge.source] is None and 
+                self.mate[edge.target] is None):
+                    self.mate[edge.source] = edge.target
+                    self.mate[edge.target] = edge.source
+                    self.cardinality += 1
+
+
+class MaximalMatchingWithEdges:
+    """Find a maximal cardinality matching using a greedy method.
+    
+    Notes
+    -----
+    Based on ideas from NetworkX library:
+    
+    http://networkx.github.io/documentation/networkx-1.9.1/
+    _modules/networkx/algorithms/matching.html#maximal_matching
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.mate = dict((node, None) for node in self.graph.iternodes())
+        self.cardinality = 0
+
+    def run(self):
+        """Executable pseudocode."""
+        for edge in self.graph.iteredges():   # O(E) time
+            if (self.mate[edge.source] is None and 
+                self.mate[edge.target] is None):
+                    self.mate[edge.source] = edge
+                    self.mate[edge.target] = ~edge
+                    self.cardinality += 1
+
+
+class MinimumWeightMatchingWithEdges:
+    """Find a minimum weight matching using a greedy method."""
+    # Bedzie potrzebne do problemu chinskiego listonosza.
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.mate = dict((node, None) for node in self.graph.iternodes())
+        self.cardinality = 0
+        self._pq = PriorityQueue()
+
+    def run(self):
+        """Executable pseudocode."""
+        for edge in self.graph.iteredges():
+            self._pq.put((edge.weight, edge))
+        while not self._pq.empty():
+            _, edge = self._pq.get()
+            if (self.mate[edge.source] is None and 
+                self.mate[edge.target] is None):
+                    self.mate[edge.source] = edge
+                    self.mate[edge.target] = ~edge
                     self.cardinality += 1
 
 # EOF
