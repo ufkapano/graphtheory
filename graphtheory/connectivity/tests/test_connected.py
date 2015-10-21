@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from connected import *
-from graphs import Graph
-from edges import Edge
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.connectivity.connected import *
 
 # 0 - 1   2 - 3
 # |   |   | / |

@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-#from bfs import BFSWithQueue as SimpleBFS
-from bfs import SimpleBFS
+#from graphtheory.traversing.bfs import BFSWithQueue as SimpleBFS
+from graphtheory.traversing.bfs import SimpleBFS
 
-#from dfs import DFSWithStack as SimpleDFS
-#from dfs import DFSWithRecursion as SimpleDFS
-from dfs import SimpleDFS
+#from graphtheory.traversing.dfs import DFSWithStack as SimpleDFS
+#from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
+from graphtheory.traversing.dfs import SimpleDFS
 
 
 class TransitiveClosureSimple:
