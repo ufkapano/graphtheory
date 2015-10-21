@@ -9,7 +9,7 @@ class DAGShortestPath:
     
     Attributes
     ----------
-    graph : input directed acyclic graph
+    graph : input weighted directed acyclic graph
     parent : dict with nodes (shortest path tree)
     distance : dict with nodes (distabces to source node)
     source : node
@@ -19,7 +19,7 @@ class DAGShortestPath:
     >>> from edges import Edge
     >>> from graphs import Graph
     >>> from dagshortestpath import DAGShortestPath
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, True)    # an exemplary DAG
     # Add nodes and edges here.
     >>> algorithm = DAGShortestPath(G)   # initialization
     >>> algorithm.run(source)   # calculations
@@ -41,7 +41,7 @@ class DAGShortestPath:
         
         Parameters
         ----------
-        graph : directed acyclic graph
+        graph : weighted directed acyclic graph
         """
         if not graph.is_directed():
             raise ValueError("graph is not directed")
