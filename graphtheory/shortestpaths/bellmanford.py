@@ -1,28 +1,24 @@
 #!/usr/bin/python
 
-from edges import Edge
-from topsort import TopologicalSortDFS
-
-
-class DAGShortestPath:
-    """The shortest path problem for a directed acyclic graph.
+class BellmanFord:
+    """The Bellman-Ford algorithm for the shortest path problem.
     
     Attributes
     ----------
-    graph : input weighted directed acyclic graph
+    graph : input directed weighted graph
     parent : dict with nodes (shortest path tree)
     distance : dict with nodes (distabces to source node)
     source : node
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from dagshortestpath import DAGShortestPath
-    >>> G = Graph(n=10, True)    # an exemplary DAG
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.bellmanford import BellmanFord
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
     # Add nodes and edges here.
-    >>> algorithm = DAGShortestPath(G)   # initialization
-    >>> algorithm.run(source)   # calculations
+    >>> algorithm = BellmanFord(G)     # initialization
+    >>> algorithm.run(source)     # calculations
     >>> algorithm.parent   # shortest path tree as a dict
     >>> algorithm.distance[target]   # distance from source to target
     >>> algorithm.path(target)   # path from source to target
@@ -34,6 +30,8 @@ class DAGShortestPath:
     Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
         Introduction to Algorithms, third edition, The MIT Press, 
         Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Bellman-Ford_algorithm
     """
 
     def __init__(self, graph):
@@ -41,24 +39,26 @@ class DAGShortestPath:
         
         Parameters
         ----------
-        graph : weighted directed acyclic graph
+        graph : directed weighted graph
         """
         if not graph.is_directed():
-            raise ValueError("graph is not directed")
+            raise ValueError("the graph is not directed")
         self.graph = graph
         # Shortest path tree as a dictionary.
-        self.parent = dict((node, None) for node in self.graph.iternodes())
-        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.parent = dict(((node, None) for node in self.graph.iternodes()))
+        self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
 
     def run(self, source):
         """Executable pseudocode."""
         self.source = source
         self.distance[source] = 0
-        algorithm = TopologicalSortDFS(self.graph)
-        algorithm.run()
-        for source in algorithm.sorted_nodes:
-            for edge in self.graph.iteroutedges(source):
+        for step in xrange(self.graph.v()-1):   # |V|-1 times
+            for edge in self.graph.iteredges():   # O(E) time
                 self._relax(edge)
+        # Check for negative cycles.
+        for edge in self.graph.iteredges():   # O(E) time
+            if self.distance[edge.target] > self.distance[edge.source] + edge.weight:
+                raise ValueError("negative cycle")
 
     def _relax(self, edge):
         """Edge relaxation."""

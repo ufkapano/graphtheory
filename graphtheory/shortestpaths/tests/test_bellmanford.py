@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from bellmanford import BellmanFord
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.shortestpaths.bellmanford import BellmanFord
 
 #    1
 # 0 --o 1

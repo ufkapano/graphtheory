@@ -17,9 +17,9 @@ class Dijkstra:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from dijkstra import Dijkstra
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.dijkstra import Dijkstra
     >>> G = Graph(n=10, True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = Dijkstra(G)   # initialization
@@ -104,9 +104,9 @@ class DijkstraMatrix:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from dijkstra import DijkstraMatrix
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.dijkstra import DijkstraMatrix
     >>> G = Graph(n=10, True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = DijkstraMatrix(G)   # initialization

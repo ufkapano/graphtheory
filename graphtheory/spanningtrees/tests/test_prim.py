@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.spanningtrees.prim import PrimMST, PrimMatrixMST, PrimTrivialMST
+from graphtheory.spanningtrees.prim import *
 
 
 class TestPrim(unittest.TestCase):

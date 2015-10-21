@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 from Queue import Queue
-#from dfs import DFSWithRecursion as SimpleDFS
-from dfs import SimpleDFS
+#from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
+from graphtheory.traversing.dfs import SimpleDFS
 
 
 class TopologicalSortDFS:

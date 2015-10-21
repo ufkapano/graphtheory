@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from dijkstra import Dijkstra, DijkstraMatrix
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.shortestpaths.dijkstra import Dijkstra, DijkstraMatrix
 
 #    1
 # 0 --> 1
