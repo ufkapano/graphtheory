@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from edges import Edge
 from Queue import LifoQueue
+from graphtheory.structures.edges import Edge
 
 
 class FordFulkerson:

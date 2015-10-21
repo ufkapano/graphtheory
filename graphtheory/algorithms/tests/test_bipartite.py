@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from bipartite import BipartiteGraphBFS, BipartiteGraphDFS
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.algorithms.bipartite import BipartiteGraphBFS, BipartiteGraphDFS
 
 # 0---1---2
 # |   |   |

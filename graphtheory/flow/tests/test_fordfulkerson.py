@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edmondskarp import *
-from graphs import Graph
-from edges import Edge
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.flow.fordfulkerson import *
 
 #     10
 #  0 ---> 1
@@ -13,7 +13,7 @@ from edges import Edge
 #  2 ---> 3
 #     10
 
-class TestEdmondsKarp(unittest.TestCase):
+class TestFordFulkerson(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
@@ -28,8 +28,8 @@ class TestEdmondsKarp(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_edmondskarp(self):
-        algorithm = EdmondsKarp(self.G)
+    def test_fordfulkerson(self):
+        algorithm = FordFulkerson(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
         expected_flow = {
@@ -40,8 +40,8 @@ class TestEdmondsKarp(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_edmondskarp_sparse(self):
-        algorithm = EdmondsKarpSparse(self.G)
+    def test_fordfulkerson_sparse(self):
+        algorithm = FordFulkersonSparse(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
         expected_flow = {
@@ -53,7 +53,7 @@ class TestEdmondsKarp(unittest.TestCase):
         self.assertEqual(algorithm.flow, expected_flow)
 
 
-class TestEdmondsKarpWiki(unittest.TestCase):
+class TestFordFulkersonWiki(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
@@ -69,22 +69,35 @@ class TestEdmondsKarpWiki(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
+    def test_wiki(self):
+        algorithm = FordFulkerson(self.G)
+        algorithm.run(0, 6)
+        expected_max_flow = 5
+        expected_flow = {
+            0: {0: 0, 2: 0, 1: 2, 4: 0, 3: 3, 6: 0, 5: 0}, 
+            1: {0: -2, 2: 2, 1: 0, 4: 0, 3: 0, 6: 0, 5: 0}, 
+            2: {0: 0, 2: 0, 1: -2, 4: 1, 3: 1, 6: 0, 5: 0}, 
+            3: {0: -3, 2: -1, 1: 0, 4: 0, 3: 0, 6: 0, 5: 4}, 
+            4: {0: 0, 2: -1, 1: 0, 4: 0, 3: 0, 6: 1, 5: 0}, 
+            5: {0: 0, 2: 0, 1: 0, 4: 0, 3: -4, 6: 4, 5: 0}, 
+            6: {0: 0, 2: 0, 1: 0, 4: -1, 3: 0, 6: 0, 5: -4}}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
     def test_wiki_sparse(self):
-        algorithm = EdmondsKarpSparse(self.G)
+        algorithm = FordFulkersonSparse(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
         expected_flow = {
             0: {1: 2, 3: 3}, 
             1: {0: -2, 2: 2}, 
             2: {1: -2, 4: 1, 3: 1}, 
-            3: {0: -3, 2: -1, 4: 0, 5: 4}, 
-            4: {2: -1, 3: 0, 6: 1}, 
+            3: {0: -3, 2: -1, 5: 4}, 
+            4: {2: -1, 6: 1}, 
             5: {3: -4, 6: 4}, 
             6: {4: -1, 5: -4}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
-
-    def tearDown(self): pass
 
 if __name__ == "__main__":
 

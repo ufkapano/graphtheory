@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-from graphs import Graph
-
-
 class AcyclicGraphDFS:
     """Cycles detection in graphs based on DFS."""
 

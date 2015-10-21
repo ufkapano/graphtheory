@@ -1,19 +1,19 @@
 #!/usr/bin/python
-#
-# hopcroftkarp.py
-#
-# The Hopcroft-Karp algorithm.
-# Based on pseudocode from:
-# http://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm
 
-from edges import Edge
 from Queue import Queue
-#from bipartite import BipartiteGraphBFS as Bipartite
-from bipartite import BipartiteGraphDFS as Bipartite
+#from graphtheory.algorithms.bipartite import BipartiteGraphBFS as Bipartite
+from graphtheory.algorithms.bipartite import BipartiteGraphDFS as Bipartite
 
 
 class HopcroftKarp:
-    """Maximum-cardinality matching using the Hopcroft-Karp algorithm."""
+    """Maximum-cardinality matching using the Hopcroft-Karp algorithm.
+    
+    Notes
+    -----
+    Based on pseudocode from:
+    
+    http://en.wikipedia.org/wiki/Hopcroft-Karp_algorithm
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-from edges import Edge
-from bipartite import BipartiteGraphBFS
-from fordfulkerson import FordFulkersonSparse
+from graphtheory.structures.edges import Edge
+from graphtheory.algorithms.bipartite import BipartiteGraphBFS
+from graphtheory.flow.fordfulkerson import FordFulkersonSparse
 
 
 class MatchingFordFulkersonSet:

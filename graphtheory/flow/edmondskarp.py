@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from edges import Edge
 from Queue import Queue
+from graphtheory.structures.edges import Edge
 
 
 class EdmondsKarp:
