@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from prim import PrimMST, PrimMatrixMST, PrimTrivialMST
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.shortestpaths.prim import PrimMST, PrimMatrixMST, PrimTrivialMST
 
 
 class TestPrim(unittest.TestCase):

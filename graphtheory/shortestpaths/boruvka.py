@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from edges import Edge
-from unionfind import UnionFind
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.unionfind import UnionFind
 
 
 class BoruvkaMST:
@@ -15,9 +15,9 @@ class BoruvkaMST:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from boruvka import BoruvkaMST
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.boruvka import BoruvkaMST
     >>> G = Graph(n=10, False) # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = BoruvkaMST(G)

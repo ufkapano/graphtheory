@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from unionfind import UnionFind
+from graphtheory.structures.unionfind import UnionFind
 
 
 class TestUnionFind(unittest.TestCase):

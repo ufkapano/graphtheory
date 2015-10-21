@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-from kruskal import KruskalMST
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.shortestpaths.kruskal import KruskalMST
 
 
 class TestKruskal(unittest.TestCase):

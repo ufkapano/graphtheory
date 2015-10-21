@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-from unionfind import UnionFind
 from Queue import PriorityQueue
+from graphtheory.structures.unionfind import UnionFind
 
 
 class KruskalMST:
@@ -16,9 +16,9 @@ class KruskalMST:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from kruskal import KruskalMST
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.kruskal import KruskalMST
     >>> G = Graph(n=10, False) # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = KruskalMST(G)     # initialization

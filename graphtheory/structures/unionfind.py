@@ -1,11 +1,16 @@
 #!/usr/bin/python
-#
-# unionfind.py
-#
-# Union-Find according to Cormen.
 
 class UnionFind:
-    """Disjoint-set data structure."""
+    """Disjoint-set data structure.
+    
+    Notes
+    -----
+    Union-Find according to
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self):
         """Disjoint-set initialization."""
