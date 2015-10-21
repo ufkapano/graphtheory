@@ -11,7 +11,7 @@ class DAGShortestPath:
     ----------
     graph : input weighted directed acyclic graph
     parent : dict with nodes (shortest path tree)
-    distance : dict with nodes (distabces to source node)
+    distance : dict with nodes (distances to source node)
     source : node
     
     Examples

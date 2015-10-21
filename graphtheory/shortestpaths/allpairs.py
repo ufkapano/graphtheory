@@ -1,9 +1,7 @@
 #!/usr/bin/python
-#
-# All-pairs shorted paths algorithms.
 
 class SlowAllPairs:
-    """O(V**4) time."""
+    """All-pairs shortest paths algorithm in O(V**4) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -43,7 +41,7 @@ class SlowAllPairs:
 
 
 class SlowAllPairsEdges:
-    """O(V**2 (V+E)) time."""
+    """All-pairs shortest paths algorithm in O(V**2 (V+E)) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -82,7 +80,7 @@ class SlowAllPairsEdges:
 
 
 class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
-    """O(V**4) time."""
+    """All-pairs shortest paths algorithm in O(V**4) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -127,7 +125,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
 
 
 class FasterAllPairs:
-    """O(V**3 log V) time."""
+    """All-pairs shortest paths algorithm in O(V**3 log V) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

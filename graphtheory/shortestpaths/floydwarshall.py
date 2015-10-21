@@ -1,10 +1,44 @@
 #!/usr/bin/python
 
 class FloydWarshall:
-    """The Floyd-Warshall algorithm."""
+    """The Floyd-Warshall algorithm (all-pairs shortest paths).
+    
+    Negative cycles are forbidden.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.floydwarshall import FloydWarshall
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = FloydWarshall(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Floyd-Warshall_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -32,10 +66,46 @@ class FloydWarshall:
 
 
 class FloydWarshallPaths:
-    """The Floyd-Warshall algorithm with path reconstruction."""
+    """The Floyd-Warshall algorithm with path reconstruction.
+    
+    Negative cycles are forbidden.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    parent : dict-of-dict
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.floydwarshall import FloydWarshallPaths
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = FloydWarshallPaths(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    >>> algorithm.path(source, target)   # path from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Floyd-Warshall_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -77,10 +147,45 @@ class FloydWarshallPaths:
 
 
 class FloydWarshallAllGraphs:
-    """The Floyd-Warshall algorithm, nonnegative edge weights."""
+    """The Floyd-Warshall algorithm, nonnegative edge weights.
+    
+    Negative cycles are forbidden.
+    
+    Attributes
+    ----------
+    graph : input weighted graph (directed or undirected)
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.floydwarshall \
+        import FloydWarshallAllGraphs
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = FloydWarshallAllGraphs(G)   # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Floyd-Warshall_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed or undirected weighted graph
+        """
         self.graph = graph
         self.distance = dict()
         for source in self.graph.iternodes():

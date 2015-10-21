@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from allpairs import *
-from graphs import Graph
-from edges import Edge
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.shortestpaths.allpairs import *
 
 
 class TestAllPairsShortestPaths(unittest.TestCase):

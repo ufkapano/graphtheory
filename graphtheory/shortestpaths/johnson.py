@@ -1,17 +1,51 @@
 #!/usr/bin/python
 
-from edges import Edge
-from bellmanford import BellmanFord
-from dijkstra import Dijkstra
+from graphtheory.structures.edges import Edge
+from graphtheory.shortestpaths.bellmanford import BellmanFord
+from graphtheory.shortestpaths.dijkstra import Dijkstra
+
 
 class Johnson:
-    """The Johnson algorithm for the shortest path problem."""
+    """The Johnson algorithm for the shortest path problem.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.johnson import Johnson
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = Johnson(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Johnson's_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
+        self.distance = None
 
     def run(self):
         """Executable pseudocode."""
@@ -50,15 +84,48 @@ class Johnson:
 
 
 class JohnsonFaster:
-    """The Johnson algorithm for the shortest path problem."""
+    """The Johnson algorithm for the shortest path problem.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.johnson import JohnsonFaster
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = JohnsonFaster(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Johnson's_algorithm
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
         self.positive_weights = all(edge.weight >= 0
             for edge in self.graph.iteredges())   # O(E) time
+        self.distance = None
 
     def run(self):
         """Executable pseudocode."""

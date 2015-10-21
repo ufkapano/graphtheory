@@ -10,7 +10,7 @@ class Dijkstra:
     ----------
     graph : input directed weighted graph
     parent : dict with nodes (shortest path tree)
-    distance : dict with nodes (distabces to source node)
+    distance : dict with nodes (distances to source node)
     source : node
     _in_queue : dict, private
     _pq : priority queue, private
@@ -97,7 +97,7 @@ class DijkstraMatrix:
     ----------
     graph : input directed weighted graph
     parent : dict with nodes (shortest path tree)
-    distance : dict with nodes (distabces to source node)
+    distance : dict with nodes (distances to source node)
     source : node
     _in_queue : dict, private
     _pq : priority queue, private
