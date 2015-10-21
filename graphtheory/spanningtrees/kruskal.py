@@ -18,7 +18,7 @@ class KruskalMST:
     --------
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
-    >>> from graphtheory.shortestpaths.kruskal import KruskalMST
+    >>> from graphtheory.spanningtrees.kruskal import KruskalMST
     >>> G = Graph(n=10, False) # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = KruskalMST(G)     # initialization

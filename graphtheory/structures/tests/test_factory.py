@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
 import unittest
-from edges import Edge
-from graphs import Graph
-#from matrixgraphs import Graph
-from factory import GraphFactory
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
 
 
 class TestGraphFactory(unittest.TestCase):

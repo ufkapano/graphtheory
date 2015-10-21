@@ -20,7 +20,7 @@ class PrimMST:
     --------
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
-    >>> from graphtheory.shortestpaths.prim import PrimMST
+    >>> from graphtheory.spanningtrees.prim import PrimMST
     >>> G = Graph(n=10, False)    # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = PrimMST(G)
@@ -104,10 +104,10 @@ class PrimMatrixMST:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from prim import PrimMatrixMST
-    >>> from factory import GraphFactory
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.spanningtrees.prim import PrimMatrixMST
+    >>> from graphtheory.structures.factory import GraphFactory
     >>> gf = GraphFactory(Graph)
     >>> G = gf.make_complete(n=10, directed=False)
     >>> algorithm = PrimMatrixMST(G)

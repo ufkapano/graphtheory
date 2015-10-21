@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import random
-from edges import Edge
+from graphtheory.structures.edges import Edge
 
 
 class GraphFactory:
