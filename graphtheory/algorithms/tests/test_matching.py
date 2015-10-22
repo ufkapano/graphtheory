@@ -26,32 +26,6 @@ class TestMatching(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_matching_fordfulkerson_set(self):
-        algorithm = MatchingFordFulkersonSet(self.G)
-        algorithm.run()
-        # 5 solutions
-        expected_cardinality = 3
-        expected_mate1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
-        expected_mate2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
-        expected_mate3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
-        expected_mate4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
-        expected_mate5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
-        self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.mate, expected_mate5)
-
-    def test_matching_fordfulkerson_color(self):
-        algorithm = MatchingFordFulkersonColor(self.G)
-        algorithm.run()
-        # 5 solutions
-        expected_cardinality = 3
-        expected_mate1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
-        expected_mate2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
-        expected_mate3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
-        expected_mate4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
-        expected_mate5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
-        self.assertEqual(algorithm.cardinality, expected_cardinality)
-        self.assertEqual(algorithm.mate, expected_mate5)
-
     def test_maximal_matching(self):
         algorithm = MaximalMatching(self.G)
         algorithm.run()

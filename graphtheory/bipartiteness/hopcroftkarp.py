@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 from Queue import Queue
-#from graphtheory.algorithms.bipartite import BipartiteGraphBFS as Bipartite
-from graphtheory.algorithms.bipartite import BipartiteGraphDFS as Bipartite
+#from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
+from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
 
 
 class HopcroftKarp:
