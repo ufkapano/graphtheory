@@ -16,9 +16,9 @@ class DAGShortestPath:
     
     Examples
     --------
-    >>> from edges import Edge
-    >>> from graphs import Graph
-    >>> from dagshortestpath import DAGShortestPath
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.dagshortestpath import DAGShortestPath
     >>> G = Graph(n=10, True)    # an exemplary DAG
     # Add nodes and edges here.
     >>> algorithm = DAGShortestPath(G)   # initialization

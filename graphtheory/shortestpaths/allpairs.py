@@ -1,10 +1,41 @@
 #!/usr/bin/python
 
 class SlowAllPairs:
-    """All-pairs shortest paths algorithm in O(V**4) time."""
+    """All-pairs shortest paths algorithm in O(V**4) time.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    weights : dict-of-dict, private
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.allpairs import SlowAllPairs
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = SlowAllPairs(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -41,10 +72,41 @@ class SlowAllPairs:
 
 
 class SlowAllPairsEdges:
-    """All-pairs shortest paths algorithm in O(V**2 (V+E)) time."""
+    """All-pairs shortest paths algorithm in O(V**2 (V+E)) time.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    weights : dict-of-dict, private
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.allpairs import SlowAllPairsEdges
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = SlowAllPairsEdges(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -80,10 +142,43 @@ class SlowAllPairsEdges:
 
 
 class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
-    """All-pairs shortest paths algorithm in O(V**4) time."""
+    """All-pairs shortest paths algorithm in O(V**4) time.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    weights : dict-of-dict, private
+    parent : dict with nodes
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.allpairs import SlowAllPairsWithPaths
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = SlowAllPairsWithPaths(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    >>> algorithm.path(source, target)   # path from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -123,12 +218,51 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
                         self.parent[source][target] = node
         return new_distance
 
+    def path(self, source, target):
+        """Path reconstruction."""
+        if source == target:
+            return [source]
+        elif self.parent[source][target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[source][target]) + [target]
+
 
 class FasterAllPairs:
-    """All-pairs shortest paths algorithm in O(V**3 log V) time."""
+    """All-pairs shortest paths algorithm in O(V**3 log V) time.
+    
+    Attributes
+    ----------
+    graph : input directed weighted graph
+    distance : dict-of-dict
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.shortestpaths.allpairs import FasterAllPairs
+    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    # Add nodes and edges here.
+    >>> algorithm = FasterAllPairs(G)     # initialization
+    >>> algorithm.run()     # calculations
+    >>> algorithm.distance[source][target]   # distance from source to target
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : directed weighted graph
+        """
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph

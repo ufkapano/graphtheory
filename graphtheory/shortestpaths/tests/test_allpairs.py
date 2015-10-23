@@ -11,7 +11,7 @@ class TestAllPairsShortestPaths(unittest.TestCase):
     def setUp(self):
         self.N = 5           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3, 4]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 2, 6), Edge(0, 3, 3), Edge(1, 0, 3), Edge(2, 3, 2), 
             Edge(3, 1, 1), Edge(3, 2, 1), Edge(4, 1, 4), Edge(4, 3, 2)]
@@ -71,6 +71,7 @@ class TestAllPairsShortestPaths(unittest.TestCase):
             4: {0: 1, 2: 3, 1: 3, 4: None, 3: 4}}
         self.assertEqual(algorithm.distance, expected_distance)
         self.assertEqual(algorithm.parent, expected_parent)
+        self.assertEqual(algorithm.path(0, 1), [0, 3, 1])
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(1, 3, -2))

@@ -52,6 +52,7 @@ class Dijkstra:
         # Shortest path tree as a dictionary.
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.source = None
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
         self._pq = PriorityQueue()
 
@@ -139,6 +140,7 @@ class DijkstraMatrix:
         # Shortest path tree as a dictionary.
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.source = None
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
 
     def run(self, source):
