@@ -9,7 +9,7 @@ class BipartiteGraphBFS:
     Attributes
     ----------
     graph : input graph or multigraph
-    color : dict with node colors
+    color : dict with nodes (values are colors)
     
     Notes
     -----
@@ -26,7 +26,7 @@ class BipartiteGraphBFS:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.color = dict(((node, None) for node in self.graph.iternodes()))
+        self.color = dict((node, None) for node in self.graph.iternodes())
 
     def run(self, source=None):
         """Node coloring using BFS."""
@@ -59,7 +59,7 @@ class BipartiteGraphDFS:
     Attributes
     ----------
     graph : input graph or multigraph
-    color : dict with node colors
+    color : dict with nodes (values are colors)
     
     Notes
     -----

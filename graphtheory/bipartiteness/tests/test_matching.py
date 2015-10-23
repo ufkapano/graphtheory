@@ -16,10 +16,10 @@ class TestMatching(unittest.TestCase):
         # ...
         self.N = 7
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6]
+        self.nodes = range(self.N)
         self.edges = [
-            Edge(0, 4), Edge(0, 5), Edge(0, 6), 
-            Edge(1, 3), Edge(1, 5), Edge(2, 3), Edge(2, 4)]
+            Edge(0, 4), Edge(0, 5), Edge(0, 6), Edge(1, 3), Edge(1, 5), 
+            Edge(2, 3), Edge(2, 4)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -28,6 +28,19 @@ class TestMatching(unittest.TestCase):
 
     def test_matching_fordfulkerson_set(self):
         algorithm = MatchingFordFulkersonSet(self.G)
+        algorithm.run()
+        # 5 solutions
+        expected_cardinality = 3
+        expected_mate1 = {0:5, 5:0, 1:3, 3:1, 2:4, 4:2, 6:None}
+        expected_mate2 = {0:4, 4:0, 1:5, 5:1, 2:3, 3:2, 6:None}
+        expected_mate3 = {0:6, 6:0, 1:3, 3:1, 2:4, 4:2, 5:None}
+        expected_mate4 = {0:6, 6:0, 1:5, 5:1, 2:3, 3:2, 4:None}
+        expected_mate5 = {0:6, 6:0, 1:5, 5:1, 2:4, 4:2, 3:None}
+        self.assertEqual(algorithm.cardinality, expected_cardinality)
+        self.assertEqual(algorithm.mate, expected_mate5)
+
+    def test_matching_fordfulkerson_list(self):
+        algorithm = MatchingFordFulkersonList(self.G)
         algorithm.run()
         # 5 solutions
         expected_cardinality = 3
@@ -52,10 +65,18 @@ class TestMatching(unittest.TestCase):
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         self.assertEqual(algorithm.mate, expected_mate5)
 
+    def test_exceptions(self):
+        self.assertRaises(ValueError, MatchingFordFulkersonSet, Graph(2, directed=True))
+        self.assertRaises(ValueError, MatchingFordFulkersonList, Graph(2, directed=True))
+        self.assertRaises(ValueError, MatchingFordFulkersonColor, Graph(2, directed=True))
+
     def tearDown(self): pass
 
 if __name__ == "__main__":
 
-    unittest.main()
+    #unittest.main()
+    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestMatching)
+    suite = unittest.TestSuite([suite1])
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 # EOF

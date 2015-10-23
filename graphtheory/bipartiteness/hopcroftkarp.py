@@ -5,8 +5,18 @@ from Queue import Queue
 from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
 
 
-class HopcroftKarp:
+class HopcroftKarpSet:
     """Maximum-cardinality matching using the Hopcroft-Karp algorithm.
+    
+    Attributes
+    ----------
+    graph : input graph
+    mate : dict with nodes (values are nodes or None)
+    distance : dict with nodes
+    cardinality : number
+    v1 : first set of nodes
+    v2 : second set of nodes
+    Q : queue, private
     
     Notes
     -----
@@ -16,34 +26,41 @@ class HopcroftKarp:
     """
 
     def __init__(self, graph):
-        """The algorithm initialization."""
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected graph
+        """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
-        self.pair = dict((node, None) for node in self.graph.iternodes())
+        self.mate = dict((node, None) for node in self.graph.iternodes())
         self.distance = dict()
         self.cardinality = 0
         algorithm = Bipartite(self.graph)
         algorithm.run()
-        self.v1 = list()   # or set()
-        self.v2 = list()   # or set()
+        self.v1 = set()
+        self.v2 = set()
         for node in self.graph.iternodes():
             if algorithm.color[node] == 1:
-                self.v1.append(node)   # or add()
+                self.v1.add(node)
             else:
-                self.v2.append(node)   # or add()
+                self.v2.add(node)
         self.Q = Queue()   # for nodes from self.v1
 
     def run(self):
         """Executable pseudocode."""
         while self._bfs_stage():
             for node in self.v1:
-                if self.pair[node] is None and self._dfs_stage(node):
+                if self.mate[node] is None and self._dfs_stage(node):
                     self.cardinality = self.cardinality + 1
-                    #print self.pair
+                    #print self.mate
 
     def _bfs_stage(self):
         """The BFS stage."""
         for node in self.v1:
-            if self.pair[node] is None:
+            if self.mate[node] is None:
                 self.distance[node] = 0
                 self.Q.put(node)
             else:
@@ -53,19 +70,103 @@ class HopcroftKarp:
             node = self.Q.get()
             if self.distance[node] < self.distance[None]:
                 for edge in self.graph.iteroutedges(node):
-                    if self.distance[self.pair[edge.target]] == float("inf"):
-                        self.distance[self.pair[edge.target]] = self.distance[node] + 1
-                        self.Q.put(self.pair[edge.target])
+                    if self.distance[self.mate[edge.target]] == float("inf"):
+                        self.distance[self.mate[edge.target]] = self.distance[node] + 1
+                        self.Q.put(self.mate[edge.target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):
         """The DFS stage."""
         if node is not None:
             for edge in self.graph.iteroutedges(node):
-                if self.distance[self.pair[edge.target]] == self.distance[node] + 1:
-                    if self._dfs_stage(self.pair[edge.target]):
-                        self.pair[edge.target] = node
-                        self.pair[node] = edge.target
+                if self.distance[self.mate[edge.target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.mate[edge.target]):
+                        self.mate[edge.target] = node
+                        self.mate[node] = edge.target
+                        return True
+            self.distance[node] = float("inf")
+            return False
+        return True
+
+
+class HopcroftKarpList:
+    """Maximum-cardinality matching using the Hopcroft-Karp algorithm.
+    
+    Attributes
+    ----------
+    graph : input graph
+    mate : dict with nodes (values are nodes or None)
+    distance : dict with nodes
+    cardinality : number
+    v1 : first set of nodes
+    v2 : second set of nodes
+    Q : queue, private
+    
+    Notes
+    -----
+    Based on pseudocode from:
+    
+    http://en.wikipedia.org/wiki/Hopcroft-Karp_algorithm
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected graph
+        """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.mate = dict((node, None) for node in self.graph.iternodes())
+        self.distance = dict()
+        self.cardinality = 0
+        algorithm = Bipartite(self.graph)
+        algorithm.run()
+        self.v1 = list()
+        self.v2 = list()
+        for node in self.graph.iternodes():
+            if algorithm.color[node] == 1:
+                self.v1.append(node)
+            else:
+                self.v2.append(node)
+        self.Q = Queue()   # for nodes from self.v1
+
+    def run(self):
+        """Executable pseudocode."""
+        while self._bfs_stage():
+            for node in self.v1:
+                if self.mate[node] is None and self._dfs_stage(node):
+                    self.cardinality = self.cardinality + 1
+                    #print self.mate
+
+    def _bfs_stage(self):
+        """The BFS stage."""
+        for node in self.v1:
+            if self.mate[node] is None:
+                self.distance[node] = 0
+                self.Q.put(node)
+            else:
+                self.distance[node] = float("inf")
+        self.distance[None] = float("inf")
+        while not self.Q.empty():
+            node = self.Q.get()
+            if self.distance[node] < self.distance[None]:
+                for edge in self.graph.iteroutedges(node):
+                    if self.distance[self.mate[edge.target]] == float("inf"):
+                        self.distance[self.mate[edge.target]] = self.distance[node] + 1
+                        self.Q.put(self.mate[edge.target])
+        return self.distance[None] != float("inf")
+
+    def _dfs_stage(self, node):
+        """The DFS stage."""
+        if node is not None:
+            for edge in self.graph.iteroutedges(node):
+                if self.distance[self.mate[edge.target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.mate[edge.target]):
+                        self.mate[edge.target] = node
+                        self.mate[node] = edge.target
                         return True
             self.distance[node] = float("inf")
             return False
