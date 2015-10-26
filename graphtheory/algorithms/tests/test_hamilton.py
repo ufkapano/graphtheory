@@ -11,13 +11,13 @@ from graphtheory.algorithms.hamilton import *
 # | /       \ |
 # 2 --------- 3
 
-class TestHamiltonCycle(unittest.TestCase):
+class TestHamiltonianCycle(unittest.TestCase):
 
     def setUp(self):
         # 3-prism graph, Halin graph
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
-        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 2), Edge(0, 5), Edge(1, 2),
             Edge(1, 4), Edge(2, 3), Edge(3, 4), Edge(3, 5), Edge(4, 5)]
@@ -27,31 +27,31 @@ class TestHamiltonCycle(unittest.TestCase):
             self.G.add_edge(edge)
 
     def test_hamilton(self):
-        algorithm = HamiltonCycleDFS(self.G)
+        algorithm = HamiltonianCycleDFS(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = [0, 1, 2, 3, 4, 5, 0]
-        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+        self.assertEqual(algorithm.hamiltonian_cycle, expected_cycle)
 
     def test_hamilton_with_edges(self):
-        algorithm = HamiltonCycleDFSWithEdges(self.G)
+        algorithm = HamiltonianCycleDFSWithEdges(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = [
             Edge(0, 1), Edge(1, 2), Edge(2, 3),
             Edge(3, 4), Edge(4, 5), Edge(5, 0)]
-        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+        self.assertEqual(algorithm.hamiltonian_cycle, expected_cycle)
 
     def test_hamilton_with_cycle_graph(self):
-        algorithm = HamiltonCycleDFSWithGraph(self.G)
+        algorithm = HamiltonianCycleDFSWithGraph(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = [
             Edge(0, 1), Edge(1, 2), Edge(2, 3),
             Edge(3, 4), Edge(4, 5), Edge(5, 0)]
-        #print "undirected", list(algorithm.hamilton_cycle.iteredges())
+        #print "undirected", list(algorithm.hamiltonian_cycle.iteredges())
         for edge in expected_cycle:
-            self.assertTrue(algorithm.hamilton_cycle.has_edge(edge))
+            self.assertTrue(algorithm.hamiltonian_cycle.has_edge(edge))
 
     def tearDown(self): pass
 
@@ -63,13 +63,13 @@ class TestHamiltonCycle(unittest.TestCase):
 # | /         \ o
 # 2 o---------- 3
 
-class TestHamiltonCycleDirected(unittest.TestCase):
+class TestHamiltonianCycleDirected(unittest.TestCase):
 
     def setUp(self):
         # 3-prism graph, Halin graph
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(2, 0), Edge(0, 5), Edge(2, 1),
             Edge(1, 4), Edge(3, 2), Edge(3, 4), Edge(5, 3), Edge(4, 5)]
@@ -79,29 +79,29 @@ class TestHamiltonCycleDirected(unittest.TestCase):
             self.G.add_edge(edge)
 
     def test_hamilton(self):
-        algorithm = HamiltonCycleDFS(self.G)
+        algorithm = HamiltonianCycleDFS(self.G)
         algorithm.run(0)
         expected_cycle = [0, 1, 4, 5, 3, 2, 0]
-        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+        self.assertEqual(algorithm.hamiltonian_cycle, expected_cycle)
 
     def test_hamilton_with_edges(self):
-        algorithm = HamiltonCycleDFSWithEdges(self.G)
+        algorithm = HamiltonianCycleDFSWithEdges(self.G)
         algorithm.run(0)
         expected_cycle = [
             Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 3), Edge(3, 2), Edge(2, 0)]
-        self.assertEqual(algorithm.hamilton_cycle, expected_cycle)
+        self.assertEqual(algorithm.hamiltonian_cycle, expected_cycle)
 
     def test_hamilton_with_cycle_graph(self):
-        algorithm = HamiltonCycleDFSWithGraph(self.G)
+        algorithm = HamiltonianCycleDFSWithGraph(self.G)
         algorithm.run(0)
         # 5 solutions
         expected_cycle = [
             Edge(0, 1), Edge(1, 4), Edge(4, 5),
             Edge(5, 3), Edge(3, 2), Edge(2, 0)]
-        #print "directed", list(algorithm.hamilton_cycle.iteredges())
+        #print "directed", list(algorithm.hamiltonian_cycle.iteredges())
         for edge in expected_cycle:
-            self.assertTrue(algorithm.hamilton_cycle.has_edge(edge))
+            self.assertTrue(algorithm.hamiltonian_cycle.has_edge(edge))
 
     def tearDown(self): pass
 
