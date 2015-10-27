@@ -44,6 +44,8 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(algorithm.ff, ff_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 6, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
         #algorithm.dag.show()
         self.assertEqual(algorithm.dag.v(), self.N)
         self.assertEqual(algorithm.dag.e(), self.N-1)
@@ -69,6 +71,8 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(algorithm.ff, ff_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertEqual(algorithm.path(1, 7), [1, 5, 2, 3, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
         #algorithm.dag.show()
         self.assertEqual(algorithm.dag.v(), self.N)
         self.assertEqual(algorithm.dag.e(), self.N-1)
@@ -90,6 +94,8 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(post_order, post_order_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertEqual(algorithm.path(1, 7), [1, 5, 2, 3, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
         #algorithm.dag.show()
         self.assertEqual(algorithm.dag.v(), self.N)
         self.assertEqual(algorithm.dag.e(), self.N-1)

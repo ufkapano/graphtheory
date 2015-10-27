@@ -17,6 +17,22 @@ class DFSWithStack:
     parent : dict (DFS tree)
     dag : graph (DFS tree)
     
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.dfs import DFSWithStack
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = list()
+    >>> algorithm = DFSWithStack(G)
+    >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
+    >>> order   # visited nodes
+    >>> algorithm.parent   # DFS tree as a dict
+    >>> algorithm.dag    # DFS tree as a directed graph
+    >>> algorithm.dd
+    >>> algorithm.ff
+    
     Notes
     -----
     Based on:
@@ -74,6 +90,15 @@ class DFSWithStack:
             if post_action:   # source became BLACK
                 post_action(source)
 
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
+
 
 class DFSWithRecursion:
     """Depth-First Search with a recursion.
@@ -87,6 +112,22 @@ class DFSWithRecursion:
     ff : dict with nodes ('BLACK' time)
     parent : dict (DFS tree)
     dag : graph (DFS tree)
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.dfs import DFSWithRecursion
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = list()
+    >>> algorithm = DFSWithRecursion(G)
+    >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
+    >>> order   # visited nodes
+    >>> algorithm.parent   # DFS tree as a dict
+    >>> algorithm.dag    # DFS tree as a directed graph
+    >>> algorithm.dd
+    >>> algorithm.ff
     
     Notes
     -----
@@ -139,6 +180,15 @@ class DFSWithRecursion:
         if post_action:   # node became BLACK
             post_action(node)
 
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
+
 
 class SimpleDFS:
     """Depth-First Search with a recursion.
@@ -148,6 +198,20 @@ class SimpleDFS:
     graph : input graph
     parent : dict (DFS tree)
     dag : graph (DFS tree)
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.dfs import SimpleDFS
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = list()
+    >>> algorithm = SimpleDFS(G)
+    >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
+    >>> order   # visited nodes
+    >>> algorithm.parent   # DFS tree as a dict
+    >>> algorithm.dag    # DFS tree as a directed graph
     
     Notes
     -----
@@ -191,5 +255,14 @@ class SimpleDFS:
                 self._visit(edge.target, pre_action, post_action)
         if post_action:
             post_action(node)
+
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
 
 # EOF

@@ -15,6 +15,22 @@ class BFSWithQueue:
     parent : dict (BFS tree)
     dag : graph (BFS tree)
     
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.bfs import BFSWithQueue
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = list()
+    >>> algorithm = BFSWithQueue(G)
+    >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
+    >>> order   # visited nodes
+    >>> algorithm.distance[target]   # distance from source to target
+    >>> algorithm.parent   # BFS tree as a dict
+    >>> algorithm.dag    # BFS tree as a directed graph
+    >>> algorithm.path(source, target)
+    
     Notes
     -----
     Based on:
@@ -85,6 +101,21 @@ class SimpleBFS:
     graph : input graph
     parent : dict (BFS tree)
     dag : graph (BFS tree)
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.bfs import SimpleBFS
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = list()
+    >>> algorithm = SimpleBFS(G)
+    >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
+    >>> order   # visited nodes
+    >>> algorithm.parent   # BFS tree as a dict
+    >>> algorithm.dag    # BFS tree as a directed graph
+    >>> algorithm.path(source, target)
     
     Notes
     -----
