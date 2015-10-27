@@ -47,6 +47,7 @@ class BellmanFord:
         # Shortest path tree as a dictionary.
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
         self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
+        self.source = None
 
     def run(self, source):
         """Executable pseudocode."""
@@ -58,7 +59,7 @@ class BellmanFord:
         # Check for negative cycles.
         for edge in self.graph.iteredges():   # O(E) time
             if self.distance[edge.target] > self.distance[edge.source] + edge.weight:
-                raise ValueError("negative cycle")
+                raise ValueError("negative cycle detected")
 
     def _relax(self, edge):
         """Edge relaxation."""

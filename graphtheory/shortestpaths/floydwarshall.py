@@ -134,7 +134,7 @@ class FloydWarshallPaths:
                         self.parent[source][target] = self.parent[node][target]
         if any(self.distance[node][node] < 0
             for node in self.graph.iternodes()):
-                raise ValueError("negative cycle")
+                raise ValueError("negative cycle detected")
 
     def path(self, source, target):
         """Path reconstruction."""

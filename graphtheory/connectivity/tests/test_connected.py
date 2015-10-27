@@ -14,7 +14,7 @@ class TestConnectedComponents(unittest.TestCase):
     def setUp(self):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 1), Edge(1, 5), Edge(2, 6), Edge(2, 3),
             Edge(6, 3), Edge(6, 7), Edge(3, 7)]
@@ -58,7 +58,7 @@ class TestStronglyConnectedComponents(unittest.TestCase):
     def setUp(self):
         self.N = 8           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 4), Edge(4, 0), Edge(4, 5), Edge(1, 5), 
             Edge(1, 2), Edge(5, 6), Edge(6, 5), Edge(2, 6), Edge(2, 3), 

@@ -5,28 +5,37 @@ from graphtheory.structures.edges import Edge
 
 
 class FordFulkerson:
-    """The Ford-Fulkerson algorithm."""
+    """The Ford-Fulkerson algorithm.
+    
+    Attributes
+    ----------
+    graph : input directed graph
+    residual : directed graph (residual network)
+    flow : dict-of-dict
+    source : node
+    sink : node
+    max_flow : number
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        # residual network
         self.residual = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
-        # initial capacities for the residual network
+        # Initial capacities for the residual network.
         for edge in self.graph.iteredges():
-            self.residual.add_edge(edge) # original capacity
+            self.residual.add_edge(edge)   # original capacity
             self.residual.add_edge(Edge(edge.target, edge.source, 0))
-        # legal flow
+        # Legal flow.
         self.flow = dict()
         for source in self.graph.iternodes():
             self.flow[source] = dict()
             for target in self.graph.iternodes():
                 self.flow[source][target] = 0
-        # initial flow is zero
+        # Initial flow is zero.
         self.max_flow = 0
 
     def run(self, source, sink):
@@ -38,19 +47,18 @@ class FordFulkerson:
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
-            # backtrack search and write flow
+            # Backtrack search and write flow.
             target = self.sink
-            #print target
             while target != self.source:
                 node = parent[target]
                 self.flow[node][target] = self.flow[node][target] + min_capacity
                 self.flow[target][node] = self.flow[target][node] - min_capacity
                 target = node
 
-    def find_path(self): # use DFS
+    def find_path(self):   # use DFS
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
-        # capacity of found path to node
+        # Capacity of found path to node.
         capacity = {self.source: float("inf")}
         Q = LifoQueue()
         Q.put(self.source)
@@ -69,26 +77,35 @@ class FordFulkerson:
 
 
 class FordFulkersonSparse:
-    """The Ford-Fulkerson algorithm."""
+    """The Ford-Fulkerson algorithm.
+    
+    Attributes
+    ----------
+    graph : input directed graph
+    residual : directed graph (residual network)
+    flow : dict-of-dict
+    source : node
+    sink : node
+    max_flow : number
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        # residual network
         self.residual = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
-        # initial capacities for the residual network
+        # Initial capacities for the residual network.
         for edge in self.graph.iteredges():
-            self.residual.add_edge(edge) # original capacity
+            self.residual.add_edge(edge)   # original capacity
             self.residual.add_edge(Edge(edge.target, edge.source, 0))
-        # legal flow
+        # Legal flow.
         self.flow = dict()
         for node in self.graph.iternodes():
             self.flow[node] = dict()
-        # initial flow is zero
+        # Initial flow is zero.
         self.max_flow = 0
 
     def run(self, source, sink):
@@ -100,7 +117,7 @@ class FordFulkersonSparse:
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
-            # backtrack search and write flow
+            # Backtrack search and write flow.
             target = self.sink
             while target != self.source:
                 node = parent[target]
@@ -108,10 +125,10 @@ class FordFulkersonSparse:
                 self.flow[target][node] = self.flow[target].get(node, 0) - min_capacity
                 target = node
 
-    def find_path(self): # use DFS
+    def find_path(self):   # use DFS
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
-        # capacity of found path to node
+        # Capacity of found path to node.
         capacity = {self.source: float("inf")}
         Q = LifoQueue()
         Q.put(self.source)
