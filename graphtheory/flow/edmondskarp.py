@@ -5,16 +5,22 @@ from graphtheory.structures.edges import Edge
 
 
 class EdmondsKarp:
-    """The Edmonds-Karp algorithm.
+    """The Edmonds-Karp algorithm for computing the maximum flow.
     
     Attributes
     ----------
-    graph : input directed graph
+    graph : input directed graph (flow network)
     residual : directed graph (residual network)
     flow : dict-of-dict
     source : node
     sink : node
     max_flow : number
+    
+    Notes
+    -----
+    Based on:
+    
+    https://en.wikipedia.org/wiki/Edmonds-Karp_algorithm
     """
 
     def __init__(self, graph):
@@ -77,16 +83,22 @@ class EdmondsKarp:
 
 
 class EdmondsKarpSparse:
-    """The Edmonds-Karp algorithm.
+    """The Edmonds-Karp algorithm for computing the maximum flow.
     
     Attributes
     ----------
-    graph : input directed graph
+    graph : input directed graph (flow network)
     residual : directed graph (residual network)
     flow : dict-of-dict
     source : node
     sink : node
     max_flow : number
+    
+    Notes
+    -----
+    Based on:
+    
+    https://en.wikipedia.org/wiki/Edmonds-Karp_algorithm
     """
 
     def __init__(self, graph):

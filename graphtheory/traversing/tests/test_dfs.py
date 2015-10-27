@@ -15,7 +15,7 @@ class TestDFS(unittest.TestCase):
         # The graph from Cormen p.607
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 5, 4), Edge(5, 2, 5), 
             Edge(5, 6, 6), Edge(2, 6, 7), Edge(2, 3, 8), Edge(6, 3, 9), 
@@ -29,15 +29,15 @@ class TestDFS(unittest.TestCase):
 
     def test_dfs_with_stack(self):
         self.assertEqual(self.G.v(), self.N)
-        pre_ordering = []
-        post_ordering = []
+        pre_order = []
+        post_order = []
         algorithm = DFSWithStack(self.G)
-        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
-                        post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = [1, 0, 5, 2, 6, 3, 7, 4]
-        post_ordering_expected = [1, 5, 6, 7, 3, 2, 0, 4]
-        self.assertEqual(pre_ordering, pre_ordering_expected)
-        self.assertEqual(post_ordering, post_ordering_expected)
+        algorithm.run(1, pre_action=lambda node: pre_order.append(node),
+                        post_action=lambda node: post_order.append(node))
+        pre_order_expected = [1, 0, 5, 2, 6, 3, 7, 4]
+        post_order_expected = [1, 5, 6, 7, 3, 2, 0, 4]
+        self.assertEqual(pre_order, pre_order_expected)
+        self.assertEqual(post_order, post_order_expected)
         dd_expected = {0: 2, 1: 1, 2: 5, 3: 8, 4: 14, 5: 3, 6: 6, 7: 9}
         ff_expected = {0: 15, 1: 4, 2: 13, 3: 12, 4: 16, 5: 7, 6: 10, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
@@ -54,15 +54,15 @@ class TestDFS(unittest.TestCase):
 
     def test_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
-        pre_ordering = []
-        post_ordering = []
+        pre_order = []
+        post_order = []
         algorithm = DFSWithRecursion(self.G)
-        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
-                        post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = [1, 0, 4, 5, 2, 3, 6, 7]
-        post_ordering_expected = [4, 0, 7, 6, 3, 2, 5, 1]
-        self.assertEqual(pre_ordering, pre_ordering_expected)
-        self.assertEqual(post_ordering, post_ordering_expected)
+        algorithm.run(1, pre_action=lambda node: pre_order.append(node),
+                        post_action=lambda node: post_order.append(node))
+        pre_order_expected = [1, 0, 4, 5, 2, 3, 6, 7]
+        post_order_expected = [4, 0, 7, 6, 3, 2, 5, 1]
+        self.assertEqual(pre_order, pre_order_expected)
+        self.assertEqual(post_order, post_order_expected)
         dd_expected = {0: 2, 1: 1, 2: 7, 3: 8, 4: 3, 5: 6, 6: 9, 7: 10}
         ff_expected = {0: 5, 1: 16, 2: 14, 3: 13, 4: 4, 5: 15, 6: 12, 7: 11}
         self.assertEqual(algorithm.dd, dd_expected)
@@ -79,15 +79,15 @@ class TestDFS(unittest.TestCase):
 
     def test_simple_dfs_with_recursion(self):
         self.assertEqual(self.G.v(), self.N)
-        pre_ordering = []
-        post_ordering = []
+        pre_order = []
+        post_order = []
         algorithm = SimpleDFS(self.G)
-        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
-                        post_action=lambda node: post_ordering.append(node))
-        pre_ordering_expected = [1, 0, 4, 5, 2, 3, 6, 7]
-        post_ordering_expected = [4, 0, 7, 6, 3, 2, 5, 1]
-        self.assertEqual(pre_ordering, pre_ordering_expected)
-        self.assertEqual(post_ordering, post_ordering_expected)
+        algorithm.run(1, pre_action=lambda node: pre_order.append(node),
+                        post_action=lambda node: post_order.append(node))
+        pre_order_expected = [1, 0, 4, 5, 2, 3, 6, 7]
+        post_order_expected = [4, 0, 7, 6, 3, 2, 5, 1]
+        self.assertEqual(pre_order, pre_order_expected)
+        self.assertEqual(post_order, post_order_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
         #algorithm.dag.show()

@@ -15,7 +15,7 @@ class TestBFS(unittest.TestCase):
         # The graph from Cormen p.607
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 5, 4), Edge(5, 2, 5),
             Edge(5, 6, 6), Edge(2, 6, 7), Edge(2, 3, 8), Edge(6, 3, 9),
@@ -29,14 +29,14 @@ class TestBFS(unittest.TestCase):
 
     def test_bfs(self):
         self.assertEqual(self.G.v(), self.N)
-        pre_ordering = []
-        post_ordering = []
+        pre_order = []
+        post_order = []
         algorithm = BFSWithQueue(self.G)
-        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
-                        post_action=lambda node: post_ordering.append(node))
-        ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
-        self.assertEqual(pre_ordering, ordering_expected)
-        self.assertEqual(post_ordering, ordering_expected)
+        algorithm.run(1, pre_action=lambda node: pre_order.append(node),
+                        post_action=lambda node: post_order.append(node))
+        order_expected = [1, 0, 5, 4, 2, 6, 3, 7]
+        self.assertEqual(pre_order, order_expected)
+        self.assertEqual(post_order, order_expected)
         distance_expected = {0: 1, 1: 0, 2: 2, 3: 3, 4: 2, 5: 1, 6: 2, 7: 3}
         self.assertEqual(algorithm.distance, distance_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
@@ -54,14 +54,14 @@ class TestBFS(unittest.TestCase):
 
     def test_simple_bfs(self):
         self.assertEqual(self.G.v(), self.N)
-        pre_ordering = []
-        post_ordering = []
+        pre_order = []
+        post_order = []
         algorithm = SimpleBFS(self.G)
-        algorithm.run(1, pre_action=lambda node: pre_ordering.append(node),
-                        post_action=lambda node: post_ordering.append(node))
-        ordering_expected = [1, 0, 5, 4, 2, 6, 3, 7]
-        self.assertEqual(pre_ordering, ordering_expected)
-        self.assertEqual(post_ordering, ordering_expected)
+        algorithm.run(1, pre_action=lambda node: pre_order.append(node),
+                        post_action=lambda node: post_order.append(node))
+        order_expected = [1, 0, 5, 4, 2, 6, 3, 7]
+        self.assertEqual(pre_order, order_expected)
+        self.assertEqual(post_order, order_expected)
         parent_expected = {0: 1, 1: None, 2: 5, 3: 2, 4: 0, 5: 1, 6: 5, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
         self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])

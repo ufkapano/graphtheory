@@ -5,7 +5,28 @@ from graphtheory.structures.edges import Edge
 
 
 class DFSWithStack:
-    """Depth-First Search with a stack."""
+    """Depth-First Search with a stack.
+    
+    Attributes
+    ----------
+    graph : input graph
+    color : dict with nodes, private ('WHITE', 'GREY', 'BLACK')
+    time : number, private
+    dd : dict with nodes ('GREY' time)
+    ff : dict with nodes ('BLACK' time)
+    parent : dict (DFS tree)
+    dag : graph (DFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Depth-first_search
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -55,7 +76,28 @@ class DFSWithStack:
 
 
 class DFSWithRecursion:
-    """Depth-First Search with a recursion."""
+    """Depth-First Search with a recursion.
+    
+    Attributes
+    ----------
+    graph : input graph
+    color : dict with nodes, private ('WHITE', 'GREY', 'BLACK')
+    time : number, private
+    dd : dict with nodes ('GREY' time)
+    ff : dict with nodes ('BLACK' time)
+    parent : dict (DFS tree)
+    dag : graph (DFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Depth-first_search
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -68,7 +110,7 @@ class DFSWithRecursion:
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
         import sys
         recursionlimit = sys.getrecursionlimit()
-        sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -99,7 +141,24 @@ class DFSWithRecursion:
 
 
 class SimpleDFS:
-    """Depth-First Search with a recursion."""
+    """Depth-First Search with a recursion.
+    
+    Attributes
+    ----------
+    graph : input graph
+    parent : dict (DFS tree)
+    dag : graph (DFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Depth-first_search
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

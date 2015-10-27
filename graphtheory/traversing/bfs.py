@@ -5,7 +5,26 @@ from graphtheory.structures.edges import Edge
 
 
 class BFSWithQueue:
-    """Breadth-First Search."""
+    """Breadth-First Search.
+    
+    Attributes
+    ----------
+    graph : input graph
+    color : dict with nodes, private
+    distance : dict with nodes (distances to source node)
+    parent : dict (BFS tree)
+    dag : graph (BFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Breadth-first_search
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -30,7 +49,7 @@ class BFSWithQueue:
         self.distance[node] = 0
         self.parent[node] = None
         Q = Queue()
-        Q.put(node)  # node is GREY
+        Q.put(node)   # node is GREY
         if pre_action:   # when Q.put
             pre_action(node)
         while not Q.empty():
@@ -41,7 +60,7 @@ class BFSWithQueue:
                     self.distance[edge.target] = self.distance[source] + 1
                     self.parent[edge.target] = source
                     self.dag.add_edge(edge)
-                    Q.put(edge.target)  # target is GREY
+                    Q.put(edge.target)   # target is GREY
                     if pre_action:   # when Q.put
                         pre_action(edge.target)
             self.color[source] = "BLACK"
@@ -59,7 +78,24 @@ class BFSWithQueue:
 
 
 class SimpleBFS:
-    """Breadth-First Search."""
+    """Breadth-First Search.
+    
+    Attributes
+    ----------
+    graph : input graph
+    parent : dict (BFS tree)
+    dag : graph (BFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Breadth-first_search
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

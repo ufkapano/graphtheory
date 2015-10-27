@@ -5,16 +5,26 @@ from graphtheory.structures.edges import Edge
 
 
 class FordFulkerson:
-    """The Ford-Fulkerson algorithm.
+    """The Ford-Fulkerson algorithm for computing the maximum flow.
     
     Attributes
     ----------
-    graph : input directed graph
+    graph : input directed graph (flow network)
     residual : directed graph (residual network)
     flow : dict-of-dict
     source : node
     sink : node
     max_flow : number
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm
     """
 
     def __init__(self, graph):
@@ -77,16 +87,26 @@ class FordFulkerson:
 
 
 class FordFulkersonSparse:
-    """The Ford-Fulkerson algorithm.
+    """The Ford-Fulkerson algorithm for computing the maximum flow.
     
     Attributes
     ----------
-    graph : input directed graph
+    graph : input directed graph (flow network)
     residual : directed graph (residual network)
     flow : dict-of-dict
     source : node
     sink : node
     max_flow : number
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm
     """
 
     def __init__(self, graph):
