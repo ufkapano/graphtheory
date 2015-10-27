@@ -8,7 +8,7 @@ class BipartiteGraphBFS:
     
     Attributes
     ----------
-    graph : input graph or multigraph
+    graph : input bipartite graph or multigraph
     color : dict with nodes (values are colors)
     
     Notes
@@ -58,7 +58,7 @@ class BipartiteGraphDFS:
     
     Attributes
     ----------
-    graph : input graph or multigraph
+    graph : input bipartite graph or multigraph
     color : dict with nodes (values are colors)
     
     Notes

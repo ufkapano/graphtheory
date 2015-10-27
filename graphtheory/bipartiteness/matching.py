@@ -11,7 +11,7 @@ class MatchingFordFulkersonSet:
     
     Attributes
     ----------
-    graph : input graph
+    graph : input bipartite graph
     mate : dict with nodes (values are nodes or None)
     cardinality : number
     v1 : first set of nodes
@@ -25,6 +25,8 @@ class MatchingFordFulkersonSet:
         ----------
         graph : undirected graph
         """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
@@ -73,7 +75,7 @@ class MatchingFordFulkersonList:
     
     Attributes
     ----------
-    graph : input graph
+    graph : input bipartite graph
     mate : dict with nodes (values are nodes or None)
     cardinality : number
     v1 : first set of nodes
@@ -87,6 +89,8 @@ class MatchingFordFulkersonList:
         ----------
         graph : undirected graph
         """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
@@ -135,7 +139,7 @@ class MatchingFordFulkersonColor:
     
     Attributes
     ----------
-    graph : input graph
+    graph : input bipartite graph
     mate : dict with nodes (values are nodes or None)
     cardinality : number
     color : dict with nodes (values are colors)
@@ -149,6 +153,8 @@ class MatchingFordFulkersonColor:
         ----------
         graph : undirected graph
         """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0

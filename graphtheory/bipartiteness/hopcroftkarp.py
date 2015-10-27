@@ -10,7 +10,7 @@ class HopcroftKarpSet:
     
     Attributes
     ----------
-    graph : input graph
+    graph : input bipartite graph
     mate : dict with nodes (values are nodes or None)
     distance : dict with nodes
     cardinality : number
@@ -94,7 +94,7 @@ class HopcroftKarpList:
     
     Attributes
     ----------
-    graph : input graph
+    graph : input bipartite graph
     mate : dict with nodes (values are nodes or None)
     distance : dict with nodes
     cardinality : number

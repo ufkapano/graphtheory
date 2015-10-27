@@ -7,6 +7,12 @@ from graphtheory.structures.edges import Edge
 class MaximalMatching:
     """Find a maximal cardinality matching using a greedy method.
     
+    Attributes
+    ----------
+    graph : input undirected graph
+    mate : dict with nodes (values are nodes or None)
+    cardinality : number
+    
     Notes
     -----
     Based on ideas from NetworkX library:
@@ -17,6 +23,8 @@ class MaximalMatching:
 
     def __init__(self, graph):
         """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
@@ -34,6 +42,12 @@ class MaximalMatching:
 class MaximalMatchingWithEdges:
     """Find a maximal cardinality matching using a greedy method.
     
+    Attributes
+    ----------
+    graph : input undirected graph
+    mate : dict with nodes (values are edges or None)
+    cardinality : number
+    
     Notes
     -----
     Based on ideas from NetworkX library:
@@ -44,6 +58,8 @@ class MaximalMatchingWithEdges:
 
     def __init__(self, graph):
         """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
@@ -59,11 +75,20 @@ class MaximalMatchingWithEdges:
 
 
 class MinimumWeightMatchingWithEdges:
-    """Find a minimum weight matching using a greedy method."""
+    """Find a minimum weight matching using a greedy method.
+    
+    Attributes
+    ----------
+    graph : input undirected graph
+    mate : dict with nodes (values are edges or None)
+    cardinality : number
+    """
     # Bedzie potrzebne do problemu chinskiego listonosza.
 
     def __init__(self, graph):
         """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
