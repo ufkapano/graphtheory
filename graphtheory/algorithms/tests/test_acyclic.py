@@ -19,7 +19,7 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         # The graph from Cormen p.607 changed.
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 1), Edge(1, 5), Edge(5, 2), Edge(2, 6), 
             Edge(6, 3), Edge(6, 7)]
@@ -60,13 +60,13 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
 
 #     0----------+
 #     | \        |
-#     |. \.      |
-# +-->1   4      |
+#     o  o       |
+# +--o1   4      |
 # |   |    \     |
-# |   |.    \.  .|
-# |   2<-----5-->7
+# |   o     o    o
+# |   2o-----5--o7
 # |   |      |
-# |   |.     |.
+# |   o      o
 # +---3      6
 
 class TestAcyclicDirectedGraph(unittest.TestCase):
@@ -75,7 +75,7 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         # The graph from
         self.N = 8           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6, 7]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 4), Edge(4, 5), 
             Edge(5, 6), Edge(5, 7), Edge(5, 2), Edge(0, 7)]

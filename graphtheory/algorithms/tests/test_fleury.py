@@ -16,7 +16,7 @@ class TestFleuryUndirectedGraph(unittest.TestCase):
     def setUp(self):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=False)
-        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 3), Edge(1, 4), Edge(3, 4), Edge(4, 2), 
             Edge(4, 5), Edge(2, 5)]
@@ -79,7 +79,7 @@ class TestFleuryDirectedGraph(unittest.TestCase):
     def setUp(self):
         self.N = 6           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3, 4, 5]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(3, 0), Edge(1, 4), Edge(4, 3), Edge(2, 4), 
             Edge(4, 5), Edge(5, 2)]

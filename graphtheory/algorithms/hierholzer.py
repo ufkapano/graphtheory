@@ -9,7 +9,7 @@ class Hierholzer:
     Attributes
     ----------
     graph : input graph
-    eulerian_cycle : list of nodes
+    eulerian_cycle : list of nodes (length |E|+1)
     _graph_copy : graph, private
     _stack : LIFO queue, private
     
@@ -70,7 +70,7 @@ class HierholzerWithEdges:
     Attributes
     ----------
     graph : input graph
-    eulerian_cycle : list of edges
+    eulerian_cycle : list of edges (length |E|)
     _graph_copy : graph, private
     _stack : LIFO queue, private
     
