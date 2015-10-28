@@ -52,7 +52,7 @@ class FloydWarshall:
             self.distance[edge.source][edge.target] = edge.weight
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding all shortest paths."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
@@ -123,7 +123,7 @@ class FloydWarshallPaths:
             self.parent[edge.source][edge.target] = edge.source
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding all shortest paths."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():
@@ -202,7 +202,7 @@ class FloydWarshallAllGraphs:
                 self.distance[edge.target][edge.source] = edge.weight
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding all shortest paths."""
         for node in self.graph.iternodes():
             for source in self.graph.iternodes():
                 for target in self.graph.iternodes():

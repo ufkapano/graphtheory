@@ -57,7 +57,12 @@ class Dijkstra:
         self._pq = PriorityQueue()
 
     def run(self, source):
-        """Executable pseudocode."""
+        """Finding shortest paths from the source.
+        
+        Parameters
+        ----------
+        source : node
+        """
         self.source = source
         self.distance[source] = 0
         for node in self.graph.iternodes():
@@ -144,7 +149,12 @@ class DijkstraMatrix:
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
 
     def run(self, source):
-        """Executable pseudocode."""
+        """Finding shortest paths from the source.
+        
+        Parameters
+        ----------
+        source : node
+        """
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()):   # |V| times

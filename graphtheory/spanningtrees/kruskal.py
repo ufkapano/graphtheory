@@ -54,7 +54,7 @@ class KruskalMST:
         self._pq = PriorityQueue()
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding MST."""
         for node in self.graph.iternodes():
             self._uf.create(node)
         for edge in self.graph.iteredges():

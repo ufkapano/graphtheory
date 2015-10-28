@@ -57,7 +57,7 @@ class PrimMST:
         self._pq = PriorityQueue()
 
     def run(self, source=None):
-        """Executable pseudocode."""
+        """Finding MST."""
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
         self.source = source
@@ -143,7 +143,7 @@ class PrimMatrixMST:
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
 
     def run(self, source=None):
-        """Executable pseudocode."""
+        """Finding MST."""
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
         self.source = source
@@ -197,7 +197,7 @@ class PrimTrivialMST:
         self._in_mst = dict((node, False) for node in self.graph.iternodes())
 
     def run(self, source=None):
-        """Executable pseudocode."""
+        """Finding MST."""
         if source is None:   # get first random node
             source = self.graph.iternodes().next()
         self.source = source

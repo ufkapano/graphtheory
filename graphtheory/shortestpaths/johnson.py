@@ -51,7 +51,7 @@ class Johnson:
         self.distance = None
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding all shortest paths."""
         # graph copy
         size = self.graph.v()
         self._new_graph = self.graph.__class__(size + 1, directed=True)
@@ -82,8 +82,10 @@ class Johnson:
             algorithm = Dijkstra(self._new_graph) # O(V*E*log(V)) total time
             algorithm.run(source)
             for target in self.graph.iternodes():   # O(V**2) total time
-                self.distance[source][target] = (algorithm.distance[target]
-                    - self._bf.distance[source] + self._bf.distance[target])
+                self.distance[source][target] = (
+                    algorithm.distance[target]
+                    - self._bf.distance[source] 
+                    + self._bf.distance[target])
 
 
 class JohnsonFaster:
@@ -135,7 +137,7 @@ class JohnsonFaster:
         self.distance = None
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding all shortest paths."""
         if self.positive_weights:
             self._new_graph = self.graph
         else:
@@ -172,7 +174,9 @@ class JohnsonFaster:
                 if self.positive_weights:
                     self.distance[source][target] = algorithm.distance[target]
                 else:
-                    self.distance[source][target] = (algorithm.distance[target]
-                        - self._bf.distance[source] + self._bf.distance[target])
+                    self.distance[source][target] = (
+                        algorithm.distance[target]
+                        - self._bf.distance[source] 
+                        + self._bf.distance[target])
 
 # EOF

@@ -47,7 +47,7 @@ class BoruvkaMST:
         self._uf = UnionFind()
 
     def run(self):
-        """Executable pseudocode."""
+        """Finding MST."""
         for node in self.graph.iternodes():
             self._uf.create(node)
         forest = set(node for node in self.graph.iternodes())

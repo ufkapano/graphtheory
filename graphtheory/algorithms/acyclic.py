@@ -1,7 +1,24 @@
 #!/usr/bin/python
 
 class AcyclicGraphDFS:
-    """Cycles detection in graphs based on DFS."""
+    """Cycles detection in graphs based on DFS.
+    
+    ValueError is raised for cyclic graphs.
+    
+    Attributes
+    ----------
+    graph : input graph
+    color : dict with nodes, private
+    parent : dict (DFS tree)
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -31,7 +48,7 @@ class AcyclicGraphDFS:
                 self._visit(edge.target)
             elif self.color[edge.target] == "GREY":   # back edge possible
                 if self.graph.is_directed() or edge.target != self.parent[node]:
-                    raise ValueError("a cycle detected")
+                    raise ValueError("cycle detected")
             else:   # directed graph, cross or forward edge
                 pass
         self.color[node] = "BLACK"

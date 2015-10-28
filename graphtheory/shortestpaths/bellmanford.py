@@ -50,7 +50,12 @@ class BellmanFord:
         self.source = None
 
     def run(self, source):
-        """Executable pseudocode."""
+        """Finding shortest paths from the source.
+        
+        Parameters
+        ----------
+        source : node
+        """
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()-1):   # |V|-1 times

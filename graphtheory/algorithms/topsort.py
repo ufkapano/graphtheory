@@ -6,7 +6,23 @@ from graphtheory.traversing.dfs import SimpleDFS
 
 
 class TopologicalSortDFS:
-    """Topological sorting of nodes from a dag."""
+    """Topological sorting of nodes from a dag using DFS.
+    
+    Attributes
+    ----------
+    graph : input directed acyclic graph
+    sorted_nodes : list of sorted nodes
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Topological_sorting
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -23,7 +39,23 @@ class TopologicalSortDFS:
 
 
 class TopologicalSortQueue:
-    """Topological sorting of nodes from a dag."""
+    """Topological sorting of nodes from a dag.
+    
+    Attributes
+    ----------
+    graph : input directed acyclic graph
+    sorted_nodes : list of sorted nodes
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Topological_sorting
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -53,7 +85,23 @@ class TopologicalSortQueue:
 
 
 class TopologicalSortSet:
-    """Topological sorting of nodes from a dag."""
+    """Topological sorting of nodes from a dag.
+    
+    Attributes
+    ----------
+    graph : input directed acyclic graph
+    sorted_nodes : list of sorted nodes
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Topological_sorting
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -83,7 +131,23 @@ class TopologicalSortSet:
 
 
 class TopologicalSortList:
-    """Topological sorting of nodes from a dag."""
+    """Topological sorting of nodes from a dag.
+    
+    Attributes
+    ----------
+    graph : input directed acyclic graph
+    sorted_nodes : list of sorted nodes
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Topological_sorting
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
