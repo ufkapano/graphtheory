@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.hamilton import *
+from graphtheory.hamiltonian.hamilton import *
 
 # 0 --------- 5
 # | \       / |

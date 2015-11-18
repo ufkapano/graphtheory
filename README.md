@@ -16,3 +16,30 @@ References
 
 [1] A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*. 
 http://arxiv.org/abs/1504.07828
+
+Contributors
+------------
+
+Andrzej Kapanowski (project leader)
+
+Łukasz Gałuszka (MST, shortest paths, flow)
+
+Łukasz Malinowski (matching, Eulerian graphs, graph coloring, bipartite graphs)
+
+Paweł Motyl (multigraphs, graph coloring, independent sets)
+
+Piotr Szestało (Hamiltonian graphs, TSP, tournaments)
+
+Kacper Dziubek (planarity testing)
+
+Sandra Pażyniowska (graph drawing)
+
+Wojciech Sarka
+
+Igor Samson (graph coloring)
+
+Dariusz Zdybski (cliques)
+
+Aleksander Krawczyk (Halin graphs)
+
+EOF
