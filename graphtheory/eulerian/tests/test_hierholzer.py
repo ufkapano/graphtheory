@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.euler import EulerianCycleDFS, EulerianCycleDFSWithEdges
+from graphtheory.eulerian.hierholzer import Hierholzer, HierholzerWithEdges
 
 # 0 --- 1     2
 # |     |   / |
@@ -18,34 +18,33 @@ class TestEulerianCycleUndirected(unittest.TestCase):
         self.G = Graph(self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
-            Edge(0, 1), Edge(0, 3), Edge(1, 4), Edge(3, 4), Edge(4, 2), 
-            Edge(4, 5), Edge(2, 5)]
+            Edge(0, 1), Edge(0, 3), Edge(1, 4),
+            Edge(3, 4), Edge(4, 2), Edge(4, 5), Edge(2, 5)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_euler_dfs(self):
-        algorithm = EulerianCycleDFS(self.G)
+    def test_hierholzer(self):
+        algorithm = Hierholzer(self.G)
         algorithm.run(0)
         expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
-    def test_euler_dfs_with_edges(self):
-        algorithm = EulerianCycleDFSWithEdges(self.G)
+    def test_hierholzer_with_edges(self):
+        algorithm = HierholzerWithEdges(self.G)
         algorithm.run(0)
         #expected_cycle = [0, 1, 4, 2, 5, 4, 3, 0]
         expected_cycle = [
-            Edge(0, 1), Edge(1, 4), Edge(4, 2), Edge(2, 5), Edge(5, 4), 
-            Edge(4, 3), Edge(3, 0)]
+            Edge(0, 1), Edge(1, 4), Edge(4, 2),
+            Edge(2, 5), Edge(5, 4), Edge(4, 3), Edge(3, 0)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
-        self.assertRaises(ValueError, EulerianCycleDFS, self.G)
-        self.assertRaises(ValueError, EulerianCycleDFSWithEdges, self.G)
+        self.assertRaises(ValueError, Hierholzer, self.G)
 
     def tearDown(self): pass
 
@@ -73,15 +72,15 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_euler_dfs(self):
-        algorithm = EulerianCycleDFS(self.G)
+    def test_hierholzer(self):
+        algorithm = Hierholzer(self.G)
         algorithm.run(6)
         expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
-    def test_euler_dfs_with_edges(self):
-        algorithm = EulerianCycleDFSWithEdges(self.G)
+    def test_hierholzer_with_edges(self):
+        algorithm = HierholzerWithEdges(self.G)
         algorithm.run(6)
         #expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
         expected_cycle = [
@@ -92,8 +91,7 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
 
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
-        self.assertRaises(ValueError, EulerianCycleDFS, self.G)
-        self.assertRaises(ValueError, EulerianCycleDFSWithEdges, self.G)
+        self.assertRaises(ValueError, Hierholzer, self.G)
 
     def tearDown(self): pass
 
@@ -110,34 +108,33 @@ class TestEulerianCycleDirected(unittest.TestCase):
         self.G = Graph(self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
-            Edge(0, 1), Edge(3, 0), Edge(1, 4), Edge(4, 3), Edge(2, 4), 
-            Edge(4, 5), Edge(5, 2)]
+            Edge(0, 1), Edge(3, 0), Edge(1, 4),
+            Edge(4, 3), Edge(2, 4), Edge(4, 5), Edge(5, 2)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_euler_dfs(self):
-        algorithm = EulerianCycleDFS(self.G)
+    def test_hierholzer(self):
+        algorithm = Hierholzer(self.G)
         algorithm.run(0)
         expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
-    def test_euler_dfs_with_edges(self):
-        algorithm = EulerianCycleDFSWithEdges(self.G)
+    def test_hierholzer_with_edges(self):
+        algorithm = HierholzerWithEdges(self.G)
         algorithm.run(0)
         #expected_cycle = [0, 1, 4, 5, 2, 4, 3, 0]
         expected_cycle = [
-            Edge(0, 1), Edge(1, 4), Edge(4, 5), Edge(5, 2), Edge(2, 4), 
-            Edge(4, 3), Edge(3, 0)]
+            Edge(0, 1), Edge(1, 4), Edge(4, 5),
+            Edge(5, 2), Edge(2, 4), Edge(4, 3), Edge(3, 0)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
-        self.assertRaises(ValueError, EulerianCycleDFS, self.G)
-        self.assertRaises(ValueError, EulerianCycleDFSWithEdges, self.G)
+        self.assertRaises(ValueError, Hierholzer, self.G)
 
     def tearDown(self): pass
 
@@ -165,27 +162,26 @@ class TestEulerianCycleDirected2(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_euler_dfs(self):
-        algorithm = EulerianCycleDFS(self.G)
+    def test_hierholzer(self):
+        algorithm = Hierholzer(self.G)
         algorithm.run(6)
         expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges) + 1)
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
-    def test_euler_dfs_with_edges(self):
-        algorithm = EulerianCycleDFSWithEdges(self.G)
+    def test_hierholzer_with_edges(self):
+        algorithm = HierholzerWithEdges(self.G)
         algorithm.run(6)
         #expected_cycle = [6, 4, 0, 1, 4, 5, 2, 3, 5, 6]
         expected_cycle = [
-            Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4), Edge(4, 5), 
-            Edge(5, 2), Edge(2, 3), Edge(3, 5), Edge(5, 6)]
+            Edge(6, 4), Edge(4, 0), Edge(0, 1), Edge(1, 4),
+            Edge(4, 5), Edge(5, 2), Edge(2, 3), Edge(3, 5), Edge(5, 6)]
         self.assertEqual(len(algorithm.eulerian_cycle), len(self.edges))
         self.assertEqual(algorithm.eulerian_cycle, expected_cycle)
 
     def test_eulerian(self):
         self.G.add_edge(Edge(1, 2))
-        self.assertRaises(ValueError, EulerianCycleDFS, self.G)
-        self.assertRaises(ValueError, EulerianCycleDFSWithEdges, self.G)
+        self.assertRaises(ValueError, Hierholzer, self.G)
 
     def tearDown(self): pass
 

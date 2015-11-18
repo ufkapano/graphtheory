@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.fleury import *
+from graphtheory.eulerian.fleury import *
 
 # 0 --- 1     2
 # |     |   / |

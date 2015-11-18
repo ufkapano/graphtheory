@@ -4,7 +4,18 @@ from graphtheory.structures.edges import Edge
 
 
 def is_transitive(graph):
-    """Test if the tournament is transitive in O(V) time."""
+    """Test if the tournament is transitive in O(V) time.
+    
+    Parameters
+    ----------
+    graph : tournament
+    
+    Notes
+    -----
+    Based on the description from:
+    
+    https://en.wikipedia.org/wiki/Tournament_(graph_theory)
+    """
     if not graph.is_directed():
         raise ValueError("the graph is not directed")
     node_list = [None] * graph.v()
@@ -15,7 +26,21 @@ def is_transitive(graph):
 
 
 def find_hamiltonian_path(graph):
-    """Find a Hamiltonian path in a tournament."""
+    """Find a Hamiltonian path in a tournament.
+    
+    Parameters
+    ----------
+    graph : tournament
+    
+    Notes
+    -----
+    Based on the description from:
+    
+    https://en.wikipedia.org/wiki/Tournament_(graph_theory)
+    
+    A. Bar-Noy, J. Naor, Sorting, Minimal Feedback Sets and Hamilton Paths 
+    in Tournaments, SIAM Journal on Discrete Mathematics 3, 7-20 (1990).
+    """
     if not graph.is_directed():
         raise ValueError("the graph is not directed")
     return sorted(graph.iternodes(), cmp=lambda x, y:
