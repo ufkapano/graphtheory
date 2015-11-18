@@ -16,9 +16,10 @@ class TestCutNode(unittest.TestCase):
         self.N = 8           # number of nodes
         self.G = Graph(self.N)
         self.nodes = range(self.N)
-        self.edges = [Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 4, 12),
-            Edge(1, 5, 4), Edge(5, 2, 5), Edge(5, 6, 6), Edge(2, 6, 7),
-            Edge(2, 3, 8), Edge(2, 7, 9), Edge(3, 7, 11)]
+        self.edges = [
+            Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 4, 12), Edge(1, 5, 4), 
+            Edge(5, 2, 5), Edge(5, 6, 6), Edge(2, 6, 7), Edge(2, 3, 8), 
+            Edge(2, 7, 9), Edge(3, 7, 11)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -41,6 +42,10 @@ class TestCutNode(unittest.TestCase):
         self.assertEqual(algorithm._dd, dd_expected)
         parent_expected = {0: None, 1: 0, 2: 5, 3: 2, 4: 1, 5: 1, 6: 2, 7: 3}
         self.assertEqual(algorithm.parent, parent_expected)
+
+    def test_exceptions(self):
+        self.assertRaises(ValueError, TrivialCutNode, Graph(1, True))
+        self.assertRaises(ValueError, TarjanCutNode, Graph(1, True))
 
     def tearDown(self): pass
 

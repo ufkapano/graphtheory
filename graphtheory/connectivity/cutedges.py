@@ -3,23 +3,23 @@
 from graphtheory.traversing.dfs import SimpleDFS
 
 
-class TrivialCutNode:
-    """Trivial algorithm for finding cut nodes (articulation points).
+class TrivialCutEdge:
+    """Trivial bridge-finding algorithm.
     
-    The algorithm runs in O(V*(V+E)) time.
+    The algorithm runs in O(E*(V+E)) time.
     
     Attributes
     ----------
     graph : input undirected graph
-    cut_nodes : list of nodes
+    cut_edges : list of nodes
     
     Notes
     -----
     Based on the description from:
     
-    http://eduinf.waw.pl/inf/alg/001_search/0130b.php
+    http://eduinf.waw.pl/inf/alg/001_search/0130a.php
     
-    https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
+    https://en.wikipedia.org/wiki/Bridge_(graph_theory)
     """
 
     def __init__(self, graph):
@@ -27,20 +27,17 @@ class TrivialCutNode:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.cut_nodes = list()
+        self.cut_edges = list()
 
     def run(self, source=None):
         """Executable pseudocode."""
         old_ncc = self._find_ncc()
-        for source in self.graph.iternodes():
-            removed = list(self.graph.iteroutedges(source))
-            for edge in removed:
-                self.graph.del_edge(edge)
+        for edge in self.graph.iteredges():
+            self.graph.del_edge(edge)
             new_ncc = self._find_ncc()
-            for edge in removed:
-                self.graph.add_edge(edge)
-            if new_ncc > old_ncc + 1:   # source was not removed
-                self.cut_nodes.append(source)
+            self.graph.add_edge(edge)
+            if new_ncc > old_ncc:
+                self.cut_edges.append(edge)
 
     def _find_ncc(self):
         """Return the number of connected components."""
@@ -55,13 +52,13 @@ class TrivialCutNode:
         return ncc
 
 
-class TarjanCutNode:
-    """Tarjan's algorithm for finding cut nodes in O(V+E) time.
+class TarjanCutEdge:
+    """Tarjan's bridge-finding algorithm in O(V+E) time.
     
     Attributes
     ----------
     graph : input undirected graph
-    cut_nodes : list of nodes
+    cut_edges : list of nodes
     low : dict with nodes
     parent : dict with nodes (DFS tree)
     _time : number, private
@@ -72,9 +69,13 @@ class TarjanCutNode:
     -----
     Based on the description from:
     
-    http://eduinf.waw.pl/inf/alg/001_search/0130b.php
+    http://eduinf.waw.pl/inf/alg/001_search/0130a.php
     
-    https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
+    https://en.wikipedia.org/wiki/Bridge_(graph_theory)
+    
+    R. E. Tarjan, A note on nding the bridges of a graph,
+        Information Processing Letters 2, 160-161 (1974).
+    
     """
 
     def __init__(self, graph):
@@ -82,7 +83,7 @@ class TarjanCutNode:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.cut_nodes = list()
+        self.cut_edges = list()
         # Parametr dla wierzcholka wprowadzony przez Tarjana.
         self.low = dict(((node, None) for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
@@ -96,34 +97,17 @@ class TarjanCutNode:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is not None:
-            self._visit_root(source)
+            self._visit(source)
         else:
             for node in self.graph.iternodes():
                 if self._dd[node] == 0:   # not visited
-                    self._visit_root(node)
-
-    def _visit_root(self, node):
-        """Explore recursively the connected component from root."""
-        self._time = self._time + 1
-        self._dd[node] = self._time
-        self.low[node] = self._time
-        n_sons = 0   # number of sons for the root
-        for edge in self.graph.iteroutedges(node):
-            if self._dd[edge.target] == 0:   # not visited
-                n_sons = n_sons + 1
-                self.parent[edge.target] = node
-                self.dag.add_edge(edge)
-                self._visit(edge.target)
-        # Is the root an articulation point?
-        if n_sons > 1:
-            self.cut_nodes.append(node)
+                    self._visit(node)
 
     def _visit(self, node):
         """Explore recursively the connected component."""
         self._time = self._time + 1
         self._dd[node] = self._time
-        self.low[node] = self._time   # temporary
-        is_cut_node = False
+        self.low[node] = self._time
         for edge in self.graph.iteroutedges(node):
             if edge.target == self.parent[node]:   # can be None!
                 continue
@@ -132,13 +116,14 @@ class TarjanCutNode:
                 self.dag.add_edge(edge)
                 self._visit(edge.target)
                 self.low[node] = min(self.low[node], self.low[edge.target])
-                # Test for an articulation point.
-                if self.low[edge.target] >= self._dd[node]:
-                    is_cut_node = True
             else:   # back edge
                 self.low[node] = min(self.low[node], self._dd[edge.target])
-        # All neighbors are visited. Check the test.
-        if is_cut_node:
-            self.cut_nodes.append(node)
+        # All neighbors are visited. Check the bridge condition.
+        if self.parent[node] is not None and self.low[node] == self._dd[node]:
+            # Most to jest krawedz prowadzaca do node od jego rodzica.
+            # Tu jest klopotliwe wyciaganie calej krawedzi.
+            for edge in self.dag.iteroutedges(self.parent[node]):
+                if edge.target == node:
+                    self.cut_edges.append(edge)
 
 # EOF
