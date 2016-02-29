@@ -73,9 +73,8 @@ class TarjanCutEdge:
     
     https://en.wikipedia.org/wiki/Bridge_(graph_theory)
     
-    R. E. Tarjan, A note on nding the bridges of a graph,
+    R. E. Tarjan, A note on finding the bridges of a graph,
         Information Processing Letters 2, 160-161 (1974).
-    
     """
 
     def __init__(self, graph):

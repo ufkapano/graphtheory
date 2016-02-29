@@ -86,6 +86,18 @@ class TestGraphFactory(unittest.TestCase):
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
 
+    def test_bipartite(self):
+        N1, N2 = 5, 6
+        G = self.graph_factory.make_bipartite(N1, N2, directed=False, edge_probability=0.1)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), N1 + N2)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
+        # We use the fact that nodes are in two sets
+        # [0 ... N1-1], [N1 ... N1+N2-1].
+        for edge in G.iteredges():
+            self.assertEqual(edge.source < N1, edge.target >= N1)
+
     def test_grid_periodic(self):
         size = 4
         G = self.graph_factory.make_grid_periodic(size)

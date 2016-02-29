@@ -39,7 +39,7 @@ def find_hamiltonian_path(graph):
     https://en.wikipedia.org/wiki/Tournament_(graph_theory)
     
     A. Bar-Noy, J. Naor, Sorting, Minimal Feedback Sets and Hamilton Paths 
-    in Tournaments, SIAM Journal on Discrete Mathematics 3, 7-20 (1990).
+        in Tournaments, SIAM Journal on Discrete Mathematics 3, 7-20 (1990).
     """
     if not graph.is_directed():
         raise ValueError("the graph is not directed")

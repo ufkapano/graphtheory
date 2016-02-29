@@ -110,6 +110,23 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+    def make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
+        """Create a random bipartite graph."""
+        graph = self.cls(n1 + n2, directed)
+        weights = range(1, n1 * n2 + 1)   # different weights
+        random.shuffle(weights)
+        for node in xrange(n1 + n2):
+            graph.add_node(node)
+        for source in xrange(n1):
+            for target in xrange(n1, n1 + n2):   # no loops
+                if random.random() > edge_probability:
+                    continue
+                if random.random() > 0.5:   # random direction
+                    graph.add_edge(Edge(source, target, weights.pop()))
+                else:
+                    graph.add_edge(Edge(target, source, weights.pop()))
+        return graph
+
 #   |     |     |
 # --2s--(2s+1)-(2s+2)--
 #   |     |     |
