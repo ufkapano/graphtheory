@@ -127,6 +127,34 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+# |     |     |            |
+# 2s--(2s+1)-(2s+2)-...--(3s-1)
+# |     |     |            |
+# s---(s+1)-(s+2)---...--(2s-1)
+# |     |     |            |
+# 0-----1-----2-----...--(s-1)
+
+    def make_grid(self, size=3):
+        """Create the grid graph with boundary
+            |V|= size * size, |E| = 2 * size * (size-1).
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = self.cls(n, directed=False)
+        weights = range(1, 1 + 2 * size * (size-1))   # different weights
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            if col != size-1:
+                graph.add_edge(Edge(node, node + 1, weights.pop()))  # line ---
+            if row != size-1:
+                graph.add_edge(Edge(node, node + size, weights.pop()))  # line |
+        return graph
+
 #   |     |     |
 # --2s--(2s+1)-(2s+2)--
 #   |     |     |
@@ -152,6 +180,36 @@ class GraphFactory:
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
             graph.add_edge(Edge(node, ((row + 1) % size) * size + col, weights.pop())) # line |
+        return graph
+
+# |  /  |  /  |  /     /  |
+# 2s--(2s+1)-(2s+2)-...-(3s-1)
+# |  /  |  /  |  /     /  |
+# s---(s+1)-(s+2)--...--(2s-1)
+# |  /  |  /  |  /     /  |
+# 0-----1-----2---...---(s-1)
+
+    def make_triangle(self, size=3):
+        """Create the triangle graph with boundary,
+        |V| = size * size, |E| = 2 * size * (size-1) + (size-1) * (size-1).
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = size * size
+        graph = self.cls(n, directed=False)
+        weights = range(1, 1 + 3*size*size -4*size + 1)   # different weights
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in range(n):
+            row = node / size
+            col = node % size
+            if col != size-1:
+                graph.add_edge(Edge(node, node + 1, weights.pop()))  # line ---
+            if row != size-1:
+                graph.add_edge(Edge(node, node + size, weights.pop()))  # line |
+            if col != size-1 and row != size-1:
+                graph.add_edge(Edge(node, node + 1 + size, weights.pop())) # line /
         return graph
 
 #   |  /  |  /  | /
@@ -182,9 +240,33 @@ class GraphFactory:
             graph.add_edge(Edge(node, ((row + 1) % size) * size + (col + 1) % size, weights.pop())) # line /
         return graph
 
-# --1--3--5--...--(2s+1)-
+# 1--3--5--...--(2s-1)
+# |  |  |         |
+# 0--2--4--...--(2s-2)
+
+    def make_ladder(self, size=3):
+        """Create the ladder with boundary.
+        |V| = 2 * size, |E| = 3*size - 2.
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = 2 * size
+        graph = self.cls(n, directed=False)
+        weights = range(1, 1 + 3 * size - 2)   # different weights
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for i in xrange(size):
+            node = 2 * i
+            graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
+            if i != size-1:
+                graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
+                graph.add_edge(Edge(node + 1, (node + 3) % n, weights.pop())) # line ---
+        return graph
+
+# --1--3--5--...--(2s-1)-
 #   |  |  |         |
-# --0--2--4--...--(2s)---
+# --0--2--4--...--(2s-2)---
 
     def make_ladder_periodic(self, size=3):
         """Create the ladder with periodic boundary conditions.

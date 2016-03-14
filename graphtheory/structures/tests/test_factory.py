@@ -99,6 +99,14 @@ class TestGraphFactory(unittest.TestCase):
         for edge in G.iteredges():
             self.assertEqual(edge.source < N1, edge.target >= N1)
 
+    def test_grid(self):
+        size = 4
+        G = self.graph_factory.make_grid(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), size * size)
+        self.assertEqual(G.e(), 2 * size * (size-1))
+        self.assertRaises(ValueError, self.graph_factory.make_grid, 2)
+
     def test_grid_periodic(self):
         size = 4
         G = self.graph_factory.make_grid_periodic(size)
@@ -108,6 +116,14 @@ class TestGraphFactory(unittest.TestCase):
         self.assertRaises(
             ValueError, self.graph_factory.make_grid_periodic, 2)
 
+    def test_triangle(self):
+        size = 4
+        G = self.graph_factory.make_triangle(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), size * size)
+        self.assertEqual(G.e(), 3 * size * size -4 * size + 1)
+        self.assertRaises(ValueError, self.graph_factory.make_triangle, 2)
+
     def test_triangle_periodic(self):
         size = 4
         G = self.graph_factory.make_triangle_periodic(size)
@@ -116,6 +132,14 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.e(), 3 * size * size)
         self.assertRaises(
             ValueError, self.graph_factory.make_triangle_periodic, 2)
+
+    def test_ladder(self):
+        size = 4
+        G = self.graph_factory.make_ladder(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), 2 * size)
+        self.assertEqual(G.e(), 3 * size -2)
+        self.assertRaises(ValueError, self.graph_factory.make_ladder, 2)
 
     def test_ladder_periodic(self):
         size = 4
