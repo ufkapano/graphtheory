@@ -53,4 +53,14 @@ class AcyclicGraphDFS:
                 pass
         self.color[node] = "BLACK"
 
+
+def is_acyclic(graph):
+    """Cycles detection."""
+    try:
+        algorithm = AcyclicGraphDFS(graph)
+        algorithm.run()
+        return True
+    except ValueError:
+        return False
+
 # EOF

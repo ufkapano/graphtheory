@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.acyclic import AcyclicGraphDFS
+from graphtheory.algorithms.acyclic import AcyclicGraphDFS, is_acyclic
 
 # r---s   t---u   cycles are present
 # |   | / | / |
@@ -37,24 +37,28 @@ class TestAcyclicUdirectedGraph(unittest.TestCase):
         algorithm.run(1)   # it is safe, because G is connected
         parent_expected = {1: None, 0: 1, 3: 6, 2: 5, 5: 1, 4: 0, 7: 6, 6: 2}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertTrue(is_acyclic(self.G))
 
     def test_detect_cycle1(self):
         self.assertEqual(self.G.v(), self.N)
         self.G.add_edge(self.cycle_edges[0])
         algorithm = AcyclicGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
+        self.assertFalse(is_acyclic(self.G))
 
     def test_detect_cycle2(self):
         self.assertEqual(self.G.v(), self.N)
         self.G.add_edge(self.cycle_edges[1])
         algorithm = AcyclicGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
+        self.assertFalse(is_acyclic(self.G))
 
     def test_detect_cycle3(self):
         self.assertEqual(self.G.v(), self.N)
         self.G.add_edge(self.cycle_edges[2])
         algorithm = AcyclicGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
+        self.assertFalse(is_acyclic(self.G))
 
     def tearDown(self): pass
 
@@ -94,18 +98,21 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
         parent_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 5}
         #parent_expected = {0: None, 2: 1, 1: 0, 4: 0, 3: 2, 6: 5, 5: 4, 7: 0}
         self.assertEqual(algorithm.parent, parent_expected)
+        self.assertTrue(is_acyclic(self.G))
 
     def test_detect_directed_cycle1(self):
         self.assertEqual(self.G.v(), self.N)
         self.G.add_edge(self.cycle_edges[0])
         algorithm = AcyclicGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
+        self.assertFalse(is_acyclic(self.G))
 
     def test_detect_directed_cycle2(self):
         self.assertEqual(self.G.v(), self.N)
         self.G.add_edge(self.cycle_edges[1])
         algorithm = AcyclicGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
+        self.assertFalse(is_acyclic(self.G))
 
     def tearDown(self): pass
 
