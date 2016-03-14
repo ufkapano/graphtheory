@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS, BipartiteGraphDFS
+from graphtheory.bipartiteness.bipartite import *
 
 # 0---1---2
 # |   |   |
@@ -38,6 +38,9 @@ class TestBipartiteGraph(unittest.TestCase):
         algorithm.run(0)
         color_expected = {0: 0, 2: 0, 4: 0, 1: 1, 3: 1, 5: 1}
         self.assertEqual(algorithm.color, color_expected)
+
+    def test_is_bipartite(self):
+        self.assertTrue(is_bipartite(self.G))
 
     def test_exceptions(self):
         self.G.add_edge(Edge(0, 4))

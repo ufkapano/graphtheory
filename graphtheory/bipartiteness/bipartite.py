@@ -102,4 +102,14 @@ class BipartiteGraphDFS:
                 if self.color[edge.target] == self.color[node]:
                     raise ValueError("the graph is not bipartite")
 
+
+def is_bipartite(graph):
+    """Bipartite graphs detection."""
+    try:
+        algorithm = BipartiteGraphBFS(graph)
+        algorithm.run()
+        return True
+    except ValueError:
+        return False
+
 # EOF
