@@ -40,6 +40,6 @@ Igor Samson (graph coloring)
 
 Dariusz Zdybski (cliques)
 
-Aleksander Krawczyk (Halin graphs)
+Aleksander Krawczyk (Halin graphs, wheel graphs)
 
 EOF
