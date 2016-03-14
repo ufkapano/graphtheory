@@ -10,6 +10,12 @@ class WheelGraph:
     ----------
     graph : input graph
     hub : node
+    
+    Notes
+    -----
+    Based on:
+    
+    https://en.wikipedia.org/wiki/Wheel_graph
     """
 
     def __init__(self, graph):

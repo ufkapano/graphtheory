@@ -4,6 +4,7 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
+from graphtheory.planarity.wheels import is_wheel
 
 
 class TestGraphFactory(unittest.TestCase):
@@ -130,6 +131,26 @@ class TestGraphFactory(unittest.TestCase):
         self.assertTrue(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertTrue(G.e() > self.N - 2)
+
+    def test_wheel(self):
+        G = self.graph_factory.make_wheel(n=self.N, directed=False)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), 2 * self.N - 2)
+        self.assertTrue(is_wheel(G))
+        self.assertRaises(ValueError, self.graph_factory.make_wheel, 1)
+        self.assertRaises(ValueError, self.graph_factory.make_wheel, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_wheel, 3)
+
+    def test_fake_wheel(self):
+        G = self.graph_factory.make_fake_wheel(n=self.N, directed=False)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), 2 * self.N - 2)
+        self.assertFalse(is_wheel(G))
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 4)
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 5)
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 6)
 
     def tearDown(self): pass
 

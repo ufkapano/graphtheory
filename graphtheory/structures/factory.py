@@ -231,4 +231,44 @@ class GraphFactory:
         # all nodes are on paths; new edges can be added
         return graph
 
+    def make_wheel(self, n=4, directed=False):
+        """Create a wheel graph."""
+        if n < 4:
+            raise ValueError("number of vertices must be greater than 3")
+        graph = self.cls(n, directed)
+        weights = range(1, 1 + 2 * n - 2)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        hub = 0
+        for i in xrange(1, n):
+            graph.add_edge(Edge(hub, i, weights.pop()))
+            graph.add_edge(Edge(i, i+1 if (i < n-1) else 1, weights.pop()))
+        return graph
+
+    def make_fake_wheel(self, n=7, directed=False):
+        """Create a fake wheel graph."""
+        # Similar to a windmill graph,
+        # http://mathworld.wolfram.com/WindmillGraph.html
+        if n < 7:
+            raise ValueError("number of vertices must be greater than 6")
+        graph = self.make_wheel(n, directed)
+        # Remowe Edge(3, 4, weight1) and Edge(1, n-1, weight2).
+        # Add Edge(3, 1, weight1) and Edge(4, n-1, weight2).
+        # Old weights are reused.
+        for edge in graph.iteroutedges(3):
+            if edge.target == 4:
+                edge1 = edge
+                break
+        for edge in graph.iteroutedges(n-1):
+            if edge.target == 1:
+                edge2 = edge
+                break
+        graph.del_edge(edge1)
+        graph.del_edge(edge2)
+        graph.add_edge(Edge(3, 1, edge1.weight))
+        graph.add_edge(Edge(n-1, 4, edge2.weight))
+        #graph.show()
+        return graph
+
 # EOF
