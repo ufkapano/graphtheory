@@ -12,7 +12,7 @@ class GraphFactory:
         self.cls = graph_class
 
     def make_complete(self, n=1, directed=False):
-        """Create the complete graph."""
+        """Create the weighted complete graph."""
         graph = self.cls(n, directed)
         weights = range(1, 1 + n * (n-1)/2)   # different weights
         random.shuffle(weights)
@@ -27,7 +27,7 @@ class GraphFactory:
         return graph
 
     def make_cyclic(self, n=1, directed=False):
-        """Create the cyclic graph."""
+        """Create the weighted cyclic graph."""
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
         graph = self.cls(n, directed)
@@ -40,7 +40,7 @@ class GraphFactory:
         return graph
 
     def make_sparse(self, n=1, directed=False, m=0):
-        """Create a sparse graph."""
+        """Create a weighted sparse graph."""
         if m >= n*(n-1)/2:
             raise ValueError("too mamy edges")
         graph = self.cls(n, directed)
@@ -58,7 +58,7 @@ class GraphFactory:
         return graph
 
     def make_tree(self, n=1, directed=False):
-        """Create a tree graph."""
+        """Create a weighted tree graph."""
         graph = self.cls(n, directed)
         weights = range(1, n)   # different weights
         random.shuffle(weights)
@@ -72,7 +72,7 @@ class GraphFactory:
         return graph
 
     def make_connected(self, n=1, directed=False, m=0):
-        """Create a connected graph."""
+        """Create a weighted connected graph."""
         if m < n - 1 or m >= n * (n - 1)/2:
             raise ValueError("bad number of edges for the connected graph")
         graph = self.cls(n, directed)
@@ -96,7 +96,7 @@ class GraphFactory:
         return graph
 
     def make_random(self, n=1, directed=False, edge_probability=0.5):
-        """Create a random graph."""
+        """Create a weighted random graph."""
         graph = self.cls(n, directed)
         weights = range(1, 1 + n * (n-1)/2)   # different weights
         random.shuffle(weights)
@@ -113,7 +113,7 @@ class GraphFactory:
         return graph
 
     def make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
-        """Create a random bipartite graph."""
+        """Create a weighted random bipartite graph."""
         graph = self.cls(n1 + n2, directed)
         weights = range(1, n1 * n2 + 1)   # different weights
         random.shuffle(weights)
@@ -137,7 +137,7 @@ class GraphFactory:
 # 0-----1-----2-----...--(s-1)
 
     def make_grid(self, size=3):
-        """Create the grid graph with boundary
+        """Create the weighted grid graph with boundary
             |V|= size * size, |E| = 2 * size * (size-1).
         """
         if size < 3:
@@ -166,7 +166,7 @@ class GraphFactory:
 #   |     |     |
 
     def make_grid_periodic(self, size=3):
-        """Create the grid graph with periodic boundary conditions.
+        """Create the weighted grid graph with periodic boundary conditions.
         |V| = size * size, |E| = 2 * |V|.
         """
         if size < 3:
@@ -192,7 +192,7 @@ class GraphFactory:
 # 0-----1-----2---...---(s-1)
 
     def make_triangle(self, size=3):
-        """Create the triangle graph with boundary,
+        """Create the weighted triangle graph with boundary,
         |V| = size * size, |E| = 2 * size * (size-1) + (size-1) * (size-1).
         """
         if size < 3:
@@ -223,8 +223,8 @@ class GraphFactory:
 # / |  /  |  /  |
 
     def make_triangle_periodic(self, size=3):
-        """Create the triangle network with periodic boundary conditions.
-        |V| = size * size, |E| = 3 * |V|.
+        """Create the weighted triangle network with periodic boundary 
+        conditions. |V| = size * size, |E| = 3 * |V|.
         """
         if size < 3:
             raise ValueError("size too small")
@@ -247,7 +247,7 @@ class GraphFactory:
 # 0--2--4--...--(2s-2)
 
     def make_ladder(self, size=3):
-        """Create the ladder with boundary.
+        """Create the weighted ladder with boundary.
         |V| = 2 * size, |E| = 3*size - 2.
         """
         if size < 3:
@@ -271,7 +271,7 @@ class GraphFactory:
 # --0--2--4--...--(2s-2)---
 
     def make_ladder_periodic(self, size=3):
-        """Create the ladder with periodic boundary conditions.
+        """Create the weighted ladder with periodic boundary conditions.
         |V| = 2 * size, |E| = 3 * size.
         """
         if size < 3:
@@ -316,7 +316,7 @@ class GraphFactory:
         return graph
 
     def make_wheel(self, n=4, directed=False):
-        """Create a wheel graph."""
+        """Create a weighted wheel graph."""
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
         graph = self.cls(n, directed)
@@ -331,7 +331,7 @@ class GraphFactory:
         return graph
 
     def make_fake_wheel(self, n=7, directed=False):
-        """Create a fake wheel graph."""
+        """Create a weighted fake wheel graph."""
         # Similar to a windmill graph,
         # http://mathworld.wolfram.com/WindmillGraph.html
         if n < 7:

@@ -29,6 +29,9 @@ class Graph(dict):
         """
         self.n = n
         self.directed = directed
+        # Structures defining a topological graph.
+        self.edge_next = None
+        self.edge_prev = None
 
     def is_directed(self):
         """Test if the graph is directed."""
@@ -42,6 +45,29 @@ class Graph(dict):
         """Return the number of edges in O(V) time."""
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges / 2)
+
+    def f(self):
+        """Return the number of faces (for planar graphs)."""
+        if not self.edge_next or not self.edge_prev:
+            raise ValueError("run planarity test first")
+        return self.e() + 2 - self.n   # Euler's formula
+
+    def iterfaces(self):
+        """Generate all faces on demand (for planar graphs)."""
+        if not self.edge_next or not self.edge_prev:
+            raise ValueError("planar embedding not calculated")
+        used = set()
+        for edge in self.edge_next:
+            if edge in used:
+                continue
+            used.add(edge)
+            face = [edge]
+            edge = self.edge_next[~edge]
+            while edge not in used:
+                used.add(edge)
+                face.append(edge)
+                edge = self.edge_next[~edge]
+            yield face
 
     def add_node(self, node):
         """Add a node to the graph."""
@@ -96,7 +122,7 @@ class Graph(dict):
             return 0
 
     def iternodes(self):
-        """Generate the nodes from the graph on demand."""
+        """Generate all nodes from the graph on demand."""
         return self.iterkeys()
 
     def iteradjacent(self, source):
@@ -119,7 +145,7 @@ class Graph(dict):
                 yield self[target][source]
 
     def iteredges(self):
-        """Generate the edges from the graph on demand."""
+        """Generate all edges from the graph on demand."""
         for source in self.iternodes():
             for target in self[source]:
                 if self.is_directed() or source < target:
