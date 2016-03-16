@@ -28,6 +28,8 @@ class GraphFactory:
 
     def make_cyclic(self, n=1, directed=False):
         """Create the cyclic graph."""
+        if n < 3:
+            raise ValueError("number of nodes must be greater than 2")
         graph = self.cls(n, directed)
         weights = range(1, 1 + n)   # different weights
         random.shuffle(weights)
@@ -316,7 +318,7 @@ class GraphFactory:
     def make_wheel(self, n=4, directed=False):
         """Create a wheel graph."""
         if n < 4:
-            raise ValueError("number of vertices must be greater than 3")
+            raise ValueError("number of nodes must be greater than 3")
         graph = self.cls(n, directed)
         weights = range(1, 1 + 2 * n - 2)
         random.shuffle(weights)
@@ -333,7 +335,7 @@ class GraphFactory:
         # Similar to a windmill graph,
         # http://mathworld.wolfram.com/WindmillGraph.html
         if n < 7:
-            raise ValueError("number of vertices must be greater than 6")
+            raise ValueError("number of nodes must be greater than 6")
         graph = self.make_wheel(n, directed)
         # Remowe Edge(3, 4, weight1) and Edge(1, n-1, weight2).
         # Add Edge(3, 1, weight1) and Edge(4, n-1, weight2).

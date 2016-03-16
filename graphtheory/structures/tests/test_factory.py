@@ -36,6 +36,8 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.e(), self.N)
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
+        self.assertRaises(ValueError, self.graph_factory.make_cyclic, 1)
+        self.assertRaises(ValueError, self.graph_factory.make_cyclic, 2)
 
     def test_cyclic_directed(self):
         G = self.graph_factory.make_cyclic(n=self.N, directed=True)
@@ -44,6 +46,8 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.e(), self.N)
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
+        self.assertRaises(ValueError, self.graph_factory.make_cyclic, 1)
+        self.assertRaises(ValueError, self.graph_factory.make_cyclic, 2)
 
     def test_sparse(self):
         m_edges = 2 * self.N
@@ -172,6 +176,9 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), 2 * self.N - 2)
         self.assertFalse(is_wheel(G))
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 1)
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 3)
         self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 4)
         self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 5)
         self.assertRaises(ValueError, self.graph_factory.make_fake_wheel, 6)
