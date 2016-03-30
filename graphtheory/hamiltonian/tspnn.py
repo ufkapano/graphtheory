@@ -41,7 +41,15 @@ class NearestNeighborTSPWithEdges:
 
 
 class NearestNeighborTSPWithGraph:
-    """The nearest neighbor algorithm for TSP."""
+    """The nearest neighbor algorithm for TSP.
+    
+    Attributes
+    ----------
+    graph : input weighted complete graph
+    hamiltonian_cycle : cycle graph
+    source : starting node
+    _used : dict with nodes, private
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

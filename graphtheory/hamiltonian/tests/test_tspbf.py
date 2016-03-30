@@ -35,10 +35,14 @@ class TestTSP(unittest.TestCase):
         algorithm = BruteForceTSPWithEdges(self.G)
         algorithm.run(2)
         # Cycles for different starting nodes.
-        expected_hamiltonian_cycle0 = [Edge(0, 1, 20), Edge(1, 2, 30), Edge(2, 3, 12), Edge(3, 0, 35)]
-        expected_hamiltonian_cycle1 = [Edge(1, 0, 20), Edge(0, 3, 35), Edge(3, 2, 12), Edge(2, 1, 30)]
-        expected_hamiltonian_cycle2 = [Edge(2, 1, 30), Edge(1, 0, 20), Edge(0, 3, 35), Edge(3, 2, 12)]
-        expected_hamiltonian_cycle3 = [Edge(3, 0, 35), Edge(0, 1, 20), Edge(1, 2, 30), Edge(2, 3, 12)]
+        expected_hamiltonian_cycle0 = [
+            Edge(0, 1, 20), Edge(1, 2, 30), Edge(2, 3, 12), Edge(3, 0, 35)]
+        expected_hamiltonian_cycle1 = [
+            Edge(1, 0, 20), Edge(0, 3, 35), Edge(3, 2, 12), Edge(2, 1, 30)]
+        expected_hamiltonian_cycle2 = [
+            Edge(2, 1, 30), Edge(1, 0, 20), Edge(0, 3, 35), Edge(3, 2, 12)]
+        expected_hamiltonian_cycle3 = [
+            Edge(3, 0, 35), Edge(0, 1, 20), Edge(1, 2, 30), Edge(2, 3, 12)]
         expected_hamiltonian_cycle = expected_hamiltonian_cycle2
         self.assertEqual(algorithm.hamiltonian_cycle, expected_hamiltonian_cycle)
         weight = sum(edge.weight for edge in algorithm.hamiltonian_cycle)
@@ -51,7 +55,8 @@ class TestTSP(unittest.TestCase):
         weight = sum(edge.weight for edge in algorithm.hamiltonian_cycle.iteredges())
         self.assertEqual(weight, self.best_weight)
         #algorithm.hamiltonian_cycle.show()
-        self.assertEqual(algorithm.hamiltonian_cycle.e(), algorithm.hamiltonian_cycle.v())
+        self.assertEqual(algorithm.hamiltonian_cycle.e(),
+                         algorithm.hamiltonian_cycle.v())
         for node in algorithm.hamiltonian_cycle.iternodes():
             self.assertEqual(algorithm.hamiltonian_cycle.degree(node), 2)
 
