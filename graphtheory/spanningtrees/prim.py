@@ -90,6 +90,56 @@ class PrimMST:
         return self.mst
 
 
+class PrimMSTWithEdges:
+    """Prim's algorithm for finding a minimum spanning tree.
+    
+    Attributes
+    ----------
+    graph : input undirected weighted graph or multigraph
+    distance : dict with nodes
+    parent : dict with nodes (MST)
+    _in_queue : dict, private
+    _pq : priority queue, private
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.parent = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
+        self._in_queue = dict((node, True) for node in self.graph.iternodes())
+        self._pq = PriorityQueue()
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        if source is None:   # get first random node
+            source = self.graph.iternodes().next()
+        self.source = source
+        self.distance[source] = 0
+        for node in self.graph.iternodes():
+            self._pq.put((self.distance[node], node))
+        while not self._pq.empty():
+            _, node = self._pq.get()
+            if self._in_queue[node]:
+                self._in_queue[node] = False
+            else:
+                continue
+            for edge in self.graph.iteroutedges(node):
+                if self._in_queue[edge.target] and edge.weight < self.distance[edge.target]:
+                    self.distance[edge.target] = edge.weight
+                    self.parent[edge.target] = ~edge
+                    # DECREASE-KEY
+                    self._pq.put((edge.weight, edge.target))
+
+    def to_tree(self):
+        """The minimum spanning tree is built."""
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.parent:   # O(V) time
+            if self.parent[node] is not None:
+                self.mst.add_edge(self.parent[node])
+        return self.mst
+
+
 class PrimMatrixMST:
     """Prim's algorithm for finding a minimum spanning tree.
     
@@ -168,6 +218,49 @@ class PrimMatrixMST:
             elif (self.parent[edge.target] is edge.source and
                 self.distance[edge.target] == edge.weight):
                     self.mst.add_edge(edge)
+        return self.mst
+
+
+class PrimMatrixMSTWithEdges:
+    """Prim's algorithm for finding MST in O(V**2) time.
+    
+    Attributes
+    ----------
+    graph : input undirected weighted graph or multigraph
+    distance : dict with nodes
+    parent : dict with edges (MST)
+    _in_queue : dict, private
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
+        self.parent = dict((node, None) for node in self.graph.iternodes())
+        self._in_queue = dict((node, True) for node in self.graph.iternodes())
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        if source is None:   # get first random node
+            source = self.graph.iternodes().next()
+        self.source = source
+        self.distance[source] = 0
+        for step in xrange(self.graph.v()):    # |V| times
+            # Find min node in the graph, O(V) time.
+            node = min((node for node in self.graph.iternodes() 
+                if self._in_queue[node]), key=self.distance.get)
+            self._in_queue[node] = False
+            for edge in self.graph.iteroutedges(node):   # O(V) time
+                if self._in_queue[edge.target] and edge.weight < self.distance[edge.target]:
+                    self.distance[edge.target] = edge.weight
+                    self.parent[edge.target] = ~edge
+
+    def to_tree(self):
+        """The minimum spanning tree is built."""
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.parent:   # O(V) time
+            if self.parent[node] is not None:
+                self.mst.add_edge(self.parent[node])
         return self.mst
 
 

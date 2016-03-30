@@ -34,8 +34,23 @@ class TestPrim(unittest.TestCase):
         mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [
-            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), Edge(1, 4, 10), 
-            Edge(4, 6, 8), Edge(3, 5, 6)]
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), 
+            Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_prim_with_edges(self):
+        algorithm = PrimMSTWithEdges(self.G)
+        algorithm.run()
+        algorithm.to_tree()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), 
+            Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
@@ -50,8 +65,23 @@ class TestPrim(unittest.TestCase):
         mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [
-            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), Edge(1, 4, 10), 
-            Edge(4, 6, 8), Edge(3, 5, 6)]
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), 
+            Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_prim_matrix_with_edges(self):
+        algorithm = PrimMatrixMSTWithEdges(self.G)
+        algorithm.run()
+        algorithm.to_tree()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), 
+            Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
@@ -66,8 +96,8 @@ class TestPrim(unittest.TestCase):
         mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
         self.assertEqual(mst_weight, mst_weight_expected)
         mst_edges_expected = [
-            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), Edge(1, 4, 10), 
-            Edge(4, 6, 8), Edge(3, 5, 6)]
+            Edge(0, 1, 7), Edge(0, 3, 4), Edge(2, 4, 5), 
+            Edge(1, 4, 10), Edge(4, 6, 8), Edge(3, 5, 6)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
@@ -108,9 +138,39 @@ class TestPrimCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
+    def test_mst_cormen_with_edges(self):
+        algorithm = PrimMSTWithEdges(self.G)
+        algorithm.run()
+        algorithm.to_tree()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 42
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(2, 5, 5), Edge(6, 5, 3), Edge(3, 4, 9), Edge(5, 4, 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
     def test_mst_matrix_cormen(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
+        algorithm.run()
+        algorithm.to_tree()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-1)
+        mst_weight_expected = 42
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(2, 5, 5), Edge(6, 5, 3), Edge(3, 4, 9), Edge(5, 4, 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_mst_matrix_cormen_with_edges(self):
+        algorithm = PrimMatrixMSTWithEdges(self.G)
         algorithm.run()
         algorithm.to_tree()
         self.assertEqual(algorithm.mst.v(), self.N)

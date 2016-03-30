@@ -51,6 +51,10 @@ class TestTSP(unittest.TestCase):
         for node in algorithm.hamiltonian_cycle.iternodes():
             self.assertEqual(algorithm.hamiltonian_cycle.degree(node), 2)
 
+    def test_exceptions(self):
+        self.assertRaises(ValueError, NearestNeighborTSPWithEdges, Graph(5, True))
+        self.assertRaises(ValueError, NearestNeighborTSPWithGraph, Graph(5, True))
+
     def tearDown(self): pass
 
 if __name__ == "__main__":
