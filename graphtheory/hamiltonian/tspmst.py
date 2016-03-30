@@ -6,6 +6,12 @@ from graphtheory.traversing.dfs import SimpleDFS
 
 class PrimTSPWithEdges:
     """The minimum spanning tree algorithm for Metric TSP.
+    
+    Attributes
+    ----------
+    graph : input weighted complete graph
+    hamiltonian_cycle : list of edges
+    source : starting node
     """
 
     def __init__(self, graph):
@@ -14,6 +20,7 @@ class PrimTSPWithEdges:
             raise ValueError("the graph is directed")
         self.graph = graph
         self.hamiltonian_cycle = list()
+        self.source = None
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -23,14 +30,13 @@ class PrimTSPWithEdges:
         algorithm = PrimMatrixMSTWithEdges(self.graph)   # O(V**2) time
         algorithm.run(self.source)
         self.mst = algorithm.to_tree()
-        #self.mst.show()
         # Obchodzenie MST w kolejnosci preorder z uzyciem DFS.
-        # Cykl Hamiltona jako lista wierzcholkow.
+        # Hamiltonian cycle as a list of nodes.
         order = list()
         algorithm = SimpleDFS(self.mst)   # O(V) time
         algorithm.run(self.source, pre_action=lambda node: order.append(node))
-        order.append(self.source)   # zamykam cykl, teraz dlugosc V+1
-        # Szukam krawedzi realizujacych cykl Hamiltona, O(V**2) time.
+        order.append(self.source)   # close cycle, length V+1
+        # Finding edges for the Hamiltonian cycle, O(V**2) time.
         for i in xrange(self.graph.v()):
             source = order[i]
             target = order[i+1]
@@ -42,6 +48,12 @@ class PrimTSPWithEdges:
 
 class PrimTSPWithGraph:
     """The minimum spanning tree algorithm for Metric TSP.
+    
+    Attributes
+    ----------
+    graph : input weighted complete graph
+    hamiltonian_cycle : cycle graph
+    source : starting node
     """
 
     def __init__(self, graph):
@@ -52,6 +64,7 @@ class PrimTSPWithGraph:
         self.hamiltonian_cycle = self.graph.__class__(self.graph.v())
         for node in self.graph.iternodes():
             self.hamiltonian_cycle.add_node(node)
+        self.source = None
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -61,14 +74,13 @@ class PrimTSPWithGraph:
         algorithm = PrimMatrixMSTWithEdges(self.graph)   # O(V**2) time
         algorithm.run(self.source)
         self.mst = algorithm.to_tree()
-        #self.mst.show()
         # Obchodzenie MST w kolejnosci preorder z uzyciem DFS.
-        # Cykl Hamiltona jako lista wierzcholkow.
+        # Hamiltonian cycle as a list of nodes.
         order = list()
         algorithm = SimpleDFS(self.mst)   # O(V) time
         algorithm.run(self.source, pre_action=lambda node: order.append(node))
-        order.append(self.source)   # zamykam cykl, teraz dlugosc V+1
-        # Szukam krawedzi realizujacych cykl Hamiltona, O(V**2) time.
+        order.append(self.source)   # close cycle, length V+1
+        # Finding edges for the Hamiltonian cycle, O(V**2) time.
         for i in xrange(self.graph.v()):
             source = order[i]
             target = order[i+1]
