@@ -1,10 +1,9 @@
 # This file tells git what files to ignore.
 
-# Regular Python bytecode files.
-*.pyc
-
-# Optimized Python bytecode files.
-*.pyo
+# Python files.
+*.py[cod]
+*.so
+*.pickle
 
 # Auxiliary LaTeX files.
 *.dvi
@@ -14,6 +13,8 @@
 *.lof
 *.lot
 *.ps
+*.eps
+*.pdf
 # Beamer
 *.nav
 *.out

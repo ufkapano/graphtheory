@@ -5,11 +5,11 @@ import random
 import timeit
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.hamiltonian.tspbf import *
-from graphtheory.hamiltonian.tspnn import *
-from graphtheory.hamiltonian.tsprnn import *
-from graphtheory.hamiltonian.tspse import *
-from graphtheory.hamiltonian.tspmst import *
+from graphtheory.hamiltonian.tspbf import BruteForceTSPWithGraph
+from graphtheory.hamiltonian.tspnn import NearestNeighborTSPWithGraph
+from graphtheory.hamiltonian.tsprnn import RepeatedNearestNeighborTSPWithGraph
+from graphtheory.hamiltonian.tspse import SortedEdgeTSPWithGraph
+from graphtheory.hamiltonian.tspmst import PrimTSPWithGraph
 
 # Euclidean TSP.
 # Nodes are points in a unit square.
@@ -36,22 +36,22 @@ print "Delta:", max(G.degree(node) for node in G.iternodes())
 
 print "Testing BruteForceTSPWithGraph ..."
 t1 = timeit.Timer(lambda: BruteForceTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print V, E, t1.timeit(1)            # single run
 
 print "Testing NearestNeighborTSPWithGraph ..."
 t1 = timeit.Timer(lambda: NearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print V, E, t1.timeit(1)            # single run
 
 print "Testing RepeatedNearestNeighborTSPWithGraph ..."
 t1 = timeit.Timer(lambda: RepeatedNearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print V, E, t1.timeit(1)            # single run
 
 print "Testing SortedEdgeTSPWithGraph ..."
 t1 = timeit.Timer(lambda: SortedEdgeTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print V, E, t1.timeit(1)            # single run
 
 print "Testing PrimTSPWithGraph ..."
 t1 = timeit.Timer(lambda: PrimTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print V, E, t1.timeit(1)            # single run
 
 # EOF

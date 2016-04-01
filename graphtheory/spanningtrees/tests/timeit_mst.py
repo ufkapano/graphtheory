@@ -12,6 +12,7 @@ from graphtheory.spanningtrees.prim import PrimMST
 from graphtheory.spanningtrees.prim import PrimMatrixMST
 from graphtheory.spanningtrees.prim import PrimTrivialMST
 from graphtheory.spanningtrees.kruskal import KruskalMST
+from graphtheory.spanningtrees.kruskal import KruskalMSTSorted
 
 V = 10
 graph_factory = GraphFactory(Graph)
@@ -49,6 +50,10 @@ print V, E, t1.timeit(1)            # single run
 
 print "Testing KruskalMST ..."
 t1 = timeit.Timer(lambda: KruskalMST(G).run())
+print V, E, t1.timeit(1)            # single run
+
+print "Testing KruskalMSTSorted ..."
+t1 = timeit.Timer(lambda: KruskalMSTSorted(G).run())
 print V, E, t1.timeit(1)            # single run
 
 # EOF

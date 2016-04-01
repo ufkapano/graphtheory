@@ -15,7 +15,11 @@ References
 ----------
 
 [1] A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*. 
-http://arxiv.org/abs/1504.07828
+http://arxiv.org/abs/1504.07828 [draft]
+
+A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*. 
+The Python Papers 11, 3 (2016). 
+http://ojs.pythonpapers.org/index.php/tpp/article/view/270 [final version]
 
 Contributors
 ------------
