@@ -53,6 +53,8 @@ class DFSWithStack:
         self.dd = dict()
         self.ff = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -149,6 +151,8 @@ class DFSWithRecursion:
         self.dd = dict()
         self.ff = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
@@ -229,6 +233,8 @@ class SimpleDFS:
         self.graph = graph
         self.parent = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
         import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))

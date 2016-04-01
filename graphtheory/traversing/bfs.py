@@ -49,6 +49,8 @@ class BFSWithQueue:
         self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -133,6 +135,8 @@ class SimpleBFS:
         self.graph = graph
         self.parent = dict()
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
