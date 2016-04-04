@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from graphtheory.traversing.dfs import SimpleDFS
+from graphtheory.connectivity.connected import is_connected
 
 
 class TrivialCutNode:
@@ -146,6 +147,8 @@ def is_biconnected(graph):
     """Test if the undirected graph is biconnected."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
+    if not is_connected(graph):
+        return False
     algorithm = TarjanCutNode(graph)
     algorithm.run()
     return len(algorithm.cut_nodes) == 0
