@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.connectivity.cutedges import TrivialCutEdge, TarjanCutEdge
+from graphtheory.connectivity.cutedges import TrivialCutEdge
+from graphtheory.connectivity.cutedges import TarjanCutEdge
 
 # 0---1   2---3
 # | / | / | / |

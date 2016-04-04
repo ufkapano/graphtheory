@@ -3,7 +3,10 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.connectivity.connected import *
+from graphtheory.connectivity.connected import ConnectedComponentsBFS
+from graphtheory.connectivity.connected import ConnectedComponentsDFS
+from graphtheory.connectivity.connected import is_connected
+from graphtheory.connectivity.connected import StronglyConnectedComponents
 
 # 0 - 1   2 - 3
 # |   |   | / |

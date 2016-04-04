@@ -3,7 +3,9 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.connectivity.cutnodes import TrivialCutNode, TarjanCutNode
+from graphtheory.connectivity.cutnodes import TrivialCutNode
+from graphtheory.connectivity.cutnodes import TarjanCutNode
+from graphtheory.connectivity.cutnodes import is_biconnected
 
 # 0---1   2---3
 # | / | / | \ |
@@ -42,6 +44,15 @@ class TestCutNode(unittest.TestCase):
         self.assertEqual(algorithm._dd, dd_expected)
         parent_expected = {0: None, 1: 0, 2: 5, 3: 2, 4: 1, 5: 1, 6: 2, 7: 3}
         self.assertEqual(algorithm.parent, parent_expected)
+
+    def test_is_biconnected(self):
+        self.assertFalse(is_biconnected(self.G))
+        self.G.add_edge(Edge(4, 5))
+        self.assertFalse(is_biconnected(self.G))
+        self.G.add_edge(Edge(1, 2))
+        self.assertFalse(is_biconnected(self.G))
+        self.G.add_edge(Edge(6, 7))
+        self.assertTrue(is_biconnected(self.G))
 
     def test_exceptions(self):
         self.assertRaises(ValueError, TrivialCutNode, Graph(1, True))

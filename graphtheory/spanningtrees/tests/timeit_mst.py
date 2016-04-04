@@ -7,6 +7,7 @@ from graphtheory.structures.factory import GraphFactory
 from graphtheory.connectivity.connected import is_connected
 from graphtheory.algorithms.acyclic import is_acyclic
 from graphtheory.bipartiteness.bipartite import is_bipartite
+from graphtheory.connectivity.cutnodes import is_biconnected
 from graphtheory.spanningtrees.boruvka import BoruvkaMST
 from graphtheory.spanningtrees.prim import PrimMST
 from graphtheory.spanningtrees.prim import PrimMatrixMST
@@ -27,6 +28,7 @@ print "Nodes:", G.v(), V
 print "Edges:", G.e(), E
 print "Directed:", G.is_directed()
 print "Connected:", is_connected(G)
+print "Biconnected:", is_biconnected(G)
 print "Acyclic:", is_acyclic(G)
 print "Bipartite:", is_bipartite(G)
 Delta = max(G.degree(node) for node in G.iternodes())

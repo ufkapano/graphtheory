@@ -141,4 +141,13 @@ class TarjanCutNode:
         if is_cut_node:
             self.cut_nodes.append(node)
 
+
+def is_biconnected(graph):
+    """Test if the undirected graph is biconnected."""
+    if graph.is_directed():
+        raise ValueError("the graph is directed")
+    algorithm = TarjanCutNode(graph)
+    algorithm.run()
+    return len(algorithm.cut_nodes) == 0
+
 # EOF
