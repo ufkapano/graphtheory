@@ -80,6 +80,8 @@ class PrimMST:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
             if (self.parent[edge.source] is edge.target and
                 self.distance[edge.source] == edge.weight):
@@ -134,6 +136,8 @@ class PrimMSTWithEdges:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
         for node in self.parent:   # O(V) time
             if self.parent[node] is not None:
                 self.mst.add_edge(self.parent[node])
@@ -211,6 +215,8 @@ class PrimMatrixMST:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
             if (self.parent[edge.source] is edge.target and
                 self.distance[edge.source] == edge.weight):
@@ -258,6 +264,10 @@ class PrimMatrixMSTWithEdges:
     def to_tree(self):
         """The minimum spanning tree is built."""
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
         for node in self.parent:   # O(V) time
             if self.parent[node] is not None:
                 self.mst.add_edge(self.parent[node])
@@ -287,6 +297,8 @@ class PrimTrivialMST:
             raise ValueError("the graph is directed")
         self.graph = graph
         self.mst = self.graph.__class__(self.graph.v())
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.mst.add_node(node)
         self._in_mst = dict((node, False) for node in self.graph.iternodes())
 
     def run(self, source=None):

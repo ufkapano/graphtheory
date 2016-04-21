@@ -35,6 +35,16 @@ class PlanarGraphFactory:
             graph.edge_prev[~edge2] = edge1
         return graph
 
+# 1-------2
+# |\     /|
+# | \   / |
+# |  \ /  |  wheel graph W_7
+# 6---0---3  planar Halin graph
+# |  / \  |
+# | /   \ |
+# |/     \|
+# 5-------4
+
     def make_wheel(self, n=4, directed=False):
         """Create a weighted wheel topological graph."""
         if n < 4:
