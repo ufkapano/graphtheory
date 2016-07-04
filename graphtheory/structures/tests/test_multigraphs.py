@@ -76,6 +76,17 @@ class TestMultiGraphDirected(unittest.TestCase):
         for edge in T.iteredges():
             self.assertTrue(self.G.weight(~edge), T.weight(edge))
 
+    def test_complement(self):
+        T = self.G.complement()
+        self.assertEqual(T.v(), self.G.v())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+            self.assertFalse(T.has_edge(Edge(node, node)))   # no loops
+        for edge in T.iteredges():
+            self.assertFalse(self.G.has_edge(edge))
+        for edge in self.G.iteredges():
+            self.assertFalse(T.has_edge(edge))
+
     def test_degree(self):
         self.assertRaises(ValueError, self.G.degree, 2)
         self.assertEqual(self.G.indegree(2), 2)
@@ -156,6 +167,17 @@ class TestMultiGraphUndirected(unittest.TestCase):
             self.assertTrue(self.G.has_node(node))
         for edge in T.iteredges():
             self.assertTrue(self.G.weight(~edge), T.weight(edge))
+
+    def test_complement(self):
+        T = self.G.complement()
+        self.assertEqual(T.v(), self.G.v())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+            self.assertFalse(T.has_edge(Edge(node, node)))   # no loops
+        for edge in T.iteredges():
+            self.assertFalse(self.G.has_edge(edge))
+        for edge in self.G.iteredges():
+            self.assertFalse(T.has_edge(edge))
 
     def test_degree(self):
         self.assertEqual(self.G.degree(2), 5)

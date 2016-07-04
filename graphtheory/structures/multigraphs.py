@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from graphtheory.structures.edges import Edge
+
 class MultiGraph(dict):
     """The class defining a weighted multigraph.
     
@@ -165,8 +167,22 @@ class MultiGraph(dict):
             new_graph.add_edge(~edge)
         return new_graph
 
+    def complement(self):
+        """Return the complement of the multigraph."""
+        new_graph = MultiGraph(n=self.n, directed=self.directed)
+        for node in self.iternodes():
+            new_graph.add_node(node)
+        for source in self.iternodes():
+            for target in self.iternodes():
+                if source != target:
+                    edge = Edge(source, target)
+                    # no loops and parallel edges
+                    if not self.has_edge(edge) and not new_graph.has_edge(edge):
+                        new_graph.add_edge(edge)
+        return new_graph
+
     def degree(self, source):
-        """Return the degree of the node in the undirected graph."""
+        """Return the degree of the node in the undirected multigraph."""
         if self.is_directed():
             raise ValueError("the graph is directed")
         if source in self[source]:

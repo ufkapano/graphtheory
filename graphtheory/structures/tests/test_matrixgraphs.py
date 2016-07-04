@@ -78,6 +78,17 @@ class TestGraphDirected(unittest.TestCase):
         for edge in T.iteredges():
             self.assertTrue(self.G.has_edge(~edge))
 
+    def test_complement(self):
+        T = self.G.complement()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.N*(self.N-1) - self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertFalse(self.G.has_edge(edge))
+        for edge in self.G.iteredges():
+            self.assertFalse(T.has_edge(edge))
+
     def test_add_graph_directed(self):
         T = Graph(self.N, directed=True)
         T.add_edge(Edge(0, 3, 9))
@@ -143,6 +154,26 @@ class TestGraphUndirected(unittest.TestCase):
             self.assertTrue(self.G.has_node(node))
         for edge in T.iteredges():
             self.assertTrue(self.G.has_edge(edge))
+
+    def test_transpose(self):
+        T = self.G.transpose()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(~edge))
+
+    def test_complement(self):
+        T = self.G.complement()
+        self.assertEqual(T.v(), self.G.v())
+        self.assertEqual(T.e(), self.N*(self.N-1)/2 - self.G.e())
+        for node in T.iternodes():
+            self.assertTrue(self.G.has_node(node))
+        for edge in T.iteredges():
+            self.assertFalse(self.G.has_edge(edge))
+        for edge in self.G.iteredges():
+            self.assertFalse(T.has_edge(edge))
 
     def test_degree(self):
         self.assertEqual(self.G.degree(0), 2)

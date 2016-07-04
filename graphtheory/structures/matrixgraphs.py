@@ -41,7 +41,7 @@ class Graph:
             for target in xrange(self.n):
                 if self.data[source][target] != 0:
                     counter = counter + 1
-        return (counter if self.directed else counter / 2)
+        return (counter if self.is_directed() else counter / 2)
 
     def add_node(self, node):
         """Add a node to the graph."""
@@ -76,7 +76,7 @@ class Graph:
             self.data[edge.source][edge.target] = edge.weight
         else:
             raise ValueError("parallel edges are forbidden")
-        if not self.directed:
+        if not self.is_directed():
             if self.data[edge.target][edge.source] == 0:
                 self.data[edge.target][edge.source] = edge.weight
             else:
@@ -85,7 +85,7 @@ class Graph:
     def del_edge(self, edge):
         """Remove an edge from the graph."""
         self.data[edge.source][edge.target] = 0
-        if not self.directed:
+        if not self.is_directed():
             self.data[edge.target][edge.source] = 0
 
     def has_edge(self, edge):
@@ -123,7 +123,7 @@ class Graph:
         for source in xrange(self.n):
             for target in xrange(self.n):
                 if self.data[source][target] != 0 and (
-                    self.directed or source < target):
+                    self.is_directed() or source < target):
                     yield Edge(source, target, self.data[source][target])
 
     def show(self):
@@ -151,6 +151,15 @@ class Graph:
         for source in xrange(self.n):
             for target in xrange(self.n):
                 new_graph.data[source][target] = self.data[target][source]
+        return new_graph
+
+    def complement(self):
+        """Return the complement of the graph."""
+        new_graph = Graph(n=self.n, directed=self.directed)
+        for source in xrange(self.n):
+            for target in xrange(self.n):   # no loops
+                if self.data[source][target] == 0 and source != target:
+                    new_graph.data[source][target] = 1
         return new_graph
 
     def degree(self, source):
@@ -210,7 +219,7 @@ class Graph:
         """Export the graph to the adjacency list format with comments."""
         afile = open(file_name, "w")
         afile.write("# NAME=%s\n" % name)
-        afile.write("# DIRECTED=%s\n" % self.directed)
+        afile.write("# DIRECTED=%s\n" % self.is_directed())
         afile.write("# V=%s\n" % self.v())
         afile.write("# E=%s\n" % self.e())
         for edge in self.iteredges():

@@ -266,8 +266,6 @@ class PrimMatrixMSTWithEdges:
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
-        for node in self.graph.iternodes():   # isolated nodes are possible
-            self.mst.add_node(node)
         for node in self.parent:   # O(V) time
             if self.parent[node] is not None:
                 self.mst.add_edge(self.parent[node])
