@@ -34,6 +34,11 @@ class TestMatching(unittest.TestCase):
         expected_mate = {0: 4, 4: 0, 1: 3, 3: 1, 2: None, 5: None, 6: None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         self.assertEqual(algorithm.mate, expected_mate)
+        # Is it matching?
+        for source in algorithm.mate:
+            if algorithm.mate[source] is not None:
+                target = algorithm.mate[source]
+                self.assertEqual(algorithm.mate[target], source)
 
     def test_maximal_matching_with_edges(self):
         algorithm = MaximalMatchingWithEdges(self.G)
@@ -44,6 +49,11 @@ class TestMatching(unittest.TestCase):
             3: Edge(3, 1), 4: Edge(4, 0), 5: None, 6: None}
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         self.assertEqual(algorithm.mate, expected_mate)
+        # Is it matching?
+        for source in algorithm.mate:
+            if algorithm.mate[source] is not None:
+                edge = algorithm.mate[source]
+                self.assertEqual(algorithm.mate[edge.target], ~edge)
 
     def tearDown(self): pass
 
@@ -76,6 +86,11 @@ class TestMatchingWithWeights(unittest.TestCase):
             for node in algorithm.mate if algorithm.mate[node]) / 2
         self.assertEqual(weight, expected_weight)
         self.assertEqual(algorithm.mate, expected_mate)
+        # Is it matching?
+        for source in algorithm.mate:
+            if algorithm.mate[source] is not None:
+                edge = algorithm.mate[source]
+                self.assertEqual(algorithm.mate[edge.target], ~edge)
 
     def tearDown(self): pass
 
@@ -111,6 +126,11 @@ class TestMatchingWithWeights2(unittest.TestCase):
             for node in algorithm.mate if algorithm.mate[node]) / 2
         self.assertEqual(weight, expected_weight)
         self.assertEqual(algorithm.mate, expected_mate)
+        # Is it matching?
+        for source in algorithm.mate:
+            if algorithm.mate[source] is not None:
+                edge = algorithm.mate[source]
+                self.assertEqual(algorithm.mate[edge.target], ~edge)
 
     def tearDown(self): pass
 
