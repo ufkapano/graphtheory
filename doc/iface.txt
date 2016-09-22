@@ -1,0 +1,41 @@
+Interface for graphs. G is a graph, 
+node is usually integer or string, 
+edge is an instance of the Edge class.
+------------------------------------------------------------
+Method name         Short description
+
+Graph(n=8)          return an undirected graph with eight nodes
+Graph(n=6, True)    return a directed graph with six nodes
+G.is_directed()     return True if G is a directed graph
+G.v()               return the number of nodes
+G.e()               return the number of edges
+G.f()               return the number of faces (for planar graphs)
+
+G.add_node(node)    add the node to G
+G.del_node(node)    remove the node form G
+G.has_node(node)    return True if the node is in G
+
+G.add_edge(edge)    add the edge to G
+G.del_edge(edge)    remove the edge form G
+G.has_edge(edge)    return True if the edge is in G
+G.weight(edge)      return the edge weight or zero
+
+G.iternodes()            generate nodes on demand
+G.iteredges()            generate edges on demand
+G.iterfaces()            generate all faces on demand (for planar graphs)
+
+G.iteroutedges(node)     generate outedges on demand
+G.iterinedges(node)      generate inedges on demand
+G.iteradjacent(node)     generate adjacent nodes on demand
+
+G.degree(node)      return the degree of the node (G undirected)
+G.indegree(node)    return the indegree of the node
+G.outdegree(node)   return the outdegree of the node
+
+G.show()            the graph presentation
+G.copy()            return the graph copy
+G.transpose()       return the transpose of G
+G.complement()      return the complement of G
+G.subgraph(nodes)   return the induced subgraph
+
+EOF
