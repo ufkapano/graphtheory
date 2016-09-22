@@ -87,6 +87,13 @@ class TestMultiGraphDirected(unittest.TestCase):
         for edge in self.G.iteredges():
             self.assertFalse(T.has_edge(edge))
 
+    def test_subgraph(self):
+        T = self.G.subgraph([0, 1, 2])
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 5)
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+
     def test_degree(self):
         self.assertRaises(ValueError, self.G.degree, 2)
         self.assertEqual(self.G.indegree(2), 2)
@@ -178,6 +185,13 @@ class TestMultiGraphUndirected(unittest.TestCase):
             self.assertFalse(self.G.has_edge(edge))
         for edge in self.G.iteredges():
             self.assertFalse(T.has_edge(edge))
+
+    def test_subgraph(self):
+        T = self.G.subgraph([0, 1, 2])
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 5)
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
 
     def test_degree(self):
         self.assertEqual(self.G.degree(2), 5)

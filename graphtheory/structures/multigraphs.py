@@ -181,6 +181,19 @@ class MultiGraph(dict):
                         new_graph.add_edge(edge)
         return new_graph
 
+    def subgraph(self, nodes):
+        """Return the induced subgraph."""
+        node_set = set(nodes)
+        if any(not self.has_node(node) for node in node_set):
+            raise ValueError("nodes not from the graph")
+        new_graph = MultiGraph(n=len(node_set), directed=self.directed)
+        for node in node_set:
+            new_graph.add_node(node)
+        for edge in self.iteredges():
+            if (edge.source in node_set) and (edge.target in node_set):
+                new_graph.add_edge(edge)
+        return new_graph
+
     def degree(self, source):
         """Return the degree of the node in the undirected multigraph."""
         if self.is_directed():
