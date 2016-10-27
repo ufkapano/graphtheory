@@ -12,7 +12,7 @@ class TestTransitiveClosure(unittest.TestCase):
     def setUp(self):
         self.N = 4           # number of nodes
         self.G = Graph(self.N, directed=True)
-        self.nodes = [0, 1, 2, 3]
+        self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -49,6 +49,6 @@ class TestTransitiveClosure(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    unittest.main()
+    unittest.main(verbosity=2)
 
 # EOF

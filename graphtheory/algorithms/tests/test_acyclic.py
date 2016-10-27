@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.acyclic import AcyclicGraphDFS, is_acyclic
+from graphtheory.algorithms.acyclic import AcyclicGraphDFS
+from graphtheory.algorithms.acyclic import is_acyclic
 
 # r---s   t---u   cycles are present
 # |   | / | / |
@@ -118,10 +119,6 @@ class TestAcyclicDirectedGraph(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestAcyclicUdirectedGraph)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestAcyclicDirectedGraph)
-    suite = unittest.TestSuite([suite1, suite2])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main(verbosity=2)
 
 # EOF

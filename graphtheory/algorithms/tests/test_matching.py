@@ -3,7 +3,9 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.matching import *
+from graphtheory.algorithms.matching import MaximalMatching
+from graphtheory.algorithms.matching import MaximalMatchingWithEdges
+from graphtheory.algorithms.matching import MinimumWeightMatchingWithEdges
 
 
 class TestMatching(unittest.TestCase):
@@ -16,7 +18,7 @@ class TestMatching(unittest.TestCase):
         # ...
         self.N = 7
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3, 4, 5, 6]
+        self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 5), Edge(0, 6), 
             Edge(1, 3), Edge(1, 5), Edge(2, 3), Edge(2, 4)]
@@ -64,7 +66,7 @@ class TestMatchingWithWeights(unittest.TestCase):
         # Graf pelny z kolejnymi wagami.
         self.N = 4
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3]
+        self.nodes = range(self.N)
         self.edges = [Edge(0, 1, 5), Edge(0, 2, 7), Edge(0, 3, 2),
             Edge(1, 2, 3), Edge(1, 3, 6), Edge(2, 3, 4)]
         for node in self.nodes:
@@ -101,7 +103,7 @@ class TestMatchingWithWeights2(unittest.TestCase):
         # Graf pelny z kolejnymi wagami.
         self.N = 4
         self.G = Graph(self.N)
-        self.nodes = [0, 1, 2, 3]
+        self.nodes = range(self.N)
         self.edges = [Edge(0, 1, 4), Edge(0, 2, 3), Edge(0, 3, 2),
             Edge(1, 2, 7), Edge(1, 3, 5), Edge(2, 3, 6)]
         for node in self.nodes:
@@ -136,6 +138,6 @@ class TestMatchingWithWeights2(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    unittest.main()
+    unittest.main(verbosity=2)
 
 # EOF
