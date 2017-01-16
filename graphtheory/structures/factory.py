@@ -148,7 +148,7 @@ class GraphFactory:
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
-        for node in range(n):
+        for node in xrange(n):
             row = node / size
             col = node % size
             if col != size-1:
@@ -177,7 +177,7 @@ class GraphFactory:
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
-        for node in range(n):
+        for node in xrange(n):
             row = node / size
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
@@ -203,7 +203,7 @@ class GraphFactory:
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
-        for node in range(n):
+        for node in xrange(n):
             row = node / size
             col = node % size
             if col != size-1:
@@ -234,7 +234,7 @@ class GraphFactory:
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
-        for node in range(n):
+        for node in xrange(n):
             row = node / size
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
@@ -273,6 +273,10 @@ class GraphFactory:
     def make_ladder_periodic(self, size=3):
         """Create the weighted ladder with periodic boundary conditions.
         |V| = 2 * size, |E| = 3 * size.
+        This is a prism graph or a circular ladder graph.
+        
+         Weisstein, Eric W. "Prism Graph." From MathWorld--A Wolfram Web Resource. 
+         http://mathworld.wolfram.com/PrismGraph.html 
         """
         if size < 3:
             raise ValueError("size too small")

@@ -71,7 +71,8 @@ class Edge:
 
     def __hash__(self):
         """Hashable edges."""
-        return hash(repr(self))
+        #return hash(repr(self))
+        return hash((self.source, self.target, self.weight))
 
     def __invert__(self):
         """Return the edge with the opposite direction."""
