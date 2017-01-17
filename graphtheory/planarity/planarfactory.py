@@ -11,9 +11,9 @@ class PlanarGraphFactory:
         """Get a graph class."""
         self.cls = graph_class
 
-    def make_cyclic(self, n=1, directed=False):
+    def make_cyclic(self, n=1):
         """Create a weighted cyclic topological graph."""
-        graph = self.cls(n, directed)
+        graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
         weights = range(1, 1 + n)   # different weights
@@ -45,11 +45,11 @@ class PlanarGraphFactory:
 # |/     \|
 # 5-------4
 
-    def make_wheel(self, n=4, directed=False):
+    def make_wheel(self, n=4):
         """Create a weighted wheel topological graph."""
         if n < 4:
             raise ValueError("number of vertices must be greater than 3")
-        graph = self.cls(n, directed)
+        graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
         weights = range(1, 1 + 2 * n - 2)

@@ -14,7 +14,7 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.graph_factory = PlanarGraphFactory(Graph)
 
     def test_cyclic(self):
-        G = self.graph_factory.make_cyclic(n=self.N, directed=False)
+        G = self.graph_factory.make_cyclic(n=self.N)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), self.N)
@@ -28,7 +28,7 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.assertRaises(ValueError, self.graph_factory.make_cyclic, 2)
 
     def test_wheel(self):
-        G = self.graph_factory.make_wheel(n=self.N, directed=False)
+        G = self.graph_factory.make_wheel(n=self.N)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
         self.assertEqual(G.e(), 2 * self.N - 2)

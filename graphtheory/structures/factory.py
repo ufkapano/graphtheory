@@ -12,7 +12,7 @@ class GraphFactory:
         self.cls = graph_class
 
     def make_complete(self, n=1, directed=False):
-        """Create the weighted complete graph."""
+        """Create a weighted complete graph."""
         graph = self.cls(n, directed)
         weights = range(1, 1 + n * (n-1)/2)   # different weights
         random.shuffle(weights)
@@ -27,7 +27,7 @@ class GraphFactory:
         return graph
 
     def make_cyclic(self, n=1, directed=False):
-        """Create the weighted cyclic graph."""
+        """Create a weighted cyclic graph."""
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
         graph = self.cls(n, directed)
@@ -137,7 +137,7 @@ class GraphFactory:
 # 0-----1-----2-----...--(s-1)
 
     def make_grid(self, size=3):
-        """Create the weighted grid graph with boundary
+        """Create a weighted grid graph with boundary
             |V|= size * size, |E| = 2 * size * (size-1).
         """
         if size < 3:
@@ -166,7 +166,7 @@ class GraphFactory:
 #   |     |     |
 
     def make_grid_periodic(self, size=3):
-        """Create the weighted grid graph with periodic boundary conditions.
+        """Create a weighted grid graph with periodic boundary conditions.
         |V| = size * size, |E| = 2 * |V|.
         """
         if size < 3:
@@ -192,7 +192,7 @@ class GraphFactory:
 # 0-----1-----2---...---(s-1)
 
     def make_triangle(self, size=3):
-        """Create the weighted triangle graph with boundary,
+        """Create a weighted triangle graph with boundary,
         |V| = size * size, |E| = 2 * size * (size-1) + (size-1) * (size-1).
         """
         if size < 3:
@@ -223,7 +223,7 @@ class GraphFactory:
 # / |  /  |  /  |
 
     def make_triangle_periodic(self, size=3):
-        """Create the weighted triangle network with periodic boundary 
+        """Create a weighted triangle network with periodic boundary 
         conditions. |V| = size * size, |E| = 3 * |V|.
         """
         if size < 3:
@@ -247,7 +247,7 @@ class GraphFactory:
 # 0--2--4--...--(2s-2)
 
     def make_ladder(self, size=3):
-        """Create the weighted ladder with boundary.
+        """Create a weighted ladder with boundary.
         |V| = 2 * size, |E| = 3*size - 2.
         """
         if size < 3:
@@ -271,7 +271,7 @@ class GraphFactory:
 # --0--2--4--...--(2s-2)---
 
     def make_prism(self, size=3):
-        """Create the prism graph or a circular ladder graph.
+        """Create a weighted prism graph or a circular ladder graph.
         |V| = 2 * size, |E| = 3 * size.
         
          Weisstein, Eric W. "Prism Graph." From MathWorld--A Wolfram Web Resource. 
@@ -295,7 +295,7 @@ class GraphFactory:
     make_ladder_periodic = make_prism
 
     def make_antiprism(self, size=3):
-        """Create the antiprism graph, |V| = 2 * size, |E| = 4 * size.
+        """Create a weighted antiprism graph, |V| = 2 * size, |E| = 4 * size.
         
         Weisstein, Eric W. "Antiprism Graph." From MathWorld--A Wolfram Web Resource. 
         http://mathworld.wolfram.com/AntiprismGraph.html 
