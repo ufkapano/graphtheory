@@ -55,9 +55,6 @@ class TestHopcroftKarp(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestHopcroftKarp)
-    suite = unittest.TestSuite([suite1])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
 
 # EOF

@@ -124,11 +124,6 @@ class TestJohnsonWiki(unittest.TestCase):
 
 if __name__ == '__main__':
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestJohnson)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestJohnsonNegativeEdges)
-    suite3 = unittest.TestLoader().loadTestsFromTestCase(TestJohnsonWiki)
-    suite = unittest.TestSuite([suite1, suite2, suite3])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
 
 # EOF

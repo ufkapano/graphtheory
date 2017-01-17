@@ -1,0 +1,29 @@
+GRAPH GENERATORS
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+
+gf = GraphFactory(Graph)
+
+G = gf.make_complete(n=10)        # complete graph
+G = gf.make_complete(n=10, True)   # tournament
+G = gf.make_cyclic(n=10)         # cyclic graph
+G = gf.make_cyclic(n=10, True)    # directed cyclic graph
+G = gf.make_sparse(n=10, True, m=12) # random graph with m edges
+G = gf.make_tree(n=10)             # random tree
+G = gf.make_connected(n=10, m=12)   # connected graph
+G = gf.make_random(n=10, 0.5)      # random graph
+G = gf.make_bipartite(10, 12, False, 0.5)   # random bipartite graph
+G = gf.make_grid(size=4)          # grid graph, size > 2
+G = gf.make_grid_periodic(size=4)   # periodic grid graph, size > 2
+G = gf.make_triangle(size=4)       # triangle graph, size > 2
+G = gf.make_triangle_periodic(size=4)   # periodic triangle graph, size > 2
+G = gf.make_ladder(size=4)        # ladder, size > 2
+G = gf.make_prism(size=4)        # prism graph, size > 2
+G = gf.make_antiprism(size=4)   # antiprism graph, size > 2
+G = gf.make_flow_network(n=10)   # flow network (directed)
+G = gf.make_wheel(n=10)       # wheel graph
+G = gf.make_fake_wheel(n=10)       # fake wheel graph, n > 6
+
+EOF

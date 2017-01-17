@@ -145,14 +145,23 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.e(), 3 * size -2)
         self.assertRaises(ValueError, self.graph_factory.make_ladder, 2)
 
-    def test_ladder_periodic(self):
+    def test_prism(self):
         size = 4
-        G = self.graph_factory.make_ladder_periodic(size)
+        G = self.graph_factory.make_prism(size)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), 2 * size)
         self.assertEqual(G.e(), 3 * size)
         self.assertRaises(
-            ValueError, self.graph_factory.make_ladder_periodic, 2)
+            ValueError, self.graph_factory.make_prism, 2)
+
+    def test_antiprism(self):
+        size = 4
+        G = self.graph_factory.make_antiprism(size)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), 2 * size)
+        self.assertEqual(G.e(), 4 * size)
+        self.assertRaises(
+            ValueError, self.graph_factory.make_antiprism, 2)
 
     def test_flow_network(self):
         G = self.graph_factory.make_flow_network(self.N)
@@ -187,9 +196,6 @@ class TestGraphFactory(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestGraphFactory)
-    suite = unittest.TestSuite([suite1])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
 
 # EOF

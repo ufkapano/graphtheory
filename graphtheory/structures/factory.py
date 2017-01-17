@@ -270,10 +270,9 @@ class GraphFactory:
 #   |  |  |         |
 # --0--2--4--...--(2s-2)---
 
-    def make_ladder_periodic(self, size=3):
-        """Create the weighted ladder with periodic boundary conditions.
+    def make_prism(self, size=3):
+        """Create the prism graph or a circular ladder graph.
         |V| = 2 * size, |E| = 3 * size.
-        This is a prism graph or a circular ladder graph.
         
          Weisstein, Eric W. "Prism Graph." From MathWorld--A Wolfram Web Resource. 
          http://mathworld.wolfram.com/PrismGraph.html 
@@ -291,6 +290,27 @@ class GraphFactory:
             graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
             graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
             graph.add_edge(Edge(node + 1, (node + 3) % n, weights.pop())) # line ---
+        return graph
+
+    make_ladder_periodic = make_prism
+
+    def make_antiprism(self, size=3):
+        """Create the antiprism graph, |V| = 2 * size, |E| = 4 * size.
+        
+        Weisstein, Eric W. "Antiprism Graph." From MathWorld--A Wolfram Web Resource. 
+        http://mathworld.wolfram.com/AntiprismGraph.html 
+        """
+        if size < 3:
+            raise ValueError("size too small")
+        n = 2 * size
+        graph = self.cls(n, directed=False)
+        weights = range(1, 1 + 4 * size)   # different weights
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        for node in xrange(n):
+            graph.add_edge(Edge(node, (node + 1) % n, weights.pop())) # line /
+            graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
         return graph
 
     def make_flow_network(self, n=1):
