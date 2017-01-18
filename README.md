@@ -38,12 +38,18 @@ Kacper Dziubek (planarity testing)
 
 Sandra Pażyniowska (graph drawing)
 
-Wojciech Sarka
+Wojciech Sarka (dominating sets)
 
 Igor Samson (graph coloring)
 
 Dariusz Zdybski (cliques)
 
 Aleksander Krawczyk (Halin graphs, wheel graphs)
+
+Małgorzata Olak (chordal graphs)
+
+Krzysztof Niedzielski (matching)
+
+Konrad Gałuszka (series-parallel graphs)
 
 EOF
