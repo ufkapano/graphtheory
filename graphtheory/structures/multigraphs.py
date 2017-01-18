@@ -204,7 +204,7 @@ class MultiGraph(dict):
             loops = 0
         edges = 0
         for target in self[source]:
-            edges = edges + len(self[source][target])
+            edges += len(self[source][target])
         return edges + loops
 
     def outdegree(self, source):
@@ -215,7 +215,7 @@ class MultiGraph(dict):
             loops = 0
         edges = 0
         for target in self[source]:
-            edges = edges + len(self[source][target])
+            edges += len(self[source][target])
         if self.is_directed():
             return edges
         else:   # degree
@@ -227,7 +227,7 @@ class MultiGraph(dict):
             edges = 0
             for target in self.iternodes():
                 if source in self[target]:
-                    edges = edges + len(self[target][source])
+                    edges += len(self[target][source])
             return edges
         else:   # degree
             if source in self[source]:
@@ -236,7 +236,7 @@ class MultiGraph(dict):
                 loops = 0
             edges = 0
             for target in self[source]:
-                edges = edges + len(self[source][target])
+                edges += len(self[source][target])
             return edges + loops
 
     def __eq__(self, other):   # FIX

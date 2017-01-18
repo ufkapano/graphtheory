@@ -169,7 +169,7 @@ class Graph:
         counter = 0
         for target in xrange(self.n):
             if self.data[source][target] != 0:
-                counter = counter + 1
+                counter += 1
         return counter
 
     def outdegree(self, source):
@@ -177,7 +177,7 @@ class Graph:
         counter = 0
         for target in xrange(self.n):
             if self.data[source][target] != 0:
-                counter = counter + 1
+                counter += 1
         return counter
 
     def indegree(self, source):
@@ -185,7 +185,7 @@ class Graph:
         counter = 0
         for target in xrange(self.n):
             if self.data[target][source] != 0:
-                counter = counter + 1
+                counter += 1
         return counter
 
     def __eq__(self, other):

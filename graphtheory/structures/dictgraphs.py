@@ -181,7 +181,7 @@ class Graph(dict):
             counter = 0
             for target in self.iternodes():
                 if source in self[target]:
-                    counter = counter + 1
+                    counter += 1
             return counter
         else:                   # O(1) time
             return len(self[source])

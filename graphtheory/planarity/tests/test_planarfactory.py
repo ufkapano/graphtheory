@@ -25,7 +25,11 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.assertEqual(len(faces), 2)
         #print "faces", faces
         self.assertRaises(ValueError, self.graph_factory.make_cyclic, 1)
+        # For n=1 and the Graph class we have
+        # ValueError("loops are forbidden")
         self.assertRaises(ValueError, self.graph_factory.make_cyclic, 2)
+        # For n=2 and the Graph class we have
+        # ValueError("parallel edges are forbidden")
 
     def test_wheel(self):
         G = self.graph_factory.make_wheel(n=self.N)
