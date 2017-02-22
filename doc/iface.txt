@@ -1,9 +1,11 @@
-Interface for graphs. G is a graph, 
-node is usually integer or string, 
-edge is an instance of the Edge class.
-------------------------------------------------------------
-Method name         Short description
+INTERFACE FOR GRAPHS
 
+G, H - graphs
+node - usually integer or string
+edge - an instance of the Edge clas
+----------------------------------------------------------------------
+Method name         Short description
+----------------------------------------------------------------------
 Graph(n=8)          return an undirected graph with eight nodes
 Graph(n=6, True)    return a directed graph with six nodes
 G.is_directed()     return True if G is a directed graph
@@ -37,5 +39,5 @@ G.copy()            return the graph copy
 G.transpose()       return the transpose of G
 G.complement()      return the complement of G
 G.subgraph(nodes)   return the induced subgraph
-
+----------------------------------------------------------------------
 EOF

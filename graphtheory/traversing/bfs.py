@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from Queue import Queue
-from graphtheory.structures.edges import Edge
 
 
 class BFSWithQueue:
