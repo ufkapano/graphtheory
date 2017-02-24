@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.flow.edmondskarp import *
+from graphtheory.flow.edmondskarp import EdmondsKarp
+from graphtheory.flow.edmondskarp import EdmondsKarpSparse
 
 #     10
 #  0 ---> 1
@@ -45,10 +46,10 @@ class TestEdmondsKarp(unittest.TestCase):
         algorithm.run(0, 3)
         expected_max_flow = 20
         expected_flow = {
-            0: {2: 10, 1: 10}, 
-            1: {0: -10, 3: 10}, 
-            2: {0: -10, 3: 10}, 
-            3: {2: -10, 1: -10}}
+            0: {1: 10, 2: 10},
+            1: {0: -10, 2: 0, 3: 10},
+            2: {0: -10, 1: 0, 3: 10},
+            3: {1: -10, 2: -10}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
@@ -69,17 +70,32 @@ class TestEdmondsKarpWiki(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_wiki_sparse(self):
+    def test_edmondskarp(self):
+        algorithm = EdmondsKarp(self.G)
+        algorithm.run(0, 6)
+        expected_max_flow = 5
+        expected_flow = {
+            0: {0: 0, 1: 2, 2: 0, 3: 3, 4: 0, 5: 0, 6: 0},
+            1: {0: -2, 1: 0, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0},
+            2: {0: 0, 1: -2, 2: 0, 3: 1, 4: 1, 5: 0, 6: 0},
+            3: {0: -3, 1: 0, 2: -1, 3: 0, 4: 0, 5: 4, 6: 0},
+            4: {0: 0, 1: 0, 2: -1, 3: 0, 4: 0, 5: 0, 6: 1},
+            5: {0: 0, 1: 0, 2: 0, 3: -4, 4: 0, 5: 0, 6: 4},
+            6: {0: 0, 1: 0, 2: 0, 3: 0, 4: -1, 5: -4, 6: 0}}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+    def test_edmondskarp_sparse(self):
         algorithm = EdmondsKarpSparse(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
         expected_flow = {
-            0: {1: 2, 3: 3}, 
-            1: {0: -2, 2: 2}, 
-            2: {1: -2, 4: 1, 3: 1}, 
-            3: {0: -3, 2: -1, 4: 0, 5: 4}, 
-            4: {2: -1, 3: 0, 6: 1}, 
-            5: {3: -4, 6: 4}, 
+            0: {1: 2, 2: 0, 3: 3},
+            1: {0: -2, 2: 2, 4: 0},
+            2: {0: 0, 1: -2, 3: 1, 4: 1},
+            3: {0: -3, 2: -1, 4: 0, 5: 4},
+            4: {1: 0, 2: -1, 3: 0, 6: 1},
+            5: {3: -4, 6: 4},
             6: {4: -1, 5: -4}}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)

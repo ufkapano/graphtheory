@@ -57,8 +57,8 @@ class EdmondsKarp:
             target = self.sink
             while target != self.source:
                 node = parent[target]
-                self.flow[node][target] = self.flow[node][target] + min_capacity
-                self.flow[target][node] = self.flow[target][node] - min_capacity
+                self.flow[node][target] += min_capacity
+                self.flow[target][node] -= min_capacity
                 target = node
 
     def _find_path(self):  # use BFS
@@ -109,14 +109,16 @@ class EdmondsKarpSparse:
         self.residual = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
-        # Initial capacities for the residual network.
-        for edge in self.graph.iteredges():
-            self.residual.add_edge(edge)   # original capacity
-            self.residual.add_edge(Edge(edge.target, edge.source, 0))
         # Legal flow.
         self.flow = dict()
         for node in self.graph.iternodes():
             self.flow[node] = dict()
+        # Initial capacities for the residual network.
+        for edge in self.graph.iteredges():
+            self.residual.add_edge(edge)   # original capacity
+            self.residual.add_edge(Edge(edge.target, edge.source, 0))
+            self.flow[edge.source][edge.target] = 0
+            self.flow[edge.target][edge.source] = 0
         # Initial flow is zero.
         self.max_flow = 0
 
@@ -133,8 +135,8 @@ class EdmondsKarpSparse:
             target = self.sink
             while target != self.source:
                 node = parent[target]
-                self.flow[node][target] = self.flow[node].get(target, 0) + min_capacity
-                self.flow[target][node] = self.flow[target].get(node, 0) - min_capacity
+                self.flow[node][target] += min_capacity
+                self.flow[target][node] -= min_capacity
                 target = node
 
     def _find_path(self):   # use BFS
@@ -147,7 +149,7 @@ class EdmondsKarpSparse:
         while not Q.empty():
             node = Q.get()
             for edge in self.residual.iteroutedges(node):
-                cap = edge.weight - self.flow[edge.source].get(edge.target, 0)
+                cap = edge.weight - self.flow[edge.source][edge.target]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = edge.source
                     capacity[edge.target] = min(capacity[edge.source], cap)

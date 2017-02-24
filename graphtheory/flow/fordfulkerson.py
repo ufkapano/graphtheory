@@ -254,7 +254,7 @@ class FordFulkersonWithEdges:
         return 0, parent
 
 
-class FordFulkersonRecursive:
+class FordFulkersonRecursive:   # very slow
     """The Ford-Fulkerson algorithm for computing the maximum flow.
     
     Attributes

@@ -10,12 +10,15 @@ from graphtheory.bipartiteness.bipartite import is_bipartite
 from graphtheory.connectivity.cutnodes import is_biconnected
 from graphtheory.spanningtrees.boruvka import BoruvkaMST
 from graphtheory.spanningtrees.prim import PrimMST
+from graphtheory.spanningtrees.prim import PrimMSTWithEdges
 from graphtheory.spanningtrees.prim import PrimMatrixMST
+from graphtheory.spanningtrees.prim import PrimMatrixMSTWithEdges
+from graphtheory.spanningtrees.prim import PrimConnectedMST
 from graphtheory.spanningtrees.prim import PrimTrivialMST
 from graphtheory.spanningtrees.kruskal import KruskalMST
 from graphtheory.spanningtrees.kruskal import KruskalMSTSorted
 
-V = 10
+V = 50
 graph_factory = GraphFactory(Graph)
 G = graph_factory.make_random(V, False, 0.5)
 #G = graph_factory.make_complete(V, False)
@@ -42,8 +45,20 @@ print "Testing PrimMST ..."
 t1 = timeit.Timer(lambda: PrimMST(G).run())
 print V, E, t1.timeit(1)            # single run
 
+print "Testing PrimMSTWithEdges ..."
+t1 = timeit.Timer(lambda: PrimMSTWithEdges(G).run())
+print V, E, t1.timeit(1)            # single run
+
 print "Testing PrimMatrixMST ..."
 t1 = timeit.Timer(lambda: PrimMatrixMST(G).run())
+print V, E, t1.timeit(1)            # single run
+
+print "Testing PrimMatrixMSTWithEdges ..."
+t1 = timeit.Timer(lambda: PrimMatrixMSTWithEdges(G).run())
+print V, E, t1.timeit(1)            # single run
+
+print "Testing PrimConnectedMST ..."
+t1 = timeit.Timer(lambda: PrimConnectedMST(G).run())
 print V, E, t1.timeit(1)            # single run
 
 print "Testing PrimTrivialMST ..."
