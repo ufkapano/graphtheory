@@ -23,7 +23,7 @@ class TestPrim(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_mst(self):
+    def test_prim(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMST(self.G)
         algorithm.run()
@@ -54,7 +54,7 @@ class TestPrim(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_matrix(self):
+    def test_prim_matrix(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
         algorithm.run()
@@ -85,7 +85,7 @@ class TestPrim(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_trivial(self):
+    def test_prim_trivial(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimTrivialMST(self.G)
         algorithm.run()
@@ -122,7 +122,7 @@ class TestPrimCormen(unittest.TestCase):
             self.G.add_edge(edge)
         #print self.G
 
-    def test_mst_cormen(self):
+    def test_prim(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMST(self.G)
         algorithm.run()
@@ -138,7 +138,7 @@ class TestPrimCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_cormen_with_edges(self):
+    def test_prim_with_edges(self):
         algorithm = PrimMSTWithEdges(self.G)
         algorithm.run()
         algorithm.to_tree()
@@ -153,7 +153,7 @@ class TestPrimCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_matrix_cormen(self):
+    def test_prim_matrix(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimMatrixMST(self.G)
         algorithm.run()
@@ -169,7 +169,7 @@ class TestPrimCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_matrix_cormen_with_edges(self):
+    def test_prim_matrix_with_edges(self):
         algorithm = PrimMatrixMSTWithEdges(self.G)
         algorithm.run()
         algorithm.to_tree()
@@ -184,7 +184,7 @@ class TestPrimCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_trivial_cormen(self):
+    def test_prim_trivial(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = PrimTrivialMST(self.G)
         algorithm.run()

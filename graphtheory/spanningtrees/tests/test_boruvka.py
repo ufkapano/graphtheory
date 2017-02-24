@@ -6,7 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.spanningtrees.boruvka import BoruvkaMST
 
 
-class TestBoruvka(unittest.TestCase):
+class TestBoruvkaWiki(unittest.TestCase):
 
     def setUp(self):
         # The graph (unique weights) from
@@ -24,7 +24,7 @@ class TestBoruvka(unittest.TestCase):
             self.G.add_edge(edge)
         #print self.G
 
-    def test_mst_wiki(self):
+    def test_boruvka(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = BoruvkaMST(self.G)
         algorithm.run()
@@ -60,7 +60,7 @@ class TestBoruvkaCormen(unittest.TestCase):
             self.G.add_edge(edge)
         #print self.G
 
-    def test_mst_cormen(self):
+    def test_boruvka(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = BoruvkaMST(self.G)
         algorithm.run()
@@ -95,7 +95,7 @@ class TestBoruvkaDisconnectedGraph(unittest.TestCase):
             self.G.add_edge(edge)
         #print self.G
 
-    def test_mst_disconnected(self):
+    def test_boruvka(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = BoruvkaMST(self.G)
         algorithm.run()

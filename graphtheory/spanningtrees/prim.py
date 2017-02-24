@@ -11,6 +11,7 @@ class PrimMST:
     Attributes
     ----------
     graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
     distance : dict with nodes
     parent : dict with nodes (MST)
     _in_queue : dict, private
@@ -51,6 +52,7 @@ class PrimMST:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
+        self.mst = None
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -98,6 +100,7 @@ class PrimMSTWithEdges:
     Attributes
     ----------
     graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
     distance : dict with nodes
     parent : dict with nodes (MST)
     _in_queue : dict, private
@@ -107,6 +110,7 @@ class PrimMSTWithEdges:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.mst = None
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         self.parent = dict((node, None) for node in self.graph.iternodes()) # MST as a dict
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -152,6 +156,7 @@ class PrimMatrixMST:
     Attributes
     ----------
     graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
     distance : dict with nodes
     parent : dict with nodes (MST)
     _in_queue : dict, private
@@ -192,6 +197,7 @@ class PrimMatrixMST:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
+        self.mst = None
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -233,6 +239,7 @@ class PrimMatrixMSTWithEdges:
     Attributes
     ----------
     graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
     distance : dict with nodes
     parent : dict with edges (MST)
     _in_queue : dict, private
@@ -241,6 +248,7 @@ class PrimMatrixMSTWithEdges:
     def __init__(self, graph):
         """The algorithm initialization."""
         self.graph = graph
+        self.mst = None
         self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         self.parent = dict((node, None) for node in self.graph.iternodes())
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
@@ -294,7 +302,7 @@ class PrimTrivialMST:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v())
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         self._in_mst = dict((node, False) for node in self.graph.iternodes())

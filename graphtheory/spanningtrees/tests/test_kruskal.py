@@ -24,7 +24,7 @@ class TestKruskal(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_mst(self):
+    def test_kruskal(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = KruskalMST(self.G)
         algorithm.run()
@@ -39,7 +39,7 @@ class TestKruskal(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_sorted(self):
+    def test_kruskal_sorted(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = KruskalMSTSorted(self.G)
         algorithm.run()
@@ -74,7 +74,7 @@ class TestKruskalCormen(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
 
-    def test_mst_cormen(self):
+    def test_kruskal(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = KruskalMST(self.G)
         algorithm.run()
@@ -89,7 +89,7 @@ class TestKruskalCormen(unittest.TestCase):
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
-    def test_mst_cormen_sorted(self):
+    def test_kruskal_sorted(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = KruskalMSTSorted(self.G)
         algorithm.run()
@@ -101,6 +101,56 @@ class TestKruskalCormen(unittest.TestCase):
         mst_edges_expected = [
             Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
             Edge(2, 5, 5), Edge(6, 5, 3), Edge(3, 4, 9), Edge(5, 4, 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def tearDown(self): pass
+
+
+class TestKruskalDisconnectedGraph(unittest.TestCase):
+
+    def setUp(self):
+        # The modified graph (unique weights) from Cormen.
+        self.N = 9           # number of nodes
+        self.G = Graph(self.N)
+        self.nodes = range(self.N)
+        self.edges = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(1, 7, 11), Edge(1, 2, 12), 
+            Edge(7, 8, 7), Edge(8, 2, 2), Edge(8, 6, 6), Edge(7, 6, 1),
+            Edge(3, 5, 14), Edge(3, 4, 9), Edge(5, 4, 10)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #print self.G
+
+    def test_kruskal(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = KruskalMST(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-2) # 2 components
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(6, 8, 6), Edge(3, 4, 9), Edge(5, 4, 10)]
+        for edge in mst_edges_expected:
+            self.assertTrue(algorithm.mst.has_edge(edge))
+
+    def test_kruskal_sorted(self):
+        self.assertEqual(self.G.v(), self.N)
+        algorithm = KruskalMSTSorted(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.mst.v(), self.N)
+        self.assertEqual(algorithm.mst.e(), self.N-2) # 2 components
+        mst_weight_expected = 40
+        mst_weight = sum(edge.weight for edge in algorithm.mst.iteredges())
+        self.assertEqual(mst_weight, mst_weight_expected)
+        mst_edges_expected = [
+            Edge(0, 1, 4), Edge(0, 7, 8), Edge(8, 2, 2), Edge(7, 6, 1), 
+            Edge(6, 8, 6), Edge(3, 4, 9), Edge(5, 4, 10)]
         for edge in mst_edges_expected:
             self.assertTrue(algorithm.mst.has_edge(edge))
 
