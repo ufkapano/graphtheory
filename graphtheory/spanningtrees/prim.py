@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from Queue import PriorityQueue
+from graphtheory.connectivity.connected import is_connected
 
 
 class PrimMST:
@@ -280,6 +281,73 @@ class PrimMatrixMSTWithEdges:
         return self.mst
 
 
+class PrimConnectedMST:
+    """Prim's algorithm for finding a minimum spanning tree.
+    
+    The algorithm runs in O(E log V) time.
+    The graph must be connected.
+    
+    Attributes
+    ----------
+    graph : input undirected weighted graph or multigraph
+    mst : graph (MST)
+    _in_queue : dict, private
+    _pq : priority queue, private
+    
+    Notes
+    -----
+    Based on:
+    
+    Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C., 2009, 
+        Introduction to Algorithms, third edition, The MIT Press, 
+        Cambridge, London.
+    
+    https://en.wikipedia.org/wiki/Prim's_algorithm.
+    
+    https://en.wikipedia.org/wiki/Minimum_spanning_tree
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : undirected weighted graph or multigraph
+        """
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        if not is_connected(graph):
+            raise ValueError("the graph is not connected")
+        self.graph = graph
+        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self._in_queue = dict((node, True) for node in self.graph.iternodes())
+        self._pq = PriorityQueue()
+
+    def run(self, source=None):
+        """Finding MST."""
+        if source is None:   # get first random node
+            source = self.graph.iternodes().next()
+        self.source = source
+        self._in_queue[source] = False
+        #  W kolejce trzymam krawedzie wychodzace na zewnatrz od MST.
+        for edge in self.graph.iteroutedges(self.source):
+            self._pq.put((edge.weight, edge))
+        while not self._pq.empty():
+            _, edge = self._pq.get()
+            if self._in_queue[edge.target]:
+                self._in_queue[edge.target] = False
+                self.mst.add_edge(edge)   # wstawiam do MST
+            else:
+                continue
+            for edge2 in self.graph.iteroutedges(edge.target):
+                if self._in_queue[edge2.target]:
+                    self._pq.put((edge2.weight, edge2))
+
+    def to_tree(self):
+        """Compatibility with other Prim classes."""
+        return self.mst
+
+
 class PrimTrivialMST:
     """Prim's algorithm for finding a minimum spanning tree.
     
@@ -301,6 +369,8 @@ class PrimTrivialMST:
         """
         if graph.is_directed():
             raise ValueError("the graph is directed")
+        if not is_connected(graph):
+            raise ValueError("the graph is not connected")
         self.graph = graph
         self.mst = self.graph.__class__(self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
