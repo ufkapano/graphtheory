@@ -30,9 +30,9 @@ class RandomSequentialNodeColoring:
         """Give node the smallest possible color."""
         n = self.graph.v()   # memory O(V)
         used = [False] * n   # is color used?
-        for edge in self.graph.iteroutedges(source):
-            if self.color[edge.target] is not None:
-                used[self.color[edge.target]] = True
+        for target in self.graph.iteradjacent(source):
+            if self.color[target] is not None:
+                used[self.color[target]] = True
         for c in xrange(n):   # check colors
             if not used[c]:
                 self.color[source] = c
