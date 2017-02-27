@@ -3,7 +3,9 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.bipartiteness.bipartite import *
+from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS
+from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS
+from graphtheory.bipartiteness.bipartite import is_bipartite
 
 # 0---1---2
 # |   |   |

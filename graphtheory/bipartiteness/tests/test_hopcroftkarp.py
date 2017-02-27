@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.bipartiteness.hopcroftkarp import *
+from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpSet
+from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
 
 
 class TestHopcroftKarp(unittest.TestCase):
