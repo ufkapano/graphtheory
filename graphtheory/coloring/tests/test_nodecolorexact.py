@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
+from graphtheory.coloring.nodecolorexact import ExactNodeColoring
 
 # 0 --- 1 --- 2
 # |   / |   / |
@@ -28,8 +28,8 @@ class TestNodeColoring(unittest.TestCase):
         # Best coloring - 3 colors.
         # color = {0:a, 1:b, 2:c, 3:c, 4:a, 5:b}
 
-    def test_cs_node_coloring(self):
-        algorithm = ConnectedSequentialNodeColoring(self.G)
+    def test_exact_node_coloring(self):
+        algorithm = ExactNodeColoring(self.G)
         algorithm.run()
         # Sprawdzenie, czy kazdy wierzcholek ma kolor.
         for node in self.G.iternodes():
@@ -39,10 +39,10 @@ class TestNodeColoring(unittest.TestCase):
                                 algorithm.color[edge.target])
         #print algorithm.color
         all_colors = set(algorithm.color[node] for node in self.G.iternodes())
-        self.assertEqual(len(all_colors), 4)
+        self.assertEqual(len(all_colors), 3)   # best coloring
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, ConnectedSequentialNodeColoring,
+        self.assertRaises(ValueError, ExactNodeColoring,
             Graph(5, directed=True))
 
     def tearDown(self): pass

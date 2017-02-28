@@ -21,6 +21,7 @@ class ConnectedSequentialNodeColoring:
         order = list()
         algorithm = SimpleBFS(self.graph)
         algorithm.run(pre_action=lambda node: order.append(node))
+        #print "order", order
         for source in order:
             self._greedy_color(source)
 
