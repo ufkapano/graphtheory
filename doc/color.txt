@@ -1,0 +1,34 @@
+GRAPH COLORING
+----------------------------------------------------------------------
+VERTEX COLORING
+
+from graphtheory.coloring.nodecolorbt import BacktrackingNodeColoring
+from graphtheory.coloring.nodecolorexact import ExactNodeColoring
+from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring
+from graphtheory.coloring.nodecolorrs import RandomSequentialNodeColoring
+from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
+
+G = Graph()
+#algorithm = ExactlNodeColoring(G)
+#algorithm = UnorderedSequentialNodeColoring(G)
+#algorithm = RandomSequentialNodeColoring(G)
+algorithm = ConnectedSequentialNodeColoring(G)
+algorithm.run()
+for node in G.iternodes():
+    print node, algorithm.color[node]
+----------------------------------------------------------------------
+EDGE COLORING
+
+from graphtheory.coloring.edgecolorus import UnorderedSequentialEdgeColoring
+from graphtheory.coloring.edgecolorrs import RandomSequentialEdgeColoring
+from graphtheory.coloring.edgecolorrs import ConnectedSequentialEdgeColoring
+
+G = Graph()
+#algorithm = UnorderedSequentialEdgeColoring(G)
+#algorithm = RandomSequentialEdgeColoring(G)
+algorithm = ConnectedSequentialEdgeColoring(G)
+algorithm.run()
+for edge in G.iteredges():
+    print edge, algorithm.color[edge]
+----------------------------------------------------------------------
+EOF
