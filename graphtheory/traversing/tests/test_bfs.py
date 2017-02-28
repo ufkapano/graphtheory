@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.traversing.bfs import BFSWithQueue, SimpleBFS
+from graphtheory.traversing.bfs import BFSWithQueue
+from graphtheory.traversing.bfs import SimpleBFS
 
 # 0---1   2---3
 # |   | / | / |

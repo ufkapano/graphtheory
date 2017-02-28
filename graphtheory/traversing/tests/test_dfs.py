@@ -3,7 +3,9 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.traversing.dfs import *
+from graphtheory.traversing.dfs import DFSWithStack
+from graphtheory.traversing.dfs import DFSWithRecursion
+from graphtheory.traversing.dfs import SimpleDFS
 
 # 0---1   2---3
 # |   | / | / |
