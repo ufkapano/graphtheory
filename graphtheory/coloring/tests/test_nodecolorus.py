@@ -10,6 +10,8 @@ from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring
 # |  /  |  /  |
 # | /   | /   |
 # 3 --- 4 --- 5
+# Best node coloring - 3 colors.
+# color = {0:a, 1:b, 2:c, 3:c, 4:a, 5:b}
 
 class TestNodeColoring(unittest.TestCase):
 
@@ -25,13 +27,10 @@ class TestNodeColoring(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
         #self.G.show()
-        # Best coloring - 3 colors.
-        # color = {0:a, 1:b, 2:c, 3:c, 4:a, 5:b}
 
     def test_us_node_coloring(self):
         algorithm = UnorderedSequentialNodeColoring(self.G)
-        algorithm.run()   # 4 colors
-        # Sprawdzenie, czy kazdy wierzcholek ma kolor.
+        algorithm.run()
         for node in self.G.iternodes():
             self.assertNotEqual(algorithm.color[node], None)
         for edge in self.G.iteredges():

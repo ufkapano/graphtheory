@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.coloring.nodecolorexact import ExactNodeColoring
+from graphtheory.coloring.nodecolorbt import BacktrackingNodeColoring
 
 # 0 --- 1 --- 2
 # |   / |   / |
@@ -28,11 +28,9 @@ class TestNodeColoring(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_exact_node_coloring(self):
-        algorithm = ExactNodeColoring(self.G)
+    def test_bt_node_coloring(self):
+        algorithm = BacktrackingNodeColoring(self.G, 3)
         algorithm.run()
-        for node in self.G.iternodes():
-            self.assertNotEqual(algorithm.color[node], None)
         for edge in self.G.iteredges():
             self.assertNotEqual(algorithm.color[edge.source],
                                 algorithm.color[edge.target])
@@ -41,8 +39,8 @@ class TestNodeColoring(unittest.TestCase):
         self.assertEqual(len(all_colors), 3)   # best coloring
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, ExactNodeColoring,
-            Graph(5, directed=True))
+        self.assertRaises(ValueError, BacktrackingNodeColoring,
+            Graph(5, directed=True), self.N)
 
     def tearDown(self): pass
 
