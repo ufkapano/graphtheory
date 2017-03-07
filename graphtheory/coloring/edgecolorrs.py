@@ -23,7 +23,7 @@ class RandomSequentialEdgeColoring:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.color = dict()   # {edge: int}
+        self.color = dict()
         self.m = 0   # graph.e() is slow
         for edge in self.graph.iteredges():
             if edge.source == edge.target:

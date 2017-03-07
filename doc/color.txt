@@ -25,9 +25,9 @@ from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
 
 G = Graph()
 # Add nodes and edges here.
-#algorithm = ExactlNodeColoring(G)
-#algorithm = UnorderedSequentialNodeColoring(G)
-#algorithm = RandomSequentialNodeColoring(G)
+# algorithm = ExactlNodeColoring(G)
+# algorithm = UnorderedSequentialNodeColoring(G)
+# algorithm = RandomSequentialNodeColoring(G)
 algorithm = ConnectedSequentialNodeColoring(G)
 algorithm.run()
 for node in G.iternodes():

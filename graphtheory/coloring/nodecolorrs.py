@@ -6,6 +6,9 @@ import random
 class RandomSequentialNodeColoring:
     """Find a random sequential (RS) node coloring.
     
+    Based on
+     http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
+    
     Attributes
     ----------
     graph : input undirected graph or multigraph
@@ -15,8 +18,6 @@ class RandomSequentialNodeColoring:
     -----
     Colors are 0, 1, 2, ...
     """
-    # Idea taka jak w 
-    # http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
 
     def __init__(self, graph):
         """The algorithm initialization."""

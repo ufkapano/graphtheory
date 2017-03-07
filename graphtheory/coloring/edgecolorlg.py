@@ -8,7 +8,6 @@ class EdgeColoringWithLineGraph:
     """Find an edge coloring using a line graph.
     
     Based on ideas from
-    
     http://edu.i-lo.tarnow.pl/inf/alg/001_search/0126c.php
     
     Attributes
@@ -28,7 +27,7 @@ class EdgeColoringWithLineGraph:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.color = dict()   # {edge: int}
+        self.color = dict()
         self.m = 0   # graph.e() is slow
         for edge in self.graph.iteredges():
             if edge.source == edge.target:
