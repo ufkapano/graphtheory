@@ -5,7 +5,8 @@ from edgecolorcs import ConnectedSequentialEdgeColoring
 
 class NTLEdgeColoring:
     """Find the NTL (Nishizeki, Terada, Leven) edge coloring.
-
+    
+    The algorithm is using Delta or Delta+1 colors.
     Based on Java code from
     https://github.com/martakuzak/GIS
     

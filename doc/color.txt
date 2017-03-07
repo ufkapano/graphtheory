@@ -22,13 +22,15 @@ from graphtheory.coloring.nodecolorexact import ExactNodeColoring
 from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring
 from graphtheory.coloring.nodecolorrs import RandomSequentialNodeColoring
 from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
+from graphtheory.coloring.nodecolorbrooks import BrooksNodeColoring
 
 G = Graph()
 # Add nodes and edges here.
 # algorithm = ExactlNodeColoring(G)
 # algorithm = UnorderedSequentialNodeColoring(G)
 # algorithm = RandomSequentialNodeColoring(G)
-algorithm = ConnectedSequentialNodeColoring(G)
+# algorithm = ConnectedSequentialNodeColoring(G)
+algorithm = BrooksNodeColoring(G)
 algorithm.run()
 for node in G.iternodes():
     print node, algorithm.color[node]
@@ -41,11 +43,15 @@ from graphtheory.coloring.edgecolorus import UnorderedSequentialEdgeColoring
 from graphtheory.coloring.edgecolorrs import RandomSequentialEdgeColoring
 from graphtheory.coloring.edgecolorrs import ConnectedSequentialEdgeColoring
 from graphtheory.coloring.edgecolorlg import EdgeColoringWithLineGraph
+from graphtheory.coloring.edgecolorntl import NTLEdgeColoring
 
 G = Graph()
-#algorithm = UnorderedSequentialEdgeColoring(G)
-#algorithm = RandomSequentialEdgeColoring(G)
-algorithm = ConnectedSequentialEdgeColoring(G)
+# Add nodes and edges here.
+# algorithm = UnorderedSequentialEdgeColoring(G)
+# algorithm = RandomSequentialEdgeColoring(G)
+# algorithm = ConnectedSequentialEdgeColoring(G)
+# algorithm = EdgeColoringWithLineGraph(G)
+algorithm = NTLEdgeColoring(G)   # use Delta or Delta+1 colors
 algorithm.run()
 for edge in G.iteredges():
     print edge, algorithm.color[edge]
