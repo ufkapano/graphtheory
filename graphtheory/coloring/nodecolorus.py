@@ -1,10 +1,19 @@
 #!/usr/bin/python
 
 class UnorderedSequentialNodeColoring:
-    """Find an unordered sequential (US) node coloring."""
+    """Find an unordered sequential (US) node coloring.
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with nodes (values are colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    """
     # Idea taka jak w 
     # http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
-    # Kolory sa kolejnymi liczbami 0, 1, 2, ...
 
     def __init__(self, graph):
         """The algorithm initialization."""

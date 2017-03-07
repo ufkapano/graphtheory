@@ -10,6 +10,17 @@ class EdgeColoringWithLineGraph:
     Based on ideas from
     
     http://edu.i-lo.tarnow.pl/inf/alg/001_search/0126c.php
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with edges (values are colors)
+    m : number (the number od edges)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    edge.source < edge.target for any edge in color.
     """
 
     def __init__(self, graph):

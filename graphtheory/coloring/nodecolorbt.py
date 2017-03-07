@@ -7,6 +7,17 @@ class BacktrackingNodeColoring:
     Based on the description from
     
     http://www.geeksforgeeks.org/backttracking-set-5-m-coloring-problem/
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    m_colors : number of colors available
+    color : dict with nodes (values are colors)
+    node_list : list of nodes, private
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
     """
 
     def __init__(self, graph, m_colors):

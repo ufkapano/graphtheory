@@ -1,5 +1,5 @@
 PLANAR GRAPH GENERATORS
-
+----------------------------------------------------------------------
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.planarfactory import PlanarGraphFactory
@@ -8,5 +8,5 @@ gf = PlanarGraphFactory(Graph)
 
 G = gf.make_cyclic(n=10)      # cyclic topological graph
 G = gf.make_wheel(n=10)       # wheel topological graph
-
+----------------------------------------------------------------------
 EOF

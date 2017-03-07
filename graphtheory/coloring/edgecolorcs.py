@@ -3,15 +3,29 @@
 from Queue import Queue
 
 class ConnectedSequentialEdgeColoring:
-    """Find a connected sequential (CS) edge coloring."""
+    """Find a connected sequential (CS) edge coloring.
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with edges (values are colors)
+    parent : dict (BFS tree)
+    m : number (the number od edges)
+    saturation : dict with nodes (values are sets of adjacent node colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    edge.source < edge.target for any edge in color.
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.parent = dict()   # BFS tree
-        self.color = dict()   # {edge: int}
+        self.parent = dict()
+        self.color = dict()
         self.m = 0   # graph.e() is slow
         for edge in self.graph.iteredges():
             if edge.source == edge.target:

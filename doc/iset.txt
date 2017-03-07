@@ -1,4 +1,10 @@
 INDEPENDENT SETS
+----------------------------------------------------------------------
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
 
+G = Graph()
+# Add nodes and edges here.
 
+----------------------------------------------------------------------
 EOF

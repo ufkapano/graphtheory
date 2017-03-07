@@ -329,7 +329,7 @@ class PrimConnectedMST:
             source = self.graph.iternodes().next()
         self.source = source
         self._in_queue[source] = False
-        #  W kolejce trzymam krawedzie wychodzace na zewnatrz od MST.
+        # W kolejce trzymam krawedzie wychodzace na zewnatrz od MST.
         for edge in self.graph.iteroutedges(self.source):
             self._pq.put((edge.weight, edge))
         while not self._pq.empty():

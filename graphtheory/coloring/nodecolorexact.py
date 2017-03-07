@@ -1,7 +1,17 @@
 #!/usr/bin/python
 
 class ExactNodeColoring:
-    """Find an exact node coloring (slow)."""
+    """Find an exact node coloring (slow).
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with nodes (values are colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    """
     # Idea taka jak w 
     # http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
     # ale nie ma optymalizacji przez pomijanie sprawdzania kombinacji,

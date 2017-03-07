@@ -3,7 +3,20 @@
 import random
 
 class RandomSequentialEdgeColoring:
-    """Find a random sequential (RS) edge coloring."""
+    """Find a random sequential (RS) edge coloring.
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with edges (values are colors)
+    m : number (the number od edges)
+    saturation : dict with nodes (values are sets of adjacent node colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    edge.source < edge.target for any edge in color.
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

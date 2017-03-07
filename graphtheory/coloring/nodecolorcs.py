@@ -4,7 +4,17 @@ from graphtheory.traversing.bfs import SimpleBFS
 
 
 class ConnectedSequentialNodeColoring:
-    """Find a connected sequential (CS) node coloring."""
+    """Find a connected sequential (CS) node coloring.
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with nodes (values are colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

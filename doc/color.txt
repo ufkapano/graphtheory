@@ -1,14 +1,30 @@
 GRAPH COLORING
 ----------------------------------------------------------------------
+M COLORING PROBLEM
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.coloring.nodecolorbt import BacktrackingNodeColoring
+
+G = Graph()
+# Add nodes and edges here.
+# Set m_colors.
+algorithm = BacktrackingNodeColoring(G, m_colors)
+algorithm.run()
+for node in G.iternodes():
+    print node, algorithm.color[node]
+----------------------------------------------------------------------
 VERTEX COLORING
 
-from graphtheory.coloring.nodecolorbt import BacktrackingNodeColoring
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.nodecolorexact import ExactNodeColoring
 from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring
 from graphtheory.coloring.nodecolorrs import RandomSequentialNodeColoring
 from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
 
 G = Graph()
+# Add nodes and edges here.
 #algorithm = ExactlNodeColoring(G)
 #algorithm = UnorderedSequentialNodeColoring(G)
 #algorithm = RandomSequentialNodeColoring(G)
@@ -19,6 +35,8 @@ for node in G.iternodes():
 ----------------------------------------------------------------------
 EDGE COLORING
 
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.edgecolorus import UnorderedSequentialEdgeColoring
 from graphtheory.coloring.edgecolorrs import RandomSequentialEdgeColoring
 from graphtheory.coloring.edgecolorrs import ConnectedSequentialEdgeColoring

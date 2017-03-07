@@ -1,5 +1,5 @@
 INTERFACE FOR GRAPHS
-
+----------------------------------------------------------------------
 G, H - graphs
 node - usually integer or string
 edge - an instance of the Edge clas

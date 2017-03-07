@@ -4,8 +4,17 @@ import random
 
 
 class RandomSequentialNodeColoring:
-    """Find a random sequential (RS) node coloring."""
-    # Kolory sa kolejnymi liczbami 0, 1, 2, ...
+    """Find a random sequential (RS) node coloring.
+    
+    Attributes
+    ----------
+    graph : input undirected graph or multigraph
+    color : dict with nodes (values are colors)
+    
+    Notes
+    -----
+    Colors are 0, 1, 2, ...
+    """
     # Idea taka jak w 
     # http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
 
