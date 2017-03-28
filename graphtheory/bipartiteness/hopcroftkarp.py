@@ -54,7 +54,7 @@ class HopcroftKarpSet:
         while self._bfs_stage():
             for node in self.v1:
                 if self.mate[node] is None and self._dfs_stage(node):
-                    self.cardinality = self.cardinality + 1
+                    self.cardinality += 1
                     #print self.mate
 
     def _bfs_stage(self):
@@ -69,20 +69,20 @@ class HopcroftKarpSet:
         while not self.Q.empty():
             node = self.Q.get()
             if self.distance[node] < self.distance[None]:
-                for edge in self.graph.iteroutedges(node):
-                    if self.distance[self.mate[edge.target]] == float("inf"):
-                        self.distance[self.mate[edge.target]] = self.distance[node] + 1
-                        self.Q.put(self.mate[edge.target])
+                for target in self.graph.iteradjacent(node):
+                    if self.distance[self.mate[target]] == float("inf"):
+                        self.distance[self.mate[target]] = self.distance[node] + 1
+                        self.Q.put(self.mate[target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):
         """The DFS stage."""
         if node is not None:
-            for edge in self.graph.iteroutedges(node):
-                if self.distance[self.mate[edge.target]] == self.distance[node] + 1:
-                    if self._dfs_stage(self.mate[edge.target]):
-                        self.mate[edge.target] = node
-                        self.mate[node] = edge.target
+            for target in self.graph.iteradjacent(node):
+                if self.distance[self.mate[target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.mate[target]):
+                        self.mate[target] = node
+                        self.mate[node] = target
                         return True
             self.distance[node] = float("inf")
             return False
@@ -138,7 +138,7 @@ class HopcroftKarpList:
         while self._bfs_stage():
             for node in self.v1:
                 if self.mate[node] is None and self._dfs_stage(node):
-                    self.cardinality = self.cardinality + 1
+                    self.cardinality += 1
                     #print self.mate
 
     def _bfs_stage(self):
@@ -153,20 +153,20 @@ class HopcroftKarpList:
         while not self.Q.empty():
             node = self.Q.get()
             if self.distance[node] < self.distance[None]:
-                for edge in self.graph.iteroutedges(node):
-                    if self.distance[self.mate[edge.target]] == float("inf"):
-                        self.distance[self.mate[edge.target]] = self.distance[node] + 1
-                        self.Q.put(self.mate[edge.target])
+                for target in self.graph.iteradjacent(node):
+                    if self.distance[self.mate[target]] == float("inf"):
+                        self.distance[self.mate[target]] = self.distance[node] + 1
+                        self.Q.put(self.mate[target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):
         """The DFS stage."""
         if node is not None:
-            for edge in self.graph.iteroutedges(node):
-                if self.distance[self.mate[edge.target]] == self.distance[node] + 1:
-                    if self._dfs_stage(self.mate[edge.target]):
-                        self.mate[edge.target] = node
-                        self.mate[node] = edge.target
+            for target in self.graph.iteradjacent(node):
+                if self.distance[self.mate[target]] == self.distance[node] + 1:
+                    if self._dfs_stage(self.mate[target]):
+                        self.mate[target] = node
+                        self.mate[node] = target
                         return True
             self.distance[node] = float("inf")
             return False
