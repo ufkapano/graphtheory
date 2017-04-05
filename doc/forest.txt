@@ -1,0 +1,17 @@
+ALGORITHMS FOR TREES
+----------------------------------------------------------------------
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+
+gf = GraphFactory(Graph)
+G = gf.make_tree(n=10)             # random tree
+
+# Finding a maximum independent set.
+algorithm = BorieIndependentSet(G)
+algorithm.run()
+# algorithm.independent_set
+# algorithm.cardinality
+# algorithm.parent      # DFS tree as a dict
+----------------------------------------------------------------------
+EOF

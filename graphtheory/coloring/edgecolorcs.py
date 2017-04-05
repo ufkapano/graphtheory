@@ -10,7 +10,7 @@ class ConnectedSequentialEdgeColoring:
     graph : input undirected graph or multigraph
     color : dict with edges (values are colors)
     parent : dict (BFS tree)
-    m : number (the number od edges)
+    m : number (the number of edges)
     saturation : dict with nodes (values are sets of adjacent node colors)
     
     Notes
