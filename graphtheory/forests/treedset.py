@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-class BorieIndependentSet:
-    """Find a maximum independent set for trees.
+class BorieDominatingSet:
+    """Find a minimum cardinality dominating set for trees.
     
     Attributes
     ----------
     graph : input forest
-    independent_set : set with nodes
+    dominating_set : set with nodes
     parent : dict (DFS tree)
-    cardinality : number (the size of max iset)
+    cardinality : number (the size of min dset)
     
     Notes
     -----
@@ -25,7 +25,7 @@ class BorieIndependentSet:
             raise ValueError("the graph is directed")
         self.graph = graph
         self.parent = dict()
-        self.independent_set = set()
+        self.dominating_set = set()
         self.cardinality = 0
         import sys
         recursionlimit = sys.getrecursionlimit()
@@ -36,32 +36,35 @@ class BorieIndependentSet:
         if source is not None:
             # A single connected component, a single tree.
             self.parent[source] = None   # before _visit
-            arg2 = self._visit(source)
-            self.independent_set.update(max(arg2, key=len))
-            self.cardinality = len(self.independent_set)
+            a2_set, b2_set, c2_set = self._visit(source)
+            self.dominating_set.update(min([a2_set, b2_set], key=len))
+            self.cardinality = len(self.dominating_set)
         else:
             # A forest is possible.
             for node in self.graph.iternodes():
                 if node not in self.parent:
                     self.parent[node] = None   # before _visit
-                    arg2 = self._visit(node)
-                    self.independent_set.update(max(arg2, key=len))
-            self.cardinality = len(self.independent_set)
+                    a2_set, b2_set, c2_set = self._visit(node)
+                    self.dominating_set.update(min([a2_set, b2_set], key=len))
+            self.cardinality = len(self.dominating_set)
 
     def compose(self, arg1, arg2):
         """Compose results."""
-        # a_set : max iset that includes root
-        # b_set : max iset that excludes root
-        a1_set, b1_set = arg1
-        a2_set, b2_set = arg2
-        a_set = a1_set | b2_set
-        b_set = b1_set | max(arg2, key=len)
-        return (a_set, b_set)
+        # a_set : min dset that includes root
+        # b_set : min dset that excludes root
+        # c_set : root undominated
+        a1_set, b1_set, c1_set = arg1
+        a2_set, b2_set, c2_set = arg2
+        a_set = a1_set | min(arg2, key=len)
+        b_set = min([b1_set | a2_set, b1_set | b2_set,
+            c1_set | a2_set], key=len)
+        c_set = c1_set | b2_set
+        return (a_set, b_set, c_set)
 
     def _visit(self, root):
         """Explore recursively the connected component."""
         # Start from a single node.
-        arg1 = (set([root]), set())
+        arg1 = (set([root]), set([root]), set())
         for target in self.graph.iteradjacent(root):
             if target not in self.parent:
                 self.parent[target] = root   # before _visit

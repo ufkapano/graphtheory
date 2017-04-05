@@ -28,13 +28,13 @@ class TestIndependentSet1(unittest.TestCase):
         algorithm.run()
         expected1 = set([3, 4, 5, 6])
         expected2 = set([0, 4, 5, 6])
-        #print "iset", algorithm.independent_set
-        for edge in self.G.iteredges():
-            self.assertFalse(edge.source in algorithm.independent_set and
-                             edge.target in algorithm.independent_set)
-        self.assertEqual(algorithm.cardinality, 4)
-        self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
+        self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected2)
+        #print "iset", algorithm.independent_set
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
 
     def tearDown(self): pass
 
@@ -48,8 +48,8 @@ class TestIndependentSet2(unittest.TestCase):
         self.N = 7
         self.G = Graph(self.N)
         self.nodes = range(self.N)
-        self.edges = [Edge(0, 1), Edge(1, 3), Edge(1, 2), Edge(1, 4),
-            Edge(2, 5), Edge(2, 6)]
+        self.edges = [Edge(0, 1), Edge(1, 3), Edge(1, 2),
+            Edge(1, 4), Edge(2, 5), Edge(2, 6)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -60,13 +60,13 @@ class TestIndependentSet2(unittest.TestCase):
         algorithm = BorieIndependentSet(self.G)
         algorithm.run()
         expected1 = set([0, 3, 4, 5, 6])
-        #print "iset", algorithm.independent_set
-        for edge in self.G.iteredges():
-            self.assertFalse(edge.source in algorithm.independent_set and
-                             edge.target in algorithm.independent_set)
-        self.assertEqual(algorithm.cardinality, 5)
-        self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
+        self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected1)
+        #print "iset", algorithm.independent_set
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
 
     def tearDown(self): pass
 
@@ -81,7 +81,8 @@ class TestIndependentSet3(unittest.TestCase):
         self.N = 6
         self.G = Graph(self.N)
         self.nodes = range(self.N)
-        self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(3, 4), Edge(4, 5)]
+        self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
+            Edge(3, 4), Edge(4, 5)]
         for node in self.nodes:
             self.G.add_node(node)
         for edge in self.edges:
@@ -95,13 +96,13 @@ class TestIndependentSet3(unittest.TestCase):
         expected2 = set([0, 3, 5])
         expected3 = set([0, 2, 4])
         expected4 = set([1, 3, 5])
-        #print "iset", algorithm.independent_set
-        for edge in self.G.iteredges():
-            self.assertFalse(edge.source in algorithm.independent_set and
-                             edge.target in algorithm.independent_set)
-        self.assertEqual(algorithm.cardinality, 3)
-        self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
+        self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected3)
+        #print "iset", algorithm.independent_set
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
 
     def tearDown(self): pass
 

@@ -5,13 +5,20 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 
 gf = GraphFactory(Graph)
-G = gf.make_tree(n=10)             # random tree
+G = gf.make_tree(n=10)        # random tree
 
 # Finding a maximum independent set.
 algorithm = BorieIndependentSet(G)
 algorithm.run()
 # algorithm.independent_set
-# algorithm.cardinality
-# algorithm.parent      # DFS tree as a dict
+# algorithm.cardinality       # the size of max iset
+# algorithm.parent            # DFS tree as a dict
+
+# Finding a minimum dominating set.
+algorithm = BorieDominatingSet(G)
+algorithm.run()
+# algorithm.dominating_set
+# algorithm.cardinality       # the size of min dset
+# algorithm.parent            # DFS tree as a dict
 ----------------------------------------------------------------------
 EOF
