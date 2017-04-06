@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+from Queue import Queue
+
+
 class BorieIndependentSet:
     """Find a maximum independent set for trees.
     
@@ -68,3 +71,61 @@ class BorieIndependentSet:
                 arg2 = self._visit(target)
                 arg1 = self.compose(arg1, arg2)
         return arg1
+
+
+class TreeIndependentSet:
+    """Find a maximum independent set for trees.
+    
+    Attributes
+    ----------
+    graph : input forest
+    independent_set : set with nodes
+    cardinality : number (the size of max iset)
+    _used : set, private
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.independent_set = set()
+        self.cardinality = 0
+        self._used = set()   # for iset and neighbors
+
+    def run(self):
+        """Executable pseudocode."""
+        # A dictionary with node degrees, O(V) time.
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())
+        Q = Queue()   # for leafs
+        # Put leafs to the queue, O(V) time.
+        for node in self.graph.iternodes():
+            if degree_dict[node] == 0:   # isolated node from the beginning
+                self.independent_set.add(node)
+                self._used.add(node)
+                self.cardinality += 1
+            elif degree_dict[node] == 1:   # leaf
+                Q.put(node)
+        while not Q.empty():
+            source = Q.get()
+            # A leaf may become isolated.
+            if degree_dict[source] == 0 and source not in self._used:
+                self.independent_set.add(source)
+                self._used.add(source)
+                self.cardinality += 1
+                continue
+            for target in self.graph.iteradjacent(source):
+                if degree_dict[target] > 0:   # this is parent
+                    self.independent_set.add(source)   # put leaf to iset
+                    self._used.add(source)
+                    self._used.add(target)
+                    self.cardinality += 1
+                    # Remove edges going from target.
+                    for node in self.graph.iteradjacent(target):
+                        if degree_dict[node] > 0:
+                            degree_dict[node] -= 1
+                            degree_dict[target] -= 1
+                            if degree_dict[node] == 1:   # new leaf
+                                Q.put(node)
+                    break

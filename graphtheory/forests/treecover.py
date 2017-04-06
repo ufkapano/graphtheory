@@ -96,7 +96,7 @@ class TreeNodeCover:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = Queue()
+        Q = Queue()   # for leafs
         # Put leafs to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 1:

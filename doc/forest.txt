@@ -4,6 +4,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.forests.treeiset import BorieIndependentSet
+from graphtheory.forests.treeiset import TreeIndependentSet
 from graphtheory.forests.treedset import BorieDominatingSet
 from graphtheory.forests.treecover import BorieNodeCover
 from graphtheory.forests.treecover import TreeNodeCover
@@ -18,6 +19,11 @@ algorithm.run()
 # algorithm.independent_set
 # algorithm.cardinality       # the size of max iset
 # algorithm.parent            # DFS tree as a dict
+
+algorithm = TreeIndependentSet(G)
+algorithm.run()
+# algorithm.independent_set
+# algorithm.cardinality       # the size of max iset
 ----------------------------------------------------------------------
 # Finding a minimum dominating set.
 
