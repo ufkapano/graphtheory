@@ -16,7 +16,7 @@ class TestIndependentSet1(unittest.TestCase):
         self.N = 7
         self.G = Graph(self.N)
         self.nodes = range(self.N)
-        self.edges = [ Edge(0, 1), Edge(0, 3), Edge(1, 2), 
+        self.edges = [Edge(0, 1), Edge(0, 3), Edge(1, 2), 
             Edge(1, 4), Edge(2, 5), Edge(2, 6)]
         for node in self.nodes:
             self.G.add_node(node)
@@ -96,10 +96,11 @@ class TestIndependentSet2(unittest.TestCase):
 
     def tearDown(self): pass
 
-# 0---1---2---3---4---5
+# 0---1---2---3---4---5   path P_6
 # best dset len([1, 4]) = 2
 # best node cover len([1, 2, 4]) = 3
 # best iset len([0, 2, 5]) = 3
+# best matching set([Edge(0, 1), Edge(2. 3), Edge(4, 5)])
 
 class TestIndependentSet3(unittest.TestCase):
 

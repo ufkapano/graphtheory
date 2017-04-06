@@ -9,6 +9,7 @@ from graphtheory.forests.treedset import BorieDominatingSet
 from graphtheory.forests.treedset import TreeDominatingSet
 from graphtheory.forests.treecover import BorieNodeCover
 from graphtheory.forests.treecover import TreeNodeCover
+from graphtheory.forests.treemate import BorieMatching
 
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)        # random tree
@@ -51,5 +52,14 @@ algorithm = TreeNodeCover(G)
 algorithm.run()
 # algorithm.node_cover
 # algorithm.cardinality       # the size of min cover
+----------------------------------------------------------------------
+# Finding a maximum matching.
+
+algorithm = BorieMatching(G)
+algorithm.run()
+# algorithm.mate
+# algorithm.mate_set
+# algorithm.cardinality       # the size of max matching
+# algorithm.parent            # DFS tree as a dict
 ----------------------------------------------------------------------
 EOF

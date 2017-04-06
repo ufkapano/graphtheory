@@ -94,10 +94,11 @@ class TestNodeCover2(unittest.TestCase):
 
     def tearDown(self): pass
 
-# 0---1---2---3---4---5
+# 0---1---2---3---4---5   path P_6
 # best dset len([1, 4]) = 2
 # best node cover len([1, 2, 4]) = 3
 # best iset len([0, 2, 5]) = 3
+# best matching set([Edge(0, 1), Edge(2. 3), Edge(4, 5)])
 
 class TestNodeCover3(unittest.TestCase):
 
