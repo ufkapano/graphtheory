@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+from Queue import Queue
+
+
 class BorieNodeCover:
     """Find a minimum cardinality node cover for trees.
     
@@ -68,3 +71,49 @@ class BorieNodeCover:
                 arg2 = self._visit(target)
                 arg1 = self.compose(arg1, arg2)
         return arg1
+
+
+class TreeNodeCover:
+    """Find a minimum cardinality node cover for trees.
+    
+    Attributes
+    ----------
+    graph : input forest
+    node_cover : set with nodes
+    cardinality : number (the size of min dset)
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.node_cover = set()
+        self.cardinality = 0
+
+    def run(self):
+        """Executable pseudocode."""
+        # A dictionary with node degrees, O(V) time.
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())
+        Q = Queue()
+        # Put leafs to the queue, O(V) time.
+        for node in self.graph.iternodes():
+            if degree_dict[node] == 1:
+                Q.put(node)
+        while not Q.empty():
+            source = Q.get()
+            if degree_dict[source] == 0:   # isolated node
+                continue
+            for target in self.graph.iteradjacent(source):
+                if degree_dict[target] > 0:   # this is parent
+                    self.node_cover.add(target)   # put parent to cover
+                    self.cardinality += 1
+                    # Remove edges going from target.
+                    for node in self.graph.iteradjacent(target):
+                        if degree_dict[node] > 0:
+                            degree_dict[node] -= 1
+                            degree_dict[target] -= 1
+                            if degree_dict[node] == 1:   # new leaf
+                                Q.put(node)
+                    break

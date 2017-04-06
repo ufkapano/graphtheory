@@ -3,22 +3,41 @@ ALGORITHMS FOR TREES
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
+from graphtheory.forests.treeiset import BorieIndependentSet
+from graphtheory.forests.treedset import BorieDominatingSet
+from graphtheory.forests.treecover import BorieNodeCover
+from graphtheory.forests.treecover import TreeNodeCover
 
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)        # random tree
-
+----------------------------------------------------------------------
 # Finding a maximum independent set.
+
 algorithm = BorieIndependentSet(G)
 algorithm.run()
 # algorithm.independent_set
 # algorithm.cardinality       # the size of max iset
 # algorithm.parent            # DFS tree as a dict
-
+----------------------------------------------------------------------
 # Finding a minimum dominating set.
+
 algorithm = BorieDominatingSet(G)
 algorithm.run()
 # algorithm.dominating_set
 # algorithm.cardinality       # the size of min dset
 # algorithm.parent            # DFS tree as a dict
+----------------------------------------------------------------------
+# Finding a minimum node cover.
+
+algorithm = BorieNodeCover(G)
+algorithm.run()
+# algorithm.node_cover
+# algorithm.cardinality       # the size of min cover
+# algorithm.parent            # DFS tree as a dict
+
+algorithm = TreeNodeCover(G)
+algorithm.run()
+# algorithm.node_cover
+# algorithm.cardinality       # the size of min cover
 ----------------------------------------------------------------------
 EOF

@@ -4,6 +4,7 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treecover import BorieNodeCover
+from graphtheory.forests.treecover import TreeNodeCover
 
 # 0---1---2---6
 # |   |   |
@@ -25,6 +26,18 @@ class TestNodeCover1(unittest.TestCase):
 
     def test_borie_node_cover(self):
         algorithm = BorieNodeCover(self.G)
+        algorithm.run()
+        expected1 = set([0, 1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.node_cover, expected1)
+        #print "cover", algorithm.node_cover
+        # Testing cover.
+        for edge in self.G.iteredges():
+            self.assertTrue(edge.source in algorithm.node_cover or
+                            edge.target in algorithm.node_cover)
+
+    def test_tree_node_cover(self):
+        algorithm = TreeNodeCover(self.G)
         algorithm.run()
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
@@ -67,6 +80,18 @@ class TestNodeCover2(unittest.TestCase):
             self.assertTrue(edge.source in algorithm.node_cover or
                             edge.target in algorithm.node_cover)
 
+    def test_tree_node_cover(self):
+        algorithm = TreeNodeCover(self.G)
+        algorithm.run()
+        expected1 = set([1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.node_cover, expected1)
+        #print "cover", algorithm.node_cover
+        # Testing cover.
+        for edge in self.G.iteredges():
+            self.assertTrue(edge.source in algorithm.node_cover or
+                            edge.target in algorithm.node_cover)
+
     def tearDown(self): pass
 
 # 0---1---2---3---4---5
@@ -97,6 +122,21 @@ class TestNodeCover3(unittest.TestCase):
         expected4 = set([1, 3, 5])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected3)
+        #print "cover", algorithm.node_cover
+        # Testing cover.
+        for edge in self.G.iteredges():
+            self.assertTrue(edge.source in algorithm.node_cover or
+                            edge.target in algorithm.node_cover)
+
+    def test_tree_node_cover(self):
+        algorithm = TreeNodeCover(self.G)
+        algorithm.run()
+        expected1 = set([1, 2, 4])
+        expected2 = set([1, 3, 4])
+        expected3 = set([0, 2, 4])
+        expected4 = set([1, 3, 5])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.node_cover, expected2)
         #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
