@@ -6,6 +6,7 @@ from graphtheory.structures.factory import GraphFactory
 from graphtheory.forests.treeiset import BorieIndependentSet
 from graphtheory.forests.treeiset import TreeIndependentSet
 from graphtheory.forests.treedset import BorieDominatingSet
+from graphtheory.forests.treedset import TreeDominatingSet
 from graphtheory.forests.treecover import BorieNodeCover
 from graphtheory.forests.treecover import TreeNodeCover
 
@@ -32,6 +33,11 @@ algorithm.run()
 # algorithm.dominating_set
 # algorithm.cardinality       # the size of min dset
 # algorithm.parent            # DFS tree as a dict
+
+algorithm = TreeDominatingSet(G)
+algorithm.run()
+# algorithm.dominating_set
+# algorithm.cardinality       # the size of min dset
 ----------------------------------------------------------------------
 # Finding a minimum node cover.
 
