@@ -7,7 +7,7 @@ class BorieMatching:
     ----------
     graph : input forest
     mate_set : set with edges
-    mate ; dict
+    mate : dict
     parent : dict (DFS tree)
     cardinality : number (the size of max matching)
     """
@@ -44,7 +44,7 @@ class BorieMatching:
             self.mate[edge.source] = edge.target
             self.mate[edge.target] = edge.source
 
-    def compose(self, arg1, arg2, edge):
+    def _compose(self, arg1, arg2, edge):
         """Compose results with an edge connecting roots."""
         # a_set : max matching that includes root
         # b_set : max matching that excludes roota
@@ -65,5 +65,5 @@ class BorieMatching:
             if edge.target not in self.parent:
                 self.parent[edge.target] = root   # before _visit
                 arg2 = self._visit(edge.target)
-                arg1 = self.compose(arg1, arg2, edge)
+                arg1 = self._compose(arg1, arg2, edge)
         return arg1

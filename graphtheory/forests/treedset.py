@@ -51,7 +51,7 @@ class BorieDominatingSet:
                     self.dominating_set.update(min([a2_set, b2_set], key=len))
             self.cardinality = len(self.dominating_set)
 
-    def compose(self, arg1, arg2):
+    def _compose(self, arg1, arg2):
         """Compose results."""
         # a_set : min dset that includes root
         # b_set : min dset that excludes root
@@ -72,7 +72,7 @@ class BorieDominatingSet:
             if target not in self.parent:
                 self.parent[target] = root   # before _visit
                 arg2 = self._visit(target)
-                arg1 = self.compose(arg1, arg2)
+                arg1 = self._compose(arg1, arg2)
         return arg1
 
 

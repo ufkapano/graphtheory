@@ -51,7 +51,7 @@ class BorieNodeCover:
                     self.node_cover.update(min(arg2, key=len))
             self.cardinality = len(self.node_cover)
 
-    def compose(self, arg1, arg2):
+    def _compose(self, arg1, arg2):
         """Compose results."""
         # a_set : min cover includes root
         # b_set : min cover excludes root
@@ -69,7 +69,7 @@ class BorieNodeCover:
             if target not in self.parent:
                 self.parent[target] = root   # before _visit
                 arg2 = self._visit(target)
-                arg1 = self.compose(arg1, arg2)
+                arg1 = self._compose(arg1, arg2)
         return arg1
 
 

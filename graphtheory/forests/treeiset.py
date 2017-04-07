@@ -51,7 +51,7 @@ class BorieIndependentSet:
                     self.independent_set.update(max(arg2, key=len))
             self.cardinality = len(self.independent_set)
 
-    def compose(self, arg1, arg2):
+    def _compose(self, arg1, arg2):
         """Compose results."""
         # a_set : max iset that includes root
         # b_set : max iset that excludes root
@@ -69,7 +69,7 @@ class BorieIndependentSet:
             if target not in self.parent:
                 self.parent[target] = root   # before _visit
                 arg2 = self._visit(target)
-                arg1 = self.compose(arg1, arg2)
+                arg1 = self._compose(arg1, arg2)
         return arg1
 
 
