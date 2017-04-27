@@ -8,13 +8,13 @@ gf = GraphFactory(Graph)
 
 G = gf.make_complete(n=10)        # complete graph
 G = gf.make_complete(n=10, True)   # tournament
-G = gf.make_cyclic(n=10)         # cyclic graph
+G = gf.make_cyclic(n=10)         # undirected cyclic graph
 G = gf.make_cyclic(n=10, True)    # directed cyclic graph
-G = gf.make_sparse(n=10, True, m=12) # random graph with m edges
+G = gf.make_sparse(n=10, False, m=12) # random undirected graph with m edges
 G = gf.make_tree(n=10)             # random tree
-G = gf.make_connected(n=10, m=12)   # connected graph
-G = gf.make_random(n=10, 0.5)      # random graph
-G = gf.make_bipartite(10, 12, False, 0.5)   # random bipartite graph
+G = gf.make_connected(n=10, m=12)   # connected undirected graph
+G = gf.make_random(n=10, False, 0.5)      # random undirected graph
+G = gf.make_bipartite(10, 12, False, 0.5)   # random bipartite undirected graph
 G = gf.make_grid(size=4)          # grid graph, size > 2
 G = gf.make_grid_periodic(size=4)   # periodic grid graph, size > 2
 G = gf.make_triangle(size=4)       # triangle graph, size > 2

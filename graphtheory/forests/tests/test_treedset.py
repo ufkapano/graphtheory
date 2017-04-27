@@ -30,7 +30,6 @@ class TestDominatingSet1(unittest.TestCase):
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -43,7 +42,6 @@ class TestDominatingSet1(unittest.TestCase):
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -76,7 +74,6 @@ class TestDominatingSet2(unittest.TestCase):
         expected1 = set([1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -89,7 +86,6 @@ class TestDominatingSet2(unittest.TestCase):
         expected1 = set([1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -124,7 +120,6 @@ class TestDominatingSet3(unittest.TestCase):
         expected1 = set([1, 4])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -137,7 +132,6 @@ class TestDominatingSet3(unittest.TestCase):
         expected1 = set([1, 4])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
-        #print "dset", algorithm.dominating_set
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:

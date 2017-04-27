@@ -30,7 +30,6 @@ class TestNodeCover1(unittest.TestCase):
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected1)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or
@@ -42,7 +41,6 @@ class TestNodeCover1(unittest.TestCase):
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected1)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or
@@ -74,7 +72,6 @@ class TestNodeCover2(unittest.TestCase):
         expected1 = set([1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected1)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or
@@ -86,7 +83,6 @@ class TestNodeCover2(unittest.TestCase):
         expected1 = set([1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected1)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or
@@ -123,7 +119,6 @@ class TestNodeCover3(unittest.TestCase):
         expected4 = set([1, 3, 5])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected3)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or
@@ -138,7 +133,6 @@ class TestNodeCover3(unittest.TestCase):
         expected4 = set([1, 3, 5])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.node_cover, expected2)
-        #print "cover", algorithm.node_cover
         # Testing cover.
         for edge in self.G.iteredges():
             self.assertTrue(edge.source in algorithm.node_cover or

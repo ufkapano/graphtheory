@@ -31,7 +31,6 @@ class TestIndependentSet1(unittest.TestCase):
         expected2 = set([0, 4, 5, 6])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected2)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set
@@ -44,7 +43,6 @@ class TestIndependentSet1(unittest.TestCase):
         expected2 = set([0, 4, 5, 6])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected1)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set
@@ -76,7 +74,6 @@ class TestIndependentSet2(unittest.TestCase):
         expected1 = set([0, 3, 4, 5, 6])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected1)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set
@@ -88,7 +85,6 @@ class TestIndependentSet2(unittest.TestCase):
         expected1 = set([0, 3, 4, 5, 6])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected1)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set
@@ -125,7 +121,6 @@ class TestIndependentSet3(unittest.TestCase):
         expected4 = set([1, 3, 5])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected3)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set
@@ -140,7 +135,6 @@ class TestIndependentSet3(unittest.TestCase):
         expected4 = set([1, 3, 5])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.independent_set, expected1)
-        #print "iset", algorithm.independent_set
         # Testing iset.
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in algorithm.independent_set

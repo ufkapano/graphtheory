@@ -30,8 +30,6 @@ class TestMatching1(unittest.TestCase):
         expected2 = set([Edge(0, 3), Edge(1, 4), Edge(2, 6)])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.mate_set, expected1)
-        #print "mate_set", algorithm.mate_set
-        #print "mate", algorithm.mate
         # Testing matching.
         S = set()
         for edge in algorithm.mate_set:
@@ -65,8 +63,6 @@ class TestMatching2(unittest.TestCase):
         expected1 = set([Edge(1, 3), Edge(2, 5)])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.mate_set, expected1)
-        #print "mate_set", algorithm.mate_set
-        #print "mate", algorithm.mate
         # Testing matching.
         S = set()
         for edge in algorithm.mate_set:
@@ -102,8 +98,6 @@ class TestMatching3(unittest.TestCase):
         expected1 = set([Edge(0, 1), Edge(2, 3), Edge(4, 5)])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.mate_set, expected1)
-        #print "mate_set", algorithm.mate_set
-        #print "mate", algorithm.mate
         # Testing matching.
         S = set()
         for edge in algorithm.mate_set:
