@@ -6,6 +6,8 @@ from Queue import Queue
 class BorieIndependentSet:
     """Find a maximum independent set for trees.
     
+    It works for trees and forests.
+    
     Attributes
     ----------
     graph : input forest
@@ -73,8 +75,11 @@ class BorieIndependentSet:
         return arg1
 
 
-class TreeIndependentSet:
+class TreeIndependentSet1:
     """Find a maximum independent set for trees.
+    
+    It works for trees and forests. A single tree may become
+    disconnected during computations.
     
     Attributes
     ----------
@@ -110,11 +115,13 @@ class TreeIndependentSet:
         while not Q.empty():
             source = Q.get()
             # A leaf may become isolated.
-            if degree_dict[source] == 0 and source not in self._used:
-                self.independent_set.add(source)
-                self._used.add(source)
-                self.cardinality += 1
+            if degree_dict[source] == 0:
+                if source not in self._used:
+                    self.independent_set.add(source)
+                    self._used.add(source)
+                    self.cardinality += 1
                 continue
+            # Here degree_dict[source] == 1.
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     self.independent_set.add(source)   # put leaf to iset
@@ -129,3 +136,68 @@ class TreeIndependentSet:
                             if degree_dict[node] == 1:   # new leaf
                                 Q.put(node)
                     break
+
+
+class TreeIndependentSet2:
+    """Find a maximum independent set for trees.
+    
+    It works for trees and forests. A single tree is connected
+    during computations.
+    
+    Attributes
+    ----------
+    graph : input forest
+    independent_set : set with nodes
+    cardinality : number (the size of max iset)
+    _used : set, private
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.independent_set = set()
+        self.cardinality = 0
+        self._used = set()   # for iset and neighbors
+
+    def run(self):
+        """Executable pseudocode."""
+        # A dictionary with node degrees, O(V) time.
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())
+        Q = Queue()   # for leafs
+        # Put leafs to the queue, O(V) time.
+        for node in self.graph.iternodes():
+            if degree_dict[node] == 0:   # isolated node from the beginning
+                self.independent_set.add(node)
+                self._used.add(node)
+                self.cardinality += 1
+            elif degree_dict[node] == 1:   # leaf
+                Q.put(node)
+        while not Q.empty():
+            source = Q.get()
+            # A leaf may become isolated.
+            if degree_dict[source] == 0:
+                if source not in self._used:
+                    self.independent_set.add(source)
+                    self._used.add(source)
+                    self.cardinality += 1
+                continue
+            for target in self.graph.iteradjacent(source):
+                if degree_dict[target] > 0:   # this is parent
+                    if source not in self._used:
+                        self.independent_set.add(source)   # put leaf to iset
+                        self._used.add(source)
+                        self._used.add(target)
+                        self.cardinality += 1
+                    # Remove the edge from source to target.
+                    degree_dict[target] -= 1
+                    degree_dict[source] -= 1
+                    if degree_dict[target] == 1:   # parent is a new leaf
+                        Q.put(target)
+                    break
+
+TreeIndependentSet = TreeIndependentSet1
+
+# EOF

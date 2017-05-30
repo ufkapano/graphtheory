@@ -80,9 +80,9 @@ def is_connected(graph):
     """Test if the undirected graph is connected."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    algorithm = SimpleDFS(graph)
     order = list()
     source = graph.iternodes().next()
+    algorithm = SimpleDFS(graph)
     algorithm.run(source, lambda node: order.append(node))
     return len(order) == graph.v()
 

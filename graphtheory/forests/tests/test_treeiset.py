@@ -4,7 +4,8 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treeiset import BorieIndependentSet
-from graphtheory.forests.treeiset import TreeIndependentSet
+from graphtheory.forests.treeiset import TreeIndependentSet1
+from graphtheory.forests.treeiset import TreeIndependentSet2
 
 # 0---1---2---6
 # |   |   |
@@ -36,8 +37,20 @@ class TestIndependentSet1(unittest.TestCase):
             self.assertFalse(edge.source in algorithm.independent_set
                          and edge.target in algorithm.independent_set)
 
-    def test_tree_iset(self):
-        algorithm = TreeIndependentSet(self.G)
+    def test_tree_iset1(self):
+        algorithm = TreeIndependentSet1(self.G)
+        algorithm.run()
+        expected1 = set([3, 4, 5, 6])
+        expected2 = set([0, 4, 5, 6])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.independent_set, expected1)
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
+
+    def test_tree_iset2(self):
+        algorithm = TreeIndependentSet2(self.G)
         algorithm.run()
         expected1 = set([3, 4, 5, 6])
         expected2 = set([0, 4, 5, 6])
@@ -79,8 +92,19 @@ class TestIndependentSet2(unittest.TestCase):
             self.assertFalse(edge.source in algorithm.independent_set
                          and edge.target in algorithm.independent_set)
 
-    def test_tree_iset(self):
-        algorithm = TreeIndependentSet(self.G)
+    def test_tree_iset1(self):
+        algorithm = TreeIndependentSet1(self.G)
+        algorithm.run()
+        expected1 = set([0, 3, 4, 5, 6])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.independent_set, expected1)
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
+
+    def test_tree_iset2(self):
+        algorithm = TreeIndependentSet2(self.G)
         algorithm.run()
         expected1 = set([0, 3, 4, 5, 6])
         self.assertEqual(algorithm.cardinality, len(expected1))
@@ -126,8 +150,22 @@ class TestIndependentSet3(unittest.TestCase):
             self.assertFalse(edge.source in algorithm.independent_set
                          and edge.target in algorithm.independent_set)
 
-    def test_tree_iset(self):
-        algorithm = TreeIndependentSet(self.G)
+    def test_tree_iset1(self):
+        algorithm = TreeIndependentSet1(self.G)
+        algorithm.run()
+        expected1 = set([0, 2, 5])
+        expected2 = set([0, 3, 5])
+        expected3 = set([0, 2, 4])
+        expected4 = set([1, 3, 5])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.independent_set, expected1)
+        # Testing iset.
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
+
+    def test_tree_iset2(self):
+        algorithm = TreeIndependentSet2(self.G)
         algorithm.run()
         expected1 = set([0, 2, 5])
         expected2 = set([0, 3, 5])
