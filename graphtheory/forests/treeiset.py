@@ -76,10 +76,9 @@ class BorieIndependentSet:
 
 
 class TreeIndependentSet1:
-    """Find a maximum independent set for trees.
+    """Find a maximum independent set for forests.
     
-    It works for trees and forests. A single tree may become
-    disconnected during computations.
+    A single tree may become disconnected during computations.
     
     Attributes
     ----------
@@ -139,10 +138,9 @@ class TreeIndependentSet1:
 
 
 class TreeIndependentSet2:
-    """Find a maximum independent set for trees.
+    """Find a maximum independent set for forests.
     
-    It works for trees and forests. A single tree is connected
-    during computations.
+    A single tree is connected during computations.
     
     Attributes
     ----------
@@ -184,6 +182,7 @@ class TreeIndependentSet2:
                     self._used.add(source)
                     self.cardinality += 1
                 continue
+            # Here degree_dict[source] == 1.
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     if source not in self._used:
@@ -198,6 +197,7 @@ class TreeIndependentSet2:
                         Q.put(target)
                     break
 
-TreeIndependentSet = TreeIndependentSet1
+
+TreeIndependentSet = TreeIndependentSet2
 
 # EOF
