@@ -120,7 +120,7 @@ class TreeIndependentSet1:
                     self._used.add(source)
                     self.cardinality += 1
                 continue
-            # Here degree_dict[source] == 1.
+            assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     self.independent_set.add(source)   # put leaf to iset
@@ -182,7 +182,7 @@ class TreeIndependentSet2:
                     self._used.add(source)
                     self.cardinality += 1
                 continue
-            # Here degree_dict[source] == 1.
+            assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     if source not in self._used:

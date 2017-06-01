@@ -121,7 +121,7 @@ class TreeDominatingSet1:
                     self._used.add(source)
                     self.cardinality += 1
                 continue
-            # Here degree_dict[source] == 1.
+            assert degree_dict[source] == 1
             if source in self._used:
                 # Remove such leaf.
                 for node in self.graph.iteradjacent(source):
@@ -193,7 +193,7 @@ class TreeDominatingSet2:
                     self._used.add(source)
                     self.cardinality += 1
                 continue
-            # Here degree_dict[source] == 1.
+            assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     if source not in self._used:   # parent goes to dset

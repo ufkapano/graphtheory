@@ -73,8 +73,8 @@ class BorieNodeCover:
         return arg1
 
 
-class TreeNodeCover:
-    """Find a minimum cardinality node cover for trees.
+class TreeNodeCover1:
+    """Find a minimum cardinality node cover for forests.
     
     Attributes
     ----------
@@ -105,6 +105,7 @@ class TreeNodeCover:
             source = Q.get()
             if degree_dict[source] == 0:   # isolated node
                 continue
+            assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     self.node_cover.add(target)   # put parent to cover
@@ -117,3 +118,53 @@ class TreeNodeCover:
                             if degree_dict[node] == 1:   # new leaf
                                 Q.put(node)
                     break
+
+
+class TreeNodeCover2:
+    """Find a minimum cardinality node cover for forests.
+    
+    Attributes
+    ----------
+    graph : input forest
+    node_cover : set with nodes
+    cardinality : number (the size of min dset)
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.node_cover = set()
+        self.cardinality = 0
+
+    def run(self):
+        """Executable pseudocode."""
+        # A dictionary with node degrees, O(V) time.
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())
+        Q = Queue()   # for leafs
+        # Put leafs to the queue, O(V) time.
+        for node in self.graph.iternodes():
+            if degree_dict[node] == 1:
+                Q.put(node)
+        while not Q.empty():
+            source = Q.get()
+            if degree_dict[source] == 0:   # isolated node
+                continue
+            assert degree_dict[source] == 1
+            for target in self.graph.iteradjacent(source):
+                if degree_dict[target] > 0:   # this is parent
+                    if source not in self.node_cover and \
+                        target not in self.node_cover: # edge not covered
+                        self.node_cover.add(target)   # put parent to cover
+                        self.cardinality += 1
+                    # Remove the edge from source to target.
+                    degree_dict[source] -= 1
+                    degree_dict[target] -= 1
+                    if degree_dict[target] == 1:   # new leaf
+                        Q.put(target)
+                    break
+
+
+TreeNodeCover = TreeNodeCover2
