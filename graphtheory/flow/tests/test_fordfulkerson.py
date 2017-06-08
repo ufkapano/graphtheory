@@ -9,14 +9,14 @@ from graphtheory.flow.fordfulkerson import FordFulkersonWithEdges
 from graphtheory.flow.fordfulkerson import FordFulkersonRecursive
 
 #     10
-#  0 ---> 1
+#  0 ---o 1
 #  |   /  |
 #10|  /1  |10
-# .| /.   |.
-#  2 ---> 3
+#  o o    o
+#  2 ---o 3
 #     10
 
-class TestFordFulkerson(unittest.TestCase):
+class TestMaximumFlow1(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
@@ -31,7 +31,7 @@ class TestFordFulkerson(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_fordfulkerson(self):
+    def test_ford_fulkerson(self):
         algorithm = FordFulkerson(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
@@ -43,7 +43,7 @@ class TestFordFulkerson(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_sparse(self):
+    def test_ford_fulkerson_sparse(self):
         algorithm = FordFulkersonSparse(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
@@ -55,7 +55,7 @@ class TestFordFulkerson(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_with_edges(self):
+    def test_ford_fulkerson_with_edges(self):
         algorithm = FordFulkersonWithEdges(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
@@ -67,7 +67,7 @@ class TestFordFulkerson(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_recursive(self):
+    def test_ford_fulkerson_recursive(self):
         algorithm = FordFulkersonRecursive(self.G)
         algorithm.run(0, 3)
         expected_max_flow = 20
@@ -80,7 +80,7 @@ class TestFordFulkerson(unittest.TestCase):
         self.assertEqual(algorithm.flow, expected_flow)
 
 
-class TestFordFulkersonWiki(unittest.TestCase):
+class TestMaximumFlow2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
@@ -96,7 +96,7 @@ class TestFordFulkersonWiki(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
-    def test_fordfulkerson(self):
+    def test_ford_fulkerson(self):
         algorithm = FordFulkerson(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
@@ -111,7 +111,7 @@ class TestFordFulkersonWiki(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_sparse(self):
+    def test_ford_fulkerson_sparse(self):
         algorithm = FordFulkersonSparse(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
@@ -126,7 +126,7 @@ class TestFordFulkersonWiki(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_with_edges(self):
+    def test_ford_fulkerson_with_edges(self):
         algorithm = FordFulkersonWithEdges(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
@@ -144,7 +144,7 @@ class TestFordFulkersonWiki(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
-    def test_fordfulkerson_recursive(self):
+    def test_ford_fulkerson_recursive(self):
         algorithm = FordFulkersonRecursive(self.G)
         algorithm.run(0, 6)
         expected_max_flow = 5
@@ -156,6 +156,90 @@ class TestFordFulkersonWiki(unittest.TestCase):
             Edge(4, 1): 0, Edge(4, 2, 0): -1, Edge(4, 3, 0): 0, Edge(4, 6): 1,
             Edge(5, 3, 0): -4, Edge(5, 6, 9): 4,
             Edge(6, 4, 0): -1, Edge(6, 5, 0): -4}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+#    10     4      10
+# 0 ---o 1 ---o 3 ---o 5
+#    \   |  \   o   o
+#   10\  |2  \8 |6 /10
+#      o o    o | /
+#        2 ---o 4
+#           9
+
+class TestMaximumFlow3(unittest.TestCase):
+
+    def setUp(self):
+        self.N = 6           # number of nodes
+        self.G = Graph(self.N, directed=True)
+        self.nodes = range(self.N)
+        self.edges = [
+            Edge(0, 1, 10), Edge(0, 2, 10), Edge(1, 2, 2), Edge(1, 3, 4), 
+            Edge(1, 4, 8), Edge(2, 4, 9), Edge(4, 3, 6), Edge(4, 5, 10), 
+            Edge(3, 5, 10)]
+        for node in self.nodes:
+            self.G.add_node(node)
+        for edge in self.edges:
+            self.G.add_edge(edge)
+        #self.G.show()
+
+    def test_ford_fulkerson(self):
+        algorithm = FordFulkerson(self.G)
+        algorithm.run(0, 5)
+        expected_max_flow = 19
+        expected_flow = {
+            0: {0: 0, 1: 10, 2: 9, 3: 0, 4: 0, 5: 0},
+            1: {0: -10, 1: 0, 2: 0, 3: 4, 4: 6, 5: 0},
+            2: {0: -9, 1: 0, 2: 0, 3: 0, 4: 9, 5: 0},
+            3: {0: 0, 1: -4, 2: 0, 3: 0, 4: -5, 5: 9},
+            4: {0: 0, 1: -6, 2: -9, 3: 5, 4: 0, 5: 10},
+            5: {0: 0, 1: 0, 2: 0, 3: -9, 4: -10, 5: 0}}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+    def test_ford_fulkerson_sparse(self):
+        algorithm = FordFulkersonSparse(self.G)
+        algorithm.run(0, 5)
+        expected_max_flow = 19
+        expected_flow = {
+            0: {1: 10, 2: 9},
+            1: {0: -10, 2: 0, 3: 4, 4: 6},
+            2: {0: -9, 1: 0, 4: 9},
+            3: {1: -4, 4: -5, 5: 9},
+            4: {1: -6, 2: -9, 3: 5, 5: 10},
+            5: {3: -9, 4: -10}}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+    def test_ford_fulkerson_with_edges(self):
+        algorithm = FordFulkersonWithEdges(self.G)
+        algorithm.run(0, 5)
+        expected_max_flow = 19
+        expected_flow = {
+            Edge(0, 1, 10): 10, Edge(0, 2, 10): 9,
+            Edge(1, 0, 0): -10, Edge(1, 2, 2): 0,
+            Edge(1, 3, 4): 4, Edge(1, 4, 8): 6,
+            Edge(2, 0, 0): -9, Edge(2, 1, 0): 0, Edge(2, 4, 9): 9,
+            Edge(3, 1, 0): -4, Edge(3, 4, 0): -5, Edge(3, 5, 10): 9,
+            Edge(4, 1, 0): -6, Edge(4, 2, 0): -9,
+            Edge(4, 3, 6): 5, Edge(4, 5, 10): 10,
+            Edge(5, 3, 0): -9, Edge(5, 4, 0): -10}
+        self.assertEqual(algorithm.max_flow, expected_max_flow)
+        self.assertEqual(algorithm.flow, expected_flow)
+
+    def test_ford_fulkerson_recursive(self):
+        algorithm = FordFulkersonRecursive(self.G)
+        algorithm.run(0, 5)
+        expected_max_flow = 19
+        expected_flow = {
+            Edge(0, 1, 10): 10, Edge(0, 2, 10): 9,
+            Edge(1, 0, 0): -10, Edge(1, 2, 2): 0,
+            Edge(1, 3, 4): 4, Edge(1, 4, 8): 6,
+            Edge(2, 0, 0): -9, Edge(2, 1, 0): 0, Edge(2, 4, 9): 9,
+            Edge(3, 1, 0): -4, Edge(3, 4, 0): -6, Edge(3, 5, 10): 10,
+            Edge(4, 1, 0): -6, Edge(4, 2, 0): -9,
+            Edge(4, 3, 6): 6, Edge(4, 5, 10): 9,
+            Edge(5, 3, 0): -10, Edge(5, 4, 0): -9}
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 

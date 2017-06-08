@@ -155,8 +155,8 @@ class TreeNodeCover2:
             assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
-                    if source not in self.node_cover and \
-                        target not in self.node_cover: # edge not covered
+                    if (source not in self.node_cover and
+                        target not in self.node_cover): # edge not covered
                         self.node_cover.add(target)   # put parent to cover
                         self.cardinality += 1
                     # Remove the edge from source to target.
