@@ -154,6 +154,12 @@ class TestMaximumFlow3(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
+    def test_exceptions(self):
+        self.assertRaises(ValueError, EdmondsKarp, Graph())
+        self.assertRaises(ValueError, EdmondsKarpSparse, Graph())
+        self.assertRaises(ValueError, lambda: EdmondsKarp(self.G).run(0,0))
+        self.assertRaises(ValueError, lambda: EdmondsKarpSparse(self.G).run(0,0))
+
 if __name__ == "__main__":
 
     unittest.main()

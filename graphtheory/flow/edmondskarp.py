@@ -46,10 +46,12 @@ class EdmondsKarp:
 
     def run(self, source, sink):
         """Executable pseudocode."""
+        if source == sink:
+            raise ValueError("source and sink are the same")
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self._find_path()
+            min_capacity, parent = self._find_path_bfs()
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
@@ -61,7 +63,7 @@ class EdmondsKarp:
                 self.flow[target][node] -= min_capacity
                 target = node
 
-    def _find_path(self):  # use BFS
+    def _find_path_bfs(self):
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
@@ -124,10 +126,12 @@ class EdmondsKarpSparse:
 
     def run(self, source, sink):
         """Executable pseudocode."""
+        if source == sink:
+            raise ValueError("source and sink are the same")
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self._find_path()
+            min_capacity, parent = self._find_path_bfs()
             if min_capacity == 0:
                 break
             self.max_flow = self.max_flow + min_capacity
@@ -139,7 +143,7 @@ class EdmondsKarpSparse:
                 self.flow[target][node] -= min_capacity
                 target = node
 
-    def _find_path(self):   # use BFS
+    def _find_path_bfs(self):
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
