@@ -55,19 +55,13 @@ class FordFulkerson:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self.find_path_dfs()
-            if min_capacity == 0:
+            min_capacity = self._find_path_dfs()
+            if min_capacity > 0:
+                self.max_flow += min_capacity
+            else:
                 break
-            self.max_flow = self.max_flow + min_capacity
-            # Backtrack search and write flow.
-            target = self.sink
-            while target != self.source:
-                node = parent[target]
-                self.flow[node][target] += min_capacity
-                self.flow[target][node] -= min_capacity
-                target = node
 
-    def find_path_dfs(self):
+    def _find_path_dfs(self):
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
@@ -84,8 +78,15 @@ class FordFulkerson:
                     if edge.target != self.sink:
                         Q.put(edge.target)
                     else:
-                        return capacity[self.sink], parent
-        return 0, parent
+                        # Backtrack search and write flow.
+                        target = self.sink
+                        while target != self.source:
+                            node = parent[target]
+                            self.flow[node][target] += capacity[self.sink]
+                            self.flow[target][node] -= capacity[self.sink]
+                            target = node
+                        return capacity[self.sink]
+        return 0
 
 
 class FordFulkersonSparse:
@@ -139,19 +140,13 @@ class FordFulkersonSparse:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self.find_path_dfs()
-            if min_capacity == 0:
+            min_capacity = self._find_path_dfs()
+            if min_capacity > 0:
+                self.max_flow += min_capacity
+            else:
                 break
-            self.max_flow = self.max_flow + min_capacity
-            # Backtrack search and write flow.
-            target = self.sink
-            while target != self.source:
-                node = parent[target]
-                self.flow[node][target] += min_capacity
-                self.flow[target][node] -= min_capacity
-                target = node
 
-    def find_path_dfs(self):
+    def _find_path_dfs(self):
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
@@ -168,8 +163,15 @@ class FordFulkersonSparse:
                     if edge.target != self.sink:
                         Q.put(edge.target)
                     else:
-                        return capacity[self.sink], parent
-        return 0, parent
+                        # Backtrack search and write flow.
+                        target = self.sink
+                        while target != self.source:
+                            node = parent[target]
+                            self.flow[node][target] += capacity[self.sink]
+                            self.flow[target][node] -= capacity[self.sink]
+                            target = node
+                        return capacity[self.sink]
+        return 0
 
 
 class FordFulkersonWithEdges:
@@ -226,20 +228,13 @@ class FordFulkersonWithEdges:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self.find_path_dfs()
-            if min_capacity == 0:
+            min_capacity = self._find_path_dfs()
+            if min_capacity > 0:
+                self.max_flow += min_capacity
+            else:
                 break
-            self.max_flow = self.max_flow + min_capacity
-            # Backtrack search and write flow.
-            target = self.sink
-            while target != self.source:
-                edge = parent[target]
-                edge2 = self.mate[edge]
-                self.flow[edge2] += min_capacity
-                self.flow[edge] -= min_capacity
-                target = edge.target
 
-    def find_path_dfs(self):
+    def _find_path_dfs(self):
         """Finding augmenting paths in the residual network."""
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
@@ -256,8 +251,16 @@ class FordFulkersonWithEdges:
                     if edge.target != self.sink:
                         Q.put(edge.target)
                     else:
-                        return capacity[self.sink], parent
-        return 0, parent
+                        # Backtrack search and write flow.
+                        target = self.sink
+                        while target != self.source:
+                            edge = parent[target]
+                            edge2 = self.mate[edge]
+                            self.flow[edge2] += capacity[self.sink]
+                            self.flow[edge] -= capacity[self.sink]
+                            target = edge.target
+                        return capacity[self.sink]
+        return 0
 
 
 class FordFulkersonRecursive:
@@ -315,13 +318,13 @@ class FordFulkersonRecursive:
         while True:
             # Nowe poszukiwanie sciezki za pomoca DFS.
             self.parent = dict((node, None) for node in self.residual.iternodes())
-            min_capacity = self.find_path_dfs(self.source, float("inf"))
+            min_capacity = self._find_path_dfs(self.source, float("inf"))
             if min_capacity > 0:
                 self.max_flow += min_capacity
             else:
                 break
 
-    def find_path_dfs(self, source, start_capacity):
+    def _find_path_dfs(self, source, start_capacity):
         """Finding augmenting paths in the residual network."""
         if source == self.sink:
             return start_capacity
@@ -331,7 +334,7 @@ class FordFulkersonRecursive:
                 # Sprawdzamy, czy nie plynelismy ta krawedzia.
                 self.parent[edge.target] = edge.source
                 min_capacity = min(start_capacity, cap)
-                min_capacity = self.find_path_dfs(edge.target, min_capacity)
+                min_capacity = self._find_path_dfs(edge.target, min_capacity)
                 if min_capacity > 0:
                     # Dodajemy przeplyw przy powrocie.
                     self.flow[edge.source][edge.target] += min_capacity
@@ -397,13 +400,13 @@ class FordFulkersonRecursiveWithEdges:
         while True:
             # Nowe poszukiwanie sciezki za pomoca DFS.
             self.parent = dict((node, None) for node in self.residual.iternodes())
-            min_capacity = self.find_path_dfs(self.source, float("inf"))
+            min_capacity = self._find_path_dfs(self.source, float("inf"))
             if min_capacity > 0:
                 self.max_flow += min_capacity
             else:
                 break
 
-    def find_path_dfs(self, source, start_capacity):
+    def _find_path_dfs(self, source, start_capacity):
         """Finding augmenting paths in the residual network."""
         if source == self.sink:
             return start_capacity
@@ -413,7 +416,7 @@ class FordFulkersonRecursiveWithEdges:
                 # Sprawdzamy, czy nie plynelismy ta krawedzia.
                 self.parent[edge.target] = self.mate[edge]
                 min_capacity = min(start_capacity, cap)
-                min_capacity = self.find_path_dfs(edge.target, min_capacity)
+                min_capacity = self._find_path_dfs(edge.target, min_capacity)
                 if min_capacity > 0:
                     # Dodajemy przeplyw przy powrocie.
                     edge2 = self.mate[edge]

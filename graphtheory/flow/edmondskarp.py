@@ -51,17 +51,11 @@ class EdmondsKarp:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self._find_path_bfs()
-            if min_capacity == 0:
+            min_capacity = self._find_path_bfs()
+            if min_capacity > 0:
+                self.max_flow += min_capacity
+            else:
                 break
-            self.max_flow = self.max_flow + min_capacity
-            # Backtrack search and write flow.
-            target = self.sink
-            while target != self.source:
-                node = parent[target]
-                self.flow[node][target] += min_capacity
-                self.flow[target][node] -= min_capacity
-                target = node
 
     def _find_path_bfs(self):
         """Finding augmenting paths in the residual network."""
@@ -80,8 +74,15 @@ class EdmondsKarp:
                     if edge.target != self.sink:
                         Q.put(edge.target)
                     else:
-                        return capacity[self.sink], parent
-        return 0, parent
+                        # Backtrack search and write flow.
+                        target = self.sink
+                        while target != self.source:
+                            node = parent[target]
+                            self.flow[node][target] += capacity[self.sink]
+                            self.flow[target][node] -= capacity[self.sink]
+                            target = node
+                        return capacity[self.sink]
+        return 0
 
 
 class EdmondsKarpSparse:
@@ -131,17 +132,11 @@ class EdmondsKarpSparse:
         self.source = source
         self.sink = sink
         while True:
-            min_capacity, parent = self._find_path_bfs()
-            if min_capacity == 0:
+            min_capacity = self._find_path_bfs()
+            if min_capacity > 0:
+                self.max_flow += min_capacity
+            else:
                 break
-            self.max_flow = self.max_flow + min_capacity
-            # Backtrack search and write flow.
-            target = self.sink
-            while target != self.source:
-                node = parent[target]
-                self.flow[node][target] += min_capacity
-                self.flow[target][node] -= min_capacity
-                target = node
 
     def _find_path_bfs(self):
         """Finding augmenting paths in the residual network."""
@@ -160,7 +155,14 @@ class EdmondsKarpSparse:
                     if edge.target != self.sink:
                         Q.put(edge.target)
                     else:
-                        return capacity[self.sink], parent
-        return 0, parent
+                        # Backtrack search and write flow.
+                        target = self.sink
+                        while target != self.source:
+                            node = parent[target]
+                            self.flow[node][target] += capacity[self.sink]
+                            self.flow[target][node] -= capacity[self.sink]
+                            target = node
+                        return capacity[self.sink]
+        return 0
 
 # EOF
