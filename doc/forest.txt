@@ -18,48 +18,48 @@ G = gf.make_tree(n=10)        # random tree
 
 algorithm = BorieIndependentSet(G)
 algorithm.run()
-# algorithm.independent_set
-# algorithm.cardinality       # the size of max iset
-# algorithm.parent            # DFS tree as a dict
+print algorithm.independent_set
+print algorithm.cardinality       # the size of max iset
+print algorithm.parent            # DFS tree as a dict
 
 algorithm = TreeIndependentSet(G)
 algorithm.run()
-# algorithm.independent_set
-# algorithm.cardinality       # the size of max iset
+print algorithm.independent_set
+print algorithm.cardinality       # the size of max iset
 ----------------------------------------------------------------------
 # Finding a minimum dominating set.
 
 algorithm = BorieDominatingSet(G)
 algorithm.run()
-# algorithm.dominating_set
-# algorithm.cardinality       # the size of min dset
-# algorithm.parent            # DFS tree as a dict
+print algorithm.dominating_set
+print algorithm.cardinality       # the size of min dset
+print algorithm.parent            # DFS tree as a dict
 
 algorithm = TreeDominatingSet(G)
 algorithm.run()
-# algorithm.dominating_set
-# algorithm.cardinality       # the size of min dset
+print algorithm.dominating_set
+print algorithm.cardinality       # the size of min dset
 ----------------------------------------------------------------------
 # Finding a minimum node cover.
 
 algorithm = BorieNodeCover(G)
 algorithm.run()
-# algorithm.node_cover
-# algorithm.cardinality       # the size of min cover
-# algorithm.parent            # DFS tree as a dict
+print algorithm.node_cover
+print algorithm.cardinality       # the size of min cover
+print algorithm.parent            # DFS tree as a dict
 
 algorithm = TreeNodeCover(G)
 algorithm.run()
-# algorithm.node_cover
-# algorithm.cardinality       # the size of min cover
+print algorithm.node_cover
+print algorithm.cardinality       # the size of min cover
 ----------------------------------------------------------------------
 # Finding a maximum matching.
 
 algorithm = BorieMatching(G)
 algorithm.run()
-# algorithm.mate
-# algorithm.mate_set
-# algorithm.cardinality       # the size of max matching
-# algorithm.parent            # DFS tree as a dict
+print algorithm.mate
+print algorithm.mate_set
+print algorithm.cardinality       # the size of max matching
+print algorithm.parent            # DFS tree as a dict
 ----------------------------------------------------------------------
 EOF
