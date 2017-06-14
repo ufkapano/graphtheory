@@ -11,6 +11,8 @@ from graphtheory.flow.fordfulkerson import FordFulkersonRecursive
 from graphtheory.flow.fordfulkerson import FordFulkersonRecursiveWithEdges
 from graphtheory.flow.edmondskarp import EdmondsKarp
 from graphtheory.flow.edmondskarp import EdmondsKarpSparse
+from graphtheory.flow.dinic import Dinic
+from graphtheory.flow.dinic import DinicSparse
 
 V = 10
 graph_factory = GraphFactory(Graph)
@@ -49,6 +51,14 @@ print V, E, t1.timeit(1)            # single run
 
 print "Testing EdmondsKarpSparse ..."
 t1 = timeit.Timer(lambda: EdmondsKarpSparse(G).run(0, V-1))
+print V, E, t1.timeit(1)            # single run
+
+print "Testing Dinic ..."
+t1 = timeit.Timer(lambda: Dinic(G).run(0, V-1))
+print V, E, t1.timeit(1)            # single run
+
+print "Testing DinicSparse ..."
+t1 = timeit.Timer(lambda: DinicSparse(G).run(0, V-1))
 print V, E, t1.timeit(1)            # single run
 
 # EOF
