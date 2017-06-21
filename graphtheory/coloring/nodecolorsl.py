@@ -1,10 +1,7 @@
 #!/usr/bin/python
 
-class UnorderedSequentialNodeColoring:
-    """Find an unordered sequential (US) node coloring.
-    
-    Based on
-    http://eduinf.waw.pl/inf/alg/001_search/0142.php
+class SmallestLastNodeColoring:
+    """Find a smallest last (SL) node coloring.
     
     Attributes
     ----------
@@ -15,8 +12,6 @@ class UnorderedSequentialNodeColoring:
     -----
     Colors are 0, 1, 2, ...
     """
-    # Idea taka jak w 
-    # http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -30,7 +25,29 @@ class UnorderedSequentialNodeColoring:
 
     def run(self):
         """Executable pseudocode."""
-        for source in self.graph.iternodes():
+        n = self.graph.v()
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())   # O(V) time
+        order = list()
+        used = set()
+        bucket = list(set() for deg in xrange(n))   # O(V) time
+        for node in self.graph.iternodes():   # O(V) time
+            bucket[self.graph.degree(node)].add(node)
+        for step in xrange(n):   # O(V) time
+            for deg in xrange(n):
+                if bucket[deg]:
+                    source = bucket[deg].pop()
+                    break
+            order.append(source)
+            used.add(source)
+            for target in self.graph.iteradjacent(source):
+                if target in used:
+                    continue
+                deg = degree_dict[target]
+                bucket[deg].remove(target)
+                bucket[deg-1].add(target)
+                degree_dict[target] = deg-1
+        for source in reversed(order):
             self._greedy_color(source)
 
     def _greedy_color(self, source):   # a list is faster then a set

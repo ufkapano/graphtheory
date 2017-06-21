@@ -3,6 +3,9 @@
 class ExactNodeColoring:
     """Find an exact node coloring (slow).
     
+    Based on
+    http://eduinf.waw.pl/inf/alg/001_search/0142.php
+    
     Attributes
     ----------
     graph : input undirected graph or multigraph

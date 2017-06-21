@@ -7,7 +7,7 @@ class RandomSequentialNodeColoring:
     """Find a random sequential (RS) node coloring.
     
     Based on
-     http://edu.i-lo.tarnow.pl/inf/alg/001_search/0142.php
+    http://eduinf.waw.pl/inf/alg/001_search/0142.php
     
     Attributes
     ----------
