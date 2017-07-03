@@ -38,6 +38,7 @@ class BrooksNodeColoring:
                 raise ValueError("a loop detected")
         if 2 * self.m == self.graph.v() * (self.graph.v() - 1):
             raise ValueError("complete graph detected")
+        self._color_list = [False] * self.graph.v()
 
     def run(self):
         """Executable pseudocode."""
@@ -89,15 +90,16 @@ class BrooksNodeColoring:
 
     def _greedy_color(self, source):
         """Give node the smallest possible color."""
-        n = self.graph.v()   # memory O(V)
-        used = [False] * n   # is color used?
         for target in self.graph.iteradjacent(source):
             if self.color[target] is not None:
-                used[self.color[target]] = True
-        for c in xrange(n):   # check colors
-            if not used[c]:
+                self._color_list[self.color[target]] = True
+        for c in xrange(self.graph.v()):   # check colors
+            if not self._color_list[c]:
                 self.color[source] = c
                 break
+        for target in self.graph.iteradjacent(source):
+            if self.color[target] is not None:
+                self._color_list[self.color[target]] = False
         return c
 
 # EOF
