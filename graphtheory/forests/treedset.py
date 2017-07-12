@@ -77,7 +77,7 @@ class BorieDominatingSet:
 
 
 class TreeDominatingSet1:
-    """Find a maximum dominating set for forests.
+    """Find a minimum dominating set for forests.
     
     A single tree may become disconnected during computations.
     
@@ -149,7 +149,7 @@ class TreeDominatingSet1:
 
 
 class TreeDominatingSet2:
-    """Find a maximum dominating set for forests.
+    """Find a minimum dominating set for forests.
     
     A single tree is connected during computations.
     
