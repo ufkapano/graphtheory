@@ -86,7 +86,6 @@ class TreeDominatingSet1:
     graph : input forest
     dominating_set : set with nodes
     cardinality : number (the size of min dset)
-    _used : set, private
     """
 
     def __init__(self, graph):
@@ -96,10 +95,10 @@ class TreeDominatingSet1:
         self.graph = graph
         self.dominating_set = set()
         self.cardinality = 0
-        self._used = set()   # for dset and neighbors
 
     def run(self):
         """Executable pseudocode."""
+        used = set()   # for dset and neighbors
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
@@ -108,7 +107,7 @@ class TreeDominatingSet1:
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
                 self.dominating_set.add(node)   # isolated node from the beginning
-                self._used.add(node)
+                used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
                 Q.put(node)
@@ -116,13 +115,13 @@ class TreeDominatingSet1:
             source = Q.get()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
-                if source not in self._used:   # parent not in dset
+                if source not in used:   # parent not in dset
                     self.dominating_set.add(source)
-                    self._used.add(source)
+                    used.add(source)
                     self.cardinality += 1
                 continue
             assert degree_dict[source] == 1
-            if source in self._used:
+            if source in used:
                 # Remove such leaf.
                 for node in self.graph.iteradjacent(source):
                     if degree_dict[node] > 0:   # this is parent
@@ -135,14 +134,14 @@ class TreeDominatingSet1:
                 for target in self.graph.iteradjacent(source):
                     if degree_dict[target] > 0:   # this is parent
                         self.dominating_set.add(target)
-                        self._used.add(target)
+                        used.add(target)
                         self.cardinality += 1
                         # Remove edges going from target.
                         for node in self.graph.iteradjacent(target):
                             if degree_dict[node] > 0:
                                 degree_dict[node] -= 1
                                 degree_dict[target] -= 1
-                                self._used.add(node)   # child goes to used
+                                used.add(node)   # child goes to used
                                 if degree_dict[node] == 1:   # new leaf
                                     Q.put(node)
                         break
@@ -158,7 +157,6 @@ class TreeDominatingSet2:
     graph : input forest
     dominating_set : set with nodes
     cardinality : number (the size of min dset)
-    _used : set, private
     """
 
     def __init__(self, graph):
@@ -168,10 +166,10 @@ class TreeDominatingSet2:
         self.graph = graph
         self.dominating_set = set()
         self.cardinality = 0
-        self._used = set()   # for dset and neighbors
 
     def run(self):
         """Executable pseudocode."""
+        used = set()   # for dset and neighbors
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
@@ -180,7 +178,7 @@ class TreeDominatingSet2:
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
                 self.dominating_set.add(node)   # isolated node from the beginning
-                self._used.add(node)
+                used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
                 Q.put(node)
@@ -188,20 +186,20 @@ class TreeDominatingSet2:
             source = Q.get()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
-                if source not in self._used:   # parent not in dset
+                if source not in used:   # parent not in dset
                     self.dominating_set.add(source)
-                    self._used.add(source)
+                    used.add(source)
                     self.cardinality += 1
                 continue
             assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
-                    if source not in self._used:   # parent goes to dset
+                    if source not in used:   # parent goes to dset
                         self.dominating_set.add(target)
-                        self._used.add(target)
+                        used.add(target)
                         self.cardinality += 1
                         for node in self.graph.iteradjacent(target):
-                            self._used.add(node)   # child goes to used
+                            used.add(node)   # child goes to used
                     # Remove the edge from source to target.
                     degree_dict[target] -= 1
                     degree_dict[source] -= 1

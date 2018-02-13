@@ -92,6 +92,15 @@ class TestMaximumFlow1(unittest.TestCase):
         self.assertEqual(algorithm.max_flow, expected_max_flow)
         self.assertEqual(algorithm.flow, expected_flow)
 
+# https://en.wikipedia.org/wiki/Edmonds%E2%80%93Karp_algorithm
+#
+# 0 ----o 3 --o 5
+# | o   o |     |
+# |  \ /  |     |
+# |   2   |     |
+# |  o \  |     |
+# | /   o |     o
+# 1 o---- 4 --o 6
 
 class TestMaximumFlow2(unittest.TestCase):
 

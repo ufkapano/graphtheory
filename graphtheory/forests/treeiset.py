@@ -85,7 +85,6 @@ class TreeIndependentSet1:
     graph : input forest
     independent_set : set with nodes
     cardinality : number (the size of max iset)
-    _used : set, private
     """
 
     def __init__(self, graph):
@@ -95,10 +94,10 @@ class TreeIndependentSet1:
         self.graph = graph
         self.independent_set = set()
         self.cardinality = 0
-        self._used = set()   # for iset and neighbors
 
     def run(self):
         """Executable pseudocode."""
+        used = set()   # for iset and neighbors
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
@@ -107,7 +106,7 @@ class TreeIndependentSet1:
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:   # isolated node from the beginning
                 self.independent_set.add(node)
-                self._used.add(node)
+                used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
                 Q.put(node)
@@ -115,17 +114,17 @@ class TreeIndependentSet1:
             source = Q.get()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
-                if source not in self._used:
+                if source not in used:
                     self.independent_set.add(source)
-                    self._used.add(source)
+                    used.add(source)
                     self.cardinality += 1
                 continue
             assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
                     self.independent_set.add(source)   # put leaf to iset
-                    self._used.add(source)
-                    self._used.add(target)
+                    used.add(source)
+                    used.add(target)
                     self.cardinality += 1
                     # Remove edges going from target.
                     for node in self.graph.iteradjacent(target):
@@ -147,7 +146,6 @@ class TreeIndependentSet2:
     graph : input forest
     independent_set : set with nodes
     cardinality : number (the size of max iset)
-    _used : set, private
     """
 
     def __init__(self, graph):
@@ -157,10 +155,10 @@ class TreeIndependentSet2:
         self.graph = graph
         self.independent_set = set()
         self.cardinality = 0
-        self._used = set()   # for iset and neighbors
 
     def run(self):
         """Executable pseudocode."""
+        used = set()   # for iset and neighbors
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
@@ -169,7 +167,7 @@ class TreeIndependentSet2:
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:   # isolated node from the beginning
                 self.independent_set.add(node)
-                self._used.add(node)
+                used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
                 Q.put(node)
@@ -177,18 +175,18 @@ class TreeIndependentSet2:
             source = Q.get()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
-                if source not in self._used:
+                if source not in used:
                     self.independent_set.add(source)
-                    self._used.add(source)
+                    used.add(source)
                     self.cardinality += 1
                 continue
             assert degree_dict[source] == 1
             for target in self.graph.iteradjacent(source):
                 if degree_dict[target] > 0:   # this is parent
-                    if source not in self._used:
+                    if source not in used:
                         self.independent_set.add(source)   # put leaf to iset
-                        self._used.add(source)
-                        self._used.add(target)
+                        used.add(source)
+                        used.add(target)
                         self.cardinality += 1
                     # Remove the edge from source to target.
                     degree_dict[target] -= 1
