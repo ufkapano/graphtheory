@@ -69,7 +69,6 @@ class BoruvkaMST:
                     if edge < min_edges[target]:
                         min_edges[target] = edge
             # Connecting components, total time is O(V).
-            forest = set()
             for edge in min_edges.itervalues():
                 if edge is dummy_edge: # a disconnected graph
                     continue
@@ -77,7 +76,6 @@ class BoruvkaMST:
                 target = self._uf.find(edge.target)
                 if source != target:   # different components
                     self._uf.union(source, target)
-                    forest.add(source)
                     self.mst.add_edge(edge)
             # Remove duplicates, total time is O(V).
             forest = set(self._uf.find(node) for node in forest)
