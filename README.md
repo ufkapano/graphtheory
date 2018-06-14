@@ -26,7 +26,7 @@ Contributors
 
 Andrzej Kapanowski (project leader)
 
-Łukasz Gałuszka (MST, shortest paths, flow)
+Łukasz Gałuszka (MST, shortest paths, flows)
 
 Łukasz Malinowski (matching, Eulerian graphs, graph coloring, bipartite graphs)
 

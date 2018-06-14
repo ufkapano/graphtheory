@@ -39,12 +39,12 @@ class Edge:
     def __repr__(self):
         """Compute the string representation of the edge."""
         if self.weight == 1:
-            return "%s(%s, %s)" % (
+            return "{}({}, {})".format(
                 self.__class__.__name__,
                 repr(self.source),
                 repr(self.target))
         else:
-            return "%s(%s, %s, %s)" % (
+            return "{}({}, {}, {})".format(
                 self.__class__.__name__,
                 repr(self.source),
                 repr(self.target),

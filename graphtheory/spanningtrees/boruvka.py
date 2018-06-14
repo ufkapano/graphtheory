@@ -52,14 +52,14 @@ class BoruvkaMST:
         """Finding MST."""
         for node in self.graph.iternodes():
             self._uf.create(node)
-        forest = set(node for node in self.graph.iternodes())
+        forest = set(self.graph.iternodes())
         dummy_edge = Edge(None, None, float("inf"))
         new_len = len(forest)
         old_len = new_len + 1
         while old_len > new_len:
             old_len = new_len
             min_edges = dict(((node, dummy_edge) for node in forest))
-            # Finding the cheapest eadges.
+            # Finding the cheapest edges.
             for edge in self.graph.iteredges(): # O(E) time
                 source = self._uf.find(edge.source)
                 target = self._uf.find(edge.target)
