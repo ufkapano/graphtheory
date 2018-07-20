@@ -14,7 +14,7 @@ from graphtheory.forests.treemate import BorieMatching
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)        # random tree
 ----------------------------------------------------------------------
-# Finding a maximum independent set.
+# FINDING A MAXIMUM INDEPENDENT SET
 
 algorithm = BorieIndependentSet(G)
 algorithm.run()
@@ -27,7 +27,7 @@ algorithm.run()
 print algorithm.independent_set
 print algorithm.cardinality       # the size of max iset
 ----------------------------------------------------------------------
-# Finding a minimum dominating set.
+# FINDING A MINIMUM DOMINATING SET
 
 algorithm = BorieDominatingSet(G)
 algorithm.run()
@@ -40,7 +40,7 @@ algorithm.run()
 print algorithm.dominating_set
 print algorithm.cardinality       # the size of min dset
 ----------------------------------------------------------------------
-# Finding a minimum node cover.
+# FINDING A MINIMUM NODE COVER
 
 algorithm = BorieNodeCover(G)
 algorithm.run()
@@ -53,7 +53,7 @@ algorithm.run()
 print algorithm.node_cover
 print algorithm.cardinality       # the size of min cover
 ----------------------------------------------------------------------
-# Finding a maximum matching.
+# FINDING A MAXIMUM MATCHING
 
 algorithm = BorieMatching(G)
 algorithm.run()

@@ -1,6 +1,6 @@
 GRAPH COLORING
 ----------------------------------------------------------------------
-M COLORING PROBLEM
+# M COLORING PROBLEM
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
@@ -14,7 +14,7 @@ algorithm.run()
 for node in G.iternodes():
     print node, algorithm.color[node]
 ----------------------------------------------------------------------
-VERTEX COLORING
+# VERTEX COLORING
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
@@ -39,7 +39,7 @@ algorithm.run()
 for node in G.iternodes():
     print node, algorithm.color[node]
 ----------------------------------------------------------------------
-EDGE COLORING
+# EDGE COLORING
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
