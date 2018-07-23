@@ -9,6 +9,7 @@ from graphtheory.independentsets.isetll import LargestLastIndependentSet3
 from graphtheory.independentsets.isetll import LargestLastIndependentSet4
 from graphtheory.independentsets.isetll import LargestLastIndependentSet5
 from graphtheory.independentsets.isetll import LargestLastIndependentSet6
+from graphtheory.independentsets.isetll import LargestLastIndependentSet7
 
 # 0 --- 1 --- 2 nie jest dwudzielny, bo sa trojkaty
 # |   / |     |
@@ -93,6 +94,16 @@ class TestIndependentSet(unittest.TestCase):
         self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
         #print algorithm.independent_set
 
+    def test_ll_independent_set7(self):
+        algorithm = LargestLastIndependentSet7(self.G)
+        #algorithm.run()   # przypadkiem znajduje najlepsze rozwiazanie
+        algorithm.run(3)   # znajduje set([2, 3])
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
+        self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
+        #print algorithm.independent_set
+
     def test_exceptions(self):
         self.assertRaises(ValueError, LargestLastIndependentSet1,
             Graph(5, directed=True))
@@ -105,6 +116,8 @@ class TestIndependentSet(unittest.TestCase):
         self.assertRaises(ValueError, LargestLastIndependentSet5,
             Graph(5, directed=True))
         self.assertRaises(ValueError, LargestLastIndependentSet6,
+            Graph(5, directed=True))
+        self.assertRaises(ValueError, LargestLastIndependentSet7,
             Graph(5, directed=True))
 
     def tearDown(self): pass

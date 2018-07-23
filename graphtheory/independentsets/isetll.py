@@ -246,7 +246,72 @@ class LargestLastIndependentSet6:
         self.independent_set = set(graph_copy.iternodes())
         self.cardinality = graph_copy.v()
 
+######################################################################
+# Zastosowanie sortowania bukietowego.
 
-LargestLastIndependentSet = LargestLastIndependentSet3
+class LargestLastIndependentSet7:
+    """Find a maximal independent set."""
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        for edge in self.graph.iteredges():
+            if edge.source == edge.target:
+                raise ValueError("a loop detected")
+        self.independent_set = set()
+        self.cardinality = 0
+        self.source = None
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        used = set()
+        node_list = self._find_ll_ordering()
+        if source is not None:
+            self.source = source
+            self.independent_set.add(source)
+            used.add(source)
+            used.update(self.graph.iteradjacent(source))
+        for source in node_list:
+            if source in used:
+                continue
+            self.independent_set.add(source)
+            used.add(source)
+            used.update(self.graph.iteradjacent(source))
+        self.cardinality = len(self.independent_set)
+
+    def _find_ll_ordering(self):
+        """Find a largest last node ordering."""
+        order = list()   # zapisuje kolejnosc wierzcholkow
+        used = set()
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())   # O(V) time
+        # Grupujemy wierzcholki w bukietach wg stopni.
+        bucket = list(set() for deg in xrange(self.graph.v()))   # O(V) time
+        for node in self.graph.iternodes():   # O(V) time
+            bucket[self.graph.degree(node)].add(node)
+        maxi = self.graph.v()-1   # indeks najwiekszego
+        for step in xrange(self.graph.v()):
+            while not bucket[maxi]:   # ide w dol, chyba O(2V)
+                #print "ide w dol", maxi
+                maxi -= 1
+            source = bucket[maxi].pop()
+            order.append(source)
+            used.add(source)
+            for target in self.graph.iteradjacent(source):
+                if target in used:
+                    continue
+                deg = degree_dict[target]   # stary stopien
+                bucket[deg].remove(target)
+                bucket[deg-1].add(target)
+                degree_dict[target] = deg-1   # nowy stopien
+                degree_dict[source] -= 1
+            assert degree_dict[source] == 0
+        order.reverse()   # zmiana kolejnosci, O(V) time
+        return order
+
+
+LargestLastIndependentSet = LargestLastIndependentSet7
 
 # EOF
