@@ -21,6 +21,7 @@ from graphtheory.independentsets.isetll import LargestLastIndependentSet2
 from graphtheory.independentsets.isetll import LargestLastIndependentSet3
 from graphtheory.independentsets.isetll import LargestLastIndependentSet4
 from graphtheory.independentsets.isetll import LargestLastIndependentSet5
+from graphtheory.independentsets.isetll import LargestLastIndependentSet6
 
 V = 100
 graph_factory = GraphFactory(Graph)
@@ -100,6 +101,10 @@ print V, E, t1.timeit(1)            # pojedyncze wykonanie
 
 print "Testing LargestLastIndependentSet5 ..."
 t1 = timeit.Timer(lambda: LargestLastIndependentSet5(G).run())
+print V, E, t1.timeit(1)            # pojedyncze wykonanie
+
+print "Testing LargestLastIndependentSet6 ..."
+t1 = timeit.Timer(lambda: LargestLastIndependentSet6(G).run())
 print V, E, t1.timeit(1)            # pojedyncze wykonanie
 
 # EOF

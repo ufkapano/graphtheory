@@ -214,6 +214,39 @@ class LargestLastIndependentSet5:
         return True
 
 
+# W kopii grafu usuwam wierzcholki o najwiekszym stopniu
+# az nie bedzie krawedzi. Wtedy wszystkie wierzcholki naleza do iset.
+# Jest 2 do 4 razy szybciej niz wersja 5.
+# Nie dziala dla grafow z macierza sasiedztwa.
+class LargestLastIndependentSet6:
+    """Find a maximal independent set."""
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        for edge in self.graph.iteredges():
+            if edge.source == edge.target:
+                raise ValueError("a loop detected")
+        self.independent_set = None
+        self.cardinality = 0
+        self.source = None
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        if source is not None:
+            self.source = source   # tego nie usuwamy
+        graph_copy = self.graph.copy()
+        while graph_copy.e() > 0:
+            source = max((node for node in graph_copy.iternodes()
+                if node != self.source),
+                key=graph_copy.degree)
+            graph_copy.del_node(source)   # remove with edges
+        self.independent_set = set(graph_copy.iternodes())
+        self.cardinality = graph_copy.v()
+
+
 LargestLastIndependentSet = LargestLastIndependentSet3
 
 # EOF
