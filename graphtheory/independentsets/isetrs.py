@@ -16,24 +16,24 @@ class RandomSequentialIndependentSet1:
                 raise ValueError("a loop detected")
         self.independent_set = set()
         self.cardinality = 0
-        self._used = set()
         self.source = None
 
     def run(self, source=None):
         """Executable pseudocode."""
+        used = set()
         node_list = list(self.graph.iternodes())
         random.shuffle(node_list)   # O(V) time
         if source is not None:
             self.source = source
             self.independent_set.add(source)
-            self._used.add(source)
-            self._used.update(self.graph.iteradjacent(source))
+            used.add(source)
+            used.update(self.graph.iteradjacent(source))
         for source in node_list:
-            if source in self._used:
+            if source in used:
                 continue
             self.independent_set.add(source)
-            self._used.add(source)
-            self._used.update(self.graph.iteradjacent(source))
+            used.add(source)
+            used.update(self.graph.iteradjacent(source))
         self.cardinality = len(self.independent_set)
 
 
@@ -51,26 +51,26 @@ class RandomSequentialIndependentSet2:
                 raise ValueError("a loop detected")
         self.independent_set = set()
         self.cardinality = 0
-        self._used = dict((node, False) for node in self.graph.iternodes())
         self.source = None
 
     def run(self, source=None):
         """Executable pseudocode."""
+        used = dict((node, False) for node in self.graph.iternodes())
         node_list = list(self.graph.iternodes())
         random.shuffle(node_list)   # O(V) time
         if source is not None:
             self.source = source
             self.independent_set.add(source)
-            self._used[source] = True
+            used[source] = True
             for target in self.graph.iteradjacent(source):
-                self._used[target] = True
+                used[target] = True
         for source in node_list:
-            if self._used[source]:
+            if used[source]:
                 continue
             self.independent_set.add(source)
-            self._used[source] = True
+            used[source] = True
             for target in self.graph.iteradjacent(source):
-                self._used[target] = True
+                used[target] = True
         self.cardinality = len(self.independent_set)
 
 
@@ -88,28 +88,28 @@ class RandomSequentialIndependentSet3:
                 raise ValueError("a loop detected")
         self.independent_set = dict((node, False) for node in self.graph.iternodes())
         self.cardinality = 0
-        self._used = dict((node, False) for node in self.graph.iternodes())
         self.source = None
 
     def run(self, source=None):
         """Executable pseudocode."""
+        used = dict((node, False) for node in self.graph.iternodes())
         node_list = list(self.graph.iternodes())
         random.shuffle(node_list)   # O(V) time
         if source is not None:
             self.source = source
             self.independent_set[source] = True
-            self._used[source] = True
+            used[source] = True
             self.cardinality += 1
             for target in self.graph.iteradjacent(source):
-                self._used[target] = True
+                used[target] = True
         for source in node_list:
-            if self._used[source]:
+            if used[source]:
                 continue
             self.independent_set[source] = True
-            self._used[source] = True
+            used[source] = True
             self.cardinality += 1
             for target in self.graph.iteradjacent(source):
-                self._used[target] = True
+                used[target] = True
 
 
 RandomSequentialIndependentSet = RandomSequentialIndependentSet1
