@@ -16,6 +16,7 @@ from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet3
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet4
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet5
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet6
+from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet7
 from graphtheory.independentsets.isetll import LargestLastIndependentSet1
 from graphtheory.independentsets.isetll import LargestLastIndependentSet2
 from graphtheory.independentsets.isetll import LargestLastIndependentSet3
@@ -81,6 +82,10 @@ print V, E, t1.timeit(1)            # pojedyncze wykonanie
 
 print "Testing SmallestFirstIndependentSet6 ..."
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet6(G).run())
+print V, E, t1.timeit(1)            # pojedyncze wykonanie
+
+print "Testing SmallestFirstIndependentSet7 ..."
+t1 = timeit.Timer(lambda: SmallestFirstIndependentSet7(G).run())
 print V, E, t1.timeit(1)            # pojedyncze wykonanie
 
 print "Testing LargestLastIndependentSet1 ..."

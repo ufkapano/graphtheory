@@ -238,7 +238,102 @@ class SmallestFirstIndependentSet6:
                 for node in self.graph.iteradjacent(target):
                     degree_dict[node] -= 1
 
+######################################################################
+# Zastosowanie sortowania bukietowego.
 
-SmallestFirstIndependentSet = SmallestFirstIndependentSet1
+class SmallestFirstIndependentSet7:
+    """Find a maximal independent set."""
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        for edge in self.graph.iteredges():
+            if edge.source == edge.target:
+                raise ValueError("a loop detected")
+        self.independent_set = set()
+        self.cardinality = 0
+        self.source = None
+
+    def run(self, source=None):
+        """Executable pseudocode."""
+        used = set()
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())   # O(V) time
+        # Grupujemy wierzcholki w bukietach wg stopni.
+        bucket = list(set() for deg in xrange(self.graph.v()))   # O(V) time
+        for node in self.graph.iternodes():   # O(V) time
+            bucket[self.graph.degree(node)].add(node)
+
+        # Liczba krokow do wykonania rowna sie liczbie wierzcholkow.
+        steps = self.graph.v()
+        if source is not None:
+            self.source = source
+            self.independent_set.add(source)
+            used.add(source)
+            steps -= 1   # bo usuniety source
+            # Uaktualnienie degree_dict i bucket.
+            deg = degree_dict[source] # tutaj deg moze byc dowolne
+            bucket[deg].remove(source)
+            # Usuwanie sasiadow source.
+            for target in self.graph.iteradjacent(source):
+                if target in used:   # nie bedzie takich
+                    continue
+                used.add(target)
+                steps -= 1   # bo usuniety target
+                # Uaktualnienie degree_dict i bucket.
+                deg = degree_dict[target]
+                bucket[deg].remove(target)
+                degree_dict[target] = deg-1   # bo usuniety source
+                degree_dict[source] -= 1
+                # Uaktualnienie degree_dict i bucket.
+                for node in self.graph.iteradjacent(target):
+                    if node in used:   # node usuniety z bucket
+                        continue
+                    deg = degree_dict[node]
+                    bucket[deg].remove(node)
+                    bucket[deg-1].add(node)
+                    degree_dict[node] = deg-1
+                    degree_dict[target] -= 1
+                assert degree_dict[target] == 0
+            assert degree_dict[source] == 0
+
+        while steps > 0:
+            # Wybor wierzcholka o najmniejszym stopniu.
+            for deg in xrange(self.graph.v()):
+                if bucket[deg]:
+                    source = bucket[deg].pop()
+                    break
+            self.independent_set.add(source)
+            used.add(source)
+            steps -= 1   # bo usuniety source
+            # Usuwanie sasiadow source.
+            for target in self.graph.iteradjacent(source):
+                if target in used:   # target usuniety z bucket
+                    continue
+                used.add(target)
+                steps -= 1   # bo usuniety target
+                # Uaktualnienie degree_dict i bucket.
+                deg = degree_dict[target]
+                bucket[deg].remove(target)
+                degree_dict[target] = deg-1   # bo usuniety source
+                degree_dict[source] -= 1
+                # Uaktualnienie degree_dict i bucket.
+                for node in self.graph.iteradjacent(target):
+                    if node in used:   # node usuniety z bucket
+                        continue
+                    deg = degree_dict[node]
+                    bucket[deg].remove(node)
+                    bucket[deg-1].add(node)
+                    degree_dict[node] = deg-1
+                    degree_dict[target] -= 1
+                assert degree_dict[target] == 0
+            assert degree_dict[source] == 0
+        self.cardinality = len(self.independent_set)
+        assert steps == 0
+
+
+SmallestFirstIndependentSet = SmallestFirstIndependentSet7
 
 # EOF

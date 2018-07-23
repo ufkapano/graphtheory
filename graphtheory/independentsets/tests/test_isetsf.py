@@ -9,6 +9,7 @@ from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet3
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet4
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet5
 from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet6
+from graphtheory.independentsets.isetsf import SmallestFirstIndependentSet7
 
 # 0 --- 1 --- 2 nie jest dwudzielny, bo sa trojkaty
 # |   / |     |
@@ -93,6 +94,16 @@ class TestIndependentSet(unittest.TestCase):
         self.assertEqual(algorithm.cardinality, cardinality)
         #print algorithm.independent_set
 
+    def test_sf_independent_set7(self):
+        algorithm = SmallestFirstIndependentSet7(self.G)
+        #algorithm.run()   # przypadkiem znajduje najlepsze rozwiazanie
+        algorithm.run(3)   # znajduje set([2, 3])
+        for edge in self.G.iteredges():
+            self.assertFalse(edge.source in algorithm.independent_set
+                         and edge.target in algorithm.independent_set)
+        self.assertEqual(algorithm.cardinality, len(algorithm.independent_set))
+        #print algorithm.independent_set
+
     def test_exceptions(self):
         self.assertRaises(ValueError, SmallestFirstIndependentSet1,
             Graph(5, directed=True))
@@ -105,6 +116,8 @@ class TestIndependentSet(unittest.TestCase):
         self.assertRaises(ValueError, SmallestFirstIndependentSet5,
             Graph(5, directed=True))
         self.assertRaises(ValueError, SmallestFirstIndependentSet6,
+            Graph(5, directed=True))
+        self.assertRaises(ValueError, SmallestFirstIndependentSet7,
             Graph(5, directed=True))
 
     def tearDown(self): pass
