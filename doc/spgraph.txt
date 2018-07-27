@@ -24,28 +24,28 @@ print peo
 # A MAXIMUM INDEPENDENT SET
 
 from graphtheory.seriesparallel.spiset import SPIndependentSet
-algorithm = SPIndependentSet(G)
+algorithm = SPIndependentSet(G, T)
 algorithm.run()
 print algorithm.independent_set
 ----------------------------------------------------------------------
 # A MINIMUM DOMINATING SET
 
 from graphtheory.seriesparallel.spdset import SPDominatingSet
-algorithm = SPDominatingSet(G)
+algorithm = SPDominatingSet(G, T)
 algorithm.run()
 print algorithm.dominating_set
 ----------------------------------------------------------------------
 # A MINIMUM VERTEX COVER
 
 from graphtheory.seriesparallel.spcover import SPNodeCover
-algorithm = SPNodeCover(G)
+algorithm = SPNodeCover(G, T)
 algorithm.run()
 print algorithm.node_cover
 ----------------------------------------------------------------------
 # A MAXIMUM MATCHING
 
 from graphtheory.seriesparallel.spmate import SPMatching
-algorithm = SPMatching(G)
+algorithm = SPMatching(G, T)
 algorithm.run()
 print algorithm.mate_set      # a set of edges
 ----------------------------------------------------------------------
