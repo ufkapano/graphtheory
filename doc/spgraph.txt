@@ -51,7 +51,7 @@ print algorithm.mate_set      # a set of edges
 ----------------------------------------------------------------------
 # VERTEX COLORING
 
-from graphtheory.seriesparallel.spcolor import SPNodeColoring
+from graphtheory.seriesparallel.spnodecolor import SPNodeColoring
 algorithm = SPNodeColoring(G)
 algorithm.run()
 print algorithm.color         # dict
