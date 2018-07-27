@@ -1,0 +1,55 @@
+SERIES-PARALLEL GRAPHS (SP-GRAPHS)
+----------------------------------------------------------------------
+# GENERATORS
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+
+
+from sptree import find_sptree
+from spnodes import btree_print
+T = find_sptree(G)
+btree_print(T)
+----------------------------------------------------------------------
+# A PERFECT ELIMINATION ORDERING (treewidth = 2)
+
+from sptools import find_peo_spgraph
+peo = find_peo_spgraph(G)     # list
+print peo
+----------------------------------------------------------------------
+# A MAXIMUM INDEPENDENT SET
+
+from graphtheory.seriesparallel.spiset import SPIndependentSet
+algorithm = SPIndependentSet(G)
+algorithm.run()
+print algorithm.independent_set
+----------------------------------------------------------------------
+# A MINIMUM DOMINATING SET
+
+from graphtheory.seriesparallel.spdset import SPDominatingSet
+algorithm = SPDominatingSet(G)
+algorithm.run()
+print algorithm.dominating_set
+----------------------------------------------------------------------
+# A MINIMUM VERTEX COVER
+
+from graphtheory.seriesparallel.spcover import SPNodeCover
+algorithm = SPNodeCover(G)
+algorithm.run()
+print algorithm.node_cover
+----------------------------------------------------------------------
+# A MAXIMUM MATCHING
+
+from graphtheory.seriesparallel.spmate import SPMatching
+algorithm = SPMatching(G)
+algorithm.run()
+print algorithm.mate_set      # a set of edges
+----------------------------------------------------------------------
+# VERTEX COLORING
+
+from graphtheory.seriesparallel.spcolor import SPNodeColoring
+algorithm = SPNodeColoring(G)
+algorithm.run()
+print algorithm.color         # dict
+----------------------------------------------------------------------
+EOF
