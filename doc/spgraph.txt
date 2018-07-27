@@ -4,16 +4,20 @@ SERIES-PARALLEL GRAPHS (SP-GRAPHS)
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
+from graphtheory.seriesparallel.sptools import make_random_ktree
+from graphtheory.seriesparallel.sptools import make_random_spgraph
+from graphtheory.seriesparallel.sptrees import find_sptree
+from graphtheory.seriesparallel.spnodes import btree_print
 
+G = make_random_spgraph(n=10)
+#G = make_random_ktree(n=10, k=2)
 
-from sptree import find_sptree
-from spnodes import btree_print
 T = find_sptree(G)
 btree_print(T)
 ----------------------------------------------------------------------
 # A PERFECT ELIMINATION ORDERING (treewidth = 2)
 
-from sptools import find_peo_spgraph
+from graphtheory.seriesparallel.sptools import find_peo_spgraph
 peo = find_peo_spgraph(G)     # list
 print peo
 ----------------------------------------------------------------------
