@@ -4,7 +4,8 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.spnodes import Node
-from graphtheory.seriesparallel.spdset import SPDominatingSet
+from graphtheory.seriesparallel.spdset import SPGraphDominatingSet
+from graphtheory.seriesparallel.spdset import SPTreeDominatingSet
 
 
 class TestDominatingSet(unittest.TestCase):
@@ -36,8 +37,14 @@ class TestDominatingSet(unittest.TestCase):
         node9 = Node(0, 1, "jackknife", node8, node5)
         self.root = node9
 
-    def test_spdset(self):
-        algorithm = SPDominatingSet(self.G, self.root)
+    def test_spgraph_dset(self):
+        algorithm = SPGraphDominatingSet(self.G, self.root)
+        algorithm.run()
+        expected1 = set([1])
+        self.assertEqual(algorithm. dominating_set, expected1)
+
+    def test_sptree_dset(self):
+        algorithm = SPTreeDominatingSet(self.root)
         algorithm.run()
         expected1 = set([1])
         self.assertEqual(algorithm. dominating_set, expected1)

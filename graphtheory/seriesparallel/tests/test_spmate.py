@@ -4,7 +4,8 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.spnodes import Node
-from graphtheory.seriesparallel.spmate import SPMatching
+from graphtheory.seriesparallel.spmate import SPGraphMatching
+from graphtheory.seriesparallel.spmate import SPTreeMatching
 
 # 0      s=0, t=1
 # | \
@@ -36,8 +37,26 @@ class TestSPMatching(unittest.TestCase):
         node9 = Node(0, 1, "jackknife", node8, node5)
         self.root = node9
 
-    def test_sp_mate(self):
-        algorithm = SPMatching(self.G, self.root)
+    def test_spgraph_mate(self):
+        algorithm = SPGraphMatching(self.G, self.root)
+        algorithm.run()
+        expected1 = set([Edge(0, 2), Edge(1, 3)])
+        expected2 = set([Edge(0, 2), Edge(1, 4)])
+        #print "mate_set", algorithm.mate_set
+        #print "mate", algorithm.mate
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.mate_set, expected1)
+        #self.assertEqual(algorithm.mate_set, expected2)
+        # Test poprawnosci skojarzenia na krawedziach.
+        # Sprawdzam, czy konce sie nie powtarzaja.
+        S = set()
+        for edge in algorithm.mate_set:
+            S.add(edge.source)
+            S.add(edge.target)
+        self.assertEqual(len(S), 2 * len(algorithm.mate_set))
+
+    def test_sptree_mate(self):
+        algorithm = SPTreeMatching(self.root)
         algorithm.run()
         expected1 = set([Edge(0, 2), Edge(1, 3)])
         expected2 = set([Edge(0, 2), Edge(1, 4)])

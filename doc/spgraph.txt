@@ -23,31 +23,57 @@ print peo
 ----------------------------------------------------------------------
 # A MAXIMUM INDEPENDENT SET
 
-from graphtheory.seriesparallel.spiset import SPIndependentSet
-algorithm = SPIndependentSet(G, T)
+from graphtheory.seriesparallel.spiset import SPGraphIndependentSet
+from graphtheory.seriesparallel.spiset import SPTreeIndependentSet
+
+algorithm = SPGraphIndependentSet(G, T)
+algorithm.run()
+print algorithm.independent_set
+
+algorithm = SPTreeIndependentSet(T)
 algorithm.run()
 print algorithm.independent_set
 ----------------------------------------------------------------------
 # A MINIMUM DOMINATING SET
 
-from graphtheory.seriesparallel.spdset import SPDominatingSet
-algorithm = SPDominatingSet(G, T)
+from graphtheory.seriesparallel.spdset import SPGraphDominatingSet
+from graphtheory.seriesparallel.spdset import SPTreeDominatingSet
+
+algorithm = SPGraphDominatingSet(G, T)
+algorithm.run()
+print algorithm.dominating_set
+
+algorithm = SPTreeDominatingSet(T)
 algorithm.run()
 print algorithm.dominating_set
 ----------------------------------------------------------------------
 # A MINIMUM VERTEX COVER
 
-from graphtheory.seriesparallel.spcover import SPNodeCover
-algorithm = SPNodeCover(G, T)
+from graphtheory.seriesparallel.spcover import SPGraphNodeCover
+from graphtheory.seriesparallel.spcover import SPTreeNodeCover
+
+algorithm = SPGraphNodeCover(G, T)
+algorithm.run()
+print algorithm.node_cover
+
+algorithm = SPTreeNodeCover(T)
 algorithm.run()
 print algorithm.node_cover
 ----------------------------------------------------------------------
 # A MAXIMUM MATCHING
 
-from graphtheory.seriesparallel.spmate import SPMatching
-algorithm = SPMatching(G, T)
+from graphtheory.seriesparallel.spmate import SPGraphMatching
+from graphtheory.seriesparallel.spmate import SPTreeMatching
+
+algorithm = SPGraphMatching(G, T)
 algorithm.run()
 print algorithm.mate_set      # a set of edges
+print algorithm.mate          # dict
+
+algorithm = SPTreeMatching(T)
+algorithm.run()
+print algorithm.mate_set      # a set of edges
+print algorithm.mate          # dict
 ----------------------------------------------------------------------
 # VERTEX COLORING
 

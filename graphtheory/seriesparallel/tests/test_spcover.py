@@ -4,7 +4,8 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.spnodes import Node
-from graphtheory.seriesparallel.spcover import SPNodeCover
+from graphtheory.seriesparallel.spcover import SPGraphNodeCover
+from graphtheory.seriesparallel.spcover import SPTreeNodeCover
 
 # 0      s=0, t=1
 # | \
@@ -36,8 +37,20 @@ class TestNodeCover(unittest.TestCase):
         node9 = Node(0, 1, "jackknife", node8, node5)
         self.root = node9
 
-    def test_sp_node_cover(self):
-        algorithm = SPNodeCover(self.G, self.root)
+    def test_spgraph_node_cover(self):
+        algorithm = SPGraphNodeCover(self.G, self.root)
+        algorithm.run()
+        expected1 = set([0, 1])
+        expected2 = set([1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.node_cover, expected2)
+        # Testing cover.
+        for edge in self.G.iteredges():
+            self.assertTrue(edge.source in algorithm.node_cover
+                         or edge.target in algorithm.node_cover)
+
+    def test_sptree_node_cover(self):
+        algorithm = SPTreeNodeCover(self.root)
         algorithm.run()
         expected1 = set([0, 1])
         expected2 = set([1, 2])

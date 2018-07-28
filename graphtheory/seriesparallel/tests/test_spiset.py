@@ -4,7 +4,8 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.spnodes import Node
-from graphtheory.seriesparallel.spiset import SPIndependentSet
+from graphtheory.seriesparallel.spiset import SPGraphIndependentSet
+from graphtheory.seriesparallel.spiset import SPTreeIndependentSet
 
 
 class TestIndependentSet(unittest.TestCase):
@@ -12,9 +13,9 @@ class TestIndependentSet(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_sp_independent_set_small(self):
+    def test_spgraph_independent_set_small(self):
         self.prepareSmallGraph()
-        algorithm = SPIndependentSet(self.G, self.root)
+        algorithm = SPGraphIndependentSet(self.G, self.root)
         algorithm.run()
         expected1 = set([0, 3, 4])
         expected2 = set([2, 3, 4])
@@ -22,17 +23,43 @@ class TestIndependentSet(unittest.TestCase):
         self.assertTrue(algorithm.independent_set == expected1
                         or algorithm.independent_set == expected2)
 
-    def  test_sp_independent_set_small2(self):
+    def test_sptree_independent_set_small(self):
+        self.prepareSmallGraph()
+        algorithm = SPTreeIndependentSet(self.root)
+        algorithm.run()
+        expected1 = set([0, 3, 4])
+        expected2 = set([2, 3, 4])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertTrue(algorithm.independent_set == expected1
+                        or algorithm.independent_set == expected2)
+
+    def  test_spgraph_independent_set_small2(self):
         self.prepareSmallGraph2()
-        algorithm = SPIndependentSet(self.G, self.root)
+        algorithm = SPGraphIndependentSet(self.G, self.root)
         algorithm.run()
         expected1 = set([0, 2, 3, 4])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertTrue(algorithm.independent_set == expected1)
 
-    def test_sp_independent_set_medium(self):
+    def  test_sptree_independent_set_small2(self):
+        self.prepareSmallGraph2()
+        algorithm = SPTreeIndependentSet(self.root)
+        algorithm.run()
+        expected1 = set([0, 2, 3, 4])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertTrue(algorithm.independent_set == expected1)
+
+    def test_spgraph_independent_set_medium(self):
         self.prepareMediumGraph()
-        algorithm = SPIndependentSet(self.G, self.root)
+        algorithm = SPGraphIndependentSet(self.G, self.root)
+        algorithm.run()
+        expected = set([1, 2, 3, 4, 7])
+        self.assertEqual(algorithm.cardinality, len(expected))
+        self.assertEqual(algorithm.independent_set, expected)
+
+    def test_sptree_independent_set_medium(self):
+        self.prepareMediumGraph()
+        algorithm = SPTreeIndependentSet(self.root)
         algorithm.run()
         expected = set([1, 2, 3, 4, 7])
         self.assertEqual(algorithm.cardinality, len(expected))
