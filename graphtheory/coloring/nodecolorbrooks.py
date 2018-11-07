@@ -57,12 +57,13 @@ class BrooksNodeColoring:
             # po usunieciu neighbor1 i neighbor2 graf dalej byl spojny.
             # Wybieram wierzcholek o najwiekszym stopniu, O(V) time.
             #source = max(self.graph.iternodes(), key=self.graph.degree)
-            source = self.graph.iternodes().next()
+            #source = self.graph.iternodes().next()
             for nodes in itertools.combinations(
                 self.graph.iteradjacent(source), 2):   # O(Delta**2) time
                     neighbor1, neighbor2 = nodes
                     if not self.graph.has_edge(Edge(neighbor1, neighbor2)):
                         break
+            #print "path", neighbor1, source, neighbor2
             # Mark two neighbors of source as visited.
             self.parent[neighbor1] = source
             self.parent[neighbor2] = source
@@ -70,6 +71,8 @@ class BrooksNodeColoring:
             self.order.append(neighbor1)   # second colored, color 0
             self.order.append(neighbor2)   # first colored, color 0
         # Mozemy kolorowac zachlannie wg znalezionej kolejnosci.
+        # Sprawdzenie czy wszedzie doszedl BFS.
+        assert len(self.order) == self.graph.v()
         self.order.reverse()   # kolejnosc odwrotna! O(V) time
         for source in self.order:
             self._greedy_color(source)
