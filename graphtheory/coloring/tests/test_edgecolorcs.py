@@ -6,7 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.edgecolorcs import ConnectedSequentialEdgeColoring
 
 #     a     d
-#  0 --- 1 --- 2 
+#  0 --- 1 --- 2    outerplanar, chordal, 2-tree
 #  |   / |   / |  4 colors (best)
 # c| b/ c| b/ c|
 #  | /   | /   |

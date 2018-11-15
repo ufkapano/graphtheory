@@ -1,5 +1,5 @@
-graphs-dict
-===========
+graphtheory package (graphs-dict repo)
+======================================
 
 Python implementation of graph data structures and algorithms is presented. 
 The minimal graph interface is defined together with several 
@@ -10,6 +10,7 @@ Graphs are instances of the Graph class (several versions).
 Multigraphs are instances of the MultiGraph class.
 Many algorithms are implemented using a unified approach. 
 There are separate classes and modules devoted to different algorithms.
+The graphtheory package is written with Python 2.7.
 
 References
 ----------
@@ -51,5 +52,7 @@ Małgorzata Olak (chordal graphs)
 Krzysztof Niedzielski (matching)
 
 Konrad Gałuszka (series-parallel graphs)
+
+Maciej Niezabitowski (treewidth)
 
 EOF

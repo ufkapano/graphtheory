@@ -5,9 +5,9 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.nodecolorbrooks import BrooksNodeColoring
 
-# 0 --- 1 --- 2 nie jest dwudzielny, bo sa trojkaty
-# |   / |   / |
-# |  /  |  /  | jest dwuspojny (biconnected)
+# 0 --- 1 --- 2   nie jest dwudzielny, bo sa trojkaty
+# |   / |   / |   outerplanar, chordal, 2-tree
+# |  /  |  /  |   jest dwuspojny (biconnected)
 # | /   | /   |
 # 3 --- 4 --- 5
 # Best node coloring - 3 colors.
@@ -99,7 +99,7 @@ class TestNodeColoring2(unittest.TestCase):
 
     def tearDown(self): pass
 
-# 0-------5  3-prism, cubic (3-regular), 3-connected, planar
+# 0-------5  3-prism, cubic (3-regular), 3-connected, planar, Halin
 # |\     /|      chromatic number 3
 # | 2---3 | 
 # |/     \|

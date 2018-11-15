@@ -6,7 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.edgecolorrs import RandomSequentialEdgeColoring
 
 #     a     d
-#  0 --- 1 --- 2 
+#  0 --- 1 --- 2    outerplanar, chordal, 2-tree
 #  |   / |   / |  4 colors (best)
 # c| b/ c| b/ c|
 #  | /   | /   |
@@ -43,7 +43,7 @@ class TestEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), self.G.degree(node))
         #print algorithm.color
         all_colors = set(algorithm.color[edge] for edge in self.G.iteredges())
-        self.assertEqual(len(all_colors), 5)
+        self.assertTrue(len(all_colors) in set([4, 5, 6, 7]))
 
     def test_exceptions(self):
         self.assertRaises(ValueError, RandomSequentialEdgeColoring,

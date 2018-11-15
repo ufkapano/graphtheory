@@ -5,7 +5,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.nodecolorsl import SmallestLastNodeColoring
 
-# 0 --- 1 --- 2
+# 0 --- 1 --- 2   outerplanar, chordal, 2-tree
 # |   / |   / |
 # |  /  |  /  |
 # | /   | /   |

@@ -72,9 +72,9 @@ class BrooksNodeColoring:
             self.order.append(neighbor2)   # first colored, color 0
         # Mozemy kolorowac zachlannie wg znalezionej kolejnosci.
         # Sprawdzenie czy wszedzie doszedl BFS.
-        assert len(self.order) == self.graph.v()
+        assert len(self.order) == self.graph.v(), "problems with a Delta-regular graph"
         self.order.reverse()   # kolejnosc odwrotna! O(V) time
-        for source in self.order:
+        for source in self.order:   # O(V+E) time
             self._greedy_color(source)
 
     def _visit(self, node):
