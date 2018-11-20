@@ -44,12 +44,12 @@ class BipartiteGraphBFS:
         Q.put(node)
         while not Q.empty():
             source = Q.get()
-            for edge in self.graph.iteroutedges(source):
-                if self.color[edge.target] is None:
-                    self.color[edge.target] = (self.color[source] + 1) % 2  # before Q.put
-                    Q.put(edge.target)
+            for target in self.graph.iteradjacent(source):
+                if self.color[target] is None:
+                    self.color[target] = (self.color[source] + 1) % 2  # before Q.put
+                    Q.put(target)
                 else:   # target was visited
-                    if self.color[edge.target] == self.color[source]:
+                    if self.color[target] == self.color[source]:
                         raise ValueError("the graph is not bipartite")
 
 
@@ -94,12 +94,12 @@ class BipartiteGraphDFS:
 
     def _visit(self, node):
         """Explore recursively the connected component."""
-        for edge in self.graph.iteroutedges(node):
-            if self.color[edge.target] is None:
-                self.color[edge.target] = (self.color[node] + 1) % 2  # before _visit
-                self._visit(edge.target)
+        for target in self.graph.iteradjacent(node):
+            if self.color[target] is None:
+                self.color[target] = (self.color[node] + 1) % 2  # before _visit
+                self._visit(target)
             else:   # target was visited
-                if self.color[edge.target] == self.color[node]:
+                if self.color[target] == self.color[node]:
                     raise ValueError("the graph is not bipartite")
 
 
