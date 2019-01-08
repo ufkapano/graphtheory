@@ -25,6 +25,8 @@ from graphtheory.coloring.nodecolorcs import ConnectedSequentialNodeColoring
 from graphtheory.coloring.nodecolorsl import SmallestLastNodeColoring
 from graphtheory.coloring.nodecolorlf import LargestFirstNodeColoring
 from graphtheory.coloring.nodecolorslf import SLFNodeColoring
+from graphtheory.coloring.nodecolorgis import GISNodeColoring
+from graphtheory.coloring.nodecolorrlf import RLFNodeColoring
 from graphtheory.coloring.nodecolorbrooks import BrooksNodeColoring
 
 G = Graph()
@@ -36,6 +38,8 @@ G = Graph()
 # algorithm = SmallestLastNodeColoring(G)
 # algorithm = LargestFirstNodeColoring(G)
 # algorithm = SLFNodeColoring(G)
+# algorithm = GISNodeColoring(G)
+# algorithm = RLFNodeColoring(G)
 algorithm = BrooksNodeColoring(G)
 algorithm.run()
 for node in G.iternodes():
