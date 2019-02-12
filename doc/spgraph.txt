@@ -15,13 +15,14 @@ G = make_random_spgraph(n=10)
 T = find_sptree(G)
 btree_print(T)
 ----------------------------------------------------------------------
-# A PERFECT ELIMINATION ORDERING (treewidth = 2)
+# PERFECT ELIMINATION ORDERING (treewidth = 2)
 
 from graphtheory.seriesparallel.sptools import find_peo_spgraph
+
 peo = find_peo_spgraph(G)     # list
 print peo
 ----------------------------------------------------------------------
-# A MAXIMUM INDEPENDENT SET
+# MAXIMUM INDEPENDENT SET
 
 from graphtheory.seriesparallel.spiset import SPGraphIndependentSet
 from graphtheory.seriesparallel.spiset import SPTreeIndependentSet
@@ -34,7 +35,7 @@ algorithm = SPTreeIndependentSet(T)
 algorithm.run()
 print algorithm.independent_set
 ----------------------------------------------------------------------
-# A MINIMUM DOMINATING SET
+# MINIMUM DOMINATING SET
 
 from graphtheory.seriesparallel.spdset import SPGraphDominatingSet
 from graphtheory.seriesparallel.spdset import SPTreeDominatingSet
@@ -47,7 +48,7 @@ algorithm = SPTreeDominatingSet(T)
 algorithm.run()
 print algorithm.dominating_set
 ----------------------------------------------------------------------
-# A MINIMUM VERTEX COVER
+# MINIMUM VERTEX COVER
 
 from graphtheory.seriesparallel.spcover import SPGraphNodeCover
 from graphtheory.seriesparallel.spcover import SPTreeNodeCover
@@ -60,7 +61,7 @@ algorithm = SPTreeNodeCover(T)
 algorithm.run()
 print algorithm.node_cover
 ----------------------------------------------------------------------
-# A MAXIMUM MATCHING
+# MAXIMUM MATCHING
 
 from graphtheory.seriesparallel.spmate import SPGraphMatching
 from graphtheory.seriesparallel.spmate import SPTreeMatching
@@ -78,6 +79,7 @@ print algorithm.mate          # dict
 # VERTEX COLORING
 
 from graphtheory.seriesparallel.spnodecolor import SPNodeColoring
+
 algorithm = SPNodeColoring(G)
 algorithm.run()
 print algorithm.color         # dict

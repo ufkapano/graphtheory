@@ -3,18 +3,31 @@ ALGORITHMS FOR TREES
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
-from graphtheory.forests.treeiset import BorieIndependentSet
-from graphtheory.forests.treeiset import TreeIndependentSet
-from graphtheory.forests.treedset import BorieDominatingSet
-from graphtheory.forests.treedset import TreeDominatingSet
-from graphtheory.forests.treecover import BorieNodeCover
-from graphtheory.forests.treecover import TreeNodeCover
-from graphtheory.forests.treemate import BorieMatching
 
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)        # random tree
 ----------------------------------------------------------------------
+# FINDING A TREE CENTER
+
+from graphtheory.forests.treecenter import TreeCenter
+
+algorithm = TreeCenter(G)
+algorithm.run()
+print algorithm.tree_center     # one or two nodes
+print algorithm.tree_radius
+----------------------------------------------------------------------
+# DRAWING A TREE
+
+from graphtheory.forests.treeplot import TreePlot
+
+algorithm = TreePlot(G)
+algorithm.run()
+print algorithm.point_dict   # a dict with point positions in the plane
+----------------------------------------------------------------------
 # FINDING A MAXIMUM INDEPENDENT SET
+
+from graphtheory.forests.treeiset import BorieIndependentSet
+from graphtheory.forests.treeiset import TreeIndependentSet
 
 algorithm = BorieIndependentSet(G)
 algorithm.run()
@@ -29,6 +42,9 @@ print algorithm.cardinality       # the size of max iset
 ----------------------------------------------------------------------
 # FINDING A MINIMUM DOMINATING SET
 
+from graphtheory.forests.treedset import BorieDominatingSet
+from graphtheory.forests.treedset import TreeDominatingSet
+
 algorithm = BorieDominatingSet(G)
 algorithm.run()
 print algorithm.dominating_set
@@ -42,6 +58,9 @@ print algorithm.cardinality       # the size of min dset
 ----------------------------------------------------------------------
 # FINDING A MINIMUM NODE COVER
 
+from graphtheory.forests.treecover import BorieNodeCover
+from graphtheory.forests.treecover import TreeNodeCover
+
 algorithm = BorieNodeCover(G)
 algorithm.run()
 print algorithm.node_cover
@@ -54,6 +73,8 @@ print algorithm.node_cover
 print algorithm.cardinality       # the size of min cover
 ----------------------------------------------------------------------
 # FINDING A MAXIMUM MATCHING
+
+from graphtheory.forests.treemate import BorieMatching
 
 algorithm = BorieMatching(G)
 algorithm.run()
