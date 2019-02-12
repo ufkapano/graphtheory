@@ -1,19 +1,28 @@
 SERIES-PARALLEL GRAPHS (SP-GRAPHS)
 ----------------------------------------------------------------------
+# RECOGNITION
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.seriesparallel.sptrees import find_sptree
+from graphtheory.seriesparallel.spnodes import btree_print
+
+graph_factory = GraphFactory(Graph)
+G = graph_factory.make_cyclic(n=5)   # n > 2
+# a cycle graph is an sp-graph
+T = find_sptree(G)
+btree_print(T)
+----------------------------------------------------------------------
 # GENERATORS
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.sptools import make_random_ktree
 from graphtheory.seriesparallel.sptools import make_random_spgraph
-from graphtheory.seriesparallel.sptrees import find_sptree
-from graphtheory.seriesparallel.spnodes import btree_print
 
 G = make_random_spgraph(n=10)
 #G = make_random_ktree(n=10, k=2)
-
-T = find_sptree(G)
-btree_print(T)
 ----------------------------------------------------------------------
 # PERFECT ELIMINATION ORDERING (treewidth = 2)
 
