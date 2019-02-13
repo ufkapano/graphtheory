@@ -127,6 +127,8 @@ class HalinGraphPEO:
                 for new_parent in self._graph_copy.iteradjacent(node):
                     if new_parent not in self.outer_next:   # wewnetrzny wierzcholek
                         break
+                if parent_copy[node] is None:   # node is root
+                    parent_copy[new_parent] = None    # new root
                 self.order.append(node)
                 self._graph_copy.del_node(node)
                 # Uzupelniem krawedzie i parent_copy.
