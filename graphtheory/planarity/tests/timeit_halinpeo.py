@@ -10,20 +10,14 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.planarity.halin import HalinGraph
 from graphtheory.planarity.halinpeo import HalinGraphPEO
-from graphtheory.planarity.halintools import make_halin
-from graphtheory.planarity.halintools import make_halin_cubic
+from graphtheory.planarity.halintools import make_halin_outer
+from graphtheory.planarity.halintools import make_halin_cubic_outer
 
-V = 100000
-G = make_halin(V)
-#G = make_halin_cubic(V)
+V = 10000
+G, outer = make_halin_outer(V)
+#G, outer = make_halin_cubic_outer(V)   # always finishing with 7-wheel
 E = G.e()
 #G.show()
-
-# Rozpoznawanie outer.
-algorithm = HalinGraph(G)
-algorithm.run()
-#print "outer", algorithm.outer
-outer = algorithm.outer
 
 print "Testing HalinGraphPEO ..."
 t1 = timeit.Timer(lambda: HalinGraphPEO(G, outer).run())

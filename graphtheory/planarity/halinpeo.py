@@ -33,6 +33,7 @@ class HalinGraphPEO:
 
     def _find_parent(self):   # O(V) time
         """Find the inner tree (dict) using modified BFS."""
+        print "_find_parent ..."
         # Robimy BFS z wierzcholka wewnetrznego.
         for source in self.graph.iternodes():
             if source not in self.outer:
@@ -54,6 +55,7 @@ class HalinGraphPEO:
 
     def _find_cycle(self):
         """Order nodes from the outer cycle."""
+        print "_find_cycle ..."
         # Ustalam dwa pierwsze wierzcholki z cyklu zewnetrzego.
         node1 = self.outer.pop()   # pobieramy dowolny
         self.outer.add(node1)   # przywracamy
@@ -80,7 +82,8 @@ class HalinGraphPEO:
             node2 = node4
 
     def _find_peo(self):
-        """Find PEO for a Halin graph."""
+        """Find PEO for a Halin graph (chordal completion)."""
+        print "_find_peo ..."
         # Czasem obiegamy cykl zewnetrzny wiecej niz jeden raz.
         parent_copy = self.parent.copy()   # zmienia sie przy usuwaniu centrum wachlarza
         # wierzcholek poczatkowy, bedziemy szli wzdluz cyklu zewnetrznego.
@@ -88,6 +91,7 @@ class HalinGraphPEO:
         self.outer.add(current)   # przywracamy
         while True:
             if self._graph_copy.v() == 1 + len(self.outer_next):   # wheel
+                print "wheel detected, finishing, |V| =", self._graph_copy.v()
                 for node in self._graph_copy.iternodes():
                     if node in self.outer_next:
                         self.order.append(node)
@@ -110,6 +114,7 @@ class HalinGraphPEO:
                 current = finish   # ustawienie dla nastepnej petli while True
                 # Upewniam sie, ze to wachlarz.
                 if self._graph_copy.degree(parent_copy[start]) != (counter + 1):
+                    print "continue, not a fan, |V| =", self._graph_copy.v()
                     continue   # to nie jest wachlarz, przeskakujemy
                 # Dodaje wierzcholki do PEO.
                 node = self.outer_next[start]
@@ -124,6 +129,7 @@ class HalinGraphPEO:
                 # Teraz zaliczam do PEO centrum wachlarza. TO MOZE BYC ROOT!
                 # Chyba popsuje sie parent_copy.
                 node = parent_copy[start]
+                print "remove fan, center", node, "counter", counter
                 for new_parent in self._graph_copy.iteradjacent(node):
                     if new_parent not in self.outer_next:   # wewnetrzny wierzcholek
                         break

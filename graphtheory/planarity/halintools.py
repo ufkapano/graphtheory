@@ -6,8 +6,8 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treeplot import TreePlot
 
 
-def make_halin(n=4):
-    """Create a random weighted Halin graph."""
+def make_halin_outer(n=4):
+    """Create a random weighted Halin graph with the set of outer nodes."""
     if n < 4:
         raise ValueError("number of nodes must be greater than 3")
     graph = Graph(n)
@@ -54,11 +54,17 @@ def make_halin(n=4):
     n_leafs = len(L)
     for i in range(n_leafs):
         graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))
+    return graph, set(L)
+
+
+def make_halin(n=4):
+    """Create a random weighted Halin graph."""
+    graph, outer = make_halin_outer(n)
     return graph
 
 
-def make_halin_cubic(n=4):
-    """Create a cubic Halin graph."""
+def make_halin_cubic_outer(n=4):
+    """Create a random weighted cubic Halin graph with the set of outer nodes."""
     if n < 4:
         raise ValueError("number of nodes must be greater than 3")
     if n % 2:
@@ -102,6 +108,12 @@ def make_halin_cubic(n=4):
     n_leafs = len(L)
     for i in range(n_leafs):
         graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))
+    return graph, set(L)
+
+
+def make_halin_cubic(n=4):
+    """Create a random weighted cubic Halin graph."""
+    graph, outer = make_halin_cubic_outer(n)
     return graph
 
 # EOF
