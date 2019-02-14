@@ -3,6 +3,7 @@
 import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
+from graphtheory.forests.treecenter import TreeCenter
 from graphtheory.forests.treeplot import TreePlot
 
 
@@ -37,11 +38,16 @@ def make_halin_outer(n=4):
             nodes.add(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
             node += 1
-    # Wyznaczam root, ale bez uzycia TreeCenter.
-    for node in graph.iternodes():
-        if graph.degree(node) > 1:   # zawsze taki bedzie
-            root = node
-            break
+    # Method 1. Finding root without TreeCenter.
+    #for node in graph.iternodes():
+    #    if graph.degree(node) > 1:   # always present
+    #        root = node
+    #        break
+    # Method 2. Finding root with TreeCenter.
+    # TreeCenter reduces floating point errors for points.
+    algorithm = TreeCenter(graph)
+    algorithm.run()
+    root = algorithm.tree_center[0]
     # Wyznaczam slownik z punktami.
     algorithm = TreePlot(graph)
     algorithm.run(root)
@@ -90,11 +96,16 @@ def make_halin_cubic_outer(n=4):
         nodes.add(node)   # nowy lisc
         graph.add_edge(Edge(parent, node, weights.pop()))
         node += 1
-    # Wyznaczam root, ale bez uzycia TreeCenter.
-    for node in graph.iternodes():
-        if graph.degree(node) > 1:   # zawsze taki bedzie
-            root = node
-            break
+    # Method 1. Finding root without TreeCenter.
+    #for node in graph.iternodes():
+    #    if graph.degree(node) > 1:   # always present
+    #        root = node
+    #        break
+    # Method 2. Finding root with TreeCenter.
+    # TreeCenter reduces floating point errors for points.
+    algorithm = TreeCenter(graph)
+    algorithm.run()
+    root = algorithm.tree_center[0]
     # Wyznaczam slownik z punktami.
     algorithm = TreePlot(graph)
     algorithm.run(root)

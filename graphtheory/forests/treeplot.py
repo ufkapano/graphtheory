@@ -20,7 +20,7 @@ class TreePlot:
             algorithm = TreeCenter(self.graph)
             algorithm.run()
             root = algorithm.tree_center[0]
-        self.plot(root, 0.0, 2 * math.pi, level=0)
+        self.plot(root, 0.0, 2.0 * math.pi, level=0)
 
     def plot(self, source, left, right, level):
         """Find node positions.
@@ -45,7 +45,7 @@ class TreePlot:
             if deg == 1:   # hanging node
                 return
             else:   # neighbors without already visited node
-                delta = (right - left) / (deg - 1)
+                delta = (right - left) / (deg - 1.0)
         for target in self.graph.iteradjacent(source):
             if target not in self.point_dict:
                 self.plot(target, left, left + delta, level + 1)
