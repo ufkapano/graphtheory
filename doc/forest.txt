@@ -19,10 +19,15 @@ print algorithm.tree_radius
 # DRAWING A TREE
 
 from graphtheory.forests.treeplot import TreePlot
+from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
-algorithm = TreePlot(G)
+algorithm = TreePlot(G)   # using float,  only for trees with |V| < 1e4
 algorithm.run()
 print algorithm.point_dict   # a dict with point positions in the plane
+
+algorithm = TreePlotRadiusAngle(G)   # using fractions
+algorithm.run()
+print algorithm.point_dict   # a dict with pairs (radius, angle)
 ----------------------------------------------------------------------
 # FINDING A MAXIMUM INDEPENDENT SET
 

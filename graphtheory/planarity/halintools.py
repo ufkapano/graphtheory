@@ -4,7 +4,7 @@ import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treecenter import TreeCenter
-from graphtheory.forests.treeplot import TreePlot
+from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
 
 def make_halin_outer(n=4):
@@ -39,24 +39,24 @@ def make_halin_outer(n=4):
             graph.add_edge(Edge(parent, node, weights.pop()))
             node += 1
     # Method 1. Finding root without TreeCenter.
-    #for node in graph.iternodes():
-    #    if graph.degree(node) > 1:   # always present
-    #        root = node
-    #        break
+    for node in graph.iternodes():
+        if graph.degree(node) > 1:   # always present
+            root = node
+            break
     # Method 2. Finding root with TreeCenter.
     # TreeCenter reduces floating point errors for points.
-    algorithm = TreeCenter(graph)
-    algorithm.run()
-    root = algorithm.tree_center[0]
+    #algorithm = TreeCenter(graph)
+    #algorithm.run()
+    #root = algorithm.tree_center[0]
     # Wyznaczam slownik z punktami.
-    algorithm = TreePlot(graph)
+    algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
     L = list()   # for leafs
     for node in algorithm.point_dict:
         if graph.degree(node) == 1:   # leafs
             L.append(node)
     # Sortowanie lisci ze wzgledu na kat.
-    L.sort(key=lambda node: algorithm.point_dict[node].alpha())
+    L.sort(key=lambda node: algorithm.point_dict[node][1])
     n_leafs = len(L)
     for i in range(n_leafs):
         graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))
@@ -97,17 +97,17 @@ def make_halin_cubic_outer(n=4):
         graph.add_edge(Edge(parent, node, weights.pop()))
         node += 1
     # Method 1. Finding root without TreeCenter.
-    #for node in graph.iternodes():
-    #    if graph.degree(node) > 1:   # always present
-    #        root = node
-    #        break
+    for node in graph.iternodes():
+        if graph.degree(node) > 1:   # always present
+            root = node
+            break
     # Method 2. Finding root with TreeCenter.
     # TreeCenter reduces floating point errors for points.
-    algorithm = TreeCenter(graph)
-    algorithm.run()
-    root = algorithm.tree_center[0]
+    #algorithm = TreeCenter(graph)
+    #algorithm.run()
+    #root = algorithm.tree_center[0]
     # Wyznaczam slownik z punktami.
-    algorithm = TreePlot(graph)
+    algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
     #print algorithm.point_dict
     L = list()   # for leafs
@@ -115,7 +115,7 @@ def make_halin_cubic_outer(n=4):
         if graph.degree(node) == 1:   # leaf
             L.append(node)
     # Sortowanie lisci ze wzgledu na kat.
-    L.sort(key=lambda node: algorithm.point_dict[node].alpha())
+    L.sort(key=lambda node: algorithm.point_dict[node][1])
     n_leafs = len(L)
     for i in range(n_leafs):
         graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))

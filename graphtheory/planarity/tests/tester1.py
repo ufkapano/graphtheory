@@ -29,12 +29,18 @@ print "Vertex coloring ..."
 algorithm = HalinNodeColoring(G, outer)
 algorithm.run()
 print "parent", algorithm.parent
+assert len(algorithm.parent) == G.v()
 print "color", algorithm.color
+all_colors = set(algorithm.color[node] for node in G.iternodes())
+print "len(all_colors)", len(all_colors)
+assert len(algorithm.color) == G.v()
 
 print "Finding PEO for chordal completion ..."
 algorithm = HalinGraphPEO(G, outer)
 algorithm.run()
 print "parent", algorithm.parent
+assert len(algorithm.parent) == G.v()
 print "order", algorithm.order
+assert len(algorithm.order) == G.v()
 
 # EOF
