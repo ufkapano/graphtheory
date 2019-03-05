@@ -169,6 +169,17 @@ class TestGraphFactory(unittest.TestCase):
         self.assertEqual(G.v(), self.N)
         self.assertTrue(G.e() > self.N - 2)
 
+    def test_necklace(self):
+        G = self.graph_factory.make_necklace(n=self.N, directed=False)
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), 3 * self.N / 2)
+        self.assertRaises(ValueError, self.graph_factory.make_necklace, 1)
+        self.assertRaises(ValueError, self.graph_factory.make_necklace, 2)
+        self.assertRaises(ValueError, self.graph_factory.make_necklace, 3)
+        self.assertRaises(ValueError, self.graph_factory.make_necklace, 5)
+        #G = self.graph_factory.make_necklace(n=6, directed=False)
+        #G.show()
+
     def test_wheel(self):
         G = self.graph_factory.make_wheel(n=self.N, directed=False)
         self.assertFalse(G.is_directed())

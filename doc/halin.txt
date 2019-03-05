@@ -22,7 +22,12 @@ from graphtheory.planarity.halintools import make_halin
 from graphtheory.planarity.halintools import make_halin_cubic
 from graphtheory.planarity.halintools import make_halin_outer
 from graphtheory.planarity.halintools import make_halin_cubic_outer
+from graphtheory.structures.factory import GraphFactory
 
+gf = GraphFactory(Graph)
+
+G = gf.make_wheel(n=10)       # wheel graph
+G = gf.make_necklace(n=10)   # necklace graph, n even
 G = make_halin(n=7)
 G = make_halin_cubic(n=10)   # n even
 G, outer = make_halin_outer(n=7)

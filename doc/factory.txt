@@ -23,6 +23,7 @@ G = gf.make_ladder(size=4)        # ladder, size > 2
 G = gf.make_prism(size=4)        # prism graph, size > 2
 G = gf.make_antiprism(size=4)   # antiprism graph, size > 2
 G = gf.make_flow_network(n=10)   # flow network (directed)
+G = gf.make_necklace(n=10)   # necklace graph, n even
 G = gf.make_wheel(n=10)       # wheel graph
 G = gf.make_fake_wheel(n=10)       # fake wheel graph, n > 6
 

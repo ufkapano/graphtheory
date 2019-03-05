@@ -339,6 +339,30 @@ class GraphFactory:
         # all nodes are on paths; new edges can be added
         return graph
 
+    def make_necklace(self, n=4, directed=False):
+        """Create a weighted necklace graph, |V| = 2*k, |E| = 3*k."""
+        if n < 4:
+            raise ValueError("number of nodes must be greater than 3")
+        if n % 2:
+            raise ValueError("number of nodes must be even")
+        # It is a cubic graph.
+        graph = self.cls(n, directed)
+        k = n / 2
+        weights = range(1, 1 + 3 * k)
+        random.shuffle(weights)
+        for node in xrange(n):
+            graph.add_node(node)
+        graph.add_edge(Edge(0, 1, weights.pop()))
+        graph.add_edge(Edge(0, 2, weights.pop()))
+        graph.add_edge(Edge(0, n-1, weights.pop()))
+        graph.add_edge(Edge(n-2, n-1, weights.pop()))
+        graph.add_edge(Edge(n-3, n-1, weights.pop()))
+        for i in xrange(1, n-3):
+            graph.add_edge(Edge(i, i+2, weights.pop())) # ---
+        for i in xrange(1, n-1, 2):
+            graph.add_edge(Edge(i, i+1, weights.pop())) # |
+        return graph
+
     def make_wheel(self, n=4, directed=False):
         """Create a weighted wheel graph."""
         if n < 4:
