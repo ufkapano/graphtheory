@@ -146,7 +146,7 @@ class MultiGraph(dict):
         for source in self.iternodes():
             print source, ":",
             for target in self[source]:
-                print "%s(%s)" % (target, len(self[source][target])),
+                print "{}({})".format(target, len(self[source][target])),
             print
 
     def copy(self):

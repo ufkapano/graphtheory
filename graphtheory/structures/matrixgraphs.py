@@ -134,7 +134,7 @@ class Graph:
                 if self.data[source][target] == 1:
                     print target,
                 elif self.data[source][target] != 0:
-                    print "%s(%s)" % (target, self.data[source][target]),
+                    print "{}({})".format(target, self.data[source][target]),
             print
 
     def copy(self):
@@ -218,15 +218,15 @@ class Graph:
     def save(self, file_name, name="Graph"):
         """Export the graph to the adjacency list format with comments."""
         afile = open(file_name, "w")
-        afile.write("# NAME=%s\n" % name)
-        afile.write("# DIRECTED=%s\n" % self.is_directed())
-        afile.write("# V=%s\n" % self.v())
-        afile.write("# E=%s\n" % self.e())
+        afile.write("# NAME={}\n".format(name))
+        afile.write("# DIRECTED={}\n".format(self.is_directed()))
+        afile.write("# V={}\n".format(self.v()))
+        afile.write("# E={}\n".format(self.e()))
         for edge in self.iteredges():
             if edge.weight == 1:
-                afile.write("%s %s\n" % (edge.source, edge.target))
+                afile.write("{} {}\n".format(edge.source, edge.target))
             else:
-                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
         afile.close()
 
     @classmethod
@@ -261,9 +261,9 @@ class Graph:
         afile = open(file_name, "w")
         for edge in self.iteredges():
             if edge.weight == 1:
-                afile.write("%s %s\n" % (edge.source, edge.target))
+                afile.write("{} {}\n".format(edge.source, edge.target))
             else:
-                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
         afile.close()
 
     def save_ncol(self, file_name="graph.ncol"):
@@ -272,12 +272,12 @@ class Graph:
             raise ValueError("the graph is directed")
         afile = open(file_name, "w")
         for node in self.iternodes():
-            afile.write("# %s\n" % str(node))
+            afile.write("# {}\n".format(node))
             for edge in self.iteroutedges(node):
                 if edge.source < edge.target and edge.weight == 1:
-                    afile.write("%s\n" % str(edge.target))
+                    afile.write("{}\n".format(edge.target))
                 elif edge.source < edge.target:
-                    afile.write("%s %s\n" % (edge.target, edge.weight))
+                    afile.write("{} {}\n".format(edge.target, edge.weight))
         afile.close()
 
 # EOF

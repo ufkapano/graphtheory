@@ -24,9 +24,9 @@ from graphtheory.planarity.halintools import make_halin_outer
 from graphtheory.planarity.halintools import make_halin_cubic_outer
 
 G = make_halin(n=7)
-#G = make_halin_cubic(n=10)   # n even
-#G, outer = make_halin_outer(n=7)
-#G, outer = make_halin_cubic_outer(n=10)   # n even
+G = make_halin_cubic(n=10)   # n even
+G, outer = make_halin_outer(n=7)
+G, outer = make_halin_cubic_outer(n=10)   # n even
 ----------------------------------------------------------------------
 # PERFECT ELIMINATION ORDERING FOR CHORDAL COMPLETION (treewidth = 3)
 
@@ -44,6 +44,6 @@ from graphtheory.planarity.halinnodecolor import HalinNodeColoring
 algorithm = HalinNodeColoring(G, outer)
 algorithm.run()
 print algorithm.parent        # inner tree (dict)
-print algorithm.color         # dict
+print algorithm.color         # dict with node colors
 ----------------------------------------------------------------------
 EOF

@@ -133,7 +133,7 @@ class Graph(dict):
                 if edge.weight == 1:
                     print edge.target,
                 else:
-                    print "%s(%s)" % (edge.target, edge.weight),
+                    print "{}({})".format(edge.target, edge.weight),
             print
 
     def copy(self):
@@ -225,15 +225,15 @@ class Graph(dict):
     def save(self, file_name, name="Graph"):
         """Export the graph to the adjacency list format with comments."""
         afile = open(file_name, "w")
-        afile.write("# NAME=%s\n" % name)
-        afile.write("# DIRECTED=%s\n" % self.directed)
-        afile.write("# V=%s\n" % self.v())
-        afile.write("# E=%s\n" % self.e())
+        afile.write("# NAME={}\n".format(name))
+        afile.write("# DIRECTED={}\n".format(self.directed))
+        afile.write("# V={}\n".format(self.v()))
+        afile.write("# E={}\n".format(self.e()))
         for edge in self.iteredges():
             if edge.weight == 1:
-                afile.write("%s %s\n" % (edge.source, edge.target))
+                afile.write("{} {}\n".format(edge.source, edge.target))
             else:
-                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
         afile.close()
 
     @classmethod
@@ -271,9 +271,9 @@ class Graph(dict):
         afile = open(file_name, "w")
         for edge in self.iteredges():
             if edge.weight == 1:
-                afile.write("%s %s\n" % (edge.source, edge.target))
+                afile.write("{} {}\n".format(edge.source, edge.target))
             else:
-                afile.write("%s %s %s\n" % (edge.source, edge.target, edge.weight))
+                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
         afile.close()
 
     def save_ncol(self, file_name="graph.ncol"):
@@ -282,12 +282,12 @@ class Graph(dict):
             raise ValueError("the graph is directed")
         afile = open(file_name, "w")
         for node in self.iternodes():
-            afile.write("# %s\n" % str(node))
+            afile.write("# {}\n".format(node))
             for edge in self.iteroutedges(node):
                 if edge.source < edge.target and edge.weight == 1:
-                    afile.write("%s\n" % str(edge.target))
+                    afile.write("{}\n".format(edge.target))
                 elif edge.source < edge.target:
-                    afile.write("%s %s\n" % (edge.target, edge.weight))
+                    afile.write("{} {}\n".format(edge.target, edge.weight))
         afile.close()
 
 # EOF

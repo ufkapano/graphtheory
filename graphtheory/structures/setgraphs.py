@@ -5,18 +5,18 @@ from graphtheory.structures.edges import Edge
 
 
 class Graph(dict):
-    """The class defining a graph.
+    """The class defining an unweighted graph (edge weights are ignored).
     
     Nodes can be numbers, strings, or any hashable objects.
     We would like to compare nodes.
     
-    An exemplary graph structure:
-    {"A": {"B": Edge("A", "B", 1), "C": Edge("A", "C", 2)}, 
-    "B": {"C": Edge("B", "C", 3), "D": Edge("B", "D", 4)}, 
-    "C": {"D": Edge("C", "D", 5)}, 
-    "D": {"C": Edge("D", "C", 6)}, 
-    "E": {"C": Edge("E", "C", 7)}, 
-    "F": {}}
+    Internal structure of an exemplary directed graph:
+    {"A": set(["B", "C"]), 
+    "B": set(["C", "D"]), 
+    "C": set(["D"]), 
+    "D": set(["C"]), 
+    "E": set(["C"]), 
+    "F": set()}
     """
 
     def __init__(self, n=0, directed=False):
@@ -29,9 +29,6 @@ class Graph(dict):
         """
         self.n = n
         self.directed = directed
-        # Structures defining a topological graph.
-        self.edge_next = None
-        self.edge_prev = None
 
     def is_directed(self):
         """Test if the graph is directed."""
@@ -46,33 +43,10 @@ class Graph(dict):
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges / 2)
 
-    def f(self):
-        """Return the number of faces (for planar graphs)."""
-        if not self.edge_next or not self.edge_prev:
-            raise ValueError("run planarity test first")
-        return self.e() + 2 - self.n   # Euler's formula
-
-    def iterfaces(self):
-        """Generate all faces on demand (for planar graphs)."""
-        if not self.edge_next or not self.edge_prev:
-            raise ValueError("planar embedding not calculated")
-        used = set()
-        for edge in self.edge_next:
-            if edge in used:
-                continue
-            used.add(edge)
-            face = [edge]
-            edge = self.edge_next[~edge]
-            while edge not in used:
-                used.add(edge)
-                face.append(edge)
-                edge = self.edge_next[~edge]
-            yield face
-
     def add_node(self, node):
         """Add a node to the graph."""
         if node not in self:
-            self[node] = dict()
+            self[node] = set()
 
     def has_node(self, node):
         """Test if a node exists."""
@@ -80,12 +54,8 @@ class Graph(dict):
 
     def del_node(self, node):
         """Remove a node from the graph (with edges)."""
-        # The dictionary changes size during iteration.
-        for edge in list(self.iterinedges(node)):
-            self.del_edge(edge)
-        if self.is_directed():
-            for edge in list(self.iteroutedges(node)):
-                self.del_edge(edge)
+        for source in self:
+            self[source].discard(node)
         del self[node]
 
     def add_edge(self, edge):
@@ -95,20 +65,20 @@ class Graph(dict):
         self.add_node(edge.source)
         self.add_node(edge.target)
         if edge.target not in self[edge.source]:
-            self[edge.source][edge.target] = edge
+            self[edge.source].add(edge.target)
         else:
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
             if edge.source not in self[edge.target]:
-                self[edge.target][edge.source] = ~edge
+                self[edge.target].add(edge.source)
             else:
                 raise ValueError("parallel edges are forbidden")
 
     def del_edge(self, edge):
         """Remove an edge from the graph."""
-        del self[edge.source][edge.target]
+        self[edge.source].remove(edge.target)
         if not self.is_directed():
-            del self[edge.target][edge.source]
+            self[edge.target].remove(edge.source)
 
     def has_edge(self, edge):
         """Test if an edge exists (the weight is not checked)."""
@@ -117,56 +87,53 @@ class Graph(dict):
     def weight(self, edge):
         """Return the edge weight or zero."""
         if edge.source in self and edge.target in self[edge.source]:
-            return self[edge.source][edge.target].weight
+            return 1
         else:
             return 0
 
     def iternodes(self):
-        """Generate all nodes from the graph on demand."""
+        """Generate the nodes from the graph on demand."""
         return self.iterkeys()
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        return self[source].iterkeys()
+        return iter(self[source])
 
     def iteroutedges(self, source):
         """Generate the outedges from the graph on demand."""
         for target in self[source]:
-            yield self[source][target]
+            yield Edge(source, target)
 
     def iterinedges(self, source):
         """Generate the inedges from the graph on demand."""
         if self.is_directed():   # O(V) time
             for target in self.iternodes():
                 if source in self[target]:
-                    yield self[target][source]
+                    yield Edge(target, source)
         else:
             for target in self[source]:
-                yield self[target][source]
+                yield Edge(target, source)
 
     def iteredges(self):
-        """Generate all edges from the graph on demand."""
+        """Generate the edges from the graph on demand."""
         for source in self.iternodes():
             for target in self[source]:
                 if self.is_directed() or source < target:
-                    yield self[source][target]
+                    yield Edge(source, target)
 
     def show(self):
         """The graph presentation."""
         for source in self.iternodes():
             print source, ":",
             for edge in self.iteroutedges(source):
-                if edge.weight == 1:
-                    print edge.target,
-                else:
-                    print "{}({})".format(edge.target, edge.weight),
+                print edge.target,
             print
 
     def copy(self):
         """Return the graph copy."""
         new_graph = Graph(n=self.n, directed=self.directed)
         for node in self.iternodes():
-            new_graph[node] = dict(self[node])
+            new_graph[node] = set(self[node])
         return new_graph
 
     def transpose(self):
@@ -185,23 +152,10 @@ class Graph(dict):
             new_graph.add_node(node)
         for source in self.iternodes():
             for target in self.iternodes():
-                if source != target:   # no loops
+                if source != target:
                     edge = Edge(source, target)
                     if not self.has_edge(edge) and not new_graph.has_edge(edge):
                         new_graph.add_edge(edge)
-        return new_graph
-
-    def subgraph(self, nodes):
-        """Return the induced subgraph."""
-        node_set = set(nodes)
-        if any(not self.has_node(node) for node in node_set):
-            raise ValueError("nodes not from the graph")
-        new_graph = Graph(n=len(node_set), directed=self.directed)
-        for node in node_set:
-            new_graph.add_node(node)
-        for edge in self.iteredges():
-            if (edge.source in node_set) and (edge.target in node_set):
-                new_graph.add_edge(edge)
         return new_graph
 
     def degree(self, source):
@@ -265,14 +219,11 @@ class Graph(dict):
         """Export the graph to the adjacency list format with comments."""
         afile = open(file_name, "w")
         afile.write("# NAME={}\n".format(name))
-        afile.write("# DIRECTED={}\n".format(self.is_directed()))
+        afile.write("# DIRECTED={}\n".format(self.directed))
         afile.write("# V={}\n".format(self.v()))
         afile.write("# E={}\n".format(self.e()))
         for edge in self.iteredges():
-            if edge.weight == 1:
-                afile.write("{} {}\n".format(edge.source, edge.target))
-            else:
-                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
+            afile.write("{} {}\n".format(edge.source, edge.target))
         afile.close()
 
     @classmethod
@@ -309,10 +260,7 @@ class Graph(dict):
             raise ValueError("the graph is directed")
         afile = open(file_name, "w")
         for edge in self.iteredges():
-            if edge.weight == 1:
-                afile.write("{} {}\n".format(edge.source, edge.target))
-            else:
-                afile.write("{} {} {}\n".format(edge.source, edge.target, edge.weight))
+            afile.write("{} {}\n".format(edge.source, edge.target))
         afile.close()
 
     def save_ncol(self, file_name="graph.ncol"):
@@ -323,10 +271,8 @@ class Graph(dict):
         for node in self.iternodes():
             afile.write("# {}\n".format(node))
             for edge in self.iteroutedges(node):
-                if edge.source < edge.target and edge.weight == 1:
+                if edge.source < edge.target:
                     afile.write("{}\n".format(edge.target))
-                elif edge.source < edge.target:
-                    afile.write("{} {}\n".format(edge.target, edge.weight))
         afile.close()
 
 # EOF
