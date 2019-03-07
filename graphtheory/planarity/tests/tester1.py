@@ -11,11 +11,12 @@ from graphtheory.planarity.halintools import make_halin_cubic
 from graphtheory.planarity.wheels import is_wheel
 
 graph_factory = GraphFactory(Graph)
-#G = graph_factory.make_prism(3)   # V=2*size=6
-#G = graph_factory.make_complete(4)   # V=4
-#G = graph_factory.make_wheel(5)   # V > 3
-#G = make_halin(7)    # V > 3
-G = make_halin_cubic(8)   # V even
+#G = graph_factory.make_prism(size=3)   # V=2*size=6
+#G = graph_factory.make_complete(n=4)   # V=4
+#G = graph_factory.make_wheel(n=5)   # V > 3
+G = graph_factory.make_necklace(n=6)   # V even
+#G = make_halin(n=7)    # V > 3
+#G = make_halin_cubic(n=8)   # V even
 G.show()
 
 print "Recognition ..."

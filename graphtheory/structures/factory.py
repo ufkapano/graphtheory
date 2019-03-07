@@ -339,8 +339,16 @@ class GraphFactory:
         # all nodes are on paths; new edges can be added
         return graph
 
+# 0-----------------(n-1)       n is even
+# |\                / |  outer nodes set(xrange(0,n,2)) | set([n-1])
+# | 1--3--5-...-(n-3) |
+# |/   |  |         \ |
+# 2----4--6-...----(n-2)
+
     def make_necklace(self, n=4, directed=False):
-        """Create a weighted necklace graph, |V| = 2*k, |E| = 3*k."""
+        """Create a weighted necklace graph, |V| = 2*k, |E| = 3*k.
+        The set of outer nodes is set(xrange(0,n,2)) | set([n-1]).
+        """
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
         if n % 2:
@@ -364,7 +372,7 @@ class GraphFactory:
         return graph
 
     def make_wheel(self, n=4, directed=False):
-        """Create a weighted wheel graph."""
+        """Create a weighted wheel graph. The hub is equal to 0."""
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
         graph = self.cls(n, directed)
