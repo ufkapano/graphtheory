@@ -22,6 +22,9 @@ A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*.
 The Python Papers 11, 3 (2016). 
 http://ojs.pythonpapers.org/index.php/tpp/article/view/270 [final version]
 
+[2] A. Kapanowski and A. Krawczyk, *Halin graphs are 3-vertex-colorable except even wheels*.
+https://arxiv.org/abs/1903.02904
+
 Contributors
 ------------
 
