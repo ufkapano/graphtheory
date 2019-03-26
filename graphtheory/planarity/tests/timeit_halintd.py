@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+import timeit
+import random
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.planarity.halintd import HalinGraphTreeDecomposition
+from graphtheory.planarity.halintools import make_halin_outer
+from graphtheory.planarity.halintools import make_halin_cubic_outer
+
+V = 10
+graph_factory = GraphFactory(Graph)
+G = graph_factory.make_necklace(n=V)   # V even
+outer = set(xrange(0,V,2)) | set([V-1])   # necklace
+
+#G, outer = make_halin_outer(V)
+#G, outer = make_halin_cubic_outer(V)   # always finishing with 7-wheel
+E = G.e()
+#G.show()
+
+print "Testing HalinGraphTreeDecomposition ..."
+t1 = timeit.Timer(lambda: HalinGraphTreeDecomposition(G, outer).run())
+print V, E, t1.timeit(1)            # pojedyncze wykonanie
+
+# EOF
