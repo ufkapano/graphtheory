@@ -56,6 +56,6 @@ Krzysztof Niedzielski (matching)
 
 Konrad Gałuszka (series-parallel graphs)
 
-Maciej Niezabitowski (treewidth)
+Maciej Niezabitowski (tree decomposition)
 
 EOF

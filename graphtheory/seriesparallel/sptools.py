@@ -17,7 +17,9 @@ def make_random_spgraph(n):
         graph.add_node(node)
     source = 0
     sink = n-1
-    edge_list = [Edge(source, sink)]
+    idx = 1
+    edge_list = [Edge(source, sink, idx)]
+    idx += 1
     node = n-2
     while node > 0:
         # Losowanie krawedzi na ktorej bedzie operacja.
@@ -31,13 +33,18 @@ def make_random_spgraph(n):
             action = random.choice(["series", "parallel"])
         if action == "series":
             edge_list.pop()
-            edge_list.append(Edge(edge.source, node))
-            edge_list.append(Edge(node, edge.target))
+            edge_list.append(Edge(edge.source, node, idx))
+            idx += 1
+            edge_list.append(Edge(node, edge.target, idx))
+            idx += 1
         elif action == "parallel":
-            edge_list.append(Edge(edge.source, node))
-            edge_list.append(Edge(node, edge.target))
+            edge_list.append(Edge(edge.source, node, idx))
+            idx += 1
+            edge_list.append(Edge(node, edge.target, idx))
+            idx += 1
         elif action == "jackknife":
-            edge_list.append(Edge(edge.target, node))
+            edge_list.append(Edge(edge.target, node, idx))
+            idx += 1
         node -= 1
     for edge in edge_list:
         graph.add_edge(edge)
