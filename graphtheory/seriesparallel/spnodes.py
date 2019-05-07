@@ -24,8 +24,7 @@ def btree_print(top, level=0):
     if top is None:
         return
     btree_print(top.right, level+1)
-    #print '   ' * level, top
-    print "{0}[{1}]{2}".format('   ' * level, level, top)
+    print ( "{0}[{1}]{2}".format('   ' * level, level, top) )
     btree_print(top.left, level+1)
 
 

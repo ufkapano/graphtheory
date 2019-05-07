@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph

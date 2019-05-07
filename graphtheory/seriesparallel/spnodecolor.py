@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS
 from graphtheory.connectivity.connected import is_connected
 from graphtheory.seriesparallel.sptools import find_peo_spgraph
