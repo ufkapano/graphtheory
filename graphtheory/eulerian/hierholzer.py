@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-from Queue import LifoQueue
+try:
+    from Queue import LifoQueue
+except ImportError:   # Python 3
+    from queue import LifoQueue
 
 
 class Hierholzer:
@@ -32,11 +35,11 @@ class Hierholzer:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.eulerian_cycle.append(source)
         while True:
             if self._graph_copy.outdegree(source) > 0:
-                edge = self._graph_copy.iteroutedges(source).next()
+                edge = next(self._graph_copy.iteroutedges(source))
                 self._stack.put(source)
                 self._graph_copy.del_edge(edge)
                 source = edge.target
@@ -93,10 +96,10 @@ class HierholzerWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         while True:
             if self._graph_copy.outdegree(source) > 0:
-                edge = self._graph_copy.iteroutedges(source).next()
+                edge = next(self._graph_copy.iteroutedges(source))
                 self._stack.put(edge)
                 self._graph_copy.del_edge(edge)
                 source = edge.target

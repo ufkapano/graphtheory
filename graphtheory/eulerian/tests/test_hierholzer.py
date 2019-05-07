@@ -187,12 +187,6 @@ class TestEulerianCycleDirected2(unittest.TestCase):
 
 if __name__ == "__main__":
 
-    #unittest.main()
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestEulerianCycleUndirected)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestEulerianCycleUndirected2)
-    suite3 = unittest.TestLoader().loadTestsFromTestCase(TestEulerianCycleDirected)
-    suite4 = unittest.TestLoader().loadTestsFromTestCase(TestEulerianCycleDirected2)
-    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
 
 # EOF

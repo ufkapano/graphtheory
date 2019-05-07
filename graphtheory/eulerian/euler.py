@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-from Queue import LifoQueue
+try:
+    from Queue import LifoQueue
+except ImportError:   # Python 3
+    from queue import LifoQueue
 
 
 class EulerianCycleDFS:
@@ -35,7 +38,7 @@ class EulerianCycleDFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self._visit(source)
         while not self._stack.empty():
             self.eulerian_cycle.append(self._stack.get())
@@ -45,7 +48,7 @@ class EulerianCycleDFS:
     def _visit(self, source):
         """Visiting node."""
         while self._graph_copy.outdegree(source) > 0:
-            edge = self._graph_copy.iteroutedges(source).next()
+            edge = next(self._graph_copy.iteroutedges(source))
             self._graph_copy.del_edge(edge)
             self._visit(edge.target)
         self._stack.put(source)
@@ -98,9 +101,9 @@ class EulerianCycleDFSWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            start_edge = self.graph.iteredges().next()
+            start_edge = next(self.graph.iteredges())
         else:
-            start_edge = self.graph.iteroutedges(source).next()
+            start_edge = next(self.graph.iteroutedges(source))
         self._graph_copy.del_edge(start_edge)
         self._visit(start_edge)
         while not self._stack.empty():
@@ -111,7 +114,7 @@ class EulerianCycleDFSWithEdges:
     def _visit(self, start_edge):
         """Visiting edge."""
         while self._graph_copy.outdegree(start_edge.target) > 0:
-            edge = self._graph_copy.iteroutedges(start_edge.target).next()
+            edge = next(self._graph_copy.iteroutedges(start_edge.target))
             self._graph_copy.del_edge(edge)
             self._visit(edge)
         self._stack.put(start_edge)

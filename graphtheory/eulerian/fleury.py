@@ -31,7 +31,7 @@ class FleuryDFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         node = source
         self.eulerian_cycle.append(node)
         while self._graph_copy.outdegree(node) > 0:
@@ -99,7 +99,7 @@ class FleuryDFSWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         node = source
         while self._graph_copy.outdegree(node) > 0:
             for edge in list(self._graph_copy.iteroutedges(node)):
@@ -166,7 +166,7 @@ class FleuryBFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         node = source
         self.eulerian_cycle.append(node)
         while self._graph_copy.outdegree(node) > 0:
@@ -234,7 +234,7 @@ class FleuryBFSWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         node = source
         while self._graph_copy.outdegree(node) > 0:
             for edge in list(self._graph_copy.iteroutedges(node)):
