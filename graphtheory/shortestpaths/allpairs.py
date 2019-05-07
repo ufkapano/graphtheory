@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
+
 class SlowAllPairs:
     """All-pairs shortest paths algorithm in O(V**4) time.
     
