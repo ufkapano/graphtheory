@@ -37,7 +37,7 @@ class WheelGraph:
         if n < 4:
             raise ValueError("the number of nodes is less then 4")
         elif n == 4 and e == 6:   # complete graph K4
-            self.hub = self.graph.iternodes().next()
+            self.hub = next(self.graph.iternodes())
             return
         if e != 2 * n - 2:
             raise ValueError("bad number of edges")

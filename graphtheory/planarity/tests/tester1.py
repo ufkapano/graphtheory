@@ -19,29 +19,29 @@ G = graph_factory.make_necklace(n=6)   # V even
 #G = make_halin_cubic(n=8)   # V even
 G.show()
 
-print "Recognition ..."
-print "is_wheel", is_wheel(G)
+print ( "Recognition ..." )
+print ( "is_wheel {}".format(is_wheel(G)) )
 algorithm = HalinGraph(G)
 algorithm.run()
-print "outer", algorithm.outer
+print ( "outer {}".format(algorithm.outer) )
 outer = algorithm.outer
 
-print "Vertex coloring ..."
+print ( "Vertex coloring ..." )
 algorithm = HalinNodeColoring(G, outer)
 algorithm.run()
-print "parent", algorithm.parent
+print ( "parent {}".format(algorithm.parent) )
 assert len(algorithm.parent) == G.v()
-print "color", algorithm.color
+print ( "color {}".format(algorithm.color) )
 all_colors = set(algorithm.color[node] for node in G.iternodes())
-print "len(all_colors)", len(all_colors)
+print ( "len(all_colors) {}".format(len(all_colors)) )
 assert len(algorithm.color) == G.v()
 
-print "Finding PEO for chordal completion ..."
+print ( "Finding PEO for chordal completion ..." )
 algorithm = HalinGraphPEO(G, outer)
 algorithm.run()
-print "parent", algorithm.parent
+print ( "parent {}".format(algorithm.parent) )
 assert len(algorithm.parent) == G.v()
-print "order", algorithm.order
+print ( "order {}".format(algorithm.order) )
 assert len(algorithm.order) == G.v()
 
 # EOF

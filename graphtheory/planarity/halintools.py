@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
@@ -12,7 +18,7 @@ def make_halin_outer(n=4):
     if n < 4:
         raise ValueError("number of nodes must be greater than 3")
     graph = Graph(n)
-    weights = range(1, 1 + 2 * n - 2)
+    weights = list(range(1, 1 + 2 * n - 2))
     random.shuffle(weights)
     for node in xrange(n):
         graph.add_node(node)
@@ -76,7 +82,7 @@ def make_halin_cubic_outer(n=4):
     if n % 2:
         raise ValueError("odd number of nodes")
     graph = Graph(n)
-    weights = range(1, 1 + 3 * n / 2)
+    weights = list(range(1, 1 + 3 * n // 2))
     random.shuffle(weights)
     for node in xrange(n):
         graph.add_node(node)

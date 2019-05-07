@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 import random
 from graphtheory.structures.edges import Edge
 
@@ -18,7 +24,7 @@ class PlanarGraphFactory:
         graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
-        weights = range(1, 1 + n)   # different weights
+        weights = list(range(1, 1 + n))   # different weights
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
@@ -54,7 +60,7 @@ class PlanarGraphFactory:
         graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
-        weights = range(1, 1 + 2 * n - 2)
+        weights = list(range(1, 1 + 2 * n - 2))
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)

@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
-from Queue import Queue
+try:
+    from Queue import Queue
+except ImportError:   # Python 3
+    from queue import Queue
+    xrange = range
+
 from graphtheory.structures.edges import Edge
 
 
@@ -88,7 +93,6 @@ class HalinGraphPEO:
         self.outer.add(current)   # przywracamy
         while True:
             if self._graph_copy.v() == 1 + len(self.outer_next):   # wheel
-                #print "wheel detected, finishing, |V| =", self._graph_copy.v()
                 for node in self._graph_copy.iternodes():
                     if node in self.outer_next:
                         self.order.append(node)
@@ -112,11 +116,6 @@ class HalinGraphPEO:
                 current = finish   # ustawienie dla nastepnej petli while True
                 # Upewniam sie, ze to wachlarz.
                 if self._graph_copy.degree(parent_copy[start]) != (counter + 1):
-                    #print "continue, not a fan, |V| =", self._graph_copy.v()
-                    #print "parent", parent_copy[start], "start", start, "finish", finish
-                    #print "degree", self._graph_copy.degree(parent_copy[start]), "counter", counter
-                    #if self._graph_copy.v() < 50:
-                    #    self._graph_copy.show()
                     continue   # to nie jest wachlarz, przeskakujemy
                 # Dodaje wierzcholki do PEO.
                 node = self.outer_next[start]
@@ -132,7 +131,6 @@ class HalinGraphPEO:
                 # Chyba popsuje sie parent_copy.
                 node = parent_copy[start]
                 assert self._graph_copy.degree(node) == 3
-                #print "remove fan, center", node, "counter", counter
                 for new_parent in self._graph_copy.iteradjacent(node):
                     if new_parent not in self.outer_next:   # wewnetrzny wierzcholek
                         break
