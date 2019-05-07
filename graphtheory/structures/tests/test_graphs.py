@@ -23,6 +23,7 @@ class TestGraphDirected(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_directed(self):
         self.assertTrue(self.G.is_directed())
@@ -145,6 +146,7 @@ class TestGraphUndirected(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_undirected(self):
         self.assertFalse(self.G.is_directed())

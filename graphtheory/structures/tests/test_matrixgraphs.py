@@ -20,6 +20,7 @@ class TestGraphDirected(unittest.TestCase):
             Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_directed(self):
         self.assertTrue(self.G.is_directed())
@@ -130,6 +131,7 @@ class TestGraphUndirected(unittest.TestCase):
             Edge(3, 1, 5)]
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_undirected(self):
         self.assertFalse(self.G.is_directed())
@@ -167,7 +169,7 @@ class TestGraphUndirected(unittest.TestCase):
     def test_complement(self):
         T = self.G.complement()
         self.assertEqual(T.v(), self.G.v())
-        self.assertEqual(T.e(), self.N*(self.N-1)/2 - self.G.e())
+        self.assertEqual(T.e(), self.N*(self.N-1) // 2 - self.G.e())
         for node in T.iternodes():
             self.assertTrue(self.G.has_node(node))
         for edge in T.iteredges():

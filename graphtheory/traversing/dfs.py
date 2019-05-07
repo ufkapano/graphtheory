@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-from Queue import LifoQueue
+try:
+    from Queue import LifoQueue
+except ImportError:   # Python 3
+    from queue import LifoQueue
 
 
 class DFSWithStack:

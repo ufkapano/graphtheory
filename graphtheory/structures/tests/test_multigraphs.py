@@ -28,6 +28,7 @@ class TestMultiGraphDirected(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_basic(self):
         self.assertTrue(self.G.is_directed())

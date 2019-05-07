@@ -44,7 +44,7 @@ class Graph(dict):
     def e(self):
         """Return the number of edges in O(V) time."""
         edges = sum(len(self[node]) for node in self)
-        return (edges if self.is_directed() else edges / 2)
+        return (edges if self.is_directed() else edges // 2)
 
     def f(self):
         """Return the number of faces (for planar graphs)."""
@@ -123,11 +123,15 @@ class Graph(dict):
 
     def iternodes(self):
         """Generate all nodes from the graph on demand."""
-        return self.iterkeys()
+        #return self.iterkeys()   # Python 2 only
+        for node in self:
+            yield node
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        return self[source].iterkeys()
+        #return self[source].iterkeys()   # Python 2 only
+        for target in self[source]:
+            yield target
 
     def iteroutedges(self, source):
         """Generate the outedges from the graph on demand."""
@@ -153,14 +157,16 @@ class Graph(dict):
 
     def show(self):
         """The graph presentation."""
+        L = []
         for source in self.iternodes():
-            print source, ":",
+            L.append("{} : ".format(source))
             for edge in self.iteroutedges(source):
                 if edge.weight == 1:
-                    print edge.target,
+                    L.append("{} ".format(edge.target))
                 else:
-                    print "{}({})".format(edge.target, edge.weight),
-            print
+                    L.append("{}({}) ".format(edge.target, edge.weight))
+            L.append("\n")
+        print("".join(L))
 
     def copy(self):
         """Return the graph copy."""

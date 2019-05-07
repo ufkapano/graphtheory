@@ -45,7 +45,7 @@ class MultiGraph(dict):
         if self.is_directed():
             return edges
         else:
-            return (edges + loops) / 2
+            return (edges + loops) // 2
 
     def is_directed(self):
         """Test if the multigraph is directed."""
@@ -108,7 +108,9 @@ class MultiGraph(dict):
 
     def iternodes(self):
         """Generate nodes from the multigraph on demand."""
-        return self.iterkeys()
+        #return self.iterkeys()   # Python 2 only
+        for node in self:
+            yield node
 
     def iteradjacent(self, source):
         """Generate adjacent nodes from the multigraph on demand."""
@@ -143,11 +145,13 @@ class MultiGraph(dict):
 
     def show(self):
         """The multigraph presentation."""
+        L = []
         for source in self.iternodes():
-            print source, ":",
+            L.append("{} : ".format(source))
             for target in self[source]:
-                print "{}({})".format(target, len(self[source][target])),
-            print
+                L.append("{}({})".format(target, len(self[source][target])))
+            L.append("\n")
+        print("".join(L))
 
     def copy(self):
         """Return the multigraph copy."""

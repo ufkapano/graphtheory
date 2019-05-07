@@ -17,7 +17,7 @@ class TestGraphFactory(unittest.TestCase):
         G = self.graph_factory.make_complete(n=self.N, directed=False)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), self.N * (self.N-1) / 2)
+        self.assertEqual(G.e(), self.N * (self.N-1) // 2)
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
 
@@ -25,7 +25,7 @@ class TestGraphFactory(unittest.TestCase):
         G = self.graph_factory.make_complete(n=self.N, directed=True)
         self.assertTrue(G.is_directed())
         self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), self.N * (self.N-1) / 2)
+        self.assertEqual(G.e(), self.N * (self.N-1) // 2)
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
 
@@ -172,7 +172,7 @@ class TestGraphFactory(unittest.TestCase):
     def test_necklace(self):
         G = self.graph_factory.make_necklace(n=self.N, directed=False)
         self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), 3 * self.N / 2)
+        self.assertEqual(G.e(), 3 * self.N // 2)
         self.assertRaises(ValueError, self.graph_factory.make_necklace, 1)
         self.assertRaises(ValueError, self.graph_factory.make_necklace, 2)
         self.assertRaises(ValueError, self.graph_factory.make_necklace, 3)

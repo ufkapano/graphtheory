@@ -3,7 +3,11 @@
 import copy
 import random
 from graphtheory.structures.edges import Edge
-
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
 
 class Graph:
     """The class defining a graph.
@@ -40,19 +44,19 @@ class Graph:
         for source in xrange(self.n):
             for target in xrange(self.n):
                 if self.data[source][target] != 0:
-                    counter = counter + 1
-        return (counter if self.is_directed() else counter / 2)
+                    counter += 1
+        return (counter if self.is_directed() else counter // 2)
 
     def add_node(self, node):
         """Add a node to the graph."""
-        if not isinstance(node, (int, long)):
+        if not isinstance(node, integer_types):
             raise ValueError("node is not int or long")
         if node >= self.n or node < 0:
             raise ValueError("node out of range")
 
     def has_node(self, node):
         """Test if a node exists."""
-        if not isinstance(node, (int, long)):
+        if not isinstance(node, integer_types):
             raise ValueError("node is not int or long")
         if 0 <= node < self.n:
             return True
@@ -127,15 +131,17 @@ class Graph:
                     yield Edge(source, target, self.data[source][target])
 
     def show(self):
-        """The graph presentation in O(V**2) time."""
+        """The graph presentation in O(V^2) time."""
+        L = []
         for source in xrange(self.n):
-            print source, ":",
+            L.append("{} : ".format(source))
             for target in xrange(self.n):
                 if self.data[source][target] == 1:
-                    print target,
+                    L.append("{} ".format(target))
                 elif self.data[source][target] != 0:
-                    print "{}({})".format(target, self.data[source][target]),
-            print
+                    L.append("{}({}) ".format(target, self.data[source][target]))
+            L.append("\n")
+        print("".join(L))
 
     def copy(self):
         """Return the graph copy in O(V**2) time."""
