@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 # Wersja malo wydajna.
 # Tutaj _used i independent_set jest typu set.
 class SmallestFirstIndependentSet1:

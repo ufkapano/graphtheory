@@ -3,6 +3,12 @@
 # Algorytmy heurystyczne z usuwaniem wierzcholkow.
 # Zamiast degree_dict mozna usuwac wierzcholki z kopii grafu.
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 # Lista wierzcholkow wg stopni ustalona na poczatku.
 class LargestLastIndependentSet1:
     """Find a maximal independent set."""
