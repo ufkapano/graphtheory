@@ -1,7 +1,12 @@
 #!/usr/bin/python
 
+try:
+    from Queue import Queue
+except ImportError:   # Python 3
+    from queue import Queue
+    xrange = range
+
 import itertools
-from Queue import Queue
 from graphtheory.structures.edges import Edge
 from graphtheory.connectivity.connected import is_connected
 

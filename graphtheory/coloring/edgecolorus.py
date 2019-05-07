@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
+
 class UnorderedSequentialEdgeColoring:
     """Find an unordered sequential (US) edge coloring.
     

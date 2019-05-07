@@ -1,8 +1,15 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 from graphtheory.structures.edges import Edge
 from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring as NodeColoring
 #from graphtheory.coloring.nodecolorrs import RandomSequentialNodeColoring as NodeColoring
+
 
 class EdgeColoringWithLineGraph:
     """Find an edge coloring using a line graph.

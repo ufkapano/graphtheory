@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
+
 class SLFNodeColoring:
     """Find a saturated largest first (SLF) node coloring.
     Computational complexity is O(V^2).

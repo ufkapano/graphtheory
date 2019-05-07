@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
+
 class SmallestLastNodeColoring:
     """Find a smallest last (SL) node coloring.
     
