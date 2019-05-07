@@ -85,7 +85,7 @@ class TestMatchingWithWeights(unittest.TestCase):
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         # Krawedzie sa po dwa razy w slowniku.
         weight = sum(algorithm.mate[node].weight
-            for node in algorithm.mate if algorithm.mate[node]) / 2
+            for node in algorithm.mate if algorithm.mate[node]) // 2
         self.assertEqual(weight, expected_weight)
         self.assertEqual(algorithm.mate, expected_mate)
         # Is it matching?
@@ -125,7 +125,7 @@ class TestMatchingWithWeights2(unittest.TestCase):
         self.assertEqual(algorithm.cardinality, expected_cardinality)
         # Krawedzie sa po dwa razy w slowniku.
         weight = sum(algorithm.mate[node].weight
-            for node in algorithm.mate if algorithm.mate[node]) / 2
+            for node in algorithm.mate if algorithm.mate[node]) // 2
         self.assertEqual(weight, expected_weight)
         self.assertEqual(algorithm.mate, expected_mate)
         # Is it matching?

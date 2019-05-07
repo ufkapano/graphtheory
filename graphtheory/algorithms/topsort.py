@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
-from Queue import Queue
+try:
+    from Queue import Queue
+except ImportError:   # Python 3
+    from queue import Queue
+    xrange = range
+
 #from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
 from graphtheory.traversing.dfs import SimpleDFS
 
@@ -29,7 +34,7 @@ class TopologicalSortDFS:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.sorted_nodes = list()
+        self.sorted_nodes = []
 
     def run(self):
         """Executable pseudocode."""
@@ -70,7 +75,7 @@ class TopologicalSortQueue:
         # Calculate indegree of nodes.
         inedges = dict((node, 0) for node in self.graph.iternodes())
         for edge in self.graph.iteredges():
-            inedges[edge.target] = inedges[edge.target] + 1
+            inedges[edge.target] += 1
         for node in self.graph.iternodes():
             if inedges[node] == 0:
                 Q.put(node)
@@ -79,7 +84,7 @@ class TopologicalSortQueue:
             self.sorted_nodes.append(node)
             # Remove all outedges.
             for edge in self.graph.iteroutedges(node):
-                inedges[edge.target] = inedges[edge.target]-1
+                inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
                     Q.put(edge.target)
 
@@ -108,7 +113,7 @@ class TopologicalSortSet:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.sorted_nodes = list()
+        self.sorted_nodes = []
 
     def run(self):
         """Executable pseudocode."""
@@ -116,7 +121,7 @@ class TopologicalSortSet:
         # Calculate indegree of nodes.
         inedges = dict((node, 0) for node in self.graph.iternodes())
         for edge in self.graph.iteredges():
-            inedges[edge.target] = inedges[edge.target] + 1
+            inedges[edge.target] += 1
         for node in self.graph.iternodes():
             if inedges[node] == 0:
                 Q.add(node)
@@ -125,7 +130,7 @@ class TopologicalSortSet:
             self.sorted_nodes.append(node)
             # Remove all outedges.
             for edge in self.graph.iteroutedges(node):
-                inedges[edge.target] = inedges[edge.target]-1
+                inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
                     Q.add(edge.target)
 
@@ -161,7 +166,7 @@ class TopologicalSortList:
         # Calculate indegree of nodes.
         inedges = dict((node, 0) for node in self.graph.iternodes())
         for edge in self.graph.iteredges():
-            inedges[edge.target] = inedges[edge.target] + 1
+            inedges[edge.target] += 1
         qstart = 0  # first to get
         qend = 0   # first free place
         for node in self.graph.iternodes():
@@ -173,7 +178,7 @@ class TopologicalSortList:
             qstart += 1
             # Remove all outedges.
             for edge in self.graph.iteroutedges(source):
-                inedges[edge.target] = inedges[edge.target]-1
+                inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
                     self.sorted_nodes[qend] = edge.target
                     qend += 1
