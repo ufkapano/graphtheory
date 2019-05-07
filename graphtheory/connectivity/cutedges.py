@@ -48,7 +48,7 @@ class TrivialCutEdge:
             if not visited[source]:
                 algorithm.run(source, pre_action=lambda node:
                     visited.__setitem__(node, True))
-                ncc = ncc + 1
+                ncc += 1
         return ncc
 
 
@@ -104,7 +104,7 @@ class TarjanCutEdge:
 
     def _visit(self, node):
         """Explore recursively the connected component."""
-        self._time = self._time + 1
+        self._time += 1
         self._dd[node] = self._time
         self.low[node] = self._time
         for edge in self.graph.iteroutedges(node):

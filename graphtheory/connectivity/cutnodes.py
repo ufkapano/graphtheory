@@ -52,7 +52,7 @@ class TrivialCutNode:
             if not visited[source]:
                 algorithm.run(source, pre_action=lambda node:
                     visited.__setitem__(node, True))
-                ncc = ncc + 1
+                ncc += 1
         return ncc
 
 
@@ -111,7 +111,7 @@ class TarjanCutNode:
         n_sons = 0   # number of sons for the root
         for edge in self.graph.iteroutedges(node):
             if self._dd[edge.target] == 0:   # not visited
-                n_sons = n_sons + 1
+                n_sons += 1
                 self.parent[edge.target] = node
                 self.dag.add_edge(edge)
                 self._visit(edge.target)
@@ -121,7 +121,7 @@ class TarjanCutNode:
 
     def _visit(self, node):
         """Explore recursively the connected component."""
-        self._time = self._time + 1
+        self._time += 1
         self._dd[node] = self._time
         self.low[node] = self._time   # temporary
         is_cut_node = False
