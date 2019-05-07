@@ -69,7 +69,8 @@ class BoruvkaMST:
                     if edge < min_edges[target]:
                         min_edges[target] = edge
             # Connecting components, total time is O(V).
-            for edge in min_edges.itervalues():
+            for node in min_edges:
+                edge = min_edges[node]
                 if edge is dummy_edge: # a disconnected graph
                     continue
                 source = self._uf.find(edge.source)

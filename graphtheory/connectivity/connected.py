@@ -31,7 +31,7 @@ class StronglyConnectedComponents:
             if self.scc[source] is None:
                 algorithm.run(source, pre_action=lambda
                     node: self.scc.__setitem__(node, self.n_scc))
-                self.n_scc = self.n_scc + 1
+                self.n_scc += 1
 
 
 class ConnectedComponentsBFS:
@@ -52,7 +52,7 @@ class ConnectedComponentsBFS:
             if self.cc[source] is None:
                 algorithm.run(source, pre_action=lambda node:
                     self.cc.__setitem__(node, self.n_cc))
-                self.n_cc = self.n_cc + 1
+                self.n_cc += 1
 
 
 class ConnectedComponentsDFS:
@@ -73,15 +73,15 @@ class ConnectedComponentsDFS:
             if self.cc[source] is None:
                 algorithm.run(source, pre_action=lambda node:
                     self.cc.__setitem__(node, self.n_cc))
-                self.n_cc = self.n_cc + 1
+                self.n_cc += 1
 
 
 def is_connected(graph):
     """Test if the undirected graph is connected."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()
-    source = graph.iternodes().next()
+    order = []
+    source = next(graph.iternodes())
     algorithm = SimpleDFS(graph)
     algorithm.run(source, lambda node: order.append(node))
     return len(order) == graph.v()

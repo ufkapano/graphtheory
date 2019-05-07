@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
-from Queue import PriorityQueue
+try:
+    from Queue import PriorityQueue
+except ImportError:   # Python 3
+    from queue import PriorityQueue
+    xrange = range
+
 from graphtheory.connectivity.connected import is_connected
 
 
@@ -62,7 +67,7 @@ class PrimMST:
     def run(self, source=None):
         """Finding MST."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
         for node in self.graph.iternodes():
@@ -120,7 +125,7 @@ class PrimMSTWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
         for node in self.graph.iternodes():
@@ -206,7 +211,7 @@ class PrimMatrixMST:
     def run(self, source=None):
         """Finding MST."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()):    # |V| times
@@ -257,7 +262,7 @@ class PrimMatrixMSTWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
         for step in xrange(self.graph.v()):    # |V| times
@@ -326,7 +331,7 @@ class PrimConnectedMST:
     def run(self, source=None):
         """Finding MST."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._in_queue[source] = False
         # W kolejce trzymam krawedzie wychodzace na zewnatrz od MST.
@@ -380,7 +385,7 @@ class PrimTrivialMST:
     def run(self, source=None):
         """Finding MST."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._in_mst[source] = True
         for step in xrange(self.graph.v()-1):    # |V|-1 times
