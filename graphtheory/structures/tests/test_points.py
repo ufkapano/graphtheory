@@ -45,6 +45,8 @@ class TestPoint(unittest.TestCase):
         self.assertFalse(self.p1 == self.p2)
         self.assertTrue(self.p1 != self.p2)
         self.assertFalse(self.p1 != self.p1)
+        self.assertTrue(self.p1 < self.p2)
+        self.assertTrue(self.p1 <= self.p2)
 
     def test_alpha(self):
         self.assertEqual(Point(5, 5).alpha(), Fraction(1, 2))

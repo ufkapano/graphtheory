@@ -85,6 +85,62 @@ class Point:
             elif self.x >= 0 and self.y < 0:  # IV cwiartka
                 return 4 - Fraction(-self.y, distance)
 
+    def __eq__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        return self.x == other.x and self.y == other.y
+
+    def __ne__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        return not (self == other)
+
+    def __lt__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        if self.x < other.x:
+            return True
+        if self.x > other.y:
+            return False
+        if self.y < other.y:
+            return True
+        if self.y > other.y:
+            return False
+        return False
+
+    def __le__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        if self.x < other.x:
+            return True
+        if self.x > other.y:
+            return False
+        if self.y < other.y:
+            return True
+        if self.y > other.y:
+            return False
+        return True
+
+    def __gt__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        if self.x < other.x:
+            return False
+        if self.x > other.y:
+            return True
+        if self.y < other.y:
+            return False
+        if self.y > other.y:
+            return True
+        return False
+
+    def __ge__(self, other):
+        """Points comparizon (like 2-tuple)."""
+        if self.x < other.x:
+            return False
+        if self.x > other.y:
+            return True
+        if self.y < other.y:
+            return False
+        if self.y > other.y:
+            return True
+        return True
+
     def __cmp__(self, other):
         """Points comparizon (like 2-tuple)."""
         return cmp((self.x, self.y), (other.x, other.y))

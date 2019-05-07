@@ -21,6 +21,8 @@ class TestDirectedEdge(unittest.TestCase):
         self.assertEqual(repr(~self.edge3), "Edge(3, 1, 2)")
 
     def test_cmp(self):
+        self.assertFalse(self.edge1 == self.edge3)
+        self.assertTrue(self.edge1 != self.edge3)
         self.assertTrue(self.edge1 < self.edge3)
         self.assertTrue(self.edge1 > self.edge4)
         self.assertTrue(self.edge3 >= self.edge4)
@@ -56,6 +58,8 @@ class TestUndirectedEdge(unittest.TestCase):
         self.assertEqual(repr(~self.edge3), "UndirectedEdge(1, 3, 2)")
 
     def test_cmp(self):
+        self.assertFalse(self.edge1 == self.edge3)
+        self.assertTrue(self.edge1 != self.edge3)
         self.assertTrue(self.edge1 < self.edge3)
         self.assertTrue(self.edge1 > self.edge4)
         self.assertTrue(self.edge3 >= self.edge4)

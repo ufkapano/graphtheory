@@ -50,6 +50,91 @@ class Edge:
                 repr(self.target),
                 repr(self.weight))
 
+    def __eq__(self, other):
+        """Comparing of edges (the weight first)."""
+        return (self.source == other.source and self.target == other.target
+            and self.weight == other.weight)
+
+    def __ne__(self, other):
+        """Comparing of edges (the weight first)."""
+        return not (self == other)
+
+    def __lt__(self, other):
+        """Comparing of edges (the weight first)."""
+        # Check weights.
+        if self.weight > other.weight:
+            return False
+        if self.weight < other.weight:
+            return True
+        # Check the first node.
+        if self.source > other.source:
+            return False
+        if self.source < other.source:
+            return True
+        # Check the second node.
+        if self.target > other.target:
+            return False
+        if self.target < other.target:
+            return True
+        return False
+
+    def __le__(self, other):
+        """Comparing of edges (the weight first)."""
+        # Check weights.
+        if self.weight > other.weight:
+            return False
+        if self.weight < other.weight:
+            return True
+        # Check the first node.
+        if self.source > other.source:
+            return False
+        if self.source < other.source:
+            return True
+        # Check the second node.
+        if self.target > other.target:
+            return False
+        if self.target < other.target:
+            return True
+        return True
+
+    def __gt__(self, other):
+        """Comparing of edges (the weight first)."""
+        # Check weights.
+        if self.weight > other.weight:
+            return True
+        if self.weight < other.weight:
+            return False
+        # Check the first node.
+        if self.source > other.source:
+            return True
+        if self.source < other.source:
+            return False
+        # Check the second node.
+        if self.target > other.target:
+            return True
+        if self.target < other.target:
+            return False
+        return False
+
+    def __ge__(self, other):
+        """Comparing of edges (the weight first)."""
+        # Check weights.
+        if self.weight > other.weight:
+            return True
+        if self.weight < other.weight:
+            return False
+        # Check the first node.
+        if self.source > other.source:
+            return True
+        if self.source < other.source:
+            return False
+        # Check the second node.
+        if self.target > other.target:
+            return True
+        if self.target < other.target:
+            return False
+        return True
+
     def __cmp__(self, other):
         """Comparing of edges (the weight first)."""
         # Check weights.
