@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
 from graphtheory.spanningtrees.prim import PrimMatrixMSTWithEdges
 from graphtheory.traversing.dfs import SimpleDFS
 
@@ -25,7 +31,7 @@ class PrimTSPWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         algorithm = PrimMatrixMSTWithEdges(self.graph)   # O(V**2) time
         algorithm.run(self.source)
@@ -69,7 +75,7 @@ class PrimTSPWithGraph:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         algorithm = PrimMatrixMSTWithEdges(self.graph)   # O(V**2) time
         algorithm.run(self.source)

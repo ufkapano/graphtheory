@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+try:
+    integer_types = (int, long)
+except NameError:   # Python 3
+    integer_types = (int,)
+    xrange = range
+
+
 class NearestNeighborTSPWithEdges:
     """The nearest neighbor algorithm for TSP.
     
@@ -23,7 +30,7 @@ class NearestNeighborTSPWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         start_node = source
         self._used[source] = True
         # Szukamy n-1 kolejnych krawedzi. Unikamy tworzenia cyklu.
@@ -65,7 +72,7 @@ class NearestNeighborTSPWithGraph:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._used[self.source] = True
         # Szukamy n-1 kolejnych krawedzi. Unikamy tworzenia cyklu.

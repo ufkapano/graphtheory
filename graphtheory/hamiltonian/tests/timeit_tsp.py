@@ -15,7 +15,7 @@ from graphtheory.hamiltonian.tspmst import PrimTSPWithGraph
 # Nodes are points in a unit square.
 # Weights are distances.
 V = 8               # number of nodes
-E = V*(V-1)/2       # number of edges
+E = V*(V-1) // 2       # number of edges
 G = Graph(n=V, directed=False)
 for i in xrange(V):
     G.add_node((random.random(), random.random()))

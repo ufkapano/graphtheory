@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
-from Queue import PriorityQueue
+try:
+    from Queue import PriorityQueue
+except ImportError:   # Python 3
+    from queue import PriorityQueue
+    xrange = range
+
 from graphtheory.structures.unionfind import UnionFind
 
 

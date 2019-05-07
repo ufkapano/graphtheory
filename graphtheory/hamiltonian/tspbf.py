@@ -31,7 +31,7 @@ class BruteForceTSPWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._hamilton_dfs(self.source)
 
@@ -90,7 +90,7 @@ class BruteForceTSPWithGraph:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._hamilton_dfs(self.source)
 

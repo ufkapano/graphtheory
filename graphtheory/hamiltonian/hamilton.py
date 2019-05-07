@@ -32,7 +32,7 @@ class HamiltonianCycleDFS:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._hamilton_dfs(self.source)
 
@@ -89,7 +89,7 @@ class HamiltonianCycleDFSWithEdges:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._hamilton_dfs(self.source)
 
@@ -148,7 +148,7 @@ class HamiltonianCycleDFSWithGraph:
     def run(self, source=None):
         """Executable pseudocode."""
         if source is None:   # get first random node
-            source = self.graph.iternodes().next()
+            source = next(self.graph.iternodes())
         self.source = source
         self._hamilton_dfs(self.source)
 
