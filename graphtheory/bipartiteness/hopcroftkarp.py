@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
-from Queue import Queue
+try:
+    from Queue import Queue
+except ImportError:   # Python 3
+    from queue import Queue
+
 #from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
 from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
 

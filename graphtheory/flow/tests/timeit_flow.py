@@ -20,45 +20,45 @@ G = graph_factory.make_flow_network(V)
 E = G.e()
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format(G.v(), V) )
+print ( "Edges: {} {}".format(G.e(), E) )
+print ( "Directed: {}".format(G.is_directed()) )
 
-print "Testing FordFulkerson ..."
+print ( "Testing FordFulkerson ..." )
 t1 = timeit.Timer(lambda: FordFulkerson(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing FordFulkersonSparse ..."
+print ( "Testing FordFulkersonSparse ..." )
 t1 = timeit.Timer(lambda: FordFulkersonSparse(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing FordFulkersonWithEdges ..."
+print ( "Testing FordFulkersonWithEdges ..." )
 t1 = timeit.Timer(lambda: FordFulkersonWithEdges(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing FordFulkersonRecursive ..."
+print ( "Testing FordFulkersonRecursive ..." )
 t1 = timeit.Timer(lambda: FordFulkersonRecursive(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing FordFulkersonRecursiveWithEdges ..."
+print ( "Testing FordFulkersonRecursiveWithEdges ..." )
 t1 = timeit.Timer(lambda: FordFulkersonRecursiveWithEdges(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing EdmondsKarp ..."
+print ( "Testing EdmondsKarp ..." )
 t1 = timeit.Timer(lambda: EdmondsKarp(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing EdmondsKarpSparse ..."
+print ( "Testing EdmondsKarpSparse ..." )
 t1 = timeit.Timer(lambda: EdmondsKarpSparse(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing Dinic ..."
+print ( "Testing Dinic ..." )
 t1 = timeit.Timer(lambda: Dinic(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing DinicSparse ..."
+print ( "Testing DinicSparse ..." )
 t1 = timeit.Timer(lambda: DinicSparse(G).run(0, V-1))
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF
