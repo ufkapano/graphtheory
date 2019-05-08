@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
@@ -15,12 +15,12 @@ G = graph_factory.make_necklace(n=V)   # V even
 G.show()
 
 print ( "Recognition ..." )
-print ( "is_wheel {}".format(is_wheel(G)) )
+print ( "is_wheel {}".format( is_wheel(G) ))
 algorithm = HalinGraph(G)
 algorithm.run()
-print ( "outer".format(algorithm.outer) )
+print ( "outer {}".format( algorithm.outer ))
 outer = algorithm.outer
-#assert outer == set(xrange(1,V))   # wheel
+#assert outer == set(range(1,V))   # wheel
 assert outer == set(range(0,V,2)) | set([V-1])   # necklace
 
 # EOF
