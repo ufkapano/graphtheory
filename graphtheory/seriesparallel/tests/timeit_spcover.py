@@ -22,11 +22,11 @@ for tnode in btree_inorder(root):
 
 algorithm = SPTreeNodeCover(root)
 algorithm.run()
-print "cover", algorithm.node_cover
-print "cardinality", algorithm.cardinality
+print ( "cover {}".format( algorithm.node_cover ))
+print ( "cardinality {}".format( algorithm.cardinality ))
 
-print "Testing SPTreeNodeCover ..."
+print ( "Testing SPTreeNodeCover ..." )
 t1 = timeit.Timer(lambda: SPTreeNodeCover(root).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

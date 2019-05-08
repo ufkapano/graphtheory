@@ -22,12 +22,12 @@ for tnode in btree_inorder(root):
 
 algorithm = SPTreeMatching(root)
 algorithm.run()
-print "mate_set", algorithm.mate_set
-print "mate", algorithm.mate
-print "cardinality", algorithm.cardinality
+print ( "mate_set {}".format( algorithm.mate_set ))
+print ( "mate {}".format( algorithm.mate ))
+print ( "cardinality {}".format( algorithm.cardinality ))
 
-print "Testing SPTreeMatching ..."
+print ( "Testing SPTreeMatching ..." )
 t1 = timeit.Timer(lambda: SPTreeMatching(root).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

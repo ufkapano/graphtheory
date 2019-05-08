@@ -20,12 +20,12 @@ G = make_random_spgraph(V)
 E = G.e()
 #G.show()
 
-print "Testing find_peo_spgraph1 ..."
+print ( "Testing find_peo_spgraph1 ..." )
 t1 = timeit.Timer(lambda: find_peo_spgraph1(G))
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing find_peo_spgraph2 ..."
+print ( "Testing find_peo_spgraph2 ..." )
 t1 = timeit.Timer(lambda: find_peo_spgraph2(G))
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

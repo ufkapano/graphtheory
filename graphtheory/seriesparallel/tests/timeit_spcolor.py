@@ -23,8 +23,8 @@ algorithm.run()
 all_colors = set(algorithm.color[node] for node in G.iternodes())
 assert len(all_colors) == 3
 
-print "Testing SPNodeColoring ..."
+print ( "Testing SPNodeColoring ..." )
 t1 = timeit.Timer(lambda: SPNodeColoring(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

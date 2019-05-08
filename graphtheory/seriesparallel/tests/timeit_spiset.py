@@ -22,11 +22,11 @@ for tnode in btree_inorder(root):
 
 algorithm = SPTreeIndependentSet(root)
 algorithm.run()
-print "iset", algorithm.independent_set
-print "cardinality", algorithm.cardinality
+print ( "iset {}".format( algorithm.independent_set ))
+print ( "cardinality {}".format( algorithm.cardinality ))
 
-print "Testing SPTreeIndependentSet ..."
+print ( "Testing SPTreeIndependentSet ..." )
 t1 = timeit.Timer(lambda: SPTreeIndependentSet(root).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

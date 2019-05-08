@@ -20,8 +20,8 @@ E = G.e()
 T = find_sptree(G)
 btree_print(T)
 
-print "Testing find_sptree ..."
+print ( "Testing find_sptree ..." )
 t1 = timeit.Timer(lambda: find_sptree(G))
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

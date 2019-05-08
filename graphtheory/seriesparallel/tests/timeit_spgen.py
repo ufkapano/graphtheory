@@ -11,18 +11,18 @@ from graphtheory.seriesparallel.sptools import make_random_spgraph
 
 V = 10
 
-print "Testing make_random_spgraph ..."
+print ( "Testing make_random_spgraph ..." )
 L = []
 t1 = timeit.Timer(lambda: L.append(make_random_spgraph(V)))
-result = t1.timeit(1)            # pojedyncze wykonanie
+result = t1.timeit(1)            # single run
 E = L[0].e()
-print V, E, result
+print ( "{} {} {}".format(V, E, result) )   # single run
 
-print "Testing make_random_ktree ..."
+print ( "Testing make_random_ktree ..." )
 L = []
 t1 = timeit.Timer(lambda: L.append(make_random_ktree(V, 2)))
-result = t1.timeit(1)            # pojedyncze wykonanie
+result = t1.timeit(1)            # single run
 E = L[0].e()
-print V, E, result
+print ( "{} {} {}".format(V, E, result) )   # single run
 
 # EOF

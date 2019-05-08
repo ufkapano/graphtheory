@@ -22,11 +22,11 @@ for tnode in btree_inorder(root):
 
 algorithm = SPTreeDominatingSet(root)
 algorithm.run()
-print "dset", algorithm.dominating_set
-print "cardinality", algorithm.cardinality
+print ( "dset {}".format( algorithm.dominating_set ))
+print ( "cardinality {}".format( algorithm.cardinality ))
 
-print "Testing SPTreeDominatingSet ..."
+print ( "Testing SPTreeDominatingSet ..." )
 t1 = timeit.Timer(lambda: SPTreeDominatingSet(root).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF
