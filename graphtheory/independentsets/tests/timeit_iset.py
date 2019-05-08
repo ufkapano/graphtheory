@@ -32,89 +32,89 @@ G = graph_factory.make_random(V, False, probability)
 E = G.e()
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
+print ( "Directed: {}".format( G.is_directed() ))
 
-print "Testing UnorderedSequentialIndependentSet1 ..."
+print ( "Testing UnorderedSequentialIndependentSet1 ..." )
 t1 = timeit.Timer(lambda: UnorderedSequentialIndependentSet1(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing UnorderedSequentialIndependentSet2 ..."
+print ( "Testing UnorderedSequentialIndependentSet2 ..." )
 t1 = timeit.Timer(lambda: UnorderedSequentialIndependentSet2(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing UnorderedSequentialIndependentSet3 ..."
+print ( "Testing UnorderedSequentialIndependentSet3 ..." )
 t1 = timeit.Timer(lambda: UnorderedSequentialIndependentSet3(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing RandomSequentialIndependentSet1 ..."
+print ( "Testing RandomSequentialIndependentSet1 ..." )
 t1 = timeit.Timer(lambda: RandomSequentialIndependentSet1(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing RandomSequentialIndependentSet2 ..."
+print ( "Testing RandomSequentialIndependentSet2 ..." )
 t1 = timeit.Timer(lambda: RandomSequentialIndependentSet2(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing RandomSequentialIndependentSet3 ..."
+print ( "Testing RandomSequentialIndependentSet3 ..." )
 t1 = timeit.Timer(lambda: RandomSequentialIndependentSet3(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet1 ..."
+print ( "Testing SmallestFirstIndependentSet1 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet1(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet2 ..."
+print ( "Testing SmallestFirstIndependentSet2 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet2(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet3 ..."
+print ( "Testing SmallestFirstIndependentSet3 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet3(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet4 ..."
+print ( "Testing SmallestFirstIndependentSet4 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet4(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet5 ..."
+print ( "Testing SmallestFirstIndependentSet5 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet5(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet6 ..."
+print ( "Testing SmallestFirstIndependentSet6 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet6(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SmallestFirstIndependentSet7 ..."
+print ( "Testing SmallestFirstIndependentSet7 ..." )
 t1 = timeit.Timer(lambda: SmallestFirstIndependentSet7(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet1 ..."
+print ( "Testing LargestLastIndependentSet1 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet1(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet2 ..."
+print ( "Testing LargestLastIndependentSet2 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet2(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet3 ..."
+print ( "Testing LargestLastIndependentSet3 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet3(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet4 ..."
+print ( "Testing LargestLastIndependentSet4 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet4(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet5 ..."
+print ( "Testing LargestLastIndependentSet5 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet5(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet6 ..."
+print ( "Testing LargestLastIndependentSet6 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet6(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing LargestLastIndependentSet7 ..."
+print ( "Testing LargestLastIndependentSet7 ..." )
 t1 = timeit.Timer(lambda: LargestLastIndependentSet7(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

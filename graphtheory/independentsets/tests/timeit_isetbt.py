@@ -14,13 +14,13 @@ G = graph_factory.make_random(V, False, probability)
 E = G.e()
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
+print ( "Directed: {}".format( G.is_directed() ))
 
-print "Testing BacktrackingIndependentSet ..."
+print ( "Testing BacktrackingIndependentSet ..." )
 t1 = timeit.Timer(lambda: BacktrackingIndependentSet(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF
