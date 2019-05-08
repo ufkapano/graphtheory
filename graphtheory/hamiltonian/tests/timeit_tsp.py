@@ -17,7 +17,7 @@ from graphtheory.hamiltonian.tspmst import PrimTSPWithGraph
 V = 8               # number of nodes
 E = V*(V-1) // 2       # number of edges
 G = Graph(n=V, directed=False)
-for i in xrange(V):
+for i in range(V):
     G.add_node((random.random(), random.random()))
 for source in G.iternodes():
     for target in G.iternodes():
@@ -28,30 +28,30 @@ for source in G.iternodes():
             G.add_edge(Edge(source, target, weight))
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
-print "Delta:", max(G.degree(node) for node in G.iternodes())
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
+print ( "Directed: {}".format( G.is_directed() ))
+print ( "Delta: {}".format( max(G.degree(node) for node in G.iternodes()) ))
 
-print "Testing BruteForceTSPWithGraph ..."
+print ( "Testing BruteForceTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: BruteForceTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing NearestNeighborTSPWithGraph ..."
+print ( "Testing NearestNeighborTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: NearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing RepeatedNearestNeighborTSPWithGraph ..."
+print ( "Testing RepeatedNearestNeighborTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: RepeatedNearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SortedEdgeTSPWithGraph ..."
+print ( "Testing SortedEdgeTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: SortedEdgeTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing PrimTSPWithGraph ..."
+print ( "Testing PrimTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: PrimTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

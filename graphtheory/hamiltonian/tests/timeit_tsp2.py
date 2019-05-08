@@ -17,26 +17,26 @@ G = graph_factory.make_complete(V, False)
 E = G.e()
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
-print "Delta:", max(G.degree(node) for node in G.iternodes())
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
+print ( "Directed: {}".format( G.is_directed() ))
+print ( "Delta: {}".format( max(G.degree(node) for node in G.iternodes()) ))
 
-print "Testing BruteForceTSPWithGraph ..."
+print ( "Testing BruteForceTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: BruteForceTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing NearestNeighborTSPWithGraph ..."
+print ( "Testing NearestNeighborTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: NearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing RepeatedNearestNeighborTSPWithGraph ..."
+print ( "Testing RepeatedNearestNeighborTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: RepeatedNearestNeighborTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing SortedEdgeTSPWithGraph ..."
+print ( "Testing SortedEdgeTSPWithGraph ..." )
 t1 = timeit.Timer(lambda: SortedEdgeTSPWithGraph(G).run())
-print V, E, t1.timeit(1)            # single run
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

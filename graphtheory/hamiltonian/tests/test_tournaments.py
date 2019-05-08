@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
-from graphtheory.hamiltonian.tournaments import *
+from graphtheory.hamiltonian.tournaments import is_transitive
+from graphtheory.hamiltonian.tournaments import find_hamiltonian_path
 
 
 class TestTournaments(unittest.TestCase):
@@ -16,11 +17,10 @@ class TestTournaments(unittest.TestCase):
         #self.G.show()
 
     def test_is_transitive(self):
-        #print "is_transitive", is_transitive(self.G)
         outdegrees = sorted(self.G.outdegree(node)
             for node in self.G.iternodes())
         if is_transitive(self.G):
-            self.assertEqual(outdegrees, range(self.N))
+            self.assertEqual(outdegrees, list(range(self.N)))
 
     def test_find_hamiltonian_path(self):
         path = find_hamiltonian_path(self.G)
