@@ -13,16 +13,16 @@ graph_factory = GraphFactory(Graph)
 G = graph_factory.make_tree(V)
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
 assert G.v() == V
 assert G.e() == E
-print "Directed:", G.is_directed()
-print "Max degree:", max(G.degree(node) for node in G.iternodes())
+print ( "Directed: {}".format( G.is_directed() ))
+print ( "Delta: {}".format( max(G.degree(node) for node in G.iternodes()) ))
 
-print "Testing TreeCenter ..."
+print ( "Testing TreeCenter ..." )
 t1 = timeit.Timer(lambda: TreeCenter(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

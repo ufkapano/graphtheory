@@ -18,46 +18,46 @@ graph_factory = GraphFactory(Graph)
 G = graph_factory.make_tree(V, False)
 #G.show()
 
-print "Calculate parameters ..."
-print "Nodes:", G.v(), V
-print "Edges:", G.e(), E
-print "Directed:", G.is_directed()
-print "Bipartite:", is_bipartite(G)
+print ( "Calculate parameters ..." )
+print ( "Nodes: {} {}".format( G.v(), V ))
+print ( "Edges: {} {}".format( G.e(), E ))
+print ( "Directed: {}".format( G.is_directed() ))
+print ( "Bipartite: {}".format( is_bipartite(G) ))
 
 algorithm = BorieMatching(G)
 algorithm.run()
-print "BorieMatching cardinality:", algorithm.cardinality
+print ( "BorieMatching cardinality: {}".format( algorithm.cardinality ))
 
 algorithm = HopcroftKarpSet(G)
 algorithm.run()
-print "HopcroftKarpSet cardinality:", algorithm.cardinality
+print ( "HopcroftKarpSet cardinality: {}".format( algorithm.cardinality ))
 
 algorithm = MatchingFordFulkersonSet(G)
 algorithm.run()
-print "MatchingFordFulkersonSet cardinality:", algorithm.cardinality
+print ( "MatchingFordFulkersonSet cardinality: {}".format( algorithm.cardinality ))
 
-print "Testing BorieMatching ..."
+print ( "Testing BorieMatching ..." )
 t1 = timeit.Timer(lambda: BorieMatching(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing HopcroftKarpSet ..."
+print ( "Testing HopcroftKarpSet ..." )
 t1 = timeit.Timer(lambda: HopcroftKarpSet(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing HopcroftKarpList ..."
+print ( "Testing HopcroftKarpList ..." )
 t1 = timeit.Timer(lambda: HopcroftKarpList(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing MatchingFordFulkersonSet ..."
+print ( "Testing MatchingFordFulkersonSet ..." )
 t1 = timeit.Timer(lambda: MatchingFordFulkersonSet(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing MatchingFordFulkersonList ..."
+print ( "Testing MatchingFordFulkersonList ..." )
 t1 = timeit.Timer(lambda: MatchingFordFulkersonList(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
-print "Testing MatchingFordFulkersonColor ..."
+print ( "Testing MatchingFordFulkersonColor ..." )
 t1 = timeit.Timer(lambda: MatchingFordFulkersonColor(G).run())
-print V, E, t1.timeit(1)            # pojedyncze wykonanie
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF
