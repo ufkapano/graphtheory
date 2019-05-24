@@ -1,0 +1,43 @@
+MATCHING
+----------------------------------------------------------------------
+# MATCHING FOR GENERAL GRAPHS (HEURISTICS)
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.algorithms.matching import MaximalMatching
+from graphtheory.algorithms.matching import MaximalMatchingWithEdges
+from graphtheory.algorithms.matching import MinimumWeightMatchingWithEdges
+
+G = Graph()
+# Add nodes and edges here.
+algorithm = MaximalMatching(G)
+# algorithm = MaximalMatchingWithEdges(G)
+# algorithm = MinimumWeightMatchingWithEdges(G)
+algorithm.run()
+print ( algorithm.cardinality )
+print ( algorithm.mate )
+----------------------------------------------------------------------
+# MATCHING FOR BIPARTITE GRAPHS
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.bipartiteness.matching import MatchingFordFulkersonSet
+from graphtheory.bipartiteness.matching import MatchingFordFulkersonList
+from graphtheory.bipartiteness.matching import MatchingFordFulkersonColor
+from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpSet
+from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
+
+V = 10
+graph_factory = GraphFactory(Graph)
+G = graph_factory.make_bipartite(V/2, V/2, False, 0.5)   # random bipartite
+#G = graph_factory.make_tree(V, False)   # trees are bipartite
+
+algorithm = MatchingFordFulkersonSet(G)
+# algorithm = MatchingFordFulkersonList(G)
+# algorithm = MatchingFordFulkersonColor(G)
+# algorithm = HopcroftKarpSet(G)
+# algorithm = HopcroftKarpList(G)
+algorithm.run()
+print ( algorithm.cardinality )
+print ( algorithm.mate )
+----------------------------------------------------------------------
+EOF

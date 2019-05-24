@@ -29,7 +29,7 @@ G = make_random_spgraph(n=10)
 from graphtheory.seriesparallel.sptools import find_peo_spgraph
 
 peo = find_peo_spgraph(G)     # list
-print peo
+print ( peo )
 ----------------------------------------------------------------------
 # MAXIMUM INDEPENDENT SET
 
@@ -38,11 +38,11 @@ from graphtheory.seriesparallel.spiset import SPTreeIndependentSet
 
 algorithm = SPGraphIndependentSet(G, T)
 algorithm.run()
-print algorithm.independent_set
+print ( algorithm.independent_set )
 
 algorithm = SPTreeIndependentSet(T)
 algorithm.run()
-print algorithm.independent_set
+print ( algorithm.independent_set )
 ----------------------------------------------------------------------
 # MINIMUM DOMINATING SET
 
@@ -51,11 +51,11 @@ from graphtheory.seriesparallel.spdset import SPTreeDominatingSet
 
 algorithm = SPGraphDominatingSet(G, T)
 algorithm.run()
-print algorithm.dominating_set
+print ( algorithm.dominating_set )
 
 algorithm = SPTreeDominatingSet(T)
 algorithm.run()
-print algorithm.dominating_set
+print ( algorithm.dominating_set )
 ----------------------------------------------------------------------
 # MINIMUM VERTEX COVER
 
@@ -64,11 +64,11 @@ from graphtheory.seriesparallel.spcover import SPTreeNodeCover
 
 algorithm = SPGraphNodeCover(G, T)
 algorithm.run()
-print algorithm.node_cover
+print ( algorithm.node_cover )
 
 algorithm = SPTreeNodeCover(T)
 algorithm.run()
-print algorithm.node_cover
+print ( algorithm.node_cover )
 ----------------------------------------------------------------------
 # MAXIMUM MATCHING
 
@@ -77,13 +77,13 @@ from graphtheory.seriesparallel.spmate import SPTreeMatching
 
 algorithm = SPGraphMatching(G, T)
 algorithm.run()
-print algorithm.mate_set      # a set of edges
-print algorithm.mate          # dict
+print ( algorithm.mate_set )   # a set of edges
+print ( algorithm.mate )       # dict
 
 algorithm = SPTreeMatching(T)
 algorithm.run()
-print algorithm.mate_set      # a set of edges
-print algorithm.mate          # dict
+print ( algorithm.mate_set )   # a set of edges
+print ( algorithm.mate )       # dict
 ----------------------------------------------------------------------
 # VERTEX COLORING
 
@@ -91,6 +91,6 @@ from graphtheory.seriesparallel.spnodecolor import SPNodeColoring
 
 algorithm = SPNodeColoring(G)
 algorithm.run()
-print algorithm.color         # dict
+print ( algorithm.color )   # dict
 ----------------------------------------------------------------------
 EOF

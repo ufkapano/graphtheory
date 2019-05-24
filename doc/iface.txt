@@ -1,8 +1,8 @@
 INTERFACE FOR GRAPHS
 ----------------------------------------------------------------------
 G, H - graphs
-node - usually integer or string
-edge - an instance of the Edge clas
+node - usually integer or string (hashable, with order)
+edge - an instance of the Edge class (hashable, with order)
 ----------------------------------------------------------------------
 Method name         Short description
 ----------------------------------------------------------------------

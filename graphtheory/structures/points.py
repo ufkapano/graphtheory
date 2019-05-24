@@ -141,7 +141,7 @@ class Point:
             return True
         return True
 
-    def __cmp__(self, other):
+    def __cmp__(self, other):   # Python 2 only
         """Points comparizon (like 2-tuple)."""
         return cmp((self.x, self.y), (other.x, other.y))
 

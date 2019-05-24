@@ -10,8 +10,10 @@ G = gf.make_cyclic(n=10)      # cyclic topological graph
 G = gf.make_wheel(n=10)       # wheel topological graph
 
 G.show()
-print G.v(), G.e(), G.f()     # the number of nodes, edges, faces
+print ( G.v() )   # the number of nodes
+print ( G.e() )   # the number of edges
+print ( G.f() )   # the number of faces
 for face in G.iterfaces():
-    print face
+    print ( face )
 ----------------------------------------------------------------------
 EOF

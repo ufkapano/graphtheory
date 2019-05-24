@@ -12,7 +12,7 @@ G = Graph()
 algorithm = BacktrackingNodeColoring(G, m_colors)
 algorithm.run()
 for node in G.iternodes():
-    print node, algorithm.color[node]
+    print ( "{} {}".format(node, algorithm.color[node]) )
 ----------------------------------------------------------------------
 # VERTEX COLORING
 
@@ -43,7 +43,7 @@ G = Graph()
 algorithm = BrooksNodeColoring(G)
 algorithm.run()
 for node in G.iternodes():
-    print node, algorithm.color[node]
+    print ( "{} {}".format(node, algorithm.color[node]) )
 ----------------------------------------------------------------------
 # EDGE COLORING
 
@@ -64,6 +64,6 @@ G = Graph()
 algorithm = NTLEdgeColoring(G)   # use Delta or Delta+1 colors
 algorithm.run()
 for edge in G.iteredges():
-    print edge, algorithm.color[edge]
+    print ( "{} {}".format(edge, algorithm.color[edge]) )
 ----------------------------------------------------------------------
 EOF
