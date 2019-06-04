@@ -6,6 +6,7 @@ from graphtheory.traversing.bfs import SimpleBFS
 
 class FleuryDFS:
     """Fleury's algorithm for finding an Eulerian cycle (multigraphs).
+    Complexity O(V*E).
     
     Attributes
     ----------
@@ -74,6 +75,7 @@ class FleuryDFS:
 
 class FleuryDFSWithEdges:
     """Fleury's algorithm for finding an Eulerian cycle (multigraphs).
+    Complexity O(V*E).
     
     Attributes
     ----------
@@ -141,6 +143,7 @@ class FleuryDFSWithEdges:
 
 class FleuryBFS:
     """Fleury's algorithm for finding an Eulerian cycle (multigraphs).
+    Complexity O(V*E).
     
     Attributes
     ----------
@@ -209,6 +212,7 @@ class FleuryBFS:
 
 class FleuryBFSWithEdges:
     """Fleury's algorithm for finding an Eulerian cycle (multigraphs).
+    Complexity O(V*E).
     
     Attributes
     ----------

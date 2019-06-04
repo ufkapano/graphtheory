@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.eulerian.hierholzer import Hierholzer, HierholzerWithEdges
+from graphtheory.eulerian.hierholzer import Hierholzer
+from graphtheory.eulerian.hierholzer import HierholzerWithEdges
 
 # 0 --- 1     2
 # |     |   / |

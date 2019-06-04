@@ -3,7 +3,8 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.eulerian.euler import EulerianCycleDFS, EulerianCycleDFSWithEdges
+from graphtheory.eulerian.euler import EulerianCycleDFS
+from graphtheory.eulerian.euler import EulerianCycleDFSWithEdges
 
 # 0 --- 1     2
 # |     |   / |

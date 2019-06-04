@@ -7,7 +7,7 @@ except ImportError:   # Python 3
 
 
 class Hierholzer:
-    """Finding an Eulerian cycle in a multigraph.
+    """Finding an Eulerian cycle in a multigraph, complexity O(E).
     
     Attributes
     ----------
@@ -68,7 +68,7 @@ class Hierholzer:
 
 
 class HierholzerWithEdges:
-    """Finding an Eulerian cycle in a multigraph.
+    """Finding an Eulerian cycle in a multigraph, complexity O(E).
     
     Attributes
     ----------

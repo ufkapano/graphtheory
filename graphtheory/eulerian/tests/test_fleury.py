@@ -3,7 +3,10 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.eulerian.fleury import *
+from graphtheory.eulerian.fleury import FleuryDFS            # O(V*E)
+from graphtheory.eulerian.fleury import FleuryDFSWithEdges   # O(V*E)
+from graphtheory.eulerian.fleury import FleuryBFS            # O(V*E)
+from graphtheory.eulerian.fleury import FleuryBFSWithEdges   # O(V*E)
 
 # 0 --- 1     2
 # |     |   / |

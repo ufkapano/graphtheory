@@ -7,7 +7,7 @@ except ImportError:   # Python 3
 
 
 class EulerianCycleDFS:
-    """Finding an Eulerian cycle in a multigraph.
+    """Finding an Eulerian cycle in a multigraph, complexity O(E).
     
     Attributes
     ----------
@@ -33,7 +33,7 @@ class EulerianCycleDFS:
         self._stack = LifoQueue()
         import sys
         recursionlimit = sys.getrecursionlimit()
-        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
+        sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -69,7 +69,7 @@ class EulerianCycleDFS:
 
 
 class EulerianCycleDFSWithEdges:
-    """Finding an Eulerian cycle in a multigraph.
+    """Finding an Eulerian cycle in a multigraph, complexity O(E).
     
     Attributes
     ----------
@@ -97,6 +97,9 @@ class EulerianCycleDFSWithEdges:
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
         self._stack = LifoQueue()
+        import sys
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 
     def run(self, source=None):
         """Executable pseudocode."""
