@@ -86,6 +86,12 @@ class NTLEdgeColoring:
         self.missing[edge.source].add(c)
         self.missing[edge.target].add(c)
 
+    def _get_color(self, edge):
+        """Get color."""
+        if edge.source > edge.target:
+            edge = ~edge
+        return self.color[edge]
+
     def _recolor(self, edge):
         """Swap edge colors."""
         # Przygotowanie kolorow brakujacych m(*).
@@ -105,10 +111,7 @@ class NTLEdgeColoring:
             finished = True
             for edge1 in self.graph.iteroutedges(edge.source):
                 # Kolor krawedzi ma byc kolorem brakujacym poprzedniego wierzcholka.
-                if edge1.source > edge1.target:
-                    c = self.color[~edge1]
-                else:
-                    c = self.color[edge1]
+                c = self._get_color(edge1)
                 if c == mis[tmp_v] and edge1.target not in fan_set:
                     # 12. Dodajemy krawedz do wachlarza.
                     tmp_v = edge1.target
@@ -152,10 +155,7 @@ class NTLEdgeColoring:
                 if parity % 2 == 0:   # kolor alpha
                     for edge1 in self.graph.iteroutedges(tmp2_v):
                         # Kolor krawedzi ma byc alpha.
-                        if edge1.source > edge1.target:
-                            c = self.color[~edge1]
-                        else:
-                            c = self.color[edge1]
+                        c = self._get_color(edge1)
                         if c == alpha and edge1.target not in path_set:
                             tmp2_v = edge1.target
                             path.append(edge1)
@@ -165,10 +165,7 @@ class NTLEdgeColoring:
                 else:   # parity % 2 == 1, kolor beta
                     for edge1 in self.graph.iteroutedges(tmp2_v):
                         # Kolor krawedzi ma byc beta.
-                        if edge1.source > edge1.target:
-                            c = self.color[~edge1]
-                        else:
-                            c = self.color[edge1]
+                        c = self._get_color(edge1)
                         if c == beta and edge1.target not in path_set:
                             tmp2_v = edge1.target
                             path.append(edge1)
