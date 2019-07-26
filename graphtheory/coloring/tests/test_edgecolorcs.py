@@ -41,7 +41,8 @@ class TestEdgeColoring(unittest.TestCase):
                 else:
                     color_set.add(algorithm.color[edge])
             self.assertEqual(len(color_set), self.G.degree(node))
-        #print algorithm.color
+        #print ( algorithm.color )
+        #algorithm.show_colors()
         all_colors = set(algorithm.color[edge] for edge in self.G.iteredges())
         self.assertEqual(len(all_colors), 4)   # best coloring
 

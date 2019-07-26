@@ -28,7 +28,7 @@ from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
 
 V = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_bipartite(V/2, V/2, False, 0.5)   # random bipartite
+G = graph_factory.make_bipartite(V // 2, V // 2, False, 0.5)   # random bipartite
 #G = graph_factory.make_tree(V, False)   # trees are bipartite
 
 algorithm = MatchingFordFulkersonSet(G)

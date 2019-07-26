@@ -58,4 +58,22 @@ class UnorderedSequentialEdgeColoring:
                 break
         return c
 
+    def _get_color(self, edge):
+        """Get color."""
+        if edge.source > edge.target:
+            edge = ~edge
+        return self.color[edge]
+
+    def show_colors(self):
+        """Show edge coloring (undirected graphs)."""
+        L = []
+        for source in self.graph.iternodes():
+            L.append("{} : ".format(source))
+            for edge in self.graph.iteroutedges(source):
+                # It should work for multigraphs.
+                c = self._get_color(edge)
+                L.append("{}({}) ".format(edge.target, c))
+            L.append("\n")
+        print("".join(L))
+
 # EOF

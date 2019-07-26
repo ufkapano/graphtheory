@@ -63,6 +63,7 @@ G = Graph()
 # algorithm = EdgeColoringWithLineGraph(G)
 algorithm = NTLEdgeColoring(G)   # use Delta or Delta+1 colors
 algorithm.run()
+algorithm.show_colors()
 for edge in G.iteredges():
     print ( "{} {}".format(edge, algorithm.color[edge]) )
 ----------------------------------------------------------------------
