@@ -1,0 +1,19 @@
+LINUX WITH PYTHON AND GIT INSTALLED
+----------------------------------------------------------------------
+1. Clone the project into the home directory
+
+$ cd
+$ git clone https://github.com/ufkapano/graphs-dict.git
+----------------------------------------------------------------------
+2. Add the graphs-dict directory to the PYTHONPATH environment variable,
+for .bashrc file you can add:
+
+if [ -n "${PYTHONPATH}" ] ; then
+    PYTHONPATH="${PYTHONPATH}:$HOME/graphs-dict"
+else
+    PYTHONPATH="$HOME/graphs-dict"
+fi
+----------------------------------------------------------------------
+3. Start using the graphtheory package!
+----------------------------------------------------------------------
+EOF
