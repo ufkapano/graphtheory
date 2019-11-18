@@ -21,11 +21,18 @@ class TestDirectedEdge(unittest.TestCase):
         self.assertEqual(repr(~self.edge3), "Edge(3, 1, 2)")
 
     def test_cmp(self):
+        self.assertTrue(self.edge1 == Edge(2, 4))
         self.assertFalse(self.edge1 == self.edge3)
         self.assertTrue(self.edge1 != self.edge3)
+        self.assertFalse(self.edge1 != Edge(2, 4))
         self.assertTrue(self.edge1 < self.edge3)
+        self.assertFalse(self.edge3 < self.edge4)
+        self.assertTrue(self.edge1 <= self.edge3)
+        self.assertFalse(self.edge1 <= self.edge4)
         self.assertTrue(self.edge1 > self.edge4)
+        self.assertFalse(self.edge1 > self.edge3)
         self.assertTrue(self.edge3 >= self.edge4)
+        self.assertFalse(self.edge1 >= self.edge3)
 
     def test_hash(self):
         aset = set()

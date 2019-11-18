@@ -1,4 +1,7 @@
 #!/usr/bin/python
+#
+# Python 2.7 and Python 3.2+ [@total_ordering]
+#from functools import total_ordering
 
 class Edge:
     """The class defining a directed edge.
@@ -52,12 +55,13 @@ class Edge:
 
     def __eq__(self, other):
         """Comparing of edges (the weight first)."""
-        return (self.source == other.source and self.target == other.target
+        return (self.source == other.source
+            and self.target == other.target
             and self.weight == other.weight)
 
     def __ne__(self, other):
         """Comparing of edges (the weight first)."""
-        return not (self == other)
+        return not self == other
 
     def __lt__(self, other):
         """Comparing of edges (the weight first)."""
@@ -135,7 +139,7 @@ class Edge:
             return False
         return True
 
-    def __cmp__(self, other):
+    def __cmp__(self, other):   # Python 2 only
         """Comparing of edges (the weight first)."""
         # Check weights.
         if self.weight > other.weight:
