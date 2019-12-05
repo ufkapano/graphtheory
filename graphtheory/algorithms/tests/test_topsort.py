@@ -3,7 +3,10 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.topsort import *
+from graphtheory.algorithms.topsort import TopologicalSortQueue
+from graphtheory.algorithms.topsort import TopologicalSortDFS
+from graphtheory.algorithms.topsort import TopologicalSortSet
+from graphtheory.algorithms.topsort import TopologicalSortList
 
 
 class TestTopologicalSorting(unittest.TestCase):

@@ -44,7 +44,7 @@ class TopologicalSortDFS:
 
 
 class TopologicalSortQueue:
-    """Topological sorting of nodes from a dag.
+    """Topological sorting of nodes from a dag (Kahn's algorithm).
     
     Attributes
     ----------
@@ -90,7 +90,7 @@ class TopologicalSortQueue:
 
 
 class TopologicalSortSet:
-    """Topological sorting of nodes from a dag.
+    """Topological sorting of nodes from a dag (Kahn's algorithm).
     
     Attributes
     ----------
@@ -136,7 +136,7 @@ class TopologicalSortSet:
 
 
 class TopologicalSortList:
-    """Topological sorting of nodes from a dag.
+    """Topological sorting of nodes from a dag (Kahn's algorithm).
     
     Attributes
     ----------

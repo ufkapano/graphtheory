@@ -3,7 +3,10 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.algorithms.closure import *
+from graphtheory.algorithms.closure import TransitiveClosureSimple
+from graphtheory.algorithms.closure import TransitiveClosure
+from graphtheory.algorithms.closure import TransitiveClosureBFS
+from graphtheory.algorithms.closure import TransitiveClosureDFS
 
 # 0 --> 1 --> 2 --> 3
 

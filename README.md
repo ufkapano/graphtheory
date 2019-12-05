@@ -1,5 +1,4 @@
-graphtheory package (graphs-dict repo)
-======================================
+# graphtheory package
 
 Python implementation of graph data structures and algorithms is presented. 
 The minimal graph interface is defined together with several 
@@ -12,8 +11,17 @@ Many algorithms are implemented using a unified approach.
 There are separate classes and modules devoted to different algorithms.
 The graphtheory package is written with Python 2.7 and Python 3.2.
 
-References
-----------
+## Problems and algorithms
+
+* Cycle detection, topological sorting (DFS, Kahn), 
+transitive closure (matrix multiplication, Floyd-Warshall, BFS, DFS)
+* Bipartiteness: bipartite graphs detection (BFS, DFS), 
+maximum-cardinality matching (Hopcroft-Karp, Ford-Fulkerson)
+* Matching: heuristics (greedy for a maximal cardinality matching,
+greedy for a minimum weight matching)
+
+
+## References
 
 [1] A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*. 
 http://arxiv.org/abs/1504.07828 [draft]
@@ -25,8 +33,7 @@ http://ojs.pythonpapers.org/index.php/tpp/article/view/270 [final version]
 [2] A. Kapanowski and A. Krawczyk, *Halin graphs are 3-vertex-colorable except even wheels*.
 https://arxiv.org/abs/1903.02904
 
-Contributors
-------------
+## Contributors
 
 Andrzej Kapanowski (project leader)
 
