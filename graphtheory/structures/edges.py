@@ -1,8 +1,10 @@
 #!/usr/bin/python
 #
 # Python 2.7 and Python 3.2+ [@total_ordering]
-#from functools import total_ordering
 
+from functools import total_ordering
+
+@total_ordering
 class Edge:
     """The class defining a directed edge.
     
@@ -65,102 +67,11 @@ class Edge:
 
     def __lt__(self, other):
         """Comparing of edges (the weight first)."""
-        # Check weights.
-        if self.weight > other.weight:
-            return False
-        if self.weight < other.weight:
-            return True
-        # Check the first node.
-        if self.source > other.source:
-            return False
-        if self.source < other.source:
-            return True
-        # Check the second node.
-        if self.target > other.target:
-            return False
-        if self.target < other.target:
-            return True
-        return False
-
-    def __le__(self, other):
-        """Comparing of edges (the weight first)."""
-        # Check weights.
-        if self.weight > other.weight:
-            return False
-        if self.weight < other.weight:
-            return True
-        # Check the first node.
-        if self.source > other.source:
-            return False
-        if self.source < other.source:
-            return True
-        # Check the second node.
-        if self.target > other.target:
-            return False
-        if self.target < other.target:
-            return True
-        return True
-
-    def __gt__(self, other):
-        """Comparing of edges (the weight first)."""
-        # Check weights.
-        if self.weight > other.weight:
-            return True
-        if self.weight < other.weight:
-            return False
-        # Check the first node.
-        if self.source > other.source:
-            return True
-        if self.source < other.source:
-            return False
-        # Check the second node.
-        if self.target > other.target:
-            return True
-        if self.target < other.target:
-            return False
-        return False
-
-    def __ge__(self, other):
-        """Comparing of edges (the weight first)."""
-        # Check weights.
-        if self.weight > other.weight:
-            return True
-        if self.weight < other.weight:
-            return False
-        # Check the first node.
-        if self.source > other.source:
-            return True
-        if self.source < other.source:
-            return False
-        # Check the second node.
-        if self.target > other.target:
-            return True
-        if self.target < other.target:
-            return False
-        return True
-
-    def __cmp__(self, other):   # Python 2 only
-        """Comparing of edges (the weight first)."""
-        # Check weights.
-        if self.weight > other.weight:
-            return 1
-        if self.weight < other.weight:
-            return -1
-        # Check the first node.
-        if self.source > other.source:
-            return 1
-        if self.source < other.source:
-            return -1
-        # Check the second node.
-        if self.target > other.target:
-            return 1
-        if self.target < other.target:
-            return -1
-        return 0
+        return (self.weight, self.source, self.target) < (
+            other.weight, other.source, other.target)
 
     def __hash__(self):
         """Hashable edges."""
-        #return hash(repr(self))
         return hash((self.source, self.target, self.weight))
 
     def __invert__(self):
@@ -168,23 +79,5 @@ class Edge:
         return self.__class__(self.target, self.source, self.weight)
 
     inverted = __invert__
-
-
-class UndirectedEdge(Edge):
-    """The class defining an undirected edge."""
-
-    def __init__(self, source, target, weight=1):
-        """Load up an edge instance."""
-        if source > target:
-            self.source = target
-            self.target = source
-        else:
-            self.source = source
-            self.target = target
-        self.weight = weight
-
-    def __invert__(self):
-        """The edge direction is not defined."""
-        return self
 
 # EOF
