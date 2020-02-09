@@ -2,7 +2,7 @@ PLANAR GRAPH GENERATORS
 ----------------------------------------------------------------------
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.structures.planarfactory import PlanarGraphFactory
+from graphtheory.planarity.planarfactory import PlanarGraphFactory
 
 gf = PlanarGraphFactory(Graph)
 
