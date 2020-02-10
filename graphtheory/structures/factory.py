@@ -53,7 +53,7 @@ class GraphFactory:
         random.shuffle(weights)
         for node in xrange(n):
             graph.add_node(node)
-        nodes = range(n)
+        nodes = list(range(n))
         n_edges = 0
         while n_edges < m:
             source, target = random.sample(nodes, 2)

@@ -35,7 +35,7 @@ class TestPoint(unittest.TestCase):
     def test_copy(self):
         p3 = self.p1.copy()
         self.assertEqual(p3, self.p1)
-        self.assertNotEqual(id(p3), id(self.p1))   # inny obiekt
+        self.assertNotEqual(id(p3), id(self.p1))   # different objects
 
     def test_length(self):
         self.assertAlmostEqual(Point(3, 4).length(), 5.0)
