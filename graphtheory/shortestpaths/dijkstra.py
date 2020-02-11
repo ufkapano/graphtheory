@@ -75,11 +75,9 @@ class Dijkstra:
             _, node = self._pq.get()
             if self._in_queue[node]:
                 self._in_queue[node] = False
-            else:
-                continue
-            for edge in self.graph.iteroutedges(node):
-                if self._in_queue[edge.target] and self._relax(edge):
-                    self._pq.put((self.distance[edge.target], edge.target))
+                for edge in self.graph.iteroutedges(node):
+                    if self._in_queue[edge.target] and self._relax(edge):
+                        self._pq.put((self.distance[edge.target], edge.target))
 
     def _relax(self, edge):
         """Edge relaxation."""
