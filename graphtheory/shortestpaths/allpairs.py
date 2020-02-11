@@ -8,7 +8,7 @@ except NameError:   # Python 3
 
 
 class SlowAllPairs:
-    """All-pairs shortest paths algorithm in O(V**4) time.
+    """All-pairs shortest paths algorithm in O(V^4) time.
     
     Attributes
     ----------
@@ -48,7 +48,7 @@ class SlowAllPairs:
         self.graph = graph
         self.distance = dict()
         self.weights = dict()
-        for source in self.graph.iternodes():   # O(V**2) time
+        for source in self.graph.iternodes():   # O(V^2) time
             self.distance[source] = dict()
             for target in self.graph.iternodes():
                 self.distance[source][target] = float("inf")
@@ -66,7 +66,7 @@ class SlowAllPairs:
             raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_distance):
-        """O(V**3) time."""
+        """O(V^3) time."""
         new_distance = dict()
         for source in self.graph.iternodes():
             new_distance[source] = dict()
@@ -79,7 +79,7 @@ class SlowAllPairs:
 
 
 class SlowAllPairsEdges:
-    """All-pairs shortest paths algorithm in O(V**2 (V+E)) time.
+    """All-pairs shortest paths algorithm in O(V^2 (V+E)) time.
     
     Attributes
     ----------
@@ -119,7 +119,7 @@ class SlowAllPairsEdges:
         self.graph = graph
         self.distance = dict()
         self.weights = dict()
-        for source in self.graph.iternodes():   # O(V**2) time
+        for source in self.graph.iternodes():   # O(V^2) time
             self.distance[source] = dict()
             for target in self.graph.iternodes():
                 self.distance[source][target] = float("inf")
@@ -149,7 +149,7 @@ class SlowAllPairsEdges:
 
 
 class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
-    """All-pairs shortest paths algorithm in O(V**4) time.
+    """All-pairs shortest paths algorithm in O(V^4) time.
     
     Attributes
     ----------
@@ -192,7 +192,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
         self.distance = dict()
         self.weights = dict()
         self.parent = dict()
-        for source in self.graph.iternodes():   # O(V**2) time
+        for source in self.graph.iternodes():   # O(V^2) time
             self.distance[source] = dict()
             self.parent[source] = dict()
             for target in self.graph.iternodes():
@@ -213,7 +213,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
             raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_distance):
-        """O(V**3) time."""
+        """O(V^3) time."""
         new_distance = dict()
         for source in self.graph.iternodes():
             new_distance[source] = dict(old_distance[source]) # IMPORTANT, copy
@@ -236,7 +236,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
 
 
 class FasterAllPairs:
-    """All-pairs shortest paths algorithm in O(V**3 log V) time.
+    """All-pairs shortest paths algorithm in O(V^3 log V) time.
     
     Attributes
     ----------
@@ -274,7 +274,7 @@ class FasterAllPairs:
             raise ValueError("the graph is not directed")
         self.graph = graph
         self.distance = dict()
-        for source in self.graph.iternodes():   # O(V**2) time
+        for source in self.graph.iternodes():   # O(V^2) time
             self.distance[source] = dict()
             for target in self.graph.iternodes():
                 self.distance[source][target] = float("inf") # IMPORTANT
@@ -292,7 +292,7 @@ class FasterAllPairs:
             raise ValueError("negative cycle detected")
 
     def extended_shortest_paths(self, old_distance):
-        """O(V**3) time."""
+        """O(V^3) time."""
         new_distance = dict()
         for source in self.graph.iternodes():
             new_distance[source] = dict()

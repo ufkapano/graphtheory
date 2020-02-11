@@ -81,7 +81,7 @@ class Johnson:
             self.distance[source] = dict()
             algorithm = Dijkstra(self._new_graph) # O(V*E*log(V)) total time
             algorithm.run(source)
-            for target in self.graph.iternodes():   # O(V**2) total time
+            for target in self.graph.iternodes():   # O(V^2) total time
                 self.distance[source][target] = (
                     algorithm.distance[target]
                     - self._bf.distance[source] 
@@ -170,7 +170,7 @@ class JohnsonFaster:
             self.distance[source] = dict()
             algorithm = Dijkstra(self._new_graph) # O(V*E*log(V)) total time
             algorithm.run(source)
-            for target in self.graph.iternodes():   # O(V**2) total time
+            for target in self.graph.iternodes():   # O(V^2) total time
                 if self.positive_weights:
                     self.distance[source][target] = algorithm.distance[target]
                 else:

@@ -204,7 +204,7 @@ class BipartiteGraphEdgeColoring:
                         finished = False   # bedziemy szukac drugiego koloru
                         break
             parity += 1
-        #print "path", path
+        #print ( "path {}".format(path) )
         # Sciezka zostala znaleziona i na pewno istnieje.
         # Zamieniamy kolory alpha i beta na sciezce.
         # Najpierw usuwam kolory, pierwszy to beta.

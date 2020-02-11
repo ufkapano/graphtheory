@@ -68,7 +68,7 @@ class BrooksNodeColoring:
                     neighbor1, neighbor2 = nodes
                     if not self.graph.has_edge(Edge(neighbor1, neighbor2)):
                         break
-            #print "path", neighbor1, source, neighbor2
+            #print ( "path {} {} {}".format(neighbor1, source, neighbor2) )
             # Mark two neighbors of source as visited.
             self.parent[neighbor1] = source
             self.parent[neighbor2] = source

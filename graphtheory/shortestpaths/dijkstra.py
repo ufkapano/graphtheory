@@ -159,7 +159,7 @@ class DijkstraMatrix:
         """
         self.source = source
         self.distance[source] = 0
-        for step in xrange(self.graph.v()):   # |V| times
+        for _ in xrange(self.graph.v()):   # |V| times
             # Find min node, O(V) time.
             node = min((node for node in self.graph.iternodes() 
                 if self._in_queue[node]), key=self.distance.get)
