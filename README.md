@@ -32,7 +32,7 @@ NTL (using Delta or Delta+1 colors),
 complete graphs (exact),
 bipartite graphs (exact)
 * Independent sets: backtracking (exact), US, RS, LL, SF
-* Dominating sets: backtracking (exact)
+* Dominating sets: backtracking (exact), US, RS, LF
 * Minimum spanning trees (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
 * Single-source shortest paths (weighted directed graphs without negative cycles): 

@@ -8,8 +8,7 @@ from graphtheory.independentsets.isetbt import BacktrackingIndependentSet
 
 V = 10
 graph_factory = GraphFactory(Graph)
-probability = 0.5
-G = graph_factory.make_random(V, False, probability)
+G = graph_factory.make_random(V, False, edge_probability=0.5)
 #G = graph_factory.make_cyclic(V, False)
 E = G.e()
 #G.show()
