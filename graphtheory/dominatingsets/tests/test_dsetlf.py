@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.dominatingsets.dsetbt import BacktrackingDominatingSet
+from graphtheory.dominatingsets.dsetlf import LargestFirstDominatingSet
 
 # 0 --- 1 --- 2 not bipartite (triangles are present)
 # |   / |     |
@@ -27,18 +27,29 @@ class TestDominatingSet(unittest.TestCase):
         #self.G.show()
 
     def test_dominating_set(self):
-        algorithm = BacktrackingDominatingSet(self.G)
+        algorithm = LargestFirstDominatingSet(self.G)
         algorithm.run()
         used = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
             used.update(self.G.iteradjacent(node))
         self.assertEqual(len(used), self.N)
         self.assertEqual(algorithm.cardinality, len(algorithm.dominating_set))
-        self.assertEqual(algorithm.cardinality, 2)
+        self.assertEqual(algorithm.cardinality, 2)   # best = 2
+        #print ( algorithm.dominating_set )
+
+    def test_dominating_set_source(self):
+        algorithm = LargestFirstDominatingSet(self.G)
+        algorithm.run(3)
+        used = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            used.update(self.G.iteradjacent(node))
+        self.assertEqual(len(used), self.N)
+        self.assertEqual(algorithm.cardinality, len(algorithm.dominating_set))
+        self.assertEqual(algorithm.cardinality, 2)   # best = 2
         #print ( algorithm.dominating_set )
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, BacktrackingDominatingSet,
+        self.assertRaises(ValueError, LargestFirstDominatingSet,
             Graph(5, directed=True))
 
     def tearDown(self): pass

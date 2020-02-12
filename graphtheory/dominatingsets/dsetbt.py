@@ -3,7 +3,7 @@
 import random
 
 class BacktrackingDominatingSet:
-    """Find a minimum dominating set using backtracking."""
+    """Find a minimum dominating set using backtracking (slow)."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
