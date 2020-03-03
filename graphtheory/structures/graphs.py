@@ -50,7 +50,7 @@ class Graph(dict):
         """Return the number of faces (for planar graphs)."""
         if not self.edge_next or not self.edge_prev:
             raise ValueError("run planarity test first")
-        return self.e() + 2 - self.n   # Euler's formula
+        return self.e() + 2 - self.v()   # Euler's formula
 
     def iterfaces(self):
         """Generate all faces on demand (for planar graphs)."""
