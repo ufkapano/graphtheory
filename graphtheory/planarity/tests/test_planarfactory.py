@@ -24,6 +24,12 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.assertEqual(G.f(), 2)
         self.assertEqual(len(faces), 2)
         #print ( "faces {}".format(faces) )
+        edge1 = next(G.iteredges())
+        #print ( edge1 )
+        #print ( list(G.iterface(edge1)) )
+        #print ( list(G.iterface(~edge1)) )
+        self.assertEqual(len(list(G.iterface(edge1))), self.N)
+        self.assertEqual(len(list(G.iterface(~edge1))), self.N)
         self.assertRaises(ValueError, self.graph_factory.make_cyclic, 1)
         # For n=1 and the Graph class we have
         # ValueError("loops are forbidden")
