@@ -155,7 +155,7 @@ class MultiGraph(dict):
 
     def copy(self):
         """Return the multigraph copy."""
-        new_graph = MultiGraph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in self.iternodes():
             new_graph[source] = dict()
             for target in self[source]:
@@ -164,7 +164,7 @@ class MultiGraph(dict):
 
     def transpose(self):
         """Return the transpose of the multigraph."""
-        new_graph = MultiGraph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for edge in self.iteredges():
@@ -173,7 +173,7 @@ class MultiGraph(dict):
 
     def complement(self):
         """Return the complement of the multigraph."""
-        new_graph = MultiGraph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for source in self.iternodes():
@@ -190,7 +190,7 @@ class MultiGraph(dict):
         node_set = set(nodes)
         if any(not self.has_node(node) for node in node_set):
             raise ValueError("nodes not from the graph")
-        new_graph = MultiGraph(n=len(node_set), directed=self.directed)
+        new_graph = self.__class__(n=len(node_set), directed=self.directed)
         for node in node_set:
             new_graph.add_node(node)
         for edge in self.iteredges():

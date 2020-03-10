@@ -144,14 +144,14 @@ class Graph(dict):
 
     def copy(self):
         """Return the graph copy."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph[node] = dict(self[node])
         return new_graph
 
     def transpose(self):
         """Return the transpose of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for edge in self.iteredges():
@@ -160,7 +160,7 @@ class Graph(dict):
 
     def complement(self):
         """Return the complement of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for source in self.iternodes():

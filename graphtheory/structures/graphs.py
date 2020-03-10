@@ -181,14 +181,14 @@ class Graph(dict):
 
     def copy(self):
         """Return the graph copy."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph[node] = dict(self[node])
         return new_graph
 
     def transpose(self):
         """Return the transpose of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for edge in self.iteredges():
@@ -197,7 +197,7 @@ class Graph(dict):
 
     def complement(self):
         """Return the complement of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for source in self.iternodes():
@@ -213,7 +213,7 @@ class Graph(dict):
         node_set = set(nodes)
         if any(not self.has_node(node) for node in node_set):
             raise ValueError("nodes not from the graph")
-        new_graph = Graph(n=len(node_set), directed=self.directed)
+        new_graph = self.__class__(n=len(node_set), directed=self.directed)
         for node in node_set:
             new_graph.add_node(node)
         for edge in self.iteredges():

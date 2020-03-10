@@ -145,7 +145,7 @@ class Graph:
 
     def copy(self):
         """Return the graph copy in O(V**2) time."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):
                 new_graph.data[source][target] = self.data[source][target]
@@ -153,7 +153,7 @@ class Graph:
 
     def transpose(self):
         """Return the transpose of the graph in O(V**2) time."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):
                 new_graph.data[source][target] = self.data[target][source]
@@ -161,7 +161,7 @@ class Graph:
 
     def complement(self):
         """Return the complement of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):   # no loops
                 if self.data[source][target] == 0 and source != target:
