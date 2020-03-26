@@ -52,6 +52,10 @@ chordal completion (PEO), vertex coloring
 chordal completion (PEO), tree decomposition, plotting
 * Chordal graphs: in progress ...
 
+## Installation
+
+See doc/quickstart.txt
+
 ## References
 
 [1] A. Kapanowski and Ł. Gałuszka, *Weighted graph algorithms with Python*. 
