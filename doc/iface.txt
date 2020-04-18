@@ -24,6 +24,7 @@ G.weight(edge)      return the edge weight or zero
 
 G.iternodes()            generate nodes on demand
 G.iteredges()            generate edges on demand
+G.iteredges_connected(start_edge) generate connected edges on demand
 G.iterfaces()            generate all faces on demand (for planar graphs)
 G.iterface(edge)         generate edges from the same face on demand (for planar graphs)
 

@@ -163,6 +163,15 @@ class TestGraphUndirected(unittest.TestCase):
         self.assertEqual(len(inedges_B), 3)
         self.assertEqual(len(outedges_B), 3)
 
+    def test_iteredges_connected(self):
+        start_edge = next(self.G.iteredges())
+        A = set([start_edge.source, start_edge.target])
+        for edge in self.G.iteredges_connected(start_edge):
+            B = set([edge.source, edge.target])
+            self.assertTrue(len(A & B) > 0)
+            A.update(B)
+            #print ( A )
+
     def test_copy(self):
         T = self.G.copy()
         self.assertEqual(T.v(), self.G.v())
