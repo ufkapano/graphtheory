@@ -36,12 +36,16 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.assertRaises(ValueError, self.graph_factory.make_cyclic, 2)
         # For n=2 and the Graph class we have
         # ValueError("parallel edges are forbidden")
+        #print ( G.edge2face )
+        #print ( G.face2edge )
+        self.assertEqual(len(G.edge2face), 2 * self.N)
+        self.assertEqual(len(G.face2edge), 2)
 
     def test_wheel(self):
         G = self.graph_factory.make_wheel(n=self.N)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), self.N)
-        self.assertEqual(G.e(), 2 * self.N - 2)
+        self.assertEqual(G.e(), 2 * (self.N - 1))
         self.assertTrue(is_wheel(G))
         faces = list(G.iterfaces())
         self.assertEqual(G.f(), self.N)
@@ -50,6 +54,10 @@ class TestPlanarGraphFactory(unittest.TestCase):
         self.assertRaises(ValueError, self.graph_factory.make_wheel, 1)
         self.assertRaises(ValueError, self.graph_factory.make_wheel, 2)
         self.assertRaises(ValueError, self.graph_factory.make_wheel, 3)
+        #print ( G.edge2face )
+        #print ( G.face2edge )
+        self.assertEqual(len(G.edge2face), 4 * (self.N - 1))
+        self.assertEqual(len(G.face2edge), self.N)
 
     def tearDown(self): pass
 

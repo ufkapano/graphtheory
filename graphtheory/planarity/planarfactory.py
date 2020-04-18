@@ -24,6 +24,8 @@ class PlanarGraphFactory:
         graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
+        graph.face2edge = dict()
+        graph.edge2face = dict()
         weights = list(range(1, 1 + n))   # different weights
         random.shuffle(weights)
         for node in xrange(n):
@@ -33,6 +35,10 @@ class PlanarGraphFactory:
             edge1 = Edge(i, (i+1) % n, weights.pop())
             graph.add_edge(edge1)
             L.append(edge1)
+            graph.edge2face[edge1] = 0
+            graph.edge2face[~edge1] = 1
+        graph.face2edge[0] = L[0]
+        graph.face2edge[1] = ~(L[0])
         for i in xrange(n):
             # At the node i.
             edge1 = L[i]
@@ -60,6 +66,8 @@ class PlanarGraphFactory:
         graph = self.cls(n, False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
+        graph.face2edge = dict()
+        graph.edge2face = dict()
         weights = list(range(1, 1 + 2 * n - 2))
         random.shuffle(weights)
         for node in xrange(n):
@@ -90,6 +98,13 @@ class PlanarGraphFactory:
             graph.edge_prev[edge1] = ~edge4
             graph.edge_prev[~edge4] = edge3
             graph.edge_prev[edge3] = edge1
+            # Faces at hub [~edge1, edge3, edge2]
+            graph.edge2face[~edge1] = i
+            graph.edge2face[edge3] = i
+            graph.edge2face[edge2] = i
+            graph.edge2face[~edge3] = 0
+            graph.face2edge[0] = ~edge3
+            graph.face2edge[i] = edge3
         return graph
 
 # EOF
