@@ -51,4 +51,15 @@ algorithm.run()
 print ( algorithm.parent )    # inner tree (dict)
 print ( algorithm.color )     # dict with node colors
 ----------------------------------------------------------------------
+# TREE DECOMPOSITION
+
+from graphtheory.planarity.halintd import HalinGraphTreeDecomposition
+
+algorithm = HalinGraphTreeDecomposition(G, outer)
+algorithm.run()
+print ( algorithm.parent )    # inner tree (dict)
+print ( algorithm.order )   # PEO (list)
+print ( algorithm.cliques )   # list of sets
+print ( algorithm.td )   # td as a graph (nodes are tuples)
+----------------------------------------------------------------------
 EOF

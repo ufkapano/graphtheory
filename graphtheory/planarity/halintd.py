@@ -17,7 +17,7 @@ class HalinGraphTreeDecomposition:
         
         Parameters
         ----------
-        graph : undirected graph
+        graph : an undirected connected graph (Halin graph)
         outer : a set of outer nodes
         """
         if graph.is_directed():
@@ -29,7 +29,7 @@ class HalinGraphTreeDecomposition:
         self.outer_next = dict()   # lista cykliczna
         self.outer_prev = dict()   # lista cykliczna
         self.parent = dict()
-        self.cliques = []
+        self.cliques = []   # list of sets
         self.td = None   # tree decomposition
 
     def run(self):
@@ -40,7 +40,7 @@ class HalinGraphTreeDecomposition:
         self._find_td()
 
     def _find_parent(self):   # O(V) time
-        """Find the inner tree (dict) using modified BFS."""
+        """Find the inner tree (dict) using a modified BFS."""
         # Robimy BFS z wierzcholka wewnetrznego.
         for source in self.graph.iternodes():
             if source not in self.outer:
