@@ -1,0 +1,16 @@
+VERTEX COVERS
+----------------------------------------------------------------------
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.vertexcovers.nodecoverapp import ApproximationNodeCover
+from graphtheory.vertexcovers.nodecoverdeg import DegreeNodeCover
+
+G = Graph()
+# Add nodes and edges here.
+#algorithm = ApproximationNodeCover(G)   # 2-approximation
+algorithm = DegreeNodeCover   # greedy
+algorithm.run()
+print ( algorithm.node_cover )
+print ( algorithm.cardinality )
+----------------------------------------------------------------------
+EOF
