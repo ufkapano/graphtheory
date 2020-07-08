@@ -5,10 +5,12 @@ DOMINATING SETS
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.dominatingsets.dsetbt import BacktrackingDominatingSet
+from graphtheory.dominatingsets.dsethb import HybridDominatingSet
 
 G = Graph()
 # Add nodes and edges here.
-algorithm = BacktrackingDominatingSet(G)
+#algorithm = BacktrackingDominatingSet(G)
+algorithm = HybridDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
 print ( algorithm.cardinality )

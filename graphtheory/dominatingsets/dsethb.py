@@ -1,18 +1,23 @@
 #!/usr/bin/python
 
 import random
+#from graphtheory.dominatingsets.dsetus import UnorderedSequentialDominatingSet as DominatingSet
+#from graphtheory.dominatingsets.dsetrs import RandomSequentialDominatingSet as DominatingSet
+from graphtheory.dominatingsets.dsetlf import LargestFirstDominatingSet as DominatingSet
 
-class BacktrackingDominatingSet:
-    """Find a minimum dominating set using backtracking (slow)."""
+class HybridDominatingSet:
+    """Find a minimum dominating set using a hybrid algorithm."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.dominating_set = set(self.graph.iternodes())
+        algorithm = DominatingSet(graph)
+        algorithm.run()
+        self.dominating_set = algorithm.dominating_set
         self._tmp_set = set()
-        self.cardinality = self.graph.v()
+        self.cardinality = len(self.dominating_set)
         self.node_list = list(self.graph.iternodes())
         #random.shuffle(self.node_list)
         import sys
