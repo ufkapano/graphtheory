@@ -7,7 +7,7 @@ except NameError:   # Python 3
     xrange = range
 
 class LargestFirstNodeCover:
-    """Find a minimum node cover (largest first algorithm)."""
+    """Find a minimum node cover (largest first algorithm) in O(V+E) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

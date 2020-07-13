@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 class ApproximationNodeCover:
-    """Find a minimum node cover (2-approximation).
+    """Find a minimum node cover (2-approximation) in O(V+E) time.
     
     Based on ideas from Cormen.
     len(node_cover) <= 2 * len(minimum_node_cover)

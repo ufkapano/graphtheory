@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 class DegreeNodeCover:
-    """Find a minimum node cover (greedy algorithm)."""
+    """Find a minimum node cover (greedy algorithm) in O(V+E) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
