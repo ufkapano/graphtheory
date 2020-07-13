@@ -32,15 +32,15 @@ NTL (using Delta or Delta+1 colors),
 complete graphs (exact),
 bipartite graphs (exact)
 * Independent sets: backtracking (exact), US, RS, LL, SF
-* Dominating sets: backtracking (exact), hybrid(exact), US, RS, LF
-* Vertex covers: greedy, 2-approximation
+* Dominating sets: backtracking (exact), hybrid (exact), US, RS, LF
+* Vertex covers (heuristics): greedy, 2-approximation, LF
 * Minimum spanning trees (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
 * Single-source shortest paths (weighted directed graphs without negative cycles): 
 Dijkstra (nonnegative weights), DAGs (using topological sorting), 
 Bellman-Ford
 * All-pairs shortest paths (weighted directed graphs without negative cycles): 
-Floyd-Warshall, Johnson, Matrix multiplications
+Floyd-Warshall, Johnson, matrix multiplications
 * Eulerian graphs: DFS, Fleury, Hierholzer
 * Hamiltonian graphs: DFS, tournaments, 
 TSP (DFS, with MST, NN, RNN, sorted edges)

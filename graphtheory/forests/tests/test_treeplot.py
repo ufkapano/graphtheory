@@ -35,14 +35,14 @@ class TestTreePlot(unittest.TestCase):
         algorithm = TreePlot(self.G)
         algorithm.run()
         self.assertEqual(len(algorithm.point_dict), self.N)
-        #print algorithm.point_dict
+        #print ( algorithm.point_dict )
 
     def test_tree_plot_radius_angle(self):
         self.assertEqual(self.G.e(), self.N-1)
         algorithm = TreePlotRadiusAngle(self.G)
         algorithm.run()
         self.assertEqual(len(algorithm.point_dict), self.N)
-        #print algorithm.point_dict
+        #print ( algorithm.point_dict )
         self.assertEqual(algorithm.point_dict,
             {0: (2, Fraction(1, 2)),
             1: (1, Fraction(1, 1)), 
@@ -61,7 +61,7 @@ class TestTreePlot(unittest.TestCase):
         algorithm = TreePlot(T)
         algorithm.run()
         self.assertEqual(len(algorithm.point_dict), 3)
-        #print algorithm.point_dict
+        #print ( algorithm.point_dict )
 
     def test_tree_three_nodes_radius_angle(self):
         T = Graph(3)
@@ -72,7 +72,7 @@ class TestTreePlot(unittest.TestCase):
         algorithm = TreePlotRadiusAngle(T)
         algorithm.run()
         self.assertEqual(len(algorithm.point_dict), 3)
-        #print algorithm.point_dict
+        #print ( algorithm.point_dict )
         self.assertEqual(algorithm.point_dict,
             {0: (1, Fraction(3, 2)),
             1: (0, Fraction(3, 1)), 

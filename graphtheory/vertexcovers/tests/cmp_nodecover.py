@@ -6,6 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.vertexcovers.nodecoverapp import ApproximationNodeCover
 from graphtheory.vertexcovers.nodecoverdeg import DegreeNodeCover
+from graphtheory.vertexcovers.nodecoverlf import LargestFirstNodeCover
 
 V = 10
 graph_factory = GraphFactory(Graph)
@@ -25,5 +26,9 @@ print ( "AppNC {}".format(algorithm.cardinality) )
 algorithm = DegreeNodeCover(G)
 algorithm.run()
 print ( "DegNC {}".format(algorithm.cardinality) )
+
+algorithm = LargestFirstNodeCover(G)
+algorithm.run()
+print ( "LFNC {}".format(algorithm.cardinality) )
 
 # EOF
