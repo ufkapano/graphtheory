@@ -76,15 +76,15 @@ class Graph(dict):
                 edge = self.edge_next[~edge]
             yield face
 
-    def iterface(self, edge):
+    def iterface(self, start_edge):
         """Generate edges from the same face on demand (for planar graphs)."""
         if not self.edge_next or not self.edge_prev:
             raise ValueError("planar embedding not calculated")
-        edge1 = edge
+        edge = start_edge
         while True:
-            yield edge1
-            edge1 = self.edge_next[~edge1]
-            if edge1 == edge:
+            yield edge
+            edge = self.edge_next[~edge]
+            if edge == start_edge:
                 break
 
     def add_node(self, node):
