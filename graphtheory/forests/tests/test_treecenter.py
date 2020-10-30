@@ -41,12 +41,21 @@ class TestTreeCenter(unittest.TestCase):
         self.assertEqual(algorithm.tree_center, [4, 5])
         self.assertEqual(algorithm.tree_radius, 3)
 
-    def test_center_two2(self):
+    def test_path1(self):
         T = Graph(2)
         T.add_edge(Edge(0, 1))
         algorithm = TreeCenter(T)
         algorithm.run()
         self.assertEqual(algorithm.tree_center, [0, 1])
+        self.assertEqual(algorithm.tree_radius, 1)
+
+    def test_path2(self):
+        T = Graph(3)
+        T.add_edge(Edge(0, 1))
+        T.add_edge(Edge(1, 2))
+        algorithm = TreeCenter(T)
+        algorithm.run()
+        self.assertEqual(algorithm.tree_center, [1])
         self.assertEqual(algorithm.tree_radius, 1)
 
     def test_cycle(self):
