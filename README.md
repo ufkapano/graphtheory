@@ -52,6 +52,7 @@ chordal completion (PEO), vertex coloring
 * Halin graphs (exact algorithms): recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
 * Chordal graphs: in progress ...
+* Clustering: Kruskal.
 
 ## Installation
 

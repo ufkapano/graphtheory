@@ -95,51 +95,19 @@ class Point:
 
     def __lt__(self, other):
         """Points comparizon (like 2-tuple)."""
-        if self.x < other.x:
-            return True
-        if self.x > other.y:
-            return False
-        if self.y < other.y:
-            return True
-        if self.y > other.y:
-            return False
-        return False
+        return (self.x, self.y) < (other.x, other.y)
 
     def __le__(self, other):
         """Points comparizon (like 2-tuple)."""
-        if self.x < other.x:
-            return True
-        if self.x > other.y:
-            return False
-        if self.y < other.y:
-            return True
-        if self.y > other.y:
-            return False
-        return True
+        return (self.x, self.y) <= (other.x, other.y)
 
     def __gt__(self, other):
         """Points comparizon (like 2-tuple)."""
-        if self.x < other.x:
-            return False
-        if self.x > other.y:
-            return True
-        if self.y < other.y:
-            return False
-        if self.y > other.y:
-            return True
-        return False
+        return (self.x, self.y) > (other.x, other.y)
 
     def __ge__(self, other):
         """Points comparizon (like 2-tuple)."""
-        if self.x < other.x:
-            return False
-        if self.x > other.y:
-            return True
-        if self.y < other.y:
-            return False
-        if self.y > other.y:
-            return True
-        return True
+        return (self.x, self.y) >= (other.x, other.y)
 
     def __cmp__(self, other):   # Python 2 only
         """Points comparizon (like 2-tuple)."""

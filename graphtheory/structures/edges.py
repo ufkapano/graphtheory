@@ -57,9 +57,8 @@ class Edge:
 
     def __eq__(self, other):
         """Comparing of edges (the weight first)."""
-        return (self.source == other.source
-            and self.target == other.target
-            and self.weight == other.weight)
+        return (self.source, self.target, self.weight) == (
+            other.source, other.target, other.weight)
 
     def __ne__(self, other):
         """Comparing of edges (the weight first)."""
