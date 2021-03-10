@@ -192,16 +192,6 @@ class TestGraphUndirected(unittest.TestCase):
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 6)
 
-    def test_load_save(self):
-        name1 = "undirected_matrixgraph.txt"
-        name2 = "undirected_matrixgraph.lgl"
-        name3 = "undirected_matrixgraph.ncol"
-        self.G.save(name1)
-        self.G.save_lgl(name2)
-        self.G.save_ncol(name3)
-        T = Graph.load(name1)
-        self.assertEqual(self.G, T)
-
     def tearDown(self): pass
 
 # 0-2-4-6
