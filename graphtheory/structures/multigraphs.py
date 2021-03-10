@@ -108,13 +108,11 @@ class MultiGraph(dict):
 
     def iternodes(self):
         """Generate nodes from the multigraph on demand."""
-        #return self.iterkeys()   # Python 2 only
-        for node in self:
-            yield node
+        return iter(self)
 
     def iteradjacent(self, source):
         """Generate adjacent nodes from the multigraph on demand."""
-        return self[source].iterkeys()
+        return iter(self[source])
 
     def iteroutedges(self, source):
         """Generate outedges from the multigraph on demand."""

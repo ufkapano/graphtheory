@@ -3,6 +3,7 @@
 import copy
 import random
 from graphtheory.structures.edges import Edge
+
 try:
     integer_types = (int, long)
 except NameError:   # Python 3
@@ -51,17 +52,14 @@ class Graph:
         """Add a node to the graph."""
         if not isinstance(node, integer_types):
             raise ValueError("node is not int or long")
-        if node >= self.n or node < 0:
+        if not (0 <= node < self.n):
             raise ValueError("node out of range")
 
     def has_node(self, node):
         """Test if a node exists."""
         if not isinstance(node, integer_types):
             raise ValueError("node is not int or long")
-        if 0 <= node < self.n:
-            return True
-        else:
-            return False
+        return 0 <= node < self.n
 
     def del_node(self, source):
         """Remove a node from the graph with edges.
@@ -144,7 +142,7 @@ class Graph:
         print("".join(L))
 
     def copy(self):
-        """Return the graph copy in O(V**2) time."""
+        """Return the graph copy in O(V^2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in xrange(self.n):
             for target in xrange(self.n):

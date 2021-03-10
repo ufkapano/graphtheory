@@ -55,13 +55,13 @@ class Graph(dict):
 
     def f(self):
         """Return the number of faces (for planar graphs)."""
-        if not self.edge_next or not self.edge_prev:
+        if not self.edge_next:
             raise ValueError("run planarity test first")
         return self.e() + 2 - self.v()   # Euler's formula
 
     def iterfaces(self):
         """Generate all faces on demand (for planar graphs)."""
-        if not self.edge_next or not self.edge_prev:
+        if not self.edge_next:
             raise ValueError("planar embedding not calculated")
         used = set()
         for edge in self.edge_next:
@@ -78,7 +78,7 @@ class Graph(dict):
 
     def iterface(self, start_edge):
         """Generate edges from the same face on demand (for planar graphs)."""
-        if not self.edge_next or not self.edge_prev:
+        if not self.edge_next:
             raise ValueError("planar embedding not calculated")
         edge = start_edge
         while True:
@@ -141,15 +141,11 @@ class Graph(dict):
 
     def iternodes(self):
         """Generate all nodes from the graph on demand."""
-        #return self.iterkeys()   # Python 2 only
-        for node in self:
-            yield node
+        return iter(self)
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        #return self[source].iterkeys()   # Python 2 only
-        for target in self[source]:
-            yield target
+        return iter(self[source])
 
     def iteroutedges(self, source):
         """Generate the outedges from the graph on demand."""
