@@ -52,6 +52,8 @@ class TestGraphDirected(unittest.TestCase):
         self.assertFalse(T == self.G, "edge directions are different")
         T.del_edge(Edge("B", "D"))
         T.add_edge(Edge("D", "B"))
+        #self.G.show()
+        #T.show()
         self.assertTrue(T == self.G, "graphs are the same")
 
     def test_iteredges(self):
@@ -198,16 +200,6 @@ class TestGraphUndirected(unittest.TestCase):
         self.G.add_graph(T)
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 6)
-
-    def test_load_save(self):
-        name1 = "undirected_setgraph.txt"
-        name2 = "undirected_setgraph.lgl"
-        name3 = "undirected_setgraph.ncol"
-        self.G.save(name1)
-        self.G.save_lgl(name2)
-        self.G.save_ncol(name3)
-        T = Graph.load(name1)
-        self.assertEqual(self.G, T)
 
     def tearDown(self): pass
 

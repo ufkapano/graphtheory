@@ -93,14 +93,11 @@ class Graph(dict):
 
     def iternodes(self):
         """Generate the nodes from the graph on demand."""
-        #return self.iterkeys()   # Python 2 only
-        for node in self:
-            yield node
+        return iter(self)
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        for target in self[source]:
-            yield target
+        return iter(self[source])
 
     def iteroutedges(self, source):
         """Generate the outedges from the graph on demand."""
@@ -187,23 +184,11 @@ class Graph(dict):
     def __eq__(self, other):
         """Test if the graphs are equal."""
         if self.is_directed() is not other.is_directed():
-            #print "directed and undirected graphs"
             return False
-        if self.v() != other.v():
-            #print "|V1| != |V2|"
+        if set(self) != set(other):   # checking nodes
             return False
-        for node in self.iternodes():   # O(V) time
-            if not other.has_node(node):
-                #print "V1 != V2"
-                return False
-        if self.e() != other.e():   # inefficient, O(E) time
-            #print "|E1| != |E2|"
-            return False
-        for edge in self.iteredges():   # O(E) time
-            if not other.has_edge(edge):
-                #print "E1 != E2"
-                return False
-            if edge.weight != other.weight(edge):
+        for node in self.iternodes():   # checking neighbors
+            if self[node] != other[node]:   # comparing sets
                 return False
         return True
 
@@ -219,65 +204,5 @@ class Graph(dict):
             self.add_node(node)
         for edge in other.iteredges():
             self.add_edge(edge)
-
-    def save(self, file_name, name="Graph"):
-        """Export the graph to the adjacency list format with comments."""
-        afile = open(file_name, "w")
-        afile.write("# NAME={}\n".format(name))
-        afile.write("# DIRECTED={}\n".format(self.directed))
-        afile.write("# V={}\n".format(self.v()))
-        afile.write("# E={}\n".format(self.e()))
-        for edge in self.iteredges():
-            afile.write("{} {}\n".format(edge.source, edge.target))
-        afile.close()
-
-    @classmethod
-    def load(cls, file_name):
-        """Import the graph from the adjacency list format with comments."""
-        afile = open(file_name, "r")
-        n = 1
-        is_directed = False
-        for line in afile:
-            if line[0] == "#":
-                if "# NAME=" in line:
-                    name = line[7:-1]
-                elif line == "# DIRECTED=False\n":
-                    is_directed = False
-                elif line == "# DIRECTED=True\n":
-                    is_directed = True
-                elif "# V=" in line:
-                    n = int(line[4:-1])
-                else:   # ignore other
-                    graph = cls(n, is_directed)
-            else:
-                #alist = [int(x) for x in line.split()]
-                #alist = [eval(x) for x in line.split()]
-                alist = line.split()
-                if len(alist) == 3:
-                    alist[-1] = eval(alist[-1])
-                graph.add_edge(Edge(*alist))
-        afile.close()
-        return graph
-
-    def save_lgl(self, file_name="graph.lgl"):
-        """Export the graph to the adjacency list format (LGL)."""
-        if self.is_directed():
-            raise ValueError("the graph is directed")
-        afile = open(file_name, "w")
-        for edge in self.iteredges():
-            afile.write("{} {}\n".format(edge.source, edge.target))
-        afile.close()
-
-    def save_ncol(self, file_name="graph.ncol"):
-        """Export the graph to the labelled edge list format (NCOL)."""
-        if self.is_directed():
-            raise ValueError("the graph is directed")
-        afile = open(file_name, "w")
-        for node in self.iternodes():
-            afile.write("# {}\n".format(node))
-            for edge in self.iteroutedges(node):
-                if edge.source < edge.target:
-                    afile.write("{}\n".format(edge.target))
-        afile.close()
 
 # EOF

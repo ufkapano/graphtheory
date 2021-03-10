@@ -1,20 +1,23 @@
-INTERFACE FOR GRAPHS
+INTERFACE FOR GRAPHS AND MULTIGRAPHS
 ----------------------------------------------------------------------
 G, H - graphs
 node - usually integer or string (hashable, with order)
+    For matrixgraphs, nodes are int from 0 to n-1.
 edge - an instance of the Edge class (hashable, with order, directed)
 ----------------------------------------------------------------------
 Method name         Short description
 ----------------------------------------------------------------------
-Graph(n=8)          return an undirected graph with eight nodes
-Graph(n=6, True)    return a directed graph with six nodes
+Graph()             return an empty undirected graph
+Graph(directed=True) return aa empty directed graph
+Graph(n=8)          return an undirected graph with eight nodes (matrixgraphs)
+Graph(n=6, True)    return a directed graph with six nodes (matrixgraphs)
 G.is_directed()     return True if G is a directed graph
 G.v()               return the number of nodes
 G.e()               return the number of edges
 G.f()               return the number of faces (for planar graphs)
 
-G.add_node(node)    add the node to G
-G.del_node(node)    remove the node form G
+G.add_node(node)    add the node to G (only testing for matrixgraphs)
+G.del_node(node)    remove the node form G (only remove edges for matrixgraphs)
 G.has_node(node)    return True if the node is in G
 
 G.add_edge(edge)    add the edge to G
@@ -41,5 +44,6 @@ G.copy()            return the graph copy
 G.transpose()       return the transpose of G
 G.complement()      return the complement of G
 G.subgraph(nodes)   return the induced subgraph
+G == H, G != H      comparisons
 ----------------------------------------------------------------------
 EOF

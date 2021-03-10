@@ -86,31 +86,31 @@ class Point:
                 return 4 - Fraction(-self.y, distance)
 
     def __eq__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return self.x == other.x and self.y == other.y
 
     def __ne__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return not (self == other)
 
     def __lt__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return (self.x, self.y) < (other.x, other.y)
 
     def __le__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return (self.x, self.y) <= (other.x, other.y)
 
     def __gt__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return (self.x, self.y) > (other.x, other.y)
 
     def __ge__(self, other):
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return (self.x, self.y) >= (other.x, other.y)
 
     def __cmp__(self, other):   # Python 2 only
-        """Points comparizon (like 2-tuple)."""
+        """Points comparison (like 2-tuple)."""
         return cmp((self.x, self.y), (other.x, other.y))
 
     def __hash__(self):

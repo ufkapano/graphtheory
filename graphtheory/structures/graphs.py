@@ -290,23 +290,11 @@ class Graph(dict):
     def __eq__(self, other):
         """Test if the graphs are equal."""
         if self.is_directed() is not other.is_directed():
-            #print "directed and undirected graphs"
             return False
-        if self.v() != other.v():
-            #print "|V1| != |V2|"
+        if set(self) != set(other):   # checking nodes
             return False
-        for node in self.iternodes():   # O(V) time
-            if not other.has_node(node):
-                #print "V1 != V2"
-                return False
-        if self.e() != other.e():   # inefficient, O(E) time
-            #print "|E1| != |E2|"
-            return False
-        for edge in self.iteredges():   # O(E) time
-            if not other.has_edge(edge):
-                #print "E1 != E2"
-                return False
-            if edge.weight != other.weight(edge):
+        for node in self.iternodes():   # comparing neighbors
+            if self[node] != other[node]:   # different dicts
                 return False
         return True
 

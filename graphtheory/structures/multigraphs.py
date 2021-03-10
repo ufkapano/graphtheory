@@ -7,6 +7,8 @@ class MultiGraph(dict):
     
     Nodes can be numbers, strings, or any hashable objects.
     We would like to compare nodes.
+    If edge1.source == edge2.source and edge1.target == edge2.target,
+    then edge1.weight != edge2.weight (edge1 and edge2 are in a multigraph).
     
     Internal structure of an exemplary directed multigraph:
     {"A": {"B": [Edge("A", "B", 1)], "C": [Edge("A", "C", 2)]}, 
@@ -72,6 +74,9 @@ class MultiGraph(dict):
 
     def add_edge(self, edge):
         """Add an edge to the multigraph (missing nodes are created)."""
+        if edge.source in self and edge.target in self[edge.source]:
+            if edge in self[edge.source][edge.target]:
+                raise ValueError("the same parallel edge")
         self.add_node(edge.source)
         self.add_node(edge.target)
         if edge.target not in self[edge.source]:
@@ -244,22 +249,13 @@ class MultiGraph(dict):
     def __eq__(self, other):   # FIX
         """Test if the multigraphs are equal."""
         if self.is_directed() is not other.is_directed():
-            #print "directed and undirected multigraphs"
             return False
-        if self.v() != other.v():
-            #print "|V1| != |V2|"
+        if set(self) != set(other):   # checking nodes
             return False
-        for node in self.iternodes():   # time O(V)
-            if not other.has_node(node):
-                #print "V1 != V2"
-                return False
-        if self.e() != other.e():   # inefficient, time O(E)
-            #print "|E1| != |E2|"
-            return False
-        for edge in self.iteredges():   # time O(E)
-            if not other.has_edge(edge):
-                #print "E1 != E2"
-                return False
+        for source in self.iternodes():   # comparing neighbors
+            for target in self[source]:
+                if set(self[source][target]) != set(other[source][target]):
+                    return False
         return True
 
     def __ne__(self, other):
