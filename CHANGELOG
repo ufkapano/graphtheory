@@ -1,0 +1,32 @@
+CHANGELOG
+
+2021-03-09
+* Using iter() in Graph.iternodes() and Graph.iteradjacent().
+* Graph comparison based on sets and dicts.
+* Using list(xrange()) in factory.
+
+2020-12-22
+* Tournaments using functools.cmp_to_key (Py3.2+).
+
+2020-11-30
+* Drawing trees with matplotlib.
+TreePlot is using float (numerical errors for large trees).
+TreePlotRadiusAngle is using int and Fraction.
+
+2020-04-27
+* HalinGraphTreeDecomposition in doc.
+
+2020-04-18
+* Structures for a topological graph (graphs module):
+edge_next, edge_prev, face2edge, edge2face.
+Used in Graph.f(), Graph.iterfaces(), Graph.iterface(), Graph.copy().
+* Graph.iteredges_connected() added.
+Used in ConnectedSequentialEdgeColoring.
+
+2020-03-10
+* Using self.__class__ in Graph, Multigraph, Edge.
+
+2020-01-20
+* Edge with functools.total_ordering (Py2.7 and Py3.2+).
+
+EOF

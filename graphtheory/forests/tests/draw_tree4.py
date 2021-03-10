@@ -9,7 +9,7 @@ from graphtheory.structures.points import Point
 from graphtheory.forests.treeplot import TreePlot
 from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
-# Complete ternary tree
+# Complete binary tree
 N = 50
 V = 2 * N + 1   # the number of nodes
 E = 2 * N       # the number of edges
