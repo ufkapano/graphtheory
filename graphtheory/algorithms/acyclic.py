@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 class AcyclicGraphDFS:
     """Cycles detection in graphs based on DFS.
     
@@ -25,7 +27,6 @@ class AcyclicGraphDFS:
         self.graph = graph
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

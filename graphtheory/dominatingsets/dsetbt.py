@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import random
 
 class BacktrackingDominatingSet:
@@ -15,7 +16,6 @@ class BacktrackingDominatingSet:
         self.cardinality = self.graph.v()
         self.node_list = list(self.graph.iternodes())
         #random.shuffle(self.node_list)
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
 

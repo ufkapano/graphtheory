@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 from graphtheory.seriesparallel.spnodes import btree_count_iter
 
 
@@ -14,7 +15,6 @@ class SPGraphIndependentSet:
         self.root = root         # binary sp-tree
         self.independent_set = set()
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -87,7 +87,6 @@ class SPTreeIndependentSet:
         self.root = root         # binary sp-tree
         self.independent_set = set()
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(btree_count_iter(self.root), recursionlimit))
 

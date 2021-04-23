@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 
 class BruteForceTSPWithEdges:
     """The brute force algorithm (a.k.a. exhaustive search) for TSP.
@@ -24,7 +25,6 @@ class BruteForceTSPWithEdges:
         self._stack = list()
         self._used = dict((node, False) for node in self.graph.iternodes())
         self.best_weight = float("inf")
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -83,7 +83,6 @@ class BruteForceTSPWithGraph:
             self._path.add_node(node)
         self._used = dict((node, False) for node in self.graph.iternodes())
         self.best_weight = float("inf")
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

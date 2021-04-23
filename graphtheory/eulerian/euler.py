@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 try:
     from Queue import LifoQueue
 except ImportError:   # Python 3
@@ -31,7 +33,6 @@ class EulerianCycleDFS:
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
         self._stack = LifoQueue()
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 
@@ -97,7 +98,6 @@ class EulerianCycleDFSWithEdges:
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
         self._stack = LifoQueue()
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 

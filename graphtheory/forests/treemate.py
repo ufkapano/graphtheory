@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 class BorieMatching:
     """Find a maximum matching for trees.
     
@@ -21,7 +23,6 @@ class BorieMatching:
         self.mate_set = set()
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

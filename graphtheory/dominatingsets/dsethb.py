@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import random
 #from graphtheory.dominatingsets.dsetus import UnorderedSequentialDominatingSet as DominatingSet
 #from graphtheory.dominatingsets.dsetrs import RandomSequentialDominatingSet as DominatingSet
@@ -20,7 +21,6 @@ class HybridDominatingSet:
         self.cardinality = len(self.dominating_set)
         self.node_list = list(self.graph.iternodes())
         #random.shuffle(self.node_list)
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
 

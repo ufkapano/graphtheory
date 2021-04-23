@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 class BacktrackingNodeColoring:
     """Node coloring with k colors using backtracking.
     
@@ -31,7 +33,6 @@ class BacktrackingNodeColoring:
                 raise ValueError("a loop detected")
         self.m_colors = m_colors
         self.node_list = list(self.graph.iternodes())
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

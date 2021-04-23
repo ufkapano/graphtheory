@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 try:
     from Queue import Queue
 except ImportError:   # Python 3
@@ -80,7 +82,6 @@ class BipartiteGraphDFS:
             raise ValueError("the graph is directed")
         self.graph = graph
         self.color = dict(((node, None) for node in self.graph.iternodes()))
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -109,7 +110,7 @@ class BipartiteGraphDFS:
 def is_bipartite(graph):
     """Bipartite graphs detection."""
     try:
-        algorithm = BipartiteGraphBFS(graph)
+        algorithm = BipartiteGraphBFS(graph)   # no recursion
         algorithm.run()
         return True
     except ValueError:

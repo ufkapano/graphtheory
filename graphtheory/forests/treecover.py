@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 try:
     from Queue import Queue
 except ImportError:   # Python 3
@@ -33,7 +35,6 @@ class BorieNodeCover:
         self.parent = dict()
         self.node_cover = set()
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

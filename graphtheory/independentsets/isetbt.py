@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import random
 
 class BacktrackingIndependentSet:
@@ -19,7 +20,6 @@ class BacktrackingIndependentSet:
         self._used = dict((node, 0) for node in self.graph.iternodes())
         self.node_list = list(self.graph.iternodes())
         #random.shuffle(self.node_list)
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v()*2, recursionlimit))
 

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 from graphtheory.structures.edges import Edge
 from graphtheory.seriesparallel.spnodes import btree_count_iter
 
@@ -16,7 +17,6 @@ class SPGraphMatching:
         self.mate_set = set()    # set with mate edges
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0     # size of mate set
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -92,7 +92,6 @@ class SPTreeMatching:
         self.mate_set = set()    # set with mate edges
         self.mate = dict()
         self.cardinality = 0     # size of mate set
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(btree_count_iter(self.root), recursionlimit))
 

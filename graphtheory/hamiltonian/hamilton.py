@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 class HamiltonianCycleDFS:
     """Finding a Hamiltonian cycle in a Hamiltonian graph.
     
@@ -25,7 +27,6 @@ class HamiltonianCycleDFS:
         self.source = None
         self._stack = list()
         self._used = dict((node, False) for node in self.graph.iternodes())
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -82,7 +83,6 @@ class HamiltonianCycleDFSWithEdges:
         self.source = None
         self._stack = list()
         self._used = dict((node, False) for node in self.graph.iternodes())
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -141,7 +141,6 @@ class HamiltonianCycleDFSWithGraph:
         for node in self.graph.iternodes():
             self._path.add_node(node)
         self._used = dict((node, False) for node in self.graph.iternodes())
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

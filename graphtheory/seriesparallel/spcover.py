@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 from graphtheory.seriesparallel.spnodes import btree_count_iter
 
 
@@ -14,7 +15,6 @@ class SPGraphNodeCover:
         self.root = root         # binary sp-tree
         self.node_cover = set()
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -87,7 +87,6 @@ class SPTreeNodeCover:
         self.root = root         # binary sp-tree
         self.node_cover = set()
         self.cardinality = 0
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(btree_count_iter(self.root), recursionlimit))
 
