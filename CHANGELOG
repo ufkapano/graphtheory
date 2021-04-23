@@ -1,5 +1,10 @@
 CHANGELOG
 
+2021-04-23
+* 'import sys' moved to the top of files [recursion limit issues].
+* is_connected() with BFS (no recursion).
+* First tools for chordal graphs added.
+
 2021-03-09
 * Using iter() in Graph.iternodes() and Graph.iteradjacent().
 * Graph comparison based on sets and dicts.

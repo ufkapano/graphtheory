@@ -51,7 +51,13 @@ iset, dset, vertex cover, matching,
 chordal completion (PEO), vertex coloring
 * Halin graphs (exact algorithms): recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
-* Chordal graphs: in progress ...
+* Chordal graphs (exact algorithms): recognition, generators, 
+finding PEO (MCS), 
+finding maximum clique (PEO, MDO),
+finding all maximal cliques (PEO)
+* Outerplanar graphs (exact algorithms): recognition, 
+chordal completion (PEO), vertex coloring
+* Permutation graphs: in progress ...
 * Clustering: Kruskal.
 
 ## Installation
@@ -105,5 +111,9 @@ Maciej Niezabitowski (tree decomposition)
 Piotr Wlazło (edge coloring)
 
 Magdalena Stępień (planar graphs)
+
+Sandra Rudnicka (outerplanar graphs)
+
+Albert Surmacz (permutation graphs)
 
 EOF

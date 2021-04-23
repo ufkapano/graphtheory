@@ -1,0 +1,38 @@
+CHORDAL GRAPHS
+----------------------------------------------------------------------
+# RECOGNITION
+
+from graphtheory.chordality.peotools import find_peo_mcs
+from graphtheory.chordality.peotools import find_maximum_clique_peo
+from graphtheory.chordality.peotools import find_all_maximal_cliques
+from graphtheory.chordality.peotools import is_peo1, is_peo2
+
+order = find_peo_mcs(G)
+assert is_peo1(G, order)   # testing PEO
+assert is_peo2(G, order)   # testing PEO
+max_clique = find_maximum_clique_peo(G, order)
+print ( max_clique )   # a set of nodes
+cliques = find_all_maximal_cliques(G, order)
+print ( cliques )   # a list with sets
+----------------------------------------------------------------------
+# GENERATORS
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.chordality.chordaltools import make_random_ktree
+from graphtheory.chordality.chordaltools import make_random_chordal
+
+G = make_random_ktree(n=10, k=5)
+G = make_random_chordal(n=10)
+----------------------------------------------------------------------
+# MINIMUM DEGREE ORDERING OF CHORDAL GRAPHS
+
+from graphtheory.chordality.mdotools import find_mdo
+from graphtheory.chordality.mdotools import find_maximum_clique_mdo
+
+order = find_mdo(G)
+print ( order )   # list of nodes (MDO)
+max_clique = find_maximum_clique_mdo(G)
+print ( max_clique )   # a set of nodes
+----------------------------------------------------------------------
+EOF
