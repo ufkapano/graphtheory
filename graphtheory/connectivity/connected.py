@@ -82,7 +82,7 @@ def is_connected(graph):
         raise ValueError("the graph is directed")
     order = []
     source = next(graph.iternodes())
-    algorithm = SimpleDFS(graph)
+    algorithm = SimpleBFS(graph)   # no recursion
     algorithm.run(source, lambda node: order.append(node))
     return len(order) == graph.v()
 

@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 try:
     from Queue import LifoQueue
 except ImportError:   # Python 3
@@ -155,7 +157,6 @@ class DFSWithRecursion:
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
@@ -237,7 +238,6 @@ class SimpleDFS:
         self.dag = self.graph.__class__(self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
-        import sys
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 
