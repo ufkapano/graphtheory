@@ -5,6 +5,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.peotools import find_peo_mcs
 from graphtheory.chordality.tdtools import find_td_chordal
+from graphtheory.chordality.tdtools import find_td_order
 
 # 0---1            2-tree
 # | \ | \
@@ -13,7 +14,7 @@ from graphtheory.chordality.tdtools import find_td_chordal
 class TestTreeDecomposition(unittest.TestCase):
 
     def setUp(self):
-        self.N = 5           # number of nodes
+        self.N = 5   # number of nodes
         self.G = Graph(self.N)
         self.nodes = list(range(self.N))
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 3), 
@@ -28,6 +29,40 @@ class TestTreeDecomposition(unittest.TestCase):
         T = find_td_chordal(self.G, self.order)
         #T.show()
         bags1 = set([(0, 1, 2), (0, 2, 3), (1, 2, 4)])
+        bags2 = set(T.iternodes())
+        self.assertEqual(T.v(), len(bags1))
+        self.assertEqual(bags1, bags2)
+
+    def test_find_td_order(self):
+        T = find_td_order(self.G, [3, 0, 1, 2, 4])
+        #T.show()
+        bags1 = set([(0, 1, 2), (0, 2, 3), (1, 2, 4)])
+        bags2 = set(T.iternodes())
+        self.assertEqual(T.v(), len(bags1))
+        self.assertEqual(bags1, bags2)
+
+    def tearDown(self): pass
+
+
+class TestTreeDecomposition2(unittest.TestCase):
+
+    def setUp(self): pass
+
+# 2-------3   numeracja wg cyklu Hamiltona
+# |\     /|   3-prism graph, Halin graph
+# | 1---4 |   cubic, planar
+# |/     \|   treewidth = 3
+# 0-------5
+
+    def test_find_td_order(self):
+        G = Graph(6)
+        edge_list = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(3, 4), 
+            Edge(4, 5), Edge(0, 5), Edge(1, 4), Edge(2, 0), Edge(3, 5)]
+        for edge in edge_list:
+            G.add_edge(edge)
+        T = find_td_order(G, [2,5,0,1,3,4])
+        #T.show()
+        bags1 = set([(0,1,2,3), (0,1,3,4), (0,3,4,5)])
         bags2 = set(T.iternodes())
         self.assertEqual(T.v(), len(bags1))
         self.assertEqual(bags1, bags2)

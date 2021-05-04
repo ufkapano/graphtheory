@@ -39,4 +39,33 @@ def find_td_chordal(graph, order):
     algorithm.to_tree()
     return algorithm.mst
 
+
+def find_td_order(graph, order):
+    """Finding a tree decomposition using a given node order."""
+    if graph.is_directed():
+        raise ValueError("the graph is directed")
+    # Nie chce modyfikowac oryginalnego grafu.
+    graph_copy = graph.copy()
+    edge_list = []
+    for source in order:
+        # Robie klike z {source} + N(source).
+        # Dla grafow cieciwowych jest to niepotrzebne.
+        for (node, target) in itertools.combinations(
+            graph_copy.iteradjacent(source), 2):
+            edge = Edge(node, target)
+            if not graph_copy.has_edge(edge):
+                graph_copy.add_edge(edge)
+                edge_list.append(edge)
+        # Usuwanie source z krawedziami.
+        graph_copy.del_node(source)
+    # Robie graf cieciwowy z oryginalu.
+    for edge in edge_list:
+        graph.add_edge(edge)
+    # Graf stal sie cieciwowy.
+    T = find_td_chordal(graph, order)
+    # Przywracanie oryginalu.
+    for edge in edge_list:
+        graph.del_edge(edge)
+    return T
+
 # EOF

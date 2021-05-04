@@ -52,4 +52,13 @@ isinstance(T, Graph)
 bags = list(T.iternodes())   # a list of tuples
 treewidth = max(len(bag) for bag in bags) - 1
 ----------------------------------------------------------------------
+# TREE DECOMPOSITION OF GENERAL GRAPHS
+
+from graphtheory.chordality.tdtools import find_td_order
+
+# G is a general connected undirected graph.
+# 'order' is a selected sequence of nodes (PEO for chordal graphs).
+T = find_td_order(G, order)   # finding a tree decomposition (heuristic)
+treewidth = max(len(bag) for bag in bags) - 1
+----------------------------------------------------------------------
 EOF
