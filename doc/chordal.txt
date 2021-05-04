@@ -7,12 +7,15 @@ from graphtheory.chordality.peotools import find_maximum_clique_peo
 from graphtheory.chordality.peotools import find_all_maximal_cliques
 from graphtheory.chordality.peotools import is_peo1, is_peo2
 
-order = find_peo_mcs(G)
-assert is_peo1(G, order)   # testing PEO
-assert is_peo2(G, order)   # testing PEO
-max_clique = find_maximum_clique_peo(G, order)
+order = find_peo_mcs(G)   # if G is not chordal, then 'order' is not a PEO
+assert is_peo1(G, order)   # testing PEO, O(V+E) time
+assert is_peo2(G, order)   # testing PEO, O(V+E) time
+
+max_clique = find_maximum_clique_peo(G, order)   # G have to be chordal
 print ( max_clique )   # a set of nodes
-cliques = find_all_maximal_cliques(G, order)
+treewidth = len(max_clique) - 1
+
+cliques = find_all_maximal_cliques(G, order)   # G have to be chordal
 print ( cliques )   # a list with sets
 ----------------------------------------------------------------------
 # GENERATORS
@@ -22,17 +25,31 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.chordaltools import make_random_ktree
 from graphtheory.chordality.chordaltools import make_random_chordal
 
-G = make_random_ktree(n=10, k=5)
-G = make_random_chordal(n=10)
+G = make_random_ktree(n=10, k=5)   # PEO = range(n)
+G = make_random_chordal(n=10)   # PEO = range(n)
 ----------------------------------------------------------------------
 # MINIMUM DEGREE ORDERING OF CHORDAL GRAPHS
 
 from graphtheory.chordality.mdotools import find_mdo
 from graphtheory.chordality.mdotools import find_maximum_clique_mdo
 
-order = find_mdo(G)
+order = find_mdo(G)   # O(V+E) time
 print ( order )   # list of nodes (MDO)
-max_clique = find_maximum_clique_mdo(G)
+max_clique = find_maximum_clique_mdo(G)   # O(V+E) time
 print ( max_clique )   # a set of nodes
+----------------------------------------------------------------------
+# TREE DECOMPOSITION OF CHORDAL GRAPHS
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.chordality.peotools import find_peo_mcs
+from graphtheory.chordality.tdtools import find_td_chordal
+
+G = make_random_chordal(n)   # G is a chordal graph
+order = find_peo_mcs(G)   # finding PEO
+T = find_td_chordal(G, order)   # finding a tree decomposition
+isinstance(T, Graph)
+bags = list(T.iternodes())   # a list of tuples
+treewidth = max(len(bag) for bag in bags) - 1
 ----------------------------------------------------------------------
 EOF
