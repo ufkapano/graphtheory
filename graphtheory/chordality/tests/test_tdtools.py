@@ -6,6 +6,8 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.peotools import find_peo_mcs
 from graphtheory.chordality.tdtools import find_td_chordal
 from graphtheory.chordality.tdtools import find_td_order
+from graphtheory.chordality.tdtools import find_treewidth_min_deg # upper bound
+from graphtheory.chordality.tdtools import find_treewidth_mmd # lower bound
 
 # 0---1            2-tree
 # | \ | \
@@ -40,6 +42,16 @@ class TestTreeDecomposition(unittest.TestCase):
         bags2 = set(T.iternodes())
         self.assertEqual(T.v(), len(bags1))
         self.assertEqual(bags1, bags2)
+
+    def test_find_treewidth_min_deg(self):
+        treewidth, order = find_treewidth_min_deg(self.G) # upper bound
+        #print("min_deg", treewidth)
+        self.assertTrue(treewidth >= 2) # 2 is the true treewidth
+
+    def test_find_treewidth_mmd(self):
+        treewidth, order = find_treewidth_mmd(self.G) # lower bound
+        #print("mmd", treewidth)
+        self.assertTrue(treewidth <= 2) # 2 is the true treewidth
 
     def tearDown(self): pass
 

@@ -6,6 +6,8 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.algorithms.acyclic import is_acyclic
 from graphtheory.connectivity.connected import is_connected
 from graphtheory.traversing.bfs import SimpleBFS
+from graphtheory.chordality.tdtools import find_treewidth_min_deg # upper bound
+from graphtheory.chordality.tdtools import find_treewidth_mmd # lower bound
 
 # https://en.wikipedia.org/wiki/Tree_decomposition
 #
@@ -105,6 +107,16 @@ class TestTreeDecomposition(unittest.TestCase):
     def test_treewidth(self):
         treewidth = max(len(bag) for bag in self.T.iternodes()) -1
         self.assertEqual(treewidth, 2)   # outerplanar graph
+
+    def test_find_treewidth_min_deg(self):
+        treewidth, order = find_treewidth_min_deg(self.G) # upper bound, 2
+        #print("min_deg", treewidth)
+        self.assertTrue(treewidth >= 2) # 2 is the true treewidth
+
+    def test_find_treewidth_mmd(self):
+        treewidth, order = find_treewidth_mmd(self.G) # lower bound, 2
+        #print("mmd", treewidth)
+        self.assertTrue(treewidth <= 2) # 2 is the true treewidth
 
     def tearDown(self): pass
 

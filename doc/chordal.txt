@@ -55,10 +55,17 @@ treewidth = max(len(bag) for bag in bags) - 1
 # TREE DECOMPOSITION OF GENERAL GRAPHS
 
 from graphtheory.chordality.tdtools import find_td_order
+from graphtheory.chordality.tdtools import find_treewidth_min_deg # upper bound
+from graphtheory.chordality.tdtools import find_treewidth_mmd # lower bound
 
 # G is a general connected undirected graph.
-# 'order' is a selected sequence of nodes (PEO for chordal graphs).
+# 'order' is a selected sequence of nodes.
+
 T = find_td_order(G, order)   # finding a tree decomposition (heuristic)
 treewidth = max(len(bag) for bag in bags) - 1
+
+treewidth, order = find_treewidth_min_deg(G) # upper bound for treewidth
+
+treewidth, order = find_treewidth_mmd(G) # lower bound for treewidth
 ----------------------------------------------------------------------
 EOF
