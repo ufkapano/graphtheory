@@ -44,15 +44,19 @@ class TestMultiGraphDirected(unittest.TestCase):
         self.assertEqual(self.G.weight(Edge(3, 2)), 0)
         self.assertEqual(self.G.weight(Edge(2, 1)), 1)
         self.assertEqual(self.G.weight(Edge(0, 3)), 2)
+        self.assertEqual(self.G.weight((0, 3)), 2)
 
     def test_del_edge(self):
         edge1 = Edge(2, 3, 23)
         self.G.add_edge(edge1)
+        self.assertTrue(self.G.has_edge(edge1))
+        self.assertTrue(self.G.has_edge((2, 3)))
         self.assertEqual(self.G.e(), len(self.edges) + 1)
         self.G.del_edge(edge1)
         self.assertEqual(self.G.e(), len(self.edges))
         edge2 = Edge(1, 1, 11)
         self.assertTrue(self.G.has_edge(edge2))
+        self.assertTrue(self.G.has_edge((1, 1)))
         self.G.del_edge(edge2)
         self.assertFalse(self.G.has_edge(edge2))
 
@@ -139,16 +143,21 @@ class TestMultiGraphUndirected(unittest.TestCase):
         self.assertEqual(self.G.weight(Edge(3, 2)), 0)
         self.assertEqual(self.G.weight(Edge(1, 2)), 1)
         self.assertEqual(self.G.weight(Edge(0, 3)), 2)
+        self.assertEqual(self.G.weight((0, 3)), 2)
 
     def test_del_edge(self):
         edge1 = Edge(2, 3, 23)
         self.G.add_edge(edge1)
+        self.assertTrue(self.G.has_edge(edge1))
+        self.assertTrue(self.G.has_edge((2, 3)))
         self.assertEqual(self.G.e(), len(self.edges) + 1)
         self.G.del_edge(edge1)
         self.assertEqual(self.G.e(), len(self.edges))
         edge2 = Edge(1, 1, 11)
         self.assertTrue(self.G.has_edge(edge2))
+        self.assertTrue(self.G.has_edge((1, 1)))
         self.G.del_edge(edge2)
+        #self.G.del_edge((1, 1))   # ERROR, the edge should have the weight
         self.assertFalse(self.G.has_edge(edge2))
 
     def test_copy(self):

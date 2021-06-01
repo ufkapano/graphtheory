@@ -1,5 +1,9 @@
 CHANGELOG
 
+2021-06-01
+* It is possible to use a tuple (source, target) in some graph methods:
+del_edge(), has_edge(), weight().
+
 2021-04-23
 * 'import sys' moved to the top of files [recursion limit issues].
 * is_connected() with BFS (no recursion).

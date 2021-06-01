@@ -29,6 +29,10 @@ class TestGraphDirected(unittest.TestCase):
         self.G.del_node(1)
         self.assertEqual(self.G.v(), self.N) # no changes
         self.assertEqual(self.G.e(), 2)
+        self.assertTrue(self.G.has_edge((2, 0)))
+        self.assertEqual(self.G.weight((2, 0)), 6)
+        self.G.del_edge((2, 0))
+        self.assertFalse(self.G.has_edge((2, 0)))
 
     def test_cmp(self):
         T = Graph(self.N)
@@ -140,6 +144,10 @@ class TestGraphUndirected(unittest.TestCase):
         self.G.del_node(1)   # node become isolated
         self.assertEqual(self.G.v(), self.N)
         self.assertEqual(self.G.e(), 2)
+        self.assertTrue(self.G.has_edge((2, 0)))
+        self.assertEqual(self.G.weight((2, 0)), 6)
+        self.G.del_edge((2, 0))
+        self.assertFalse(self.G.has_edge((2, 0)))
 
     def test_iteredges(self):
         inedges = list(self.G.iterinedges(1))

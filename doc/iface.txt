@@ -1,16 +1,21 @@
 INTERFACE FOR GRAPHS AND MULTIGRAPHS
 ----------------------------------------------------------------------
-G, H - graphs
+G, H - graphs or multigraphs
 node - usually integer or string (hashable, with order)
     For matrixgraphs, nodes are int from 0 to n-1.
 edge - an instance of the Edge class (hashable, with order, directed)
 ----------------------------------------------------------------------
 Method name         Short description
 ----------------------------------------------------------------------
-Graph()             return an empty undirected graph
-Graph(directed=True) return aa empty directed graph
+Graph()             return an empty undirected graph (graphs, setgraphs, dictgraphs)
+Graph(directed=True) return an empty directed graph (graphs, setgraphs, dictgraphs)
+
 Graph(n=8)          return an undirected graph with eight nodes (matrixgraphs)
 Graph(n=6, True)    return a directed graph with six nodes (matrixgraphs)
+
+MultiGraph()             return an empty undirected multigraph (multigraphs)
+MultiGraph(directed=True) return an empty directed multigraph (multigraphs)
+
 G.is_directed()     return True if G is a directed graph
 G.v()               return the number of nodes
 G.e()               return the number of edges
@@ -22,8 +27,12 @@ G.has_node(node)    return True if the node is in G
 
 G.add_edge(edge)    add the edge to G
 G.del_edge(edge)    remove the edge form G
+G.del_edge((source, target))    remove the edge form G
 G.has_edge(edge)    return True if the edge is in G
+G.has_edge((source, target))    return True if the edge is in G
 G.weight(edge)      return the edge weight or zero
+G.weight((source, target))      return the edge weight or zero
+# for multigraphs: return the number of parallel edges
 
 G.iternodes()            generate nodes on demand
 G.iteredges()            generate edges on demand

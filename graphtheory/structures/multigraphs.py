@@ -91,6 +91,9 @@ class MultiGraph(dict):
 
     def del_edge(self, edge):
         """Remove an edge from the multigraph."""
+        if not isinstance(edge, Edge):
+            source, target = edge   # tuple or list
+            edge = Edge(source, target)
         self[edge.source][edge.target].remove(edge)
         if len(self[edge.source][edge.target]) == 0:
             del self[edge.source][edge.target]
@@ -102,12 +105,19 @@ class MultiGraph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists. The weight is not checked."""
+        if not isinstance(edge, Edge):
+            source, target = edge   # tuple or list
+            edge = Edge(source, target)
         return edge.source in self and edge.target in self[edge.source]
 
     def weight(self, edge):
         """Return the number of parallel edges."""
-        if edge.source in self and edge.target in self[edge.source]:
-            return len(self[edge.source][edge.target])
+        if isinstance(edge, Edge):
+            source, target = edge.source, edge.target
+        else:
+            source, target = edge   # tuple or list
+        if source in self and target in self[source]:
+            return len(self[source][target])
         else:
             return 0
 

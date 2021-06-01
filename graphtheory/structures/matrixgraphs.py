@@ -86,17 +86,29 @@ class Graph:
 
     def del_edge(self, edge):
         """Remove an edge from the graph."""
-        self.data[edge.source][edge.target] = 0
+        if isinstance(edge, Edge):
+            source, target = edge.source, edge.target
+        else:
+            source, target = edge   # tuple or list
+        self.data[source][target] = 0
         if not self.is_directed():
-            self.data[edge.target][edge.source] = 0
+            self.data[target][source] = 0
 
     def has_edge(self, edge):
         """Test if an edge exists (the weight is not checked)."""
-        return self.data[edge.source][edge.target] != 0
+        if isinstance(edge, Edge):
+            source, target = edge.source, edge.target
+        else:
+            source, target = edge   # tuple or list
+        return self.data[source][target] != 0
 
     def weight(self, edge):
         """Return the edge weight or zero."""
-        return self.data[edge.source][edge.target]
+        if isinstance(edge, Edge):
+            source, target = edge.source, edge.target
+        else:
+            source, target = edge   # tuple or list
+        return self.data[source][target]
 
     def iternodes(self):
         """Generate the nodes from the graph on demand."""
