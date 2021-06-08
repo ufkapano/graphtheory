@@ -7,13 +7,22 @@ edge - an instance of the Edge class (hashable, with order, directed)
 ----------------------------------------------------------------------
 Method name         Short description
 ----------------------------------------------------------------------
+edge = Edge(source, target, weight=1) return a directed edge
+edge.source         the edge source
+edge.target         the edge target
+edge.weight         the edge weight (default 1)
+repr(edge)          return a string
+hash(edge)          return hash
+e1 == e2, e1 != e2, e1 < e2, e1 <= e2, e1 > e2, e1 >= e2
+~edge               return the edge with the opposite direction
+
 Graph()             return an empty undirected graph (graphs, setgraphs, dictgraphs)
 Graph(directed=True) return an empty directed graph (graphs, setgraphs, dictgraphs)
 
 Graph(n=8)          return an undirected graph with eight nodes (matrixgraphs)
-Graph(n=6, True)    return a directed graph with six nodes (matrixgraphs)
+Graph(n=6, directed=True) return a directed graph with six nodes (matrixgraphs)
 
-MultiGraph()             return an empty undirected multigraph (multigraphs)
+MultiGraph()        return an empty undirected multigraph (multigraphs)
 MultiGraph(directed=True) return an empty directed multigraph (multigraphs)
 
 G.is_directed()     return True if G is a directed graph
