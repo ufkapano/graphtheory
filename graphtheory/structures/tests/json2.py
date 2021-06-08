@@ -2,9 +2,10 @@
 
 import json
 from graphtheory.structures.edges import Edge
-from graphtheory.structures.graphs import Graph
+#from graphtheory.structures.graphs import Graph
 #from graphtheory.structures.dictgraphs import Graph
 #from graphtheory.structures.setgraphs import Graph   # weights are ignored
+from graphtheory.structures.matrixgraphs import Graph # nodes are int
 from graphtheory.structures.multigraphs import MultiGraph
 
 def dumps_graph(graph):
@@ -55,23 +56,23 @@ def load_graph(file_name):
         graph.add_edge(Edge(**d))
     return graph
 
-G1 = Graph()
-for edge in [Edge("A", "B"), Edge("B", "C", 2)]:
+G1 = Graph(n=3)
+for edge in [Edge(0, 1), Edge(1, 2, 2)]:
     G1.add_edge(edge)
 
-G2 = Graph(directed=True)
-for edge in [Edge("A", "B"), Edge("B", "C", 2)]:
+G2 = Graph(n=3, directed=True)
+for edge in [Edge(0, 1), Edge(1, 2, 2)]:
     G2.add_edge(edge)
 
-G3 = MultiGraph()
-for edge in [Edge("A", "B"), Edge("B", "C", 2), Edge("B", "C", 3)]:
+G3 = MultiGraph(n=3)
+for edge in [Edge(0, 1), Edge(1, 2, 2), Edge(1, 2, 3)]:
     G3.add_edge(edge)
 
-G4 = MultiGraph(directed=True)
-for edge in [Edge("A", "B"), Edge("B", "C", 2), Edge("B", "C", 3)]:
+G4 = MultiGraph(n=3, directed=True)
+for edge in [Edge(0, 1), Edge(1, 2, 2), Edge(1, 2, 3)]:
     G4.add_edge(edge)
 
-G = G2
+G = G1
 
 word = dumps_graph(G)
 print(word)
