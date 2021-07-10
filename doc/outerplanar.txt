@@ -8,6 +8,11 @@ from graphtheory.structures.graphs import Graph
 ----------------------------------------------------------------------
 # GENERATORS
 
+from graphtheory.planarity.genouterplanar import MaximalOuterplanarGenerator
+
+algorithm = MaximalOuterplanarGenerator(n)   # n is the number of vertices
+algorithm.run()
+algorithm.graph.show()   # random maximal outerplanar graph
 ----------------------------------------------------------------------
 # VERTEX COLORING
 
