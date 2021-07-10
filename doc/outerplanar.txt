@@ -1,0 +1,20 @@
+OUTERPLANAR GRAPHS
+----------------------------------------------------------------------
+# RECOGNITION
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+
+----------------------------------------------------------------------
+# GENERATORS
+
+----------------------------------------------------------------------
+# VERTEX COLORING
+
+from graphtheory.planarity.nodecolorouterplanar import OuterplanarNodeColoring
+
+algorithm = OuterplanarNodeColoring(G)   # O(V) time
+algorithm.run()
+print ( algorithm.color )   # dict
+----------------------------------------------------------------------
+EOF
