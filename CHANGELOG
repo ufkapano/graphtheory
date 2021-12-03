@@ -1,5 +1,8 @@
 CHANGELOG
 
+2021-07-10
+* Outerplanar graphs added.
+
 2021-06-01
 * It is possible to use a tuple (source, target) in some graph methods:
 del_edge(), has_edge(), weight().
