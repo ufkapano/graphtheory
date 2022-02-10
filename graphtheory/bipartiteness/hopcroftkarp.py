@@ -5,8 +5,10 @@ try:
 except ImportError:   # Python 3
     from queue import Queue
 
-#from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
-from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
+# no recursion
+from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
+# with recursion
+#from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
 
 
 class HopcroftKarpSet:

@@ -99,7 +99,7 @@ class Dijkstra:
 
 
 class DijkstraMatrix:
-    """The Dijkstra's algorithm with O(V**2) time.
+    """The Dijkstra's algorithm with O(V^2) time.
     
     Attributes
     ----------

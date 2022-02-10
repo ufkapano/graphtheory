@@ -6,8 +6,11 @@ except ImportError:   # Python 3
     from queue import PriorityQueue
 
 from graphtheory.structures.edges import Edge
-from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS
 from graphtheory.flow.fordfulkerson import FordFulkersonSparse
+# no recursion
+from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
+# with recursion
+#from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
 
 
 class MatchingFordFulkersonSet:
@@ -34,7 +37,7 @@ class MatchingFordFulkersonSet:
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
-        algorithm = BipartiteGraphBFS(self.graph)
+        algorithm = Bipartite(self.graph)
         algorithm.run()
         self.v1 = set()
         self.v2 = set()
@@ -98,7 +101,7 @@ class MatchingFordFulkersonList:
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
-        algorithm = BipartiteGraphBFS(self.graph)
+        algorithm = Bipartite(self.graph)
         algorithm.run()
         self.v1 = list()
         self.v2 = list()
@@ -162,7 +165,7 @@ class MatchingFordFulkersonColor:
         self.graph = graph
         self.mate = dict((node, None) for node in self.graph.iternodes())
         self.cardinality = 0
-        algorithm = BipartiteGraphBFS(self.graph)
+        algorithm = Bipartite(self.graph)
         algorithm.run()
         self.color = algorithm.color
 
@@ -188,10 +191,10 @@ class MatchingFordFulkersonColor:
                 network.add_edge(Edge(edge.target, edge.source))
         algorithm = FordFulkersonSparse(network)
         algorithm.run(self.source, self.sink)   # O(V*E) time
-        for source in self.graph.iternodes():   # O(V**2) time
+        for source in self.graph.iternodes():   # O(V^2) time
             for target in self.graph.iternodes():
-                if self.color[source] == 1 and self.color[target] != 1 \
-                    and algorithm.flow[source].get(target, 0) == 1:
+                if (self.color[source] == 1 and self.color[target] != 1
+                    and algorithm.flow[source].get(target, 0) == 1):
                         self.mate[source] = target
                         self.mate[target] = source
         self.cardinality = algorithm.max_flow
