@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import unittest
 from graphtheory.structures.edges import Edge
@@ -38,7 +38,8 @@ class TestNodeColoring(unittest.TestCase):
                                 algorithm.color[edge.target])
         #print algorithm.color
         all_colors = set(algorithm.color[node] for node in self.G.iternodes())
-        self.assertEqual(len(all_colors), 4)
+        self.assertTrue(len(all_colors) <= 4)
+        # 3 in Py3, 4 in Py2, different order
 
     def test_exceptions(self):
         self.assertRaises(ValueError, ConnectedSequentialNodeColoring,

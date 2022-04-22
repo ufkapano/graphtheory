@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 try:
     integer_types = (int, long)
@@ -38,6 +38,7 @@ class ConnectedSequentialNodeColoring:
         order = list()
         algorithm = SimpleBFS(self.graph)
         algorithm.run(pre_action=lambda node: order.append(node))
+        #print("order {}".format(order))
         for source in order:
             self._greedy_color(source)
 

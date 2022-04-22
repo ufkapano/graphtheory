@@ -2,6 +2,8 @@ CHANGELOG
 
 2022-04-22
 * Using 'range = xrange' in Py2.
+* Warning! You can not iterate over edges and remove and add edges!
+Dictionaries are different in Py3.
 
 2021-07-10
 * Outerplanar graphs added.

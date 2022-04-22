@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 class RLFNodeColoring1:
     """Recursive Largest First (RLF) algorithm for node coloring."""

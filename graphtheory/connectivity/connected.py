@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 #from graphtheory.traversing.bfs import BFSWithQueue as SimpleBFS
 from graphtheory.traversing.bfs import SimpleBFS

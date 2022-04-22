@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 from graphtheory.traversing.dfs import SimpleDFS
@@ -33,9 +33,12 @@ class TrivialCutEdge:
     def run(self, source=None):
         """Executable pseudocode."""
         old_ncc = self._find_ncc()
-        for edge in self.graph.iteredges():
+        for edge in list(self.graph.iteredges()):
+            # Warning! You can not iterate over edges and remove edges!
             self.graph.del_edge(edge)
+            #print("removed {}".format(edge))
             new_ncc = self._find_ncc()
+            #print("new_ncc {}".format(new_ncc))
             self.graph.add_edge(edge)
             if new_ncc > old_ncc:
                 self.cut_edges.append(edge)
@@ -46,7 +49,9 @@ class TrivialCutEdge:
         ncc = 0
         algorithm = SimpleDFS(self.graph)
         for source in self.graph.iternodes():
+            #print("source {}".format(source))
             if not visited[source]:
+                #print("not visited {}".format(source))
                 algorithm.run(source, pre_action=lambda node:
                     visited.__setitem__(node, True))
                 ncc += 1

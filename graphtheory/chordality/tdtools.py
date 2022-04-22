@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 https://en.wikipedia.org/wiki/Tree_decomposition
 
