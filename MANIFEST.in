@@ -1,0 +1,5 @@
+include CHANGELOG
+include LICENSE
+include README.md
+include pyproject.toml
+include doc/*.txt

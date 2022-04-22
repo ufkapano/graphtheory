@@ -48,7 +48,7 @@ from graphtheory.chordality.tdtools import find_td_chordal
 G = make_random_chordal(n)   # G is a chordal graph
 order = find_peo_mcs(G)   # finding PEO
 T = find_td_chordal(G, order)   # finding a tree decomposition
-isinstance(T, Graph)
+assert isinstance(T, Graph)
 bags = list(T.iternodes())   # a list of tuples
 treewidth = max(len(bag) for bag in bags) - 1
 ----------------------------------------------------------------------

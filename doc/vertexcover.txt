@@ -1,6 +1,6 @@
 VERTEX COVERS
 ----------------------------------------------------------------------
-# HEURISTIC ALGORITHMS FOR A MINUM VERTEX COVER
+# HEURISTIC ALGORITHMS FOR A MINIMUM VERTEX COVER
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
