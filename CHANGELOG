@@ -1,5 +1,8 @@
 CHANGELOG
 
+2022-04-22
+* Using 'range = xrange' in Py2.
+
 2021-07-10
 * Outerplanar graphs added.
 

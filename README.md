@@ -9,7 +9,6 @@ Graphs are instances of the Graph class (several versions).
 Multigraphs are instances of the MultiGraph class.
 Many algorithms are implemented using a unified approach. 
 There are separate classes and modules devoted to different algorithms.
-The graphtheory package is written with Python 2.7 and Python 3.2.
 
 ## Problems and algorithms
 
