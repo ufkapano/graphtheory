@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 import random
 from graphtheory.structures.edges import Edge
@@ -20,7 +20,7 @@ def make_halin_outer(n=4):
     graph = Graph(n)
     weights = list(range(1, 1 + 2 * n - 2))
     random.shuffle(weights)
-    for node in xrange(n):
+    for node in range(n):
         graph.add_node(node)
     # Teraz trzeba dodawac krawedzie, ale nie moze zostac wierzcholek
     # stopnia 2. Startuje od gwiazdy.
@@ -84,7 +84,7 @@ def make_halin_cubic_outer(n=4):
     graph = Graph(n)
     weights = list(range(1, 1 + 3 * n // 2))
     random.shuffle(weights)
-    for node in xrange(n):
+    for node in range(n):
         graph.add_node(node)
     # Teraz trzeba dodawac krawedzie, ale nie moze zostac wierzcholek
     # stopnia 2. Startuje od gwiazdy.

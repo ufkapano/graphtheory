@@ -7,9 +7,9 @@ PEO = Perfect Elimination Ordering
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
     """Finding PEO in a chordal graph using maximum cardinality search."""
@@ -18,7 +18,7 @@ def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
     order = list()   # PEO
     used = set()
     visited_degree = dict((node, 0) for node in graph.iternodes())
-    for step in xrange(graph.v()):   # all nodes in the loop
+    for step in range(graph.v()):   # all nodes in the loop
         source = max((node for node in graph.iternodes() if node not in used),
             key=visited_degree.__getitem__)   # O(V) time przy szybkim tescie
         order.append(source)

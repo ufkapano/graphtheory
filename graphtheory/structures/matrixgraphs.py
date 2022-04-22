@@ -6,9 +6,9 @@ from graphtheory.structures.edges import Edge
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 class Graph:
     """The class defining a graph.
@@ -29,7 +29,7 @@ class Graph:
             raise ValueError("incorrect number of nodes")
         self.n = n
         self.directed = directed  # bool
-        self.data = [[0] * self.n for node in xrange(self.n)]
+        self.data = [[0] * self.n for node in range(self.n)]
 
     def is_directed(self):
         """Test if the graph is directed."""
@@ -42,8 +42,8 @@ class Graph:
     def e(self):
         """Return the number of edges in O(V**2) time."""
         counter = 0
-        for source in xrange(self.n):
-            for target in xrange(self.n):
+        for source in range(self.n):
+            for target in range(self.n):
                 if self.data[source][target] != 0:
                     counter += 1
         return (counter if self.is_directed() else counter // 2)
@@ -64,7 +64,7 @@ class Graph:
     def del_node(self, source):
         """Remove a node from the graph with edges.
         In fact, the node become isolated. It takes O(V) time."""
-        for target in xrange(self.n):
+        for target in range(self.n):
             self.data[source][target] = 0
             self.data[target][source] = 0
 
@@ -112,30 +112,30 @@ class Graph:
 
     def iternodes(self):
         """Generate the nodes from the graph on demand."""
-        return iter(xrange(self.n))
+        return iter(range(self.n))
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        for target in xrange(self.n):   # O(V) time
+        for target in range(self.n):   # O(V) time
             if self.data[source][target] != 0:
                 yield target
 
     def iteroutedges(self, source):   # O(V) time
         """Generate the outedges from the graph on demand."""
-        for target in xrange(self.n):
+        for target in range(self.n):
             if self.data[source][target] != 0:
                 yield Edge(source, target, self.data[source][target])
 
     def iterinedges(self, source):   # O(V) time
         """Generate the inedges from the graph on demand."""
-        for target in xrange(self.n):
+        for target in range(self.n):
             if self.data[target][source] != 0:
                 yield Edge(target, source, self.data[target][source])
 
     def iteredges(self):   # O(V**2) time
         """Generate the edges from the graph on demand."""
-        for source in xrange(self.n):
-            for target in xrange(self.n):
+        for source in range(self.n):
+            for target in range(self.n):
                 if self.data[source][target] != 0 and (
                     self.is_directed() or source < target):
                     yield Edge(source, target, self.data[source][target])
@@ -143,9 +143,9 @@ class Graph:
     def show(self):
         """The graph presentation in O(V^2) time."""
         L = []
-        for source in xrange(self.n):
+        for source in range(self.n):
             L.append("{} : ".format(source))
-            for target in xrange(self.n):
+            for target in range(self.n):
                 if self.data[source][target] == 1:
                     L.append("{} ".format(target))
                 elif self.data[source][target] != 0:
@@ -156,24 +156,24 @@ class Graph:
     def copy(self):
         """Return the graph copy in O(V^2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
-        for source in xrange(self.n):
-            for target in xrange(self.n):
+        for source in range(self.n):
+            for target in range(self.n):
                 new_graph.data[source][target] = self.data[source][target]
         return new_graph
 
     def transpose(self):
         """Return the transpose of the graph in O(V**2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
-        for source in xrange(self.n):
-            for target in xrange(self.n):
+        for source in range(self.n):
+            for target in range(self.n):
                 new_graph.data[source][target] = self.data[target][source]
         return new_graph
 
     def complement(self):
         """Return the complement of the graph."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
-        for source in xrange(self.n):
-            for target in xrange(self.n):   # no loops
+        for source in range(self.n):
+            for target in range(self.n):   # no loops
                 if self.data[source][target] == 0 and source != target:
                     new_graph.data[source][target] = 1
         return new_graph
@@ -183,7 +183,7 @@ class Graph:
         if self.is_directed():
             raise ValueError("the graph is directed")
         counter = 0
-        for target in xrange(self.n):
+        for target in range(self.n):
             if self.data[source][target] != 0:
                 counter += 1
         return counter
@@ -191,7 +191,7 @@ class Graph:
     def outdegree(self, source):
         """Return the outdegree of the node."""
         counter = 0
-        for target in xrange(self.n):
+        for target in range(self.n):
             if self.data[source][target] != 0:
                 counter += 1
         return counter
@@ -199,7 +199,7 @@ class Graph:
     def indegree(self, source):
         """Return the indegree of the node."""
         counter = 0
-        for target in xrange(self.n):
+        for target in range(self.n):
             if self.data[target][source] != 0:
                 counter += 1
         return counter
@@ -210,8 +210,8 @@ class Graph:
             return False
         if self.v() != other.v():
             return False
-        for source in xrange(self.n):   # time O(V**2)
-            for target in xrange(self.n):
+        for source in range(self.n):   # time O(V**2)
+            for target in range(self.n):
                 if self.data[source][target] != other.data[source][target]:
                     return False
         return True

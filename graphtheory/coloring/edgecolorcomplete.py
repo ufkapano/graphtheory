@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class CompleteGraphEdgeColoring:
@@ -51,7 +51,7 @@ class CompleteGraphEdgeColoring:
         self.graph.del_node(removed_node) # O(n) time, removed with edges
         self.run_odd()
         # Find missing colors.
-        free = dict((node, set(xrange(n-1))) for node in self.graph.iternodes())
+        free = dict((node, set(range(n-1))) for node in self.graph.iternodes())
         for edge in self.graph.iteredges():   # O(E)=O(n^2) time
             c = self.color[edge]
             free[edge.source].remove(c)

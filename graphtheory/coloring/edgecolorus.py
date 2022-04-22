@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class UnorderedSequentialEdgeColoring:
@@ -47,7 +47,7 @@ class UnorderedSequentialEdgeColoring:
 
     def _greedy_color_with_saturation(self, edge):
         """Give edge the smallest possible color."""
-        for c in xrange(self.m):
+        for c in range(self.m):
             if (c in self.saturation[edge.source] or 
                 c in self.saturation[edge.target]):
                 continue   # color is used

@@ -2,9 +2,9 @@
 
 try:
     from Queue import Queue
+    range = xrange
 except ImportError:   # Python 3
     from queue import Queue
-    xrange = range
 
 
 class ConnectedSequentialEdgeColoring1:
@@ -69,7 +69,7 @@ class ConnectedSequentialEdgeColoring1:
 
     def _greedy_color_with_saturation(self, edge):
         """Give edge the smallest possible color."""
-        for c in xrange(self.m):
+        for c in range(self.m):
             if (c in self.saturation[edge.source] or 
                 c in self.saturation[edge.target]):
                 continue   # color is used
@@ -143,7 +143,7 @@ class ConnectedSequentialEdgeColoring2:
 
     def _greedy_color_with_saturation(self, edge):
         """Give edge the smallest possible color."""
-        for c in xrange(self.m):
+        for c in range(self.m):
             if (c in self.saturation[edge.source] or 
                 c in self.saturation[edge.target]):
                 continue   # color is used

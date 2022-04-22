@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS
 from graphtheory.connectivity.connected import is_connected
@@ -41,7 +41,7 @@ class SPNodeColoring:
         for target in self.graph.iteradjacent(source):
             if self.color[target] is not None:
                 self._color_list[self.color[target]] = True
-        for c in xrange(self.graph.v()):   # check colors
+        for c in range(self.graph.v()):   # check colors
             if not self._color_list[c]:
                 self.color[source] = c
                 break

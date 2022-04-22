@@ -2,9 +2,9 @@
 
 try:
     from Queue import Queue
+    range = xrange
 except ImportError:   # Python 3
     from queue import Queue
-    xrange = range
 
 from graphtheory.structures.edges import Edge
 
@@ -71,7 +71,7 @@ class HalinGraphPEO:
         self.outer_next[node2] = node1
         self.outer_prev[node2] = node1
         # Dodawanie kolejnych wierzcholkow do listy cyklicznej.
-        for step in xrange(len(self.outer)-2):
+        for step in range(len(self.outer)-2):
             for node3 in self.graph.iteradjacent(node2):
                 if node3 in self.outer:
                     if node3 == self.outer_prev[node2]:

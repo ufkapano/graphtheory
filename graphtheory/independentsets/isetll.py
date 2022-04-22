@@ -5,9 +5,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 # Lista wierzcholkow wg stopni ustalona na poczatku.
 class LargestLastIndependentSet1:
@@ -294,11 +294,11 @@ class LargestLastIndependentSet7:
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())   # O(V) time
         # Grupujemy wierzcholki w bukietach wg stopni.
-        bucket = list(set() for deg in xrange(self.graph.v()))   # O(V) time
+        bucket = list(set() for deg in range(self.graph.v()))   # O(V) time
         for node in self.graph.iternodes():   # O(V) time
             bucket[self.graph.degree(node)].add(node)
         maxi = self.graph.v()-1   # indeks najwiekszego
-        for step in xrange(self.graph.v()):
+        for step in range(self.graph.v()):
             while not bucket[maxi]:   # ide w dol, chyba O(2V)
                 #print "ide w dol", maxi
                 maxi -= 1

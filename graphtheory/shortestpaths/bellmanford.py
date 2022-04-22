@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class BellmanFord:
@@ -65,7 +65,7 @@ class BellmanFord:
         """
         self.source = source
         self.distance[source] = 0
-        for step in xrange(self.graph.v()-1):   # |V|-1 times
+        for step in range(self.graph.v()-1):   # |V|-1 times
             for edge in self.graph.iteredges():   # O(E) time
                 self._relax(edge)
         # Check for negative cycles.

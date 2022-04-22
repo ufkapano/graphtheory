@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class NearestNeighborTSPWithEdges:
@@ -34,7 +34,7 @@ class NearestNeighborTSPWithEdges:
         start_node = source
         self._used[source] = True
         # Szukamy n-1 kolejnych krawedzi. Unikamy tworzenia cyklu.
-        for step in xrange(self.graph.v()-1):
+        for step in range(self.graph.v()-1):
             edge = min(edge for edge in self.graph.iteroutedges(source)
                 if not self._used[edge.target])
             self.hamiltonian_cycle.append(edge)
@@ -76,7 +76,7 @@ class NearestNeighborTSPWithGraph:
         self.source = source
         self._used[self.source] = True
         # Szukamy n-1 kolejnych krawedzi. Unikamy tworzenia cyklu.
-        for step in xrange(self.graph.v()-1):
+        for step in range(self.graph.v()-1):
             edge = min(edge for edge in self.graph.iteroutedges(source)
                 if not self._used[edge.target])
             self.hamiltonian_cycle.add_edge(edge)

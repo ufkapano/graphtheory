@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
 #from graphtheory.bipartiteness.bipartite import BipartiteGraphDFS as Bipartite
@@ -122,7 +122,7 @@ class BipartiteGraphEdgeColoring:
             algorithm.run()
             self.color = algorithm.color
         else:
-            self.missing = dict((node, set(xrange(Delta)))
+            self.missing = dict((node, set(range(Delta)))
                 for node in self.graph.iternodes())
             for edge in self.graph.iteredges():
                 # Sprawdz wspolny kolor brakujacy.

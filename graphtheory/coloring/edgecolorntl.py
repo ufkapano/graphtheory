@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 from graphtheory.coloring.edgecolorcs import ConnectedSequentialEdgeColoring
 
@@ -58,7 +58,7 @@ class NTLEdgeColoring:
         else:
             # Ustal liczbe wykorzystywanych kolorow.
             k = Delta + 1   # almost optimal (simple graphs!)
-            self.missing = dict((node, set(xrange(k)))
+            self.missing = dict((node, set(range(k)))
                 for node in self.graph.iternodes())
             for edge in self.graph.iteredges():
                 # Sprawdz wspolny kolor brakujacy.
@@ -141,7 +141,7 @@ class NTLEdgeColoring:
         if beta in self.missing[edge.source]:
             #print "PRZYPADEK 1"
             # 17. Przesuwamy kolory w wachlarzu.
-            for i in xrange(len(fan)-1):
+            for i in range(len(fan)-1):
                 edge1 = fan[i]
                 edge2 = fan[i+1]
                 c = mis[edge1.target]   # to chcemy dac edge1
@@ -192,7 +192,7 @@ class NTLEdgeColoring:
             # lub do brzegu wachlarza.
             if len(path) == 0:
                 # Przesuwamy kolory w wachlarzu.
-                for i in xrange(len(fan)-1):
+                for i in range(len(fan)-1):
                     edge1 = fan[i]
                     edge2 = fan[i+1]
                     c = mis[edge1.target]   # to chcemy dac edge1
@@ -207,12 +207,12 @@ class NTLEdgeColoring:
                 # Osobno usuwam, a potem dodaje kolory, aby nie posypalo
                 # sie uaktualnianie kolorow w missing.
                 # Najpierw usuwam kolory (pierwszy to alpha), bez ostatniego.
-                for i in xrange(len(path)-1):   # bez ostatniej krawedzi
+                for i in range(len(path)-1):   # bez ostatniej krawedzi
                     c = alpha if (i % 2 == 0) else beta
                     self._del_color(path[i], c)
                 # Krawedz path[-1] nalezy do wachlarza i ma jeszcze kolor beta.
                 # Przesuwamy kolory w wachlarzu, ale nie do konca.
-                for i in xrange(len(fan)-1):
+                for i in range(len(fan)-1):
                     edge1 = fan[i]
                     edge2 = fan[i+1]
                     c = mis[edge1.target]   # to chcemy dac edge1
@@ -244,7 +244,7 @@ class NTLEdgeColoring:
                     # Teraz sciezka ma parzysta liczbe krawedzi.
                 else:
                     # Przesuwamy kolory w wachlarzu, ale nie do konca.
-                    for i in xrange(len(fan)-1):
+                    for i in range(len(fan)-1):
                         edge1 = fan[i]
                         edge2 = fan[i+1]
                         c = mis[edge1.target]   # to chcemy dac edge1
@@ -264,7 +264,7 @@ class NTLEdgeColoring:
             else:
                 # path moze sie konczyc kolorem alpha lub beta.
                 # Przesuwamy kolory w wachlarzu.
-                for i in xrange(len(fan)-1):
+                for i in range(len(fan)-1):
                     edge1 = fan[i]
                     edge2 = fan[i+1]
                     c = mis[edge1.target]   # to chcemy dac edge1

@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 import random
 from graphtheory.structures.edges import Edge
@@ -19,7 +19,7 @@ def make_random_spgraph(n):
     if n < 2:
         raise ValueError("bad n")
     graph = Graph(n)
-    for node in xrange(n):
+    for node in range(n):
         graph.add_node(node)
     source = 0
     sink = n-1
@@ -67,18 +67,18 @@ def make_random_ktree(n, k):   # using list
     elif n == 1:
         graph.add_node(0)
     else:
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         # Make {n-k-1, ..., n-1} into (k+1)-clique in graph.
-        for source in xrange(n-k-1, n):
-            for target in xrange(n-k-1, n):
+        for source in range(n-k-1, n):
+            for target in range(n-k-1, n):
                 if source < target:
                     graph.add_edge(Edge(source, target))
         node = n-k-2
         while node >= 0:
             # Wybor source z przedzialu od node+1 do n-k-1.
             # To jest jakby wybor duzej (k+1)-kliki,
-            source = random.choice(xrange(node+1, n-k))
+            source = random.choice(range(node+1, n-k))
             # Teraz zbieram wierzcholki tej kliki, ale one maja byc
             # wieksze od source, wieksze numery!
             neighbors = list(target for target in graph.iteradjacent(source)
@@ -103,7 +103,7 @@ def find_peo_spgraph1(graph):   # graph has to be connected
     graph_copy = graph.copy()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())              # O(V) time
-    bucket = list(set() for deg in xrange(graph.v()))   # O(V) time
+    bucket = list(set() for deg in range(graph.v()))   # O(V) time
     for node in graph.iternodes():   # wstawiam do kubelkow, O(V) time
         bucket[graph.degree(node)].add(node)
     # Dopoki sa wierzcholki stopnia 2 wykonuj odrywanie.

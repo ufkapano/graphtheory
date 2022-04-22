@@ -18,7 +18,7 @@ class TestTreeDecomposition(unittest.TestCase):
     def setUp(self):
         self.N = 5   # number of nodes
         self.G = Graph(self.N)
-        self.nodes = list(range(self.N))
+        self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 3), 
              Edge(0, 2), Edge(2, 4), Edge(1, 4)]
         for node in self.nodes:

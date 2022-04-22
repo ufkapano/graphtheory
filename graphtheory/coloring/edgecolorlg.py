@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 from graphtheory.structures.edges import Edge
 from graphtheory.coloring.nodecolorus import UnorderedSequentialNodeColoring as NodeColoring

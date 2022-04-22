@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 class LargestFirstDominatingSet:
     """Find a (largest first) dominating set in O(V+E) time."""
@@ -24,7 +24,7 @@ class LargestFirstDominatingSet:
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())   # O(V) time
         # Grupujemy wierzcholki w bukietach wg stopni.
-        bucket = list(set() for deg in xrange(self.graph.v()))   # O(V) time
+        bucket = list(set() for deg in range(self.graph.v()))   # O(V) time
         for node in self.graph.iternodes():   # O(V) time
             bucket[self.graph.degree(node)].add(node)
 

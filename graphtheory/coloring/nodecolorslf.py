@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class SLFNodeColoring:
@@ -36,7 +36,7 @@ class SLFNodeColoring:
     def run(self):
         """Executable pseudocode."""
         n = self.graph.v()
-        for step in xrange(n):
+        for step in range(n):
             source = max((node for node in self.graph.iternodes()
                 if self.color[node] is None), key=lambda x:
                 n * len(self.saturation[x]) + self.graph.degree(x))
@@ -44,7 +44,7 @@ class SLFNodeColoring:
 
     def _greedy_color_with_saturation(self, source):
         """Give node the smallest possible color."""
-        for c in xrange(self.graph.v()):
+        for c in range(self.graph.v()):
             if c not in self.saturation[source]:
                 self.color[source] = c
                 break

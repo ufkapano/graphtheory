@@ -2,9 +2,9 @@
 
 try:
     from Queue import PriorityQueue
+    range = xrange
 except ImportError:   # Python 3
     from queue import PriorityQueue
-    xrange = range
 
 from graphtheory.structures.unionfind import UnionFind
 
@@ -72,7 +72,7 @@ class SortedEdgeTSPWithEdges:
         edge = self.hamiltonian_cycle[0]
         self.hamiltonian_cycle = [edge]
         # Kompletuje kolejne krawedzie.
-        for step in xrange(self.graph.v()-1):   # O(V) time
+        for step in range(self.graph.v()-1):   # O(V) time
             edge1, edge2 = edge_dict[edge.target]
             if edge1.target == edge.source:
                 self.hamiltonian_cycle.append(edge2)

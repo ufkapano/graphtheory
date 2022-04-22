@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 import random
 from graphtheory.structures.edges import Edge
@@ -21,16 +21,16 @@ def make_random_ktree(n, k):
     elif n == 1:
         graph.add_node(0)
     else:
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         # Make {n-k-1, ..., n-1} into (k+1)-clique in graph.
-        for source in xrange(n-k-1, n):
-            for target in xrange(n-k-1, n):
+        for source in range(n-k-1, n):
+            for target in range(n-k-1, n):
                 if source < target:
                     graph.add_edge(Edge(source, target))
         node = n-k-2
         while node >= 0:
-            source = random.choice(xrange(node+1, n-k))
+            source = random.choice(range(node+1, n-k))
             neighbors = set(target for target in graph.iteradjacent(source)
                             if source < target)
             neighbors.add(source)   # closed neighborhood
@@ -50,7 +50,7 @@ def make_random_chordal(n):
     elif n == 1:
         graph.add_node(0)
     else:
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         # Make the first 2-clique (one edge).
         graph.add_edge(Edge(n-2, n-1))
@@ -58,8 +58,8 @@ def make_random_chordal(n):
         while node >= 0:
             # Select source from the range(node+1, n-1).
             # To jest jakby wybor duzej kliki,
-            #source = random.choice(xrange(node+1, n)) # nie chce jednego
-            source = random.choice(xrange(node+1, n-1))
+            #source = random.choice(range(node+1, n)) # nie chce jednego
+            source = random.choice(range(node+1, n-1))
             # Teraz zbieram wierzcholki tej kliki, ale one maja byc
             # wieksze od source, wieksze numery!
             neighbors = list(target for target in graph.iteradjacent(source)

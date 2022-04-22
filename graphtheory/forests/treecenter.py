@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class TreeCenter:
@@ -36,7 +36,7 @@ class TreeCenter:
         # Czyli usuwamy krawedzie.
         while True:
             if qend == self.graph.v():   # one or two nodes left
-                for i in xrange(qstart, qend):
+                for i in range(qstart, qend):
                     self.tree_center.append(Q[i])
                 if len(self.tree_center) == 2:
                     self.tree_radius += 1

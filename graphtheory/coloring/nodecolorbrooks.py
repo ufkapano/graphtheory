@@ -2,9 +2,9 @@
 
 try:
     from Queue import Queue
+    range = xrange
 except ImportError:   # Python 3
     from queue import Queue
-    xrange = range
 
 import itertools
 from graphtheory.structures.edges import Edge
@@ -101,7 +101,7 @@ class BrooksNodeColoring:
         for target in self.graph.iteradjacent(source):
             if self.color[target] is not None:
                 self._color_list[self.color[target]] = True
-        for c in xrange(self.graph.v()):   # check colors
+        for c in range(self.graph.v()):   # check colors
             if not self._color_list[c]:
                 self.color[source] = c
                 break

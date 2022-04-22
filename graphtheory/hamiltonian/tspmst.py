@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 from graphtheory.spanningtrees.prim import PrimMatrixMSTWithEdges
 from graphtheory.traversing.dfs import SimpleDFS
@@ -43,7 +43,7 @@ class PrimTSPWithEdges:
         algorithm.run(self.source, pre_action=lambda node: order.append(node))
         order.append(self.source)   # close cycle, length V+1
         # Finding edges for the Hamiltonian cycle, O(V**2) time.
-        for i in xrange(self.graph.v()):
+        for i in range(self.graph.v()):
             source = order[i]
             target = order[i+1]
             for edge in self.graph.iteroutedges(source):
@@ -87,7 +87,7 @@ class PrimTSPWithGraph:
         algorithm.run(self.source, pre_action=lambda node: order.append(node))
         order.append(self.source)   # close cycle, length V+1
         # Finding edges for the Hamiltonian cycle, O(V**2) time.
-        for i in xrange(self.graph.v()):
+        for i in range(self.graph.v()):
             source = order[i]
             target = order[i+1]
             for edge in self.graph.iteroutedges(source):

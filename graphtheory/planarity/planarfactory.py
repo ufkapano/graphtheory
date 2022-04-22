@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 import random
 from graphtheory.structures.edges import Edge
@@ -28,10 +28,10 @@ class PlanarGraphFactory:
         graph.edge2face = dict()
         weights = list(range(1, 1 + n))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         L = []            # list of edges
-        for i in xrange(n):
+        for i in range(n):
             edge1 = Edge(i, (i+1) % n, weights.pop())
             graph.add_edge(edge1)
             L.append(edge1)
@@ -39,7 +39,7 @@ class PlanarGraphFactory:
             graph.edge2face[~edge1] = 1
         graph.face2edge[0] = L[0]
         graph.face2edge[1] = ~(L[0])
-        for i in xrange(n):
+        for i in range(n):
             # At the node i.
             edge1 = L[i]
             edge2 = L[(i+n-1) % n]
@@ -70,20 +70,20 @@ class PlanarGraphFactory:
         graph.edge2face = dict()
         weights = list(range(1, 1 + 2 * n - 2))
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         hub = 0
         # L[0] and M[0] are empty for convenience.
         L = [None]            # list of edges, to the center
         M = [None]            # list of edges, circle
-        for i in xrange(1, n):
+        for i in range(1, n):
             edge1 = Edge(i, hub, weights.pop())
             edge3 = Edge(i, i+1 if (i < n-1) else 1, weights.pop())
             graph.add_edge(edge1)
             graph.add_edge(edge3)
             L.append(edge1)
             M.append(edge3)
-        for i in xrange(1, n):
+        for i in range(1, n):
             edge1 = L[i]
             edge2 = L[i+1 if (i < n-1) else 1]
             edge3 = M[i]

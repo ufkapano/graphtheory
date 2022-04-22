@@ -2,9 +2,9 @@
 
 try:
     from Queue import Queue
+    range = xrange
 except ImportError:   # Python 3
     from queue import Queue
-    xrange = range
 
 #from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
 from graphtheory.traversing.dfs import SimpleDFS
@@ -173,7 +173,7 @@ class TopologicalSortList:
             if inedges[node] == 0:
                 self.sorted_nodes[qend] = node
                 qend += 1
-        for step in xrange(self.graph.v()):
+        for step in range(self.graph.v()):
             source = self.sorted_nodes[qstart]
             qstart += 1
             # Remove all outedges.

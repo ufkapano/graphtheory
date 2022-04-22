@@ -2,9 +2,9 @@
 
 try:
     from Queue import Queue
+    range = xrange
 except ImportError:   # Python 3
     from queue import Queue
-    xrange = range
 
 from graphtheory.structures.edges import Edge
 
@@ -75,7 +75,7 @@ class HalinNodeColoring:
         self.outer_next[node2] = node1
         self.outer_prev[node2] = node1
         # Dodawanie kolejnych wierzcholkow do listy cyklicznej.
-        for step in xrange(len(self.outer)-2):
+        for step in range(len(self.outer)-2):
             for node3 in self.graph.iteradjacent(node2):
                 if node3 in self.outer:
                     if node3 == self.outer_prev[node2]:
@@ -98,7 +98,7 @@ class HalinNodeColoring:
         # CASE 1. Even cycle.
         if len(self.outer) % 2 == 0:
             current = node1
-            for i in xrange(len(self.outer)):
+            for i in range(len(self.outer)):
                 if i % 2 == 1:
                     self.color[current] = 2
                 current = self.outer_next[current]
@@ -115,7 +115,7 @@ class HalinNodeColoring:
             current = node1
             self.color[current] = 3
             current = self.outer_next[current]
-            for i in xrange(1, len(self.outer)):
+            for i in range(1, len(self.outer)):
                 if i % 2 == 1:
                     self.color[current] = 2
                 current = self.outer_next[current]
@@ -129,7 +129,7 @@ class HalinNodeColoring:
                     current = self.outer_next[current]
                     break
                 current = self.outer_next[current]
-            for i in xrange(len(self.outer)-2):
+            for i in range(len(self.outer)-2):
                 if i % 2 == 0:
                     self.color[current] = 2
                 current = self.outer_next[current]
@@ -167,7 +167,7 @@ class HalinNodeColoring:
             #    print "fan detected"
             # Przekolorowanie wachlarza [c2, c1, ..., c1, c2].
             self.color[self.parent[start]] = c3
-            for i in xrange(counter):
+            for i in range(counter):
                 if i % 2 == 0:
                     self.color[start] = c2
                 else:
@@ -175,7 +175,7 @@ class HalinNodeColoring:
                 start = self.outer_next[start]
             # Przekolorowanie poza wachlarzem [c1, (c3|c2)].
             assert (len(self.outer)-counter) % 2 == 0
-            for i in xrange(len(self.outer)-counter):
+            for i in range(len(self.outer)-counter):
                 if i % 2 == 1: # co drugi przekolorujemy
                     if self.color[self.parent[start]] == c2:
                         self.color[start] = c3

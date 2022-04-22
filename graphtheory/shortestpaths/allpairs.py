@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class SlowAllPairs:
@@ -60,7 +60,7 @@ class SlowAllPairs:
 
     def run(self):
         """Executable pseudocode."""
-        for m in xrange(2, self.graph.v()):   # |V|-2 times
+        for m in range(2, self.graph.v()):   # |V|-2 times
             self.distance = self.extended_shortest_paths(self.distance)
         if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
@@ -131,7 +131,7 @@ class SlowAllPairsEdges:
 
     def run(self):
         """Executable pseudocode."""
-        for m in xrange(2, self.graph.v()):   # |V|-2 times
+        for m in range(2, self.graph.v()):   # |V|-2 times
             self.distance = self.extended_shortest_paths(self.distance)
         if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")
@@ -207,7 +207,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
 
     def run(self):
         """Executable pseudocode."""
-        for m in xrange(2, self.graph.v()):   # |V|-2 times
+        for m in range(2, self.graph.v()):   # |V|-2 times
             self.distance = self.extended_shortest_paths(self.distance)
         if any(self.distance[node][node] < 0 for node in self.graph.iternodes()):
             raise ValueError("negative cycle detected")

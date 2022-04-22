@@ -2,9 +2,9 @@
 
 try:
     from Queue import PriorityQueue
+    range = xrange
 except ImportError:   # Python 3
     from queue import PriorityQueue
-    xrange = range
 
 from graphtheory.connectivity.connected import is_connected
 
@@ -214,7 +214,7 @@ class PrimMatrixMST:
             source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
-        for step in xrange(self.graph.v()):    # |V| times
+        for step in range(self.graph.v()):    # |V| times
             # Find min node in the graph, O(V) time.
             node = min((node for node in self.graph.iternodes() 
                 if self._in_queue[node]), key=self.distance.get)
@@ -265,7 +265,7 @@ class PrimMatrixMSTWithEdges:
             source = next(self.graph.iternodes())
         self.source = source
         self.distance[source] = 0
-        for step in xrange(self.graph.v()):    # |V| times
+        for step in range(self.graph.v()):    # |V| times
             # Find min node in the graph, O(V) time.
             node = min((node for node in self.graph.iternodes() 
                 if self._in_queue[node]), key=self.distance.get)
@@ -388,7 +388,7 @@ class PrimTrivialMST:
             source = next(self.graph.iternodes())
         self.source = source
         self._in_mst[source] = True
-        for step in xrange(self.graph.v()-1):    # |V|-1 times
+        for step in range(self.graph.v()-1):    # |V|-1 times
             # Finding min edge, O(E) time.
             min_edge = min(edge for edge in self.graph.iteredges()
                 if self._in_mst[edge.source] != self._in_mst[edge.target])

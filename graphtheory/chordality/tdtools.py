@@ -8,9 +8,9 @@ https://en.wikipedia.org/wiki/Treewidth
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 import itertools
 from graphtheory.structures.edges import Edge
@@ -79,7 +79,7 @@ def find_treewidth_min_deg(graph):
     # Nie chce modyfikowac oryginalnego grafu, wiec mam kopie.
     graph_copy = graph.copy()   # O(V+E) time and memory
     # W kazdym kroku bede usuwal jeden wierzcholek.
-    for _ in xrange(graph.v()):
+    for _ in range(graph.v()):
         # Wybieram node o najmniejszym stopniu, nie zaliczony do order.
         # Wierzcholki nalezace do order nie wystepuja w kopii grafu.
         #source = min(graph_copy.iternodes(), key=graph_copy.degree)
@@ -111,12 +111,12 @@ def find_treewidth_mmd(graph):
     order = [] # kolejnosc usuwania wierzcholkow, moze sie przyda
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())
-    bucket = list(set() for deg in xrange(graph.v()))   # O(V) time
+    bucket = list(set() for deg in range(graph.v()))   # O(V) time
     for node in graph.iternodes():   # wstawiam do kubelkow, O(V) time
         bucket[graph.degree(node)].add(node)
-    for _ in xrange(graph.v()):   # O(V) time
+    for _ in range(graph.v()):   # O(V) time
         # Szukam wierzcholka o najmniejszym stopniu.
-        for deg in xrange(graph.v()):
+        for deg in range(graph.v()):
             if bucket[deg]:
                 source = bucket[deg].pop()
                 break

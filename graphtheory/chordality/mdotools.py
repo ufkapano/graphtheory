@@ -5,9 +5,9 @@ MDO = Minimum Degree Ordering
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 def find_mdo(graph):
@@ -18,11 +18,11 @@ def find_mdo(graph):
     used = set()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())
-    bucket = list(set() for deg in xrange(graph.v()))   # O(V) time
+    bucket = list(set() for deg in range(graph.v()))   # O(V) time
     for node in graph.iternodes():   # O(V) time
         bucket[graph.degree(node)].add(node)
-    for step in xrange(graph.v()):   # O(V) time
-        for deg in xrange(graph.v()):
+    for step in range(graph.v()):   # O(V) time
+        for deg in range(graph.v()):
             if bucket[deg]:
                 source = bucket[deg].pop()
                 break
@@ -44,13 +44,13 @@ def find_maximum_clique_mdo(graph):
     used = set()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())
-    bucket = list(set() for deg in xrange(graph.v()))   # O(V) time
+    bucket = list(set() for deg in range(graph.v()))   # O(V) time
     for node in graph.iternodes():   # O(V) time
         bucket[graph.degree(node)].add(node)
     max_deg = 0   # najwiekszy stopien wierzcholka
     max_idx = 0   # indeks wierzcholka najdalej w prawo o najwiekszym stopniu
-    for step in xrange(graph.v()):   # O(V) time
-        for deg in xrange(graph.v()):
+    for step in range(graph.v()):   # O(V) time
+        for deg in range(graph.v()):
             if bucket[deg]:
                 source = bucket[deg].pop()
                 break
@@ -68,7 +68,7 @@ def find_maximum_clique_mdo(graph):
             degree_dict[target] = deg-1   # new degree
         max_clique = set(order[max_idx:])
         # slower solutions
-        #max_clique = set(order[i] for i in xrange(max_idx, len(order)))
+        #max_clique = set(order[i] for i in range(max_idx, len(order)))
         #max_clique = set(node for (i, node) in enumerate(order) if i >= max_idx)
     return max_clique
 

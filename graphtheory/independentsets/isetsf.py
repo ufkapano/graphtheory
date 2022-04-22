@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 # Wersja malo wydajna.
 # Tutaj _used i independent_set jest typu set.
@@ -268,7 +268,7 @@ class SmallestFirstIndependentSet7:
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())   # O(V) time
         # Grupujemy wierzcholki w bukietach wg stopni.
-        bucket = list(set() for deg in xrange(self.graph.v()))   # O(V) time
+        bucket = list(set() for deg in range(self.graph.v()))   # O(V) time
         for node in self.graph.iternodes():   # O(V) time
             bucket[self.graph.degree(node)].add(node)
 
@@ -307,7 +307,7 @@ class SmallestFirstIndependentSet7:
 
         while steps > 0:
             # Wybor wierzcholka o najmniejszym stopniu.
-            for deg in xrange(self.graph.v()):
+            for deg in range(self.graph.v()):
                 if bucket[deg]:
                     source = bucket[deg].pop()
                     break

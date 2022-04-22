@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-import random
-from graphtheory.structures.edges import Edge
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
+
+import random
+from graphtheory.structures.edges import Edge
 
 
 class GraphFactory:
@@ -19,12 +20,12 @@ class GraphFactory:
     def make_complete(self, n=1, directed=False):
         """Create a weighted complete graph."""
         graph = self.cls(n, directed)
-        weights = list(xrange(1, 1 + n * (n-1) // 2))   # different weights
+        weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for source in xrange(n):
-            for target in xrange(source + 1, n):   # no loops
+        for source in range(n):
+            for target in range(source + 1, n):   # no loops
                 if random.random() > 0.5:   # random direction
                     graph.add_edge(Edge(source, target, weights.pop()))
                 else:
@@ -36,11 +37,11 @@ class GraphFactory:
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
         graph = self.cls(n, directed)
-        weights = list(xrange(1, 1 + n))   # different weights
+        weights = list(range(1, 1 + n))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for i in xrange(n):
+        for i in range(n):
             graph.add_edge(Edge(i, (i+1) % n, weights.pop()))
         return graph
 
@@ -49,11 +50,11 @@ class GraphFactory:
         if m >= n*(n-1) // 2:
             raise ValueError("too mamy edges")
         graph = self.cls(n, directed)
-        weights = list(xrange(1, 1 + m))   # different weights
+        weights = list(range(1, 1 + m))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        nodes = list(xrange(n))
+        nodes = list(range(n))
         n_edges = 0
         while n_edges < m:
             source, target = random.sample(nodes, 2)
@@ -65,12 +66,12 @@ class GraphFactory:
     def make_tree(self, n=1, directed=False):
         """Create a weighted tree graph."""
         graph = self.cls(n, directed)
-        weights = list(xrange(1, n))   # different weights
+        weights = list(range(1, n))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         nodes = set([0])
-        for node in xrange(1, n):
+        for node in range(1, n):
             parent = random.sample(nodes, 1)[0]
             nodes.add(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
@@ -81,13 +82,13 @@ class GraphFactory:
         if m < n - 1 or m >= n * (n - 1) // 2:
             raise ValueError("bad number of edges for the connected graph")
         graph = self.cls(n, directed)
-        weights = list(xrange(1, m + 1))   # different weights
+        weights = list(range(1, m + 1))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         nodes = set([0])
         # make a tree
-        for node in xrange(1, n):
+        for node in range(1, n):
             parent = random.sample(nodes, 1)[0]
             nodes.add(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
@@ -103,12 +104,12 @@ class GraphFactory:
     def make_random(self, n=1, directed=False, edge_probability=0.5):
         """Create a weighted random graph."""
         graph = self.cls(n, directed)
-        weights = list(xrange(1, 1 + n * (n-1) // 2))   # different weights
+        weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for source in xrange(n):
-            for target in xrange(source + 1, n):   # no loops
+        for source in range(n):
+            for target in range(source + 1, n):   # no loops
                 if random.random() > edge_probability:
                     continue
                 if random.random() > 0.5:   # random direction
@@ -120,12 +121,12 @@ class GraphFactory:
     def make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
         """Create a weighted random bipartite graph."""
         graph = self.cls(n1 + n2, directed)
-        weights = list(xrange(1, n1 * n2 + 1))   # different weights
+        weights = list(range(1, n1 * n2 + 1))   # different weights
         random.shuffle(weights)
-        for node in xrange(n1 + n2):
+        for node in range(n1 + n2):
             graph.add_node(node)
-        for source in xrange(n1):
-            for target in xrange(n1, n1 + n2):   # no loops
+        for source in range(n1):
+            for target in range(n1, n1 + n2):   # no loops
                 if random.random() > edge_probability:
                     continue
                 if random.random() > 0.5:   # random direction
@@ -149,11 +150,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 2 * size * (size-1)))   # different weights
+        weights = list(range(1, 1 + 2 * size * (size-1)))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for node in xrange(n):
+        for node in range(n):
             row = node // size
             col = node % size
             if col != size-1:
@@ -178,11 +179,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 2 * n))   # different weights
+        weights = list(range(1, 1 + 2 * n))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for node in xrange(n):
+        for node in range(n):
             row = node // size
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
@@ -204,11 +205,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 3*size*size -4*size + 1))   # different weights
+        weights = list(range(1, 1 + 3*size*size -4*size + 1))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for node in xrange(n):
+        for node in range(n):
             row = node // size
             col = node % size
             if col != size-1:
@@ -235,11 +236,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = size * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 3 * n))   # different weights
+        weights = list(range(1, 1 + 3 * n))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for node in xrange(n):
+        for node in range(n):
             row = node // size
             col = node % size
             graph.add_edge(Edge(node, row * size + (col + 1) % size, weights.pop())) # line ---
@@ -259,11 +260,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = 2 * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 3 * size - 2))   # different weights
+        weights = list(range(1, 1 + 3 * size - 2))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for i in xrange(size):
+        for i in range(size):
             node = 2 * i
             graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
             if i != size-1:
@@ -286,11 +287,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = 2 * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 3 * size))   # different weights
+        weights = list(range(1, 1 + 3 * size))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for i in xrange(size):
+        for i in range(size):
             node = 2 * i
             graph.add_edge(Edge(node, node + 1, weights.pop())) # line |
             graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
@@ -309,11 +310,11 @@ class GraphFactory:
             raise ValueError("size too small")
         n = 2 * size
         graph = self.cls(n, directed=False)
-        weights = list(xrange(1, 1 + 4 * size))   # different weights
+        weights = list(range(1, 1 + 4 * size))   # different weights
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_edge(Edge(node, (node + 1) % n, weights.pop())) # line /
             graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
         return graph
@@ -321,12 +322,12 @@ class GraphFactory:
     def make_flow_network(self, n=1):
         """Create a flow network."""
         graph = self.cls(n, True)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
-        node_list = list(xrange(1, n))
+        node_list = list(range(1, n))
         source = 0
         sink = n - 1
-        used = dict((node, False) for node in xrange(n))
+        used = dict((node, False) for node in range(n))
         used[source] = True
         # create paths from source to sink
         while any(used[node] == False for node in used):
@@ -345,14 +346,14 @@ class GraphFactory:
         return graph
 
 # 0-----------------(n-1)       n is even
-# |\                / |  outer nodes set(xrange(0,n,2)) | set([n-1])
+# |\                / |  outer nodes set(range(0,n,2)) | set([n-1])
 # | 1--3--5-...-(n-3) |
 # |/   |  |         \ |
 # 2----4--6-...----(n-2)
 
     def make_necklace(self, n=4, directed=False):
         """Create a weighted necklace graph, |V| = 2*k, |E| = 3*k.
-        The set of outer nodes is set(xrange(0,n,2)) | set([n-1]).
+        The set of outer nodes is set(range(0,n,2)) | set([n-1]).
         """
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
@@ -361,18 +362,18 @@ class GraphFactory:
         # It is a cubic graph.
         graph = self.cls(n, directed)
         k = n // 2
-        weights = list(xrange(1, 1 + 3 * k))
+        weights = list(range(1, 1 + 3 * k))
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         graph.add_edge(Edge(0, 1, weights.pop()))
         graph.add_edge(Edge(0, 2, weights.pop()))
         graph.add_edge(Edge(0, n-1, weights.pop()))
         graph.add_edge(Edge(n-2, n-1, weights.pop()))
         graph.add_edge(Edge(n-3, n-1, weights.pop()))
-        for i in xrange(1, n-3):
+        for i in range(1, n-3):
             graph.add_edge(Edge(i, i+2, weights.pop())) # ---
-        for i in xrange(1, n-1, 2):
+        for i in range(1, n-1, 2):
             graph.add_edge(Edge(i, i+1, weights.pop())) # |
         return graph
 
@@ -381,12 +382,12 @@ class GraphFactory:
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
         graph = self.cls(n, directed)
-        weights = list(xrange(1, 1 + 2 * n - 2))
+        weights = list(range(1, 1 + 2 * n - 2))
         random.shuffle(weights)
-        for node in xrange(n):
+        for node in range(n):
             graph.add_node(node)
         hub = 0
-        for i in xrange(1, n):
+        for i in range(1, n):
             graph.add_edge(Edge(hub, i, weights.pop()))
             graph.add_edge(Edge(i, i+1 if (i < n-1) else 1, weights.pop()))
         return graph

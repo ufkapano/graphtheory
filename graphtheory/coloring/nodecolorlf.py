@@ -2,9 +2,9 @@
 
 try:
     integer_types = (int, long)
+    range = xrange
 except NameError:   # Python 3
     integer_types = (int,)
-    xrange = range
 
 
 class LargestFirstNodeColoring:
@@ -35,11 +35,11 @@ class LargestFirstNodeColoring:
         """Executable pseudocode."""
         n = self.graph.v()
         order = list()
-        bucket = list([] for deg in xrange(n))   # O(V) time
+        bucket = list([] for deg in range(n))   # O(V) time
         for node in self.graph.iternodes():   # O(V) time
             bucket[self.graph.degree(node)].append(node)
         maxi = n-1   # last
-        for step in xrange(n):   # O(V) time
+        for step in range(n):   # O(V) time
             while not bucket[maxi]:
                 maxi -= 1
             source = bucket[maxi].pop()
@@ -52,7 +52,7 @@ class LargestFirstNodeColoring:
         for target in self.graph.iteradjacent(source):
             if self.color[target] is not None:
                 self._color_list[self.color[target]] = True
-        for c in xrange(self.graph.v()):   # check colors
+        for c in range(self.graph.v()):   # check colors
             if not self._color_list[c]:
                 self.color[source] = c
                 break
