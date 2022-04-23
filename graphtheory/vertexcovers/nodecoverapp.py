@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 class ApproximationNodeCover:
     """Find a minimum node cover (2-approximation) in O(V+E) time.

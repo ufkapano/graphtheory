@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Tutaj _used i independent_set jest typu set.
 class UnorderedSequentialIndependentSet1:

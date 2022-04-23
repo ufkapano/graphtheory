@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 class DegreeNodeCover:
     """Find a minimum node cover (greedy algorithm) in O(V+E) time."""

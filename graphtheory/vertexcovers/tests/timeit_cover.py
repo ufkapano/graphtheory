@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Time: AppNC < DegNC < LFNC.
 # len(node_cover): AppNC >= DegNC >= LFNC.

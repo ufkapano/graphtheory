@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Sprawdzam szybkosc kolorowania wierzcholkow sp-grafu.
 # Wydaje sie, ze grafy dwudzielne trafiaja sie bardzo rzadko.

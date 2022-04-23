@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import timeit
 from graphtheory.structures.edges import Edge

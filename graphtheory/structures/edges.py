@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Python 2.7 and Python 3.2+ [@total_ordering]
 

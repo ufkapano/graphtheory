@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Sprawdzam szybkosc generatora sp-grafu.
 # Wnioski:

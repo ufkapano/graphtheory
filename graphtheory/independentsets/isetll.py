@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Algorytmy heurystyczne z usuwaniem wierzcholkow.
 # Zamiast degree_dict mozna usuwac wierzcholki z kopii grafu.

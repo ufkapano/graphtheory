@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 class UnorderedSequentialDominatingSet:
     """Find a (unordered sequential) dominating set in O(V+E) time."""
