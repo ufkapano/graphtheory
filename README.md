@@ -60,9 +60,19 @@ chordal completion (PEO), vertex coloring
 * Permutation graphs: in progress ...
 * Clustering: Kruskal.
 
-## Installation
+## Download
 
-See doc/quickstart.txt
+To install an official release do
+
+    python3 -m pip install graphtheory
+
+To get the git version do
+
+    git clone https://github.com/ufkapano/graphtheory.git
+
+## Usage
+
+See doc/quickstart.txt and other doc/*.txt files.
 
 ## References
 

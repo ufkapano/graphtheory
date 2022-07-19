@@ -14,6 +14,7 @@ def dumps_graph(graph):
     D['multigraph'] = isinstance(graph, MultiGraph)
     D['nodes'] = [{'id': node} for node in graph.iternodes()]
     D['edges'] = [edge.__dict__ for edge in graph.iteredges()]
+    # NetworkX uses 'links'.
     #print(D)
     return json.dumps(D, indent=2)
 
@@ -24,6 +25,7 @@ def dump_graph(graph, file_name):
     D['multigraph'] = isinstance(graph, MultiGraph)
     D['nodes'] = [{'id': node} for node in graph.iternodes()]
     D['edges'] = [edge.__dict__ for edge in graph.iteredges()]
+    # NetworkX uses 'links'.
     #print(D)
     with open(file_name, mode='w') as outfile:
         json.dump(D, outfile, indent=2)
@@ -37,7 +39,7 @@ def loads_graph(json_string):
         graph = Graph(n=len(D['nodes']), directed=D['directed'])
     for d in D['nodes']:
         graph.add_node(d['id'])
-    for d in D['edges']:
+    for d in D['edges']:   # NetworkX uses 'links'.
         graph.add_edge(Edge(**d))
     return graph
 
@@ -51,7 +53,7 @@ def load_graph(file_name):
         graph = Graph(n=len(D['nodes']), directed=D['directed'])
     for d in D['nodes']:
         graph.add_node(d['id'])
-    for d in D['edges']:
+    for d in D['edges']:    # NetworkX uses 'links'.
         graph.add_edge(Edge(**d))
     return graph
 

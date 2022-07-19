@@ -7,7 +7,7 @@
 
 # Build files.
 dist/*
-pyquats.egg-info/*
+*.egg-info/*
 
 # Auxiliary LaTeX files.
 *.dvi

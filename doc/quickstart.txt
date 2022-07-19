@@ -1,19 +1,25 @@
-LINUX WITH PYTHON AND GIT INSTALLED
+QUICK START
 ----------------------------------------------------------------------
-1. Clone the project into the home directory
+INSTALLING AN OFFICIAL RELEASE
 
-$ cd
-$ git clone https://github.com/ufkapano/graphs-dict.git
-----------------------------------------------------------------------
-2. Add the graphs-dict directory to the PYTHONPATH environment variable,
-for .bashrc file you can add:
+Requires: Python >= 3.7, numpy, matplotlib
 
-if [ -n "${PYTHONPATH}" ] ; then
-    PYTHONPATH="${PYTHONPATH}:$HOME/graphs-dict"
-else
-    PYTHONPATH="$HOME/graphs-dict"
-fi
+python3 -m pip install --upgrade pip
+python3 -m pip install graphtheory
 ----------------------------------------------------------------------
-3. Start using the graphtheory package!
+INSTALLING FROM SOURCE
+
+1. Clone the project into the git repository
+
+git clone https://github.com/ufkapano/graphtheory.git
+
+2. Install the package in the editable mode
+
+cd graphtheory
+python3 -m pip install -e .
+
+3. You can update the package any time
+
+git pull
 ----------------------------------------------------------------------
 EOF
