@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from csv import list_dialects
 import sys
 
 try:
@@ -69,17 +70,18 @@ class DFSWithStack:
                 if self.color[node] == "WHITE":
                     self._visit(node, pre_action, post_action)
 
-    def _visit(self, node, pre_action=None, post_action=None):
+    def _visit(self, node, pre_action=None, post_action=None, depth=0):
         """Explore the connected component,"""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
         Q = LifoQueue()
-        Q.put(node)   # node is GREY
+        item = (node, depth)
+        Q.put(item)   # node is GREY
         if pre_action:   # when Q.put
-            pre_action(node)
+            pre_action(item[0], item[1])
         while not Q.empty():
-            source = Q.get()    # GREY node is processed
+            source, source_depth = Q.get()    # GREY node is processed
             for edge in self.graph.iteroutedges(source):
                 if self.color[edge.target] == "WHITE":
                     self.parent[edge.target] = source
@@ -87,14 +89,15 @@ class DFSWithStack:
                     self.time = self.time + 1
                     self.dd[edge.target] = self.time
                     self.color[edge.target] = "GREY"
-                    Q.put(edge.target)   # target is GREY
+                    child_and_depth = (edge.target, source_depth + 1) # depth increases by one for evey edge
+                    Q.put(child_and_depth)   # target is GREY
                     if pre_action:   # when Q.put
-                        pre_action(edge.target)
+                        pre_action(*child_and_depth)
             self.time = self.time + 1
             self.ff[source] = self.time
             self.color[source] = "BLACK"
             if post_action:   # source became BLACK
-                post_action(source)
+                post_action(source, source_depth)
 
     def path(self, source, target):
         """Construct a path from source to target."""
@@ -169,23 +172,23 @@ class DFSWithRecursion:
                 if self.color[node] == "WHITE":
                     self._visit(node, pre_action, post_action)
 
-    def _visit(self, node, pre_action=None, post_action=None):
+    def _visit(self, node, pre_action=None, post_action=None, depth=0):
         """Explore recursively the connected component."""
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
         if pre_action:   # _visit started
-            pre_action(node)
+            pre_action(node, depth)
         for edge in self.graph.iteroutedges(node):
             if self.color[edge.target] == "WHITE":
                 self.parent[edge.target] = node
                 self.dag.add_edge(edge)
-                self._visit(edge.target, pre_action, post_action)
+                self._visit(edge.target, pre_action, post_action, depth + 1)
         self.time = self.time + 1
         self.ff[node] = self.time
         self.color[node] = "BLACK"
         if post_action:   # node became BLACK
-            post_action(node)
+            post_action(node, depth)
 
     def path(self, source, target):
         """Construct a path from source to target."""
@@ -252,17 +255,17 @@ class SimpleDFS:
                     self.parent[node] = None   # before _visit
                     self._visit(node, pre_action, post_action)
 
-    def _visit(self, node, pre_action=None, post_action=None):
+    def _visit(self, node, pre_action=None, post_action=None, depth=0):
         """Explore recursively the connected component."""
         if pre_action:
-            pre_action(node)
+            pre_action(node, depth)
         for edge in self.graph.iteroutedges(node):
             if edge.target not in self.parent:
                 self.parent[edge.target] = node   # before _visit
                 self.dag.add_edge(edge)
-                self._visit(edge.target, pre_action, post_action)
+                self._visit(edge.target, pre_action, post_action, depth + 1)
         if post_action:
-            post_action(node)
+            post_action(node, depth)
 
     def path(self, source, target):
         """Construct a path from source to target."""
