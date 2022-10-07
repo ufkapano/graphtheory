@@ -24,7 +24,7 @@ class BFSWithQueue:
     >>> from graphtheory.traversing.bfs import BFSWithQueue
     >>> G = Graph(n=10, False)   # an exemplary undirected graph
     # Add nodes and edges here.
-    >>> order = list()
+    >>> order = []
     >>> algorithm = BFSWithQueue(G)
     >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
     >>> order   # visited nodes
@@ -113,7 +113,7 @@ class SimpleBFS:
     >>> from graphtheory.traversing.bfs import SimpleBFS
     >>> G = Graph(n=10, False)   # an exemplary undirected graph
     # Add nodes and edges here.
-    >>> order = list()
+    >>> order = []
     >>> algorithm = SimpleBFS(G)
     >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
     >>> order   # visited nodes
@@ -167,6 +167,84 @@ class SimpleBFS:
                         pre_action(edge.target)
             if post_action:
                 post_action(source)
+
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
+
+
+class BFSWithDepthTracker:
+    """Breadth-First Search with a depth tracker.
+    
+    Attributes
+    ----------
+    graph : input graph
+    parent : dict (BFS tree)
+    dag : graph (BFS tree)
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.bfs import BFSWithDepthTracker
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = []
+    >>> algorithm = BFSWithDepthTracker(G)
+    >>> algorithm.run(source=0, pre_action=lambda node, depth: order.append((node, depth)))
+    >>> order   # visited nodes
+    >>> algorithm.parent   # BFS tree as a dict
+    >>> algorithm.dag    # BFS tree as a directed graph
+    >>> algorithm.path(source, target)
+    
+    Notes
+    -----
+    Based on ideas from Roberto Montalti (rhighs).
+    
+    https://en.wikipedia.org/wiki/Breadth-first_search
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.parent = dict()
+        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
+
+    def run(self, source=None, pre_action=None, post_action=None):
+        """Executable pseudocode."""
+        if source is not None:
+            self._visit(source, pre_action, post_action)
+        else:
+            for node in self.graph.iternodes():
+                if node not in self.parent:
+                    self._visit(node, pre_action, post_action)
+
+    def _visit(self, node, pre_action=None, post_action=None, depth=0):
+        """Explore the connected component."""
+        Q = Queue()
+        self.parent[node] = None   # before Q.put
+        Q.put((node, depth))
+        if pre_action:   # when Q.put
+            pre_action(node, depth)
+        while not Q.empty():
+            source, source_depth = Q.get()
+            for edge in self.graph.iteroutedges(source):
+                if edge.target not in self.parent:
+                    self.parent[edge.target] = source   # before Q.put
+                    self.dag.add_edge(edge)
+                    child_and_depth = (edge.target, source_depth + 1)
+                    Q.put(child_and_depth)
+                    if pre_action:   # when Q.put
+                        pre_action(*child_and_depth)
+            if post_action:
+                post_action(source, source_depth)
 
     def path(self, source, target):
         """Construct a path from source to target."""

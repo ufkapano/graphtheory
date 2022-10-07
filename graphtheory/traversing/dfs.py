@@ -28,7 +28,7 @@ class DFSWithStack:
     >>> from graphtheory.traversing.dfs import DFSWithStack
     >>> G = Graph(n=10, False)   # an exemplary undirected graph
     # Add nodes and edges here.
-    >>> order = list()
+    >>> order = []
     >>> algorithm = DFSWithStack(G)
     >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
     >>> order   # visited nodes
@@ -126,7 +126,7 @@ class DFSWithRecursion:
     >>> from graphtheory.traversing.dfs import DFSWithRecursion
     >>> G = Graph(n=10, False)   # an exemplary undirected graph
     # Add nodes and edges here.
-    >>> order = list()
+    >>> order = []
     >>> algorithm = DFSWithRecursion(G)
     >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
     >>> order   # visited nodes
@@ -213,7 +213,7 @@ class SimpleDFS:
     >>> from graphtheory.traversing.dfs import SimpleDFS
     >>> G = Graph(n=10, False)   # an exemplary undirected graph
     # Add nodes and edges here.
-    >>> order = list()
+    >>> order = []
     >>> algorithm = SimpleDFS(G)
     >>> algorithm.run(source=0, pre_action=lambda node: order.append(node))
     >>> order   # visited nodes
@@ -263,6 +263,79 @@ class SimpleDFS:
                 self._visit(edge.target, pre_action, post_action)
         if post_action:
             post_action(node)
+
+    def path(self, source, target):
+        """Construct a path from source to target."""
+        if source == target:
+            return [source]
+        elif self.parent[target] is None:
+            raise ValueError("no path to target")
+        else:
+            return self.path(source, self.parent[target]) + [target]
+
+
+class DFSWithDepthTracker:
+    """Depth-First Search with a recursion and a depth tracker.
+    
+    Attributes
+    ----------
+    graph : input graph
+    parent : dict (DFS tree)
+    dag : graph (DFS tree)
+    
+    Examples
+    --------
+    >>> from graphtheory.structures.edges import Edge
+    >>> from graphtheory.structures.graphs import Graph
+    >>> from graphtheory.traversing.dfs import DFSWithDepthTracker
+    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    # Add nodes and edges here.
+    >>> order = []
+    >>> algorithm = DFSWithDepthTracker(G)
+    >>> algorithm.run(source=0, pre_action=lambda node, depth: order.append((node, depth)))
+    >>> order   # visited nodes with depths
+    >>> algorithm.parent   # DFS tree as a dict
+    >>> algorithm.dag    # DFS tree as a directed graph
+    
+    Notes
+    -----
+    Based on ideas from Roberto Montalti (rhighs).
+    
+    https://en.wikipedia.org/wiki/Depth-first_search
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        self.graph = graph
+        self.parent = dict()
+        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        for node in self.graph.iternodes():   # isolated nodes are possible
+            self.dag.add_node(node)
+        recursionlimit = sys.getrecursionlimit()
+        sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
+
+    def run(self, source=None, pre_action=None, post_action=None):
+        """Executable pseudocode."""
+        if source is not None:
+            self.parent[source] = None   # before _visit
+            self._visit(source, pre_action, post_action)
+        else:
+            for node in self.graph.iternodes():
+                if node not in self.parent:
+                    self.parent[node] = None   # before _visit
+                    self._visit(node, pre_action, post_action)
+
+    def _visit(self, node, pre_action=None, post_action=None, depth=0):
+        """Explore recursively the connected component."""
+        if pre_action:
+            pre_action(node, depth)
+        for edge in self.graph.iteroutedges(node):
+            if edge.target not in self.parent:
+                self.parent[edge.target] = node   # before _visit
+                self.dag.add_edge(edge)
+                self._visit(edge.target, pre_action, post_action, depth + 1)
+        if post_action:
+            post_action(node, depth)
 
     def path(self, source, target):
         """Construct a path from source to target."""

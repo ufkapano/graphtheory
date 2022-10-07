@@ -5,6 +5,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.traversing.bfs import BFSWithQueue
 from graphtheory.traversing.bfs import SimpleBFS
+from graphtheory.traversing.bfs import BFSWithDepthTracker
 
 # 0---1   2---3
 # |   | / | / |
@@ -25,7 +26,6 @@ class TestBFS(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        #print self.G
         #self.G.show()
 
     def test_bfs(self):
@@ -75,6 +75,21 @@ class TestBFS(unittest.TestCase):
         for edge in algorithm.dag.iteredges():
             self.assertTrue(self.G.has_edge(edge))
             self.assertEqual(edge.weight, self.G.weight(edge))
+
+    def test_bfs_with_depth_tracker(self):
+        self.assertEqual(self.G.v(), self.N)
+        pre_order = []
+        post_order = []
+        algorithm = BFSWithDepthTracker(self.G)
+        algorithm.run(5,
+            pre_action=lambda node, depth: pre_order.append((node, depth)),
+            post_action=lambda node, depth: post_order.append((node, depth)))
+        pre_order.sort(key=lambda item: (item[1], item[0]))
+        post_order.sort(key=lambda item: (item[1], item[0]))
+        pre_order_expected = [(5, 0), (1, 1), (2, 1), (6, 1), (0, 2), (3, 2), (7, 2), (4, 3)]
+        post_order_expected = [(5, 0), (1, 1), (2, 1), (6, 1), (0, 2), (3, 2), (7, 2), (4, 3)]
+        self.assertEqual(pre_order, pre_order_expected)
+        self.assertEqual(post_order, post_order_expected)
 
     def tearDown(self): pass
 
