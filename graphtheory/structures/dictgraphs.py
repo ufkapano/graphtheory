@@ -80,9 +80,9 @@ class Graph(dict):
 
     def del_edge(self, edge):
         """Remove an edge from the graph."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         del self[source][target]
         if not self.is_directed():
@@ -90,17 +90,17 @@ class Graph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists (the weight is not checked)."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         return source in self and target in self[source]
 
     def weight(self, edge):
         """Return the edge weight or zero."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         if source in self and target in self[source]:
             return self[source][target]

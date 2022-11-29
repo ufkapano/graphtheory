@@ -76,9 +76,9 @@ class Graph(dict):
 
     def del_edge(self, edge):
         """Remove an edge from the graph."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         self[source].remove(target)
         if not self.is_directed():
@@ -86,17 +86,17 @@ class Graph(dict):
 
     def has_edge(self, edge):
         """Test if an edge exists (the weight is not checked)."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         return source in self and target in self[source]
 
     def weight(self, edge):
         """Return the edge weight or zero."""
-        if isinstance(edge, Edge):
+        try:   # checking Edge interface
             source, target = edge.source, edge.target
-        else:
+        except AttributeError:
             source, target = edge   # tuple or list
         if source in self and target in self[source]:
             return 1
@@ -145,14 +145,14 @@ class Graph(dict):
 
     def copy(self):
         """Return the graph copy."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph[node] = set(self[node])
         return new_graph
 
     def transpose(self):
         """Return the transpose of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for edge in self.iteredges():
@@ -161,7 +161,7 @@ class Graph(dict):
 
     def complement(self):
         """Return the complement of the graph."""
-        new_graph = Graph(n=self.n, directed=self.directed)
+        new_graph = self.__class__(n=self.n, directed=self.directed)
         for node in self.iternodes():
             new_graph.add_node(node)
         for source in self.iternodes():
