@@ -14,7 +14,7 @@ class Graph:
     """The class defining a graph.
     
     Graph class with list-of-list structure (the adjacency matrix
-    representation). Nodes are int from 0 to n-1.
+    representation). Nodes are int from range(n).
     """
 
     def __init__(self, n, directed=False):
@@ -59,7 +59,7 @@ class Graph:
         """Test if a node exists."""
         if not isinstance(node, integer_types):
             raise ValueError("node is not int or long")
-        return 0 <= node < self.n
+        return node in range(self.n)
 
     def del_node(self, source):
         """Remove a node from the graph with edges.

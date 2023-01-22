@@ -157,7 +157,7 @@ class PrimMSTWithEdges:
 class PrimMatrixMST:
     """Prim's algorithm for finding a minimum spanning tree.
     
-    The algorithm runs in O(V**2) time. It is suitable for dense graphs.
+    The algorithm runs in O(V^2) time. It is suitable for dense graphs.
     
     Attributes
     ----------
@@ -240,7 +240,7 @@ class PrimMatrixMST:
 
 
 class PrimMatrixMSTWithEdges:
-    """Prim's algorithm for finding MST in O(V**2) time.
+    """Prim's algorithm for finding MST in O(V^2) time.
     
     Attributes
     ----------
