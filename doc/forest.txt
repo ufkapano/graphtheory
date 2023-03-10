@@ -7,7 +7,7 @@ from graphtheory.structures.factory import GraphFactory
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)        # random tree
 ----------------------------------------------------------------------
-# FINDING A TREE CENTER
+# FINDING A TREE CENTER (FOR A SINGLE TREE)
 
 from graphtheory.forests.treecenter import TreeCenter
 
@@ -16,7 +16,15 @@ algorithm.run()
 print ( algorithm.tree_center )   # one or two nodes
 print ( algorithm.tree_radius )
 ----------------------------------------------------------------------
-# DRAWING A TREE
+# FINDING THE LONGEST PATH (FOR A SINGLE TREE)
+
+from graphtheory.forests.treelongestpath import TreeLongestPath
+
+algorithm = TreeLongestPath(G)
+algorithm.run()
+print ( algorithm.longest_path )   # list of nodes
+----------------------------------------------------------------------
+# DRAWING A SINGLE TREE
 
 from graphtheory.forests.treeplot import TreePlot
 from graphtheory.forests.treeplot import TreePlotRadiusAngle

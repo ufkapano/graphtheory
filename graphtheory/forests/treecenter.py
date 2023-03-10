@@ -8,7 +8,7 @@ except NameError:   # Python 3
 
 
 class TreeCenter:
-    """Finding the center of a tree in O(V) time."""
+    """Finding the center of a single tree in O(V) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
