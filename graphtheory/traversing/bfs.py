@@ -196,7 +196,7 @@ class BFSWithDepthTracker:
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = BFSWithDepthTracker(G)
-    >>> algorithm.run(source=0, pre_action=lambda node, depth: order.append((node, depth)))
+    >>> algorithm.run(source=0, pre_action=lambda pair: order.append(pair))
     >>> order   # visited nodes
     >>> algorithm.parent   # BFS tree as a dict
     >>> algorithm.dag    # BFS tree as a directed graph
@@ -232,7 +232,7 @@ class BFSWithDepthTracker:
         self.parent[node] = None   # before Q.put
         Q.put((node, depth))
         if pre_action:   # when Q.put
-            pre_action(node, depth)
+            pre_action((node, depth))
         while not Q.empty():
             source, source_depth = Q.get()
             for edge in self.graph.iteroutedges(source):
@@ -242,9 +242,9 @@ class BFSWithDepthTracker:
                     child_and_depth = (edge.target, source_depth + 1)
                     Q.put(child_and_depth)
                     if pre_action:   # when Q.put
-                        pre_action(*child_and_depth)
+                        pre_action(child_and_depth)
             if post_action:
-                post_action(source, source_depth)
+                post_action((source, source_depth))
 
     def path(self, source, target):
         """Construct a path from source to target."""

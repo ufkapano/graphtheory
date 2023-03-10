@@ -82,10 +82,10 @@ class TestBFS(unittest.TestCase):
         post_order = []
         algorithm = BFSWithDepthTracker(self.G)
         algorithm.run(5,
-            pre_action=lambda node, depth: pre_order.append((node, depth)),
-            post_action=lambda node, depth: post_order.append((node, depth)))
-        pre_order.sort(key=lambda item: (item[1], item[0]))
-        post_order.sort(key=lambda item: (item[1], item[0]))
+            pre_action=lambda pair: pre_order.append(pair),
+            post_action=lambda pair: post_order.append(pair))
+        pre_order.sort(key=lambda pair: (pair[1], pair[0]))
+        post_order.sort(key=lambda pair: (pair[1], pair[0]))
         pre_order_expected = [(5, 0), (1, 1), (2, 1), (6, 1), (0, 2), (3, 2), (7, 2), (4, 3)]
         post_order_expected = [(5, 0), (1, 1), (2, 1), (6, 1), (0, 2), (3, 2), (7, 2), (4, 3)]
         self.assertEqual(pre_order, pre_order_expected)

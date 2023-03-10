@@ -22,7 +22,7 @@ algorithm.path(source, target)   # construct a path from source to target
 
 # finding a depth for nodes
 algorithm = DFSWithDepthTracker(G)
-algorithm.run(source, pre_action=lambda node, depth: order.append((node, depth)))
+algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print(order)   # visited nodes with depths, a list of pairs (node, depth)
 ----------------------------------------------------------------------
 BFS
@@ -47,7 +47,7 @@ algorithm.path(source, target)   # construct a path from source to target
 
 # finding a depth for nodes
 algorithm = BFSWithDepthTracker(G)
-algorithm.run(source, pre_action=lambda node, depth: order.append((node, depth)))
+algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print(order)   # visited nodes with depths, a list of pairs (node, depth)
 ----------------------------------------------------------------------
 EOF

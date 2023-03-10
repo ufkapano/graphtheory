@@ -292,7 +292,7 @@ class DFSWithDepthTracker:
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = DFSWithDepthTracker(G)
-    >>> algorithm.run(source=0, pre_action=lambda node, depth: order.append((node, depth)))
+    >>> algorithm.run(source=0, pre_action=lambda pair: order.append(pair))
     >>> order   # visited nodes with depths
     >>> algorithm.parent   # DFS tree as a dict
     >>> algorithm.dag    # DFS tree as a directed graph
@@ -328,14 +328,14 @@ class DFSWithDepthTracker:
     def _visit(self, node, pre_action=None, post_action=None, depth=0):
         """Explore recursively the connected component."""
         if pre_action:
-            pre_action(node, depth)
+            pre_action((node, depth))
         for edge in self.graph.iteroutedges(node):
             if edge.target not in self.parent:
                 self.parent[edge.target] = node   # before _visit
                 self.dag.add_edge(edge)
                 self._visit(edge.target, pre_action, post_action, depth + 1)
         if post_action:
-            post_action(node, depth)
+            post_action((node, depth))
 
     def path(self, source, target):
         """Construct a path from source to target."""
