@@ -9,10 +9,10 @@ from graphtheory.traversing.dfs import SimpleDFS
 
 
 class TransitiveClosureSimple:
-    """Based on the matrix multiplication, O(V**2 E) time."""
+    """Based on the matrix multiplication, O(V^2 E) time."""
 
     def __init__(self, graph):
-        """The algorithm initialization, O(V**2) time."""
+        """The algorithm initialization, O(V^2) time."""
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -34,7 +34,7 @@ class TransitiveClosureSimple:
 
 
 class TransitiveClosure:
-    """Based on the Floyd-Warshall algorithm, O(V**3) time."""
+    """Based on the Floyd-Warshall algorithm, O(V^3) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -63,7 +63,7 @@ class TransitiveClosureBFS:
     """Based on the BFS, O(V*(V+E)) time."""
 
     def __init__(self, graph):
-        """The algorithm initialization, O(V**2) time."""
+        """The algorithm initialization, O(V^2) time."""
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
@@ -86,7 +86,7 @@ class TransitiveClosureDFS:
     """Based on the DFS, O(V*(V+E)) time."""
 
     def __init__(self, graph):
-        """The algorithm initialization, O(V**2) time."""
+        """The algorithm initialization, O(V^2) time."""
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph

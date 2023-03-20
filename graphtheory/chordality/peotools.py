@@ -133,4 +133,22 @@ def is_peo2(graph, order):
             D[target] = 0
     return True
 
+
+def find_maximum_independent_set(graph, order):
+    """Find a maximum independent set in a chordal graph."""
+    # Theorem 4.18 [2004 Golumbic] str. 99.
+    # Slownik trzymajacy numery wierzcholkow w PEO.
+    M = dict((node, i) for (i, node) in enumerate(order))   # O(V) time
+    iset = set()   # maximum independent set
+    used = set()
+    for source in order:
+        if source in used:
+            continue
+        iset.add(source)
+        used.add(source)
+        for target in graph.iteradjacent(source):   # total O(E) time
+            if M[source] < M[target]:
+                used.add(target)
+    return iset
+
 # EOF

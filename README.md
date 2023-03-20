@@ -54,6 +54,7 @@ chordal completion (PEO), tree decomposition, plotting
 finding PEO (MCS), 
 finding maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
+finding maximum independent set (PEO),
 finding tree decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
