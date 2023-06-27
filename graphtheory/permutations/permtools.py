@@ -10,6 +10,9 @@ import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
+def swap(L, i, j):
+    L[i], L[j] = L[j], L[i]
+
 def make_random_perm(n):
     """Return a random perm."""
     perm = list(range(n))
@@ -28,9 +31,6 @@ def make_bipartite_perm(p, q):
     perm.extend(range(p, p+q))
     perm.extend(range(p))
     return perm
-
-def swap(L, i, j):
-    L[i], L[j] = L[j], L[i]
 
 def make_path_perm(n):
     """Return a perm for P_n path graph."""

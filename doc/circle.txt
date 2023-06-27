@@ -9,14 +9,17 @@ from graphtheory.structures.graphs import Graph
 # GENERATORS
 from graphtheory.permutations.circletools import make_random_circle
 from graphtheory.permutations.circletools import make_path_circle
-from graphtheory.permutations.circletools import make_cyclic_circle
+from graphtheory.permutations.circletools import make_cycle_circle
+from graphtheory.permutations.circletools import make_tepee_circle
 
 # perm has (double) numbers from 0 to n-1.
 n = 10
 perm = make_random_circle(n)
+perm = make_path_circle(n)   # make perm for path graph P_n
+perm = make_cycle_circle(n)   # make perm for cycle graph C_n
+perm = make_tepee_circle(n)   # make perm for tepee graph
+
 assert len(perm) == 2*n
 assert sorted(perm) == sorted(2 * list(range(n)))
-perm = make_path_circle(n)   # make perm for path graph P_n
-perm = make_cyclic_circle(n)   # make perm for cyclic graph C_n
 ----------------------------------------------------------------------
 EOF

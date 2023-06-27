@@ -10,6 +10,9 @@ import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
+def swap(L, i, j):
+    L[i], L[j] = L[j], L[i]
+
 def make_random_circle(n):
     """Return a random circle graph as double perm."""
     #double_perm = list(range(n)) * 2
@@ -36,6 +39,17 @@ def make_cycle_circle(n):
     for i in range(1, 2*n-1, 2):
         perm[i], perm[i+1] = perm[i+1], perm[i]
     perm[0], perm[-1] = perm[-1], perm[0]
+    return perm
+
+def make_tepee_circle(n):
+    """Return a tepee graph as double perm."""
+    if n < 2:
+        raise ValueError("n has to be greater than 1")
+    perm = [0, 1, 0, 1]
+    for i in range(2, n):
+        perm.extend((i, i))
+        swap(perm, -3, -2)
+        swap(perm, -4, -3)
     return perm
 
 # EOF
