@@ -1,0 +1,26 @@
+PERMUTATION GRAPHS
+----------------------------------------------------------------------
+# RECOGNITION
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+
+----------------------------------------------------------------------
+# GENERATORS
+from graphtheory.permutations.permtools import make_random_perm
+from graphtheory.permutations.permtools import make_star_perm
+from graphtheory.permutations.permtools import make_bipartite_perm
+from graphtheory.permutations.permtools import make_path_perm
+from graphtheory.permutations.permtools import perm_has_edge
+from graphtheory.permutations.permtools import make_complement_perm
+
+# perm has numbers from 0 to n-1.
+perm = make_random_perm(n=10)
+perm = make_star_perm(n=5)   # make perm for bipartite graph K_{1,n-1}
+perm = make_bipartite_perm(p=3, q=4)   # make perm for bipartite graph K_{p,q}
+perm = make_path_perm(n=5)   # make perm for path graph P_n
+assert perm_has_edge(perm, 1, 2)
+perm2 = make_complement_perm(perm)
+assert not perm_has_edge(perm2, 1, 2)
+----------------------------------------------------------------------
+EOF

@@ -59,6 +59,7 @@ finding tree decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
 * Permutation graphs: in progress ...
+* Circle graphs: in progress ...
 * Clustering: Kruskal.
 
 ## Download
@@ -125,6 +126,8 @@ Magdalena Stępień (planar graphs)
 
 Sandra Rudnicka (outerplanar graphs)
 
-Albert Surmacz (permutation graphs)
+Albert Surmacz (permutation graphs, circle graphs)
+
+Maciej Mularski (interval graphs)
 
 EOF
