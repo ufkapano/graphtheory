@@ -10,6 +10,8 @@ from graphtheory.permutations.permtools import make_path_perm
 from graphtheory.permutations.permtools import perm_has_edge1
 from graphtheory.permutations.permtools import perm_has_edge2
 from graphtheory.permutations.permtools import make_complement_perm
+from graphtheory.permutations.permtools import perm_is_connected
+from graphtheory.permutations.permtools import perm_connected_components
 
 class TestPermGraphs(unittest.TestCase):
 
@@ -58,6 +60,23 @@ class TestPermGraphs(unittest.TestCase):
         self.assertEqual(perm2, list(reversed(perm)))
         self.assertFalse(perm_has_edge2(perm, 1, 2))
         self.assertTrue(perm_has_edge2(perm2, 1, 2))
+
+    def test_perm_is_connected(self):
+        self.assertTrue(perm_is_connected([4, 3, 2, 1, 0]))
+        self.assertTrue(perm_is_connected([2, 3, 0, 1]))
+        self.assertFalse(perm_is_connected([1, 0, 3, 2]))
+        self.assertFalse(perm_is_connected([3, 2, 1, 0, 4]))
+
+    def test_perm_connected_components(self):
+        perm = [4, 3, 2, 1, 0]
+        n_cc, cc = perm_connected_components(perm)
+        self.assertEqual(n_cc, 1)
+        self.assertEqual(set(cc[v] for v in cc), set([0]))
+        perm = [1, 0, 3, 2]
+        n_cc, cc = perm_connected_components(perm)
+        self.assertEqual(n_cc, 2)
+        self.assertEqual(set(cc[v] for v in cc), set([0, 1]))
+        #print(cc)
 
     def tearDown(self): pass
 

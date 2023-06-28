@@ -79,4 +79,30 @@ def make_complement_perm(perm):
     """
     return perm[::-1]
 
+def perm_is_connected(perm):
+    """Test if the perm graph is connected in O(n) time."""
+    n = len(perm)
+    maxi = 0
+    for i in range(n):
+        if perm[i] > maxi:
+            maxi = perm[i]
+        if i != n - 1 and maxi == i:
+            return False
+    return True
+
+def perm_connected_components(perm):
+    """Finding connected components of the perm graph in O(n) time."""
+    n = len(perm)
+    cc = dict()   # pairs (node, no of cc)
+    n_cc = 0   # the number of connected components
+    maxi = 0
+    for i in range(n):
+        if perm[i] > maxi:
+            maxi = perm[i]
+        cc[perm[i]] = n_cc
+        if i != n - 1 and maxi == i:
+            n_cc += 1   # new connected component
+    n_cc += 1
+    return n_cc, cc
+
 # EOF
