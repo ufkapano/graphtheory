@@ -52,4 +52,26 @@ def make_tepee_circle(n):
         swap(perm, -4, -3)
     return perm
 
+def is_perm_graph(double_perm): # O(n) time, O(n) memory
+    """Test if the circle graph (double perm) is a perm graph in O(n) time."""
+    window = set()
+    n = len(double_perm) // 2   # the numbed of nodes
+    for i in range(n):   # make initial window, O(n) time
+        node = double_perm[i]
+        if node in window:
+            window.remove(node)
+        else:
+            window.add(node)
+    if len(window) == n:
+        return True
+    for i in range(n, 2*n):   # O(n) time
+        node = double_perm[i]
+        if node in window:
+            window.remove(node)
+        else:
+            window.add(node)
+        if len(window) == n:
+            return True
+    return False
+
 # EOF

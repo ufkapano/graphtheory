@@ -22,4 +22,11 @@ perm = make_tepee_circle(n)   # make perm for tepee graph
 assert len(perm) == 2*n
 assert sorted(perm) == sorted(2 * list(range(n)))
 ----------------------------------------------------------------------
+FUNCTIONS
+from graphtheory.permutations.circletools import is_perm_graph
+
+assert is_perm_graph([0, 1, 0, 1])   # P_2
+assert is_perm_graph([3, 1, 0, 2, 1, 3, 2, 0])   # C_4
+assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5
+----------------------------------------------------------------------
 EOF

@@ -7,6 +7,7 @@ from graphtheory.permutations.circletools import make_random_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_tepee_circle
+from graphtheory.permutations.circletools import is_perm_graph
 
 class TestCircleGraphs(unittest.TestCase):
 
@@ -51,6 +52,11 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertEqual(make_tepee_circle(4), [0, 1, 2, 0, 3, 1, 2, 3])
         self.assertEqual(make_tepee_circle(5), [0, 1, 2, 0, 3, 1, 4, 2, 3, 4])
         #print("tepee {}".format(perm))
+
+    def test_is_perm_graph(self):
+        self.assertTrue(is_perm_graph([0, 1, 0, 1])) # P_2
+        self.assertTrue(is_perm_graph([3, 1, 0, 2, 1, 3, 2, 0])) # C_4
+        self.assertFalse(is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])) # C_5
 
     def tearDown(self): pass
 
