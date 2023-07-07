@@ -56,11 +56,12 @@ finding maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
 finding maximum independent set (PEO),
 finding tree decomposition
+* Interval graphs: double perm representation, generators, traversing (BFS, DFS)
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
-* Permutation graphs: generators
-* Circle graphs: generators
-* Clustering: Kruskal.
+* Permutation graphs: generators, traversing (BFS, DFS)
+* Circle graphs: double perm representation, generators, traversing (BFS, DFS)
+* Clustering: Kruskal
 
 ## Download
 

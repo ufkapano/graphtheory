@@ -54,18 +54,14 @@ def make_tepee_circle(n):
 
 def circle_has_edge(perm, source, target):
     """Test if the circle graph has Edge(source, target), O(n) time, O(n) memory."""
-    nodes = set(perm)   # O(n) time
-    pairs = dict((node, []) for node in nodes) # O(n) time
-    for i, node in enumerate(perm):   # O(n) time
-        pairs[node].append(i)
+    pairs = dict((node, []) for node in set(perm))   # O(n) time
+    for idx, node in enumerate(perm):   # O(n) time
+        pairs[node].append(idx)
     s1, s2 = pairs[source]
     t1, t2 = pairs[target]
-    if (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2):
-        return True
-    else:
-        return False
+    return (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2)
 
-def is_perm_graph(perm): # O(n) time, O(n) memory
+def is_perm_graph(perm):   # O(n) time, O(n) memory
     """Test if the circle graph (double perm) is a perm graph in O(n) time."""
     window = set()
     n = len(perm) // 2   # the numbed of nodes
