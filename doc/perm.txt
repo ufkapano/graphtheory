@@ -20,7 +20,7 @@ perm = make_random_perm(n)
 perm = make_star_perm(n)   # make perm for bipartite graph K_{1,n-1}
 perm = make_bipartite_perm(p=3, q=4)   # make perm for bipartite graph K_{p,q}
 perm = make_path_perm(n)   # make perm for path graph P_n
-assert perm_has_edge(perm, 1, 2)
+assert perm_has_edge(perm, 1, 2)   # O(n) time
 perm2 = make_complement_perm(perm)
 assert not perm_has_edge(perm2, 1, 2)
 ----------------------------------------------------------------------

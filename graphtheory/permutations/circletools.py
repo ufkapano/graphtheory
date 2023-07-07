@@ -15,10 +15,10 @@ def swap(L, i, j):
 
 def make_random_circle(n):
     """Return a random circle graph as double perm."""
-    #double_perm = list(range(n)) * 2
-    double_perm = [i % n for i in range(2*n)]
-    random.shuffle(double_perm)
-    return double_perm
+    #perm = list(range(n)) * 2
+    perm = [i % n for i in range(2*n)]
+    random.shuffle(perm)
+    return perm
 
 def make_path_circle(n):
     """Return a path graph P_n as double perm."""
@@ -26,7 +26,7 @@ def make_path_circle(n):
     for i in range(n):
         perm.extend((i, i))
     for i in range(1, 2*n-1, 2):
-        perm[i], perm[i+1] = perm[i+1], perm[i]
+        swap(perm, i, i+1)
     return perm
 
 def make_cycle_circle(n):
@@ -37,8 +37,8 @@ def make_cycle_circle(n):
     for i in range(n):
         perm.extend((i, i))
     for i in range(1, 2*n-1, 2):
-        perm[i], perm[i+1] = perm[i+1], perm[i]
-    perm[0], perm[-1] = perm[-1], perm[0]
+        swap(perm, i, i+1)
+    swap(perm, 0, -1)
     return perm
 
 def make_tepee_circle(n):
@@ -52,12 +52,25 @@ def make_tepee_circle(n):
         swap(perm, -4, -3)
     return perm
 
-def is_perm_graph(double_perm): # O(n) time, O(n) memory
+def circle_has_edge(perm, source, target):
+    """Test if the circle graph has Edge(source, target), O(n) time, O(n) memory."""
+    nodes = set(perm)   # O(n) time
+    pairs = dict((node, []) for node in nodes) # O(n) time
+    for i, node in enumerate(perm):   # O(n) time
+        pairs[node].append(i)
+    s1, s2 = pairs[source]
+    t1, t2 = pairs[target]
+    if (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2):
+        return True
+    else:
+        return False
+
+def is_perm_graph(perm): # O(n) time, O(n) memory
     """Test if the circle graph (double perm) is a perm graph in O(n) time."""
     window = set()
-    n = len(double_perm) // 2   # the numbed of nodes
+    n = len(perm) // 2   # the numbed of nodes
     for i in range(n):   # make initial window, O(n) time
-        node = double_perm[i]
+        node = perm[i]
         if node in window:
             window.remove(node)
         else:
@@ -65,7 +78,7 @@ def is_perm_graph(double_perm): # O(n) time, O(n) memory
     if len(window) == n:
         return True
     for i in range(n, 2*n):   # O(n) time
-        node = double_perm[i]
+        node = perm[i]
         if node in window:
             window.remove(node)
         else:

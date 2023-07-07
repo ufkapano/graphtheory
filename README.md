@@ -58,8 +58,8 @@ finding maximum independent set (PEO),
 finding tree decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
-* Permutation graphs: in progress ...
-* Circle graphs: in progress ...
+* Permutation graphs: generators
+* Circle graphs: generators
 * Clustering: Kruskal.
 
 ## Download
