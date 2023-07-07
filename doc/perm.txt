@@ -35,4 +35,24 @@ n_cc, cc = perm_connected_components([1, 0, 3, 2])
 assert n_cc == 2
 assert cc == {1: 0, 0: 0, 3: 1, 2: 1}
 ----------------------------------------------------------------------
+TRAVERSING
+from graphtheory.permutations.permbfs import PermBFS
+from graphtheory.permutations.permdfs import PermDFS
+
+# Using BFS/DFS in O(n^2) time.
+perm = [...]   # perm graph as a list
+source = ...   # starting node
+pre_order = []
+post_order = []
+algorithm = PermBFS(perm)
+#algorithm = PermDFS(perm)
+algorithm.run(source,
+    pre_action=lambda node: pre_order.append(node),
+    post_action=lambda node: post_order.append(node))
+# Results.
+print(pre_order)   # node list
+print(post_order)   # node list
+print(algorithm.parent)   # BFS/DFS tree as a dict
+print(algorithm.path(source, target)   # node list
+----------------------------------------------------------------------
 EOF
