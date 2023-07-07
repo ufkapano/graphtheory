@@ -3,24 +3,23 @@
 import sys
 import collections
 
-class PermDFS:
-    """Depth-First Search for permutation graphs in O(n^2) time."""
+class CircleDFS:
+    """Depth-First Search for circle graphs in O(n^2) time."""
 
     def __init__(self, perm):
         """The algorithm initialization."""
         self.perm = perm
         self.parent = dict()   # DFS tree
-        self.position = list(perm)   # temporary, O(n) memory
-        for k, item in enumerate(perm):   # O(n) time
-            self.position[item] = k   # for testing edges
-        #print("position", self.position)
+        self.pairs = dict((node, []) for node in set(self.perm))   # O(n) time
+        for idx, node in enumerate(self.perm):   # O(n) time
+            self.pairs[node].append(idx)
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(len(self.perm) * 2, recursionlimit))
 
-    def has_edge(self, i, j):
-        if i > j:
-            i, j = j, i
-        return self.position[i] > self.position[j]
+    def has_edge(self, source, target):
+        s1, s2 = self.pairs[source]
+        t1, t2 = self.pairs[target]
+        return (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2)
 
     def run(self, source=None, pre_action=None, post_action=None):
         """Executable pseudocode."""
@@ -28,7 +27,7 @@ class PermDFS:
             self.parent[source] = None   # before _visit
             self._visit(source, pre_action, post_action)
         else:
-            for node in self.perm:
+            for node in self.pairs:   # iternodes()
                 if node not in self.parent:
                     self.parent[node] = None   # before _visit
                     self._visit(node, pre_action, post_action)
@@ -37,7 +36,7 @@ class PermDFS:
         """Explore recursively the connected component."""
         if pre_action:
             pre_action(node)
-        for target in self.perm: # iteroutedges(node)
+        for target in self.pairs:   # iteroutedges(node), O(n) time
             if self.has_edge(node, target) and target not in self.parent:
                 self.parent[target] = node   # before _visit
                 self._visit(target, pre_action, post_action)

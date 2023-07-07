@@ -34,4 +34,24 @@ assert is_perm_graph(perm)   # O(n) time, O(n) memory
 assert circle_has_edge(perm, 0, 1)   # O(n) time, O(n) memory
 assert not circle_has_edge(perm, 0, 2)
 ----------------------------------------------------------------------
+TRAVERSING
+from graphtheory.permutations.circlebfs import CircleBFS
+from graphtheory.permutations.circledfs import CircleDFS
+
+# Using BFS/DFS in O(n^2) time.
+perm = [...]   # circle graph as a double perm (list)
+source = ...   # starting node
+pre_order = []
+post_order = []
+algorithm = CircleBFS(perm)
+#algorithm = CircleDFS(perm)
+algorithm.run(source,
+    pre_action=lambda node: pre_order.append(node),
+    post_action=lambda node: post_order.append(node))
+# Results.
+print(pre_order)   # node list
+print(post_order)   # node list
+print(algorithm.parent)   # BFS/DFS tree as a dict
+print(algorithm.path(source, target)   # node list
+----------------------------------------------------------------------
 EOF
