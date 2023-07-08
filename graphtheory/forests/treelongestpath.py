@@ -10,7 +10,7 @@ from graphtheory.traversing.bfs import BFSWithDepthTracker
 
 
 class TreeLongestPath:
-    """Finding the longest path of a single tree in O(V) time.
+    """Finding the longest path of a single tree in O(n) time.
     
     R.W. Bulterman, F.W. van der Sommen, G. Zwaan, T. Verhoeff,
     A.J.M. van Gasteren, "On computing a longest path in a tree",

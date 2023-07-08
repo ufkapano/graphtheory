@@ -8,7 +8,7 @@ except NameError:   # Python 3
 
 
 class TreeCenter:
-    """Finding the center of a single tree in O(V) time."""
+    """Finding the center of a single tree in O(n) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -22,7 +22,7 @@ class TreeCenter:
         """Executable pseudocode."""
         # Wyznaczam stopnie wierzcholkow drzewa.
         degree_dict = dict((node, self.graph.degree(node))
-            for node in self.graph.iternodes())   # O(V) time
+            for node in self.graph.iternodes())   # O(n) time
         # Identyfikujemy wierzcholki stopnia 1.
         # Wstawiamy je do kolejki.
         Q = [None] * self.graph.v()

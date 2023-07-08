@@ -8,6 +8,7 @@ from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_tepee_circle
 from graphtheory.permutations.circletools import circle_has_edge
+from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import is_perm_graph
 
 class TestCircleGraphs(unittest.TestCase):
@@ -58,6 +59,16 @@ class TestCircleGraphs(unittest.TestCase):
         perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4
         self.assertTrue(circle_has_edge(perm, 0, 1))
         self.assertFalse(circle_has_edge(perm, 0, 2))
+
+    def test_circle_is_connected(self):
+        self.assertTrue(circle_is_connected([0, 1, 0, 1]))   # P_2
+        self.assertTrue(circle_is_connected(["A", "B", "A", "B"]))   # P_2
+        self.assertTrue(circle_is_connected([3, 1, 0, 2, 1, 3, 2, 0]))   # C_4
+        self.assertTrue(circle_is_connected([0, 1, 0, 2, 3, 1, 3, 2]))   # K_{1,3}
+        self.assertTrue(circle_is_connected([4, 1, 0, 2, 1, 3, 2, 4, 3, 0]))   # C_5
+        self.assertFalse(circle_is_connected([0, 1, 0, 1, 2, 3, 2, 3])) # P_2+P_2
+        self.assertFalse(circle_is_connected([0, 1, 0, 1, 2, 2])) # P_2+P_1
+        self.assertFalse(circle_is_connected([0, 1, 2, 0, 1, 2, 3, 4, 3, 4])) # C_3+P_2
 
     def test_is_perm_graph(self):
         self.assertTrue(is_perm_graph([0, 1, 0, 1])) # P_2

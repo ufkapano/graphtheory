@@ -29,7 +29,7 @@ print ( algorithm.longest_path )   # list of nodes
 from graphtheory.forests.treeplot import TreePlot
 from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
-algorithm = TreePlot(G)   # using float,  only for trees with |V| < 1e4
+algorithm = TreePlot(G)   # using float,  only for trees with n < 1e4
 algorithm.run()
 print ( algorithm.point_dict )   # a dict with point positions (float) in the plane
 

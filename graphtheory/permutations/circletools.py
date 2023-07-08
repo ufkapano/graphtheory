@@ -9,6 +9,7 @@ except NameError:   # Python 3
 import random
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
+from graphtheory.permutations.circlebfs import CircleBFS
 
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
@@ -60,6 +61,14 @@ def circle_has_edge(perm, source, target):
     s1, s2 = pairs[source]
     t1, t2 = pairs[target]
     return (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2)
+
+def circle_is_connected(perm):
+    """Testing connectivity of the circle graph in O(n^2) time."""
+    order = []
+    algorithm = CircleBFS(perm)
+    # Elementy permutacji to wierzcholki, a to nie musza byc liczby.
+    algorithm.run(perm[0], pre_action=lambda node: order.append(node))
+    return len(order) * 2 == len(perm)
 
 def is_perm_graph(perm):   # O(n) time, O(n) memory
     """Test if the circle graph (double perm) is a perm graph in O(n) time."""

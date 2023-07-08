@@ -9,7 +9,7 @@ from graphtheory.structures.points import Point
 class TreePlot:
     """Finding the positions of tree nodes in the plane.
     
-    This is not suitable for large trees (|V| > 1e4) due to
+    This is not suitable for large trees (n > 1e4) due to
     numerical errors. For large trees use TreePlotRadiusAngle
     with fractions.
     """

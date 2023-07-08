@@ -25,11 +25,13 @@ assert sorted(perm) == sorted(2 * list(range(n)))
 FUNCTIONS
 from graphtheory.permutations.circletools import is_perm_graph
 from graphtheory.permutations.circletools import circle_has_edge
+from graphtheory.permutations.circletools import circle_is_connected
 
 assert is_perm_graph([0, 1, 0, 1])   # P_2 graph
 assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5 graph
 
 perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4 graph
+assert circle_is_connected(perm)
 assert is_perm_graph(perm)   # O(n) time, O(n) memory
 assert circle_has_edge(perm, 0, 1)   # O(n) time, O(n) memory
 assert not circle_has_edge(perm, 0, 2)
