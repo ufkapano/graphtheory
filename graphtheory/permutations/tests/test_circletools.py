@@ -8,6 +8,7 @@ from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_tepee_circle
 from graphtheory.permutations.circletools import make_ktree_circle
+from graphtheory.permutations.circletools import make_star_circle
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import is_perm_graph
@@ -55,6 +56,16 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertEqual(make_tepee_circle(4), [0, 1, 2, 0, 3, 1, 2, 3])
         self.assertEqual(make_tepee_circle(5), [0, 1, 2, 0, 3, 1, 4, 2, 3, 4])
         #print("tepee {}".format(perm))
+
+    def test_star_circle(self):
+        n = 10
+        perm = make_star_circle(n)
+        self.assertEqual(len(perm), 2*n)
+        self.assertEqual(set(perm), set(range(n)))
+        self.assertRaises(ValueError, make_star_circle, 1)
+        self.assertEqual(make_star_circle(2), [0, 1, 0, 1])
+        self.assertEqual(make_star_circle(3), [0, 1, 2, 0, 2, 1])
+        self.assertEqual(make_star_circle(4), [0, 1, 2, 3, 0, 3, 2, 1])
 
     def test_ktree_circle(self):
         n = 10

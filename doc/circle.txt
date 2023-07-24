@@ -11,6 +11,8 @@ from graphtheory.permutations.circletools import make_random_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_tepee_circle
+from graphtheory.permutations.circletools import make_ktree_circle
+from graphtheory.permutations.circletools import make_star_circle
 
 # perm has (double) numbers from 0 to n-1.
 n = 10
@@ -18,6 +20,8 @@ perm = make_random_circle(n)
 perm = make_path_circle(n)   # make perm for path graph P_n
 perm = make_cycle_circle(n)   # make perm for cycle graph C_n
 perm = make_tepee_circle(n)   # make perm for tepee graph
+perm = make_ktree_circle(n, n // 2)   # make perm for k-tree graph
+perm = make_star_circle(n)   # make perm for star graph K_{1,n-1}
 
 assert len(perm) == 2*n
 assert sorted(perm) == sorted(2 * list(range(n)))

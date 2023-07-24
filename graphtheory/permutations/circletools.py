@@ -64,6 +64,16 @@ def make_ktree_circle(n, k):
     perm.extend(range(n-k-1, n))   # po kolei znikaja
     return perm
 
+def make_star_circle(n):
+    """Return a star graph as double perm."""
+    if n < 2:
+        raise ValueError("n has to be greater than 1")
+    perm = [0]
+    perm.extend(range(1, n))
+    perm.append(0)
+    perm.extend(range(n-1,0,-1))
+    return perm
+
 def circle_has_edge(perm, source, target):
     """Test if the circle graph has Edge(source, target), O(n) time, O(n) memory."""
     pairs = dict((node, []) for node in set(perm))   # O(n) time
