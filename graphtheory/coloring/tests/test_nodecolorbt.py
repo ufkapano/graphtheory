@@ -34,8 +34,7 @@ class TestNodeColoring(unittest.TestCase):
         for edge in self.G.iteredges():
             self.assertNotEqual(algorithm.color[edge.source],
                                 algorithm.color[edge.target])
-        #print algorithm.color
-        all_colors = set(algorithm.color[node] for node in self.G.iternodes())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), 3)   # best coloring
 
     def test_exceptions(self):

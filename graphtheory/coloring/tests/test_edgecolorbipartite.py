@@ -34,7 +34,7 @@ class TestEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), max(N1, N2))
 
     def test_exceptions(self):
@@ -72,7 +72,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), 2)
 
     def test_Kpq(self):
@@ -97,7 +97,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), max(N1, N2))
 
     def test_bipartite(self):
@@ -119,7 +119,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         Delta = max(G.degree(node) for node in G.iternodes())
         self.assertEqual(len(all_colors), Delta)
 

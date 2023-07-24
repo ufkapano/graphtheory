@@ -29,7 +29,7 @@ class TestEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), N)
 
     def test_Kn_even(self):
@@ -51,7 +51,7 @@ class TestEdgeColoring(unittest.TestCase):
             self.assertEqual(len(color_set), G.degree(node))
         #print algorithm.color
         #algorithm.show_colors()
-        all_colors = set(algorithm.color[edge] for edge in G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), N-1)
 
     def test_exceptions(self):

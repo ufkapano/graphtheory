@@ -42,7 +42,7 @@ class TestEdgeColoring(unittest.TestCase):
                     color_set.add(algorithm.color[edge])
             self.assertEqual(len(color_set), self.G.degree(node))
         #print ( algorithm.color )
-        all_colors = set(algorithm.color[edge] for edge in self.G.iteredges())
+        all_colors = set(algorithm.color.values())
         self.assertEqual(len(all_colors), 4)
 
     def test_exceptions(self):

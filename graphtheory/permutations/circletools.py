@@ -53,6 +53,17 @@ def make_tepee_circle(n):
         swap(perm, -4, -3)
     return perm
 
+def make_ktree_circle(n, k):
+    """Return a k-tree circle graph as double perm."""
+    if k >= n:
+        raise ValueError("bad k")   # run time error possible
+    perm = list(range(k+1))   # first (k+1)-clique
+    # Dalej jeden znika, jeden dochodzi.
+    for i in range(k+1, n):
+        perm.extend((i-k-1, i))
+    perm.extend(range(n-k-1, n))   # po kolei znikaja
+    return perm
+
 def circle_has_edge(perm, source, target):
     """Test if the circle graph has Edge(source, target), O(n) time, O(n) memory."""
     pairs = dict((node, []) for node in set(perm))   # O(n) time
