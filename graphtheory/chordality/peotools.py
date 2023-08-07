@@ -11,6 +11,23 @@ try:
 except NameError:   # Python 3
     integer_types = (int,)
 
+def find_peo_lex_bfs(graph):   # O(V^2) time
+    """Find a lexicographic ordering."""
+    labels = dict((node, []) for node in graph.iternodes())
+    order = []
+    i = graph.v()
+    while i > 0:
+        source = max((node for node in graph.iternodes() if node not in order),
+            key=labels.__getitem__)   # porownywanie list Pythona
+        order.append(source)
+        for target in graph.iteradjacent(source):
+            if target not in order:
+                labels[target].append(i)
+        i -= 1
+    assert len(order) == graph.v()
+    order.reverse()   # O(V) time
+    return order
+
 def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
     """Finding PEO in a chordal graph using maximum cardinality search."""
     if graph.is_directed():
@@ -75,7 +92,8 @@ def is_peo1(graph, order):
     # Algorithm 4.2 [2004 Golumbic] p. 88.
     # Slownik trzymajacy numery wierzcholkow w PEO.
     M = dict((node, i) for (i, node) in enumerate(order))   # O(V) time
-    # Lista/zbior wierzcholkow do sprawdzenia.
+    # Lista/zbior wierzcholkow do sprawdzenia, czy sa polaczone z node.
+    # Sprawdzenie jest odroczone w czasie.
     A = dict((node, set()) for node in order)   # O(V) time
     for source in order:
         # X to zbior sasiadow source na prawo w PEO.
@@ -86,6 +104,9 @@ def is_peo1(graph, order):
         if X:
             target = min(X, key=M.__getitem__)   # najblizej source
             A[target].update(X - set([target]))
+            # Tu zapisujemy do sprawdzenia polaczenia sasiadow target.
+            # A co z polaczeniami pomiedzy sasiadami target?
+            # Kiedy w order dojdziemy do target, wtedy sprawdzimy dalsze polaczenia.
         # Testowanie A na zbiorach.
         if A[source] - set(graph.iteradjacent(source)):
             # Ma zostac zbior pusty, bo wierzcholki w A[source]

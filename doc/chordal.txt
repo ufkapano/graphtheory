@@ -4,11 +4,13 @@ CHORDAL GRAPHS
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
+from graphtheory.chordality.peotools import find_peo_lex_bfs
 from graphtheory.chordality.peotools import find_peo_mcs
 from graphtheory.chordality.peotools import find_maximum_clique_peo
 from graphtheory.chordality.peotools import find_all_maximal_cliques
 from graphtheory.chordality.peotools import is_peo1, is_peo2
 
+#order = find_peo_lex_bfs(G)   # if G is not chordal, then 'order' is not a PEO
 order = find_peo_mcs(G)   # if G is not chordal, then 'order' is not a PEO
 assert is_peo1(G, order)   # testing PEO, O(V+E) time
 assert is_peo2(G, order)   # testing PEO, O(V+E) time
@@ -35,7 +37,7 @@ from graphtheory.chordality.peotools import find_maximum_independent_set
 iset = find_maximum_independent_set(G, peo)   # G have to be chordal
 print ( iset )   # a set of nodes
 ----------------------------------------------------------------------
-# MINIMUM DEGREE ORDERING OF CHORDAL GRAPHS
+# MINIMUM DEGREE ORDERING (MDO) OF CHORDAL GRAPHS
 
 from graphtheory.chordality.mdotools import find_mdo
 from graphtheory.chordality.mdotools import find_maximum_clique_mdo
@@ -45,7 +47,7 @@ print ( order )   # list of nodes (MDO)
 max_clique = find_maximum_clique_mdo(G)   # O(V+E) time
 print ( max_clique )   # a set of nodes
 ----------------------------------------------------------------------
-# TREE DECOMPOSITION OF CHORDAL GRAPHS
+# TREE DECOMPOSITION (TD) OF CHORDAL GRAPHS
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
@@ -59,7 +61,7 @@ assert isinstance(T, Graph)
 bags = list(T.iternodes())   # a list of tuples
 treewidth = max(len(bag) for bag in bags) - 1
 ----------------------------------------------------------------------
-# TREE DECOMPOSITION OF GENERAL GRAPHS
+# TREE DECOMPOSITION (TD) OF GENERAL GRAPHS
 
 from graphtheory.chordality.tdtools import find_td_order
 from graphtheory.chordality.tdtools import find_treewidth_min_deg # upper bound
