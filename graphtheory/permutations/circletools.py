@@ -42,8 +42,8 @@ def make_cycle_circle(n):
     swap(perm, 0, -1)
     return perm
 
-def make_tepee_circle(n):
-    """Return a tepee graph as double perm."""
+def make_2tree_circle(n):
+    """Return a 2-tree graph as double perm."""
     if n < 2:
         raise ValueError("n has to be greater than 1")
     perm = [0, 1, 0, 1]

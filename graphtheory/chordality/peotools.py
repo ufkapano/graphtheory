@@ -72,16 +72,16 @@ def find_all_maximal_cliques(graph, order):
     # do A[node] w algorytmie 4.2 [2004 Golumbic].
     S = dict((node, 0) for node in order)
     for source in order:
-        X = set()
+        X = set()   # sasiedzi source na prawo w peo, tworza klike
         for target in graph.iteradjacent(source): # total O(E) time
             if M[source] < M[target]:
                 X.add(target)
-        if graph.degree(source) == 0:
+        if graph.degree(source) == 0:   # isolated node
             cliques.append(set([source]))
         if not X:
             continue
         node = min(X, key=M.__getitem__)   # najblizej source
-        S[node] = max(S[node], len(X)-1)
+        S[node] = max(S[node], len(X)-1)   # klika przy node bez node
         if S[source] < len(X):
             cliques.append(X | set([source]))
     return cliques

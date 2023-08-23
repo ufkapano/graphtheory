@@ -6,7 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.permutations.circletools import make_random_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
-from graphtheory.permutations.circletools import make_tepee_circle
+from graphtheory.permutations.circletools import make_2tree_circle
 from graphtheory.permutations.circletools import make_ktree_circle
 from graphtheory.permutations.circletools import make_star_circle
 from graphtheory.permutations.circletools import circle_has_edge
@@ -45,17 +45,17 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertEqual(make_cycle_circle(4), [3, 1, 0, 2, 1, 3, 2, 0])
         #print("cycle {}".format(perm))
 
-    def test_tepee_circle(self):
+    def test_2tree_circle(self):
         n = 10
-        perm = make_tepee_circle(n)
+        perm = make_2tree_circle(n)
         self.assertEqual(len(perm), 2*n)
         self.assertEqual(set(perm), set(range(n)))
-        self.assertRaises(ValueError, make_tepee_circle, 1)
-        self.assertEqual(make_tepee_circle(2), [0, 1, 0, 1])
-        self.assertEqual(make_tepee_circle(3), [0, 1, 2, 0, 1, 2])
-        self.assertEqual(make_tepee_circle(4), [0, 1, 2, 0, 3, 1, 2, 3])
-        self.assertEqual(make_tepee_circle(5), [0, 1, 2, 0, 3, 1, 4, 2, 3, 4])
-        #print("tepee {}".format(perm))
+        self.assertRaises(ValueError, make_2tree_circle, 1)
+        self.assertEqual(make_2tree_circle(2), [0, 1, 0, 1])
+        self.assertEqual(make_2tree_circle(3), [0, 1, 2, 0, 1, 2])
+        self.assertEqual(make_2tree_circle(4), [0, 1, 2, 0, 3, 1, 2, 3])
+        self.assertEqual(make_2tree_circle(5), [0, 1, 2, 0, 3, 1, 4, 2, 3, 4])
+        #print("2tree {}".format(perm))
 
     def test_star_circle(self):
         n = 10
