@@ -7,6 +7,7 @@ except NameError:   # Python 3
     integer_types = (int,)
 
 import random
+import itertools
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
@@ -71,6 +72,22 @@ def perm_has_edge2(perm, i, j):
     return left > right
 
 perm_has_edge = perm_has_edge2
+
+def make_abstract_perm_graph(perm):
+    """Return an abstract perm graph from perm in O(n^2) time."""
+    # Szukamy indeksow, position[] to permutacja odwrotma do perm.
+    position = list(perm)   # tymczasowo, O(n) memory
+    for k, item in enumerate(perm):   # O(n) time
+        position[item] = k
+    graph = Graph(n=len(perm))
+    # Jest krawedz, jezeli przedzialy sie zazebiaja.
+    # Zlozonosc n(n-1)/2, czyli O(n^2).
+    for (source, target) in itertools.combinations(perm, 2):
+        if source > target:
+            source, target = target, source
+        if position[source] > position[target]:
+            graph.add_edge(Edge(source, target))
+    return graph
 
 def make_complement_perm(perm):
     """Make a perm for the complement graph.

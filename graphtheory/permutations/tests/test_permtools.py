@@ -9,6 +9,7 @@ from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
 from graphtheory.permutations.permtools import perm_has_edge1
 from graphtheory.permutations.permtools import perm_has_edge2
+from graphtheory.permutations.permtools import make_abstract_perm_graph
 from graphtheory.permutations.permtools import make_complement_perm
 from graphtheory.permutations.permtools import perm_is_connected
 from graphtheory.permutations.permtools import perm_connected_components
@@ -53,6 +54,18 @@ class TestPermGraphs(unittest.TestCase):
         self.assertFalse(perm_has_edge1(perm, 1, 0))
         self.assertTrue(perm_has_edge2(perm, 4, 0))
         self.assertFalse(perm_has_edge2(perm, 1, 0))
+
+    def test_make_abstract_perm_graph(self):
+        perm = list(range(4,-1,-1))   # K_5
+        graph = make_abstract_perm_graph(perm)
+        self.assertTrue(isinstance(graph, Graph))
+        self.assertEqual(graph.v(), 5)   # K_5
+        self.assertEqual(graph.e(), 10)   # K_5
+        perm = [2, 3, 0, 1]   # C_4
+        graph = make_abstract_perm_graph(perm)
+        self.assertTrue(isinstance(graph, Graph))
+        self.assertEqual(graph.v(), 4)   # C_4
+        self.assertEqual(graph.e(), 4)   # C_4
 
     def test_complement_perm(self):
         perm = list(range(5))   # no edges

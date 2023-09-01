@@ -7,6 +7,7 @@ except NameError:   # Python 3
     integer_types = (int,)
 
 import random
+import itertools
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.permutations.circlebfs import CircleBFS
@@ -82,6 +83,24 @@ def circle_has_edge(perm, source, target):
     s1, s2 = pairs[source]
     t1, t2 = pairs[target]
     return (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2)
+
+def make_abstract_circle_graph(perm):
+    """Return an abstract circle graph from double perm in O(n^2) time."""
+    nodes = set(perm)   # O(n) time
+    # dict do zapisu pierwszego i drugiego wystapienia wierzcholka w perm.
+    pairs = dict((node, []) for node in nodes)   # O(n) time
+    for i, node in enumerate(perm):   # O(n) time
+        pairs[node].append(i)
+    assert all(len(pairs[node]) == 2 for node in pairs)
+    graph = Graph(n=len(nodes))
+    # Jest krawedz, jezeli przedzialy sie zazebiaja.
+    # Zlozonosc n(n-1)/2, czyli O(n^2).
+    for (source, target) in itertools.combinations(nodes, 2):
+        s1, s2 = pairs[source]
+        t1, t2 = pairs[target]
+        if (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2):
+            graph.add_edge(Edge(source, target))
+    return graph
 
 def circle_is_connected(perm):
     """Testing connectivity of the circle graph in O(n^2) time."""

@@ -12,6 +12,7 @@ from graphtheory.permutations.circletools import make_star_circle
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import is_perm_graph
+from graphtheory.permutations.circletools import make_abstract_circle_graph
 
 class TestCircleGraphs(unittest.TestCase):
 
@@ -79,6 +80,13 @@ class TestCircleGraphs(unittest.TestCase):
         perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4
         self.assertTrue(circle_has_edge(perm, 0, 1))
         self.assertFalse(circle_has_edge(perm, 0, 2))
+
+    def test_make_abstract_circle_graph(self):
+        perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4
+        graph = make_abstract_circle_graph(perm)
+        self.assertTrue(isinstance(graph, Graph))
+        self.assertEqual(graph.v(), 4)
+        self.assertEqual(graph.e(), 4)
 
     def test_circle_is_connected(self):
         self.assertTrue(circle_is_connected([0, 1, 0, 1]))   # P_2

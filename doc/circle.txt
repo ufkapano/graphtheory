@@ -30,6 +30,7 @@ FUNCTIONS
 from graphtheory.permutations.circletools import is_perm_graph
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import circle_is_connected
+from graphtheory.permutations.circletools import make_abstract_circle_graph
 
 assert is_perm_graph([0, 1, 0, 1])   # P_2 graph
 assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5 graph
@@ -39,6 +40,10 @@ assert circle_is_connected(perm)
 assert is_perm_graph(perm)   # O(n) time, O(n) memory
 assert circle_has_edge(perm, 0, 1)   # O(n) time, O(n) memory
 assert not circle_has_edge(perm, 0, 2)
+G = make_abstract_circle_graph(perm)
+assert isinstance(G, Graph)
+assert G.v() == 4   # C_4
+assert G.e() == 4   # C_4
 ----------------------------------------------------------------------
 TRAVERSING
 from graphtheory.permutations.circlebfs import CircleBFS

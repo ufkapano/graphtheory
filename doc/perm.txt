@@ -27,6 +27,7 @@ assert not perm_has_edge(perm2, 1, 2)
 CONNECTIVITY
 from graphtheory.permutations.permtools import perm_is_connected
 from graphtheory.permutations.permtools import perm_connected_components
+from graphtheory.permutations.permtools import make_abstract_perm_graph
 
 assert perm_is_connected([3, 2, 1, 0])   # K_4 is connected
 assert not perm_is_connected([1, 0, 3, 2])   # P_2+P_2 is not connected
@@ -34,6 +35,12 @@ assert not perm_is_connected([1, 0, 3, 2])   # P_2+P_2 is not connected
 n_cc, cc = perm_connected_components([1, 0, 3, 2])
 assert n_cc == 2
 assert cc == {1: 0, 0: 0, 3: 1, 2: 1}
+
+perm = [4, 3, 2, 1, 0]   # K_5
+graph = make_abstract_perm_graph(perm)
+assert isinstance(graph, Graph)
+assert graph.v() == 5   # K_5
+assert graph.e() == 10   # K_5
 ----------------------------------------------------------------------
 TRAVERSING
 from graphtheory.permutations.permbfs import PermBFS
