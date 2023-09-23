@@ -1,5 +1,13 @@
 CIRCLE GRAPHS
 ----------------------------------------------------------------------
+# PERMUTATION REPRESENTATION
+
+#    a---c       path graph P_3  a-b-c
+#  / |   | \   double perm [a,c,b,c,a,b] clockwise
+# b--+---+--b
+#  \ |   | /
+#    a---c
+----------------------------------------------------------------------
 # RECOGNITION
 
 from graphtheory.structures.edges import Edge
@@ -28,12 +36,18 @@ assert sorted(perm) == sorted(2 * list(range(n)))
 ----------------------------------------------------------------------
 FUNCTIONS
 from graphtheory.permutations.circletools import is_perm_graph
+from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import make_abstract_circle_graph
 
 assert is_perm_graph([0, 1, 0, 1])   # P_2 graph
 assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5 graph
+
+# figure-8 graph (n=6)
+double_perm = list("cdbcabedfeaf")
+perm, n2l, l2n = circle2perm(double_perm)
+assert perm == [2, 4, 0, 5, 1, 3]
 
 perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4 graph
 assert circle_is_connected(perm)

@@ -75,13 +75,12 @@ perm_has_edge = perm_has_edge2
 
 def make_abstract_perm_graph(perm):
     """Return an abstract perm graph from perm in O(n^2) time."""
-    # Szukamy indeksow, position[] to permutacja odwrotma do perm.
+    # Szukamy indeksow, position[] to permutacja odwrotna do perm.
     position = list(perm)   # tymczasowo, O(n) memory
     for k, item in enumerate(perm):   # O(n) time
         position[item] = k
     graph = Graph(n=len(perm))
-    # Jest krawedz, jezeli przedzialy sie zazebiaja.
-    # Zlozonosc n(n-1)/2, czyli O(n^2).
+    # Jest krawedz, jezeli jest inwersja. Zlozonosc n(n-1)/2, czyli O(n^2).
     for (source, target) in itertools.combinations(perm, 2):
         if source > target:
             source, target = target, source

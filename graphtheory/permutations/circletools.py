@@ -111,7 +111,10 @@ def circle_is_connected(perm):
     return len(order) * 2 == len(perm)
 
 def is_perm_graph(perm):   # O(n) time, O(n) memory
-    """Test if the circle graph (double perm) is a perm graph in O(n) time."""
+    """Test if the circle graph (double perm) is a perm graph in O(n) time.
+    Note that if this test failed then the corresponding abstract graph
+    still can be a perm graph but harder to detect.
+    """
     window = set()
     n = len(perm) // 2   # the numbed of nodes
     for i in range(n):   # make initial window, O(n) time
@@ -131,5 +134,52 @@ def is_perm_graph(perm):   # O(n) time, O(n) memory
         if len(window) == n:
             return True
     return False
+
+# Zakladam, ze double_perm zawiera etykiety (int lub str).
+# Jezeli circle graph jest perm graph, to chce dostac permutacje liczb
+# od 0 do n-1 i slownik D par (number, label)
+def circle2perm(double_perm):
+    """From double perm to perm for perm graphs.
+    Note that if this test failed then the corresponding abstract graph
+    still can be a perm graph but harder to detect.
+    """
+    window = set()
+    start_idx = -1   # nieprawidlowy index na starcie, poczatek okna
+    n = len(double_perm) // 2   # liczba wierzcholkow
+    for i in range(n):   # make initial window, O(n) time
+        node = double_perm[i]
+        if node in window:
+            window.remove(node)
+        else:
+            window.add(node)
+    if len(window) == n:
+        start_idx = 0
+    else:   # Przesuwamy okno. Z lewej wychodza, z prawej wchodza.
+        for i in range(n):   # O(n) time
+            node = double_perm[i]   # node wychodzacy z okna
+            if node in window:
+                window.remove(node)
+            else:
+                window.add(node)
+            node = double_perm[i+n]   # node wchodzacy do okna
+            if node in window:
+                window.remove(node)
+            else:
+                window.add(node)
+            if len(window) == n:
+                start_idx = i+1
+                break
+    if start_idx == -1:
+        raise ValueError("perm graph not detected")
+    # Buduje slowniki.
+    label2number = dict()
+    number2label = dict()
+    for i in range(n):
+        label2number[double_perm[start_idx+i]] = i
+        number2label[i] = double_perm[start_idx+i]
+    # Buduje permutacje.
+    perm = [label2number[double_perm[(start_idx+n+i) % (2*n)]] for i in range(n)]
+    perm.reverse()
+    return perm, number2label, label2number
 
 # EOF

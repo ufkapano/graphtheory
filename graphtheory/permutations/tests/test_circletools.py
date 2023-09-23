@@ -12,6 +12,7 @@ from graphtheory.permutations.circletools import make_star_circle
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import is_perm_graph
+from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import make_abstract_circle_graph
 
 class TestCircleGraphs(unittest.TestCase):
@@ -102,6 +103,12 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertTrue(is_perm_graph([0, 1, 0, 1])) # P_2
         self.assertTrue(is_perm_graph([3, 1, 0, 2, 1, 3, 2, 0])) # C_4
         self.assertFalse(is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])) # C_5
+        # figure-8 graph (n=6)
+        double_perm = list("cdbcabedfeaf")
+        perm, n2l, l2n = circle2perm(double_perm)
+        self.assertEqual(perm, [2, 4, 0, 5, 1, 3])
+        self.assertEqual(n2l, {0: 'c', 1: 'a', 2: 'b', 3: 'e', 4: 'd', 5: 'f'})
+        self.assertEqual(l2n, {'c': 0, 'a': 1, 'b': 2, 'e': 3, 'd': 4, 'f': 5})
 
     def tearDown(self): pass
 
