@@ -125,8 +125,14 @@ def is_perm_graph(perm):   # O(n) time, O(n) memory
             window.add(node)
     if len(window) == n:
         return True
-    for i in range(n, 2*n):   # O(n) time
-        node = perm[i]
+    # Przesuwamy okno.
+    for i in range(n):   # O(n) time
+        node = perm[i]   # node wychodzacy z okna
+        if node in window:
+            window.remove(node)
+        else:
+            window.add(node)
+        node = perm[i+n]   # node wchodzacy do okna
         if node in window:
             window.remove(node)
         else:
