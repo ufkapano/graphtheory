@@ -77,4 +77,24 @@ treewidth, order = find_treewidth_min_deg(G) # upper bound for treewidth
 
 treewidth, order = find_treewidth_mmd(G) # lower bound for treewidth
 ----------------------------------------------------------------------
+NODE COVER FOR CHORDAL GRAPHS
+
+from graphtheory.chordality.chordalcover import ChordalNodeCover
+
+# G is a chordal graph, T is a tree decomposition of G
+algorithm = ChordalNodeCover(G, T)
+algorithm.run()
+print(algorithm.cardinality)
+print(algorithm.node_cover)
+----------------------------------------------------------------------
+DOMINATING SET FOF CHORDAL GRAPHS
+
+from graphtheory.chordality.chordaldset import ChordalDominatingSet
+
+# G is a chordal graph, T is a tree decomposition of G
+algorithm = ChordalDominatingSet(G, T)
+algorithm.run()
+print(algorithm.cardinality)
+print(algorithm.dominating_set)
+----------------------------------------------------------------------
 EOF
