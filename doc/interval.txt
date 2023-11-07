@@ -8,6 +8,82 @@ from graphtheory.structures.graphs import Graph
 ----------------------------------------------------------------------
 # GENERATORS
 
+from graphtheory.chordality.intervaltools import make_random_interval
+from graphtheory.chordality.intervaltools import make_path_interval
+from graphtheory.chordality.intervaltools import make_tepee_interval
+from graphtheory.chordality.intervaltools import make_2tree_interval
+from graphtheory.chordality.intervaltools import make_star_interval
+from graphtheory.chordality.intervaltools import make_ktree_interval
+
+G = make_random_interval(n=5)
+G = make_path_interval(n=5)   # P_n graph
+G = make_tepee_interval(n=5)
+G = make_2tree_interval(n=5)
+G = make_star_interval(n=5)   # K_{1,n-1} graph
+G = make_ktree_interval(n=10, k=5)   # interval k-tree
+----------------------------------------------------------------------
+# CONNECTIVITY
+
+from graphtheory.chordality.intervaltools import interval_is_connected
+from graphtheory.chordality.intervaltools import interval_has_edge
+
+assert interval_is_connected([0,1,0,1])   # P_2
+assert interval_is_connected([0,1,2,0,1,2])   # K_3
+assert not interval_is_connected([0,0,1,1])   # P_1 + P_1
+assert interval_has_edge([1,2,3,1,4,2,3,4], 1, 3)   # diamond
+assert not interval_has_edge([1,2,3,1,4,2,3,4], 1, 4)   # diamond
+----------------------------------------------------------------------
+# CLIQUES AND PEO
+
+from graphtheory.chordality.intervaltools import find_peo_cliques
+from graphtheory.chordality.intervaltools import find_max_clique_size
+
+#   1
+#  / \
+# 2---3---4
+perm = [1,2,3,1,2,4,3,4]   # stop
+peo, cliques = find_peo_cliques(perm)
+assert peo == [1, 2, 3, 4]
+assert cliques == [{1, 2, 3}, {3, 4}]   # ordered cliques
+assert find_max_clique_size(perm) == 3
+----------------------------------------------------------------------
+# VERTEX COLORING
+
+from graphtheory.chordality.intervaltools import interval_node_color
+
+n = 5
+perm = list(range(n)) * 2   # K_n graph
+color = interval_node_color(perm)
+print(color)   # {0: 0, 1: 1, 2: 2, 3: 3, 4: 4}, n colors
+
+perm = make_path_interval(n)
+color = interval_node_color(perm)
+print(color)   # {0: 0, 1: 1, 2: 0, 3: 1, 4: 0}, 2 colors
+----------------------------------------------------------------------
+# MAXIMUM INDEPENDENT SET
+
+from graphtheory.chordality.intervaltools import interval_maximum_iset
+
+n = 10
+perm = list(range(n)) * 2   # K_n graph
+iset = interval_maximum_iset(perm)
+assert len(iset) == 1
+
+perm = make_path_interval(n)   # P_n graph
+iset = interval_maximum_iset(perm)
+assert len(iset) == (n+1) // 2
+
+perm = make_tepee_interval(n)
+iset = interval_maximum_iset(perm)
+assert len(iset) == n // 2
+
+perm = make_2tree_interval(n)
+iset = interval_maximum_iset(perm)
+assert len(iset) == (n+2) // 3
+
+perm = make_star_interval(n)   # K_{1,n-1} star graph
+iset = interval_maximum_iset(perm)
+assert len(iset) == n-1
 ----------------------------------------------------------------------
 # TRAVERSING (BFS)
 
