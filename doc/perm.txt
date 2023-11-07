@@ -7,6 +7,7 @@ from graphtheory.structures.graphs import Graph
 
 ----------------------------------------------------------------------
 # GENERATORS
+
 from graphtheory.permutations.permtools import make_random_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
@@ -24,7 +25,8 @@ assert perm_has_edge(perm, 1, 2)   # O(n) time
 perm2 = make_complement_perm(perm)
 assert not perm_has_edge(perm2, 1, 2)
 ----------------------------------------------------------------------
-CONNECTIVITY
+# CONNECTIVITY
+
 from graphtheory.permutations.permtools import perm_is_connected
 from graphtheory.permutations.permtools import perm_connected_components
 from graphtheory.permutations.permtools import make_abstract_perm_graph
@@ -42,7 +44,8 @@ assert isinstance(graph, Graph)
 assert graph.v() == 5   # K_5
 assert graph.e() == 10   # K_5
 ----------------------------------------------------------------------
-TRAVERSING
+# TRAVERSING
+
 from graphtheory.permutations.permbfs import PermBFS
 from graphtheory.permutations.permdfs import PermDFS
 

@@ -34,7 +34,8 @@ perm = make_star_circle(n)   # make perm for star graph K_{1,n-1}
 assert len(perm) == 2*n
 assert sorted(perm) == sorted(2 * list(range(n)))
 ----------------------------------------------------------------------
-FUNCTIONS
+# FUNCTIONS
+
 from graphtheory.permutations.circletools import is_perm_graph
 from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import circle_has_edge
@@ -59,7 +60,8 @@ assert isinstance(G, Graph)
 assert G.v() == 4   # C_4
 assert G.e() == 4   # C_4
 ----------------------------------------------------------------------
-TRAVERSING
+# TRAVERSING
+
 from graphtheory.permutations.circlebfs import CircleBFS
 from graphtheory.permutations.circledfs import CircleDFS
 

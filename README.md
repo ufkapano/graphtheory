@@ -55,7 +55,9 @@ finding PEO (MCS),
 finding maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
 finding maximum independent set (PEO),
-finding tree decomposition
+finding tree decomposition (TD),
+finding minimum dominating set (TD),
+finding minimum node cover (TD)
 * Interval graphs: double perm representation, generators, 
 traversing (BFS, DFS),
 finding path decomposition

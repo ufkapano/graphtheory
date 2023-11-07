@@ -1,6 +1,7 @@
 MATCHING
 ----------------------------------------------------------------------
 # MATCHING FOR GENERAL GRAPHS (HEURISTICS)
+
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.algorithms.matching import MaximalMatching
@@ -17,6 +18,7 @@ print ( algorithm.cardinality )
 print ( algorithm.mate )
 ----------------------------------------------------------------------
 # MATCHING FOR BIPARTITE GRAPHS
+
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory

@@ -98,7 +98,7 @@ class TestNodeCover1(unittest.TestCase):
         algorithm = SimpleBFS(self.T)
         algorithm.run(pre_action=lambda node: bag_order.append(node))
         # Bede korzystal z drzewa BFS zapisanego jako parent (dict).
-        #print "bag_order", bag_order
+        #print("bag_order", bag_order)
         # Dla kazdego wierzcholka grafu G buduje poddrzewo (dict).
         subtree = dict((node, dict()) for node in self.G.iternodes())
         root_bag = bag_order[0]
@@ -115,7 +115,7 @@ class TestNodeCover1(unittest.TestCase):
                     subtree[node][bag] = algorithm.parent[bag]
                 else:   # rozlaczne poddrzewa, wlasnosc nie jest spelniona
                     is_td = False
-        #print "subtree", subtree
+        #print("subtree", subtree)
         self.assertTrue(is_td)
 
     def test_treewidth(self):
@@ -198,7 +198,7 @@ class TestNodeCover2(unittest.TestCase):
         algorithm = SimpleBFS(self.T)
         algorithm.run(pre_action=lambda node: bag_order.append(node))
         # Bede korzystal z drzewa BFS zapisanego jako parent (dict).
-        #print "bag_order", bag_order
+        #print("bag_order", bag_order)
         # Dla kazdego wierzcholka grafu G buduje poddrzewo (dict).
         subtree = dict((node, dict()) for node in self.G.iternodes())
         root_bag = bag_order[0]
@@ -215,7 +215,7 @@ class TestNodeCover2(unittest.TestCase):
                     subtree[node][bag] = algorithm.parent[bag]
                 else:   # rozlaczne poddrzewa, wlasnosc nie jest spelniona
                     is_td = False
-        #print "subtree", subtree
+        #print("subtree", subtree)
         self.assertTrue(is_td)
 
     def test_treewidth(self):

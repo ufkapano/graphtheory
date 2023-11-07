@@ -1,5 +1,7 @@
-DFS
+TRAVERSING
 ----------------------------------------------------------------------
+# DFS
+
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.traversing.dfs import DFSWithStack
@@ -25,8 +27,8 @@ algorithm = DFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print(order)   # visited nodes with depths, a list of pairs (node, depth)
 ----------------------------------------------------------------------
-BFS
-----------------------------------------------------------------------
+# BFS
+
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.traversing.bfs import BFSWithQueue
