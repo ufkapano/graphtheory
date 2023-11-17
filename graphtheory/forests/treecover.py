@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
+import collections
 
 
 class BorieNodeCover:
@@ -100,13 +96,13 @@ class TreeNodeCover1:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = Queue()   # for leafs
+        Q = collections.deque()   # for leafs
         # Put leafs to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 1:
-                Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+                Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             if degree_dict[source] == 0:   # isolated node
                 continue
             assert degree_dict[source] == 1
@@ -120,7 +116,7 @@ class TreeNodeCover1:
                             degree_dict[node] -= 1
                             degree_dict[target] -= 1
                             if degree_dict[node] == 1:   # new leaf
-                                Q.put(node)
+                                Q.append(node)
                     break
 
 
@@ -147,13 +143,13 @@ class TreeNodeCover2:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = Queue()   # for leafs
+        Q = collections.deque()   # for leafs
         # Put leafs to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 1:
-                Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+                Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             if degree_dict[source] == 0:   # isolated node
                 continue
             assert degree_dict[source] == 1
@@ -167,7 +163,7 @@ class TreeNodeCover2:
                     degree_dict[source] -= 1
                     degree_dict[target] -= 1
                     if degree_dict[target] == 1:   # new leaf
-                        Q.put(target)
+                        Q.append(target)
                     break
 
 

@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
+import collections
 
 
 class BorieDominatingSet:
@@ -106,7 +102,7 @@ class TreeDominatingSet1:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = Queue()   # for leafs
+        Q = collections.deque()   # for leafs
         # Put leafs to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
@@ -114,9 +110,9 @@ class TreeDominatingSet1:
                 used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
-                Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+                Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
                 if source not in used:   # parent not in dset
@@ -132,7 +128,7 @@ class TreeDominatingSet1:
                         degree_dict[node] -= 1
                         degree_dict[source] -= 1
                         if degree_dict[node] == 1:   # new leaf
-                            Q.put(node)
+                            Q.append(node)
                         break
             else:   # source not in used, parent goes to dset
                 for target in self.graph.iteradjacent(source):
@@ -147,7 +143,7 @@ class TreeDominatingSet1:
                                 degree_dict[target] -= 1
                                 used.add(node)   # child goes to used
                                 if degree_dict[node] == 1:   # new leaf
-                                    Q.put(node)
+                                    Q.append(node)
                         break
 
 
@@ -177,7 +173,7 @@ class TreeDominatingSet2:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = Queue()   # for leafs
+        Q = collections.deque()   # for leafs
         # Put leafs to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
@@ -185,9 +181,9 @@ class TreeDominatingSet2:
                 used.add(node)
                 self.cardinality += 1
             elif degree_dict[node] == 1:   # leaf
-                Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+                Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             # A leaf may become isolated.
             if degree_dict[source] == 0:
                 if source not in used:   # parent not in dset
@@ -208,7 +204,7 @@ class TreeDominatingSet2:
                     degree_dict[target] -= 1
                     degree_dict[source] -= 1
                     if degree_dict[target] == 1:   # parent is a new leaf
-                        Q.put(target)
+                        Q.append(target)
                     break
 
 

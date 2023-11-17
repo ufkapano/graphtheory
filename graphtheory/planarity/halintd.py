@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 try:
-    from Queue import Queue
-    range = xrange
-except ImportError:   # Python 3
-    from queue import Queue
+    integer_types = (int, long)
+    range = xrange   # range będzie zawsze generatorem
+except NameError:   # Py3
+    integer_types = (int,)
 
+import collections
 from graphtheory.structures.edges import Edge
 from graphtheory.spanningtrees.prim import PrimMST
 
@@ -49,16 +50,16 @@ class HalinGraphTreeDecomposition:
 
     def _visit(self, node):
         """Explore the connected component."""
-        Q = Queue()
+        Q = collections.deque()
         self.parent[node] = None   # before Q.put
-        Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+        Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             for target in self.graph.iteradjacent(source):
                 if target not in self.parent:
                     self.parent[target] = source   # before Q.put
                     if target not in self.outer: # nie wychodzimy poza outer
-                        Q.put(target)
+                        Q.append(target)
 
     def _find_cycle(self):
         """Order nodes from the outer cycle."""
