@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
+import collections
 
 
 class BipartiteGraphBFS:
@@ -44,15 +40,15 @@ class BipartiteGraphBFS:
 
     def _visit(self, node):
         """Explore the connected component."""
-        Q = Queue()
-        self.color[node] = 0   # before Q.put
-        Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+        queue = collections.deque()
+        self.color[node] = 0   # before Q.append
+        queue.append(node)
+        while len(queue) > 0:
+            source = queue.popleft()
             for target in self.graph.iteradjacent(source):
                 if self.color[target] is None:
-                    self.color[target] = (self.color[source] + 1) % 2  # before Q.put
-                    Q.put(target)
+                    self.color[target] = (self.color[source] + 1) % 2  # before Q.append
+                    queue.append(target)
                 else:   # target was visited
                     if self.color[target] == self.color[source]:
                         raise ValueError("the graph is not bipartite")

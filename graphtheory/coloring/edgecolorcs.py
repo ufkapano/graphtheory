@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 try:
-    from Queue import Queue
-    range = xrange
-except ImportError:   # Python 3
-    from queue import Queue
+    integer_types = (int, long)
+    range = xrange   # range będzie zawsze generatorem
+except NameError:   # Py3
+    integer_types = (int,)
+
+import collections
 
 
 class ConnectedSequentialEdgeColoring1:
@@ -53,15 +55,15 @@ class ConnectedSequentialEdgeColoring1:
 
     def _visit(self, node):
         """Explore the connected component."""
-        Q = Queue()
-        self.parent[node] = None   # before Q.put
-        Q.put(node)
-        while not Q.empty():
-            source = Q.get()
+        Q = collections.deque()
+        self.parent[node] = None   # before Q.append
+        Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
             for edge in self.graph.iteroutedges(source):
                 if edge.target not in self.parent:
-                    self.parent[edge.target] = source   # before Q.put
-                    Q.put(edge.target)
+                    self.parent[edge.target] = source   # before Q.append
+                    Q.append(edge.target)
                 if edge.source > edge.target:
                     edge = ~edge
                 if self.color[edge] is None:

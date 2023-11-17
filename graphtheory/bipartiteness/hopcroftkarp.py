@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
-
+import collections
 # no recursion
 from graphtheory.bipartiteness.bipartite import BipartiteGraphBFS as Bipartite
 # with recursion
@@ -53,7 +49,7 @@ class HopcroftKarpSet:
                 self.v1.add(node)
             else:
                 self.v2.add(node)
-        self.Q = Queue()   # for nodes from self.v1
+        self.Q = collections.deque()   # for nodes from self.v1
 
     def run(self):
         """Executable pseudocode."""
@@ -68,17 +64,17 @@ class HopcroftKarpSet:
         for node in self.v1:
             if self.mate[node] is None:
                 self.distance[node] = 0
-                self.Q.put(node)
+                self.Q.append(node)
             else:
                 self.distance[node] = float("inf")
         self.distance[None] = float("inf")
-        while not self.Q.empty():
-            node = self.Q.get()
+        while len(self.Q) > 0:
+            node = self.Q.popleft()
             if self.distance[node] < self.distance[None]:
                 for target in self.graph.iteradjacent(node):
                     if self.distance[self.mate[target]] == float("inf"):
                         self.distance[self.mate[target]] = self.distance[node] + 1
-                        self.Q.put(self.mate[target])
+                        self.Q.append(self.mate[target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):
@@ -137,7 +133,7 @@ class HopcroftKarpList:
                 self.v1.append(node)
             else:
                 self.v2.append(node)
-        self.Q = Queue()   # for nodes from self.v1
+        self.Q = collections.deque()   # for nodes from self.v1
 
     def run(self):
         """Executable pseudocode."""
@@ -152,17 +148,17 @@ class HopcroftKarpList:
         for node in self.v1:
             if self.mate[node] is None:
                 self.distance[node] = 0
-                self.Q.put(node)
+                self.Q.append(node)
             else:
                 self.distance[node] = float("inf")
         self.distance[None] = float("inf")
-        while not self.Q.empty():
-            node = self.Q.get()
+        while len(self.Q) > 0:
+            node = self.Q.popleft()
             if self.distance[node] < self.distance[None]:
                 for target in self.graph.iteradjacent(node):
                     if self.distance[self.mate[target]] == float("inf"):
                         self.distance[self.mate[target]] = self.distance[node] + 1
-                        self.Q.put(self.mate[target])
+                        self.Q.append(self.mate[target])
         return self.distance[None] != float("inf")
 
     def _dfs_stage(self, node):

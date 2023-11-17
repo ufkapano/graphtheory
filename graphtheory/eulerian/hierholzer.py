@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import LifoQueue
-except ImportError:   # Python 3
-    from queue import LifoQueue
+import collections
 
 
 class Hierholzer:
@@ -30,7 +27,7 @@ class Hierholzer:
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
-        self._stack = LifoQueue()
+        self._stack = collections.deque()
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -40,13 +37,13 @@ class Hierholzer:
         while True:
             if self._graph_copy.outdegree(source) > 0:
                 edge = next(self._graph_copy.iteroutedges(source))
-                self._stack.put(source)
+                self._stack.append(source)
                 self._graph_copy.del_edge(edge)
                 source = edge.target
             else:
-                source = self._stack.get()
+                source = self._stack.pop()
                 self.eulerian_cycle.append(source)
-            if self._stack.empty():
+            if len(self._stack) == 0:
                 break
         self.eulerian_cycle.reverse()
         #del self._stack
@@ -91,7 +88,7 @@ class HierholzerWithEdges:
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
-        self._stack = LifoQueue()
+        self._stack = collections.deque()
 
     def run(self, source=None):
         """Executable pseudocode."""
@@ -100,14 +97,14 @@ class HierholzerWithEdges:
         while True:
             if self._graph_copy.outdegree(source) > 0:
                 edge = next(self._graph_copy.iteroutedges(source))
-                self._stack.put(edge)
+                self._stack.append(edge)
                 self._graph_copy.del_edge(edge)
                 source = edge.target
             else:
-                edge = self._stack.get()
+                edge = self._stack.pop()
                 source = edge.source
                 self.eulerian_cycle.append(edge)
-            if self._stack.empty():
+            if len(self._stack) == 0:
                 break
         self.eulerian_cycle.reverse()
         #del self._stack

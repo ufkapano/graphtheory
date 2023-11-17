@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
-
+import collections
 from graphtheory.structures.edges import Edge
 
 
@@ -66,17 +62,17 @@ class EdmondsKarp:
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
         capacity = {self.source: float("inf")}
-        Q = Queue()
-        Q.put(self.source)
-        while not Q.empty():
-            node = Q.get()
+        Q = collections.deque()
+        Q.append(self.source)
+        while len(Q) > 0:
+            node = Q.popleft()
             for edge in self.residual.iteroutedges(node):
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = edge.source
                     capacity[edge.target] = min(capacity[edge.source], cap)
                     if edge.target != self.sink:
-                        Q.put(edge.target)
+                        Q.append(edge.target)
                     else:
                         # Backtrack search and write flow.
                         target = self.sink
@@ -147,17 +143,17 @@ class EdmondsKarpSparse:
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
         capacity = {self.source: float("inf")}
-        Q = Queue()
-        Q.put(self.source)
-        while not Q.empty():
-            node = Q.get()
+        Q = collections.deque()
+        Q.append(self.source)
+        while len(Q) > 0:
+            node = Q.popleft()
             for edge in self.residual.iteroutedges(node):
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = edge.source
                     capacity[edge.target] = min(capacity[edge.source], cap)
                     if edge.target != self.sink:
-                        Q.put(edge.target)
+                        Q.append(edge.target)
                     else:
                         # Backtrack search and write flow.
                         target = self.sink

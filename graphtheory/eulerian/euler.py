@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-
-try:
-    from Queue import LifoQueue
-except ImportError:   # Python 3
-    from queue import LifoQueue
+import collections
 
 
 class EulerianCycleDFS:
@@ -32,7 +28,7 @@ class EulerianCycleDFS:
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
-        self._stack = LifoQueue()
+        self._stack = collections.deque()
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 
@@ -41,8 +37,8 @@ class EulerianCycleDFS:
         if source is None:   # get first random node
             source = next(self.graph.iternodes())
         self._visit(source)
-        while not self._stack.empty():
-            self.eulerian_cycle.append(self._stack.get())
+        while len(self._stack) > 0:
+            self.eulerian_cycle.append(self._stack.pop())
         #del self._stack
         #del self._graph_copy
 
@@ -52,7 +48,7 @@ class EulerianCycleDFS:
             edge = next(self._graph_copy.iteroutedges(source))
             self._graph_copy.del_edge(edge)
             self._visit(edge.target)
-        self._stack.put(source)
+        self._stack.append(source)
 
     def _is_eulerian(self):
         """Test if the graph is eulerian."""
@@ -97,7 +93,7 @@ class EulerianCycleDFSWithEdges:
             raise ValueError("the graph is not eulerian")
         self.eulerian_cycle = list()
         self._graph_copy = self.graph.copy()
-        self._stack = LifoQueue()
+        self._stack = collections.deque()
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() ** 2, recursionlimit))
 
@@ -109,8 +105,8 @@ class EulerianCycleDFSWithEdges:
             start_edge = next(self.graph.iteroutedges(source))
         self._graph_copy.del_edge(start_edge)
         self._visit(start_edge)
-        while not self._stack.empty():
-            self.eulerian_cycle.append(self._stack.get())
+        while len(self._stack) > 0:
+            self.eulerian_cycle.append(self._stack.pop())
         #del self._stack
         #del self._graph_copy
 
@@ -120,7 +116,7 @@ class EulerianCycleDFSWithEdges:
             edge = next(self._graph_copy.iteroutedges(start_edge.target))
             self._graph_copy.del_edge(edge)
             self._visit(edge)
-        self._stack.put(start_edge)
+        self._stack.append(start_edge)
 
     def _is_eulerian(self):
         """Test if the graph is eulerian."""

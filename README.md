@@ -139,4 +139,8 @@ Albert Surmacz (permutation graphs, circle graphs)
 
 Maciej Mularski (interval graphs)
 
+Angelika Siwek (AT-free graphs)
+
+Honorata Zych (chordal completion)
+
 EOF

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 try:
-    from Queue import Queue
-    range = xrange
-except ImportError:   # Python 3
-    from queue import Queue
+    integer_types = (int, long)
+    range = xrange   # range będzie zawsze generatorem
+except NameError:   # Py3
+    integer_types = (int,)
 
 import itertools
+import collections
 from graphtheory.structures.edges import Edge
 from graphtheory.connectivity.connected import is_connected
 
@@ -84,16 +85,16 @@ class BrooksNodeColoring:
 
     def _visit(self, node):
         """Explore the connected component with BFS."""
-        Q = Queue()
-        self.parent[node] = None   # before Q.put
-        Q.put(node)
+        Q = collections.deque()
+        self.parent[node] = None   # before Q.append
+        Q.append(node)
         self.order.append(node)   # pre_action
-        while not Q.empty():
-            source = Q.get()
+        while len(Q) > 0:
+            source = Q.popleft()
             for target in self.graph.iteradjacent(source):
                 if target not in self.parent:
-                    self.parent[target] = source   # before Q.put
-                    Q.put(target)
+                    self.parent[target] = source   # before Q.append
+                    Q.append(target)
                     self.order.append(target)   # pre_action
 
     def _greedy_color(self, source):

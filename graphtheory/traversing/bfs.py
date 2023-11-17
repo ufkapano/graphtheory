@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
-
+import collections
 
 class BFSWithQueue:
     """Breadth-First Search.
@@ -68,20 +64,20 @@ class BFSWithQueue:
         self.color[node] = "GREY"
         self.distance[node] = 0
         self.parent[node] = None
-        Q = Queue()
-        Q.put(node)   # node is GREY
-        if pre_action:   # when Q.put
+        queue = collections.deque()
+        queue.append(node)   # node is GREY
+        if pre_action:   # when queue.append
             pre_action(node)
-        while not Q.empty():
-            source = Q.get()
+        while len(queue) > 0:
+            source = queue.popleft()
             for edge in self.graph.iteroutedges(source):
                 if self.color[edge.target] == "WHITE":
                     self.color[edge.target] = "GREY"
                     self.distance[edge.target] = self.distance[source] + 1
                     self.parent[edge.target] = source
                     self.dag.add_edge(edge)
-                    Q.put(edge.target)   # target is GREY
-                    if pre_action:   # when Q.put
+                    queue.append(edge.target)   # target is GREY
+                    if pre_action:   # when queue.append
                         pre_action(edge.target)
             self.color[source] = "BLACK"
             if post_action:   # source became BLACK
@@ -151,19 +147,19 @@ class SimpleBFS:
 
     def _visit(self, node, pre_action=None, post_action=None):
         """Explore the connected component."""
-        Q = Queue()
-        self.parent[node] = None   # before Q.put
-        Q.put(node)
-        if pre_action:   # when Q.put
+        queue = collections.deque()
+        self.parent[node] = None   # before queue.append
+        queue.append(node)
+        if pre_action:   # when queue.append
             pre_action(node)
-        while not Q.empty():
-            source = Q.get()
+        while len(queue) > 0:
+            source = queue.popleft()
             for edge in self.graph.iteroutedges(source):
                 if edge.target not in self.parent:
-                    self.parent[edge.target] = source   # before Q.put
+                    self.parent[edge.target] = source   # before queue.append
                     self.dag.add_edge(edge)
-                    Q.put(edge.target)
-                    if pre_action:   # when Q.put
+                    queue.append(edge.target)
+                    if pre_action:   # when queue.append
                         pre_action(edge.target)
             if post_action:
                 post_action(source)
@@ -228,20 +224,20 @@ class BFSWithDepthTracker:
 
     def _visit(self, node, pre_action=None, post_action=None, depth=0):
         """Explore the connected component."""
-        Q = Queue()
-        self.parent[node] = None   # before Q.put
-        Q.put((node, depth))
-        if pre_action:   # when Q.put
+        queue = collections.deque()
+        self.parent[node] = None   # before queue.append
+        queue.append((node, depth))
+        if pre_action:   # when queue.append
             pre_action((node, depth))
-        while not Q.empty():
-            source, source_depth = Q.get()
+        while len(queue) > 0:
+            source, source_depth = queue.popleft()
             for edge in self.graph.iteroutedges(source):
                 if edge.target not in self.parent:
-                    self.parent[edge.target] = source   # before Q.put
+                    self.parent[edge.target] = source   # before queue.append
                     self.dag.add_edge(edge)
                     child_and_depth = (edge.target, source_depth + 1)
-                    Q.put(child_and_depth)
-                    if pre_action:   # when Q.put
+                    queue.append(child_and_depth)
+                    if pre_action:   # when queue.append
                         pre_action(child_and_depth)
             if post_action:
                 post_action((source, source_depth))

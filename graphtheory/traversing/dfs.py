@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-
-try:
-    from Queue import LifoQueue
-except ImportError:   # Python 3
-    from queue import LifoQueue
-
+import collections
 
 class DFSWithStack:
     """Depth-First Search with a stack.
@@ -74,12 +69,12 @@ class DFSWithStack:
         self.time = self.time + 1
         self.dd[node] = self.time
         self.color[node] = "GREY"
-        Q = LifoQueue()
-        Q.put(node)   # node is GREY
-        if pre_action:   # when Q.put
+        stack = collections.deque()
+        stack.append(node)   # node is GREY
+        if pre_action:   # when Q.append
             pre_action(node)
-        while not Q.empty():
-            source = Q.get()    # GREY node is processed
+        while len(stack) > 0:
+            source = stack.pop()    # GREY node is processed
             for edge in self.graph.iteroutedges(source):
                 if self.color[edge.target] == "WHITE":
                     self.parent[edge.target] = source
@@ -87,8 +82,8 @@ class DFSWithStack:
                     self.time = self.time + 1
                     self.dd[edge.target] = self.time
                     self.color[edge.target] = "GREY"
-                    Q.put(edge.target)   # target is GREY
-                    if pre_action:   # when Q.put
+                    stack.append(edge.target)   # target is GREY
+                    if pre_action:   # when Q.append
                         pre_action(edge.target)
             self.time = self.time + 1
             self.ff[source] = self.time

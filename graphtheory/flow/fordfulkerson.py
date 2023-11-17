@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import LifoQueue
-except ImportError:   # Python 3
-    from queue import LifoQueue
-
+import collections
 from graphtheory.structures.edges import Edge
 
 
@@ -70,17 +66,17 @@ class FordFulkerson:
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
         capacity = {self.source: float("inf")}
-        Q = LifoQueue()
-        Q.put(self.source)
-        while not Q.empty():
-            node = Q.get()
+        stack = collections.deque()
+        stack.append(self.source)
+        while len(stack) > 0:
+            node = stack.pop()
             for edge in self.residual.iteroutedges(node):
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = edge.source
                     capacity[edge.target] = min(capacity[edge.source], cap)
                     if edge.target != self.sink:
-                        Q.put(edge.target)
+                        stack.append(edge.target)
                     else:
                         # Backtrack search and write flow.
                         target = self.sink
@@ -155,17 +151,17 @@ class FordFulkersonSparse:
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
         capacity = {self.source: float("inf")}
-        Q = LifoQueue()
-        Q.put(self.source)
-        while not Q.empty():
-            node = Q.get()
+        stack = collections.deque()
+        stack.append(self.source)
+        while len(stack) > 0:
+            node = stack.pop()
             for edge in self.residual.iteroutedges(node):
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = edge.source
                     capacity[edge.target] = min(capacity[edge.source], cap)
                     if edge.target != self.sink:
-                        Q.put(edge.target)
+                        stack.append(edge.target)
                     else:
                         # Backtrack search and write flow.
                         target = self.sink
@@ -243,17 +239,17 @@ class FordFulkersonWithEdges:
         parent = dict((node, None) for node in self.residual.iternodes())
         # Capacity of found path to node.
         capacity = {self.source: float("inf")}
-        Q = LifoQueue()
-        Q.put(self.source)
-        while not Q.empty():
-            node = Q.get()
+        stack = collections.deque()
+        stack.append(self.source)
+        while len(stack) > 0:
+            node = stack.pop()
             for edge in self.residual.iteroutedges(node):
                 cap = edge.weight - self.flow[edge]
                 if cap > 0 and parent[edge.target] is None:
                     parent[edge.target] = self.mate[edge] # from target to source
                     capacity[edge.target] = min(capacity[edge.source], cap)
                     if edge.target != self.sink:
-                        Q.put(edge.target)
+                        stack.append(edge.target)
                     else:
                         # Backtrack search and write flow.
                         target = self.sink

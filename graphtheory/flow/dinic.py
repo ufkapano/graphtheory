@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-try:
-    from Queue import Queue
-except ImportError:   # Python 3
-    from queue import Queue
-
+import collections
 from graphtheory.structures.edges import Edge
 
 
@@ -74,17 +70,17 @@ class Dinic:
         self.level = dict((node, None) for node in self.residual.iternodes())
         # BFS rozpoczynamy w self.source.
         self.level[self.source] = 0
-        Q = Queue()
-        Q.put(self.source)
-        while not Q.empty():   # BFS loop
-            node = Q.get()
+        Q = collections.deque()
+        Q.append(self.source)
+        while len(Q) > 0:   # BFS loop
+            node = Q.popleft()
             for edge in self.residual.iteroutedges(node):
                 # Rozpoznajemy wierzcholki nieodwiedzone po tym,
                 # ze nie maja ustawionego parametru level.
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if self.level[edge.target] is None and cap > 0:
                     self.level[edge.target] = self.level[edge.source] + 1
-                    Q.put(edge.target)
+                    Q.append(edge.target)
         return self.level[self.sink] is not None
 
     def _dfs(self, node, start_capacity):
@@ -170,17 +166,17 @@ class DinicSparse:
         # Wyzerowanie poziomow wierzcholkow.
         self.level = dict((node, None) for node in self.residual.iternodes())
         self.level[self.source] = 0
-        Q = Queue()
-        Q.put(self.source)
-        while not Q.empty():   # BFS loop
-            node = Q.get()
+        Q = collections.deque()
+        Q.append(self.source)
+        while len(Q) > 0:   # BFS loop
+            node = Q.popleft()
             for edge in self.residual.iteroutedges(node):
                 # Rozpoznajemy wierzcholki nieodwiedzone po tym,
                 # ze nie maja ustawionego parametru level.
                 cap = edge.weight - self.flow[edge.source][edge.target]
                 if self.level[edge.target] is None and cap > 0:
                     self.level[edge.target] = self.level[edge.source] + 1
-                    Q.put(edge.target)
+                    Q.append(edge.target)
         return self.level[self.sink] is not None
 
     def _dfs(self, node, start_capacity):

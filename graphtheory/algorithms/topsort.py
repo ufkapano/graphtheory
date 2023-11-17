@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 try:
-    from Queue import Queue
-    range = xrange
-except ImportError:   # Python 3
-    from queue import Queue
+    integer_types = (int, long)
+    range = xrange   # range będzie zawsze generatorem
+except NameError:   # Python 3
+    integer_types = (int,)
 
+import collections
 #from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
 from graphtheory.traversing.dfs import SimpleDFS
 
@@ -71,22 +72,22 @@ class TopologicalSortQueue:
 
     def run(self):
         """Executable pseudocode."""
-        Q = Queue()   # queue or stack or set
+        queue = collections.deque()   # queue or stack or set
         # Calculate indegree of nodes.
         inedges = dict((node, 0) for node in self.graph.iternodes())
         for edge in self.graph.iteredges():
             inedges[edge.target] += 1
         for node in self.graph.iternodes():
             if inedges[node] == 0:
-                Q.put(node)
-        while not Q.empty():
-            node = Q.get()
+                queue.append(node)
+        while len(queue):
+            node = queue.popleft()
             self.sorted_nodes.append(node)
             # Remove all outedges.
             for edge in self.graph.iteroutedges(node):
                 inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
-                    Q.put(edge.target)
+                    queue.append(edge.target)
 
 
 class TopologicalSortSet:
