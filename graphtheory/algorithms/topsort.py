@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 try:
-    integer_types = (int, long)
     range = xrange   # range będzie zawsze generatorem
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 import collections
 #from graphtheory.traversing.dfs import DFSWithRecursion as SimpleDFS
