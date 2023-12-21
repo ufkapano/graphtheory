@@ -29,7 +29,7 @@ class TestHalinGraph(unittest.TestCase):
         G = make_halin_cubic(n=N)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), N)
-        self.assertEqual(G.e(), 3 * N / 2)
+        self.assertEqual(G.e() * 2, 3 * N)
         for node in G.iternodes():
             self.assertEqual(G.degree(node), 3)
         #G.show()

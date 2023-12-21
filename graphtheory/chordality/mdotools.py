@@ -4,10 +4,9 @@ MDO = Minimum Degree Ordering
 """
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 
 def find_mdo(graph):

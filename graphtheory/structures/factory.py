@@ -70,10 +70,10 @@ class GraphFactory:
         random.shuffle(weights)
         for node in range(n):
             graph.add_node(node)
-        nodes = set([0])
+        nodes = [0]
         for node in range(1, n):
             parent = random.sample(nodes, 1)[0]
-            nodes.add(node)
+            nodes.append(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
         return graph
 
@@ -86,11 +86,11 @@ class GraphFactory:
         random.shuffle(weights)
         for node in range(n):
             graph.add_node(node)
-        nodes = set([0])
+        nodes = [0]
         # make a tree
         for node in range(1, n):
             parent = random.sample(nodes, 1)[0]
-            nodes.add(node)
+            nodes.append(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
         # the rest of edges
         n_edges = n - 1

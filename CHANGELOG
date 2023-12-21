@@ -1,5 +1,9 @@
 CHANGELOG
 
+2023-12-21
+* In random.sample(population, k), population must be a sequence from Py3.11.
+Automatic conversion of sets to lists is no longer supported.
+
 2023-11-17
 * Queue replaced with collections.deque.
 * LifoQueue replaced with collections.deque.

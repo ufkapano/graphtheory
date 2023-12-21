@@ -7,10 +7,9 @@ https://en.wikipedia.org/wiki/Treewidth
 """
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 import itertools
 from graphtheory.structures.edges import Edge

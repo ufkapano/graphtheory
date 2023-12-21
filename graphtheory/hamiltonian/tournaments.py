@@ -4,7 +4,7 @@ from graphtheory.structures.edges import Edge
 
 
 def is_transitive(graph):
-    """Test if the tournament is transitive in O(V) time.
+    """Test if the tournament is transitive in O(n) time.
     
     Parameters
     ----------
@@ -26,7 +26,7 @@ def is_transitive(graph):
 
 
 def find_hamiltonian_path(graph):
-    """Find a Hamiltonian path in a tournament.
+    """Find a Hamiltonian path in a tournament in O(n log n) time.
     
     Parameters
     ----------

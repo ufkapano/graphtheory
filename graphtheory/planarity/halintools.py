@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 import random
 from graphtheory.structures.edges import Edge
@@ -27,21 +26,21 @@ def make_halin_outer(n=4):
     graph.add_edge(Edge(1, 0, weights.pop()))
     graph.add_edge(Edge(2, 0, weights.pop()))
     graph.add_edge(Edge(3, 0, weights.pop()))
-    nodes = set([0, 1, 2, 3])
+    nodes = [0, 1, 2, 3]
     node = 4
     while node < n:
         parent = random.sample(nodes, 1)[0]
         if graph.degree(parent) == 1:   # leaf, we must add two edges
             if node + 1 == n:
                 continue
-            nodes.add(node)
+            nodes.append(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
             node += 1
-            nodes.add(node)
+            nodes.append(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
             node += 1
         else:    # degree > 2
-            nodes.add(node)
+            nodes.append(node)
             graph.add_edge(Edge(parent, node, weights.pop()))
             node += 1
     # Method 1. Finding root without TreeCenter.
@@ -57,15 +56,15 @@ def make_halin_outer(n=4):
     # Wyznaczam slownik z punktami.
     algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
-    L = list()   # for leafs
+    L = list()   # for leaves
     for node in algorithm.point_dict:
-        if graph.degree(node) == 1:   # leafs
+        if graph.degree(node) == 1:   # leaves
             L.append(node)
-    # Sortowanie lisci ze wzgledu na kat.
+    # Sorting leaves according to the angle.
     L.sort(key=lambda node: algorithm.point_dict[node][1])
-    n_leafs = len(L)
-    for i in range(n_leafs):
-        graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))
+    n_leaves = len(L)
+    for i in range(n_leaves):
+        graph.add_edge(Edge(L[i], L[(i + 1) % n_leaves], weights.pop()))
     return graph, set(L)
 
 
@@ -91,15 +90,15 @@ def make_halin_cubic_outer(n=4):
     graph.add_edge(Edge(1, 0, weights.pop()))
     graph.add_edge(Edge(2, 0, weights.pop()))
     graph.add_edge(Edge(3, 0, weights.pop()))
-    nodes = set([1, 2, 3])
+    nodes = [1, 2, 3]
     node = 4
     while node < n:
         parent = random.sample(nodes, 1)[0]
-        nodes.remove(parent)   # to juz nie bedzie lisc
-        nodes.add(node)   # nowy lisc
+        nodes.remove(parent)   # not a leaf since now
+        nodes.append(node)   # new leaf
         graph.add_edge(Edge(parent, node, weights.pop()))
         node += 1
-        nodes.add(node)   # nowy lisc
+        nodes.append(node)   # new leaf
         graph.add_edge(Edge(parent, node, weights.pop()))
         node += 1
     # Method 1. Finding root without TreeCenter.
@@ -116,15 +115,15 @@ def make_halin_cubic_outer(n=4):
     algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
     #print algorithm.point_dict
-    L = list()   # for leafs
+    L = list()   # for leaves
     for node in algorithm.point_dict:
         if graph.degree(node) == 1:   # leaf
             L.append(node)
-    # Sortowanie lisci ze wzgledu na kat.
+    # Sorting leaves according to the angle.
     L.sort(key=lambda node: algorithm.point_dict[node][1])
-    n_leafs = len(L)
-    for i in range(n_leafs):
-        graph.add_edge(Edge(L[i], L[(i + 1) % n_leafs], weights.pop()))
+    n_leaves = len(L)
+    for i in range(n_leaves):
+        graph.add_edge(Edge(L[i], L[(i + 1) % n_leaves], weights.pop()))
     return graph, set(L)
 
 
