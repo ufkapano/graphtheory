@@ -30,7 +30,7 @@ def make_halin_outer(n=4):
     nodes = set([0, 1, 2, 3])
     node = 4
     while node < n:
-        parent = random.sample(nodes, 1)[0]
+        parent = random.sample(sorted(nodes), 1)[0]
         if graph.degree(parent) == 1:   # leaf, we must add two edges
             if node + 1 == n:
                 continue
