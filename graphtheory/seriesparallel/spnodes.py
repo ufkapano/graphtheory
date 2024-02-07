@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
-# Kazdy node oznacza pewien sp-graf.
+# Kazdy node oznacza pewien sp-graf skierowany lub nieskierowany.
 # Liscie to pojedyncze krawedzie, type=edge.
 # Node z type=series oznacza wynik polaczenia szeregowego.
 # Node z type=parallel oznacza wynik polaczenia rownoleglego.
-# Node z type=jackknife oznacza wynik operacji jackknife.
+# Node z type=jackknife oznacza wynik operacji jackknife. ONLY UNDIRECTED GRAPHS
 
 class Node:
     """The class defining a node."""
@@ -17,15 +17,23 @@ class Node:
         self.right = right
 
     def __str__(self):
-        return "Node({0}, {1}, '{2}')".format(self.source, self.target, self.type)
+        return "Node({}, {}, '{}')".format(self.source, self.target, self.type)
 
 
 def btree_print(top, level=0):
     if top is None:
         return
     btree_print(top.right, level+1)
-    print ( "{0}[{1}]{2}".format('   ' * level, level, top) )
+    print ( "{}[{}]{}".format('   ' * level, level, top) )
     btree_print(top.left, level+1)
+
+
+def btree_print2(top, level=0):
+    if top is None:
+        return
+    btree_print2(top.right, level+1)
+    print ( "{}{}".format('   |' * level + "---", top) )
+    btree_print2(top.left, level+1)
 
 
 def btree_count(top):

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 from graphtheory.seriesparallel.spnodes import btree_count_iter

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Budowanie przypadkowych sp-grafow w postaci sp-tree.
 # Rozpoznawanie sp-grafow i budowa sp-tree.
@@ -71,12 +71,14 @@ def find_sptree(graph):
     graph_copy = graph.copy()
     degree2 = set(node for node in graph.iternodes()
         if graph.degree(node) == 2)   # active nodes with degree 2
+    print("degree2 {}".format(degree2))
     call_stack = []
     tnode_dict = dict()
     # Etap I. Redukcja grafu do krawedzi lub gwiazdy.
     # Dopoki sa wierzcholki stopnia 2 wykonuj odrywanie.
     while degree2:
         source = degree2.pop()
+        print("processing {}".format(source))
         if graph_copy.degree(source) != 2:
             # Czasem stopien wierzcholka moze sie zmniejszyc!
             continue

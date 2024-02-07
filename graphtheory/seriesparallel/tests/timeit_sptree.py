@@ -10,6 +10,7 @@ from graphtheory.seriesparallel.sptools import make_random_ktree
 from graphtheory.seriesparallel.sptools import make_random_spgraph
 from graphtheory.seriesparallel.sptrees import find_sptree
 from graphtheory.seriesparallel.spnodes import btree_print
+from graphtheory.seriesparallel.spnodes import btree_print2
 
 V = 10
 #G = make_random_spgraph(V)
@@ -18,7 +19,7 @@ E = G.e()
 #G.show()
 
 T = find_sptree(G)
-btree_print(T)
+btree_print2(T)
 
 print ( "Testing find_sptree ..." )
 t1 = timeit.Timer(lambda: find_sptree(G))

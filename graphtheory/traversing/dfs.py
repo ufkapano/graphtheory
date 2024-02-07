@@ -71,7 +71,7 @@ class DFSWithStack:
         self.color[node] = "GREY"
         stack = collections.deque()
         stack.append(node)   # node is GREY
-        if pre_action:   # when Q.append
+        if pre_action:   # when stack.append
             pre_action(node)
         while len(stack) > 0:
             source = stack.pop()    # GREY node is processed
@@ -83,7 +83,7 @@ class DFSWithStack:
                     self.dd[edge.target] = self.time
                     self.color[edge.target] = "GREY"
                     stack.append(edge.target)   # target is GREY
-                    if pre_action:   # when Q.append
+                    if pre_action:   # when stack.append
                         pre_action(edge.target)
             self.time = self.time + 1
             self.ff[source] = self.time

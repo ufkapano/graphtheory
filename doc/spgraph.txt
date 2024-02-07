@@ -1,4 +1,4 @@
-SERIES-PARALLEL GRAPHS (SP-GRAPHS)
+UNDIRECTED SERIES-PARALLEL GRAPHS (SP-GRAPHS)
 ----------------------------------------------------------------------
 # RECOGNITION
 
@@ -7,12 +7,14 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.seriesparallel.sptrees import find_sptree
 from graphtheory.seriesparallel.spnodes import btree_print
+from graphtheory.seriesparallel.spnodes import btree_print2
 
 graph_factory = GraphFactory(Graph)
 G = graph_factory.make_cyclic(n=5)   # n > 2
 # a cycle graph is an sp-graph
 T = find_sptree(G)
 btree_print(T)
+btree_print2(T)
 ----------------------------------------------------------------------
 # GENERATORS
 
