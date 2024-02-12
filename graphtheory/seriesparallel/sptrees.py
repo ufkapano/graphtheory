@@ -64,10 +64,11 @@ def make_random_sptree(n):
     return root
 
 
-def find_sptree(graph):
-    """Find an sp-tree for an sp-graph."""
+def find_sptree(graph, fixed_ends=None):
+    """Find an sp-tree for an undirected sp-graph with possible fixed ends."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
+    fixed_ends = set(fixed_ends) if fixed_ends else set()
     graph_copy = graph.copy()
     degree2 = set(node for node in graph.iternodes()
         if graph.degree(node) == 2)   # active nodes with degree 2
@@ -78,6 +79,9 @@ def find_sptree(graph):
     # Dopoki sa wierzcholki stopnia 2 wykonuj odrywanie.
     while degree2:
         source = degree2.pop()
+        if source in fixed_ends:
+            print("discard {}".format(source))
+            continue
         print("processing {}".format(source))
         if graph_copy.degree(source) != 2:
             # Czasem stopien wierzcholka moze sie zmniejszyc!

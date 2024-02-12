@@ -12,7 +12,9 @@ from graphtheory.seriesparallel.spnodes import btree_print2
 graph_factory = GraphFactory(Graph)
 G = graph_factory.make_cyclic(n=5)   # n > 2
 # a cycle graph is an sp-graph
-T = find_sptree(G)
+
+#T = find_sptree(G)
+T = find_sptree(G, fixed_ends=(1, 3))   # using fixed ends
 btree_print(T)
 btree_print2(T)
 ----------------------------------------------------------------------

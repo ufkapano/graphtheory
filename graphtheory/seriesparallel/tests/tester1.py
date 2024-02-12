@@ -7,7 +7,7 @@ from graphtheory.seriesparallel.sptrees import find_sptree
 from graphtheory.seriesparallel.spnodes import btree_print
 from graphtheory.seriesparallel.spnodes import btree_print2
 
-#   0
+#   0          fixed ends: 0, 1
 #  /|\
 # 5 | \
 #  \|  \
@@ -27,7 +27,10 @@ for node in nodes:
 for edge in edges:
     G.add_edge(edge)
 
-T = find_sptree(G)
+#T = find_sptree(G)   # returs 1 and 4 as ending nodes
+#T = find_sptree(G, fixed_ends=(0,))   # returs 0 and 1 as ending nodes
+T = find_sptree(G, fixed_ends=(0, 1))
+#T = find_sptree(G, fixed_ends=(5, 1))   # ValueError: not an sp-graph
 btree_print2(T)
 
 # EOF

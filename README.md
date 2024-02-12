@@ -45,7 +45,8 @@ Floyd-Warshall, Johnson, matrix multiplications
 TSP (DFS, with MST, NN, RNN, sorted edges)
 * Forests (exact algorithms): iset, dset, vertex cover, matching, 
 tree center, longest path problem, plotting
-* Undirected series-parallel graphs (exact algorithms): recognition, generators,
+* Undirected series-parallel graphs (exact algorithms): 
+recognition (fixed ends possible), generators,
 iset, dset, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
 * Directed series-parallel graphs: recognition, generators
