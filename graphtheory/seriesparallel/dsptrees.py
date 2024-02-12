@@ -35,7 +35,7 @@ def make_random_dsptree(n):
         tnode = tnode_list.pop()
         # Losowanie operacji.
         action = random.choice(("series", "parallel"))
-        print("action {}".format(action))
+        #print("action {}".format(action))
         if action == "series":
             tnode.type = "series"
             tnode.left = Node(tnode.source, node, "edge")
@@ -75,11 +75,11 @@ def find_dsptree(graph):
         source = degree11.pop()
         if graph_copy.indegree(source) != 1:
             # Czasem stopien wierzcholka moze sie zmniejszyc!
-            print ("indegree != 1 for", source)
+            #print ("indegree != 1 for", source)
             continue
         if graph_copy.outdegree(source) != 1:
             # Czasem stopien wierzcholka moze sie zmniejszyc!
-            print ("outdegree != 1 for", source)
+            #print ("outdegree != 1 for", source)
             continue
         #print ("source", source)
         for edge in graph_copy.iterinedges(source):

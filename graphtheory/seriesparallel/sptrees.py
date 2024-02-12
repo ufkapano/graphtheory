@@ -72,7 +72,7 @@ def find_sptree(graph, fixed_ends=None):
     graph_copy = graph.copy()
     degree2 = set(node for node in graph.iternodes()
         if graph.degree(node) == 2)   # active nodes with degree 2
-    print("degree2 {}".format(degree2))
+    #print("degree2 {}".format(degree2))
     call_stack = []
     tnode_dict = dict()
     # Etap I. Redukcja grafu do krawedzi lub gwiazdy.
@@ -80,9 +80,9 @@ def find_sptree(graph, fixed_ends=None):
     while degree2:
         source = degree2.pop()
         if source in fixed_ends:
-            print("discard {}".format(source))
+            #print("discard {}".format(source))
             continue
-        print("processing {}".format(source))
+        #print("processing {}".format(source))
         if graph_copy.degree(source) != 2:
             # Czasem stopien wierzcholka moze sie zmniejszyc!
             continue
@@ -105,8 +105,10 @@ def find_sptree(graph, fixed_ends=None):
     # Etap II. Sprawdzamy co zostalo.
     degree1 = set(node for node in graph_copy.iternodes()
         if graph_copy.degree(node) == 1)
-    if len(degree1) == 2 and len(call_stack) + 2 == graph.v():
+    #print("degree1 {}".format(degree1))
+    if (len(degree1) == 2) and (len(call_stack) + 2 == graph.v()):
         # Zostala jedna krawedz, dodajemy konce do PEO.
+        #print("first if")
         node1 = degree1.pop()
         node2 = degree1.pop()
         root = Node(node1, node2, "edge")
@@ -114,11 +116,13 @@ def find_sptree(graph, fixed_ends=None):
     elif len(call_stack) + len(degree1) + 1 == graph.v():
         # Zostala gwiazda, jest jackknife.
         # Szukam centrum gwiazdy.
+        #print("second if")
+        assert graph.v() > 2
         for node in graph_copy.iternodes():
             deg = graph_copy.degree(node)
             if deg > 1:
                 if deg == len(degree1):
-                    sink = node   #  centum gwiazdy
+                    sink = node   #  centrum gwiazdy
                     break
                 else:
                     raise ValueError("not an sp-graph")
