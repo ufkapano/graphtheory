@@ -101,8 +101,8 @@ class TreeIndependentSet1:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = collections.deque()   # for leafs
-        # Put leafs to the queue, O(V) time.
+        Q = collections.deque()   # for leaves
+        # Put leaves to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:   # isolated node from the beginning
                 self.independent_set.add(node)
@@ -162,8 +162,8 @@ class TreeIndependentSet2:
         # A dictionary with node degrees, O(V) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = collections.deque()   # for leafs
-        # Put leafs to the queue, O(V) time.
+        Q = collections.deque()   # for leaves
+        # Put leaves to the queue, O(V) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:   # isolated node from the beginning
                 self.independent_set.add(node)

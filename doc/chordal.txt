@@ -71,7 +71,7 @@ from graphtheory.chordality.tdtools import find_treewidth_mmd # lower bound
 # 'order' is a selected sequence of nodes.
 
 T = find_td_order(G, order)   # finding a tree decomposition (heuristic)
-treewidth = max(len(bag) for bag in bags) - 1
+treewidth = max(len(bag) for bag in T.iternodes()) - 1 # upper bound
 
 treewidth, order = find_treewidth_min_deg(G) # upper bound for treewidth
 

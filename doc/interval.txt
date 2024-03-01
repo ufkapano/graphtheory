@@ -15,12 +15,13 @@ from graphtheory.chordality.intervaltools import make_2tree_interval
 from graphtheory.chordality.intervaltools import make_star_interval
 from graphtheory.chordality.intervaltools import make_ktree_interval
 
-G = make_random_interval(n=5)
-G = make_path_interval(n=5)   # P_n graph
-G = make_tepee_interval(n=5)
-G = make_2tree_interval(n=5)
-G = make_star_interval(n=5)   # K_{1,n-1} graph
-G = make_ktree_interval(n=10, k=5)   # interval k-tree
+# Generators return an interval graph as double perm.
+perm = make_random_interval(n=5)
+perm = make_path_interval(n=5)   # P_n graph
+perm = make_tepee_interval(n=5)
+perm = make_2tree_interval(n=5)
+perm = make_star_interval(n=5)   # K_{1,n-1} graph
+perm = make_ktree_interval(n=10, k=5)   # interval k-tree
 ----------------------------------------------------------------------
 # CONNECTIVITY
 
