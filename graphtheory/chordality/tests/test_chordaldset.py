@@ -25,7 +25,7 @@ class TestDominatingSet1(unittest.TestCase):
 
     def setUp(self):
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.nodes = ["A", "B", "C", "D", "E", "F", "G", "H"]
         self.edges = [
@@ -40,7 +40,7 @@ class TestDominatingSet1(unittest.TestCase):
         #self.G.show()
         # Tworze tree decomposition.
         # Ustalam, ze worki to beda krotki, abym mogl je porownywac.
-        self.T = Graph(6)
+        self.T = Graph(n=6)
         b0 = ("A", "B", "C")
         b1 = ("B", "C", "E")
         b2 = ("C", "D", "E")
@@ -83,7 +83,7 @@ class TestDominatingSet1(unittest.TestCase):
 
     def test_bags_cover_edges(self):
         # Buduje graf wiekszy niz G (tu akurat rowny G).
-        H = Graph(self.N)
+        H = Graph(n=self.N)
         for node in self.G.iternodes():
             H.add_node(node)
         for bag in self.T.iternodes():
@@ -135,7 +135,7 @@ class TestDominatingSet2(unittest.TestCase):
 
     def setUp(self):
         self.N = 6
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 3), 
              Edge(0, 2), Edge(2, 4), Edge(1, 4), Edge(2, 5), Edge(4, 5)]
@@ -146,7 +146,7 @@ class TestDominatingSet2(unittest.TestCase):
         #self.G.show()
         # Tworze tree decomposition.
         # Ustalam, ze worki to beda krotki, abym mogl je porownywac.
-        self.T = Graph(4)
+        self.T = Graph(n=4)
         b0 = (0, 2, 3)
         b1 = (0, 1, 2)
         b2 = (1, 2, 4)
@@ -184,7 +184,7 @@ class TestDominatingSet2(unittest.TestCase):
 
     def test_bags_cover_edges(self):
         # Buduje graf wiekszy niz G (tu akurat rowny G).
-        H = Graph(self.N)
+        H = Graph(n=self.N)
         for node in self.G.iternodes():
             H.add_node(node)
         for bag in self.T.iternodes():

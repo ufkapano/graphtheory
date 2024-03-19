@@ -15,7 +15,7 @@ class TestDominatingSet1(unittest.TestCase):
 
     def setUp(self):
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(0, 3), Edge(1, 2), 
             Edge(1, 4), Edge(2, 5), Edge(2, 6)]
@@ -71,7 +71,7 @@ class TestDominatingSet2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 3), Edge(1, 2), 
             Edge(1, 4), Edge(2, 5), Edge(2, 6)]
@@ -129,7 +129,7 @@ class TestDominatingSet3(unittest.TestCase):
 
     def setUp(self):
         self.N = 6
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3),
             Edge(3, 4), Edge(4, 5)]

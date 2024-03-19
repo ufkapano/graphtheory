@@ -19,7 +19,7 @@ class GraphFactory:
 
     def make_complete(self, n=1, directed=False):
         """Create a weighted complete graph."""
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -36,7 +36,7 @@ class GraphFactory:
         """Create a weighted cyclic graph."""
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + n))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -49,7 +49,7 @@ class GraphFactory:
         """Create a weighted sparse graph."""
         if m >= n*(n-1) // 2:
             raise ValueError("too mamy edges")
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + m))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -65,7 +65,7 @@ class GraphFactory:
 
     def make_tree(self, n=1, directed=False):
         """Create a weighted tree graph."""
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, n))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -81,7 +81,7 @@ class GraphFactory:
         """Create a weighted connected graph."""
         if m < n - 1 or m >= n * (n - 1) // 2:
             raise ValueError("bad number of edges for the connected graph")
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, m + 1))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -103,7 +103,7 @@ class GraphFactory:
 
     def make_random(self, n=1, directed=False, edge_probability=0.5):
         """Create a weighted random graph."""
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -120,7 +120,7 @@ class GraphFactory:
 
     def make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
         """Create a weighted random bipartite graph."""
-        graph = self.cls(n1 + n2, directed)
+        graph = self.cls(n=(n1 + n2), directed=directed)
         weights = list(range(1, n1 * n2 + 1))   # different weights
         random.shuffle(weights)
         for node in range(n1 + n2):
@@ -149,7 +149,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = size * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 2 * size * (size-1)))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -178,7 +178,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = size * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 2 * n))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -204,7 +204,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = size * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 3*size*size -4*size + 1))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -235,7 +235,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = size * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 3 * n))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -259,7 +259,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = 2 * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 3 * size - 2))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -286,7 +286,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = 2 * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 3 * size))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -309,7 +309,7 @@ class GraphFactory:
         if size < 3:
             raise ValueError("size too small")
         n = 2 * size
-        graph = self.cls(n, directed=False)
+        graph = self.cls(n=n, directed=False)
         weights = list(range(1, 1 + 4 * size))   # different weights
         random.shuffle(weights)
         for node in range(n):
@@ -321,7 +321,7 @@ class GraphFactory:
 
     def make_flow_network(self, n=1):
         """Create a flow network."""
-        graph = self.cls(n, True)
+        graph = self.cls(n=n, directed=True)
         for node in range(n):
             graph.add_node(node)
         node_list = list(range(1, n))
@@ -360,7 +360,7 @@ class GraphFactory:
         if n % 2:
             raise ValueError("number of nodes must be even")
         # It is a cubic graph.
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         k = n // 2
         weights = list(range(1, 1 + 3 * k))
         random.shuffle(weights)
@@ -381,7 +381,7 @@ class GraphFactory:
         """Create a weighted wheel graph. The hub is equal to 0."""
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
-        graph = self.cls(n, directed)
+        graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + 2 * n - 2))
         random.shuffle(weights)
         for node in range(n):
@@ -398,7 +398,7 @@ class GraphFactory:
         # http://mathworld.wolfram.com/WindmillGraph.html
         if n < 7:
             raise ValueError("number of nodes must be greater than 6")
-        graph = self.make_wheel(n, directed)
+        graph = self.make_wheel(n=n, directed=directed)
         # Remowe Edge(3, 4, weight1) and Edge(1, n-1, weight2).
         # Add Edge(3, 1, weight1) and Edge(4, n-1, weight2).
         # Old weights are reused.

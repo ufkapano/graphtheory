@@ -87,7 +87,7 @@ class PrimMST:
 
     def to_tree(self):
         """The minimum spanning tree is built."""
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
@@ -145,7 +145,7 @@ class PrimMSTWithEdges:
 
     def to_tree(self):
         """The minimum spanning tree is built."""
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         for node in self.parent:   # O(V) time
@@ -226,7 +226,7 @@ class PrimMatrixMST:
 
     def to_tree(self):
         """The minimum spanning tree is built."""
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
@@ -277,7 +277,7 @@ class PrimMatrixMSTWithEdges:
 
     def to_tree(self):
         """The minimum spanning tree is built."""
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         for node in self.parent:   # O(V) time
@@ -324,7 +324,7 @@ class PrimConnectedMST:
         if not is_connected(graph):
             raise ValueError("the graph is not connected")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         self._in_queue = dict((node, True) for node in self.graph.iternodes())
         self._pq = PriorityQueue()
 
@@ -377,7 +377,7 @@ class PrimTrivialMST:
         if not is_connected(graph):
             raise ValueError("the graph is not connected")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v(), directed=False)
+        self.mst = self.graph.__class__(n=self.graph.v(), directed=False)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         self._in_mst = dict((node, False) for node in self.graph.iternodes())

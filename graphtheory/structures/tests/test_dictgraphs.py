@@ -14,7 +14,7 @@ class TestGraphDirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = ["A", "B", "C", "D"]
         self.edges = [
             Edge("A", "B", 2), Edge("B", "C", 4), Edge("C", "A", 6), 
@@ -38,9 +38,9 @@ class TestGraphDirected(unittest.TestCase):
         self.assertFalse(self.G.has_edge(("C", "A")))
 
     def test_cmp(self):
-        T = Graph(self.N)
+        T = Graph(n=self.N)
         self.assertFalse(T == self.G, "directed and undirected graphs")
-        T = Graph(self.N, directed=True)
+        T = Graph(n=self.N, directed=True)
         for node in ["A", "B", "C", "X"]:
             T.add_node(node)
         self.assertFalse(T == self.G, "nodes are different")
@@ -98,7 +98,7 @@ class TestGraphDirected(unittest.TestCase):
             self.assertFalse(T.has_edge(edge))
 
     def test_add_graph_directed(self):
-        T = Graph(self.N, directed=True)
+        T = Graph(n=self.N, directed=True)
         for node in self.nodes:
             T.add_node(node)
         T.add_edge(Edge("A", "D", 9))
@@ -134,7 +134,7 @@ class TestGraphUndirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = ["A", "B", "C", "D"]
         self.edges = [
             Edge("A", "B", 2), Edge("B", "C", 4), Edge("C", "A", 6), 
@@ -200,7 +200,7 @@ class TestGraphUndirected(unittest.TestCase):
         self.assertEqual(self.G.degree("D"), 2)
 
     def test_add_graph_undirected(self):
-        T = Graph(self.N)
+        T = Graph(n=self.N)
         for node in self.nodes:
             T.add_node(node)
         T.add_edge(Edge("A", "D", 9))
@@ -220,7 +220,7 @@ class TestGraphLadder(unittest.TestCase):
 
     def setUp(self):
         self.N = 8           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.edges = [
             Edge(0, 1, 2), Edge(0, 2, 1), Edge(2, 3, 5), Edge(1, 3, 3), 
             Edge(2, 4, 4), Edge(3, 5, 6), Edge(4, 6, 7), Edge(4, 5, 8), 

@@ -51,7 +51,7 @@ class MatchingFordFulkersonSet:
         """Executable pseudocode."""
         size = self.graph.v()
         # Create flow network.
-        network = self.graph.__class__(size + 2, directed=True)
+        network = self.graph.__class__(n=(size + 2), directed=True)
         self.source = size
         self.sink = size + 1
         network.add_node(self.source)
@@ -115,7 +115,7 @@ class MatchingFordFulkersonList:
         """Executable pseudocode."""
         size = self.graph.v()
         # Create flow network.
-        network = self.graph.__class__(size + 2, directed=True)
+        network = self.graph.__class__(n=(size + 2), directed=True)
         self.source = size
         self.sink = size + 1
         network.add_node(self.source)
@@ -173,7 +173,7 @@ class MatchingFordFulkersonColor:
         """Executable pseudocode."""
         size = self.graph.v()
         # Create flow network.
-        network = self.graph.__class__(size + 2, directed=True)
+        network = self.graph.__class__(n=(size + 2), directed=True)
         self.source = size
         self.sink = size + 1
         network.add_node(self.source)

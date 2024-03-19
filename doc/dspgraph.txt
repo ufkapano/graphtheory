@@ -20,7 +20,7 @@ N = 5   # the number of nodes
 nodes = range(N)
 # directed edges!
 edges = [Edge(0, 1), Edge(0, 3), Edge(1, 2), Edge(3, 2), Edge(2, 4)]
-G = Graph(N, directed=True)   # directed graph!
+G = Graph(n=N, directed=True)   # directed graph!
 for node in nodes:
     G.add_node(node)
 for edge in edges:

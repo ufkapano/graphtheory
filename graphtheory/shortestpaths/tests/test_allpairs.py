@@ -10,7 +10,7 @@ class TestAllPairsShortestPaths(unittest.TestCase):
 
     def setUp(self):
         self.N = 5           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 2, 6), Edge(0, 3, 3), Edge(1, 0, 3), Edge(2, 3, 2), 

@@ -20,14 +20,14 @@ class TestWheel(unittest.TestCase):
         self.assertEqual(algorithm.hub, 0)
 
     def test_wheel_true(self):
-        v = 10
-        G = Graph(v, False)
-        for node in range(v):
+        N = 10
+        G = Graph(n=N, directed=False)
+        for node in range(N):
             G.add_node(node)
         hub = 0
-        for node in range(1, v):
+        for node in range(1, N):
             G.add_edge(Edge(hub, node))
-            G.add_edge(Edge(node, node+1 if node < v-1 else 1))
+            G.add_edge(Edge(node, node+1 if node < N-1 else 1))
         self.assertTrue(is_wheel(G))
         algorithm = WheelGraph(G)
         algorithm.run()
@@ -44,9 +44,9 @@ class TestWheel(unittest.TestCase):
         # | 1---3---4 |
         # |/   / \   \|
         # 2---+   +---6
-        v = 7
-        G = Graph(v, False)
-        for node in range(v):
+        N = 7
+        G = Graph(n=N, directed=False)
+        for node in range(N):
             G.add_node(node)
         edges = [
             Edge(0, 1), Edge(1, 2), Edge(0, 2), Edge(4, 5), 
@@ -63,9 +63,9 @@ class TestWheel(unittest.TestCase):
         # | 0 |
         # |/  |
         # 4---3
-        v = 5
-        G = Graph(v, False)
-        for node in range(v):
+        N = 5
+        G = Graph(n=N, directed=False)
+        for node in range(N):
             G.add_node(node)
         edges = [
             Edge(0, 1), Edge(0, 2), Edge(0, 4), 

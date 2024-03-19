@@ -170,7 +170,7 @@ class HalinGraphTreeDecomposition:
 
     def _find_td(self):
         """Find a tree decomposition for a Halin graph."""
-        H = self.graph.__class__(self.graph.v())   # graf przeciec klik maksymalnych
+        H = self.graph.__class__(n=self.graph.v())   # graf przeciec klik maksymalnych
         bag_dict = dict()
         # Budowanie workow.
         for c in self.cliques:

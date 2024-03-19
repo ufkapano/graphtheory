@@ -15,7 +15,7 @@ class TestBipartiteGraph(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=False)
+        self.G = Graph(n=self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 2), Edge(0, 3), Edge(1, 4), Edge(2, 5), 
@@ -50,8 +50,10 @@ class TestBipartiteGraph(unittest.TestCase):
         self.assertRaises(ValueError, algorithm.run)
         algorithm = BipartiteGraphDFS(self.G)
         self.assertRaises(ValueError, algorithm.run)
-        self.assertRaises(ValueError, BipartiteGraphBFS, Graph(2, directed=True))
-        self.assertRaises(ValueError, BipartiteGraphDFS, Graph(2, directed=True))
+        self.assertRaises(ValueError, BipartiteGraphBFS,
+            Graph(n=2, directed=True))
+        self.assertRaises(ValueError, BipartiteGraphDFS,
+            Graph(n=2, directed=True))
 
     def tearDown(self): pass
 

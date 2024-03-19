@@ -17,7 +17,7 @@ class TestIndependentSet(unittest.TestCase):
 
     def setUp(self):
         self.N = 6
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 3), Edge(1, 3), Edge(1, 4), 
@@ -61,11 +61,11 @@ class TestIndependentSet(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, RandomSequentialIndependentSet1,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
         self.assertRaises(ValueError, RandomSequentialIndependentSet2,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
         self.assertRaises(ValueError, RandomSequentialIndependentSet3,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
 
     def tearDown(self): pass
 

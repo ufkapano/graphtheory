@@ -13,7 +13,7 @@ class TestTreeLongestPath(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(1, 4), Edge(4, 5)]
         for node in self.nodes:

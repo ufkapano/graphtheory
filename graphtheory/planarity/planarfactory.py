@@ -20,7 +20,7 @@ class PlanarGraphFactory:
         """Create a weighted cyclic topological graph."""
         if n < 3:
             raise ValueError("number of vertices must be greater than 2")
-        graph = self.cls(n, False)
+        graph = self.cls(n=n, directed=False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
         graph.face2edge = dict()
@@ -62,7 +62,7 @@ class PlanarGraphFactory:
         """Create a weighted wheel topological graph."""
         if n < 4:
             raise ValueError("number of vertices must be greater than 3")
-        graph = self.cls(n, False)
+        graph = self.cls(n=n, directed=False)
         graph.edge_next = dict()
         graph.edge_prev = dict()
         graph.face2edge = dict()

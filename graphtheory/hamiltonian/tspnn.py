@@ -63,7 +63,8 @@ class NearestNeighborTSPWithGraph:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.hamiltonian_cycle = self.graph.__class__(self.graph.v(), self.graph.is_directed())
+        self.hamiltonian_cycle = self.graph.__class__(n=self.graph.v(),
+            directed=self.graph.is_directed())
         for node in self.graph.iternodes():
             self.hamiltonian_cycle.add_node(node)
         self.source = None

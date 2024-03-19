@@ -46,7 +46,7 @@ class EdgeColoringWithLineGraph:
 
     def run(self):
         """Executable pseudocode."""
-        line_graph = self.graph.__class__(self.graph.e(), directed=False)
+        line_graph = self.graph.__class__(n=self.graph.e(), directed=False)
         # Trzeba dodac wierzcholki do grafu krawedziowego.
         # Graf krawedziowy moze byc niespojny!
         for edge in self.graph.iteredges():

@@ -17,7 +17,7 @@ class TestTreeDecomposition(unittest.TestCase):
 
     def setUp(self):
         self.N = 5   # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 3), 
              Edge(0, 2), Edge(2, 4), Edge(1, 4)]
@@ -67,7 +67,7 @@ class TestTreeDecomposition2(unittest.TestCase):
 # 0-------5
 
     def test_find_td_order(self):
-        G = Graph(6)
+        G = Graph(n=6)
         edge_list = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(3, 4), 
             Edge(4, 5), Edge(0, 5), Edge(1, 4), Edge(2, 0), Edge(3, 5)]
         for edge in edge_list:

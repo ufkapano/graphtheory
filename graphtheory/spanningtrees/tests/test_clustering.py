@@ -16,7 +16,7 @@ class TestKruskalClustering(unittest.TestCase):
 # o o . . o o
     def setUp(self):
         self.N = 8           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = [Point(0, 0), Point(1, 0), Point(0, 2), Point(1, 2),
             Point(4, 0), Point(5, 0), Point(3, 3), Point(4, 4)]
         for node in self.nodes:

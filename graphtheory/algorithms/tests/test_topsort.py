@@ -14,7 +14,7 @@ class TestTopologicalSorting(unittest.TestCase):
     def setUp(self):
         #  Knuth s.273 t.1
         self.N = 10           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(9, 2), Edge(3, 7), Edge(7, 5), Edge(5, 8), Edge(8, 6), 

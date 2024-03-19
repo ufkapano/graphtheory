@@ -17,7 +17,7 @@ class TestEdgeColoring(unittest.TestCase):
 
     def setUp(self):
         self.N = 6
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 3), Edge(1, 3), Edge(1, 4), Edge(1, 2), 
@@ -48,7 +48,7 @@ class TestEdgeColoring(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, RandomSequentialEdgeColoring,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
 
     def tearDown(self): pass
 

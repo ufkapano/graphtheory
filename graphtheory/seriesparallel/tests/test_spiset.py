@@ -74,7 +74,7 @@ class TestIndependentSet(unittest.TestCase):
         # | \
         # 3   4
         self.N = 5
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(0, 2), Edge(1, 2),
                       Edge(1, 3), Edge(1, 4)]
@@ -101,7 +101,7 @@ class TestIndependentSet(unittest.TestCase):
         #     |
         #     4
         self.N = 5
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(1, 3), Edge(1, 4)]
         for node in self.nodes:
@@ -129,7 +129,7 @@ class TestIndependentSet(unittest.TestCase):
         #    | /
         #    8
         self.N = 9
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 2), Edge(0, 3), Edge(0, 4), Edge(0, 8),
                       Edge(1, 5), Edge(2, 5), Edge(3, 6), Edge(4, 6),

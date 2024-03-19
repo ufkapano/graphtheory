@@ -17,7 +17,7 @@ class TestBellmanFord(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N, directed=True) # directed graph
+        self.G = Graph(n=self.N, directed=True) # directed graph
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 1), Edge(0, 2, 5), Edge(1, 2, 1), Edge(1, 3, 3), 
@@ -48,7 +48,7 @@ class TestBellmanFordCormen(unittest.TestCase):
     def setUp(self):
         # The graph from Cormen p.666, negative weights.
         self.N = 5           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 6), Edge(0, 3, 7), Edge(1, 3, 8), Edge(1, 2, 5), 

@@ -14,7 +14,7 @@ class TestNodeCover(unittest.TestCase):
     def setUp(self):
         # Cormen p. 1135
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 3), Edge(1, 2), Edge(1, 4),
@@ -37,7 +37,7 @@ class TestNodeCover(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, DegreeNodeCover,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
 
     def tearDown(self): pass
 
@@ -49,7 +49,7 @@ class TestNodeCover2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 3), Edge(1, 2), Edge(1, 4),

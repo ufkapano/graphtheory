@@ -43,7 +43,7 @@ class BoruvkaMST:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.mst = self.graph.__class__(self.graph.v())
+        self.mst = self.graph.__class__(n=self.graph.v())
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.mst.add_node(node)
         self._uf = UnionFind()

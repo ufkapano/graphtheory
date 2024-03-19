@@ -16,7 +16,7 @@ class TestBFS(unittest.TestCase):
     def setUp(self):
         # The graph from Cormen p.607
         self.N = 8           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 5, 4), Edge(5, 2, 5),

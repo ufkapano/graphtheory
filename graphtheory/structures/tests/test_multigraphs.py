@@ -16,7 +16,7 @@ class TestMultiGraphDirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4   # number of nodes
-        self.G = MultiGraph(self.N, directed=True)
+        self.G = MultiGraph(n=self.N, directed=True)
         self.nodes = [0, 1, 2, 3]
         self.edges = [
             Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4), Edge(1, 1, 11), 
@@ -117,7 +117,7 @@ class TestMultiGraphUndirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 4   # number of nodes
-        self.G = MultiGraph(self.N, directed=False)
+        self.G = MultiGraph(n=self.N, directed=False)
         self.nodes = [0, 1, 2, 3]
         self.edges = [
             Edge(0, 1, 2), Edge(0, 3, 3), Edge(0, 3, 4), Edge(1, 1, 11), 

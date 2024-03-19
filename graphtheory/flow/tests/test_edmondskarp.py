@@ -18,7 +18,7 @@ class TestMaximumFlow1(unittest.TestCase):
 
     def setUp(self):
         self.N = 4           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 10), Edge(0, 2, 10), Edge(1, 2, 1), Edge(1, 3, 10), 
@@ -67,7 +67,7 @@ class TestMaximumFlow2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 3), Edge(0, 3, 3), Edge(1, 2, 4), Edge(2, 0, 3), 
@@ -123,7 +123,7 @@ class TestMaximumFlow3(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 10), Edge(0, 2, 10), Edge(1, 2, 2), Edge(1, 3, 4), 

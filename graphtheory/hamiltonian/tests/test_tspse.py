@@ -19,7 +19,7 @@ class TestTSP(unittest.TestCase):
 
     def setUp(self):
         self.N = 4
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 20), Edge(0, 3, 35), Edge(0, 2, 42), 
@@ -52,8 +52,10 @@ class TestTSP(unittest.TestCase):
             self.assertEqual(algorithm.hamiltonian_cycle.degree(node), 2)
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, SortedEdgeTSPWithEdges, Graph(5, True))
-        self.assertRaises(ValueError, SortedEdgeTSPWithGraph, Graph(5, True))
+        self.assertRaises(ValueError, SortedEdgeTSPWithEdges,
+            Graph(n=5, directed=True))
+        self.assertRaises(ValueError, SortedEdgeTSPWithGraph,
+            Graph(n=5, directed=True))
 
     def tearDown(self): pass
 

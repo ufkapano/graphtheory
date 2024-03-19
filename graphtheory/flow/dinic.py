@@ -31,7 +31,7 @@ class Dinic:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Initial capacities for the residual network.
@@ -128,7 +128,7 @@ class DinicSparse:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Legal flow.

@@ -16,7 +16,7 @@ class TestEulerianCycleUndirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=False)
+        self.G = Graph(n=self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 3), Edge(1, 4),
@@ -63,7 +63,7 @@ class TestEulerianCycleUndirected2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
-        self.G = Graph(self.N, directed=False)
+        self.G = Graph(n=self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 4), Edge(1, 4), Edge(2, 3), Edge(2, 5), 
@@ -106,7 +106,7 @@ class TestEulerianCycleDirected(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(3, 0), Edge(1, 4),
@@ -153,7 +153,7 @@ class TestEulerianCycleDirected2(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(4, 0), Edge(1, 4), Edge(2, 3), Edge(5, 2), 

@@ -32,7 +32,7 @@ class FordFulkerson:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Initial capacities for the residual network.
@@ -117,7 +117,7 @@ class FordFulkersonSparse:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Legal flow.
@@ -203,7 +203,7 @@ class FordFulkersonWithEdges:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Legal flow.
@@ -292,7 +292,7 @@ class FordFulkersonRecursive:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Initial capacities for the residual network.
@@ -372,7 +372,7 @@ class FordFulkersonRecursiveWithEdges:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.residual = self.graph.__class__(self.graph.v(), directed=True)
+        self.residual = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():
             self.residual.add_node(node)
         # Legal flow.

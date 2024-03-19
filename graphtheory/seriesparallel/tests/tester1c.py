@@ -8,7 +8,7 @@ from graphtheory.seriesparallel.spnodes import btree_print
 from graphtheory.seriesparallel.spnodes import btree_print2
 
 N = 3           # number of nodes
-G = Graph(N)
+G = Graph(n=N)
 nodes = range(N)
 edges = [Edge(0, 1), Edge(1, 2)]
 for node in nodes:

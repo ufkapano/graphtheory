@@ -39,7 +39,7 @@ class TestEdgeColoring(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, CompleteBipartiteGraphEdgeColoring,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
         gf = GraphFactory(Graph)
         G = gf.make_bipartite(2, 2, False, 1)
         #G.show()
@@ -125,7 +125,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, BipartiteGraphEdgeColoring,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
         gf = GraphFactory(Graph)
         G = gf.make_cyclic(4)
         #G.show()

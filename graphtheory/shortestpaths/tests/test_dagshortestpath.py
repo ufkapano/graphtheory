@@ -10,7 +10,7 @@ class TestDAGShortestPath(unittest.TestCase):
 
     def setUp(self):
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         for node in self.nodes:
             self.G.add_node(node)

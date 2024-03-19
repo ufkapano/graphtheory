@@ -12,7 +12,7 @@ class TestBoruvkaWiki(unittest.TestCase):
         # The graph (unique weights) from
         # http://en.wikipedia.org/wiki/Boruvka's_algorithm
         self.N = 7           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 7), Edge(1, 2, 11), Edge(0, 3, 4), Edge(3, 1, 9), 
@@ -47,7 +47,7 @@ class TestBoruvkaCormen(unittest.TestCase):
     def setUp(self):
         # The modified graph (unique weights) from Cormen.
         self.N = 9           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 4), Edge(0, 7, 8), Edge(1, 7, 11), Edge(1, 2, 12), 
@@ -83,7 +83,7 @@ class TestBoruvkaDisconnectedGraph(unittest.TestCase):
     def setUp(self):
         # The modified graph (unique weights) from Cormen.
         self.N = 9           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1, 4), Edge(0, 7, 8), Edge(1, 7, 11), Edge(1, 2, 12), 

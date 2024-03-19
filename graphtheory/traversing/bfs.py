@@ -46,7 +46,7 @@ class BFSWithQueue:
         self.color = dict(((node, "WHITE") for node in self.graph.iternodes()))
         self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
 
@@ -132,7 +132,7 @@ class SimpleBFS:
         """The algorithm initialization."""
         self.graph = graph
         self.parent = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
 
@@ -209,7 +209,7 @@ class BFSWithDepthTracker:
         """The algorithm initialization."""
         self.graph = graph
         self.parent = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
 

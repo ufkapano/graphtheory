@@ -78,7 +78,8 @@ class BruteForceTSPWithGraph:
         self.graph = graph
         self.hamiltonian_cycle = None
         self.source = None
-        self._path = self.graph.__class__(self.graph.v(), self.graph.is_directed())
+        self._path = self.graph.__class__(n=self.graph.v(),
+            directed=self.graph.is_directed())
         for node in self.graph.iternodes():
             self._path.add_node(node)
         self._used = dict((node, False) for node in self.graph.iternodes())

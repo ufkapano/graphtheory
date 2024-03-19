@@ -17,7 +17,7 @@ class Graph:
     representation). Nodes are int from range(n).
     """
 
-    def __init__(self, n, directed=False):
+    def __init__(self, *, n, directed=False):
         """Load up a Graph instance.
         
         Parameters

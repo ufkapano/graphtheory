@@ -54,7 +54,7 @@ class Johnson:
         """Finding all shortest paths."""
         # graph copy
         size = self.graph.v()
-        self._new_graph = self.graph.__class__(size + 1, directed=True)
+        self._new_graph = self.graph.__class__(n=(size + 1), directed=True)
         for node in self.graph.iternodes():   # O(V) time
             self._new_graph.add_node(node)
         for edge in self.graph.iteredges():   # O(E) time
@@ -142,7 +142,8 @@ class JohnsonFaster:
             self._new_graph = self.graph
         else:
             # graph copy
-            self._new_graph = self.graph.__class__(self.graph.v()+1, directed=True)
+            self._new_graph = self.graph.__class__(
+                n=(self.graph.v()+1), directed=True)
             for node in self.graph.iternodes():   # O(V) time
                 self._new_graph.add_node(node)
             for edge in self.graph.iteredges():   # O(E) time

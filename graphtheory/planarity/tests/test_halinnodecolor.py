@@ -34,7 +34,7 @@ class TestNodeColoring(unittest.TestCase):
 # 1---4
     def test_wheel5(self):
         N = 5
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 3), Edge(0, 4), 
             Edge(1, 2), Edge(2, 3), Edge(3, 4), Edge(4, 1)]
         for node in range(N):
@@ -62,7 +62,7 @@ class TestNodeColoring(unittest.TestCase):
 # 0-------5
     def test_3prism(self):
         N = 6
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(3, 4), 
             Edge(4, 5), Edge(0, 5), Edge(1, 4), Edge(2, 0), Edge(3, 5)]
         for node in range(N):
@@ -92,7 +92,7 @@ class TestNodeColoring(unittest.TestCase):
 # 0-------6
     def test_halin7(self):
         N = 7
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 6), Edge(1, 2), 
             Edge(1, 4), Edge(2, 3), Edge(3, 4), Edge(3, 5), 
             Edge(4, 5), Edge(4, 6), Edge(5, 6)]
@@ -120,7 +120,7 @@ class TestNodeColoring(unittest.TestCase):
 # 1-----------5
     def test_halin8a(self):
         N = 8
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 7), Edge(1, 2), 
             Edge(1, 5), Edge(2, 3), Edge(3, 4), Edge(3, 7), 
             Edge(4, 5), Edge(4, 6), Edge(5, 6), Edge(6, 7)]
@@ -148,7 +148,7 @@ class TestNodeColoring(unittest.TestCase):
 #   0-------5
     def test_halin8b(self):
         N = 8
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 5), Edge(0, 7), Edge(1, 2), 
             Edge(1, 7), Edge(2, 3), Edge(2, 7), Edge(3, 4), 
             Edge(3, 6), Edge(4, 5), Edge(4, 6), Edge(5, 6), Edge(6, 7)]
@@ -176,7 +176,7 @@ class TestNodeColoring(unittest.TestCase):
 # 0---5---4
     def test_halin8c(self):
         N = 8
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 5), Edge(0, 7), Edge(1, 2), 
             Edge(1, 7), Edge(2, 3), Edge(2, 6), Edge(3, 4), Edge(3, 6), 
             Edge(4, 5), Edge(4, 6), Edge(5, 6), Edge(6, 7)]
@@ -204,7 +204,7 @@ class TestNodeColoring(unittest.TestCase):
 # 0---------------9
     def test_halin10j(self):
         N = 10
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 9), Edge(1, 2), 
             Edge(1, 4), Edge(2, 3), Edge(3, 4), Edge(3, 6), 
             Edge(4, 5), Edge(5, 6), Edge(5, 8), Edge(6, 7), 
@@ -233,7 +233,7 @@ class TestNodeColoring(unittest.TestCase):
 # 0---------9-----6
     def test_halin10k(self):
         N = 10
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 9), Edge(1, 2), 
             Edge(1, 4), Edge(2, 3), Edge(3, 4), Edge(3, 8), 
             Edge(4, 5), Edge(5, 6), Edge(5, 7), Edge(6, 7), 
@@ -264,7 +264,7 @@ class TestNodeColoring(unittest.TestCase):
 # 9-----------8
     def test_halin10l(self):
         N = 10
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 4), Edge(0, 9), Edge(1, 2), 
             Edge(1, 9), Edge(2, 3), Edge(2, 7), Edge(3, 4), 
             Edge(3, 5), Edge(4, 5), Edge(5, 6), Edge(6, 7), 
@@ -295,7 +295,7 @@ class TestNodeColoring(unittest.TestCase):
 #   1-----------5
     def test_halin11(self):
         N = 11
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 10), Edge(1, 2), 
             Edge(1, 5), Edge(2, 3), Edge(3, 4), Edge(3, 9), 
             Edge(4, 5), Edge(4, 6), Edge(5, 6), Edge(6, 7), 
@@ -327,7 +327,7 @@ class TestNodeColoring(unittest.TestCase):
 #   5-----------6
     def test_frucht12(self):
         N = 10
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 4), Edge(0, 11), Edge(1, 2), 
             Edge(1, 10), Edge(2, 3), Edge(2, 7), Edge(3, 4), 
             Edge(3, 5), Edge(4, 5), Edge(5, 6), Edge(6, 7), 
@@ -360,7 +360,7 @@ class TestNodeColoring(unittest.TestCase):
 #     4---------------10
     def test_halin16(self):
         N = 16
-        G = Graph(N, False)
+        G = Graph(n=N, directed=False)
         edges = [Edge(0, 1), Edge(0, 2), Edge(0, 15), Edge(1, 2), 
             Edge(1, 6), Edge(2, 3), Edge(3, 4), Edge(3, 5), 
             Edge(4, 5), Edge(4, 10), Edge(5, 6), Edge(6, 7), 

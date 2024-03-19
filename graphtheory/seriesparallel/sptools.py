@@ -18,7 +18,7 @@ def make_random_spgraph(n):
     """Make a series-parallel graph with n vertices."""
     if n < 2:
         raise ValueError("bad n")
-    graph = Graph(n)
+    graph = Graph(n=n)
     for node in range(n):
         graph.add_node(node)
     source = 0
@@ -61,7 +61,7 @@ def make_random_ktree(n, k):   # using list
     """Make a random k-tree with n vertices."""
     if k >= n:
         raise ValueError("bad k")   # run time error possible
-    graph = Graph(n)
+    graph = Graph(n=n)
     if n < 1:
         raise ValueError("bad n")
     elif n == 1:

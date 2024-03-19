@@ -17,7 +17,7 @@ class TestChordalGraphs(unittest.TestCase):
 
     def setUp(self):
         self.N = 5
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1), Edge(1, 2), Edge(2, 3), Edge(0, 3), 
              Edge(0, 2), Edge(2, 4), Edge(1, 4)]

@@ -15,7 +15,7 @@ class TestCutEdge(unittest.TestCase):
     def setUp(self):
         # The graph from Cormen p.607 changed
         self.N = 8           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 4, 12), Edge(2, 3, 8), 
@@ -45,8 +45,8 @@ class TestCutEdge(unittest.TestCase):
         self.assertEqual(algorithm.cut_edges, cut_edges_expected)
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, TrivialCutEdge, Graph(1, True))
-        self.assertRaises(ValueError, TarjanCutEdge, Graph(1, True))
+        self.assertRaises(ValueError, TrivialCutEdge, Graph(n=1, directed=True))
+        self.assertRaises(ValueError, TarjanCutEdge, Graph(n=1, directed=True))
 
     def tearDown(self): pass
 

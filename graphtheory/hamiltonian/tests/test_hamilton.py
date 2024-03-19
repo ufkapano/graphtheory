@@ -16,7 +16,7 @@ class TestHamiltonianCycle(unittest.TestCase):
     def setUp(self):
         # 3-prism graph, Halin graph
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=False)
+        self.G = Graph(n=self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(0, 2), Edge(0, 5), Edge(1, 2),
@@ -68,7 +68,7 @@ class TestHamiltonianCycleDirected(unittest.TestCase):
     def setUp(self):
         # 3-prism graph, Halin graph
         self.N = 6           # number of nodes
-        self.G = Graph(self.N, directed=True)
+        self.G = Graph(n=self.N, directed=True)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(2, 0), Edge(0, 5), Edge(2, 1),

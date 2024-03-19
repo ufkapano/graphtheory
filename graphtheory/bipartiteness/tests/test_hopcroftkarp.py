@@ -12,7 +12,7 @@ class TestHopcroftKarp(unittest.TestCase):
     def setUp(self):
         # Wilson, ex. 25.1, bipartite graph
         self.N = 7
-        self.G = Graph(self.N, directed=False)
+        self.G = Graph(n=self.N, directed=False)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 5), Edge(0, 6), Edge(1, 3), Edge(1, 5), 
@@ -49,8 +49,10 @@ class TestHopcroftKarp(unittest.TestCase):
         self.assertEqual(algorithm.mate, expected_mate1)
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, HopcroftKarpSet, Graph(2, directed=True))
-        self.assertRaises(ValueError, HopcroftKarpList, Graph(2, directed=True))
+        self.assertRaises(ValueError, HopcroftKarpSet,
+            Graph(n=2, directed=True))
+        self.assertRaises(ValueError, HopcroftKarpList,
+            Graph(n=2, directed=True))
 
     def tearDown(self): pass
 

@@ -19,7 +19,7 @@ class MultiGraph(dict):
     "F": {}}
     """
 
-    def __init__(self, n=0, directed=False):
+    def __init__(self, *, n=0, directed=False):
         """Load up a MultiGraph instance.
         
         Parameters

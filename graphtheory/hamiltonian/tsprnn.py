@@ -76,7 +76,7 @@ class RepeatedNearestNeighborTSPWithGraph:
         """Executable pseudocode."""
         for source in self.graph.iternodes():
             start_node = source
-            cycle = self.graph.__class__(self.graph.v())
+            cycle = self.graph.__class__(n=self.graph.v())
             for node in self.graph.iternodes():
                 cycle.add_node(node)
             self._used = dict((node, False) for node in self.graph.iternodes())

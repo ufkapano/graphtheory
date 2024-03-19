@@ -16,7 +16,7 @@ class TestCutNode(unittest.TestCase):
     def setUp(self):
         # The graph from Cormen p.607 changed.
         self.N = 8           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4, 2), Edge(0, 1, 3), Edge(1, 4, 12), Edge(1, 5, 4), 
@@ -55,8 +55,10 @@ class TestCutNode(unittest.TestCase):
         self.assertTrue(is_biconnected(self.G))
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, TrivialCutNode, Graph(1, True))
-        self.assertRaises(ValueError, TarjanCutNode, Graph(1, True))
+        self.assertRaises(ValueError, TrivialCutNode,
+            Graph(n=1, directed=True))
+        self.assertRaises(ValueError, TarjanCutNode,
+            Graph(n=1, directed=True))
 
     def tearDown(self): pass
 

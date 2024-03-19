@@ -18,7 +18,7 @@ from graphtheory.seriesparallel.spnodes import btree_print2
 #     1
 
 N = 6           # number of nodes
-G = Graph(N)
+G = Graph(n=N)
 nodes = range(N)
 edges = [Edge(1, 2), Edge(2, 3), Edge(3, 0), Edge(2, 4), Edge(4, 0),
  Edge(4, 5), Edge(5, 0)]

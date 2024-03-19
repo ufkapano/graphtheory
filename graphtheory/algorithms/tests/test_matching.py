@@ -17,7 +17,7 @@ class TestMatching(unittest.TestCase):
         # 2 : 3 4
         # ...
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 5), Edge(0, 6), 
@@ -65,7 +65,7 @@ class TestMatchingWithWeights(unittest.TestCase):
     def setUp(self):
         # Graf pelny z kolejnymi wagami.
         self.N = 4
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1, 5), Edge(0, 2, 7), Edge(0, 3, 2),
             Edge(1, 2, 3), Edge(1, 3, 6), Edge(2, 3, 4)]
@@ -102,7 +102,7 @@ class TestMatchingWithWeights2(unittest.TestCase):
     def setUp(self):
         # Graf pelny z kolejnymi wagami.
         self.N = 4
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [Edge(0, 1, 4), Edge(0, 2, 3), Edge(0, 3, 2),
             Edge(1, 2, 7), Edge(1, 3, 5), Edge(2, 3, 6)]

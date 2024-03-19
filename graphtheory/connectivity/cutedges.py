@@ -94,7 +94,7 @@ class TarjanCutEdge:
         self.parent = dict(((node, None) for node in self.graph.iternodes()))
         self._time = 0    # time stamp
         self._dd = dict(((node, 0) for node in self.graph.iternodes()))
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(self.graph.v() * 2, recursionlimit))
 

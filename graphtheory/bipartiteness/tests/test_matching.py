@@ -17,7 +17,7 @@ class TestMatching(unittest.TestCase):
         # 2 : 3 4
         # ...
         self.N = 7
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 4), Edge(0, 5), Edge(0, 6), Edge(1, 3), Edge(1, 5), 
@@ -68,9 +68,12 @@ class TestMatching(unittest.TestCase):
         self.assertEqual(algorithm.mate, expected_mate5)
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, MatchingFordFulkersonSet, Graph(2, directed=True))
-        self.assertRaises(ValueError, MatchingFordFulkersonList, Graph(2, directed=True))
-        self.assertRaises(ValueError, MatchingFordFulkersonColor, Graph(2, directed=True))
+        self.assertRaises(ValueError, MatchingFordFulkersonSet,
+            Graph(n=2, directed=True))
+        self.assertRaises(ValueError, MatchingFordFulkersonList,
+            Graph(n=2, directed=True))
+        self.assertRaises(ValueError, MatchingFordFulkersonColor,
+            Graph(n=2, directed=True))
 
     def tearDown(self): pass
 

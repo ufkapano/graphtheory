@@ -17,7 +17,7 @@ class TestPathDecomposition(unittest.TestCase):
 
     def setUp(self):
         self.N = 7   # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = [1,2,3,4,5,6,7]
         self.edges = [
             Edge(1, 2), Edge(2, 3), Edge(3, 4), Edge(4, 5), 
@@ -26,7 +26,7 @@ class TestPathDecomposition(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        self.T = Graph(5)   # path decomposition
+        self.T = Graph(n=5)   # path decomposition
         b0 = (1, 2)
         b1 = (2, 3)
         b2 = (3, 6, 7)
@@ -59,7 +59,7 @@ class TestPathDecomposition(unittest.TestCase):
 
     def test_bags_cover_edges(self):
         # Buduje graf wiekszy niz G (tu akurat rowny G).
-        H = Graph(self.N)
+        H = Graph(n=self.N)
         for node in self.G.iternodes():
             H.add_node(node)
         for bag in self.T.iternodes():

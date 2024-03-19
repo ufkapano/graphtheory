@@ -56,7 +56,7 @@ class TestEdgeColoring(unittest.TestCase):
 
     def test_exceptions(self):
         self.assertRaises(ValueError, CompleteGraphEdgeColoring,
-            Graph(5, directed=True))
+            Graph(n=5, directed=True))
 
     def tearDown(self): pass
 

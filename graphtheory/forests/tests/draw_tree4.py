@@ -13,7 +13,7 @@ from graphtheory.forests.treeplot import TreePlotRadiusAngle
 N = 50
 V = 2 * N + 1   # the number of nodes
 E = 2 * N       # the number of edges
-G = Graph(V, False)
+G = Graph(n=V, directed=False)
 for i in range(V):
     G.add_node(i)
 for i in range(N):

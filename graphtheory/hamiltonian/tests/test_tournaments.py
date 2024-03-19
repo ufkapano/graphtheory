@@ -28,8 +28,10 @@ class TestTournaments(unittest.TestCase):
             self.assertTrue(self.G.has_edge(Edge(path[i], path[i+1])))
 
     def test_exceptions(self):
-        self.assertRaises(ValueError, is_transitive, Graph(1, False))
-        self.assertRaises(ValueError, find_hamiltonian_path, Graph(1, False))
+        self.assertRaises(ValueError, is_transitive,
+            Graph(n=1, directed=False))
+        self.assertRaises(ValueError, find_hamiltonian_path,
+            Graph(n=1, directed=False))
 
     def tearDown(self): pass
 

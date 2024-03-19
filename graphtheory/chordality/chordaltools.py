@@ -14,7 +14,7 @@ def make_random_ktree(n, k):
     """Make a random k-tree with n vertices, PEO = range(n)."""
     if k >= n:
         raise ValueError("bad k")   # run time error possible
-    graph = Graph(n)
+    graph = Graph()
     if n < 1:
         raise ValueError("bad n")
     elif n == 1:
@@ -43,7 +43,7 @@ def make_random_ktree(n, k):
 
 def make_random_chordal(n):
     """Make a connected chordal graph with n vertices, PEO = range(n)."""
-    graph = Graph(n)
+    graph = Graph()
     if n < 1:
         raise ValueError("bad n")
     elif n == 1:

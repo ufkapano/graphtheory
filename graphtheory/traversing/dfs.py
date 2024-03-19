@@ -51,7 +51,7 @@ class DFSWithStack:
         self.time = 0    # time stamp
         self.dd = dict()
         self.ff = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
 
@@ -149,7 +149,7 @@ class DFSWithRecursion:
         self.time = 0    # time stamp
         self.dd = dict()
         self.ff = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
         recursionlimit = sys.getrecursionlimit()
@@ -230,7 +230,7 @@ class SimpleDFS:
         """The algorithm initialization."""
         self.graph = graph
         self.parent = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
         recursionlimit = sys.getrecursionlimit()
@@ -303,7 +303,7 @@ class DFSWithDepthTracker:
         """The algorithm initialization."""
         self.graph = graph
         self.parent = dict()
-        self.dag = self.graph.__class__(self.graph.v(), directed=True)
+        self.dag = self.graph.__class__(n=self.graph.v(), directed=True)
         for node in self.graph.iternodes():   # isolated nodes are possible
             self.dag.add_node(node)
         recursionlimit = sys.getrecursionlimit()

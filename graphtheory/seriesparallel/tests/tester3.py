@@ -19,7 +19,7 @@ from graphtheory.seriesparallel.dsptrees import find_dsptree
 N = 5   # the number of nodes
 nodes = range(N)
 edges = [Edge(0, 1), Edge(0, 3), Edge(1, 2), Edge(3, 2), Edge(2, 4)]
-G = Graph(N, directed=True)
+G = Graph(n=N, directed=True)
 for node in nodes:
     G.add_node(node)
 for edge in edges:

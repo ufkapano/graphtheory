@@ -15,7 +15,7 @@ def make_random_dspgraph(n):
     """Make a directed series-parallel graph with n vertices."""
     if n < 2:
         raise ValueError("bad n")
-    graph = Graph(n, directed=True)   # directed graph
+    graph = Graph(n=n, directed=True)   # directed graph
     for node in range(n):
         graph.add_node(node)
     source = 0

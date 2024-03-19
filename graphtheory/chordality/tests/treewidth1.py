@@ -27,7 +27,7 @@ class TestTreeDecomposition(unittest.TestCase):
 
     def setUp(self):
         self.N = 8     # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = list("ABCDEFGH")
         self.edges = [
             Edge("A", "B"), Edge("A", "C"), Edge("B", "C"), Edge("B", "F"), 
@@ -38,7 +38,7 @@ class TestTreeDecomposition(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
-        self.T = Graph(6)   # tree decomposition
+        self.T = Graph(n=6)   # tree decomposition
         b0 = ("A", "B", "C")
         b1 = ("B", "C", "E")
         b2 = ("C", "D", "E")
@@ -66,7 +66,7 @@ class TestTreeDecomposition(unittest.TestCase):
 
     def test_bags_cover_edges(self):
         # Buduje graf wiekszy niz G (tu akurat rowny G).
-        H = Graph(self.N)
+        H = Graph(n=self.N)
         for node in self.G.iternodes():
             H.add_node(node)
         for bag in self.T.iternodes():

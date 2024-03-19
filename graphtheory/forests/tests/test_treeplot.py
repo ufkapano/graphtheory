@@ -20,7 +20,7 @@ class TestTreePlot(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 2), Edge(1, 4),
@@ -53,7 +53,7 @@ class TestTreePlot(unittest.TestCase):
             6: (2, Fraction(5, 1))})
 
     def test_tree_three_nodes(self):
-        T = Graph(3)
+        T = Graph(n=3)
         for node in (0, 1, 2):
             T.add_node(node)
         for edge in (Edge(0, 1), Edge(1, 2)):
@@ -64,7 +64,7 @@ class TestTreePlot(unittest.TestCase):
         #print ( algorithm.point_dict )
 
     def test_tree_three_nodes_radius_angle(self):
-        T = Graph(3)
+        T = Graph(n=3)
         for node in (0, 1, 2):
             T.add_node(node)
         for edge in (Edge(0, 1), Edge(1, 2)):

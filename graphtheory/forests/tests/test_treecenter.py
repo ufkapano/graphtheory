@@ -17,7 +17,7 @@ class TestTreeCenter(unittest.TestCase):
 
     def setUp(self):
         self.N = 7           # number of nodes
-        self.G = Graph(self.N)
+        self.G = Graph(n=self.N)
         self.nodes = range(self.N)
         self.edges = [
             Edge(0, 1), Edge(1, 2), Edge(1, 4),
@@ -42,7 +42,7 @@ class TestTreeCenter(unittest.TestCase):
         self.assertEqual(algorithm.tree_radius, 3)
 
     def test_path1(self):
-        T = Graph(2)
+        T = Graph(n=2)
         T.add_edge(Edge(0, 1))
         algorithm = TreeCenter(T)
         algorithm.run()
@@ -50,7 +50,7 @@ class TestTreeCenter(unittest.TestCase):
         self.assertEqual(algorithm.tree_radius, 1)
 
     def test_path2(self):
-        T = Graph(3)
+        T = Graph(n=3)
         T.add_edge(Edge(0, 1))
         T.add_edge(Edge(1, 2))
         algorithm = TreeCenter(T)
