@@ -96,4 +96,16 @@ print ( algorithm.mate_set )
 print ( algorithm.cardinality )   # the size of max matching
 print ( algorithm.parent )        # DFS tree as a dict
 ----------------------------------------------------------------------
+# FINDING A PERFECT ELIMINATION ORDERING (PEO)
+
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.forests.treepeo import find_peo_tree
+
+gf = GraphFactory(Graph)
+G = gf.make_tree(n=10)   # random tree
+assert G.v() == G.e() + 1
+# Every tree is a chordal graph.
+peo = find_peo_tree(G)   # list of nodes
+assert len(peo) == G.v()
+----------------------------------------------------------------------
 EOF

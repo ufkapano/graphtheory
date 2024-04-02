@@ -5,7 +5,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
 class MaximalOuterplanarGenerator:
-    """Generator of maximal outerplanar graphs."""
+    """Generator of maximal outerplanar graphs, O(n) time."""
 
     def __init__(self, n):
         if not isinstance(n, int):
@@ -24,10 +24,10 @@ class MaximalOuterplanarGenerator:
         return self.graph
 
     def _generate(self, weights):
-        G = self.graph.copy()
-        node_list = list(G.iternodes())   # O(V) time
-        random.shuffle(node_list)   # O(V) time
-        while G.v() > 3:   # O(V) time
+        G = self.graph.copy()   # O(n) time
+        node_list = list(G.iternodes())   # O(n) time
+        random.shuffle(node_list)   # O(n) time
+        while G.v() > 3:   # O(n) time
             # fill cycle with random edges
             node = node_list.pop()   # O(1) time
             source, target = list(G.iteradjacent(node))

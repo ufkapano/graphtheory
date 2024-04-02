@@ -35,7 +35,7 @@ class StronglyConnectedComponents:
 
 
 class ConnectedComponentsBFS:
-    """Connected components for undirected graphs."""
+    """Connected components for undirected graphs with BFS."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -56,7 +56,7 @@ class ConnectedComponentsBFS:
 
 
 class ConnectedComponentsDFS:
-    """Connected components for undirected graphs."""
+    """Connected components for undirected graphs with DFS."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
