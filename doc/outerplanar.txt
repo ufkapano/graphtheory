@@ -18,7 +18,7 @@ algorithm.graph.show()   # random maximal outerplanar graph
 
 from graphtheory.planarity.nodecolorouterplanar import OuterplanarNodeColoring
 
-algorithm = OuterplanarNodeColoring(G)   # O(V) time
+algorithm = OuterplanarNodeColoring(G)   # O(n) time
 algorithm.run()
 print ( algorithm.color )   # dict
 ----------------------------------------------------------------------

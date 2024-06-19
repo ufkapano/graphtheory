@@ -10,7 +10,7 @@ try:
 except NameError:   # Python 3
     pass
 
-def find_peo_lex_bfs(graph):   # O(V^2) time
+def find_peo_lex_bfs1(graph):
     """Find a lexicographic ordering."""
     labels = dict((node, []) for node in graph.iternodes())
     order = []
@@ -26,6 +26,27 @@ def find_peo_lex_bfs(graph):   # O(V^2) time
     assert len(order) == graph.v()
     order.reverse()   # O(V) time
     return order
+
+def find_peo_lex_bfs2(graph):   # O(V^2) time, sets are used for speed
+    """Find a lexicographic ordering."""
+    labels = dict((node, []) for node in graph.iternodes())
+    order = []
+    used = set()
+    i = graph.v()
+    while i > 0:
+        source = max((node for node in graph.iternodes() if node not in used),
+            key=labels.__getitem__)   # porownywanie list Pythona
+        order.append(source)
+        used.add(source)
+        for target in graph.iteradjacent(source):
+            if target not in used:
+                labels[target].append(i)
+        i -= 1
+    assert len(order) == graph.v()
+    order.reverse()   # O(V) time
+    return order
+
+find_peo_lex_bfs = find_peo_lex_bfs2
 
 def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
     """Finding PEO in a chordal graph using maximum cardinality search."""

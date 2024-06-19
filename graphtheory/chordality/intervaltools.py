@@ -20,6 +20,7 @@ def make_random_interval(n):   # tak jak dla circle graphs
     random.shuffle(perm)
     return perm
 
+# 0---1---2---3   make_path_interval(4)
 def make_path_interval(n):   # tak jak dla circle graphs
     """Return a path interval graph as double perm."""
     perm = []
@@ -29,8 +30,8 @@ def make_path_interval(n):   # tak jak dla circle graphs
         swap(perm, i, i+1)
     return perm
 
-# 0---5---4  graf tepee, do P_{n-1} dolaczamy nowy wierzcholek
-# | / | \ |
+# 0---5---4   graf tepee, do P_{n-1} dolaczamy nowy wierzcholek
+# | / | \ |   make_tepee_interval(6)
 # 1---2---3
 def make_tepee_interval(n):
     """Return a tepee interval graph as double perm."""
@@ -44,8 +45,8 @@ def make_tepee_interval(n):
     perm.append(n-1)
     return perm
 
-# 0---2---4---6 to nie jest tepee graph
-# | / | / | /
+# 0---2---4---6   to nie jest tepee graph
+# | / | / | /     make_2tree_interval(7)
 # 1---3---5
 def make_2tree_interval(n):   # tak jak dla circle graphs
     """Return a 2tree interval graph as double perm."""
@@ -58,6 +59,9 @@ def make_2tree_interval(n):   # tak jak dla circle graphs
         swap(perm, -4, -3)
     return perm
 
+#   2   3   make_star_interval(5)
+#    \ /
+# 1---0---4
 def make_star_interval(n):   # dla circle graphs jest inaczej
     """Return a star interval graph as double perm."""
     if n < 2:
