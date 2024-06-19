@@ -10,6 +10,7 @@ try:
 except NameError:   # Python 3
     pass
 
+
 def find_peo_lex_bfs1(graph):
     """Find a lexicographic ordering."""
     labels = dict((node, []) for node in graph.iternodes())
@@ -26,6 +27,7 @@ def find_peo_lex_bfs1(graph):
     assert len(order) == graph.v()
     order.reverse()   # O(V) time
     return order
+
 
 def find_peo_lex_bfs2(graph):   # O(V^2) time, sets are used for speed
     """Find a lexicographic ordering."""
@@ -46,15 +48,17 @@ def find_peo_lex_bfs2(graph):   # O(V^2) time, sets are used for speed
     order.reverse()   # O(V) time
     return order
 
+
 find_peo_lex_bfs = find_peo_lex_bfs2
 
-def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
-    """Finding PEO in a chordal graph using maximum cardinality search."""
+
+def find_peo_mcs1(graph):   # to nie jest najszybsza wersja!
+    """Finding PEO in a chordal graph using maximum cardinality search, O(V^2) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
     order = list()   # PEO
     used = set()
-    visited_degree = dict((node, 0) for node in graph.iternodes())
+    visited_degree = dict((node, 0) for node in graph.iternodes()) # O(V) time
     for step in range(graph.v()):   # all nodes in the loop
         source = max((node for node in graph.iternodes() if node not in used),
             key=visited_degree.__getitem__)   # O(V) time przy szybkim tescie
@@ -65,6 +69,40 @@ def find_peo_mcs(graph):   # to nie jest najszybsza wersja!
             visited_degree[target] += 1
     order.reverse()   # O(V) time
     return order
+
+
+def find_peo_mcs2(graph):
+    """Finding PEO using maximum cardinality search, O(V+E) time."""
+    if graph.is_directed():
+        raise ValueError("the graph is directed")
+    order = list()   # zapisuje kolejnosc analizowanych wierzcholkow
+    used = set()
+    visited_degree = dict((node, 0) for node in graph.iternodes())
+    bucket = list(set() for deg in range(graph.v()))   # O(V) time
+    # Na poczatku wszystkie wierzcholki maja stopien 0.
+    bucket[0].update(graph.iternodes())
+    maxi = 0   # indeks najwiekszego
+    for step in range(graph.v()):
+        while not bucket[maxi]:   # ide w dol
+            maxi -= 1
+        source = bucket[maxi].pop()
+        order.append(source)
+        used.add(source)
+        # Update visited degree.
+        for target in graph.iteradjacent(source):   # sumarycznie O(E) time
+            # Trzeba przerzucic target do innego kubelka.
+            if target in used:   # nie ma go w bucket
+                continue
+            deg = visited_degree[target]   # stary stopien
+            bucket[deg].remove(target)
+            bucket[deg+1].add(target)
+            visited_degree[target] = deg+1   # nowy stopien
+            maxi = max(maxi, deg+1)   # na biezaco uaktualniam
+    order.reverse()   # zmiana kolejnosci, O(V) time
+    return order
+
+
+find_peo_mcs = find_peo_mcs2
 
 
 def find_maximum_clique_peo(graph, order):
