@@ -102,6 +102,24 @@ def find_peo_mcs2(graph):
     return order
 
 
+def find_peo_mcs3(graph):   # using the graph copy
+    """Finding PEO in a chordal graph using maximum cardinality search, O(V^2) time."""
+    if graph.is_directed():
+        raise ValueError("the graph is directed")
+    order = list()   # PEO
+    H = graph.copy()
+    visited_degree = dict((node, 0) for node in graph.iternodes()) # O(V) time
+    for step in range(graph.v()):
+        source = max(H.iternodes(), key=visited_degree.__getitem__) # O(V) time
+        order.append(source)
+        # Update visited degree.
+        for target in H.iteradjacent(source):   # total O(E) time
+            visited_degree[target] += 1
+        H.del_node(source)
+    order.reverse()   # O(V) time
+    return order
+
+
 find_peo_mcs = find_peo_mcs2
 
 

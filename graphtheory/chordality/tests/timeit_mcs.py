@@ -8,6 +8,7 @@ from graphtheory.chordality.chordaltools import make_random_ktree
 from graphtheory.chordality.chordaltools import make_random_chordal
 from graphtheory.chordality.peotools import find_peo_mcs1
 from graphtheory.chordality.peotools import find_peo_mcs2
+from graphtheory.chordality.peotools import find_peo_mcs3
 
 V = 10
 G = make_random_chordal(V)
@@ -21,6 +22,10 @@ print ("{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 print ( "Testing find_peo_mcs2 ..." )
 t1 = timeit.Timer(lambda: find_peo_mcs2(G))
+print ("{} {} {}".format(V, E, t1.timeit(1)) )   # single run
+
+print ( "Testing find_peo_mcs3 ..." )
+t1 = timeit.Timer(lambda: find_peo_mcs3(G))
 print ("{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF
