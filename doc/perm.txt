@@ -14,16 +14,24 @@ from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
 from graphtheory.permutations.permtools import perm_has_edge
 from graphtheory.permutations.permtools import make_complement_perm
+from graphtheory.permutations.permtools import make_abstract_perm_graph
 
 # perm has numbers from 0 to n-1.
 n = 10
-perm = make_random_perm(n)
-perm = make_star_perm(n)   # make perm for bipartite graph K_{1,n-1}
-perm = make_bipartite_perm(p=3, q=4)   # make perm for bipartite graph K_{p,q}
-perm = make_path_perm(n)   # make perm for path graph P_n
+perm = make_random_perm(n)   # random perm graph
+perm = make_star_perm(n)   # bipartite graph K_{1,n-1}
+perm = make_bipartite_perm(p=3, q=4)   # bipartite graph K_{p,q}
+perm = make_path_perm(n)   # path graph P_n
+assert isinstance(perm, list)
+assert len(perm) == n
+assert sorted(perm) == list(range(n))
 assert perm_has_edge(perm, 1, 2)   # O(n) time
-perm2 = make_complement_perm(perm)
+perm2 = make_complement_perm(perm)   # O(n) time
 assert not perm_has_edge(perm2, 1, 2)
+
+# Create an abstract perm graph.
+G = make_abstract_perm_graph(perm)
+assert isinstance(G, Graph)
 ----------------------------------------------------------------------
 # CONNECTIVITY
 
