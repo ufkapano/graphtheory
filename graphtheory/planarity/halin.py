@@ -25,7 +25,7 @@ class HalinGraph:
         
         Parameters
         ----------
-        graph : undirected graph
+        graph : an undirected graph
         """
         if graph.is_directed():
             raise ValueError("the graph is directed")

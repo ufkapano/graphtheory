@@ -1,0 +1,31 @@
+ASTEROIDAL TRIPLE-FREE GRAPHS (AT-FREE GRAPHS)
+----------------------------------------------------------------------
+# RECOGNITION IN O(n^4) TIME
+
+from graphtheory.structures.edges import Edge
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.asteroidal.atfree import ATFreeGraph
+
+gf = GraphFactory(Graph)
+
+# Exemplary AT-free graphs.
+G = gf.make_cyclic(n=4)   # undirected cyclic graph C_4
+#G = gf.make_cyclic(n=5)   # undirected cyclic graph C_5
+#G = gf.make_prism(size=3)
+
+algorithm = ATFreeGraph(G)
+algorithm.run()
+assert algorithm.is_at_free()
+
+# Exemplary graphs with AT.
+G = gf.make_cyclic(n=6)   # undirected cyclic graph C_6
+
+algorithm = ATFreeGraph(G)
+algorithm.run()
+assert not algorithm.is_at_free()
+----------------------------------------------------------------------
+MAXIMUM INDEPENDET SETS IN O(n^4) TIME
+
+----------------------------------------------------------------------
+EOF

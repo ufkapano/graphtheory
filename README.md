@@ -52,7 +52,7 @@ chordal completion (PEO), vertex coloring
 * Directed series-parallel graphs: recognition, generators
 * Halin graphs (exact algorithms): recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
-* Chordal graphs (exact algorithms): recognition, generators, 
+* Chordal graphs (exact algorithms): recognition O(n+m), generators, 
 finding PEO (MCS), 
 finding maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
@@ -65,12 +65,14 @@ traversing (BFS, DFS),
 finding path decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
-* Permutation graphs: generators, 
+* Permutation graphs: perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 
 connectivity O(n)
 * Circle graphs: double perm representation, generators, 
 traversing (BFS, DFS) O(n^2),
 connectivity O(n^2)
+* AT-free graphs: recognition O(n^4),
+finding maximum independent set O(n^4)
 * Clustering: Kruskal
 
 ## Download
@@ -143,6 +145,6 @@ Maciej Mularski (interval graphs)
 
 Angelika Siwek (AT-free graphs)
 
-Honorata Zych (chordal completion)
+Honorata Zych (triangulations of graphs)
 
 EOF
