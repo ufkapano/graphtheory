@@ -25,7 +25,23 @@ algorithm = ATFreeGraph(G)
 algorithm.run()
 assert not algorithm.is_at_free()
 ----------------------------------------------------------------------
-MAXIMUM INDEPENDET SETS IN O(n^4) TIME
+MAXIMUM INDEPENDENT SETS IN O(n^4) TIME
 
+# Finding the independence number.
+from graphtheory.asteroidal.atfreeiset1 import ATFreeIndependentSet
+
+G = gf.make_cyclic(n=4)   # undirected cyclic graph C_4
+algorithm = ATFreeIndependentSet(G)
+algorithm.run()
+assert algorithm.cardinality == 2
+----------------------------------------------------------------------
+# Finding a maximum independent set.
+from graphtheory.asteroidal.atfreeiset2 import ATFreeIndependentSet
+
+G = gf.make_cyclic(n=4)   # undirected cyclic graph C_4
+algorithm = ATFreeIndependentSet(G)
+algorithm.run()
+print(algorithm.independent_set)   # {0, 2} or {1, 3}
+assert algorithm.cardinality == 2
 ----------------------------------------------------------------------
 EOF

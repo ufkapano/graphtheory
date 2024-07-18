@@ -37,8 +37,8 @@ class ATFreeGraph:
 
     def create_component_structure(self):
         """Create component structure for the graph."""
-        # component_structure[u][v] == 0, if v in N[u],
-        # component_structure[u][v] == k > 0, if v in k component of V-N[u].
+        # component_structure[u,v] == 0, if v in N[u],
+        # component_structure[u,v] == k > 0, if v in k component of V-N[u].
         # Czyli jezeli u.v sa w tej samej skladowej spojnej, to jest path.
         V = set(self.graph.iternodes())
         for v in V:
