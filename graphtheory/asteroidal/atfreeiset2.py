@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-#
-# Wersja z cs4 do importu do testow bez print().
 
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.connectivity.connected import ConnectedComponentsBFS
 
 class ATFreeIndependentSet:
-    """Find a maximum independent set for AT-free graphs."""
+    """Find a maximum independent set for AT-free graphs.
+
+    Based on:
+
+    H. Broersma, T. Kloks, D. Kratsch, H. Muller,
+    Independent sets in asteroidal triple-free graphs,
+    SIAM J. Discrete Math. 12, No.2, 276-287 (1999).
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""

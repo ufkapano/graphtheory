@@ -5,7 +5,14 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.connectivity.connected import ConnectedComponentsBFS
 
 class ATFreeIndependentSet:
-    """Finding the independence number for AT-free graphs."""
+    """Finding the independence number for AT-free graphs.
+
+    Based on:
+
+    H. Broersma, T. Kloks, D. Kratsch, H. Muller,
+    Independent sets in asteroidal triple-free graphs,
+    SIAM J. Discrete Math. 12, No.2, 276-287 (1999).
+    """
 
     def __init__(self, graph):
         """The algorithm initialization."""
