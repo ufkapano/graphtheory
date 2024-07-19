@@ -67,10 +67,31 @@ algorithm = PermBFS(perm)
 algorithm.run(source,
     pre_action=lambda node: pre_order.append(node),
     post_action=lambda node: post_order.append(node))
+
 # Results.
 print(pre_order)   # node list
 print(post_order)   # node list
 print(algorithm.parent)   # BFS/DFS tree as a dict
 print(algorithm.path(source, target)   # node list
+----------------------------------------------------------------------
+# FINDING A CHORDAL COMPLETION FOR PERMUTATION GRAPHS IN O(n^4) TIME
+
+from graphtheory.permutations.permpeo import PermGraphPEO
+from graphtheory.chordality.peotools import is_peo1
+
+n = 10
+perm = make_bipartite_perm(n // 2, n-(n // 2))   # exemplary perm graph
+assert len(perm) == n
+algorithm = PermGraphPEO(perm)
+algorithm.run()
+
+# Results.
+algorithm.graph.show()   # chordal completion
+assert isinstance(algorithm.graph, Graph)
+print(algorithm.order)   # PEO for chordal completion
+assert isinstance(algorithm.order, list)
+assert len(algorithm.order) == n
+print(algorithm.new_edges)   # new edges added to the perm graph
+assert is_peo1(algorithm.graph, algorithm.order)
 ----------------------------------------------------------------------
 EOF

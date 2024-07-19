@@ -25,7 +25,7 @@ algorithm = ATFreeGraph(G)
 algorithm.run()
 assert not algorithm.is_at_free()
 ----------------------------------------------------------------------
-MAXIMUM INDEPENDENT SETS IN O(n^4) TIME
+# MAXIMUM INDEPENDENT SETS IN O(n^4) TIME
 
 # Finding the independence number.
 from graphtheory.asteroidal.atfreeiset1 import ATFreeIndependentSet

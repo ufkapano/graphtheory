@@ -67,7 +67,8 @@ finding path decomposition
 chordal completion (PEO), vertex coloring
 * Permutation graphs: perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 
-connectivity O(n)
+connectivity O(n),
+greedy triangulations O(n^4)
 * Circle graphs: double perm representation, generators, 
 traversing (BFS, DFS) O(n^2),
 connectivity O(n^2)
