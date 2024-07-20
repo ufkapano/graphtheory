@@ -98,7 +98,9 @@ class ATFreeIndependentSet:
             self.alpha_C[key] = 1
         # Components and intervals with two elements.
         for key in self.bucket_I[2]:
-            self.alpha_I[key] = 1
+            #self.alpha_I[key] = 1
+            # Componens are connected but intervals do not have to be.
+            self.alpha_I[key] = self.find_alpha_I(key)
         for key in self.bucket_C[2]:
             self.alpha_C[key] = 1
         # Przy wiekszej licznosci trzeba uzywac formul rozkladu.

@@ -98,12 +98,11 @@ class ATFreeIndependentSet:
             self.alpha_C[key] = set(self.component_structure[key])
         # Components and intervals with two elements.
         for key in self.bucket_I[2]:
-            S = set(self.intervals[key])
-            S.pop()   # zostaje jeden element
-            self.alpha_I[key] = S
+            # Componens are connected but intervals do not have to be.
+            self.alpha_I[key] = self.find_alpha_I(key)
         for key in self.bucket_C[2]:
             S = set(self.component_structure[key])
-            S.pop()   # zostaje jeden element
+            S.pop()   # one element left
             self.alpha_C[key] = S
         # Przy wiekszej licznosci trzeba uzywac formul rozkladu.
         for i in range(3, self.graph.v()):
