@@ -12,6 +12,7 @@ from graphtheory.permutations.permtools import make_random_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
+from graphtheory.permutations.permtools import make_ladder_perm
 from graphtheory.permutations.permtools import perm_has_edge
 from graphtheory.permutations.permtools import make_complement_perm
 from graphtheory.permutations.permtools import make_abstract_perm_graph
@@ -22,6 +23,7 @@ perm = make_random_perm(n)   # random perm graph
 perm = make_star_perm(n)   # bipartite graph K_{1,n-1}
 perm = make_bipartite_perm(p=3, q=4)   # bipartite graph K_{p,q}
 perm = make_path_perm(n)   # path graph P_n
+perm = make_ladder_perm(n)   # ladder graph (bipartite)
 assert isinstance(perm, list)
 assert len(perm) == n
 assert sorted(perm) == list(range(n))

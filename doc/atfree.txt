@@ -44,4 +44,7 @@ algorithm.run()
 print(algorithm.independent_set)   # {0, 2} or {1, 3}
 assert algorithm.cardinality == 2
 ----------------------------------------------------------------------
+# MINIMUM DOMINATING SETS
+
+----------------------------------------------------------------------
 EOF

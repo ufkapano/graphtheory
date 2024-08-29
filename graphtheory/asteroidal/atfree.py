@@ -43,11 +43,11 @@ class ATFreeGraph:
         V = set(self.graph.iternodes())
         for v in V:
             # Label 0 for nodes in N[v].
-            closed_neighborhood = set(self.graph.iteradjacent(v)).union([v])
-            for u in closed_neighborhood:
+            Nv = set(self.graph.iteradjacent(v)).union([v])
+            for u in Nv:
                 self.component_structure[v,u] = 0
 
-            G_reduced = self.graph.subgraph(V - closed_neighborhood)
+            G_reduced = self.graph.subgraph(V - Nv)
             algorithm = ConnectedComponentsBFS(G_reduced)
             algorithm.run()
             for u in algorithm.cc:   # tu jest numeracja skladowych od 0
@@ -68,9 +68,9 @@ class ATFreeGraph:
         for edge in Gc.iteredges():
             u, v = edge.source, edge.target
             # Obliczanie domknietych sasiedztw.
-            u_neighborhood = set(self.graph.iteradjacent(u)).union([u])
-            v_neighborhood = set(self.graph.iteradjacent(v)).union([v])
-            union_of_neighborhoods = u_neighborhood.union(v_neighborhood)
+            Nu = set(self.graph.iteradjacent(u)).union([u])
+            Nv = set(self.graph.iteradjacent(v)).union([v])
+            union_of_neighborhoods = Nu.union(Nv)
             for w in V - union_of_neighborhoods:
                 # Check for each pair of vertices whether they belong to the
                 # same connected component when the closed neighborhood of the
@@ -81,7 +81,7 @@ class ATFreeGraph:
                     self.component_structure[v,w] and
                     self.component_structure[w,u] ==
                     self.component_structure[w,v]):
-                    self.asteroidal_triple = [u, v, w]
+                    self.asteroidal_triple = (u, v, w)
                     return None
 
     def is_at_free(self):

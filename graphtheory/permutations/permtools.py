@@ -49,6 +49,24 @@ def make_path_perm(n):
         swap(perm, -3, -2)
         return perm
 
+def make_ladder_perm(n):
+    """Return a perm for a ladder graph (bipartite)."""
+    if n < 4:
+        raise ValueError("n too small")
+    elif n % 2 != 0:
+        raise ValueError("n have to be even")
+    elif n == 4:
+        return [2, 3, 0, 1]
+    elif n > 4:
+        perm = make_ladder_perm(n-2)
+        assert perm[-3] == n-3
+        perm[-3] = n-2
+        perm.append(n-3)
+        perm.append(n-1)
+        swap(perm, -1, -2)
+        swap(perm, -2, -3)
+        return perm
+
 def perm_has_edge1(perm, i, j):
     """Test if the perm graph has Edge(i, j), O(n) time, O(n) memory."""
     if i > j:

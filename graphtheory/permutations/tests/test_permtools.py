@@ -7,6 +7,7 @@ from graphtheory.permutations.permtools import make_random_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
+from graphtheory.permutations.permtools import make_ladder_perm
 from graphtheory.permutations.permtools import perm_has_edge1
 from graphtheory.permutations.permtools import perm_has_edge2
 from graphtheory.permutations.permtools import make_abstract_perm_graph
@@ -47,6 +48,14 @@ class TestPermGraphs(unittest.TestCase):
         self.assertEqual(make_path_perm(4), [1, 3, 0, 2])
         self.assertEqual(make_path_perm(5), [2, 0, 4, 1, 3])
         self.assertEqual(make_path_perm(6), [1, 3, 0, 5, 2, 4])
+
+    def test_ladder_perm(self):
+        self.assertRaises(ValueError, make_ladder_perm, 2)
+        self.assertRaises(ValueError, make_ladder_perm, 5)
+        self.assertEqual(make_ladder_perm(4), [2, 3, 0, 1])
+        self.assertEqual(make_ladder_perm(6), [2, 4, 0, 5, 1, 3])
+        self.assertEqual(make_ladder_perm(8), [2, 4, 0, 6, 1, 7, 3, 5])
+        self.assertEqual(make_ladder_perm(10), [2, 4, 0, 6, 1, 8, 3, 9, 5, 7])
 
     def test_has_edge(self):
         perm = [4, 0, 1, 2, 3]   # star graph

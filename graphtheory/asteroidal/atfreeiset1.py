@@ -43,13 +43,13 @@ class ATFreeIndependentSet:
         """Create component structure for G."""
         V = set(self.graph.iternodes())
         for v in V:
-            closed_neighborhood = set(self.graph.iteradjacent(v)).union([v])
-            G_reduced = self.graph.subgraph(V - closed_neighborhood)
+            Nv = set(self.graph.iteradjacent(v)).union([v])
+            G_reduced = self.graph.subgraph(V - Nv)
             algorithm = ConnectedComponentsBFS(G_reduced)
             algorithm.run()
             component_list = [set() for x in range(algorithm.n_cc + 1)]
-            component_list[0] = closed_neighborhood
-            for u in closed_neighborhood:
+            component_list[0] = Nv
+            for u in Nv:
                 self.component_structure[v,u] = component_list[0]
             for u in algorithm.cc:   # tu jest numeracja skladowych od 0
                 idx = algorithm.cc[u] + 1   # numerujemy od 1
