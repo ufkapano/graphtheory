@@ -2,7 +2,6 @@ ASTEROIDAL TRIPLE-FREE GRAPHS (AT-FREE GRAPHS)
 ----------------------------------------------------------------------
 # RECOGNITION IN O(n^4) TIME
 
-from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.asteroidal.atfree import ATFreeGraph
@@ -28,23 +27,39 @@ assert not algorithm.is_at_free()
 # MAXIMUM INDEPENDENT SETS IN O(n^4) TIME
 
 # Finding the independence number.
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
 from graphtheory.asteroidal.atfreeiset1 import ATFreeIndependentSet
 
+gf = GraphFactory(Graph)
 G = gf.make_cyclic(n=4)   # undirected cyclic graph C_4
 algorithm = ATFreeIndependentSet(G)
 algorithm.run()
 assert algorithm.cardinality == 2
 ----------------------------------------------------------------------
 # Finding a maximum independent set.
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
 from graphtheory.asteroidal.atfreeiset2 import ATFreeIndependentSet
 
+gf = GraphFactory(Graph)
 G = gf.make_cyclic(n=4)   # undirected cyclic graph C_4
 algorithm = ATFreeIndependentSet(G)
 algorithm.run()
-print(algorithm.independent_set)   # {0, 2} or {1, 3}
+assert algorithm.independent_set in [{0, 2}, {1, 3}]
 assert algorithm.cardinality == 2
 ----------------------------------------------------------------------
 # MINIMUM DOMINATING SETS
 
+from graphtheory.structures.graphs import Graph
+from graphtheory.structures.factory import GraphFactory
+from graphtheory.asteroidal.atfreedset import ATFreeDominatingSet
+
+gf = GraphFactory(Graph)
+G = gf.make_path(n=6)   # undirected path graph P_6   0--1--2--3--4--5
+algorithm = ATFreeDominatingSet(G)
+algorithm.run()
+assert algorithm.dominating_set == {1, 4}
+assert algorithm.cardinality == 2
 ----------------------------------------------------------------------
 EOF

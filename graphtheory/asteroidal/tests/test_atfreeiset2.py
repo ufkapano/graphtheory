@@ -16,8 +16,7 @@ class TestATFreeIndependentSet(unittest.TestCase):
             G.add_edge(edge)
         algorithm = ATFreeIndependentSet(G)
         algorithm.run()
-        self.assertEqual(algorithm.independent_set, {0, 2})
-        #self.assertEqual(algorithm.independent_set, {1, 3})
+        self.assertTrue(algorithm.independent_set in [{0, 2}, {1, 3}])
         self.assertEqual(algorithm.cardinality, 2)
 
     def test_c5(self):
