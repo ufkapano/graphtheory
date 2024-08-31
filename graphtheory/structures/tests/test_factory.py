@@ -29,6 +29,15 @@ class TestGraphFactory(unittest.TestCase):
         aset = set(edge.weight for edge in G.iteredges())
         self.assertEqual(G.e(), len(aset))
 
+    def test_path(self):
+        G = self.graph_factory.make_path(n=self.N, directed=False)
+        self.assertFalse(G.is_directed())
+        self.assertEqual(G.v(), self.N)
+        self.assertEqual(G.e(), self.N-1)
+        aset = set(edge.weight for edge in G.iteredges())
+        self.assertEqual(G.e(), len(aset))
+        self.assertEqual(aset, set(range(1, self.N)))
+
     def test_cyclic(self):
         G = self.graph_factory.make_cyclic(n=self.N, directed=False)
         self.assertFalse(G.is_directed())

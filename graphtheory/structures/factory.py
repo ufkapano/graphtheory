@@ -32,8 +32,19 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
+    def make_path(self, n=1, directed=False):
+        """Create a weighted path graph P_n."""
+        graph = self.cls(n=n, directed=directed)
+        weights = list(range(1, n))   # different weights
+        random.shuffle(weights)
+        for node in range(n):
+            graph.add_node(node)
+        for i in range(n-1):
+            graph.add_edge(Edge(i, i+1, weights.pop()))
+        return graph
+
     def make_cyclic(self, n=1, directed=False):
-        """Create a weighted cyclic graph."""
+        """Create a weighted cyclic graph C_n."""
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
         graph = self.cls(n=n, directed=directed)
