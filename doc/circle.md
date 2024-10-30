@@ -2,11 +2,13 @@
 
 ## PERMUTATION REPRESENTATION
 
->    a---c       path graph P_3  a-b-c
->  / |   | \   double perm [a,c,b,c,a,b] clockwise
-> b--+---+--b
->  \ |   | /
->    a---c
+~~~python
+#    a---c       path graph P_3  a---b---c
+#  / |   | \   double perm [a,c,b,c,a,b] clockwise
+# b--+---+--b
+#  \ |   | /
+#    a---c
+~~~
 
 ## RECOGNITION
 

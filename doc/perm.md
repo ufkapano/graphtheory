@@ -1,13 +1,17 @@
-PERMUTATION GRAPHS
-----------------------------------------------------------------------
-# RECOGNITION
+# PERMUTATION GRAPHS
 
+## RECOGNITION
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
-----------------------------------------------------------------------
-# GENERATORS
+# TO DO
+~~~
 
+## GENERATORS
+
+~~~python
 from graphtheory.permutations.permtools import make_random_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
@@ -34,9 +38,11 @@ assert not perm_has_edge(perm2, 1, 2)
 # Create an abstract perm graph.
 G = make_abstract_perm_graph(perm)
 assert isinstance(G, Graph)
-----------------------------------------------------------------------
-# CONNECTIVITY
+~~~
 
+## CONNECTIVITY
+
+~~~python
 from graphtheory.permutations.permtools import perm_is_connected
 from graphtheory.permutations.permtools import perm_connected_components
 from graphtheory.permutations.permtools import make_abstract_perm_graph
@@ -53,9 +59,11 @@ graph = make_abstract_perm_graph(perm)
 assert isinstance(graph, Graph)
 assert graph.v() == 5   # K_5
 assert graph.e() == 10   # K_5
-----------------------------------------------------------------------
-# TRAVERSING
+~~~
 
+## TRAVERSING
+
+~~~python
 from graphtheory.permutations.permbfs import PermBFS
 from graphtheory.permutations.permdfs import PermDFS
 
@@ -75,9 +83,11 @@ print(pre_order)   # node list
 print(post_order)   # node list
 print(algorithm.parent)   # BFS/DFS tree as a dict
 print(algorithm.path(source, target)   # node list
-----------------------------------------------------------------------
-# FINDING A CHORDAL COMPLETION FOR PERMUTATION GRAPHS IN O(n^4) TIME
+~~~
 
+## FINDING A CHORDAL COMPLETION FOR PERMUTATION GRAPHS IN O(n^4) TIME
+
+~~~python
 from graphtheory.permutations.permpeo import PermGraphPEO
 from graphtheory.chordality.peotools import is_peo1
 
@@ -95,5 +105,6 @@ assert isinstance(algorithm.order, list)
 assert len(algorithm.order) == n
 print(algorithm.new_edges)   # new edges added to the perm graph
 assert is_peo1(algorithm.graph, algorithm.order)
-----------------------------------------------------------------------
+~~~
+
 EOF

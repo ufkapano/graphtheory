@@ -65,7 +65,7 @@ traversing (BFS, DFS),
 finding path decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
-* Permutation graphs: perm representation, generators, 
+* [Permutation graphs](/doc/perm.md): perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 
 connectivity O(n),
 greedy triangulations O(n^4)
@@ -89,7 +89,7 @@ To get the git version do
 
 ## Usage
 
-See doc/quickstart.txt and other doc/*.txt or doc/*.md files.
+See `doc/quickstart.txt` and other `doc/*.txt` or `doc/*.md` files.
 
 ## References
 
