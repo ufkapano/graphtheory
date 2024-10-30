@@ -72,8 +72,9 @@ greedy triangulations O(n^4)
 * Circle graphs: double perm representation, generators, 
 traversing (BFS, DFS) O(n^2),
 connectivity O(n^2)
-* AT-free graphs: recognition O(n^4),
-finding maximum independent set O(n^4)
+* [AT-free graphs](/doc/atfree.md): recognition O(n^4),
+finding maximum independent set O(n^4),
+finding minimum dominating set 
 * Clustering: Kruskal
 
 ## Download
@@ -147,5 +148,11 @@ Maciej Mularski (interval graphs)
 Angelika Siwek (AT-free graphs)
 
 Honorata Zych (triangulations of graphs)
+
+Oliwia Gil (circular-arc graphs)
+
+Mikołaj Szymański (dominating sets)
+
+[Back to the top](#graphtheory-package)
 
 EOF

@@ -15,7 +15,15 @@ class ATFreeDominatingSet:
     D. Kratsch, Domination and total domination in asteroidal triple-free graphs,
     Discrete Appl. Math. 99 No.1-3, 111-123 (2000).
     '''
+
     def __init__(self, graph, w=5):
+        """The algorithm initialization.
+        
+        Parameters
+        ----------
+        graph : an undirected graph
+        w : an algorithm parameter, w = 5 for AT-free graphs
+        """
         if graph.is_directed():
             raise ValueError("the graph is directed")
         # Zakladam. ze mamy AT-free graph.
@@ -29,6 +37,7 @@ class ATFreeDominatingSet:
         self._A = None   # queues (list od dicts)
 
     def run(self):
+        """Executable pseudocode."""
         for source in self.graph.iternodes():
             self.find_bfs_levels(source)
             self.init_queue()
