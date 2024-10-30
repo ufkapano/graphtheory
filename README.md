@@ -21,13 +21,13 @@ maximum-cardinality matching (Hopcroft-Karp, Ford-Fulkerson)
 * Matching: heuristics (greedy for a maximal cardinality matching,
 greedy for a minimum weight matching)
 * Vertex coloring: sequential (US, RS, CS),
-Brooks' theorem (Delta colors),
+Brooks' theorem (&Delta; colors),
 m-coloring (backtracking, exact),
 counter method (exact),
 LF, SLF, RLF, SL, GIS
 * Edge coloring: with the line graph (using vertex coloring), 
 sequential (US, RS, CS), 
-NTL (using Delta or Delta+1 colors),
+NTL (using &Delta; or &Delta;+1 colors),
 complete graphs (exact),
 bipartite graphs (exact)
 * Independent sets: backtracking (exact), US, RS, LL, SF
@@ -69,7 +69,7 @@ chordal completion (PEO), vertex coloring
 traversing (BFS, DFS) O(n^2), 
 connectivity O(n),
 greedy triangulations O(n^4)
-* Circle graphs: double perm representation, generators, 
+* [Circle graphs](/doc/circle.md): double perm representation, generators, 
 traversing (BFS, DFS) O(n^2),
 connectivity O(n^2)
 * [AT-free graphs](/doc/atfree.md): recognition O(n^4),
@@ -89,7 +89,7 @@ To get the git version do
 
 ## Usage
 
-See doc/quickstart.txt and other doc/*.txt files.
+See doc/quickstart.txt and other doc/*.txt or doc/*.md files.
 
 ## References
 

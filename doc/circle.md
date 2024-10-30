@@ -1,20 +1,25 @@
-CIRCLE GRAPHS
-----------------------------------------------------------------------
-# PERMUTATION REPRESENTATION
+# CIRCLE GRAPHS
 
-#    a---c       path graph P_3  a-b-c
-#  / |   | \   double perm [a,c,b,c,a,b] clockwise
-# b--+---+--b
-#  \ |   | /
-#    a---c
-----------------------------------------------------------------------
-# RECOGNITION
+## PERMUTATION REPRESENTATION
 
+>    a---c       path graph P_3  a-b-c
+>  / |   | \   double perm [a,c,b,c,a,b] clockwise
+> b--+---+--b
+>  \ |   | /
+>    a---c
+
+## RECOGNITION
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
-----------------------------------------------------------------------
-# GENERATORS
+# TO DO
+~~~
+
+## GENERATORS
+
+~~~python
 from graphtheory.permutations.circletools import make_random_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
@@ -33,9 +38,11 @@ perm = make_star_circle(n)   # make perm for star graph K_{1,n-1}
 
 assert len(perm) == 2*n
 assert sorted(perm) == sorted(2 * list(range(n)))
-----------------------------------------------------------------------
-# FUNCTIONS
+~~~
 
+## FUNCTIONS
+
+~~~python
 from graphtheory.permutations.circletools import is_perm_graph
 from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import circle_has_edge
@@ -63,9 +70,11 @@ G = make_abstract_circle_graph(perm)
 assert isinstance(G, Graph)
 assert G.v() == 4   # C_4
 assert G.e() == 4   # C_4
-----------------------------------------------------------------------
-# TRAVERSING
+~~~
 
+## TRAVERSING
+
+~~~python
 from graphtheory.permutations.circlebfs import CircleBFS
 from graphtheory.permutations.circledfs import CircleDFS
 
@@ -84,5 +93,6 @@ print(pre_order)   # node list
 print(post_order)   # node list
 print(algorithm.parent)   # BFS/DFS tree as a dict
 print(algorithm.path(source, target)   # node list
-----------------------------------------------------------------------
+~~~
+
 EOF
