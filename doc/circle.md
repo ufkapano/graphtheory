@@ -4,10 +4,18 @@
 
 ~~~python
 #    a---c       path graph P_3  a---b---c
-#  / |   | \   double perm [a,c,b,c,a,b] clockwise
-# b--+---+--b
-#  \ |   | /
+#  / |   | \     nodes: a, b, c
+# b--+---+--b    edges: (a,b), (b,c)
+#  \ |   | /   double perm (clockwise): [a,c,b,c,a,b]
 #    a---c
+#
+#     c---a      cycle graph C_4
+#   / |   | \    nodes: a, b, c, d
+# b---+---+---b  edges: (a,b), (b,c), (c,d), (d,a)
+# |   |   |   |  double perm (clockwise): [a,b,d,a,c,d,b,c]
+# d---+---+---d
+#   \ |   | /
+#     c---a
 ~~~
 
 ## RECOGNITION

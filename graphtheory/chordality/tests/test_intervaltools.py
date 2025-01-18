@@ -76,6 +76,7 @@ class TestIntervalGraphs(unittest.TestCase):
 
     def test_interval_is_connected(self):
         self.assertTrue(interval_is_connected([0,1,0,1]))   # P_2
+        self.assertTrue(interval_is_connected(['a','b','a','b']))   # P_2
         self.assertTrue(interval_is_connected([0,1,2,0,1,2]))   # K_3
         self.assertFalse(interval_is_connected([0,0,1,1]))   # P_1 + P_1
 
@@ -89,6 +90,17 @@ class TestIntervalGraphs(unittest.TestCase):
         #print(print_intervals(cliques))
         self.assertEqual(peo, [1, 2, 3, 4])
         self.assertEqual(cliques, [{1, 2, 3}, {3, 4}]) # ordered cliques
+
+    def test_find_peo_cliques2(self):
+        #   a
+        #  / \
+        # b---c---d
+        perm = ['a','b','c','a','b','d','c','d']   # stop
+        peo, cliques = find_peo_cliques(perm)
+        #print()
+        #print(print_intervals(cliques))
+        self.assertEqual(peo, ['a', 'b', 'c', 'd'])
+        self.assertEqual(cliques, [{'a', 'b', 'c'}, {'c', 'd'}]) # ordered cliques
 
     def test_find_max_clique_size(self):
         perm = [1,2,3,1,2,4,3,4]   # stop
