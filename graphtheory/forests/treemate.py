@@ -41,7 +41,7 @@ class BorieMatching:
                     arg2 = self._visit(node)
                     self.mate_set.update(max(arg2, key=len))
         self.cardinality = len(self.mate_set)
-        for edge in self.mate_set:   # O(V) time
+        for edge in self.mate_set:   # O(n) time
             self.mate[edge.source] = edge.target
             self.mate[edge.target] = edge.source
 

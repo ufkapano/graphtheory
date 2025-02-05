@@ -18,7 +18,7 @@ class BFSWithQueue:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.bfs import BFSWithQueue
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = BFSWithQueue(G)
@@ -107,7 +107,7 @@ class SimpleBFS:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.bfs import SimpleBFS
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = SimpleBFS(G)
@@ -188,7 +188,7 @@ class BFSWithDepthTracker:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.bfs import BFSWithDepthTracker
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = BFSWithDepthTracker(G)

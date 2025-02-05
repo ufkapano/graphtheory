@@ -100,6 +100,7 @@ print ( algorithm.parent )        # DFS tree as a dict
 
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.forests.treepeo import find_peo_tree
+from graphtheory.forests.treepeo import TreePEO
 
 gf = GraphFactory(Graph)
 G = gf.make_tree(n=10)   # random tree
@@ -107,5 +108,10 @@ assert G.v() == G.e() + 1
 # Every tree is a chordal graph.
 peo = find_peo_tree(G)   # list of nodes
 assert len(peo) == G.v()
+
+algorithm = TreePEO(G)
+algorithm.run()
+print ( algorithm.peo )   # list of nodes
+print ( algorithm.parent )   # a tree as a dict
 ----------------------------------------------------------------------
 EOF

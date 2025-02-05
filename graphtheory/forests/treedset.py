@@ -99,11 +99,11 @@ class TreeDominatingSet1:
     def run(self):
         """Executable pseudocode."""
         used = set()   # for dset and neighbors
-        # A dictionary with node degrees, O(V) time.
+        # A dictionary with node degrees, O(n) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = collections.deque()   # for leafs
-        # Put leafs to the queue, O(V) time.
+        Q = collections.deque()   # for leaves
+        # Put leaves to the queue, O(n) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
                 self.dominating_set.add(node)   # isolated node from the beginning
@@ -170,11 +170,11 @@ class TreeDominatingSet2:
     def run(self):
         """Executable pseudocode."""
         used = set()   # for dset and neighbors
-        # A dictionary with node degrees, O(V) time.
+        # A dictionary with node degrees, O(n) time.
         degree_dict = dict((node, self.graph.degree(node))
             for node in self.graph.iternodes())
-        Q = collections.deque()   # for leafs
-        # Put leafs to the queue, O(V) time.
+        Q = collections.deque()   # for leaves
+        # Put leaves to the queue, O(n) time.
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:
                 self.dominating_set.add(node)   # isolated node from the beginning

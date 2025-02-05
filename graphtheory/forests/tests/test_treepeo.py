@@ -4,6 +4,7 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treepeo import find_peo_tree
+from graphtheory.forests.treepeo import TreePEO
 
 # 0---1---3---4
 #     |   |
@@ -27,21 +28,40 @@ class TestTreePEO(unittest.TestCase):
         self.assertEqual(len(peo), self.N)
         self.assertEqual(peo, [0, 2, 4, 5, 1, 3])
 
-    def test_peo2(self):
+        algorithm = TreePEO(self.G)
+        algorithm.run()
+        self.assertEqual(algorithm.peo, [0, 2, 4, 5, 1, 3])
+        self.assertEqual(len(algorithm.parent), self.G.v())
+        self.assertEqual(algorithm.parent, {0: 1, 2: 1, 4: 3, 5: 3, 1: 3, 3: None})
+        #print(algorithm.parent)
+
+    def test_peo2(self):   # single edge
         T = Graph()
         for edge in [Edge(0, 1)]:
             T.add_edge(edge)
         peo = find_peo_tree(T)
-        self.assertEqual(len(peo), 2)
+        self.assertEqual(len(peo), T.v())
         self.assertEqual(peo, [0, 1])
 
-    def test_peo3(self):
+        algorithm = TreePEO(T)
+        algorithm.run()
+        self.assertEqual(algorithm.peo, [0, 1])
+        self.assertEqual(len(algorithm.parent), T.v())
+        #print(algorithm.parent)
+
+    def test_peo3(self):   # two trees
         T = Graph()
         for edge in [Edge(0, 1), Edge(2, 3)]:
             T.add_edge(edge)
         peo = find_peo_tree(T)
         self.assertEqual(len(peo), 4)
         self.assertEqual(peo, [0, 1, 2, 3])
+
+        algorithm = TreePEO(T)
+        algorithm.run()
+        self.assertEqual(algorithm.peo, [0, 1, 2, 3])
+        self.assertEqual(len(algorithm.parent), T.v())
+        #print(algorithm.parent)
 
     def test_peo4(self):
         T = Graph()
@@ -51,13 +71,21 @@ class TestTreePEO(unittest.TestCase):
         self.assertEqual(len(peo), 4)
         self.assertEqual(peo, [1, 2, 3, 0])
 
+        algorithm = TreePEO(T)
+        algorithm.run()
+        self.assertEqual(algorithm.peo, [1, 2, 3, 0])
+        self.assertEqual(len(algorithm.parent), T.v())
+        self.assertEqual(algorithm.parent, {1: 0, 2: 0, 3: 0, 0: None})
+        #print(algorithm.parent)
+
     def test_directed_graph(self):
         self.G.directed = True
-        self.assertRaises(ValueError, find_peo_tree, self.G)
+        self.assertRaises(ValueError, TreePEO, self.G)
         T = Graph()   # not a tree
         for edge in [Edge(0, 1), Edge(0, 2), Edge(1, 2), Edge(0, 3)]:
             T.add_edge(edge)
-        self.assertRaises(ValueError, find_peo_tree, T)
+        algorithm = TreePEO(T)
+        self.assertRaises(ValueError, algorithm.run)
 
     def tearDown(self): pass
 

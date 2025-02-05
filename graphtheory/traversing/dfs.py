@@ -21,7 +21,7 @@ class DFSWithStack:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.dfs import DFSWithStack
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = DFSWithStack(G)
@@ -119,7 +119,7 @@ class DFSWithRecursion:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.dfs import DFSWithRecursion
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = DFSWithRecursion(G)
@@ -206,7 +206,7 @@ class SimpleDFS:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.dfs import SimpleDFS
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = SimpleDFS(G)
@@ -283,7 +283,7 @@ class DFSWithDepthTracker:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.traversing.dfs import DFSWithDepthTracker
-    >>> G = Graph(n=10, False)   # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)   # an exemplary undirected graph
     # Add nodes and edges here.
     >>> order = []
     >>> algorithm = DFSWithDepthTracker(G)
