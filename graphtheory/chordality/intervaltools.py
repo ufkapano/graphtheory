@@ -121,6 +121,42 @@ def print_intervals(cliques):
         tab.append(" ".join(row))
     return "\n".join(tab)
 
+def interval_drawing(perm):
+    """Interval graph drawing."""
+    n = len(perm) // 2   # liczba odcinkow
+    used = [-1] * n
+    str_lines = [""] * n   # przygotowanie wierszy dla kazdego node
+    empty = ' '
+    line = '-'
+    for node in perm:   # idziemy wzdluz permutacji
+        last_idx = -1
+        free_line_idx = -1
+        # UWAGA Tu sie wydluzaja tylko wiersze, ktore sie zaczynaja lub koncza,
+        # a inne nie sa wydluzane.
+        if node in used:   # przedzial w trakcie rysowania
+            last_idx = used.index(node)   # nr wiersza z odcinkiem
+            str_lines[last_idx] += str(node)
+            used[last_idx] = -1   # koniec rysowania
+        else:   # wyznaczanie wiersza do rysowania odcinka
+            free_line_idx = min(idx for idx in range(n) if used[idx] == -1)
+            str_lines[free_line_idx] += str(node)
+            used[free_line_idx] = node
+        # Przedluzanie wszystkich wierszy.
+        for idx in range(n):
+            if idx == last_idx:   # skonczyl sie odcinek
+                str_lines[idx] += empty
+            elif idx == free_line_idx:   # zaczal sie odcinek
+                str_lines[idx] += line
+            elif used[idx] == -1:   # pusto
+                str_lines[idx] += empty * (len(str(node)) + 1)
+            else:   # kontynuacja odcinka
+                str_lines[idx] += line * (len(str(node)) + 1)
+    #print(str_lines)
+    for line in str_lines:
+        if line.strip() == "":
+            break
+        print(line)
+
 def interval_is_connected(perm):
     """Testing connectivity using double perm in O(n) time."""
     used = set()

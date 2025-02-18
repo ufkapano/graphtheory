@@ -198,8 +198,7 @@ class TreeDominatingSet2:
                         self.dominating_set.add(target)
                         used.add(target)
                         self.cardinality += 1
-                        for node in self.graph.iteradjacent(target):
-                            used.add(node)   # child goes to used
+                        used.update(self.graph.iteradjacent(target))
                     # Remove the edge from source to target.
                     degree_dict[target] -= 1
                     degree_dict[source] -= 1

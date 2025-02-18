@@ -89,8 +89,8 @@ def make_abstract_circle_graph(perm):
     nodes = set(perm)   # O(n) time
     # dict do zapisu pierwszego i drugiego wystapienia wierzcholka w perm.
     pairs = dict((node, []) for node in nodes)   # O(n) time
-    for i, node in enumerate(perm):   # O(n) time
-        pairs[node].append(i)
+    for idx, node in enumerate(perm):   # O(n) time
+        pairs[node].append(idx)
     assert all(len(pairs[node]) == 2 for node in pairs)
     graph = Graph(n=len(nodes))
     # Jest krawedz, jezeli przedzialy sie zazebiaja.
