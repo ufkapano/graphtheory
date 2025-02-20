@@ -9,6 +9,7 @@ from graphtheory.structures.graphs import Graph
 # GENERATORS
 
 from graphtheory.chordality.intervaltools import make_random_interval
+from graphtheory.chordality.intervaltools import make_complete_interval
 from graphtheory.chordality.intervaltools import make_path_interval
 from graphtheory.chordality.intervaltools import make_tepee_interval
 from graphtheory.chordality.intervaltools import make_2tree_interval
@@ -19,6 +20,7 @@ from graphtheory.chordality.intervaltools import make_abstract_interval_graph
 # Generators return an interval graph as double perm.
 n = 10
 perm = make_random_interval(n)   # random interval graph
+perm = make_complete_interval(n)   # K_n graph
 perm = make_path_interval(n)   # P_n graph
 perm = make_tepee_interval(n)   # tepee graph
 perm = make_2tree_interval(n)   # interval 2-tree

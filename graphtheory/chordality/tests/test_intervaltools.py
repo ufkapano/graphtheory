@@ -4,6 +4,7 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.intervaltools import make_random_interval
+from graphtheory.chordality.intervaltools import make_complete_interval
 from graphtheory.chordality.intervaltools import make_path_interval
 from graphtheory.chordality.intervaltools import make_tepee_interval
 from graphtheory.chordality.intervaltools import make_2tree_interval
@@ -28,6 +29,11 @@ class TestIntervalGraphs(unittest.TestCase):
         self.assertEqual(len(perm), 2*n)
         self.assertEqual(sorted(perm), sorted(i % n for i in range(2*n)))
         #print(perm)
+
+    def test_complete_interval(self):
+        self.assertEqual(make_complete_interval(2), [0, 1, 0, 1])
+        self.assertEqual(make_complete_interval(3), [0, 1, 2, 0, 1, 2])
+        self.assertEqual(make_complete_interval(4), [0, 1, 2, 3, 0, 1, 2, 3])
 
     def test_path_interval(self):
         self.assertEqual(make_path_interval(2), [0, 1, 0, 1])

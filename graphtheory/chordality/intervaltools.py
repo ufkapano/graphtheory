@@ -20,6 +20,10 @@ def make_random_interval(n):   # tak jak dla circle graphs
     random.shuffle(perm)
     return perm
 
+def make_complete_interval(n):
+    """Return a complete interval graph as double perm."""
+    return list(range(n)) * 2
+
 # 0---1---2---3   make_path_interval(4)
 def make_path_interval(n):   # tak jak dla circle graphs
     """Return a path interval graph as double perm."""

@@ -4,6 +4,7 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.permutations.circletools import make_random_circle
+from graphtheory.permutations.circletools import make_complete_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_2tree_circle
@@ -25,6 +26,12 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertEqual(len(perm), 2*n)
         self.assertEqual(set(perm), set(range(n)))
         #print("random {}".format(perm))
+
+    def test_path_complete(self):
+        self.assertEqual(make_complete_circle(1), [0, 0])
+        self.assertEqual(make_complete_circle(2), [0, 1, 0, 1])
+        self.assertEqual(make_complete_circle(3), [0, 1, 2, 0, 1, 2])
+        self.assertEqual(make_complete_circle(4), [0, 1, 2, 3, 0, 1, 2, 3])
 
     def test_path_circle(self):
         n = 10

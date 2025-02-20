@@ -22,6 +22,10 @@ def make_random_circle(n):
     random.shuffle(perm)
     return perm
 
+def make_complete_circle(n):
+    """Return a complete graph K_n as double perm."""
+    return list(range(n)) * 2
+
 def make_path_circle(n):
     """Return a path graph P_n as double perm."""
     perm = []

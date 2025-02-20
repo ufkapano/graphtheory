@@ -31,6 +31,7 @@ from graphtheory.structures.graphs import Graph
 
 ~~~python
 from graphtheory.permutations.circletools import make_random_circle
+from graphtheory.permutations.circletools import make_complete_circle
 from graphtheory.permutations.circletools import make_path_circle
 from graphtheory.permutations.circletools import make_cycle_circle
 from graphtheory.permutations.circletools import make_2tree_circle
@@ -40,6 +41,7 @@ from graphtheory.permutations.circletools import make_star_circle
 # perm has (double) numbers from 0 to n-1.
 n = 10
 perm = make_random_circle(n)
+perm = make_complete_circle(n)   # make perm for complete graph K_n
 perm = make_path_circle(n)   # make perm for path graph P_n
 perm = make_cycle_circle(n)   # make perm for cycle graph C_n
 perm = make_2tree_circle(n)   # make perm for 2-tree graph
