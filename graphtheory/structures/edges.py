@@ -44,16 +44,10 @@ class Edge:
     def __repr__(self):
         """Compute the string representation of the edge."""
         if self.weight == 1:
-            return "{}({}, {})".format(
-                self.__class__.__name__,
-                repr(self.source),
-                repr(self.target))
+            return "Edge({0!r}, {1!r})".format(self.source, self.target)
         else:
-            return "{}({}, {}, {})".format(
-                self.__class__.__name__,
-                repr(self.source),
-                repr(self.target),
-                repr(self.weight))
+            return "Edge({0!r}, {1!r}, {2!r})".format(
+                self.source, self.target, self.weight)
 
     def __eq__(self, other):
         """Comparing of edges (the weight first)."""
@@ -75,7 +69,7 @@ class Edge:
 
     def __invert__(self):
         """Return the edge with the opposite direction."""
-        return self.__class__(self.target, self.source, self.weight)
+        return Edge(self.target, self.source, self.weight)
 
     inverted = __invert__
 
