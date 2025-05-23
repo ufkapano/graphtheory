@@ -59,6 +59,7 @@ class TreePEO:
         for node in self.graph.iternodes():
             if degree_dict[node] == 0:   # isolated node from the beginning
                 self.peo.append(node)
+                self.parent[node] = None   # a forest is started
             elif degree_dict[node] == 1:   # leaf
                 Q.append(node)
         while len(Q) > 0:

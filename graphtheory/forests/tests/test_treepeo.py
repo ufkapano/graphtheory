@@ -78,6 +78,22 @@ class TestTreePEO(unittest.TestCase):
         self.assertEqual(algorithm.parent, {1: 0, 2: 0, 3: 0, 0: None})
         #print(algorithm.parent)
 
+    def test_peo5(self):   # two trees and a single node
+        T = Graph()
+        for node in range(5):
+            T.add_node(node)
+        for edge in [Edge(0, 1), Edge(2, 3)]:
+            T.add_edge(edge)
+        peo = find_peo_tree(T)
+        self.assertEqual(len(peo), 5)
+        self.assertEqual(peo, [4, 0, 1, 2, 3])
+
+        algorithm = TreePEO(T)
+        algorithm.run()
+        self.assertEqual(algorithm.peo, [4, 0, 1, 2, 3])
+        self.assertEqual(len(algorithm.parent), T.v())
+        #print(algorithm.parent)
+
     def test_directed_graph(self):
         self.G.directed = True
         self.assertRaises(ValueError, TreePEO, self.G)
