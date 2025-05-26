@@ -36,6 +36,7 @@ G.del_node(node)    remove the node form G (only remove adjacent edges for matri
 G.has_node(node)    return True if the node is in G
 
 G.add_edge(edge)    add the edge to G
+G.add_edge((source, target))    add the edge to G (default weight is 1)
 G.del_edge(edge)    remove the edge form G
 G.del_edge((source, target))    remove the edge form G
 G.has_edge(edge)    return True if the edge is in G

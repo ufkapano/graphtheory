@@ -74,6 +74,9 @@ class MultiGraph(dict):
 
     def add_edge(self, edge):
         """Add an edge to the multigraph (missing nodes are created)."""
+        if not isinstance(edge, Edge):
+            source, target = edge   # tuple or list
+            edge = Edge(source, target)
         if edge.source in self and edge.target in self[edge.source]:
             if edge in self[edge.source][edge.target]:
                 raise ValueError("the same parallel edge")

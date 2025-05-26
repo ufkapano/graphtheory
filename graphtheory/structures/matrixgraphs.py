@@ -70,17 +70,22 @@ class Graph:
 
     def add_edge(self, edge):
         """Add an edge to the graph."""
-        if edge.source == edge.target:
+        try:   # checking Edge interface
+            source, target = edge.source, edge.target
+        except AttributeError:
+            source, target = edge   # tuple or list
+            edge = Edge(source, target)
+        if source == target:
             raise ValueError("loops are forbidden")
-        self.add_node(edge.source)
-        self.add_node(edge.target)
-        if self.data[edge.source][edge.target] == 0:
-            self.data[edge.source][edge.target] = edge.weight
+        self.add_node(source)
+        self.add_node(target)
+        if self.data[source][target] == 0:
+            self.data[source][target] = edge.weight
         else:
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
-            if self.data[edge.target][edge.source] == 0:
-                self.data[edge.target][edge.source] = edge.weight
+            if self.data[target][source] == 0:
+                self.data[target][source] = edge.weight
             else:
                 raise ValueError("parallel edges are forbidden")
 

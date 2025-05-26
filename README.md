@@ -5,7 +5,7 @@ The minimal graph interface is defined together with several
 classes implementing this interface. 
 Graph nodes can be any hashable Python objects. 
 Directed edges are instances of the Edge class. 
-Graphs are instances of the Graph class (several versions).
+Simple graphs are instances of the Graph class (several versions).
 Multigraphs are instances of the MultiGraph class.
 Many algorithms are implemented using a unified approach. 
 There are separate classes and modules devoted to different algorithms.
@@ -45,15 +45,17 @@ Floyd-Warshall, Johnson, matrix multiplications
 TSP (DFS, with MST, NN, RNN, sorted edges)
 * [Forests](/doc/forest.md) (exact algorithms): 
 iset, dset, vertex cover, matching, 
-tree center, longest path problem, plotting
+tree center, longest path problem, finding PEO, plotting
 * Undirected series-parallel graphs (exact algorithms): 
 recognition (fixed ends possible), generators,
 iset, dset, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
 * Directed series-parallel graphs: recognition, generators
-* Halin graphs (exact algorithms): recognition, generators, vertex coloring,
+* Halin graphs (exact algorithms): 
+recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
-* Chordal graphs (exact algorithms): recognition O(n+m), generators, 
+* Chordal graphs (exact algorithms): 
+recognition O(n+m), generators, 
 finding PEO (MCS), 
 finding maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
@@ -62,7 +64,7 @@ finding tree decomposition (TD),
 finding minimum dominating set (TD),
 finding minimum node cover (TD)
 * Interval graphs: double perm representation, generators, 
-traversing (BFS, DFS),
+traversing (BFS, DFS), 
 finding path decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
@@ -71,10 +73,11 @@ perm representation, generators,
 traversing (BFS, DFS) O(n^2), 
 connectivity O(n),
 greedy triangulations O(n^4)
-* [Circle graphs](/doc/circle.md): double perm representation, generators, 
-traversing (BFS, DFS) O(n^2),
-connectivity O(n^2)
-* [AT-free graphs](/doc/atfree.md): recognition O(n^4),
+* [Circle graphs](/doc/circle.md): 
+double perm representation, generators, 
+traversing (BFS, DFS) O(n^2), connectivity O(n^2)
+* [AT-free graphs](/doc/atfree.md): 
+recognition O(n^4), 
 finding maximum independent set O(n^4),
 finding minimum dominating set 
 * Clustering: Kruskal

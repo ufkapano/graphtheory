@@ -64,17 +64,22 @@ class Graph(dict):
 
     def add_edge(self, edge):
         """Add an edge to the graph (missing nodes are created)."""
-        if edge.source == edge.target:
+        try:   # checking Edge interface
+            source, target = edge.source, edge.target
+        except AttributeError:
+            source, target = edge   # tuple or list
+            edge = Edge(source, target)
+        if source == target:
             raise ValueError("loops are forbidden")
-        self.add_node(edge.source)
-        self.add_node(edge.target)
-        if edge.target not in self[edge.source]:
-            self[edge.source][edge.target] = edge.weight
+        self.add_node(source)
+        self.add_node(target)
+        if target not in self[source]:
+            self[source][target] = edge.weight
         else:
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
-            if edge.source not in self[edge.target]:
-                self[edge.target][edge.source] = edge.weight
+            if source not in self[target]:
+                self[target][source] = edge.weight
             else:
                 raise ValueError("parallel edges are forbidden")
 
