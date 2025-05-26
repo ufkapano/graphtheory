@@ -43,7 +43,8 @@ Floyd-Warshall, Johnson, matrix multiplications
 * Eulerian graphs: DFS, Fleury, Hierholzer
 * Hamiltonian graphs: DFS, tournaments, 
 TSP (DFS, with MST, NN, RNN, sorted edges)
-* Forests (exact algorithms): iset, dset, vertex cover, matching, 
+* [Forests](/doc/forest.md) (exact algorithms): 
+iset, dset, vertex cover, matching, 
 tree center, longest path problem, plotting
 * Undirected series-parallel graphs (exact algorithms): 
 recognition (fixed ends possible), generators,
@@ -65,7 +66,8 @@ traversing (BFS, DFS),
 finding path decomposition
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
-* [Permutation graphs](/doc/perm.md): perm representation, generators, 
+* [Permutation graphs](/doc/perm.md): 
+perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 
 connectivity O(n),
 greedy triangulations O(n^4)
