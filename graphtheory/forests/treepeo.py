@@ -5,7 +5,7 @@ import collections
 
 
 def find_peo_tree(graph):
-    """Find PEO for a tree or a forest (removing leaves)."""
+    """Find PEO for a tree or a forest (removing leaves), O(n) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
     peo = []
@@ -40,7 +40,7 @@ def find_peo_tree(graph):
 
 
 class TreePEO:
-    """Find PEO for a tree (removing leaves)."""
+    """Find PEO for a tree (removing leaves), O(n) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

@@ -22,6 +22,15 @@ assert G.v() == 5   # the number of vertices
 assert G.e() == 6   # the number of edges
 assert sorted(G.degree(node) for node in G.iternodes()) == [1, 2, 2, 3, 4]
 
+# Using node and edge attributes.
+color_dict = dict()
+for node in G.iternodes():
+    color_dict[node] = 'black'
+
+length_dict = dict()
+for edge in G.iteredges():
+    length_dict[edge] = 1
+
 order = []
 algorithm = SimpleBFS(G)
 algorithm.run("A", pre_action=lambda node: order.append(node))

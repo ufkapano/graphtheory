@@ -1,5 +1,18 @@
 # ALGORITHMS FOR TREES
 
+## RECOGNITION
+
+~~~python
+from graphtheory.algorithms.acyclic import is_acyclic
+from graphtheory.connectivity.connected import is_connected
+
+# Testing a single tree G.
+assert not G.is_directed()
+assert G.v() == G.e() + 1
+assert is_acyclic(G)
+assert is_connected(G)
+~~~
+
 ## RANDOM TREES
 
 ~~~python
