@@ -12,8 +12,8 @@ from graphtheory.chordality.peotools import is_peo1, is_peo2
 
 #order = find_peo_lex_bfs(G)   # if G is not chordal, then 'order' is not a PEO
 order = find_peo_mcs(G)   # if G is not chordal, then 'order' is not a PEO
-assert is_peo1(G, order)   # testing PEO, O(V+E) time
-assert is_peo2(G, order)   # testing PEO, O(V+E) time
+assert is_peo1(G, order)   # testing PEO, O(n+m) time
+assert is_peo2(G, order)   # testing PEO, O(n+m) time
 
 max_clique = find_maximum_clique_peo(G, peo)   # G have to be chordal
 print ( max_clique )   # a set of nodes
@@ -42,9 +42,9 @@ print ( iset )   # a set of nodes
 from graphtheory.chordality.mdotools import find_mdo
 from graphtheory.chordality.mdotools import find_maximum_clique_mdo
 
-order = find_mdo(G)   # O(V+E) time
+order = find_mdo(G)   # O(n+m) time
 print ( order )   # list of nodes (MDO)
-max_clique = find_maximum_clique_mdo(G)   # O(V+E) time
+max_clique = find_maximum_clique_mdo(G)   # O(n+m) time
 print ( max_clique )   # a set of nodes
 ----------------------------------------------------------------------
 # TREE DECOMPOSITION (TD) OF CHORDAL GRAPHS

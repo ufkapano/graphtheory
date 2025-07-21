@@ -45,7 +45,7 @@ class Graph(dict):
         return len(self)
 
     def e(self):
-        """Return the number of edges in O(V) time."""
+        """Return the number of edges in O(n) time."""
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges // 2)
 
@@ -167,7 +167,7 @@ class Graph(dict):
 
     def iterinedges(self, source):
         """Generate the inedges from the graph on demand."""
-        if self.is_directed():   # O(V) time
+        if self.is_directed():   # O(n) time
             for target in self.iternodes():
                 if source in self[target]:
                     yield self[target][source]
@@ -291,7 +291,7 @@ class Graph(dict):
 
     def indegree(self, source):
         """Return the indegree of the node."""
-        if self.is_directed():   # O(V) time
+        if self.is_directed():   # O(n) time
             counter = 0
             for target in self.iternodes():
                 if source in self[target]:

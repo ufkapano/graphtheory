@@ -132,10 +132,9 @@ class TestGraphDirected(unittest.TestCase):
 
     def tearDown(self): pass
 
-# A --- B
-# |  /  |
-# | /   |
-# C --- D
+# A---B
+# | / |
+# C---D
 
 class TestGraphUndirected(unittest.TestCase):
 

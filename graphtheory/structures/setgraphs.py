@@ -39,7 +39,7 @@ class Graph(dict):
         return len(self)
 
     def e(self):
-        """Return the number of edges in O(V) time."""
+        """Return the number of edges in O(n) time."""
         edges = sum(len(self[node]) for node in self)
         return (edges if self.is_directed() else edges // 2)
 
@@ -122,7 +122,7 @@ class Graph(dict):
 
     def iterinedges(self, source):
         """Generate the inedges from the graph on demand."""
-        if self.is_directed():   # O(V) time
+        if self.is_directed():   # O(n) time
             for target in self.iternodes():
                 if source in self[target]:
                     yield Edge(target, source)
@@ -176,6 +176,19 @@ class Graph(dict):
                         new_graph.add_edge(edge)
         return new_graph
 
+    def subgraph(self, nodes):
+        """Return the induced subgraph."""
+        node_set = set(nodes)
+        if any(not self.has_node(node) for node in node_set):
+            raise ValueError("nodes not from the graph")
+        new_graph = self.__class__(n=len(node_set), directed=self.directed)
+        for node in node_set:
+            new_graph.add_node(node)
+        for edge in self.iteredges():
+            if (edge.source in node_set) and (edge.target in node_set):
+                new_graph.add_edge(edge)
+        return new_graph
+
     def degree(self, source):
         """Return the degree of the node in the undirected graph."""
         if self.is_directed():
@@ -188,7 +201,7 @@ class Graph(dict):
 
     def indegree(self, source):
         """Return the indegree of the node."""
-        if self.is_directed():   # O(V) time
+        if self.is_directed():   # O(n) time
             counter = 0
             for target in self.iternodes():
                 if source in self[target]:

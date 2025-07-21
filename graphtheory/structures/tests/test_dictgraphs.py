@@ -97,6 +97,13 @@ class TestGraphDirected(unittest.TestCase):
         for edge in self.G.iteredges():
             self.assertFalse(T.has_edge(edge))
 
+    def test_subgraph(self):
+        T = self.G.subgraph(["A", "B", "C"])
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 3)
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
+
     def test_add_graph_directed(self):
         T = Graph(n=self.N, directed=True)
         for node in self.nodes:
@@ -125,10 +132,9 @@ class TestGraphDirected(unittest.TestCase):
 
     def tearDown(self): pass
 
-# A --- B
-# |  /  |
-# | /   |
-# C --- D
+# A---B
+# | / |
+# C---D
 
 class TestGraphUndirected(unittest.TestCase):
 
@@ -192,6 +198,13 @@ class TestGraphUndirected(unittest.TestCase):
             self.assertFalse(self.G.has_edge(edge))
         for edge in self.G.iteredges():
             self.assertFalse(T.has_edge(edge))
+
+    def test_subgraph(self):
+        T = self.G.subgraph(["A", "B", "C"])
+        self.assertEqual(T.v(), 3)
+        self.assertEqual(T.e(), 3)
+        for edge in T.iteredges():
+            self.assertTrue(self.G.has_edge(edge))
 
     def test_degree(self):
         self.assertEqual(self.G.degree("A"), 2)

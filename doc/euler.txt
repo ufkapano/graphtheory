@@ -2,14 +2,14 @@ EULERIAN CYCLES
 ----------------------------------------------------------------------
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.eulerian.fleury import FleuryDFS            # O(V*E)
-from graphtheory.eulerian.fleury import FleuryDFSWithEdges   # O(V*E)
-from graphtheory.eulerian.fleury import FleuryBFS            # O(V*E)
-from graphtheory.eulerian.fleury import FleuryBFSWithEdges   # O(V*E)
-from graphtheory.eulerian.euler import EulerianCycleDFS      # O(E)
-from graphtheory.eulerian.euler import EulerianCycleDFSWithEdges   # O(E)
-from graphtheory.eulerian.hierholzer import Hierholzer             # O(E)
-from graphtheory.eulerian.hierholzer import HierholzerWithEdges    # O(E)
+from graphtheory.eulerian.fleury import FleuryDFS            # O(n*m)
+from graphtheory.eulerian.fleury import FleuryDFSWithEdges   # O(n*m)
+from graphtheory.eulerian.fleury import FleuryBFS            # O(n*m)
+from graphtheory.eulerian.fleury import FleuryBFSWithEdges   # O(n*m)
+from graphtheory.eulerian.euler import EulerianCycleDFS      # O(m)
+from graphtheory.eulerian.euler import EulerianCycleDFSWithEdges   # O(m)
+from graphtheory.eulerian.hierholzer import Hierholzer             # O(m)
+from graphtheory.eulerian.hierholzer import HierholzerWithEdges    # O(m)
 
 G = Graph()
 # Add nodes and edges here.

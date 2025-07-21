@@ -40,7 +40,7 @@ class Graph:
         return self.n
 
     def e(self):
-        """Return the number of edges in O(V**2) time."""
+        """Return the number of edges in O(n^2) time."""
         counter = 0
         for source in range(self.n):
             for target in range(self.n):
@@ -63,7 +63,7 @@ class Graph:
 
     def del_node(self, source):
         """Remove a node from the graph with edges.
-        In fact, the node become isolated. It takes O(V) time."""
+        In fact, the node become isolated. It takes O(n) time."""
         for target in range(self.n):
             self.data[source][target] = 0
             self.data[target][source] = 0
@@ -121,23 +121,23 @@ class Graph:
 
     def iteradjacent(self, source):
         """Generate the adjacent nodes from the graph on demand."""
-        for target in range(self.n):   # O(V) time
+        for target in range(self.n):   # O(n) time
             if self.data[source][target] != 0:
                 yield target
 
-    def iteroutedges(self, source):   # O(V) time
+    def iteroutedges(self, source):   # O(n) time
         """Generate the outedges from the graph on demand."""
         for target in range(self.n):
             if self.data[source][target] != 0:
                 yield Edge(source, target, self.data[source][target])
 
-    def iterinedges(self, source):   # O(V) time
+    def iterinedges(self, source):   # O(n) time
         """Generate the inedges from the graph on demand."""
         for target in range(self.n):
             if self.data[target][source] != 0:
                 yield Edge(target, source, self.data[target][source])
 
-    def iteredges(self):   # O(V**2) time
+    def iteredges(self):   # O(n^2) time
         """Generate the edges from the graph on demand."""
         for source in range(self.n):
             for target in range(self.n):
@@ -146,7 +146,7 @@ class Graph:
                     yield Edge(source, target, self.data[source][target])
 
     def show(self):
-        """The graph presentation in O(V^2) time."""
+        """The graph presentation in O(n^2) time."""
         L = []
         for source in range(self.n):
             L.append("{} : ".format(source))
@@ -159,7 +159,7 @@ class Graph:
         print("".join(L))
 
     def copy(self):
-        """Return the graph copy in O(V^2) time."""
+        """Return the graph copy in O(n^2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in range(self.n):
             for target in range(self.n):
@@ -167,7 +167,7 @@ class Graph:
         return new_graph
 
     def transpose(self):
-        """Return the transpose of the graph in O(V**2) time."""
+        """Return the transpose of the graph in O(n^2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in range(self.n):
             for target in range(self.n):
@@ -175,13 +175,17 @@ class Graph:
         return new_graph
 
     def complement(self):
-        """Return the complement of the graph."""
+        """Return the complement of the graph in O(n^2) time."""
         new_graph = self.__class__(n=self.n, directed=self.directed)
         for source in range(self.n):
             for target in range(self.n):   # no loops
                 if self.data[source][target] == 0 and source != target:
                     new_graph.data[source][target] = 1
         return new_graph
+
+    def subgraph(self, nodes):
+        """Return the induced subgraph."""
+        raise NotImplementedError   # we need nodes as range(n)
 
     def degree(self, source):
         """Return the degree of the node in the undirected graph."""
@@ -215,7 +219,7 @@ class Graph:
             return False
         if self.v() != other.v():
             return False
-        for source in range(self.n):   # time O(V**2)
+        for source in range(self.n):   # time O(n^2)
             for target in range(self.n):
                 if self.data[source][target] != other.data[source][target]:
                     return False
