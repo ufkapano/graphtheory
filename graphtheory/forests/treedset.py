@@ -40,7 +40,7 @@ class BorieDominatingSet:
             # A single connected component, a single tree.
             self.parent[source] = None   # before _visit
             a2_set, b2_set, c2_set = self._visit(source)
-            self.dominating_set.update(min([a2_set, b2_set], key=len))
+            self.dominating_set.update(min(a2_set, b2_set, key=len))
             self.cardinality = len(self.dominating_set)
         else:
             # A forest is possible.
@@ -48,7 +48,7 @@ class BorieDominatingSet:
                 if node not in self.parent:
                     self.parent[node] = None   # before _visit
                     a2_set, b2_set, c2_set = self._visit(node)
-                    self.dominating_set.update(min([a2_set, b2_set], key=len))
+                    self.dominating_set.update(min(a2_set, b2_set, key=len))
             self.cardinality = len(self.dominating_set)
 
     def _compose(self, arg1, arg2):
@@ -59,8 +59,7 @@ class BorieDominatingSet:
         a1_set, b1_set, c1_set = arg1
         a2_set, b2_set, c2_set = arg2
         a_set = a1_set | min(arg2, key=len)
-        b_set = min([b1_set | a2_set, b1_set | b2_set,
-            c1_set | a2_set], key=len)
+        b_set = min(b1_set | a2_set, b1_set | b2_set, c1_set | a2_set, key=len)
         c_set = c1_set | b2_set
         return (a_set, b_set, c_set)
 

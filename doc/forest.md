@@ -113,6 +113,18 @@ print ( algorithm.dominating_set )
 print ( algorithm.cardinality )   # the size of min dset
 ~~~
 
+## FINDING A MINIMUM INDEPENDENT DOMINATING SET
+
+~~~python
+from graphtheory.forests.treeidset import TreeIndependentDominatingSet
+
+algorithm = TreeIndependentDominatingSet(G)
+algorithm.run()
+print ( algorithm.dominating_set )
+print ( algorithm.cardinality )   # the size of minimum independent dset
+print ( algorithm.parent )        # DFS tree as a dict
+~~~
+
 ## FINDING A MINIMUM NODE COVER
 
 ~~~python
