@@ -98,6 +98,8 @@ def make_abstract_perm_graph(perm):
     for k, item in enumerate(perm):   # O(n) time
         position[item] = k
     graph = Graph(n=len(perm))
+    for node in range(len(perm)):
+        graph.add_node(node)
     # Jest krawedz, jezeli jest inwersja. Zlozonosc n(n-1)/2, czyli O(n^2).
     for (source, target) in itertools.combinations(perm, 2):
         if source > target:

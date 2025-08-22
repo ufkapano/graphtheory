@@ -72,6 +72,7 @@ class TestPermGraphs(unittest.TestCase):
         self.assertEqual(graph.e(), 10)   # K_5
         perm = [2, 3, 0, 1]   # C_4
         graph = make_abstract_perm_graph(perm)
+        #graph.show()
         self.assertTrue(isinstance(graph, Graph))
         self.assertEqual(graph.v(), 4)   # C_4
         self.assertEqual(graph.e(), 4)   # C_4
