@@ -7,6 +7,9 @@ from graphtheory.structures.factory import GraphFactory
 from graphtheory.forests.treedset import BorieDominatingSet
 from graphtheory.forests.treedset import TreeDominatingSet1
 from graphtheory.forests.treedset import TreeDominatingSet2
+from graphtheory.forests.treedset import TreeDominatingSet3
+from graphtheory.forests.treedset import TreeDominatingSet4
+from graphtheory.forests.treeidset import TreeIndependentDominatingSet
 
 V = 10
 E = V-1   # tree
@@ -29,10 +32,10 @@ algorithm.run()
 print ( algorithm.dominating_set )
 print ( "tree dset1 {}".format( algorithm.cardinality ))
 
-algorithm = TreeDominatingSet2(G)
+algorithm = TreeIndependentDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
-print ( "tree dset2 {}".format( algorithm.cardinality ))
+print ( "tree idset {}".format( algorithm.cardinality ))
 
 print ( "Testing BorieDominatingSet ..." )
 t1 = timeit.Timer(lambda: BorieDominatingSet(G).run())
@@ -44,6 +47,18 @@ print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 print ( "Testing TreeDominatingSet2 ..." )
 t1 = timeit.Timer(lambda: TreeDominatingSet2(G).run())
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
+
+print ( "Testing TreeDominatingSet3 ..." )
+t1 = timeit.Timer(lambda: TreeDominatingSet3(G).run())
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
+
+print ( "Testing TreeDominatingSet4 ..." )
+t1 = timeit.Timer(lambda: TreeDominatingSet4(G).run())
+print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
+
+print ( "Testing TreeIndependentDominatingSet ..." )
+t1 = timeit.Timer(lambda: TreeIndependentDominatingSet(G).run())
 print ( "{} {} {}".format(V, E, t1.timeit(1)) )   # single run
 
 # EOF

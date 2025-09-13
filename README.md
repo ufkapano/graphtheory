@@ -44,11 +44,13 @@ Floyd-Warshall, Johnson, matrix multiplications
 * Hamiltonian graphs: DFS, tournaments, 
 TSP (DFS, with MST, NN, RNN, sorted edges)
 * [Forests](/doc/forest.md) (exact algorithms): 
-iset, dset and 2-stable set, vertex cover, matching, 
+independent set, (weighted) dominating set and 2-stable set, 
+(weighted) independent dominating set
+vertex cover, matching, 
 tree center, longest path problem, finding PEO, plotting
 * Undirected series-parallel graphs (exact algorithms): 
 recognition (fixed ends possible), generators,
-iset, dset, vertex cover, matching, 
+independent set, dominating set, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
 * Directed series-parallel graphs: recognition, generators
 * Halin graphs (exact algorithms): 

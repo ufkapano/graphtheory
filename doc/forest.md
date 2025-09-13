@@ -105,6 +105,7 @@ from graphtheory.forests.treedset import TreeDominatingSet2
 from graphtheory.forests.treedset import TreeDominatingSet3
 from graphtheory.forests.treedset import TreeDominatingSet4
 
+# G is a tree or a forest.
 algorithm = BorieDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
@@ -132,11 +133,30 @@ print ( algorithm.two_stable_set )   # a maximum 2-stable set
 ~~~python
 from graphtheory.forests.treeidset import TreeIndependentDominatingSet
 
+# G is a tree or a forest.
 algorithm = TreeIndependentDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
 print ( algorithm.cardinality )   # the size of minimum independent dset
 print ( algorithm.parent )        # DFS tree as a dict
+~~~
+
+## FINDING A MINIMUM WEIGHT (INDEPENDENT) DOMINATING SET
+
+~~~python
+from graphtheory.forests.treewdset import TreeWeightedDominatingSet
+from graphtheory.forests.treewidset import TreeWeightedIndependentDominatingSet
+
+# G is a tree or a forest.
+# weight_dict is a dict with paires (node, weight).
+algorithm = TreeWeightedDominatingSet(G, weight_dict)   # version 2
+#algorithm = TreeWeightedIndependentDominatingSet(G, weight_dict)
+algorithm.run()
+print ( algorithm.dominating_set )
+print ( algorithm.cardinality )   # the size of minimum independent dset
+print ( algorithm.parent )        # DFS tree as a dict
+print ( algorithm.weight_dict )
+print ( algorithm.dominating_set_weight )
 ~~~
 
 ## FINDING A MINIMUM NODE COVER
