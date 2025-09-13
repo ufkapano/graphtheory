@@ -6,6 +6,8 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.forests.treedset import BorieDominatingSet
 from graphtheory.forests.treedset import TreeDominatingSet1
 from graphtheory.forests.treedset import TreeDominatingSet2
+from graphtheory.forests.treedset import TreeDominatingSet3
+from graphtheory.forests.treedset import TreeDominatingSet4
 
 # 0---1---2---6
 # |   |   |
@@ -55,6 +57,34 @@ class TestDominatingSet1(unittest.TestCase):
         expected1 = set([0, 1, 2])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
+    def test_tree_dset3(self):
+        algorithm = TreeDominatingSet3(self.G)
+        algorithm.run()
+        expected1 = set([0, 1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([3, 4, 5]))
+        #self.assertEqual(algorithm.two_stable_set, set([3, 4, 6]))
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
+    def test_tree_dset4(self):
+        algorithm = TreeDominatingSet4(self.G)
+        algorithm.run()
+        expected1 = set([0, 1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([3, 4, 5]))
+        #self.assertEqual(algorithm.two_stable_set, set([3, 4, 6]))
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:
@@ -117,6 +147,32 @@ class TestDominatingSet2(unittest.TestCase):
             neighbors.update(self.G.iteradjacent(node))
         self.assertEqual(len(neighbors), self.G.v())
 
+    def test_tree_dset3(self):
+        algorithm = TreeDominatingSet3(self.G)
+        algorithm.run()
+        expected1 = set([1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([0, 5]))
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
+    def test_tree_dset4(self):
+        algorithm = TreeDominatingSet4(self.G)
+        algorithm.run()
+        expected1 = set([1, 2])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([0, 5]))
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
     def tearDown(self): pass
 
 # 0---1---2---3---4---5   path P_6
@@ -169,6 +225,32 @@ class TestDominatingSet3(unittest.TestCase):
         expected1 = set([1, 4])
         self.assertEqual(algorithm.cardinality, len(expected1))
         self.assertEqual(algorithm.dominating_set, expected1)
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
+    def test_tree_dset3(self):
+        algorithm = TreeDominatingSet3(self.G)
+        algorithm.run()
+        expected1 = set([1, 4])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([0, 5]))
+        # Testing dset.
+        neighbors = set(algorithm.dominating_set)
+        for node in algorithm.dominating_set:
+            neighbors.update(self.G.iteradjacent(node))
+        self.assertEqual(len(neighbors), self.G.v())
+
+    def test_tree_dset4(self):
+        algorithm = TreeDominatingSet4(self.G)
+        algorithm.run()
+        expected1 = set([1, 4])
+        self.assertEqual(algorithm.cardinality, len(expected1))
+        self.assertEqual(algorithm.dominating_set, expected1)
+        self.assertEqual(algorithm.two_stable_set, set([0, 5]))
         # Testing dset.
         neighbors = set(algorithm.dominating_set)
         for node in algorithm.dominating_set:

@@ -2,6 +2,7 @@
 
 import sys
 import collections
+from graphtheory.forests.treepeo import TreePEO
 
 
 class BorieDominatingSet:
@@ -204,6 +205,128 @@ class TreeDominatingSet2:
                     if degree_dict[target] == 1:   # parent is a new leaf
                         Q.append(target)
                     break
+
+
+class TreeDominatingSet3:
+    """Find a minimum dominating set and a maximum 2-stable set for trees.
+    
+    A single tree is connected during computations.
+    
+    Based on:
+    
+    Chang, G.J. (2013). Algorithmic Aspects of Domination in Graphs.
+    In: Pardalos, P., Du, DZ., Graham, R. (eds) Handbook of Combinatorial
+    Optimization. Springer, New York, NY.
+    
+    Attributes
+    ----------
+    graph : input forest
+    dominating_set : set with nodes
+    cardinality : number (the size of min dset)
+    two_stable_set : set with nodes
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.dominating_set = set()
+        self.cardinality = 0
+        self.two_stable_set = set()
+
+    def run(self):
+        """Executable pseudocode."""
+        used = set()   # for dset and neighbors
+        # A dictionary with node degrees, O(n) time.
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())
+        Q = collections.deque()   # for leaves
+        # Put leafs to the queue, O(n) time.
+        for node in self.graph.iternodes():
+            if degree_dict[node] == 0:
+                self.dominating_set.add(node)   # isolated node from the beginning
+                self.two_stable_set.add(node)
+                used.add(node)
+                self.cardinality += 1
+            elif degree_dict[node] == 1:   # leaf
+                Q.append(node)
+        while len(Q) > 0:
+            source = Q.popleft()
+            # A leaf may become isolated.
+            if degree_dict[source] == 0:
+                if source not in used:   # parent is not in dset
+                    self.dominating_set.add(source)
+                    self.two_stable_set.add(source)
+                    used.add(source)
+                    self.cardinality += 1
+                continue
+            assert degree_dict[source] == 1
+            for target in self.graph.iteradjacent(source):
+                if degree_dict[target] > 0:   # this is parent
+                    if source not in used:   # parent goes to dset
+                        self.dominating_set.add(target)
+                        self.two_stable_set.add(source)
+                        used.add(target)
+                        self.cardinality += 1
+                        used.update(self.graph.iteradjacent(target))
+                    # Remove the edge from source to target.
+                    degree_dict[target] -= 1
+                    degree_dict[source] -= 1
+                    if degree_dict[target] == 1:   # parent is a new leaf
+                        Q.append(target)
+                    break
+
+
+class TreeDominatingSet4:
+    """Find a minimum dominating set and a maximum 2-stable set for trees.
+    
+    A single tree is connected during computations.
+    TreePEO is used to find PEO and parent.
+    
+    Based on:
+    
+    Chang, G.J. (2013). Algorithmic Aspects of Domination in Graphs.
+    In: Pardalos, P., Du, DZ., Graham, R. (eds) Handbook of Combinatorial
+    Optimization. Springer, New York, NY.
+    
+    Attributes
+    ----------
+    graph : input forest
+    dominating_set : set with nodes
+    cardinality : number (the size of min dset)
+    two_stable_set : set with nodes
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.dominating_set = set()
+        self.cardinality = 0
+        self.two_stable_set = set()
+
+    def run(self):
+        """Executable pseudocode."""
+        algorithm = TreePEO(self.graph)
+        algorithm.run()   # O(n) time
+        used = set()   # for dset and neighbors
+        for source in algorithm.peo:   # other leaves will be here
+            target = algorithm.parent[source]
+            if target is None:   # tha last node
+                if source not in used:   # parent is not in dset
+                    self.dominating_set.add(source)
+                    self.two_stable_set.add(source)
+                    used.add(source)
+                    self.cardinality += 1
+                continue
+            if source not in used:   # parent goes to dset
+                self.dominating_set.add(target)
+                self.two_stable_set.add(source)
+                used.add(target)
+                self.cardinality += 1
+                used.update(self.graph.iteradjacent(target))
 
 
 TreeDominatingSet = TreeDominatingSet2

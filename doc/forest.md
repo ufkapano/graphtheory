@@ -100,6 +100,10 @@ print ( algorithm.cardinality )   # the size of max iset
 ~~~python
 from graphtheory.forests.treedset import BorieDominatingSet
 from graphtheory.forests.treedset import TreeDominatingSet
+from graphtheory.forests.treedset import TreeDominatingSet1
+from graphtheory.forests.treedset import TreeDominatingSet2
+from graphtheory.forests.treedset import TreeDominatingSet3
+from graphtheory.forests.treedset import TreeDominatingSet4
 
 algorithm = BorieDominatingSet(G)
 algorithm.run()
@@ -107,10 +111,20 @@ print ( algorithm.dominating_set )
 print ( algorithm.cardinality )   # the size of min dset
 print ( algorithm.parent )        # DFS tree as a dict
 
-algorithm = TreeDominatingSet(G)
+algorithm = TreeDominatingSet(G)   # this is version 2
+#algorithm = TreeDominatingSet1(G)
+#algorithm = TreeDominatingSet2(G)
 algorithm.run()
 print ( algorithm.dominating_set )
 print ( algorithm.cardinality )   # the size of min dset
+
+# Finding a minimum dominating set and a maximum 2-stable set.
+algorithm = TreeDominatingSet3(G)
+#algorithm = TreeDominatingSet4(G)
+algorithm.run()
+print ( algorithm.dominating_set )
+print ( algorithm.cardinality )   # the size of min dset
+print ( algorithm.two_stable_set )   # a maximum 2-stable set
 ~~~
 
 ## FINDING A MINIMUM INDEPENDENT DOMINATING SET
