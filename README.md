@@ -45,7 +45,7 @@ Floyd-Warshall, Johnson, matrix multiplications
 TSP (DFS, with MST, NN, RNN, sorted edges)
 * [Forests](/doc/forest.md) (exact algorithms): 
 independent set, (weighted) dominating set and 2-stable set, 
-(weighted) independent dominating set
+(weighted) independent dominating set,
 vertex cover, matching, 
 tree center, longest path problem, finding PEO, plotting
 * Undirected series-parallel graphs (exact algorithms): 

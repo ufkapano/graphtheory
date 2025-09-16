@@ -21,7 +21,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 
 gf = GraphFactory(Graph)
-G = gf.make_tree(n=10)        # a random tree
+G = gf.make_tree(n=10)        # a random tree (connected)
 assert G.v() == G.e() + 1
 ~~~
 
@@ -148,7 +148,7 @@ from graphtheory.forests.treewdset import TreeWeightedDominatingSet
 from graphtheory.forests.treewidset import TreeWeightedIndependentDominatingSet
 
 # G is a tree or a forest.
-# weight_dict is a dict with paires (node, weight).
+# weight_dict is a dict with pairs (node, weight).
 algorithm = TreeWeightedDominatingSet(G, weight_dict)   # version 2
 #algorithm = TreeWeightedIndependentDominatingSet(G, weight_dict)
 algorithm.run()
