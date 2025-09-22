@@ -96,6 +96,18 @@ perm = make_star_interval(n)   # K_{1,n-1} star graph
 iset = interval_maximum_iset(perm)
 assert len(iset) == n-1
 ----------------------------------------------------------------------
+# MINIMUM DOMINATING SET
+
+from graphtheory.chordality.intervaldset import IntervalDominatingSet
+
+# [2013 Chang] Primal-dual algorithm, O(n+m) time.
+# perm is a double perm for an interval graph.
+algorithm = IntervalDominatingSet(perm)
+algorithm.run()
+print(algorithm.dominating_set)
+assert algorithm.cardinality == len(algorithm.dominating_set)
+print(algorithm.two_stable_set)
+----------------------------------------------------------------------
 # TRAVERSING (BFS)
 
 from graphtheory.chordality.intervalbfs import IntervalBFS

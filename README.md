@@ -35,10 +35,13 @@ bipartite graphs (exact)
 * Vertex covers (heuristics): greedy, 2-approximation, LF
 * Minimum spanning trees (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
-* Single-source shortest paths (weighted directed graphs without negative cycles): 
-Dijkstra (nonnegative weights), DAGs (using topological sorting), 
+* Single-source shortest paths 
+(weighted directed graphs without negative cycles): 
+Dijkstra (nonnegative weights), 
+DAGs (using topological sorting), 
 Bellman-Ford
-* All-pairs shortest paths (weighted directed graphs without negative cycles): 
+* All-pairs shortest paths 
+(weighted directed graphs without negative cycles): 
 Floyd-Warshall, Johnson, matrix multiplications
 * Eulerian graphs: DFS, Fleury, Hierholzer
 * Hamiltonian graphs: DFS, tournaments, 
@@ -59,15 +62,16 @@ chordal completion (PEO), tree decomposition, plotting
 * Chordal graphs (exact algorithms): 
 recognition O(n+m), generators, 
 finding PEO (MCS), 
-finding maximum clique (PEO, MDO),
+finding a maximum clique (PEO, MDO),
 finding all maximal cliques (PEO),
-finding maximum independent set (PEO),
-finding tree decomposition (TD),
-finding minimum dominating set (TD),
-finding minimum node cover (TD)
+finding a maximum independent set (PEO),
+finding a tree decomposition (TD),
+finding a minimum dominating set (TD),
+finding a minimum node cover (TD)
 * Interval graphs: double perm representation, generators, 
 traversing (BFS, DFS), 
-finding path decomposition
+finding a path decomposition, 
+finding a minimum dominating set O(n+m)
 * Outerplanar graphs (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
 * [Permutation graphs](/doc/perm.md): 
@@ -80,8 +84,8 @@ double perm representation, generators,
 traversing (BFS, DFS) O(n^2), connectivity O(n^2)
 * [AT-free graphs](/doc/atfree.md): 
 recognition O(n^4), 
-finding maximum independent set O(n^4),
-finding minimum dominating set 
+finding a maximum independent set O(n^4),
+finding a minimum dominating set 
 * Clustering: Kruskal
 
 ## Download
