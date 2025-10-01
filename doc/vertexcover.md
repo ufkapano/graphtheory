@@ -15,8 +15,8 @@ G = Graph()
 #algorithm = DegreeNodeCover   # greedy
 algorithm = LargestFirstNodeCover   # greedy
 algorithm.run()
-print ( algorithm.node_cover )   # a set with nodes
-print ( algorithm.cardinality )
+print( algorithm.node_cover )   # a set with nodes
+print( algorithm.cardinality )
 ~~~
 
 ## VERTEX COVERS IN SPECIAL GRAPHS

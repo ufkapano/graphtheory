@@ -14,7 +14,7 @@ G = graph_factory.make_prism(size=3)   # n=6
 
 algorithm = HalinGraph(G)
 algorithm.run()
-print ( algorithm.outer )   # a set of nodes from the outer face
+print( algorithm.outer )   # a set of nodes from the outer face
 outer = algorithm.outer
 ~~~
 
@@ -44,8 +44,8 @@ from graphtheory.planarity.halinpeo import HalinGraphPEO
 
 algorithm = HalinGraphPEO(G, outer)
 algorithm.run()
-print ( algorithm.parent )  # inner tree (dict)
-print ( algorithm.order )   # PEO (list)
+print( algorithm.parent )  # inner tree (dict)
+print( algorithm.order )   # PEO (list)
 ~~~
 
 ## VERTEX COLORING
@@ -55,8 +55,8 @@ from graphtheory.planarity.halinnodecolor import HalinNodeColoring
 
 algorithm = HalinNodeColoring(G, outer)
 algorithm.run()
-print ( algorithm.parent )    # inner tree (dict)
-print ( algorithm.color )     # dict with node colors
+print( algorithm.parent )    # inner tree (dict)
+print( algorithm.color )     # dict with node colors
 ~~~
 
 ## TREE DECOMPOSITION
@@ -66,10 +66,10 @@ from graphtheory.planarity.halintd import HalinGraphTreeDecomposition
 
 algorithm = HalinGraphTreeDecomposition(G, outer)
 algorithm.run()
-print ( algorithm.parent )    # inner tree (dict)
-print ( algorithm.order )   # PEO (list)
-print ( algorithm.cliques )   # list of sets
-print ( algorithm.td )   # td as a graph (nodes are tuples)
+print( algorithm.parent )    # inner tree (dict)
+print( algorithm.order )   # PEO (list)
+print( algorithm.cliques )   # list of sets
+print( algorithm.td )   # td as a graph (nodes are tuples)
 ~~~
 
 EOF

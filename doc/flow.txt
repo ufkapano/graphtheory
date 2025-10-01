@@ -27,7 +27,7 @@ algorithm = FordFulkerson(G)
 # algorithm = DinicSparse(G)
 # Find the maximum flow from source to sink.
 algorithm.run(source=0, sink=V-1)
-print ( algorithm.max_flow )   # the value of the maximum flow
-print ( algorithm.flow )       # table with flows (dict of dict)
+print( algorithm.max_flow )   # the value of the maximum flow
+print( algorithm.flow )       # table with flows (dict of dict)
 ----------------------------------------------------------------------
 EOF

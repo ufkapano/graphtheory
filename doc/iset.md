@@ -11,8 +11,8 @@ G = Graph()
 # Add nodes and edges here.
 algorithm = BacktrackingIndependentSet(G)
 algorithm.run()
-print ( algorithm.independent_set )
-print ( algorithm.cardinality )
+print( algorithm.independent_set )
+print( algorithm.cardinality )
 ~~~
 
 ## HEURISTIC ALGORITHMS FOR A MAXIMUM INDEPENDENT SET
@@ -32,8 +32,8 @@ G = Graph()
 # algorithm = SmallestFirstIndependentSet(G)
 algorithm = LargestLastIndependentSet(G)
 algorithm.run()
-print ( algorithm.independent_set )
-print ( algorithm.cardinality )
+print( algorithm.independent_set )
+print( algorithm.cardinality )
 ~~~
 
 ## INDEPENDENT SETS IN SPECIAL GRAPHS

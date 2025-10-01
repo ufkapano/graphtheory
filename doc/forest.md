@@ -32,8 +32,8 @@ from graphtheory.forests.treecenter import TreeCenter
 
 algorithm = TreeCenter(G)
 algorithm.run()
-print ( algorithm.tree_center )   # one or two nodes
-print ( algorithm.tree_radius )
+print( algorithm.tree_center )   # one or two nodes
+print( algorithm.tree_radius )
 ~~~
 
 ## FINDING THE LONGEST PATH (FOR A SINGLE TREE)
@@ -43,7 +43,7 @@ from graphtheory.forests.treelongestpath import TreeLongestPath
 
 algorithm = TreeLongestPath(G)
 algorithm.run()
-print ( algorithm.longest_path )   # a list of nodes
+print( algorithm.longest_path )   # a list of nodes
 ~~~
 
 ## FINDING A PERFECT ELIMINATION ORDERING (PEO)
@@ -58,8 +58,8 @@ assert len(peo) == G.v()
 
 algorithm = TreePEO(G)
 algorithm.run()
-print ( algorithm.peo )   # a list of nodes
-print ( algorithm.parent )   # a tree as a dict
+print( algorithm.peo )   # a list of nodes
+print( algorithm.parent )   # a tree as a dict
 ~~~
 
 ## DRAWING A SINGLE TREE
@@ -70,11 +70,11 @@ from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
 algorithm = TreePlot(G)   # using float,  only for trees with n < 1e4
 algorithm.run()
-print ( algorithm.point_dict )   # a dict with point positions (float) in the plane
+print( algorithm.point_dict )   # a dict with point positions (float) in the plane
 
 algorithm = TreePlotRadiusAngle(G)   # using fractions
 algorithm.run()
-print ( algorithm.point_dict )   # a dict with pairs (radius(int), angle(Fraction))
+print( algorithm.point_dict )   # a dict with pairs (radius(int), angle(Fraction))
 ~~~
 
 ## FINDING A MAXIMUM INDEPENDENT SET
@@ -85,14 +85,14 @@ from graphtheory.forests.treeiset import TreeIndependentSet
 
 algorithm = BorieIndependentSet(G)
 algorithm.run()
-print ( algorithm.independent_set )
-print ( algorithm.cardinality )   # the size of max iset
-print ( algorithm.parent )        # DFS tree as a dict
+print( algorithm.independent_set )
+print( algorithm.cardinality )   # the size of max iset
+print( algorithm.parent )        # DFS tree as a dict
 
 algorithm = TreeIndependentSet(G)
 algorithm.run()
-print ( algorithm.independent_set )
-print ( algorithm.cardinality )   # the size of max iset
+print( algorithm.independent_set )
+print( algorithm.cardinality )   # the size of max iset
 ~~~
 
 ## FINDING A MINIMUM DOMINATING SET
@@ -108,24 +108,24 @@ from graphtheory.forests.treedset import TreeDominatingSet4
 # G is a tree or a forest.
 algorithm = BorieDominatingSet(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )   # the size of min dset
-print ( algorithm.parent )        # DFS tree as a dict
+print( algorithm.dominating_set )
+print( algorithm.cardinality )   # the size of min dset
+print( algorithm.parent )        # DFS tree as a dict
 
 algorithm = TreeDominatingSet(G)   # this is version 2
 #algorithm = TreeDominatingSet1(G)
 #algorithm = TreeDominatingSet2(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )   # the size of min dset
+print( algorithm.dominating_set )
+print( algorithm.cardinality )   # the size of min dset
 
 # Finding a minimum dominating set and a maximum 2-stable set.
 algorithm = TreeDominatingSet3(G)
 #algorithm = TreeDominatingSet4(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )   # the size of min dset
-print ( algorithm.two_stable_set )   # a maximum 2-stable set
+print( algorithm.dominating_set )
+print( algorithm.cardinality )   # the size of min dset
+print( algorithm.two_stable_set )   # a maximum 2-stable set
 ~~~
 
 ## FINDING A MINIMUM INDEPENDENT DOMINATING SET
@@ -136,9 +136,9 @@ from graphtheory.forests.treeidset import TreeIndependentDominatingSet
 # G is a tree or a forest.
 algorithm = TreeIndependentDominatingSet(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )   # the size of minimum independent dset
-print ( algorithm.parent )        # DFS tree as a dict
+print( algorithm.dominating_set )
+print( algorithm.cardinality )   # the size of minimum independent dset
+print( algorithm.parent )        # DFS tree as a dict
 ~~~
 
 ## FINDING A MINIMUM WEIGHT (INDEPENDENT) DOMINATING SET
@@ -152,11 +152,11 @@ from graphtheory.forests.treewidset import TreeWeightedIndependentDominatingSet
 algorithm = TreeWeightedDominatingSet(G, weight_dict)   # version 2
 #algorithm = TreeWeightedIndependentDominatingSet(G, weight_dict)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )   # the size of minimum independent dset
-print ( algorithm.parent )        # DFS tree as a dict
-print ( algorithm.weight_dict )
-print ( algorithm.dominating_set_weight )
+print( algorithm.dominating_set )
+print( algorithm.cardinality )   # the size of minimum independent dset
+print( algorithm.parent )        # DFS tree as a dict
+print( algorithm.weight_dict )
+print( algorithm.dominating_set_weight )
 ~~~
 
 ## FINDING A MINIMUM VERTEX COVER
@@ -167,14 +167,14 @@ from graphtheory.forests.treecover import TreeNodeCover
 
 algorithm = BorieNodeCover(G)
 algorithm.run()
-print ( algorithm.node_cover )   # a set with nodes
-print ( algorithm.cardinality )   # the size of min cover
-print ( algorithm.parent )        # DFS tree as a dict
+print( algorithm.node_cover )   # a set with nodes
+print( algorithm.cardinality )   # the size of min cover
+print( algorithm.parent )        # DFS tree as a dict
 
 algorithm = TreeNodeCover(G)
 algorithm.run()
-print ( algorithm.node_cover )   # a set with nodes
-print ( algorithm.cardinality )   # the size of min cover
+print( algorithm.node_cover )   # a set with nodes
+print( algorithm.cardinality )   # the size of min cover
 ~~~
 
 ## FINDING A MAXIMUM MATCHING
@@ -184,10 +184,10 @@ from graphtheory.forests.treemate import BorieMatching
 
 algorithm = BorieMatching(G)
 algorithm.run()
-print ( algorithm.mate )   # a dict with pairs (source, target or None)
-print ( algorithm.mate_set )   # a set with edges from max matching
-print ( algorithm.cardinality )   # the size of max matching
-print ( algorithm.parent )        # DFS tree as a dict
+print( algorithm.mate )   # a dict with pairs (source, target or None)
+print( algorithm.mate_set )   # a set with edges from max matching
+print( algorithm.cardinality )   # the size of max matching
+print( algorithm.parent )        # DFS tree as a dict
 ~~~
 
 EOF

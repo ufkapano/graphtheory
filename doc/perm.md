@@ -79,10 +79,10 @@ algorithm.run(source,
     post_action=lambda node: post_order.append(node))
 
 # Results.
-print(pre_order)   # node list
-print(post_order)   # node list
-print(algorithm.parent)   # BFS/DFS tree as a dict
-print(algorithm.path(source, target)   # node list
+print( pre_order )   # node list
+print( post_order )   # node list
+print( algorithm.parent )   # BFS/DFS tree as a dict
+print( algorithm.path(source, target) )   # node list
 ~~~
 
 ## FINDING A CHORDAL COMPLETION FOR PERMUTATION GRAPHS IN O(n^4) TIME
@@ -100,10 +100,10 @@ algorithm.run()
 # Results.
 algorithm.graph.show()   # chordal completion
 assert isinstance(algorithm.graph, Graph)
-print(algorithm.order)   # PEO for chordal completion
+print( algorithm.order )   # PEO for chordal completion
 assert isinstance(algorithm.order, list)
 assert len(algorithm.order) == n
-print(algorithm.new_edges)   # new edges added to the perm graph
+print( algorithm.new_edges )   # new edges added to the perm graph
 assert is_peo1(algorithm.graph, algorithm.order)
 ~~~
 

@@ -12,6 +12,7 @@ There are separate classes and modules devoted to different algorithms.
 
 ## Problems and algorithms
 
+* [Interface for graphs and multigraphs](iface.md)
 * [Graph generators](/doc/factory.md): directed and undirected, weighted graphs
 * [Graph traversal](/doc/traversal.md): BFS and DFS (many versions)
 * [Connectivity](/doc/connected.md): connected components, 

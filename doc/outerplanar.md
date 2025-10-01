@@ -26,7 +26,7 @@ from graphtheory.planarity.nodecolorouterplanar import OuterplanarNodeColoring
 
 algorithm = OuterplanarNodeColoring(G)   # O(n) time
 algorithm.run()
-print ( algorithm.color )   # dict
+print( algorithm.color )   # dict
 ~~~
 
 EOF

@@ -18,15 +18,15 @@ order = []
 #algorithm = DFSWithRecursion(G)
 algorithm = SimpleDFS(G)
 algorithm.run(source, pre_action=lambda node: order.append(node))
-print(order)   # visited nodes
-print(algorithm.parent)   # DFS tree as a dict
+print( order )   # visited nodes
+print( algorithm.parent )   # DFS tree as a dict
 algorithm.dag.show()    # DFS tree as a directed graph
 algorithm.path(source, target)   # construct a path from source to target
 
-# finding a depth for nodes
+# Finding a depth for nodes.
 algorithm = DFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
-print(order)   # visited nodes with depths, a list of pairs (node, depth)
+print( order )   # visited nodes with depths, a list of pairs (node, depth)
 ~~~
 
 ## BFS
@@ -45,15 +45,15 @@ order = []
 #algorithm = BFSWithQueue(G)
 algorithm = SimpleBFS(G)
 algorithm.run(source, pre_action=lambda node: order.append(node))
-print(order)   # visited nodes
-print(algorithm.parent)   # BFS tree as a dict
+print( order )   # visited nodes
+print( algorithm.parent )   # BFS tree as a dict
 algorithm.dag.show()    # BFS tree as a directed graph
 algorithm.path(source, target)   # construct a path from source to target
 
 # Finding a depth for nodes.
 algorithm = BFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
-print(order)   # visited nodes with depths, a list of pairs (node, depth)
+print( order )   # visited nodes with depths, a list of pairs (node, depth)
 ~~~
 
 EOF

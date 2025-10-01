@@ -28,8 +28,8 @@ algorithm = BoruvkaMST(G)
 algorithm.run()
 # algorithm.run(source)   # starting node can be provided
 algorithm.mst.show()         # MST as a graph
-print ( algorithm.parent )   # MST as a dict
-print ( algorithm.distance )
+print( algorithm.parent )   # MST as a dict
+print( algorithm.distance )
 T = algorithm.to_tree()   # MST as a graph (it works for all algorithms)
 T.show()
 ~~~
