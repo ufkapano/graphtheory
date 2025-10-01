@@ -1,5 +1,6 @@
-MINIMUM SPANNING TREE
-----------------------------------------------------------------------
+# MINIMUM SPANNING TREES
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
@@ -31,5 +32,6 @@ print ( algorithm.parent )   # MST as a dict
 print ( algorithm.distance )
 T = algorithm.to_tree()   # MST as a graph (it works for all algorithms)
 T.show()
-----------------------------------------------------------------------
+~~~
+
 EOF

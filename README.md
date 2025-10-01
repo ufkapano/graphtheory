@@ -33,7 +33,7 @@ bipartite graphs (exact)
 * [Independent sets](/doc/iset.md): backtracking (exact), US, RS, LL, SF
 * [Dominating sets](/doc/dset.md): backtracking (exact), hybrid (exact), US, RS, LF
 * [Vertex covers](/doc/vertexcover.md) (heuristics): greedy, 2-approximation, LF
-* Minimum spanning trees (weighted undirected graphs): 
+* [Minimum spanning trees](/doc/mst.md) (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
 * Single-source shortest paths 
 (weighted directed graphs without negative cycles): 
@@ -56,9 +56,12 @@ recognition (fixed ends possible), generators,
 independent set, dominating set, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
 * [Directed series-parallel graphs](/doc/dspgraph.md): recognition, generators
+* [Planar graphs](/doc/planar.md): generators
 * [Halin graphs](/doc/halin.md) (exact algorithms): 
 recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
+* [Outerplanar graphs](/doc/outerplanar.md) (exact algorithms): recognition, 
+chordal completion (PEO), vertex coloring
 * [Chordal graphs](/doc/chordal.md) (exact algorithms): 
 recognition O(n+m), generators, 
 finding PEO (MCS), 
@@ -72,8 +75,6 @@ finding a minimum node cover (TD)
 traversing (BFS, DFS), 
 finding a path decomposition, 
 finding a minimum dominating set O(n+m)
-* [Outerplanar graphs](/doc/outerplanar.md) (exact algorithms): recognition, 
-chordal completion (PEO), vertex coloring
 * [Permutation graphs](/doc/perm.md): 
 perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 
@@ -86,6 +87,7 @@ traversing (BFS, DFS) O(n^2), connectivity O(n^2)
 recognition O(n^4), 
 finding a maximum independent set O(n^4),
 finding a minimum dominating set 
+* [Comparability graphs](/doc/comparability.md): transitive closure
 * [Clustering](/doc/clustering.md): Kruskal
 
 ## Download
