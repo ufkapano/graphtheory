@@ -19,10 +19,10 @@ class MatchingFordFulkersonSet:
     Attributes
     ----------
     graph : input bipartite graph
-    mate : dict with nodes (values are nodes or None)
+    mate : a dict with nodes (values are nodes or None)
     cardinality : number
-    v1 : first set of nodes
-    v2 : second set of nodes
+    v1 : the first set of nodes
+    v2 : the second set of nodes
     """
 
     def __init__(self, graph):
@@ -83,10 +83,10 @@ class MatchingFordFulkersonList:
     Attributes
     ----------
     graph : input bipartite graph
-    mate : dict with nodes (values are nodes or None)
+    mate : a dict with nodes (values are nodes or None)
     cardinality : number
-    v1 : first set of nodes
-    v2 : second set of nodes
+    v1 : the first set of nodes
+    v2 : the second set of nodes
     """
 
     def __init__(self, graph):
@@ -147,9 +147,9 @@ class MatchingFordFulkersonColor:
     Attributes
     ----------
     graph : input bipartite graph
-    mate : dict with nodes (values are nodes or None)
+    mate : a dict with nodes (values are nodes or None)
     cardinality : number
-    color : dict with nodes (values are colors)
+    color : a dict with nodes (values are colors)
     """
     # Sets are not used.
 

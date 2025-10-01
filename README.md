@@ -32,7 +32,7 @@ complete graphs (exact),
 bipartite graphs (exact)
 * Independent sets: backtracking (exact), US, RS, LL, SF
 * Dominating sets: backtracking (exact), hybrid (exact), US, RS, LF
-* Vertex covers (heuristics): greedy, 2-approximation, LF
+* [Vertex covers](vertexcover.md) (heuristics): greedy, 2-approximation, LF
 * Minimum spanning trees (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
 * Single-source shortest paths 
@@ -51,11 +51,11 @@ independent set, (weighted) dominating set and 2-stable set,
 (weighted) independent dominating set,
 vertex cover, matching, 
 tree center, longest path problem, finding PEO, plotting
-* Undirected series-parallel graphs (exact algorithms): 
+* [Undirected series-parallel graphs](spgraph.md) (exact algorithms): 
 recognition (fixed ends possible), generators,
 independent set, dominating set, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
-* Directed series-parallel graphs: recognition, generators
+* [Directed series-parallel graphs](dspgraph.md): recognition, generators
 * Halin graphs (exact algorithms): 
 recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting

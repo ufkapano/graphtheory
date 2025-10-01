@@ -1,7 +1,8 @@
-DIRECTED SERIES-PARALLEL GRAPHS (DSP-GRAPHS)
-----------------------------------------------------------------------
-# RECOGNITION
+# DIRECTED SERIES-PARALLEL GRAPHS (DSP-GRAPHS)
 
+## RECOGNITION
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.dsptrees import find_dsptree
@@ -29,13 +30,16 @@ for edge in edges:
 T = find_dsptree(G)
 btree_print(T)
 btree_print2(T)
-----------------------------------------------------------------------
-# GENERATORS
+~~~
 
+## GENERATORS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.seriesparallel.dsptools import make_random_dspgraph
 
 G = make_random_dspgraph(n=10)   # returns a directed graph
-----------------------------------------------------------------------
+~~~
+
 EOF

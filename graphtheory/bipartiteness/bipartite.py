@@ -10,7 +10,7 @@ class BipartiteGraphBFS:
     Attributes
     ----------
     graph : input bipartite graph or multigraph
-    color : dict with nodes (values are colors)
+    color : a dict with pairs (node, color)
     
     Notes
     -----
@@ -60,7 +60,7 @@ class BipartiteGraphDFS:
     Attributes
     ----------
     graph : input bipartite graph or multigraph
-    color : dict with nodes (values are colors)
+    color : a dict with pairs (node, color)
     
     Notes
     -----

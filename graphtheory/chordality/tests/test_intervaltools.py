@@ -44,6 +44,7 @@ class TestIntervalGraphs(unittest.TestCase):
         self.assertEqual(make_tepee_interval(2), [1, 0, 0, 1])
         self.assertEqual(make_tepee_interval(3), [2, 0, 1, 0, 1, 2])
         self.assertEqual(make_tepee_interval(4), [3, 0, 1, 0, 2, 1, 2, 3])
+        self.assertEqual(make_tepee_interval(5), [4, 0, 1, 0, 2, 1, 3, 2, 3, 4])
 
     def test_2tree_interval(self):
         self.assertEqual(make_2tree_interval(3), [0, 1, 2, 0, 1, 2])

@@ -1,7 +1,8 @@
-VERTEX COVERS
-----------------------------------------------------------------------
-# HEURISTIC ALGORITHMS FOR A MINIMUM VERTEX COVER
+# VERTEX COVERS
 
+## HEURISTIC ALGORITHMS FOR A MINIMUM VERTEX COVER
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.vertexcovers.nodecoverapp import ApproximationNodeCover
@@ -14,7 +15,13 @@ G = Graph()
 #algorithm = DegreeNodeCover   # greedy
 algorithm = LargestFirstNodeCover   # greedy
 algorithm.run()
-print ( algorithm.node_cover )
+print ( algorithm.node_cover )   # a set with nodes
 print ( algorithm.cardinality )
-----------------------------------------------------------------------
+~~~
+
+## VERTEX COVERS IN SPECIAL GRAPHS
+
+* [Forests](forest.md)
+* [Series-parallel graphs](spgraph.md)
+
 EOF

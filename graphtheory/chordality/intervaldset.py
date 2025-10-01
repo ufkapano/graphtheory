@@ -33,12 +33,12 @@ class IntervalDominatingSet:
             self.pairs[node].append(idx)
 
         # Tworze zbiory sasiadow, graph[v] is closed neighborhood of v.
-        self.graph = dict((node, set([node])) for node in set(perm))   # O(n) time
+        self.graph = dict((node, {node}) for node in set(perm))   # O(n) time
         used = set()   # current nodes
         for source in self.perm:   # O(n) time
-            if source in used:   # bedzie usuwanie node
+            if source in used:   # removing the node
                 used.remove(source)
-            else:   # dodajemy nowy node i krawedzie
+            else:   # adding a new node and edges
                 for target in used:
                     self.graph[source].add(target)
                     self.graph[target].add(source)
@@ -48,16 +48,13 @@ class IntervalDominatingSet:
         """Finding a dset and a 2-stable set."""
         used = set()   # active intervals
         for source in self.perm:   # O(n) time
-            #print("source", source)
-            if source in used:   # bedzie usuwanie node, klika zmaleje
+            if source in used:   # removing the node, smaller clique
                 target = max(used, key=lambda v: self.pairs[v][1])
-                #print("target", target)
                 if len(self.graph[source].intersection(self.dominating_set)) == 0:
-                    #print("add ...")
                     self.dominating_set.add(target)
                     self.two_stable_set.add(source)
                 used.remove(source)
-            else:   # dodajemy nowy node, klika rosnie
+            else:   # adding a new node, larger clique
                 used.add(source)
         self.cardinality = len(self.dominating_set)
 

@@ -17,19 +17,25 @@ from graphtheory.chordality.intervaltools import make_star_interval
 from graphtheory.chordality.intervaltools import make_ktree_interval
 from graphtheory.chordality.intervaltools import make_abstract_interval_graph
 
-# Generators return an interval graph as double perm.
+# Generators return an interval graph as a double perm.
 n = 10
 perm = make_random_interval(n)   # random interval graph
 perm = make_complete_interval(n)   # K_n graph
 perm = make_path_interval(n)   # P_n graph
 perm = make_tepee_interval(n)   # tepee graph
-perm = make_2tree_interval(n)   # interval 2-tree
+# 0---5---4   make_tepee_interval(6)
+# | / | \ |
+# 1---2---3
+perm = make_2tree_interval(n)   # interval 2-tree graph
+# 0---2---4   make_2tree_interval(6)
+# | / | / |
+# 1---3---5
 perm = make_star_interval(n)   # K_{1,n-1} graph
 perm = make_ktree_interval(n, k=n // 2)   # interval k-tree
 assert isinstance(perm, list)
 assert len(perm) == 2*n
 
-# Create an abstract interval graph.
+# Create an abstract interval graph in O(n+m) time.
 G = make_abstract_interval_graph(perm)
 assert isinstance(G, Graph)
 ----------------------------------------------------------------------
@@ -38,6 +44,7 @@ assert isinstance(G, Graph)
 from graphtheory.chordality.intervaltools import interval_is_connected
 from graphtheory.chordality.intervaltools import interval_has_edge
 
+# Testing connectivity in O(n) time.
 assert interval_is_connected([0,1,0,1])   # P_2
 assert interval_is_connected([0,1,2,0,1,2])   # K_3
 assert not interval_is_connected([0,0,1,1])   # P_1 + P_1
@@ -62,6 +69,7 @@ assert find_max_clique_size(perm) == 3
 
 from graphtheory.chordality.intervaltools import interval_node_color
 
+# Vertex coloring in O(n) time.
 n = 5
 perm = list(range(n)) * 2   # K_n graph
 color = interval_node_color(perm)
@@ -112,7 +120,7 @@ print(algorithm.two_stable_set)
 
 from graphtheory.chordality.intervalbfs import IntervalBFS
 
-# 0---4---3   2tree graph
+# 0---4---3   2-tree graph (tepee)
 # | \ | /
 # 2---1
 #
@@ -138,7 +146,7 @@ print(algorithm.path(0, 1))   # [0, 1]
 
 from graphtheory.chordality.intervaldfs import IntervalDFS
 
-# 0---4---3   2tree graph
+# 0---4---3   2-tree graph (tepee)
 # | \ | /
 # 2---1
 #

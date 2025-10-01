@@ -167,13 +167,13 @@ from graphtheory.forests.treecover import TreeNodeCover
 
 algorithm = BorieNodeCover(G)
 algorithm.run()
-print ( algorithm.node_cover )
+print ( algorithm.node_cover )   # a set with nodes
 print ( algorithm.cardinality )   # the size of min cover
 print ( algorithm.parent )        # DFS tree as a dict
 
 algorithm = TreeNodeCover(G)
 algorithm.run()
-print ( algorithm.node_cover )
+print ( algorithm.node_cover )   # a set with nodes
 print ( algorithm.cardinality )   # the size of min cover
 ~~~
 
@@ -184,8 +184,8 @@ from graphtheory.forests.treemate import BorieMatching
 
 algorithm = BorieMatching(G)
 algorithm.run()
-print ( algorithm.mate )
-print ( algorithm.mate_set )
+print ( algorithm.mate )   # a dict with pairs (source, target or None)
+print ( algorithm.mate_set )   # a set with edges from max matching
 print ( algorithm.cardinality )   # the size of max matching
 print ( algorithm.parent )        # DFS tree as a dict
 ~~~

@@ -14,8 +14,8 @@ algorithm = MaximalMatching(G)
 # algorithm = MaximalMatchingWithEdges(G)
 # algorithm = MinimumWeightMatchingWithEdges(G)
 algorithm.run()
-print ( algorithm.cardinality )
-print ( algorithm.mate )
+print ( algorithm.mate )   # a dict with pairs (source, target or None)
+print ( algorithm.cardinality )  # the size of max matching
 ----------------------------------------------------------------------
 # MATCHING FOR BIPARTITE GRAPHS
 
@@ -39,7 +39,7 @@ algorithm = MatchingFordFulkersonSet(G)
 # algorithm = HopcroftKarpSet(G)
 # algorithm = HopcroftKarpList(G)
 algorithm.run()
-print ( algorithm.cardinality )
-print ( algorithm.mate )
+print ( algorithm.mate )   # a dict with pairs (source, target or None)
+print ( algorithm.cardinality )  # the size of max matching
 ----------------------------------------------------------------------
 EOF

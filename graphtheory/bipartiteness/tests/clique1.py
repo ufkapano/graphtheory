@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Finding a miximume weight clique in a weighted bipartite graph.
+# Finding a maximum weight clique in a weighted bipartite graph.
 
 import random
 from graphtheory.structures.edges import Edge
