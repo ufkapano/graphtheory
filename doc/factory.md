@@ -1,5 +1,6 @@
-GRAPH GENERATORS
-----------------------------------------------------------------------
+# GRAPH GENERATORS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
@@ -30,5 +31,6 @@ G = gf.make_wheel(n=10)       # wheel graph
 G = gf.make_fake_wheel(n=10)       # fake wheel graph, n > 6
 
 G.show()
-----------------------------------------------------------------------
+~~~
+
 EOF
