@@ -1,7 +1,8 @@
-DOMINATING SETS
-----------------------------------------------------------------------
-# EXACT ALGORITHMS FOR A MINIMUM DOMINATING SET
+# DOMINATING SETS
 
+## EXACT ALGORITHMS FOR A MINIMUM DOMINATING SET
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.dominatingsets.dsetbt import BacktrackingDominatingSet
@@ -14,9 +15,11 @@ algorithm = HybridDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
 print ( algorithm.cardinality )
-----------------------------------------------------------------------
-# HEURISTIC ALGORITHMS FOR A MINIMUM DOMINATING SET
+~~~
 
+## HEURISTIC ALGORITHMS FOR A MINIMUM DOMINATING SET
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.dominatingsets.isetus import UnorderedSequentialDominatingSet
@@ -31,5 +34,12 @@ algorithm = LargestFistDominatingSet(G)
 algorithm.run()
 print ( algorithm.dominating_set )
 print ( algorithm.cardinality )
-----------------------------------------------------------------------
+~~~
+
+## DOMINATING SETS IN SPECIAL GRAPHS
+
+* [Forests](forest.md)
+* [Series-parallel graphs](spgraph.md)
+* [Interval graphs](interval.md)
+
 EOF

@@ -1,7 +1,8 @@
-INDEPENDENT SETS
-----------------------------------------------------------------------
-# EXACT ALGORITHMS FOR A MAXIMUM INDEPENDENT SET
+# INDEPENDENT SETS
 
+## EXACT ALGORITHMS FOR A MAXIMUM INDEPENDENT SET
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.independentsets.isetbt import BacktrackingIndependentSet
@@ -12,9 +13,11 @@ algorithm = BacktrackingIndependentSet(G)
 algorithm.run()
 print ( algorithm.independent_set )
 print ( algorithm.cardinality )
-----------------------------------------------------------------------
-# HEURISTIC ALGORITHMS FOR A MAXIMUM INDEPENDENT SET
+~~~
 
+## HEURISTIC ALGORITHMS FOR A MAXIMUM INDEPENDENT SET
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.independentsets.isetus import UnorderedSequentialIndependentSet
@@ -31,5 +34,12 @@ algorithm = LargestLastIndependentSet(G)
 algorithm.run()
 print ( algorithm.independent_set )
 print ( algorithm.cardinality )
-----------------------------------------------------------------------
+~~~
+
+## INDEPENDENT SETS IN SPECIAL GRAPHS
+
+* [Forests](forest.md)
+* [Series-parallel graphs](spgraph.md)
+* [Chordal graphs](chordal.md)
+
 EOF

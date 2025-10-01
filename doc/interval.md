@@ -1,13 +1,17 @@
-INTERVAL GRAPHS
-----------------------------------------------------------------------
-# RECOGNITION
+# INTERVAL GRAPHS
 
+## RECOGNITION
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
-----------------------------------------------------------------------
-# GENERATORS
+# TO DO
+~~~
 
+## GENERATORS
+
+~~~python
 from graphtheory.chordality.intervaltools import make_random_interval
 from graphtheory.chordality.intervaltools import make_complete_interval
 from graphtheory.chordality.intervaltools import make_path_interval
@@ -38,9 +42,11 @@ assert len(perm) == 2*n
 # Create an abstract interval graph in O(n+m) time.
 G = make_abstract_interval_graph(perm)
 assert isinstance(G, Graph)
-----------------------------------------------------------------------
-# CONNECTIVITY
+~~~
 
+## CONNECTIVITY
+
+~~~python
 from graphtheory.chordality.intervaltools import interval_is_connected
 from graphtheory.chordality.intervaltools import interval_has_edge
 
@@ -50,9 +56,11 @@ assert interval_is_connected([0,1,2,0,1,2])   # K_3
 assert not interval_is_connected([0,0,1,1])   # P_1 + P_1
 assert interval_has_edge([1,2,3,1,4,2,3,4], 1, 3)   # diamond
 assert not interval_has_edge([1,2,3,1,4,2,3,4], 1, 4)   # diamond
-----------------------------------------------------------------------
-# CLIQUES AND PEO
+~~~
 
+## CLIQUES AND PEO
+
+~~~python
 from graphtheory.chordality.intervaltools import find_peo_cliques
 from graphtheory.chordality.intervaltools import find_max_clique_size
 
@@ -64,9 +72,11 @@ peo, cliques = find_peo_cliques(perm)
 assert peo == [1, 2, 3, 4]
 assert cliques == [{1, 2, 3}, {3, 4}]   # ordered cliques
 assert find_max_clique_size(perm) == 3
-----------------------------------------------------------------------
-# VERTEX COLORING
+~~~
 
+## VERTEX COLORING
+
+~~~python
 from graphtheory.chordality.intervaltools import interval_node_color
 
 # Vertex coloring in O(n) time.
@@ -78,9 +88,11 @@ print(color)   # {0: 0, 1: 1, 2: 2, 3: 3, 4: 4}, n colors
 perm = make_path_interval(n)
 color = interval_node_color(perm)
 print(color)   # {0: 0, 1: 1, 2: 0, 3: 1, 4: 0}, 2 colors
-----------------------------------------------------------------------
-# MAXIMUM INDEPENDENT SET
+~~~
 
+## MAXIMUM INDEPENDENT SET
+
+~~~python
 from graphtheory.chordality.intervaltools import interval_maximum_iset
 
 n = 10
@@ -103,9 +115,11 @@ assert len(iset) == (n+2) // 3
 perm = make_star_interval(n)   # K_{1,n-1} star graph
 iset = interval_maximum_iset(perm)
 assert len(iset) == n-1
-----------------------------------------------------------------------
-# MINIMUM DOMINATING SET
+~~~
 
+## MINIMUM DOMINATING SET
+
+~~~python
 from graphtheory.chordality.intervaldset import IntervalDominatingSet
 
 # [2013 Chang] Primal-dual algorithm, O(n+m) time.
@@ -115,9 +129,11 @@ algorithm.run()
 print(algorithm.dominating_set)
 assert algorithm.cardinality == len(algorithm.dominating_set)
 print(algorithm.two_stable_set)
-----------------------------------------------------------------------
-# TRAVERSING (BFS)
+~~~
 
+## TRAVERSING (BFS)
+
+~~~python
 from graphtheory.chordality.intervalbfs import IntervalBFS
 
 # 0---4---3   2-tree graph (tepee)
@@ -141,9 +157,11 @@ print(postorder)   # [0, 1, 2, 4, 3]
 print(algorithm.parent)   # {0: None, 1: 0, 2: 0, 3: 1, 4: 0}
 print(algorithm.path(0, 3))    # [0, 1, 3]
 print(algorithm.path(0, 1))   # [0, 1]
-----------------------------------------------------------------------
-# TRAVERSING (DFS)
+~~~
 
+## TRAVERSING (DFS)
+
+~~~python
 from graphtheory.chordality.intervaldfs import IntervalDFS
 
 # 0---4---3   2-tree graph (tepee)
@@ -167,9 +185,11 @@ print(postorder)   # [2, 4, 3, 1, 0]
 print(algorithm.parent)   # {0: None, 1: 0, 2: 1, 3: 1, 4: 3}
 print(algorithm.path(0, 1))   # [0, 1]
 print(algorithm.path(0, 3))   # [0, 1, 3]
-----------------------------------------------------------------------
-# DRAWING INTERVAL GRAPHS
+~~~
 
+## DRAWING INTERVAL GRAPHS
+
+~~~python
 from graphtheory.chordality.intervaltools import make_random_interval
 from graphtheory.chordality.intervaltools import interval_drawing
 
@@ -185,5 +205,6 @@ interval_drawing(perm)
 #         9-9     5---------------------5 
 #                   8---8                 
 #                     7-----7
-----------------------------------------------------------------------
+~~~
+
 EOF

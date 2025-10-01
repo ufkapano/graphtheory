@@ -30,9 +30,9 @@ sequential (US, RS, CS),
 NTL (using &Delta; or &Delta;+1 colors),
 complete graphs (exact),
 bipartite graphs (exact)
-* Independent sets: backtracking (exact), US, RS, LL, SF
-* Dominating sets: backtracking (exact), hybrid (exact), US, RS, LF
-* [Vertex covers](vertexcover.md) (heuristics): greedy, 2-approximation, LF
+* [Independent sets](/doc/iset.md): backtracking (exact), US, RS, LL, SF
+* [Dominating sets](/doc/dset.md): backtracking (exact), hybrid (exact), US, RS, LF
+* [Vertex covers](/doc/vertexcover.md) (heuristics): greedy, 2-approximation, LF
 * Minimum spanning trees (weighted undirected graphs): 
 Boruvka, Prim, Kruskal
 * Single-source shortest paths 
@@ -51,15 +51,15 @@ independent set, (weighted) dominating set and 2-stable set,
 (weighted) independent dominating set,
 vertex cover, matching, 
 tree center, longest path problem, finding PEO, plotting
-* [Undirected series-parallel graphs](spgraph.md) (exact algorithms): 
+* [Undirected series-parallel graphs](/doc/spgraph.md) (exact algorithms): 
 recognition (fixed ends possible), generators,
 independent set, dominating set, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
-* [Directed series-parallel graphs](dspgraph.md): recognition, generators
+* [Directed series-parallel graphs](/doc/dspgraph.md): recognition, generators
 * Halin graphs (exact algorithms): 
 recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
-* Chordal graphs (exact algorithms): 
+* [Chordal graphs](/doc/chordal.md) (exact algorithms): 
 recognition O(n+m), generators, 
 finding PEO (MCS), 
 finding a maximum clique (PEO, MDO),
@@ -68,7 +68,7 @@ finding a maximum independent set (PEO),
 finding a tree decomposition (TD),
 finding a minimum dominating set (TD),
 finding a minimum node cover (TD)
-* Interval graphs: double perm representation, generators, 
+* [Interval graphs](/doc/interval.md): double perm representation, generators, 
 traversing (BFS, DFS), 
 finding a path decomposition, 
 finding a minimum dominating set O(n+m)
