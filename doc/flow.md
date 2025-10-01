@@ -1,5 +1,6 @@
-FLOW NETWORKS
-----------------------------------------------------------------------
+# FLOW NETWORKS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
@@ -13,9 +14,9 @@ from graphtheory.flow.edmondskarp import EdmondsKarpSparse
 from graphtheory.flow.dinic import Dinic
 from graphtheory.flow.dinic import DinicSparse
 
-V = 100                       # the number of nodes
+N = 10   # the number of nodes
 gf = GraphFactory(Graph)
-G = gf.make_flow_network(n=V)
+G = gf.make_flow_network(n=N)
 algorithm = FordFulkerson(G)
 # algorithm = FordFulkersonSparse(G)
 # algorithm = FordFulkersonWithEdges(G)
@@ -25,9 +26,11 @@ algorithm = FordFulkerson(G)
 # algorithm = EdmondsKarpSparse(G)
 # algorithm = Dinic(G)
 # algorithm = DinicSparse(G)
-# Find the maximum flow from source to sink.
-algorithm.run(source=0, sink=V-1)
+
+# Finding the maximum flow from source to sink.
+algorithm.run(source=0, sink=N-1)
 print( algorithm.max_flow )   # the value of the maximum flow
-print( algorithm.flow )       # table with flows (dict of dict)
-----------------------------------------------------------------------
+print( algorithm.flow )       # a table with flows (dict of dict)
+~~~
+
 EOF

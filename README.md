@@ -12,7 +12,7 @@ There are separate classes and modules devoted to different algorithms.
 
 ## Problems and algorithms
 
-* [Interface for graphs and multigraphs](iface.md)
+* [Interface for graphs and multigraphs](/doc/iface.md)
 * [Graph generators](/doc/factory.md): directed and undirected, weighted graphs
 * [Graph traversal](/doc/traversal.md): BFS and DFS (many versions)
 * [Connectivity](/doc/connected.md): connected components, 
@@ -45,6 +45,7 @@ Bellman-Ford
 * All-pairs shortest paths 
 (weighted directed graphs without negative cycles): 
 Floyd-Warshall, Johnson, matrix multiplications
+* [Flow networks](/doc/flow.md): Ford-Fulkerson, Edmonds-Karp, Dinic
 * Eulerian graphs: DFS, Fleury, Hierholzer
 * Hamiltonian graphs: DFS, tournaments, 
 TSP (DFS, with MST, NN, RNN, sorted edges)
