@@ -56,7 +56,7 @@ recognition (fixed ends possible), generators,
 independent set, dominating set, vertex cover, matching, 
 chordal completion (PEO), vertex coloring
 * [Directed series-parallel graphs](/doc/dspgraph.md): recognition, generators
-* Halin graphs (exact algorithms): 
+* [Halin graphs](/doc/halin.md) (exact algorithms): 
 recognition, generators, vertex coloring,
 chordal completion (PEO), tree decomposition, plotting
 * [Chordal graphs](/doc/chordal.md) (exact algorithms): 
@@ -72,7 +72,7 @@ finding a minimum node cover (TD)
 traversing (BFS, DFS), 
 finding a path decomposition, 
 finding a minimum dominating set O(n+m)
-* Outerplanar graphs (exact algorithms): recognition, 
+* [Outerplanar graphs](/doc/outerplanar.md) (exact algorithms): recognition, 
 chordal completion (PEO), vertex coloring
 * [Permutation graphs](/doc/perm.md): 
 perm representation, generators, 
@@ -86,7 +86,7 @@ traversing (BFS, DFS) O(n^2), connectivity O(n^2)
 recognition O(n^4), 
 finding a maximum independent set O(n^4),
 finding a minimum dominating set 
-* Clustering: Kruskal
+* [Clustering](/doc/clustering.md): Kruskal
 
 ## Download
 

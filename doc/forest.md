@@ -159,7 +159,7 @@ print ( algorithm.weight_dict )
 print ( algorithm.dominating_set_weight )
 ~~~
 
-## FINDING A MINIMUM NODE COVER
+## FINDING A MINIMUM VERTEX COVER
 
 ~~~python
 from graphtheory.forests.treecover import BorieNodeCover
