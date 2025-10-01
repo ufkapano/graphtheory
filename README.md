@@ -13,10 +13,9 @@ There are separate classes and modules devoted to different algorithms.
 ## Problems and algorithms
 
 * [Graph generators](/doc/factory.md): directed and undirected, weighted graphs
-* [Connectivity](/doc/connected.md): connected components, strongly connected components,
-cut nodes, cut edges (bridges)
-* Cycle detection, topological sorting (DFS, Kahn), 
-transitive closure (matrix multiplication, Floyd-Warshall, BFS, DFS)
+* [Graph traversal](/doc/traversal.md): BFS and DFS (many versions)
+* [Connectivity](/doc/connected.md): connected components, 
+strongly connected components, cut nodes, cut edges (bridges)
 * [Bipartite graphs](/doc/bipartite.md): recognition (BFS, DFS), 
 maximum-cardinality matching (Hopcroft-Karp, Ford-Fulkerson)
 * [Matchings](/doc/matching.md): 
@@ -89,7 +88,9 @@ traversing (BFS, DFS) O(n^2), connectivity O(n^2)
 recognition O(n^4), 
 finding a maximum independent set O(n^4),
 finding a minimum dominating set 
-* [Comparability graphs](/doc/comparability.md): transitive closure
+* [Comparability graphs](/doc/comparability.md): 
+cycle detection, topological sorting (DFS, Kahn),
+transitive closure (matrix multiplication, Floyd-Warshall, BFS, DFS)
 * [Clustering](/doc/clustering.md): Kruskal
 
 ## Download

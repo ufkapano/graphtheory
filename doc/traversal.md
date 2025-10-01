@@ -1,7 +1,8 @@
-TRAVERSING
-----------------------------------------------------------------------
-# DFS
+# GRAPH TRAVERSAL
 
+## DFS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.traversing.dfs import DFSWithStack
@@ -26,9 +27,11 @@ algorithm.path(source, target)   # construct a path from source to target
 algorithm = DFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print(order)   # visited nodes with depths, a list of pairs (node, depth)
-----------------------------------------------------------------------
-# BFS
+~~~
 
+## BFS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.traversing.bfs import BFSWithQueue
@@ -47,9 +50,10 @@ print(algorithm.parent)   # BFS tree as a dict
 algorithm.dag.show()    # BFS tree as a directed graph
 algorithm.path(source, target)   # construct a path from source to target
 
-# finding a depth for nodes
+# Finding a depth for nodes.
 algorithm = BFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print(order)   # visited nodes with depths, a list of pairs (node, depth)
-----------------------------------------------------------------------
+~~~
+
 EOF
