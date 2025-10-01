@@ -1,7 +1,8 @@
-MATCHING
-----------------------------------------------------------------------
-# MATCHING FOR GENERAL GRAPHS (HEURISTICS)
+# MATCHINGS
 
+## MATCHINGS FOR GENERAL GRAPHS (HEURISTICS)
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.algorithms.matching import MaximalMatching
@@ -16,9 +17,11 @@ algorithm = MaximalMatching(G)
 algorithm.run()
 print ( algorithm.mate )   # a dict with pairs (source, target or None)
 print ( algorithm.cardinality )  # the size of max matching
-----------------------------------------------------------------------
-# MATCHING FOR BIPARTITE GRAPHS
+~~~
 
+## MATCHINGS FOR BIPARTITE GRAPHS
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
@@ -41,5 +44,6 @@ algorithm = MatchingFordFulkersonSet(G)
 algorithm.run()
 print ( algorithm.mate )   # a dict with pairs (source, target or None)
 print ( algorithm.cardinality )  # the size of max matching
-----------------------------------------------------------------------
+~~~
+
 EOF

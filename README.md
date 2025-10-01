@@ -16,9 +16,9 @@ There are separate classes and modules devoted to different algorithms.
 cut nodes, cut edges (bridges)
 * Cycle detection, topological sorting (DFS, Kahn), 
 transitive closure (matrix multiplication, Floyd-Warshall, BFS, DFS)
-* Bipartiteness: bipartite graphs detection (BFS, DFS), 
+* [Bipartite graphs](/doc/bipartite.md): recognition (BFS, DFS), 
 maximum-cardinality matching (Hopcroft-Karp, Ford-Fulkerson)
-* Matching: heuristics (greedy for a maximal cardinality matching,
+* [Matchings](/doc/matching.md): heuristics (greedy for a maximal cardinality matching,
 greedy for a minimum weight matching)
 * Vertex coloring: sequential (US, RS, CS),
 Brooks' theorem (&Delta; colors),
