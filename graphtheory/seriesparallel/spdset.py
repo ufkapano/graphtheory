@@ -92,14 +92,14 @@ class SPGraphDominatingSet:
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r02, r10, r11, r12, r20, r21, r22).
             return (set(),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.target]),
-                    set([node.source, node.target]),
-                    set([node.source]),
-                    set([node.source, node.target]))
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.target},
+                    {node.source, node.target},
+                    {node.source},
+                    {node.source, node.target})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":
@@ -197,14 +197,14 @@ class SPTreeDominatingSet:
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r02, r10, r11, r12, r20, r21, r22).
             return (set(),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.source, node.target]),
-                    set([node.target]),
-                    set([node.source, node.target]),
-                    set([node.source]),
-                    set([node.source, node.target]))
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.source, node.target},
+                    {node.target},
+                    {node.source, node.target},
+                    {node.source},
+                    {node.source, node.target})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":

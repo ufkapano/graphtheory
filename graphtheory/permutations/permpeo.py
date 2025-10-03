@@ -25,7 +25,6 @@ class PermGraphPEO:
         """Executable pseudocode."""
         self.order = find_peo_mcs(self.graph)
         if is_peo1(self.graph, self.order):   # pomijamy chordal graphs
-            #print("perm graph is chordal")
             return
 
         cycle2chord = dict()
@@ -71,7 +70,6 @@ class PermGraphPEO:
                 del cycle2chord[cycle]
             del chord2cycle[chord1]
             if not cycle2chord:
-                #print("chord2cycle", chord2cycle)
                 assert all(len(chord2cycle[chord]) == 0 for chord in chord2cycle)
                 break
         # Creating a chordal completion.

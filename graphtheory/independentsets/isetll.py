@@ -4,10 +4,9 @@
 # Zamiast degree_dict mozna usuwac wierzcholki z kopii grafu.
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 # Lista wierzcholkow wg stopni ustalona na poczatku.
 class LargestLastIndependentSet1:

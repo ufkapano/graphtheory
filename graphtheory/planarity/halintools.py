@@ -56,7 +56,7 @@ def make_halin_outer(n=4):
     # Wyznaczam slownik z punktami.
     algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
-    L = list()   # for leaves
+    L = []   # for leaves
     for node in algorithm.point_dict:
         if graph.degree(node) == 1:   # leaves
             L.append(node)
@@ -115,7 +115,7 @@ def make_halin_cubic_outer(n=4):
     algorithm = TreePlotRadiusAngle(graph)
     algorithm.run(root)
     #print algorithm.point_dict
-    L = list()   # for leaves
+    L = []   # for leaves
     for node in algorithm.point_dict:
         if graph.degree(node) == 1:   # leaf
             L.append(node)

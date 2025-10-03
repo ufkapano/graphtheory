@@ -56,7 +56,7 @@ def find_peo_mcs1(graph):   # to nie jest najszybsza wersja!
     """Finding PEO in a chordal graph using maximum cardinality search, O(V^2) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()   # PEO
+    order = []   # PEO
     used = set()
     visited_degree = dict((node, 0) for node in graph.iternodes()) # O(V) time
     for step in range(graph.v()):   # all nodes in the loop
@@ -75,7 +75,7 @@ def find_peo_mcs2(graph):
     """Finding PEO using maximum cardinality search, O(V+E) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()   # zapisuje kolejnosc analizowanych wierzcholkow
+    order = []   # zapisuje kolejnosc analizowanych wierzcholkow
     used = set()
     visited_degree = dict((node, 0) for node in graph.iternodes())
     bucket = list(set() for deg in range(graph.v()))   # O(V) time
@@ -106,7 +106,7 @@ def find_peo_mcs3(graph):   # using the graph copy
     """Finding PEO in a chordal graph using maximum cardinality search, O(V^2) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()   # PEO
+    order = []   # PEO
     H = graph.copy()
     visited_degree = dict((node, 0) for node in graph.iternodes()) # O(V) time
     for step in range(graph.v()):
@@ -124,12 +124,12 @@ find_peo_mcs = find_peo_mcs2
 
 
 def find_maximum_clique_peo(graph, order):
-    """Find a maximum clique in a chordal graph using PEO."""
+    """Find a maximum clique in a chordal graph using PEO, O(V+E) time."""
     max_clique = set()   # kandydat na klike najwieksza
     # Indices of nodes in PEO.
     M = dict((node, i) for (i, node) in enumerate(order))   # O(V) time
     for source in order:
-        clique = set([source])
+        clique = {source}
         for target in graph.iteradjacent(source): # total O(E) time
             if M[source] < M[target]:
                 clique.add(target)
@@ -153,13 +153,13 @@ def find_all_maximal_cliques(graph, order):
             if M[source] < M[target]:
                 X.add(target)
         if graph.degree(source) == 0:   # isolated node
-            cliques.append(set([source]))
+            cliques.append({source})
         if not X:
             continue
         node = min(X, key=M.__getitem__)   # najblizej source
         S[node] = max(S[node], len(X)-1)   # klika przy node bez node
         if S[source] < len(X):
-            cliques.append(X | set([source]))
+            cliques.append(X | {source})
     return cliques
 
 

@@ -9,7 +9,7 @@ from graphtheory.structures.edges import Edge
 
 
 class MaximalMatching:
-    """Find a maximal cardinality matching using a greedy method.
+    """Find a maximal cardinality matching using a greedy method in O(n+m) time.
     
     Attributes
     ----------
@@ -44,7 +44,7 @@ class MaximalMatching:
 
 
 class MaximalMatchingWithEdges:
-    """Find a maximal cardinality matching using a greedy method.
+    """Find a maximal cardinality matching using a greedy method in O(n+m) time.
     
     Attributes
     ----------

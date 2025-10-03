@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 # Wersja malo wydajna.
 # Tutaj _used i independent_set jest typu set.

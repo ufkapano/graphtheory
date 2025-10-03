@@ -30,7 +30,7 @@ class TestTreeDecomposition(unittest.TestCase):
     def test_find_td_chordal(self):
         T = find_td_chordal(self.G, self.order)
         #T.show()
-        bags1 = set([(0, 1, 2), (0, 2, 3), (1, 2, 4)])
+        bags1 = {(0, 1, 2), (0, 2, 3), (1, 2, 4)}
         bags2 = set(T.iternodes())
         self.assertEqual(T.v(), len(bags1))
         self.assertEqual(bags1, bags2)
@@ -38,7 +38,7 @@ class TestTreeDecomposition(unittest.TestCase):
     def test_find_td_order(self):
         T = find_td_order(self.G, [3, 0, 1, 2, 4])
         #T.show()
-        bags1 = set([(0, 1, 2), (0, 2, 3), (1, 2, 4)])
+        bags1 = {(0, 1, 2), (0, 2, 3), (1, 2, 4)}
         bags2 = set(T.iternodes())
         self.assertEqual(T.v(), len(bags1))
         self.assertEqual(bags1, bags2)
@@ -74,7 +74,7 @@ class TestTreeDecomposition2(unittest.TestCase):
             G.add_edge(edge)
         T = find_td_order(G, [2,5,0,1,3,4])
         #T.show()
-        bags1 = set([(0,1,2,3), (0,1,3,4), (0,3,4,5)])
+        bags1 = {(0,1,2,3), (0,1,3,4), (0,3,4,5)}
         bags2 = set(T.iternodes())
         self.assertEqual(T.v(), len(bags1))
         self.assertEqual(bags1, bags2)

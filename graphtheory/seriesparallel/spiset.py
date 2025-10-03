@@ -63,10 +63,7 @@ class SPGraphIndependentSet:
             # r11 faktycznie jest niepoprawne (to jest r00),
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r10, r11).
-            return (set(),
-                    set([node.target]), 
-                    set([node.source]), 
-                    set())
+            return (set(), {node.target}, {node.source}, set())
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":
@@ -135,10 +132,7 @@ class SPTreeIndependentSet:
             # r11 faktycznie jest niepoprawne (to jest r00),
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r10, r11).
-            return (set(),
-                    set([node.target]), 
-                    set([node.source]), 
-                    set())
+            return (set(), {node.target}, {node.source}, set())
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":

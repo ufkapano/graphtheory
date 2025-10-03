@@ -66,7 +66,7 @@ class BorieIndependentSet:
     def _visit(self, root):
         """Explore recursively the connected component."""
         # Start from a single node.
-        arg1 = (set([root]), set())
+        arg1 = ({root}, set())
         for target in self.graph.iteradjacent(root):
             if target not in self.parent:
                 self.parent[target] = root   # before _visit

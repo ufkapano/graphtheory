@@ -65,7 +65,7 @@ class TreeWeightedDominatingSet1:
     def _visit(self, root):
         """Explore recursively the connected component."""
         # Start from a single node.
-        arg1 = (set([root]), set([root]), set())
+        arg1 = ({root}, {root}, set())
         for target in self.graph.iteradjacent(root):
             if target not in self.parent:
                 self.parent[target] = root   # before _visit
@@ -137,8 +137,8 @@ class TreeWeightedDominatingSet2:
     def _visit(self, root):
         """Explore recursively the connected component."""
         # Start from a single node.
-        arg1 = ((self.weight_dict[root], set([root])),
-            (self.weight_dict[root], set([root])),
+        arg1 = ((self.weight_dict[root], {root}),
+            (self.weight_dict[root], {root}),
             (0, set()))
         for target in self.graph.iteradjacent(root):
             if target not in self.parent:

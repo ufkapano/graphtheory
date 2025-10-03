@@ -70,7 +70,7 @@ class SPGraphMatching:
                 edge = Edge(node.source, node.target)
             else:
                 edge = Edge(node.target, node.source)
-            return (set(), set(), set(), set([edge]))
+            return (set(), set(), set(), {edge})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":
@@ -145,7 +145,7 @@ class SPTreeMatching:
                 edge = Edge(node.source, node.target)
             else:
                 edge = Edge(node.target, node.source)
-            return (set(), set(), set(), set([edge]))
+            return (set(), set(), set(), {edge})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":

@@ -67,7 +67,7 @@ class TopologicalSortQueue:
         if not graph.is_directed():
             raise ValueError("the graph is not directed")
         self.graph = graph
-        self.sorted_nodes = list()
+        self.sorted_nodes = []
 
     def run(self):
         """Executable pseudocode."""

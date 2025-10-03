@@ -63,10 +63,10 @@ class SPGraphNodeCover:
             # r00 faktycznie jest niepoprawne (to jest r11),
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r10, r11).
-            return (set([node.source, node.target]),
-                    set([node.target]), 
-                    set([node.source]),
-                    set([node.source, node.target]))
+            return ({node.source, node.target},
+                    {node.target}, 
+                    {node.source},
+                    {node.source, node.target})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":
@@ -135,10 +135,10 @@ class SPTreeNodeCover:
             # r00 faktycznie jest niepoprawne (to jest r11),
             # ale takie przyjecie upraszcza przetwarzanie..
             # Kolejnosc (r00, r01, r10, r11).
-            return (set([node.source, node.target]),
-                    set([node.target]), 
-                    set([node.source]),
-                    set([node.source, node.target]))
+            return ({node.source, node.target},
+                    {node.target}, 
+                    {node.source},
+                    {node.source, node.target})
         arg1 = self._visit(node.left)
         arg2 = self._visit(node.right)
         if node.type == "series":

@@ -11,11 +11,12 @@ from graphtheory.algorithms.matching import MinimumWeightMatchingWithEdges
 
 G = Graph()
 # Add nodes and edges here.
-algorithm = MaximalMatching(G)
-# algorithm = MaximalMatchingWithEdges(G)
-# algorithm = MinimumWeightMatchingWithEdges(G)
+algorithm = MaximalMatching(G)   # O(n+m) time
+# algorithm = MaximalMatchingWithEdges(G)   # O(n+m) time
+# algorithm = MinimumWeightMatchingWithEdges(G)   # O(m log n) time
 algorithm.run()
 print( algorithm.mate )   # a dict with pairs (source, target or None)
+#print( algorithm.mate )   # a dict with pairs (source, edge or None) '...WithEdges'
 print( algorithm.cardinality )  # the size of max matching
 ~~~
 

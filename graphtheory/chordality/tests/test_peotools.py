@@ -30,9 +30,9 @@ class TestChordalGraphs(unittest.TestCase):
     def test_max_clique(self):
         order = find_peo_mcs(self.G)
         max_clique = find_maximum_clique_peo(self.G, order)
-        clique1 = set([0, 1, 2])
-        clique2 = set([0, 2, 3])
-        clique3 = set([1, 2, 4])
+        clique1 = {0, 1, 2}
+        clique2 = {0, 2, 3}
+        clique3 = {1, 2, 4}
         self.assertEqual(len(max_clique), 3)
         self.assertEqual(max_clique, clique1)
 
@@ -62,9 +62,9 @@ class TestChordalGraphs(unittest.TestCase):
         #print("peo {}".format(order))
         #print("iset {}".format(iset))
         self.assertEqual(len(iset), 2)
-        expected1 = set([3, 1])
-        expected2 = set([3, 4])
-        expected3 = set([4, 0])
+        expected1 = {3, 1}
+        expected2 = {3, 4}
+        expected3 = {4, 0}
         self.assertEqual(iset, expected2)
         for edge in self.G.iteredges():
             self.assertFalse(edge.source in iset and edge.target in iset)

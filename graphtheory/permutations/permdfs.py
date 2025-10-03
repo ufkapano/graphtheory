@@ -13,7 +13,6 @@ class PermDFS:
         self.position = list(perm)   # temporary, O(n) memory
         for k, item in enumerate(perm):   # O(n) time
             self.position[item] = k   # for testing edges
-        #print("position", self.position)
         recursionlimit = sys.getrecursionlimit()
         sys.setrecursionlimit(max(len(self.perm) * 2, recursionlimit))
 

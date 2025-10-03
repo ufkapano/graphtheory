@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 try:
-    integer_types = (int, long)
     range = xrange
 except NameError:   # Python 3
-    integer_types = (int,)
+    pass
 
 import random
 from graphtheory.structures.edges import Edge
@@ -99,7 +98,7 @@ def find_peo_spgraph1(graph):   # graph has to be connected
     """Find PEO for a supergraph (2-tree) of an sp-graph."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()     # PEO of 2-tree
+    order = []   # PEO of 2-tree
     graph_copy = graph.copy()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())              # O(V) time
@@ -149,7 +148,7 @@ def find_peo_spgraph2(graph):   # graph has to be connected
     """Find PEO for a supergraph (2-tree) of an sp-graph."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()     # PEO of 2-tree
+    order = []   # PEO of 2-tree
     graph_copy = graph.copy()
     degree2 = set(node for node in graph.iternodes()
         if graph.degree(node) == 2)   # active nodes with degree 2
