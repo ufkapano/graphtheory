@@ -98,7 +98,18 @@ class DFSWithStack:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 
 class DFSWithRecursion:
@@ -189,7 +200,18 @@ class DFSWithRecursion:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 
 class SimpleDFS:
@@ -266,7 +288,18 @@ class SimpleDFS:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 
 class DFSWithDepthTracker:
@@ -339,6 +372,17 @@ class DFSWithDepthTracker:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 # EOF

@@ -90,7 +90,18 @@ class BFSWithQueue:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 
 class SimpleBFS:
@@ -171,7 +182,18 @@ class SimpleBFS:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 
 class BFSWithDepthTracker:
@@ -249,6 +271,17 @@ class BFSWithDepthTracker:
         elif self.parent[target] is None:
             raise ValueError("no path to target")
         else:
-            return self.path(source, self.parent[target]) + [target]
+            # iterative solution
+            result = [target]
+            node = target
+            while node != source:
+                node = self.parent[node]
+                if node is None:
+                    raise ValueError("no path to target")
+                result.append(node)
+            result.reverse()
+            return result
+            # recursive solution
+            #return self.path(source, self.parent[target]) + [target]
 
 # EOF

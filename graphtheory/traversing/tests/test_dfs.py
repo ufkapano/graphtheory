@@ -48,6 +48,7 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         self.assertEqual(algorithm.path(1, 7), [1, 5, 6, 7])
         self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
+        self.assertRaises(ValueError, algorithm.path, 4, 7)
         #algorithm.dag.show()
         self.assertEqual(algorithm.dag.v(), self.N)
         self.assertEqual(algorithm.dag.e(), self.N-1)
@@ -75,6 +76,7 @@ class TestDFS(unittest.TestCase):
         #self.assertEqual(algorithm.parent, parent_expected)
         #self.assertEqual(algorithm.path(1, 7), [1, 5, 2, 3, 6, 7])
         self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
+        self.assertRaises(ValueError, algorithm.path, 4, 7)
         #algorithm.dag.show()
         self.assertEqual(algorithm.dag.v(), self.N)
         self.assertEqual(algorithm.dag.e(), self.N-1)
@@ -120,6 +122,9 @@ class TestDFS(unittest.TestCase):
         post_order_expected = [(5, 0), (1, 1), (2, 1), (0, 2), (6, 2), (3, 3), (4, 3), (7, 4)]
         self.assertEqual(pre_order, pre_order_expected)
         self.assertEqual(post_order, post_order_expected)
+        self.assertEqual(algorithm.path(5, 4), [5, 1, 0, 4])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
+        self.assertRaises(ValueError, algorithm.path, 4, 7)
 
     def tearDown(self): pass
 

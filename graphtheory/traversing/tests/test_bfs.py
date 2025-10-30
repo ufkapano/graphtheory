@@ -90,6 +90,9 @@ class TestBFS(unittest.TestCase):
         post_order_expected = [(5, 0), (1, 1), (2, 1), (6, 1), (0, 2), (3, 2), (7, 2), (4, 3)]
         self.assertEqual(pre_order, pre_order_expected)
         self.assertEqual(post_order, post_order_expected)
+        self.assertEqual(algorithm.path(5, 7), [5, 6, 7])
+        self.assertEqual(algorithm.path(1, 4), [1, 0, 4])
+        self.assertRaises(ValueError, algorithm.path, 4, 7)
 
     def tearDown(self): pass
 
