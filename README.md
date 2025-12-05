@@ -32,6 +32,7 @@ sequential (US, RS, CS),
 NTL (using &Delta; or &Delta;+1 colors),
 complete graphs (exact),
 bipartite graphs (exact)
+* [Cliques](/doc/clique.md): Bron-Kerbosch (several versions)
 * [Independent sets](/doc/iset.md): backtracking (exact), US, RS, LL, SF
 * [Dominating sets](/doc/dset.md): backtracking (exact), hybrid (exact), US, RS, LF
 * [Vertex covers](/doc/vertexcover.md) (heuristics): greedy, 2-approximation, LF

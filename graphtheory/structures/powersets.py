@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-#
-# Zbiory sa reprezentaowane jako krotki.
-# Zachowywana jest kolejnosc elementow w krotce.
 
 import sys
 
 def iter_power_set(T):
-    """Generuje wszystkie podzbiory danego zbioru."""
-    # Glebokosc rekurencji rowna sie len(T).
+    """Generate all subsets (tuples) of the given set T in O(2^n) time.
+
+    The recursion depth equals to len(T).
+    Ordering of the elements from T is preserved.
+    """
     recursionlimit = sys.getrecursionlimit()
     sys.setrecursionlimit(max(len(T) * 2, recursionlimit))
     if len(T) == 0:

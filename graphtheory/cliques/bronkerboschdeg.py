@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+class BronKerboschDegeneracy:
+    """Finding all maximal cliques using the Bron-Kerbosch algorithm 
+    with a degeneracy ordering.
+    
+    Attributes
+    ----------
+    graph : input undirected graph
+    cliques : list of cliques
+    counter : number of recursive calls
+    order : list of nodes (degeneracy ordering)
+    
+    Notes
+    -----
+    Based on the pseudocode from
+    
+    https://en.wikipedia.org/wiki/Bron-Kerbosch_algorithm
+    
+    C. Bron, J. Kerbosch, 
+        "Algorithm 457: finding all cliques of an undirected graph", 
+        Communications of the ACM 16 (9), 575-577 (1973).
+    """
+
+    def __init__(self, graph):
+        """The algorithm initialization."""
+        if graph.is_directed():
+            raise ValueError("the graph is directed")
+        self.graph = graph
+        self.cliques = []
+        self.counter = 0
+        self.order = None
+
+    def run(self):
+        """Executable pseudocode."""
+        self.find_degeneracy_ordering()
+        R = set()
+        P = set(self.graph.iternodes())
+        X = set()
+        self.find_cliques(R, P, X)
+
+    def find_degeneracy_ordering(self):
+        """Find a degeneracy ordering in O(V**2) time."""
+        degree_dict = dict((node, self.graph.degree(node))
+            for node in self.graph.iternodes())   # O(V) time
+        self.order = []
+        nodes = set(self.graph.iternodes())
+        for step in range(self.graph.v()):
+            source = min(nodes, key=degree_dict.__getitem__)
+            nodes.remove(source)
+            self.order.append(source)
+            for target in self.graph.iteradjacent(source):
+                degree_dict[target] -= 1
+
+    def find_cliques(self, R, P, X):
+        """The Bron-Kerbosch algorithm with a degeneracy ordering.
+        R - the temporary result
+        P - the set of the possible candidates
+        X - the excluded set
+        """
+        self.counter += 1
+        if len(P) == 0 and len(X) == 0:
+            self.cliques.append(R)
+        elif len(P) == 0:
+            return
+        else:
+            for node in self.order:   # P zmienia sie w petli!
+                if node in P:
+                    neighbors = set(self.graph.iteradjacent(node))
+                    # Usuwamy node przed wyznaczaniem new_P i new_X,
+                    # aby miec mniejszy zbior P w operacji intersection().
+                    P.remove(node)
+                    new_R = R.union([node])             # R | set([node])
+                    new_P = P.intersection(neighbors)   # P & neighbors
+                    new_X = X.intersection(neighbors)   # X & neighbors
+                    self.find_cliques(new_R, new_P, new_X)
+                    X.add(node)
+
+# EOF
