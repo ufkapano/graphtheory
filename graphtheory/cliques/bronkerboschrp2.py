@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-class BronKerboschDegeneracy:
+import random
+
+class BronKerboschRandomPivotIterator:
     """Finding all maximal cliques using the Bron-Kerbosch algorithm 
-    with a degeneracy ordering.
+    with a random pivot. An iterator over maximal cliques is created.
     
     Attributes
     ----------
     graph : input undirected graph
     cliques : list of cliques
     counter : number of recursive calls
-    order : list of nodes (degeneracy ordering)
     
     Notes
     -----
@@ -27,45 +28,32 @@ class BronKerboschDegeneracy:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.cliques = []   # maximal cliques
-        self.counter = 0   # recursive calls
-        self.order = None   # degeneracy ordering
 
     def run(self):
         """Executable pseudocode."""
-        self.find_degeneracy_ordering()
         R = set()
         P = set(self.graph.iternodes())
         X = set()
-        self.find_cliques(R, P, X)
+        yield from self.find_cliques(R, P, X)
 
-    def find_degeneracy_ordering(self):
-        """Find a degeneracy ordering in O(n^2) time."""
-        degree_dict = dict((node, self.graph.degree(node))
-            for node in self.graph.iternodes())   # O(n) time
-        self.order = []
-        nodes = set(self.graph.iternodes())
-        for step in range(self.graph.v()):
-            source = min(nodes, key=degree_dict.__getitem__)
-            nodes.remove(source)
-            self.order.append(source)
-            for target in self.graph.iteradjacent(source):
-                degree_dict[target] -= 1
+    def find_pivot(self, P, X):
+        """Find a random pivot."""
+        return random.choice(list(P.union(X)))
 
     def find_cliques(self, R, P, X):
-        """The Bron-Kerbosch algorithm with a degeneracy ordering.
+        """The Bron-Kerbosch algorithm with pivoting.
         R - the temporary result
         P - the set of the possible candidates
         X - the excluded set
         """
-        self.counter += 1
         if len(P) == 0 and len(X) == 0:
-            self.cliques.append(R)
+            yield R
         elif len(P) == 0:
             return
         else:
-            for node in self.order:   # P zmienia sie w petli!
-                if node in P:
+            pivot = self.find_pivot(P, X)
+            for node in self.graph.iternodes():   # P zmienia sie w petli!
+                if (node in P) and not self.graph.has_edge((node, pivot)):
                     neighbors = set(self.graph.iteradjacent(node))
                     # Usuwamy node przed wyznaczaniem new_P i new_X,
                     # aby miec mniejszy zbior P w operacji intersection().
@@ -73,7 +61,7 @@ class BronKerboschDegeneracy:
                     new_R = R.union([node])             # R | set([node])
                     new_P = P.intersection(neighbors)   # P & neighbors
                     new_X = X.intersection(neighbors)   # X & neighbors
-                    self.find_cliques(new_R, new_P, new_X)
+                    yield from self.find_cliques(new_R, new_P, new_X)
                     X.add(node)
 
 # EOF

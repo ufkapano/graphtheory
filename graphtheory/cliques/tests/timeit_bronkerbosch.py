@@ -5,11 +5,16 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.bipartiteness.bipartite import is_bipartite
+
 from graphtheory.cliques.bronkerbosch import BronKerboschClassic
-from graphtheory.cliques.bronkerbosch2 import BronKerboschClassicIterator
 from graphtheory.cliques.bronkerboschrp import BronKerboschRandomPivot
 from graphtheory.cliques.bronkerboschdp import BronKerboschDegreePivot
 from graphtheory.cliques.bronkerboschdeg import BronKerboschDegeneracy
+
+from graphtheory.cliques.bronkerbosch2 import BronKerboschClassicIterator
+from graphtheory.cliques.bronkerboschrp2 import BronKerboschRandomPivotIterator
+from graphtheory.cliques.bronkerboschdp2 import BronKerboschDegreePivotIterator
+from graphtheory.cliques.bronkerboschdeg2 import BronKerboschDegeneracyIterator
 
 # Wnioski.
 # BronKerboschDegreePivot ma najmniejsza liczbe wywolan rekurencyjnych
@@ -49,12 +54,24 @@ print("Testing BronKerboschRandomPivot ...")
 t1 = timeit.Timer(lambda: BronKerboschRandomPivot(G).run())
 print(V, E, t1.timeit(1))            # pojedyncze wykonanie
 
+print("Testing BronKerboschRandomPivotIterator ...")
+t1 = timeit.Timer(lambda: list(BronKerboschRandomPivotIterator(G).run()))
+print(V, E, t1.timeit(1))            # pojedyncze wykonanie
+
 print("Testing BronKerboschDegreePivot ...")
 t1 = timeit.Timer(lambda: BronKerboschDegreePivot(G).run())
 print(V, E, t1.timeit(1))            # pojedyncze wykonanie
 
+print("Testing BronKerboschDegreePivotIterator ...")
+t1 = timeit.Timer(lambda: list(BronKerboschDegreePivotIterator(G).run()))
+print(V, E, t1.timeit(1))            # pojedyncze wykonanie
+
 print("Testing BronKerboschDegeneracy ...")
 t1 = timeit.Timer(lambda: BronKerboschDegeneracy(G).run())
+print(V, E, t1.timeit(1))            # pojedyncze wykonanie
+
+print("Testing BronKerboschDegeneracyIterator ...")
+t1 = timeit.Timer(lambda: list(BronKerboschDegeneracyIterator(G).run()))
 print(V, E, t1.timeit(1))            # pojedyncze wykonanie
 
 # EOF

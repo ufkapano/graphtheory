@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-class BronKerboschDegeneracy:
+from graphtheory.chordality.mdotools import find_mdo
+
+class BronKerboschDegeneracyIterator:
     """Finding all maximal cliques using the Bron-Kerbosch algorithm 
-    with a degeneracy ordering.
+    with a degeneracy ordering. An iterator over maximal cliques is created.
     
     Attributes
     ----------
@@ -27,30 +29,15 @@ class BronKerboschDegeneracy:
         if graph.is_directed():
             raise ValueError("the graph is directed")
         self.graph = graph
-        self.cliques = []   # maximal cliques
-        self.counter = 0   # recursive calls
         self.order = None   # degeneracy ordering
 
     def run(self):
         """Executable pseudocode."""
-        self.find_degeneracy_ordering()
+        self.order = find_mdo(self.graph)   # O(n+m) time
         R = set()
         P = set(self.graph.iternodes())
         X = set()
-        self.find_cliques(R, P, X)
-
-    def find_degeneracy_ordering(self):
-        """Find a degeneracy ordering in O(n^2) time."""
-        degree_dict = dict((node, self.graph.degree(node))
-            for node in self.graph.iternodes())   # O(n) time
-        self.order = []
-        nodes = set(self.graph.iternodes())
-        for step in range(self.graph.v()):
-            source = min(nodes, key=degree_dict.__getitem__)
-            nodes.remove(source)
-            self.order.append(source)
-            for target in self.graph.iteradjacent(source):
-                degree_dict[target] -= 1
+        yield from self.find_cliques(R, P, X)
 
     def find_cliques(self, R, P, X):
         """The Bron-Kerbosch algorithm with a degeneracy ordering.
@@ -58,9 +45,8 @@ class BronKerboschDegeneracy:
         P - the set of the possible candidates
         X - the excluded set
         """
-        self.counter += 1
         if len(P) == 0 and len(X) == 0:
-            self.cliques.append(R)
+            yield R
         elif len(P) == 0:
             return
         else:
@@ -73,7 +59,7 @@ class BronKerboschDegeneracy:
                     new_R = R.union([node])             # R | set([node])
                     new_P = P.intersection(neighbors)   # P & neighbors
                     new_X = X.intersection(neighbors)   # X & neighbors
-                    self.find_cliques(new_R, new_P, new_X)
+                    yield from self.find_cliques(new_R, new_P, new_X)
                     X.add(node)
 
 # EOF

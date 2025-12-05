@@ -13,7 +13,7 @@ def find_mdo(graph):
     """Finding a minimum degree ordering in O(V+E) time."""
     if graph.is_directed():
         raise ValueError("the graph is directed")
-    order = list()
+    order = []
     used = set()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())
@@ -39,7 +39,7 @@ def find_mdo(graph):
 
 def find_maximum_clique_mdo(graph):
     """Finding a maximum clique in linear time using MDO."""
-    order = list()
+    order = []
     used = set()
     degree_dict = dict((node, graph.degree(node))
         for node in graph.iternodes())
