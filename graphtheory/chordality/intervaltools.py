@@ -174,7 +174,7 @@ def interval_is_connected(perm):
     return True
 
 def find_peo_cliques(perm):
-    """Finding PEO and ordered maximal cliques for the interval graph."""
+    """Finding PEO and ordered maximal cliques for the interval graph, O(n+m) time."""
     growing = True   # klika bedzie rosnac
     peo = []
     cliques = []   # list of maximal cliques
@@ -208,6 +208,22 @@ def find_max_clique_size(perm):   # O(n) time
             used.add(node)
             size = max(size, len(used))
     return size
+
+def iter_cliques_interval(perm):
+    """Generate all maximal cliques on demand for the interval graph, O(n+m) time."""
+    growing = True   # klika będzie rosnąć
+    used = set()   # current clique
+    for node in perm:
+        if node in used:   # będzie usuwanie node, klika zmaleje
+            if growing:   # new maximal clique
+                yield set(used)   # kopia zbioru
+            else:   # poprzednio też usuwaliśmy, więc nie ma nowej kliki
+                pass
+            used.remove(node)
+            growing = False
+        else:   # clique is growing
+            used.add(node)
+            growing = True
 
 def interval_node_color(perm):
     """Vertex coloring of an interval graph (double perm) in O(n) time."""

@@ -48,7 +48,7 @@ print( list(clique_iterator) )   # a list of maximal cliques
 # Let weight_dict be a dict with node weights.
 
 max_weight_edge = max(G.iteredges(), key=lambda edge:
-    weight_dict[edge.source] + weight_dict[edge.target])
+    weight_dict[edge.source] + weight_dict[edge.target])   # O(m) time
 
 max_weight_clique = {max_weight_edge.source, max_weight_edge.target}
 ~~~

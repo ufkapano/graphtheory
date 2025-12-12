@@ -63,15 +63,23 @@ assert not interval_has_edge([1,2,3,1,4,2,3,4], 1, 4)   # diamond
 ~~~python
 from graphtheory.chordality.intervaltools import find_peo_cliques
 from graphtheory.chordality.intervaltools import find_max_clique_size
+from graphtheory.chordality.intervaltools import iter_cliques_interval
 
 #   1
 #  / \
 # 2---3---4
 perm = [1,2,3,1,2,4,3,4]   # stop
-peo, cliques = find_peo_cliques(perm)
+peo, cliques = find_peo_cliques(perm)   # O(n+m) time
 assert peo == [1, 2, 3, 4]
 assert cliques == [{1, 2, 3}, {3, 4}]   # ordered cliques
-assert find_max_clique_size(perm) == 3
+assert find_max_clique_size(perm) == 3   # O(n) time
+for clique in iter_cliques_interval(perm):   # clique iterator, O(n+m) time
+    print(clique)
+
+# Let weight_dict be a dict with node weights.
+# Finding a maximum weight clique in O(n+m) time:
+max_weight_clique = max(iter_cliques_interval(perm),
+    key=lambda clique: sum(weight_dict[v] for v in clique))
 ~~~
 
 ## VERTEX COLORING

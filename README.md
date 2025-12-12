@@ -78,7 +78,8 @@ finding a minimum node cover (TD)
 * [Interval graphs](/doc/interval.md): double perm representation, generators, 
 traversing (BFS, DFS), 
 finding a path decomposition, 
-finding a minimum dominating set O(n+m)
+finding a minimum dominating set O(n+m),
+finding a maximum weight clique O(n+m)
 * [Permutation graphs](/doc/perm.md): 
 perm representation, generators, 
 traversing (BFS, DFS) O(n^2), 

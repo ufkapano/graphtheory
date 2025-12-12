@@ -16,6 +16,7 @@ from graphtheory.chordality.intervaltools import print_intervals
 from graphtheory.chordality.intervaltools import interval_is_connected
 from graphtheory.chordality.intervaltools import find_peo_cliques
 from graphtheory.chordality.intervaltools import find_max_clique_size
+from graphtheory.chordality.intervaltools import iter_cliques_interval
 from graphtheory.chordality.intervaltools import interval_node_color
 from graphtheory.chordality.intervaltools import interval_maximum_iset
 
@@ -112,6 +113,11 @@ class TestIntervalGraphs(unittest.TestCase):
     def test_find_max_clique_size(self):
         perm = [1,2,3,1,2,4,3,4]   # stop
         self.assertEqual(find_max_clique_size(perm), 3)
+
+    def test_iter_cliques_interval(self):
+        perm = [1,2,3,1,2,4,3,4]   # stop
+        cliques = list(iter_cliques_interval(perm))
+        self.assertEqual(cliques, [{1, 2, 3}, {3, 4}]) # ordered cliques
 
     def test_interval_node_color(self):
         n = 10
