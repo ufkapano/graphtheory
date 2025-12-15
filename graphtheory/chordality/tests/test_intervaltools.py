@@ -11,6 +11,7 @@ from graphtheory.chordality.intervaltools import make_2tree_interval
 from graphtheory.chordality.intervaltools import make_star_interval
 from graphtheory.chordality.intervaltools import make_ktree_interval
 from graphtheory.chordality.intervaltools import interval_has_edge
+from graphtheory.chordality.intervaltools import find_edges_interval
 from graphtheory.chordality.intervaltools import make_abstract_interval_graph
 from graphtheory.chordality.intervaltools import print_intervals
 from graphtheory.chordality.intervaltools import interval_is_connected
@@ -69,6 +70,11 @@ class TestIntervalGraphs(unittest.TestCase):
         self.assertFalse(interval_has_edge([1,2,3,1,4,2,3,4], 1, 4)) # diamond
         self.assertTrue(interval_has_edge([1,2,1,3,2,4,3,4], 2, 3)) # P_4
         self.assertFalse(interval_has_edge([1,2,1,3,2,4,3,4], 1, 4)) # P_4
+
+    def test_find_edges_interval(self):
+        self.assertEqual(find_edges_interval([1,2,3,1,2,0,3,0]), 4) # stop
+        self.assertEqual(find_edges_interval([0, 1, 2, 0, 1, 2]), 3) # K_3
+        self.assertEqual(find_edges_interval([0, 1, 0, 2, 1, 2]),2) # P_2
 
     def test_make_abstract_interval_graph(self):
         #   1

@@ -96,6 +96,19 @@ def interval_has_edge(perm, source, target):
     t1, t2 = pairs[target]
     return not (s2 < t1 or t2 < s1)
 
+def find_edges_interval(perm):
+    """Find the number of edges for the interval graph given
+    as a double permutation in O(n^2) time."""
+    pairs = dict((node, []) for node in set(perm))   # O(n) time
+    for idx, node in enumerate(perm):   # O(n) time
+        pairs[node].append(idx)
+    m = 0
+    for (source, target) in itertools.combinations(range(len(perm) // 2), 2):
+        s1, s2 = pairs[source]
+        t1, t2 = pairs[target]
+        m += not (s2 < t1 or t2 < s1)
+    return m
+
 def make_abstract_interval_graph(perm):   # O(n+m) time
     """Finding an abstract interval graph from double perm in O(n+m) time."""
     graph = Graph(n=len(perm) // 2)

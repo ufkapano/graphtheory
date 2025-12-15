@@ -49,6 +49,7 @@ assert isinstance(G, Graph)
 ~~~python
 from graphtheory.chordality.intervaltools import interval_is_connected
 from graphtheory.chordality.intervaltools import interval_has_edge
+from graphtheory.chordality.intervaltools import find_edges_interval
 
 # Testing connectivity in O(n) time.
 assert interval_is_connected([0,1,0,1])   # P_2
@@ -56,6 +57,10 @@ assert interval_is_connected([0,1,2,0,1,2])   # K_3
 assert not interval_is_connected([0,0,1,1])   # P_1 + P_1
 assert interval_has_edge([1,2,3,1,4,2,3,4], 1, 3)   # diamond
 assert not interval_has_edge([1,2,3,1,4,2,3,4], 1, 4)   # diamond
+
+# Finding the number of edges from a double perm in O(n^2) time.
+assert find_edges_interval([0,1,2,0,1,2]) == 3   # K_3
+assert find_edges_interval([1,2,3,1,4,2,3,4]) == 5   # diamond
 ~~~
 
 ## CLIQUES AND PEO
