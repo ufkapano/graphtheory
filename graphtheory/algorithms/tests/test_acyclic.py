@@ -14,7 +14,7 @@ from graphtheory.algorithms.acyclic import is_acyclic
 # |   | / | /
 # v   w   x---y
 
-class TestAcyclicUdirectedGraph(unittest.TestCase):
+class TestAcyclicUndirectedGraph(unittest.TestCase):
 
     def setUp(self):
         # The graph from Cormen p.607 changed.

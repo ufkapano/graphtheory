@@ -23,11 +23,13 @@ class TestTopologicalSorting(unittest.TestCase):
             self.G.add_node(node)
         for edge in self.edges:
             self.G.add_edge(edge)
+        #self.G.show()
 
     def test_topsort_queue(self):
         self.assertEqual(self.G.v(), self.N)
         algorithm = TopologicalSortQueue(self.G)
         algorithm.run()
+        #print(algorithm.sorted_nodes)
         idx = dict((node, i) for (i, node) in enumerate(algorithm.sorted_nodes))
         for edge in self.edges:
             self.assertTrue(idx[edge.source] < idx[edge.target])
