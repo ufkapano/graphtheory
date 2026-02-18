@@ -76,6 +76,7 @@ G.copy()            # return the graph copy
 G.transpose()       # return the transpose of G
 G.complement()      # return the complement of G
 G.subgraph(nodes)   # return the induced subgraph
+G.add_graph(H)
 G == H, G != H      # graph comparisons
 ~~~
 

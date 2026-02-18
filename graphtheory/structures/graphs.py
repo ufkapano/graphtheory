@@ -3,9 +3,11 @@
 import random
 import collections
 from graphtheory.structures.edges import Edge
+from graphtheory.structures.basegraphs import BaseGraph
 
 
 class Graph(dict):
+#class Graph(dict, BaseGraph):   # no effect
     """The class defining a graph.
     
     Nodes can be numbers, strings, or any hashable objects.

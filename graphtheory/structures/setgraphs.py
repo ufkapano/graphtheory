@@ -2,9 +2,11 @@
 
 import random
 from graphtheory.structures.edges import Edge
+from graphtheory.structures.basegraphs import BaseGraph
 
 
 class Graph(dict):
+#class Graph(dict, BaseGraph):   # no effect
     """The class defining an unweighted graph (edge weights are ignored).
     
     Nodes can be numbers, strings, or any hashable objects.

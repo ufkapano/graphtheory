@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import copy
 import random
 from graphtheory.structures.edges import Edge
+from graphtheory.structures.basegraphs import BaseGraph
 
 try:
     integer_types = (int, long)
@@ -10,7 +10,8 @@ try:
 except NameError:   # Python 3
     integer_types = (int,)
 
-class Graph:
+#class Graph:
+class Graph(BaseGraph):
     """The class defining a graph.
     
     Graph class with list-of-list structure (the adjacency matrix

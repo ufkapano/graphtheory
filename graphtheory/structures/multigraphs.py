@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 from graphtheory.structures.edges import Edge
+from graphtheory.structures.basegraphs import BaseGraph
+
 
 class MultiGraph(dict):
+#class MultiGraph(dict, BaseGraph):   # no effect
     """The class defining a weighted multigraph.
     
     Nodes can be numbers, strings, or any hashable objects.

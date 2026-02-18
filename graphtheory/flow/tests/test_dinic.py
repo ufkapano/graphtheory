@@ -60,7 +60,7 @@ class TestMaximumFlow1(unittest.TestCase):
 # |  \ /  |     |
 # |   2   |     |
 # |  o \  |     |
-# | /   o |     o
+# o /   o o     o
 # 1 o---- 4 --o 6
 
 class TestMaximumFlow2(unittest.TestCase):

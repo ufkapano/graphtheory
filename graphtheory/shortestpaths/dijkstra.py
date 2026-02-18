@@ -8,7 +8,7 @@ except ImportError:   # Python 3
 
 
 class Dijkstra:
-    """The Dijkstra's algorithm for the shortest path problem.
+    """The Dijkstra's algorithm for the shortest path problem, O(m log n) time.
     
     Attributes
     ----------
@@ -99,7 +99,7 @@ class Dijkstra:
 
 
 class DijkstraMatrix:
-    """The Dijkstra's algorithm with O(V^2) time.
+    """The Dijkstra's algorithm with O(n^2) time.
     
     Attributes
     ----------
@@ -159,12 +159,12 @@ class DijkstraMatrix:
         """
         self.source = source
         self.distance[source] = 0
-        for _ in range(self.graph.v()):   # |V| times
-            # Find min node, O(V) time.
+        for _ in range(self.graph.v()):   # n times
+            # Find min node, O(n) time.
             node = min((node for node in self.graph.iternodes() 
                 if self._in_queue[node]), key=self.distance.get)
             self._in_queue[node] = False
-            for edge in self.graph.iteroutedges(node):   # O(V) time
+            for edge in self.graph.iteroutedges(node):   # O(n) time
                 if self._in_queue[edge.target]:
                     self._relax(edge)
 
