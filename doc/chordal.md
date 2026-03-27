@@ -16,12 +16,13 @@ order = find_peo_mcs(G)   # if G is not chordal, then 'order' is not a PEO
 assert is_peo1(G, order)   # testing PEO, O(n+m) time
 assert is_peo2(G, order)   # testing PEO, O(n+m) time
 
-max_clique = find_maximum_clique_peo(G, peo)   # G have to be chordal
+# G is a chordal graph, PEO is known.
+max_clique = find_maximum_clique_peo(G, peo)   # O(n+m) time
 print ( max_clique )   # a set of nodes
 treewidth = len(max_clique) - 1
 
-cliques = find_all_maximal_cliques(G, peo)   # G have to be chordal
-print ( cliques )   # a list with sets
+clique_list = find_all_maximal_cliques(G, peo)
+print ( clique_list )   # a list with sets
 ~~~
 
 ## GENERATORS

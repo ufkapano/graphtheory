@@ -190,12 +190,12 @@ def find_peo_cliques(perm):
     """Finding PEO and ordered maximal cliques for the interval graph, O(n+m) time."""
     growing = True   # klika bedzie rosnac
     peo = []
-    cliques = []   # list of maximal cliques
+    clique_list = []   # list of maximal cliques
     used = set()   # current clique
     for node in perm:
         if node in used:   # bedzie usuwanie node, klika zmaleje
             if growing:   # new maximal clique
-                cliques.append(set(used))   # kopia zbioru
+                clique_list.append(set(used))   # kopia zbioru
             else:   # poprzednio tez usuwalismy, wiec nie ma nowej kliki
                 pass
             used.remove(node)
@@ -204,7 +204,7 @@ def find_peo_cliques(perm):
         else:   # clique is growing
             used.add(node)
             growing = True
-    return peo, cliques
+    return peo, clique_list
 
 def find_max_clique_size(perm):   # O(n) time
     """Finding the size of a maximum clique for the interval graph, O(n) time."""

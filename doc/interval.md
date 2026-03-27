@@ -74,9 +74,9 @@ from graphtheory.chordality.intervaltools import iter_cliques_interval
 #  / \
 # 2---3---4
 perm = [1,2,3,1,2,4,3,4]   # stop
-peo, cliques = find_peo_cliques(perm)   # O(n+m) time
+peo, clique_list = find_peo_cliques(perm)   # O(n+m) time
 assert peo == [1, 2, 3, 4]
-assert cliques == [{1, 2, 3}, {3, 4}]   # ordered cliques
+assert clique_list == [{1, 2, 3}, {3, 4}]   # ordered cliques
 assert find_max_clique_size(perm) == 3   # O(n) time
 for clique in iter_cliques_interval(perm):   # clique iterator, O(n+m) time
     print(clique)
