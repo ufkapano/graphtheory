@@ -25,6 +25,17 @@ class TestGraphDirected(unittest.TestCase):
             self.G.add_edge(edge)
         #self.G.show()
 
+    def test_edges(self):
+        for source in self.G.iternodes():
+            for target in self.G.iternodes():
+                if source == target:
+                    continue
+                if not self.G.has_edge((source, target)):
+                    continue
+                edge = self.G[source][target]
+                self.assertEqual(source, edge.source)
+                self.assertEqual(target, edge.target)
+
     def test_directed(self):
         self.assertTrue(self.G.is_directed())
         self.assertEqual(self.G.v(), self.N)
@@ -150,6 +161,17 @@ class TestGraphUndirected(unittest.TestCase):
         for edge in self.edges:
             self.G.add_edge(edge)
         #self.G.show()
+
+    def test_edges(self):
+        for source in self.G.iternodes():
+            for target in self.G.iternodes():
+                if source == target:
+                    continue
+                if not self.G.has_edge((source, target)):
+                    continue
+                edge = self.G[source][target]
+                self.assertEqual(source, edge.source)
+                self.assertEqual(target, edge.target)
 
     def test_undirected(self):
         self.assertFalse(self.G.is_directed())

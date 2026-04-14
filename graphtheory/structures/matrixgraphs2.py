@@ -86,7 +86,7 @@ class Graph(BaseGraph):
             raise ValueError("parallel edges are forbidden")
         if not self.is_directed():
             if self.data[target][source] is None:
-                self.data[target][source] = edge
+                self.data[target][source] = ~edge
             else:
                 raise ValueError("parallel edges are forbidden")
 
