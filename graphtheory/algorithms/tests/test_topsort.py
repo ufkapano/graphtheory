@@ -35,6 +35,7 @@ class TestTopologicalSorting(unittest.TestCase):
             self.assertTrue(idx[edge.source] < idx[edge.target])
 
     def test_topsort_dfs(self):
+        #self.G.add_edge(Edge(6, 2)) # cycle added
         self.assertEqual(self.G.v(), self.N)
         algorithm = TopologicalSortDFS(self.G)
         algorithm.run()
@@ -43,6 +44,7 @@ class TestTopologicalSorting(unittest.TestCase):
             self.assertTrue(idx[edge.source] < idx[edge.target])
 
     def test_topsort_set(self):
+        #self.G.add_edge(Edge(6, 2)) # cycle added
         self.assertEqual(self.G.v(), self.N)
         algorithm = TopologicalSortSet(self.G)
         algorithm.run()
@@ -51,6 +53,7 @@ class TestTopologicalSorting(unittest.TestCase):
             self.assertTrue(idx[edge.source] < idx[edge.target])
 
     def test_topsort_list(self):
+        #self.G.add_edge(Edge(6, 2)) # cycle added
         self.assertEqual(self.G.v(), self.N)
         algorithm = TopologicalSortList(self.G)
         algorithm.run()

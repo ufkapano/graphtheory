@@ -45,6 +45,7 @@ class TopologicalSortDFS:
 
 class TopologicalSortQueue:
     """Topological sorting of nodes from a dag (Kahn's algorithm).
+    Cycle detection added.
     
     Attributes
     ----------
@@ -87,10 +88,13 @@ class TopologicalSortQueue:
                 inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
                     queue.append(edge.target)
+        if len(self.sorted_nodes) < self.graph.v():
+            raise ValueError("cycle detected")
 
 
 class TopologicalSortSet:
     """Topological sorting of nodes from a dag (Kahn's algorithm).
+    Cycle detection added.
     
     Attributes
     ----------
@@ -133,10 +137,13 @@ class TopologicalSortSet:
                 inedges[edge.target] -= 1
                 if inedges[edge.target] == 0:
                     Q.add(edge.target)
+        if len(self.sorted_nodes) < self.graph.v():
+            raise ValueError("cycle detected")
 
 
 class TopologicalSortList:
     """Topological sorting of nodes from a dag (Kahn's algorithm).
+    Cycle detection added.
     
     Attributes
     ----------
@@ -176,6 +183,8 @@ class TopologicalSortList:
         for step in range(self.graph.v()):
             source = self.sorted_nodes[qstart]
             qstart += 1
+            if qstart > qend:
+                raise ValueError("cycle detected")
             # Remove all outedges.
             for edge in self.graph.iteroutedges(source):
                 inedges[edge.target] -= 1

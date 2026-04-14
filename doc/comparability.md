@@ -39,9 +39,9 @@ from graphtheory.algorithms.topsort import TopologicalSortList
 from graphtheory.algorithms.topsort import TopologicalSortDFS
 
 # G is a DAG.
-#algorithm = TopologicalSortQueue(G)
-#algorithm = TopologicalSortSet(G)
-#algorithm = TopologicalSortList(G)
+#algorithm = TopologicalSortQueue(G)   # with cycle detection
+#algorithm = TopologicalSortSet(G)   # with cycle detection
+#algorithm = TopologicalSortList(G)   # with cycle detection
 algorithm = TopologicalSortDFS(G)
 algorithm.run()
 print ( algorithm.sorted_nodes )   # a sorted list of nodes
