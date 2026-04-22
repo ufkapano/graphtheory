@@ -29,7 +29,7 @@ class StronglyConnectedComponents:
         algorithm = SimpleDFS(self.graph.transpose())
         for source in order:
             if self.scc[source] is None:
-                algorithm.run(source, pre_action=lambda
+                algorithm.run(source, post_action=lambda
                     node: self.scc.__setitem__(node, self.n_scc))
                 self.n_scc += 1
 

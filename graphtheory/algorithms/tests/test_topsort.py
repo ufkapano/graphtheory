@@ -8,6 +8,15 @@ from graphtheory.algorithms.topsort import TopologicalSortDFS
 from graphtheory.algorithms.topsort import TopologicalSortSet
 from graphtheory.algorithms.topsort import TopologicalSortList
 
+#       9 --o 2
+#       |     |
+#       |     |
+#       o     o
+# 1     5 --o 8
+# |     o       \
+# |     |        \
+# o     |         o
+# 3 --o 7 --o 4 --o 6
 
 class TestTopologicalSorting(unittest.TestCase):
 
