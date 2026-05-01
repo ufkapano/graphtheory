@@ -3,7 +3,7 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.shortestpaths.dijkstra import Dijkstra, DijkstraMatrix
+from graphtheory.shortestpaths.dijkstra import Dijkstra, Dijkstra2, DijkstraMatrix
 
 #    1
 # 0 --> 1
@@ -32,6 +32,18 @@ class TestDijkstra(unittest.TestCase):
         source = 0
         target = 3
         algorithm = Dijkstra(self.G)
+        algorithm.run(source)
+        distance_expected = {0: 0, 1: 1, 2: 2, 3: 3}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: None, 2: 1, 1: 0, 3: 2}
+        self.assertEqual(algorithm.parent, parent_expected)
+        path_expected = [0, 1, 2, 3]
+        self.assertEqual(algorithm.path(target), path_expected)
+
+    def test_dijkstra2(self):
+        source = 0
+        target = 3
+        algorithm = Dijkstra2(self.G)
         algorithm.run(source)
         distance_expected = {0: 0, 1: 1, 2: 2, 3: 3}
         self.assertEqual(algorithm.distance, distance_expected)
@@ -76,6 +88,20 @@ class TestDijkstra2(unittest.TestCase):
         source = 0
         target = 7
         algorithm = Dijkstra(self.G)
+        algorithm.run(source)
+        distance_expected = {0: 0, 1: 65, 2: 100, 3: 134, 4: 138,
+            5: 172, 6: 154, 7: 169, 8: 106}
+        self.assertEqual(algorithm.distance, distance_expected)
+        parent_expected = {0: None, 1: 0, 2: 1, 3: 8, 4: 3, 5: 6,
+            6: 3, 7: 6, 8: 1}
+        self.assertEqual(algorithm.parent, parent_expected)
+        path_expected = [0, 1, 8, 3, 6, 7]
+        self.assertEqual(algorithm.path(target), path_expected)
+
+    def test_dijkstra2(self):
+        source = 0
+        target = 7
+        algorithm = Dijkstra2(self.G)
         algorithm.run(source)
         distance_expected = {0: 0, 1: 65, 2: 100, 3: 134, 4: 138,
             5: 172, 6: 154, 7: 169, 8: 106}
