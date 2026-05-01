@@ -22,7 +22,7 @@ class BellmanFord:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.bellmanford import BellmanFord
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = BellmanFord(G)     # initialization
     >>> algorithm.run(source)     # calculations

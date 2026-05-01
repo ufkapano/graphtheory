@@ -28,7 +28,7 @@ class PrimMST:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.spanningtrees.prim import PrimMST
-    >>> G = Graph(n=10, False)    # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False)    # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = PrimMST(G)
     >>> algorithm.run()     # calculations

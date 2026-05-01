@@ -23,7 +23,7 @@ class KruskalMST:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.spanningtrees.kruskal import KruskalMST
-    >>> G = Graph(n=10, False) # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False) # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = KruskalMST(G)     # initialization
     >>> algorithm.run()         # calculations
@@ -91,7 +91,7 @@ class KruskalMSTSorted:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.spanningtrees.kruskal import KruskalMSTSorted
-    >>> G = Graph(n=10, False) # an exemplary undirected graph
+    >>> G = Graph(n=10, directed=False) # an exemplary undirected graph
     # Add nodes and edges here.
     >>> algorithm = KruskalMSTSorted(G)     # initialization
     >>> algorithm.run()         # calculations

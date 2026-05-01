@@ -21,7 +21,7 @@ class SlowAllPairs:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.allpairs import SlowAllPairs
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = SlowAllPairs(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -92,7 +92,7 @@ class SlowAllPairsEdges:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.allpairs import SlowAllPairsEdges
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = SlowAllPairsEdges(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -163,7 +163,7 @@ class SlowAllPairsWithPaths:   # not for FasterAllPairsSP
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.allpairs import SlowAllPairsWithPaths
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = SlowAllPairsWithPaths(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -248,7 +248,7 @@ class FasterAllPairs:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.allpairs import FasterAllPairs
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = FasterAllPairs(G)     # initialization
     >>> algorithm.run()     # calculations

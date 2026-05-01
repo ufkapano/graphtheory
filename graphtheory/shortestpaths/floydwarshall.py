@@ -15,7 +15,7 @@ class FloydWarshall:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.floydwarshall import FloydWarshall
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = FloydWarshall(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -81,7 +81,7 @@ class FloydWarshallPaths:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.floydwarshall import FloydWarshallPaths
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = FloydWarshallPaths(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -162,7 +162,7 @@ class FloydWarshallAllGraphs:
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.floydwarshall \
         import FloydWarshallAllGraphs
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = FloydWarshallAllGraphs(G)   # initialization
     >>> algorithm.run()     # calculations

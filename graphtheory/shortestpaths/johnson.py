@@ -21,7 +21,7 @@ class Johnson:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.johnson import Johnson
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = Johnson(G)     # initialization
     >>> algorithm.run()     # calculations
@@ -105,7 +105,7 @@ class JohnsonFaster:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.johnson import JohnsonFaster
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = JohnsonFaster(G)     # initialization
     >>> algorithm.run()     # calculations

@@ -24,7 +24,7 @@ class Dijkstra:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.dijkstra import Dijkstra
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = Dijkstra(G)   # initialization
     >>> algorithm.run(source)   # calculations
@@ -113,10 +113,10 @@ class Dijkstra2:   # in_queue[] is not used
     --------
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
-    >>> from graphtheory.shortestpaths.dijkstra import Dijkstra
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> from graphtheory.shortestpaths.dijkstra import Dijkstra2
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
-    >>> algorithm = Dijkstra(G)   # initialization
+    >>> algorithm = Dijkstra2(G)   # initialization
     >>> algorithm.run(source)   # calculations
     >>> algorithm.parent   # shortest path tree as a dict
     >>> algorithm.distance[target]   # distance from source to target
@@ -158,8 +158,11 @@ class Dijkstra2:   # in_queue[] is not used
         """
         self.source = source
         self.distance[source] = 0
-        for node in self.graph.iternodes():
-            self._pq.put((self.distance[node], node))
+        self._pq.put((0, source))
+        # Jezeli nie ma sciezki do node, to nie bedzie wstawiony do kolejki
+        # i zostanie poczatkowy distance nieskonczonosc.
+        #for node in self.graph.iternodes():
+        #    self._pq.put((self.distance[node], node))
         while not self._pq.empty():
             dist, node = self._pq.get()
             if dist > self.distance[node]:
@@ -204,7 +207,7 @@ class DijkstraMatrix:
     >>> from graphtheory.structures.edges import Edge
     >>> from graphtheory.structures.graphs import Graph
     >>> from graphtheory.shortestpaths.dijkstra import DijkstraMatrix
-    >>> G = Graph(n=10, True)    # an exemplary directed graph
+    >>> G = Graph(n=10, directed=True)    # an exemplary directed graph
     # Add nodes and edges here.
     >>> algorithm = DijkstraMatrix(G)   # initialization
     >>> algorithm.run(source)   # calculations
