@@ -145,6 +145,17 @@ class FloydWarshallPaths:
         else:
             return self.path(source, self.parent[source][target]) + [target]
 
+    def path_iter(self, source, target):
+        """Construct a path from source to target."""
+        if self.distance[source][target] == float("inf"):
+            raise ValueError("no path to target")
+        path = [target]
+        while self.parent[source][target] is not None:
+            target = self.parent[source][target]
+            path.append(target)
+        path.reverse()
+        return path
+
 
 class FloydWarshallAllGraphs:
     """The Floyd-Warshall algorithm, nonnegative edge weights.

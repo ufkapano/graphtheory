@@ -39,6 +39,7 @@ class TestBellmanFord(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def tearDown(self): pass
 
@@ -71,6 +72,7 @@ class TestBellmanFordCormen(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 3, 2, 1, 4]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def tearDown(self): pass
 

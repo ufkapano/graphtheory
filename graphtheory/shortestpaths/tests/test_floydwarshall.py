@@ -50,6 +50,7 @@ class TestFloydWarshall(unittest.TestCase):
         self.assertEqual(algorithm.distance, expected_distance)
         self.assertEqual(algorithm.parent, expected_parent)
         self.assertEqual(algorithm.path(0, 1), [0, 3, 1])
+        self.assertEqual(algorithm.path_iter(0, 1), [0, 3, 1])
 
     def test_floydwarshall_negative_cycle(self):
         self.G.add_edge(Edge(1, 3, -2))
@@ -98,6 +99,7 @@ class TestFloydWarshallNegativeEdges(unittest.TestCase):
         self.assertEqual(algorithm.distance, expected_distance)
         self.assertEqual(algorithm.parent, expected_parent)
         self.assertEqual(algorithm.path(0, 3), [0, 1, 3])
+        self.assertEqual(algorithm.path_iter(0, 3), [0, 1, 3])
 
     def test_negative_cycle(self):
         self.G.add_edge(Edge(0, 3, 2))

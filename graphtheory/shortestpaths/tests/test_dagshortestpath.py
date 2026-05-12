@@ -36,6 +36,7 @@ class TestDAGShortestPath(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 2, 5]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def tearDown(self): pass
 

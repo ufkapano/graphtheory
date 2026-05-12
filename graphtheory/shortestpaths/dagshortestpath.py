@@ -84,4 +84,15 @@ class DAGShortestPath:
         else:
             return self.path(self.parent[target]) + [target]
 
+    def path_iter(self, target):
+        """Construct a path from source to target."""
+        if self.distance[target] == float("inf"):
+            raise ValueError("no path to target")
+        path = [target]
+        while self.parent[target] is not None:
+            target = self.parent[target]
+            path.append(target)
+        path.reverse()
+        return path
+
 # EOF
