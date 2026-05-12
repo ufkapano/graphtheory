@@ -39,6 +39,7 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def test_dijkstra2(self):
         source = 0
@@ -51,6 +52,7 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def test_dijkstra_matrix(self):
         source = 0
@@ -63,6 +65,7 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 2, 3]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def tearDown(self): pass
 
@@ -97,6 +100,7 @@ class TestDijkstra2(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 8, 3, 6, 7]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def test_dijkstra2(self):
         source = 0
@@ -111,6 +115,7 @@ class TestDijkstra2(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 8, 3, 6, 7]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def test_no_path(self):
         source = 2
@@ -126,6 +131,7 @@ class TestDijkstra2(unittest.TestCase):
         #path_expected = []
         #self.assertEqual(algorithm.path(target), path_expected)
         self.assertRaises(ValueError, algorithm.path, target)
+        self.assertRaises(ValueError, algorithm.path_iter, target)
 
     def test_no_path_matrix(self):
         source = 2
@@ -141,6 +147,7 @@ class TestDijkstra2(unittest.TestCase):
         #path_expected = []
         #self.assertEqual(algorithm.path(target), path_expected)
         self.assertRaises(ValueError, algorithm.path, target)
+        self.assertRaises(ValueError, algorithm.path_iter, target)
 
     def test_dijkstra_matrix(self):
         source = 0
@@ -155,6 +162,7 @@ class TestDijkstra2(unittest.TestCase):
         self.assertEqual(algorithm.parent, parent_expected)
         path_expected = [0, 1, 8, 3, 6, 7]
         self.assertEqual(algorithm.path(target), path_expected)
+        self.assertEqual(algorithm.path_iter(target), path_expected)
 
     def tearDown(self): pass
 

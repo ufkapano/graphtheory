@@ -97,6 +97,17 @@ class Dijkstra:
         else:
             return self.path(self.parent[target]) + [target]
 
+    def path_iter(self, target):
+        """Construct a path from source to target."""
+        if self.distance[target] == float("inf"):
+            raise ValueError("no path to target")
+        path = [target]
+        while self.parent[target] is not None:
+            target = self.parent[target]
+            path.append(target)
+        path.reverse()
+        return path
+
 
 class Dijkstra2:   # in_queue[] is not used
     """The Dijkstra's algorithm for the shortest path problem, O(m log n) time.
@@ -189,6 +200,17 @@ class Dijkstra2:   # in_queue[] is not used
         else:
             return self.path(self.parent[target]) + [target]
 
+    def path_iter(self, target):
+        """Construct a path from source to target."""
+        if self.distance[target] == float("inf"):
+            raise ValueError("no path to target")
+        path = [target]
+        while self.parent[target] is not None:
+            target = self.parent[target]
+            path.append(target)
+        path.reverse()
+        return path
+
 
 class DijkstraMatrix:
     """The Dijkstra's algorithm with O(n^2) time.
@@ -277,5 +299,16 @@ class DijkstraMatrix:
             raise ValueError("no path to target")
         else:
             return self.path(self.parent[target]) + [target]
+
+    def path_iter(self, target):
+        """Construct a path from source to target."""
+        if self.distance[target] == float("inf"):
+            raise ValueError("no path to target")
+        path = [target]
+        while self.parent[target] is not None:
+            target = self.parent[target]
+            path.append(target)
+        path.reverse()
+        return path
 
 # EOF
