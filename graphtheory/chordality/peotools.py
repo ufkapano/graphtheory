@@ -138,7 +138,7 @@ def find_maximum_clique_peo(graph, order):
 
 
 def find_all_maximal_cliques(graph, order):
-    """Find all maximal cliques in a chordal graph using PEO."""
+    """Find all maximal cliques in a chordal graph."""
     # Algorithm 4.3 [2004 Golumbic] .. 99.
     # Nie obliczam liczby chromatycznej (rozmiar najwiekszej kliki)
     cliques = []   # lista klik maksymalnych
@@ -149,7 +149,7 @@ def find_all_maximal_cliques(graph, order):
     S = dict((node, 0) for node in order)
     for source in order:
         X = set()   # sasiedzi source na prawo w peo, tworza klike
-        for target in graph.iteradjacent(source): # total O(E) time
+        for target in graph.iteradjacent(source):   # total O(E) time
             if M[source] < M[target]:
                 X.add(target)
         if graph.degree(source) == 0:   # isolated node
@@ -161,6 +161,29 @@ def find_all_maximal_cliques(graph, order):
         if S[source] < len(X):
             cliques.append(X | {source})
     return cliques
+
+
+def iter_cliques_chordal(graph, order):
+    """Generate all maximal cliques on demand in a chordal graph."""
+    # Algorithm 4.3 [2004 Golumbic] .. 99.
+    # Indices of nodes in PEO.
+    M = dict((node, i) for (i, node) in enumerate(order))   # O(V) time
+    # S[node] to rozmiar najwiekszego zbioru, ktory bylby dolaczony
+    # do A[node] w algorytmie 4.2 [2004 Golumbic].
+    S = dict((node, 0) for node in order)
+    for source in order:
+        X = set()   # sasiedzi source na prawo w peo, tworza klike
+        for target in graph.iteradjacent(source):   # total O(E) time
+            if M[source] < M[target]:
+                X.add(target)
+        if graph.degree(source) == 0:   # isolated node
+            yield {source}
+        if not X:
+            continue
+        node = min(X, key=M.__getitem__)   # najblizej source
+        S[node] = max(S[node], len(X)-1)   # klika przy node bez node
+        if S[source] < len(X):
+            yield X | {source}
 
 
 def is_peo1(graph, order):

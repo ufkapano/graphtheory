@@ -88,7 +88,7 @@ def make_ktree_interval(n, k):
     return perm
 
 def interval_has_edge(perm, source, target):
-    """Test if the interval graph has Edge(source, target), O(n) time, O(n) memory."""
+    """Test if an interval graph has Edge(source, target), O(n) time, O(n) memory."""
     pairs = dict((node, []) for node in set(perm)) # O(n) time
     for idx, node in enumerate(perm):   # O(n) time
         pairs[node].append(idx)
@@ -97,7 +97,7 @@ def interval_has_edge(perm, source, target):
     return not (s2 < t1 or t2 < s1)
 
 def find_edges_interval(perm):
-    """Find the number of edges for the interval graph given
+    """Find the number of edges for an interval graph given
     as a double permutation in O(n^2) time."""
     pairs = dict((node, []) for node in set(perm))   # O(n) time
     for idx, node in enumerate(perm):   # O(n) time
@@ -187,7 +187,7 @@ def interval_is_connected(perm):
     return True
 
 def find_peo_cliques(perm):
-    """Finding PEO and ordered maximal cliques for the interval graph, O(n+m) time."""
+    """Finding PEO and ordered maximal cliques for an interval graph, O(n+m) time."""
     growing = True   # klika bedzie rosnac
     peo = []
     clique_list = []   # list of maximal cliques
@@ -207,7 +207,7 @@ def find_peo_cliques(perm):
     return peo, clique_list
 
 def find_max_clique_size(perm):   # O(n) time
-    """Finding the size of a maximum clique for the interval graph, O(n) time."""
+    """Finding the size of a maximum clique for an interval graph, O(n) time."""
     # Trzeba wiedziec, gdzie sa lewe i prawe konce przedzialow.
     # Ja uzywam zbioru used do wykrywania pierwszego i drugiego
     # pojawienia sie danej etykiety.
@@ -223,7 +223,7 @@ def find_max_clique_size(perm):   # O(n) time
     return size
 
 def iter_cliques_interval(perm):
-    """Generate all maximal cliques on demand for the interval graph, O(n+m) time."""
+    """Generate all maximal cliques on demand for an interval graph, O(n+m) time."""
     growing = True   # klika będzie rosnąć
     used = set()   # current clique
     for node in perm:

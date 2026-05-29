@@ -9,6 +9,7 @@ from graphtheory.chordality.peotools import find_peo_lex_bfs
 from graphtheory.chordality.peotools import find_peo_mcs
 from graphtheory.chordality.peotools import find_maximum_clique_peo
 from graphtheory.chordality.peotools import find_all_maximal_cliques
+from graphtheory.chordality.peotools import iter_cliques_chordal
 from graphtheory.chordality.peotools import is_peo1, is_peo2
 
 #order = find_peo_lex_bfs(G)   # if G is not chordal, then 'order' is not a PEO
@@ -18,11 +19,17 @@ assert is_peo2(G, order)   # testing PEO, O(n+m) time
 
 # G is a chordal graph, PEO is known.
 max_clique = find_maximum_clique_peo(G, peo)   # O(n+m) time
+#max_clique = max(iter_cliques_chordal(G, peo), key=len)   # O(n+m) time
 print ( max_clique )   # a set of nodes
 treewidth = len(max_clique) - 1
 
-clique_list = find_all_maximal_cliques(G, peo)
+#clique_list = find_all_maximal_cliques(G, peo)
+clique_list = list(iter_cliques_chordal(G, peo))
 print ( clique_list )   # a list with sets
+
+# weight_dict is a dict with weights for nodes.
+max_weight_clique = max(iter_cliques_chordal(G, peo),
+    key=lambda clique: sum(weight_dict[v] for v in clique))   # O(n+m) time
 ~~~
 
 ## GENERATORS

@@ -6,6 +6,7 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.peotools import find_peo_mcs
 from graphtheory.chordality.peotools import find_maximum_clique_peo
 from graphtheory.chordality.peotools import find_all_maximal_cliques
+from graphtheory.chordality.peotools import iter_cliques_chordal
 from graphtheory.chordality.peotools import is_peo1, is_peo2
 from graphtheory.chordality.peotools import find_maximum_independent_set
 
@@ -29,20 +30,26 @@ class TestChordalGraphs(unittest.TestCase):
 
     def test_max_clique(self):
         order = find_peo_mcs(self.G)
-        max_clique = find_maximum_clique_peo(self.G, order)
+        max_clique1 = find_maximum_clique_peo(self.G, order)
+        max_clique2 = max(iter_cliques_chordal(self.G, order), key=len)
         clique1 = {0, 1, 2}
         clique2 = {0, 2, 3}
         clique3 = {1, 2, 4}
-        self.assertEqual(len(max_clique), 3)
-        self.assertEqual(max_clique, clique1)
+        self.assertEqual(len(max_clique1), 3)
+        self.assertEqual(len(max_clique2), 3)
+        self.assertEqual(max_clique1, clique1)
+        self.assertEqual(max_clique2, clique3)
 
     def test_find_all_maximal_cliques(self):
         order = find_peo_mcs(self.G)
         cliques = find_all_maximal_cliques(self.G, order)
-        expected = [set([1, 2, 4]), set([0, 2, 3]), set([0, 1, 2])]
+        cliques2 = list(iter_cliques_chordal(self.G, order))
+        expected = [{1, 2, 4}, {0, 2, 3}, {0, 1, 2}]
         self.assertEqual(cliques, expected)
+        self.assertEqual(cliques2, expected)
         # Obliczam rozmiar najwiekszej kliki (liczba chromatyczna).
         self.assertEqual(max(len(c) for c in cliques), 3)
+        self.assertEqual(max(len(c) for c in cliques2), 3)
 
     def test_is_peo(self):
         self.assertTrue(is_peo1(self.G, [4,3,2,1,0]))
