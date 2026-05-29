@@ -52,8 +52,8 @@ class BellmanFord:
             raise ValueError("the graph is not directed")
         self.graph = graph
         # Shortest path tree as a dictionary.
-        self.parent = dict(((node, None) for node in self.graph.iternodes()))
-        self.distance = dict(((node, float("inf")) for node in self.graph.iternodes()))
+        self.parent = dict((node, None) for node in self.graph.iternodes())
+        self.distance = dict((node, float("inf")) for node in self.graph.iternodes())
         self.source = None
 
     def run(self, source):

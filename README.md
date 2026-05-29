@@ -173,6 +173,10 @@ Oliwia Gil (circular-arc graphs)
 
 Mikołaj Szymański (dominating sets)
 
+Paweł Konefał (flow networks)
+
+Bartłomiej Stachów (cliques)
+
 [Back to the top](#graphtheory-package)
 
 EOF
