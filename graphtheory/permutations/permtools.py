@@ -67,7 +67,7 @@ def make_ladder_perm(n):
         return perm
 
 def perm_has_edge1(perm, i, j):
-    """Test if the perm graph has Edge(i, j), O(n) time, O(n) memory."""
+    """Test if a perm graph has Edge(i, j), O(n) time, O(n) memory."""
     if i > j:
         i, j = j, i
     # Szukamy indeksow, position[] to permutacja odwrotma do perm.
@@ -78,7 +78,7 @@ def perm_has_edge1(perm, i, j):
     return position[i] > position[j]
 
 def perm_has_edge2(perm, i, j):
-    """Test if the perm graph has Edge(i, j), O(n) time, O(1) memory."""
+    """Test if a perm graph has Edge(i, j), O(n) time, O(1) memory."""
     if i > j:
         i, j = j, i
     for k, item in enumerate(perm):   # O(n) time
@@ -91,7 +91,7 @@ def perm_has_edge2(perm, i, j):
 perm_has_edge = perm_has_edge2
 
 def make_abstract_perm_graph(perm):
-    """Return an abstract perm graph from perm in O(n^2) time."""
+    """Return an abstract perm graph from a perm in O(n^2) time."""
     # Szukamy indeksow, position[] to permutacja odwrotna do perm.
     position = list(perm)   # tymczasowo, O(n) memory
     for k, item in enumerate(perm):   # O(n) time
@@ -115,7 +115,7 @@ def make_complement_perm(perm):
     return perm[::-1]
 
 def perm_is_connected(perm):
-    """Test if the perm graph is connected in O(n) time."""
+    """Test if a perm graph is connected in O(n) time."""
     n = len(perm)
     maxi = 0
     for i in range(n):
@@ -126,7 +126,7 @@ def perm_is_connected(perm):
     return True
 
 def perm_connected_components(perm):
-    """Finding connected components of the perm graph in O(n) time."""
+    """Finding connected components of a perm graph in O(n) time."""
     n = len(perm)
     cc = dict()   # pairs (node, no of cc)
     n_cc = 0   # the number of connected components

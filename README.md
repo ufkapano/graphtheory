@@ -42,7 +42,8 @@ Boruvka, Prim, Kruskal
 (weighted directed graphs without negative cycles): 
 Dijkstra (nonnegative weights), 
 DAGs (using topological sorting), 
-Bellman-Ford
+Bellman-Ford,
+SPFA (Shortest Path Faster Algorithm)
 * All-pairs shortest paths 
 (weighted directed graphs without negative cycles): 
 Floyd-Warshall, Johnson, matrix multiplications
