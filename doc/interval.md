@@ -68,6 +68,7 @@ assert find_edges_interval([1,2,3,1,4,2,3,4]) == 5   # diamond
 ~~~python
 from graphtheory.chordality.intervaltools import find_peo_cliques
 from graphtheory.chordality.intervaltools import find_max_clique_size
+from graphtheory.chordality.intervaltools import find_clique_number_interval
 from graphtheory.chordality.intervaltools import iter_cliques_interval
 
 #   1
@@ -78,6 +79,7 @@ peo, clique_list = find_peo_cliques(perm)   # O(n+m) time
 assert peo == [1, 2, 3, 4]
 assert clique_list == [{1, 2, 3}, {3, 4}]   # ordered cliques
 assert find_max_clique_size(perm) == 3   # O(n) time
+assert find_clique_number_interval(perm) == 2   # O(n) time
 for clique in iter_cliques_interval(perm):   # clique iterator, O(n+m) time
     print(clique)
 

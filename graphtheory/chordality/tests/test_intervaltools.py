@@ -17,6 +17,7 @@ from graphtheory.chordality.intervaltools import print_intervals
 from graphtheory.chordality.intervaltools import interval_is_connected
 from graphtheory.chordality.intervaltools import find_peo_cliques
 from graphtheory.chordality.intervaltools import find_max_clique_size
+from graphtheory.chordality.intervaltools import find_clique_number_interval
 from graphtheory.chordality.intervaltools import iter_cliques_interval
 from graphtheory.chordality.intervaltools import interval_node_color
 from graphtheory.chordality.intervaltools import interval_maximum_iset
@@ -119,6 +120,17 @@ class TestIntervalGraphs(unittest.TestCase):
     def test_find_max_clique_size(self):
         perm = [1,2,3,1,2,4,3,4]   # stop
         self.assertEqual(find_max_clique_size(perm), 3)
+
+    def test_find_clique_number_interval(self):
+        perm = [1,2,3,1,2,4,3,4]   # stop
+        self.assertEqual(find_clique_number_interval(perm), 2)
+        self.assertEqual(find_clique_number_interval([0, 1, 0, 1]), 1)   # K_2
+        self.assertEqual(find_clique_number_interval([0, 1, 2, 0, 1, 2]), 1)   # K3
+        self.assertEqual(find_clique_number_interval([0, 1, 0, 2, 1, 2]), 2)   # P_3
+        self.assertEqual(find_clique_number_interval(['a','b','a','c','b','c']), 2)   # P_3
+        self.assertEqual(find_clique_number_interval([1,2,3,1,4,2,3,4]), 2)   # diamond
+        self.assertEqual(find_clique_number_interval([3,0,1,0,2,1,2,3]), 2)   # tepee(4)
+        self.assertEqual(find_clique_number_interval([4,0,1,0,2,1,3,2,3,4]), 3)   # tepee(5)
 
     def test_iter_cliques_interval(self):
         perm = [1,2,3,1,2,4,3,4]   # stop

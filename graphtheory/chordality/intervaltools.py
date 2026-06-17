@@ -10,8 +10,10 @@ import itertools
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
+
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
+
 
 def make_random_interval(n):   # tak jak dla circle graphs
     """Return a random interval graph as double perm."""
@@ -20,9 +22,11 @@ def make_random_interval(n):   # tak jak dla circle graphs
     random.shuffle(perm)
     return perm
 
+
 def make_complete_interval(n):
     """Return a complete interval graph as double perm."""
     return list(range(n)) * 2
+
 
 # 0---1---2---3   make_path_interval(4)
 def make_path_interval(n):   # tak jak dla circle graphs
@@ -33,6 +37,7 @@ def make_path_interval(n):   # tak jak dla circle graphs
     for i in range(1, 2*n-1, 2):
         swap(perm, i, i+1)
     return perm
+
 
 # 0---5---4   graf tepee, do P_{n-1} dolaczamy nowy wierzcholek
 # | / | \ |   make_tepee_interval(6)
@@ -49,6 +54,7 @@ def make_tepee_interval(n):
     perm.append(n-1)
     return perm
 
+
 # 0---2---4---6   to nie jest tepee graph
 # | / | / | /     make_2tree_interval(7)
 # 1---3---5
@@ -63,6 +69,7 @@ def make_2tree_interval(n):   # tak jak dla circle graphs
         swap(perm, -4, -3)
     return perm
 
+
 #   2   3   make_star_interval(5)
 #    \ /
 # 1---0---4
@@ -76,6 +83,7 @@ def make_star_interval(n):   # dla circle graphs jest inaczej
     perm.append(0)
     return perm
 
+
 def make_ktree_interval(n, k):
     """Return a k-tree interval graph as double perm."""
     if k >= n:
@@ -87,6 +95,7 @@ def make_ktree_interval(n, k):
     perm.extend(range(n-k-1, n))   # po kolei znikaja
     return perm
 
+
 def interval_has_edge(perm, source, target):
     """Test if an interval graph has Edge(source, target), O(n) time, O(n) memory."""
     pairs = dict((node, []) for node in set(perm)) # O(n) time
@@ -95,6 +104,7 @@ def interval_has_edge(perm, source, target):
     s1, s2 = pairs[source]
     t1, t2 = pairs[target]
     return not (s2 < t1 or t2 < s1)
+
 
 def find_edges_interval(perm):
     """Find the number of edges for an interval graph given
@@ -108,6 +118,7 @@ def find_edges_interval(perm):
         t1, t2 = pairs[target]
         m += not (s2 < t1 or t2 < s1)
     return m
+
 
 def make_abstract_interval_graph(perm):   # O(n+m) time
     """Finding an abstract interval graph from double perm in O(n+m) time."""
@@ -123,6 +134,7 @@ def make_abstract_interval_graph(perm):   # O(n+m) time
             used.add(source)
     return graph
 
+
 def print_intervals(cliques):
     """Printing intervals from ordered maximal cliques."""
     # Dla kazdej kliki maksymalnej drukowany jest jeden wiersz.
@@ -137,6 +149,7 @@ def print_intervals(cliques):
             row.append(str(node) if node in clique else dot)
         tab.append(" ".join(row))
     return "\n".join(tab)
+
 
 def interval_drawing(perm):
     """Interval graph drawing."""
@@ -174,6 +187,7 @@ def interval_drawing(perm):
             break
         print(line)
 
+
 def interval_is_connected(perm):
     """Testing connectivity using double perm in O(n) time."""
     used = set()
@@ -185,6 +199,7 @@ def interval_is_connected(perm):
         else:
             used.add(node)
     return True
+
 
 def find_peo_cliques(perm):
     """Finding PEO and ordered maximal cliques for an interval graph, O(n+m) time."""
@@ -206,6 +221,7 @@ def find_peo_cliques(perm):
             growing = True
     return peo, clique_list
 
+
 def find_max_clique_size(perm):   # O(n) time
     """Finding the size of a maximum clique for an interval graph, O(n) time."""
     # Trzeba wiedziec, gdzie sa lewe i prawe konce przedzialow.
@@ -221,6 +237,26 @@ def find_max_clique_size(perm):   # O(n) time
             used.add(node)
             size = max(size, len(used))
     return size
+
+
+def find_clique_number_interval(perm):   # O(n) time
+    """Finding the number of maximal cliques for an interval graph, O(n) time."""
+    counter = 0
+    growing = True   # klika bedzie rosnac
+    used = set()   # current clique
+    for node in perm:
+        if node in used:   # bedzie usuwanie node, klika zmaleje
+            if growing:   # new maximal clique
+                counter += 1
+            else:   # poprzednio tez usuwalismy, wiec nie ma nowej kliki
+                pass
+            used.remove(node)
+            growing = False
+        else:   # clique is growing
+            used.add(node)
+            growing = True
+    return counter
+
 
 def iter_cliques_interval(perm):
     """Generate all maximal cliques on demand for an interval graph, O(n+m) time."""
@@ -238,6 +274,7 @@ def iter_cliques_interval(perm):
             used.add(node)
             growing = True
 
+
 def interval_node_color(perm):
     """Vertex coloring of an interval graph (double perm) in O(n) time."""
     n = len(perm) // 2
@@ -252,6 +289,7 @@ def interval_node_color(perm):
             used.add(node)
             color[node] = free.pop()
     return color
+
 
 def interval_maximum_iset(perm):
     """Finding maximum iset of an interval graph (double perm) in O(n) time."""
