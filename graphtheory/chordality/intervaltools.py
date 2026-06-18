@@ -201,7 +201,7 @@ def interval_is_connected(perm):
     return True
 
 
-def find_peo_cliques(perm):
+def find_peo_cliques_interval(perm):
     """Finding PEO and ordered maximal cliques for an interval graph, O(n+m) time."""
     growing = True   # klika bedzie rosnac
     peo = []
@@ -222,7 +222,7 @@ def find_peo_cliques(perm):
     return peo, clique_list
 
 
-def find_max_clique_size(perm):   # O(n) time
+def find_maximum_clique_size_interval(perm):   # O(n) time
     """Finding the size of a maximum clique for an interval graph, O(n) time."""
     # Trzeba wiedziec, gdzie sa lewe i prawe konce przedzialow.
     # Ja uzywam zbioru used do wykrywania pierwszego i drugiego

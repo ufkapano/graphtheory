@@ -8,7 +8,7 @@ from graphtheory.chordality.peotools import find_maximum_clique_peo
 from graphtheory.chordality.peotools import find_all_maximal_cliques
 from graphtheory.chordality.peotools import iter_cliques_chordal
 from graphtheory.chordality.peotools import is_peo1, is_peo2
-from graphtheory.chordality.peotools import find_maximum_independent_set
+from graphtheory.chordality.peotools import find_maximum_iset_chordal
 
 # 0---1            2-tree
 # | \ | \     iset {3,4},{3,1},{4,0}
@@ -65,7 +65,7 @@ class TestChordalGraphs(unittest.TestCase):
 
     def test_max_iset(self):
         order = find_peo_mcs(self.G)
-        iset = find_maximum_independent_set(self.G, order)
+        iset = find_maximum_iset_chordal(self.G, order)
         #print("peo {}".format(order))
         #print("iset {}".format(iset))
         self.assertEqual(len(iset), 2)

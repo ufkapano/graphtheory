@@ -45,9 +45,9 @@ G = make_random_chordal(n=10)   # PEO = range(n)
 ## MAXIMUM INDEPENDENT SETS OF CHORDAL GRAPHS
 
 ~~~python
-from graphtheory.chordality.peotools import find_maximum_independent_set
+from graphtheory.chordality.peotools import find_maximum_iset_chordal
 
-iset = find_maximum_independent_set(G, peo)   # G have to be chordal
+iset = find_maximum_iset_chordal(G, peo)   # G have to be chordal
 print ( iset )   # a set of nodes
 ~~~
 

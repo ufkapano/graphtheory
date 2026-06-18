@@ -15,8 +15,8 @@ from graphtheory.chordality.intervaltools import find_edges_interval
 from graphtheory.chordality.intervaltools import make_abstract_interval_graph
 from graphtheory.chordality.intervaltools import print_intervals
 from graphtheory.chordality.intervaltools import interval_is_connected
-from graphtheory.chordality.intervaltools import find_peo_cliques
-from graphtheory.chordality.intervaltools import find_max_clique_size
+from graphtheory.chordality.intervaltools import find_peo_cliques_interval
+from graphtheory.chordality.intervaltools import find_maximum_clique_size_interval
 from graphtheory.chordality.intervaltools import find_clique_number_interval
 from graphtheory.chordality.intervaltools import iter_cliques_interval
 from graphtheory.chordality.intervaltools import interval_node_color
@@ -95,31 +95,31 @@ class TestIntervalGraphs(unittest.TestCase):
         self.assertTrue(interval_is_connected([0,1,2,0,1,2]))   # K_3
         self.assertFalse(interval_is_connected([0,0,1,1]))   # P_1 + P_1
 
-    def test_find_peo_cliques(self):
+    def test_find_peo_cliques_interval(self):
         #   1
         #  / \
         # 2---3---4
         perm = [1,2,3,1,2,4,3,4]   # stop
-        peo, cliques = find_peo_cliques(perm)
+        peo, cliques = find_peo_cliques_interval(perm)
         #print()
         #print(print_intervals(cliques))
         self.assertEqual(peo, [1, 2, 3, 4])
         self.assertEqual(cliques, [{1, 2, 3}, {3, 4}]) # ordered cliques
 
-    def test_find_peo_cliques2(self):
+    def test_find_peo_cliques_interval2(self):
         #   a
         #  / \
         # b---c---d
         perm = ['a','b','c','a','b','d','c','d']   # stop
-        peo, cliques = find_peo_cliques(perm)
+        peo, cliques = find_peo_cliques_interval(perm)
         #print()
         #print(print_intervals(cliques))
         self.assertEqual(peo, ['a', 'b', 'c', 'd'])
         self.assertEqual(cliques, [{'a', 'b', 'c'}, {'c', 'd'}]) # ordered cliques
 
-    def test_find_max_clique_size(self):
+    def test_find_maximum_clique_size_interval(self):
         perm = [1,2,3,1,2,4,3,4]   # stop
-        self.assertEqual(find_max_clique_size(perm), 3)
+        self.assertEqual(find_maximum_clique_size_interval(perm), 3)
 
     def test_find_clique_number_interval(self):
         perm = [1,2,3,1,2,4,3,4]   # stop

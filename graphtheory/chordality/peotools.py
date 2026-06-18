@@ -254,7 +254,7 @@ def is_peo2(graph, order):
     return True
 
 
-def find_maximum_independent_set(graph, order):
+def find_maximum_iset_chordal(graph, order):
     """Find a maximum independent set in a chordal graph in O(V+E) time."""
     # Theorem 4.18 [2004 Golumbic] str. 99.
     # Slownik trzymajacy numery wierzcholkow w PEO.
