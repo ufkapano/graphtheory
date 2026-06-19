@@ -12,8 +12,10 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.permutations.circlebfs import CircleBFS
 
+
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
+
 
 def make_random_circle(n):
     """Return a random circle graph as double perm."""
@@ -22,9 +24,11 @@ def make_random_circle(n):
     random.shuffle(perm)
     return perm
 
+
 def make_complete_circle(n):
     """Return a complete graph K_n as double perm."""
     return list(range(n)) * 2
+
 
 def make_path_circle(n):
     """Return a path graph P_n as double perm."""
@@ -34,6 +38,7 @@ def make_path_circle(n):
     for i in range(1, 2*n-1, 2):
         swap(perm, i, i+1)
     return perm
+
 
 def make_cycle_circle(n):
     """Return a cycle graph C_n as double perm."""
@@ -47,6 +52,7 @@ def make_cycle_circle(n):
     swap(perm, 0, -1)
     return perm
 
+
 def make_2tree_circle(n):
     """Return a 2-tree graph as double perm."""
     if n < 2:
@@ -57,6 +63,7 @@ def make_2tree_circle(n):
         swap(perm, -3, -2)
         swap(perm, -4, -3)
     return perm
+
 
 def make_ktree_circle(n, k):
     """Return a k-tree circle graph as double perm."""
@@ -69,6 +76,7 @@ def make_ktree_circle(n, k):
     perm.extend(range(n-k-1, n))   # po kolei znikaja
     return perm
 
+
 def make_star_circle(n):
     """Return a star graph as double perm."""
     if n < 2:
@@ -79,6 +87,7 @@ def make_star_circle(n):
     perm.extend(range(n-1,0,-1))
     return perm
 
+
 def circle_has_edge(perm, source, target):
     """Test if the circle graph has Edge(source, target), O(n) time, O(n) memory."""
     pairs = dict((node, []) for node in set(perm))   # O(n) time
@@ -87,6 +96,26 @@ def circle_has_edge(perm, source, target):
     s1, s2 = pairs[source]
     t1, t2 = pairs[target]
     return (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2)
+
+
+def find_edges_circle(perm):
+    """Find the number of edges for a circle graph in O(n^2) time."""
+    nodes = set(perm)   # O(n) time
+    # dict do zapisu pierwszego i drugiego wystapienia wierzcholka w perm.
+    pairs = dict((node, []) for node in nodes)   # O(n) time
+    for idx, node in enumerate(perm):   # O(n) time
+        pairs[node].append(idx)
+    assert all(len(pairs[node]) == 2 for node in pairs)
+    m = 0
+    # Jest krawedz, jezeli przedzialy sie zazebiaja.
+    # Zlozonosc n(n-1)/2, czyli O(n^2).
+    for (source, target) in itertools.combinations(nodes, 2):
+        s1, s2 = pairs[source]
+        t1, t2 = pairs[target]
+        if (s1 < t1 < s2 < t2) or (t1 < s1 < t2 < s2):
+            m += 1
+    return m
+
 
 def make_abstract_circle_graph(perm):
     """Return an abstract circle graph from double perm in O(n^2) time."""
@@ -106,6 +135,7 @@ def make_abstract_circle_graph(perm):
             graph.add_edge(Edge(source, target))
     return graph
 
+
 def circle_is_connected(perm):
     """Testing connectivity of the circle graph in O(n^2) time."""
     order = []
@@ -113,6 +143,7 @@ def circle_is_connected(perm):
     # Elementy permutacji to wierzcholki, a to nie musza byc liczby.
     algorithm.run(perm[0], pre_action=lambda node: order.append(node))
     return len(order) * 2 == len(perm)
+
 
 def is_perm_graph(perm):   # O(n) time, O(n) memory
     """Test if the circle graph (double perm) is a perm graph in O(n) time.
@@ -144,6 +175,7 @@ def is_perm_graph(perm):   # O(n) time, O(n) memory
         if len(window) == n:
             return True
     return False
+
 
 # Zakladam, ze double_perm zawiera etykiety (int lub str).
 # Jezeli circle graph jest perm graph, to chce dostac permutacje liczb

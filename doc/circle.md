@@ -58,6 +58,7 @@ assert sorted(perm) == sorted(2 * list(range(n)))
 from graphtheory.permutations.circletools import is_perm_graph
 from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import circle_has_edge
+from graphtheory.permutations.circletools import find_edges_circle
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import make_abstract_circle_graph
 
@@ -65,11 +66,13 @@ assert is_perm_graph([0, 1, 0, 1])   # P_2 graph
 assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5 graph
 
 # figure-8 graph (n=6)
-double_perm = list("cdbcabedfeaf")
-perm, n2l, l2n = circle2perm(double_perm)
-assert perm == [2, 4, 0, 5, 1, 3]   # permutation graph
+perm = list("cdbcabedfeaf")
+assert find_edges_circle(perm) == 7
+perm2, n2l, l2n = circle2perm(perm)
+assert perm2 == [2, 4, 0, 5, 1, 3]   # permutation graph
 
 perm = [3, 1, 0, 2, 1, 3, 2, 0]   # C_4 graph
+assert find_edges_circle(perm) == 4
 assert circle_is_connected(perm)
 assert circle_has_edge(perm, 0, 1)   # O(n) time, O(n) memory
 assert not circle_has_edge(perm, 0, 2)
