@@ -13,20 +13,26 @@ from graphtheory.structures.graphs import Graph
 
 ~~~python
 from graphtheory.permutations.permtools import make_random_perm
+from graphtheory.permutations.permtools import make_complete_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
 from graphtheory.permutations.permtools import make_ladder_perm
 from graphtheory.permutations.permtools import perm_has_edge
 from graphtheory.permutations.permtools import make_complement_perm
+from graphtheory.permutations.permtools import find_edges_perm
 from graphtheory.permutations.permtools import make_abstract_perm_graph
 
 # perm has numbers from 0 to n-1.
 n = 10
 perm = make_random_perm(n)   # random perm graph
+perm = make_complete_perm(n)   # complete graph K_n
+assert find_edges_perm(perm) == N*(N-1) // 2
 perm = make_star_perm(n)   # bipartite graph K_{1,n-1}
+assert find_edges_perm(perm) == N-1
 perm = make_bipartite_perm(p=3, q=4)   # bipartite graph K_{p,q}
 perm = make_path_perm(n)   # path graph P_n
+assert find_edges_perm(perm) == N-1
 perm = make_ladder_perm(n)   # ladder graph (bipartite)
 assert isinstance(perm, list)
 assert len(perm) == n

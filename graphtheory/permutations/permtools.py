@@ -10,8 +10,10 @@ import itertools
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 
+
 def swap(L, i, j):
     L[i], L[j] = L[j], L[i]
+
 
 def make_random_perm(n):
     """Return a random perm."""
@@ -19,11 +21,18 @@ def make_random_perm(n):
     random.shuffle(perm)
     return perm
 
+
+def make_complete_perm(n):
+    """Return a perm for K_n complete graph."""
+    return list(reversed(range(n)))
+
+
 def make_star_perm(n):
     """Return a perm for K_{1,n-1} bipartite graph."""
     perm = [n-1]
     perm.extend(range(n-1))
     return perm
+
 
 def make_bipartite_perm(p, q):
     """Return a perm for K_{p,q} complete bipartite graph."""
@@ -31,6 +40,7 @@ def make_bipartite_perm(p, q):
     perm.extend(range(p, p+q))
     perm.extend(range(p))
     return perm
+
 
 def make_path_perm(n):
     """Return a perm for P_n path graph."""
@@ -47,6 +57,7 @@ def make_path_perm(n):
         swap(perm, -2, -1)
         swap(perm, -3, -2)
         return perm
+
 
 def make_ladder_perm(n):
     """Return a perm for a ladder graph (bipartite)."""
@@ -65,6 +76,7 @@ def make_ladder_perm(n):
         swap(perm, -1, -2)
         swap(perm, -2, -3)
         return perm
+
 
 def perm_has_edge1(perm, i, j):
     """Test if a perm graph has Edge(i, j), O(n) time, O(n) memory."""
@@ -90,6 +102,23 @@ def perm_has_edge2(perm, i, j):
 
 perm_has_edge = perm_has_edge2
 
+
+def find_edges_perm(perm):
+    """Find the number of edges for a perm graph in O(n^2) time."""
+    # Szukamy indeksow, position[] to permutacja odwrotna do perm.
+    position = list(perm)   # tymczasowo, O(n) memory
+    for k, item in enumerate(perm):   # O(n) time
+        position[item] = k
+    m = 0
+    # Jest krawedz, jezeli jest inwersja. Zlozonosc n(n-1)/2, czyli O(n^2).
+    for (source, target) in itertools.combinations(perm, 2):
+        if source > target:
+            source, target = target, source
+        if position[source] > position[target]:
+            m += 1
+    return m
+
+
 def make_abstract_perm_graph(perm):
     """Return an abstract perm graph from a perm in O(n^2) time."""
     # Szukamy indeksow, position[] to permutacja odwrotna do perm.
@@ -107,12 +136,14 @@ def make_abstract_perm_graph(perm):
             graph.add_edge(Edge(source, target))
     return graph
 
+
 def make_complement_perm(perm):
     """Make a perm for the complement graph.
     
     # https://en.wikipedia.org/wiki/Complement_graph
     """
     return perm[::-1]
+
 
 def perm_is_connected(perm):
     """Test if a perm graph is connected in O(n) time."""
@@ -124,6 +155,7 @@ def perm_is_connected(perm):
         if i != n - 1 and maxi == i:
             return False
     return True
+
 
 def perm_connected_components(perm):
     """Finding connected components of a perm graph in O(n) time."""

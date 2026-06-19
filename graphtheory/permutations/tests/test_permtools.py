@@ -4,12 +4,14 @@ import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.permutations.permtools import make_random_perm
+from graphtheory.permutations.permtools import make_complete_perm
 from graphtheory.permutations.permtools import make_star_perm
 from graphtheory.permutations.permtools import make_bipartite_perm
 from graphtheory.permutations.permtools import make_path_perm
 from graphtheory.permutations.permtools import make_ladder_perm
 from graphtheory.permutations.permtools import perm_has_edge1
 from graphtheory.permutations.permtools import perm_has_edge2
+from graphtheory.permutations.permtools import find_edges_perm
 from graphtheory.permutations.permtools import make_abstract_perm_graph
 from graphtheory.permutations.permtools import make_complement_perm
 from graphtheory.permutations.permtools import perm_is_connected
@@ -25,6 +27,13 @@ class TestPermGraphs(unittest.TestCase):
         self.assertEqual(len(perm), n)
         self.assertEqual(sorted(perm), list(range(n)))
         #print("random {}".format(perm))
+
+    def test_complete_perm(self):
+        n = 10
+        perm = make_complete_perm(n)
+        self.assertEqual(len(perm), n)
+        self.assertEqual(sorted(perm), list(range(n)))
+        self.assertEqual(make_complete_perm(4), [3, 2, 1, 0])
 
     def test_star_perm(self):
         n = 10
@@ -63,6 +72,24 @@ class TestPermGraphs(unittest.TestCase):
         self.assertFalse(perm_has_edge1(perm, 1, 0))
         self.assertTrue(perm_has_edge2(perm, 4, 0))
         self.assertFalse(perm_has_edge2(perm, 1, 0))
+
+    def test_find_edges_perm(self):
+        N = 10
+        perm = make_complete_perm(N)
+        self.assertEqual(find_edges_perm(perm), N*(N-1) // 2)
+
+        perm = make_path_perm(N)
+        self.assertEqual(find_edges_perm(perm), N-1)
+
+        perm = make_star_perm(N)
+        self.assertEqual(find_edges_perm(perm), N-1)
+
+        perm = make_bipartite_perm(N, N)
+        self.assertEqual(find_edges_perm(perm), N*N)
+
+        perm = make_ladder_perm(N)
+        self.assertEqual(N % 2, 0)
+        self.assertEqual(find_edges_perm(perm), (3*N // 2) -2)
 
     def test_make_abstract_perm_graph(self):
         perm = list(range(4,-1,-1))   # K_5
