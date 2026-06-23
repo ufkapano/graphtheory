@@ -14,6 +14,7 @@ from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import find_edges_circle
 from graphtheory.permutations.circletools import circle_is_connected
 from graphtheory.permutations.circletools import is_perm_graph
+from graphtheory.permutations.circletools import perm2circle
 from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import make_abstract_circle_graph
 
@@ -124,6 +125,10 @@ class TestCircleGraphs(unittest.TestCase):
         self.assertEqual(perm, [2, 4, 0, 5, 1, 3])
         self.assertEqual(n2l, {0: 'c', 1: 'a', 2: 'b', 3: 'e', 4: 'd', 5: 'f'})
         self.assertEqual(l2n, {'c': 0, 'a': 1, 'b': 2, 'e': 3, 'd': 4, 'f': 5})
+
+        self.assertEqual(perm2circle([2,1,0]), [0,1,2,0,1,2])
+        self.assertEqual(perm2circle([2,0,1]), [0,1,2,1,0,2])   # 0--2--1
+        self.assertEqual(perm2circle([2,3,0,1]), [0,1,2,3,1,0,3,2])   # C_4
 
     def tearDown(self): pass
 

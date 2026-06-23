@@ -56,6 +56,7 @@ assert sorted(perm) == sorted(2 * list(range(n)))
 
 ~~~python
 from graphtheory.permutations.circletools import is_perm_graph
+from graphtheory.permutations.circletools import perm2circle
 from graphtheory.permutations.circletools import circle2perm
 from graphtheory.permutations.circletools import circle_has_edge
 from graphtheory.permutations.circletools import find_edges_circle
@@ -64,6 +65,11 @@ from graphtheory.permutations.circletools import make_abstract_circle_graph
 
 assert is_perm_graph([0, 1, 0, 1])   # P_2 graph
 assert not is_perm_graph([4, 1, 0, 2, 1, 3, 2, 4, 3, 0])   # C_5 graph
+
+# From perm (perm graph) to double perm (circle graph).
+assert perm2circle([2,1,0]) == [0,1,2,0,1,2]
+assert perm2circle([2,0,1]) == [0,1,2,1,0,2]   # 0--2--1  P_3
+assert perm2circle([2,3,0,1]) == [0,1,2,3,1,0,3,2]   # C_4
 
 # figure-8 graph (n=6)
 perm = list("cdbcabedfeaf")

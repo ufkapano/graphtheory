@@ -177,11 +177,19 @@ def is_perm_graph(perm):   # O(n) time, O(n) memory
     return False
 
 
+def perm2circle(perm):
+    """From perm (perm graph) to double perm (circle graph)."""
+    assert set(perm) == set(range(len(perm)))
+    double_perm = list(range(len(perm)))
+    double_perm.extend(reversed(perm))
+    return double_perm
+
+
 # Zakladam, ze double_perm zawiera etykiety (int lub str).
 # Jezeli circle graph jest perm graph, to chce dostac permutacje liczb
 # od 0 do n-1 i slownik D par (number, label)
 def circle2perm(double_perm):
-    """From double perm to perm for perm graphs.
+    """From double perm (circle graph) to perm (perm graph).
     Note that if this test failed then the corresponding abstract graph
     still can be a perm graph but harder to detect.
     """
