@@ -1,7 +1,8 @@
-GRAPH COLORING
-----------------------------------------------------------------------
-# M COLORING PROBLEM
+# GRAPH COLORING
 
+## M COLORING PROBLEM
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.nodecolorbt import BacktrackingNodeColoring
@@ -12,10 +13,12 @@ G = Graph()
 algorithm = BacktrackingNodeColoring(G, m_colors)
 algorithm.run()
 for node in G.iternodes():
-    print ( "{} {}".format(node, algorithm.color[node]) )
-----------------------------------------------------------------------
-# VERTEX COLORING
+    print(node, algorithm.color[node])
+~~~
 
+## VERTEX COLORING
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.nodecolorexact import ExactNodeColoring
@@ -43,10 +46,12 @@ G = Graph()
 algorithm = BrooksNodeColoring(G)
 algorithm.run()
 for node in G.iternodes():
-    print ( "{} {}".format(node, algorithm.color[node]) )
-----------------------------------------------------------------------
-# EDGE COLORING
+    print(node, algorithm.color[node])
+~~~
 
+## EDGE COLORING
+
+~~~python
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.coloring.edgecolorus import UnorderedSequentialEdgeColoring
@@ -65,7 +70,7 @@ algorithm = NTLEdgeColoring(G)   # use Delta or Delta+1 colors
 algorithm.run()
 algorithm.show_colors()
 for edge in G.iteredges():
-    print ( "{} {}".format(edge, algorithm.color[edge]) )
+    print(edge, algorithm.color[edge])
 
 # Edge coloring for complete graphs.
 from graphtheory.structures.factory import GraphFactory
@@ -75,5 +80,6 @@ G = gf.make_complete(10)   # K_10 graph
 algorithm = CompleteGraphEdgeColoring(G)
 algorithm.run()
 algorithm.show_colors()
-----------------------------------------------------------------------
+~~~
+
 EOF

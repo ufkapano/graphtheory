@@ -19,7 +19,7 @@ from graphtheory.algorithms.acyclic import is_acyclic
 assert is_acyclic(G)   # simple testing
 algorithm = AcyclicGraphDFS(G)
 algorithm.run()
-print ( algorithm.parent )   # a DFS tree or a forest as a dict
+print( algorithm.parent )   # a DFS tree or a forest as a dict
 ~~~
 
 ## DAG (DIRECTED ACYCLIC GRAPH) DETECTION
@@ -44,7 +44,7 @@ from graphtheory.algorithms.topsort import TopologicalSortDFS
 #algorithm = TopologicalSortList(G)   # with cycle detection
 algorithm = TopologicalSortDFS(G)
 algorithm.run()
-print ( algorithm.sorted_nodes )   # a sorted list of nodes
+print( algorithm.sorted_nodes )   # a sorted list of nodes
 ~~~
 
 ## TRANSITIVE CLOSURE
@@ -61,7 +61,7 @@ from graphtheory.algorithms.closure import TransitiveClosureDFS
 #algorithm = TransitiveClosureDFS(G)
 algorithm = TransitiveClosure(G)
 algorithm.run()
-print ( algorithm.T )   # solution matrix (bool)
+print( algorithm.T )   # solution matrix (bool)
 ~~~
 
 EOF

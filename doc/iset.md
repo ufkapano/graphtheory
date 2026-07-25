@@ -39,6 +39,7 @@ print( algorithm.cardinality )
 ## INDEPENDENT SETS IN SPECIAL GRAPHS
 
 * [Forests](forest.md)
+* [Bipartite graphs](bipartite.md)
 * [Series-parallel graphs](spgraph.md)
 * [Chordal graphs](chordal.md)
 

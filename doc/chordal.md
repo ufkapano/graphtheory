@@ -20,12 +20,12 @@ assert is_peo2(G, order)   # testing PEO, O(n+m) time
 # G is a chordal graph, PEO is known.
 max_clique = find_maximum_clique_peo(G, peo)   # O(n+m) time
 #max_clique = max(iter_cliques_chordal(G, peo), key=len)   # O(n+m) time
-print ( max_clique )   # a set of nodes
+print( max_clique )   # a set of nodes
 treewidth = len(max_clique) - 1
 
 #clique_list = find_all_maximal_cliques(G, peo)
 clique_list = list(iter_cliques_chordal(G, peo))
-print ( clique_list )   # a list with sets
+print( clique_list )   # a list with sets
 
 # weight_dict is a dict with weights for nodes.
 max_weight_clique = max(iter_cliques_chordal(G, peo),
@@ -48,7 +48,7 @@ G = make_random_chordal(n=10)   # PEO = range(n)
 from graphtheory.chordality.peotools import find_maximum_iset_chordal
 
 iset = find_maximum_iset_chordal(G, peo)   # G have to be chordal
-print ( iset )   # a set of nodes
+print( iset )   # a set of nodes
 ~~~
 
 ## MINIMUM DEGREE ORDERING (MDO) OF CHORDAL GRAPHS
@@ -58,9 +58,9 @@ from graphtheory.chordality.mdotools import find_mdo
 from graphtheory.chordality.mdotools import find_maximum_clique_mdo
 
 order = find_mdo(G)   # O(n+m) time
-print ( order )   # list of nodes (MDO)
+print( order )   # list of nodes (MDO)
 max_clique = find_maximum_clique_mdo(G)   # O(n+m) time
-print ( max_clique )   # a set of nodes
+print( max_clique )   # a set of nodes
 ~~~
 
 ## TREE DECOMPOSITION (TD) OF CHORDAL GRAPHS
@@ -107,8 +107,8 @@ from graphtheory.chordality.mcsm import MCS_M
 algorithm = MCS_M(G)
 algorithm.run()
 algorithm.graph.show()   # chordal completion of G
-print(algorithm.order)   # PEO of chordal completion
-print(algorithm.new_edges)   # new edges added to G
+print( algorithm.order )   # PEO of chordal completion
+print( algorithm.new_edges )   # new edges added to G
 ~~~
 
 ## MINIMUM NODE COVER FOR CHORDAL GRAPHS
@@ -119,8 +119,8 @@ from graphtheory.chordality.chordalcover import ChordalNodeCover
 # G is a chordal graph, T is a tree decomposition of G
 algorithm = ChordalNodeCover(G, T)
 algorithm.run()
-print(algorithm.cardinality)
-print(algorithm.node_cover)
+print( algorithm.cardinality )
+print( algorithm.node_cover )
 ~~~
 
 ## MINIMUM DOMINATING SET FOF CHORDAL GRAPHS
@@ -131,8 +131,8 @@ from graphtheory.chordality.chordaldset import ChordalDominatingSet
 # G is a chordal graph, T is a tree decomposition of G
 algorithm = ChordalDominatingSet(G, T)
 algorithm.run()
-print(algorithm.cardinality)
-print(algorithm.dominating_set)
+print( algorithm.cardinality )
+print( algorithm.dominating_set )
 ~~~
 
 EOF

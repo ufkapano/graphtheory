@@ -13,8 +13,8 @@ G = Graph()
 #algorithm = BacktrackingDominatingSet(G)
 algorithm = HybridDominatingSet(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )
+print( algorithm.dominating_set )
+print( algorithm.cardinality )
 ~~~
 
 ## HEURISTIC ALGORITHMS FOR A MINIMUM DOMINATING SET
@@ -32,8 +32,8 @@ G = Graph()
 # algorithm = RandomSequentialDominatingSet(G)
 algorithm = LargestFistDominatingSet(G)
 algorithm.run()
-print ( algorithm.dominating_set )
-print ( algorithm.cardinality )
+print( algorithm.dominating_set )
+print( algorithm.cardinality )
 ~~~
 
 ## DOMINATING SETS IN SPECIAL GRAPHS
