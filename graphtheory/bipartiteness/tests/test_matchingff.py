@@ -3,9 +3,9 @@
 import unittest
 from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonSet
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonList
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonColor
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonSet
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonList
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonColor
 
 
 class TestMatching(unittest.TestCase):
