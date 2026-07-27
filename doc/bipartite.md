@@ -33,19 +33,21 @@ from graphtheory.structures.factory import GraphFactory
 from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonSet
 from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonList
 from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonColor
+from graphtheory.bipartiteness.matchingap import MatchingUsingAugmentingPath
 from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpSet
 from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
 
-V = 10
+N = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_bipartite(V // 2, V // 2, False, 0.5)   # random bipartite
-#G = graph_factory.make_tree(V, False)   # trees are bipartite
+G = graph_factory.make_bipartite(N // 2, N // 2, False, 0.5)   # random bipartite
+#G = graph_factory.make_tree(n=N, False)   # trees are bipartite
 
 algorithm = MatchingFordFulkersonSet(G)
 # algorithm = MatchingFordFulkersonList(G)
 # algorithm = MatchingFordFulkersonColor(G)
-# algorithm = HopcroftKarpSet(G)
-# algorithm = HopcroftKarpList(G)
+# algorithm = MatchingUsingAugmentingPath(G)   # O(nm) time
+# algorithm = HopcroftKarpSet(G)   # O(m sqrt(n)) time
+# algorithm = HopcroftKarpList(G)   # O(m sqrt(n)) time
 algorithm.run()
 print( algorithm.mate )   # a dict with pairs (source, target or None)
 print( algorithm.cardinality )  # the size of max matching

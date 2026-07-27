@@ -41,10 +41,10 @@ class HopcroftKarpSet:
         self.distance = dict()
         self.cardinality = 0
         algorithm = Bipartite(self.graph)
-        algorithm.run()
+        algorithm.run()   # O(n+m) time
         self.v1 = set()
         self.v2 = set()
-        for node in self.graph.iternodes():
+        for node in self.graph.iternodes():   # O(n) time
             if algorithm.color[node] == 1:
                 self.v1.add(node)
             else:
