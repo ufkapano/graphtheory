@@ -7,6 +7,7 @@ from graphtheory.chordality.arctools import make_random_arc
 from graphtheory.chordality.arctools import make_cycle_arc
 from graphtheory.chordality.arctools import make_complete_arc
 from graphtheory.chordality.arctools import make_abstract_arc_graph
+from graphtheory.chordality.arctools import make_abstract_arc_graph2
 
 
 class TestCircularArcGraphs(unittest.TestCase):
@@ -43,6 +44,11 @@ class TestCircularArcGraphs(unittest.TestCase):
         self.assertEqual(G.v(), len(reprB))
         self.assertEqual(G.e(), len(reprB))
 
+        H = make_abstract_arc_graph2(reprB)
+        #H.show()
+        self.assertEqual(H.v(), len(reprB))
+        self.assertEqual(H.e(), len(reprB))
+
     def test_make_abstract_arc_graph2(self):
         #   3       graf znaku 'stop' po wygenerowaniu
         #  / \
@@ -52,6 +58,11 @@ class TestCircularArcGraphs(unittest.TestCase):
         #G.show()
         self.assertEqual(G.v(), len(reprB))
         self.assertEqual(G.e(), len(reprB))
+
+        H = make_abstract_arc_graph2(reprB)
+        #H.show()
+        self.assertEqual(H.v(), len(reprB))
+        self.assertEqual(H.e(), len(reprB))
 
     def tearDown(self): pass
 

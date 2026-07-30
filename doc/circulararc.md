@@ -52,11 +52,11 @@ assert repr[0][0] < repr[0][1]   # a forward arc first [1988 Masuda Nakajima]
 ## FUNCTIONS
 
 ~~~python
-from graphtheory.structures.edges import Edge
-from graphtheory.structures.graphs import Graph
 from graphtheory.chordality.arctools import make_abstract_arc_graph
+from graphtheory.chordality.arctools import make_abstract_arc_graph2
 
-G = make_abstract_arc_graph(reprB)
+G = make_abstract_arc_graph(reprB)   # O(n+m) time
+#G = make_abstract_arc_graph2(reprB)   # O(n^2) time
 assert G.v() == len(reprB)   # the number of arcs
 ~~~
 
