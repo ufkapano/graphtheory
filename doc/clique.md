@@ -53,6 +53,10 @@ max_weight_edge = max(G.iteredges(), key=lambda edge:
 max_weight_clique = {max_weight_edge.source, max_weight_edge.target}
 ~~~
 
+## CLIQUES IN SPECIAL GRAPHS
+
+* [Circular-arc graphs](circulararc.md)
+
 EOF
 
 

@@ -60,4 +60,14 @@ G = make_abstract_arc_graph(reprB)   # O(n+m) time
 assert G.v() == len(reprB)   # the number of arcs
 ~~~
 
+## MAXIMUM CLIQUE
+
+~~~python
+from graphtheory.chordality.arcclique import GavrilMaximumClique
+
+algorithm = GavrilMaximumClique(reprB)   # O(n^3.5) time
+algorithm.run()
+print( algorithm.maximum_clique )   # a set of arc labels
+~~~
+
 EOF
