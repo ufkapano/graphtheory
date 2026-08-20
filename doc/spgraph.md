@@ -94,13 +94,15 @@ from graphtheory.seriesparallel.spmate import SPTreeMatching
 
 algorithm = SPGraphMatching(G, T)
 algorithm.run()
-print( algorithm.mate_set )   # a set of edges
-print( algorithm.mate )       # dict
+print( algorithm.mate_set )   # a set with edges
+print( algorithm.mate )       # a dict
+print( algorithm.cardinality )  # the size of max matching
 
 algorithm = SPTreeMatching(T)
 algorithm.run()
-print( algorithm.mate_set )   # a set of edges
-print( algorithm.mate )       # dict
+print( algorithm.mate_set )   # a set with edges
+print( algorithm.mate )       # a dict
+print( algorithm.cardinality )  # the size of max matching
 ~~~
 
 ## VERTEX COLORING

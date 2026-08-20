@@ -1,5 +1,16 @@
 # MATCHINGS
 
+## REPRESENTATIONS
+
+~~~python
+# 0===1---2
+# |   | /
+# 3===4
+# mate = {Edge(0,1), Edge(3,4)}   # a set with edges
+# mate = {0: 1, 1: 0, 2: None, 3: 4, 4: 3}   # a dict (default)
+# mate = {0: Edge(0,1), 1: Edge(1,0), 2: None, 3: Edge(3,4), 4: Edge(4,3)}   # a dict
+~~~
+
 ## MATCHINGS IN GENERAL GRAPHS (HEURISTICS)
 
 ~~~python
@@ -24,5 +35,6 @@ print( algorithm.cardinality )  # the size of max matching
 
 * [Forests](forest.md)
 * [Bipartite graphs](bipartite.md)
+* [Series-parallel graphs](spgraph.md)
 
 EOF
