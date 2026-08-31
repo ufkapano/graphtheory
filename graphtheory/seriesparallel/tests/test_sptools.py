@@ -17,13 +17,13 @@ print ( "peo2 {}".format(find_peo_spgraph2(G)) )
 
 print ( "Testing complete graph ..." )
 gf = GraphFactory(Graph)
-G = gf.make_complete(4)
+G = gf.make_complete(n=4)
 #G.show()
 #print ( "peo1 {}".format(find_peo_spgraph1(G)) )   # ValueError
 #print ( "peo2 {}".format(find_peo_spgraph2(G)) )   # ValueError
 
 print ( "Testing cyclic graph ..." )
-G = gf.make_cyclic(10)
+G = gf.make_cyclic(n=10)
 #G.show()
 print ( "peo1 {}".format(find_peo_spgraph1(G)) )
 print ( "peo2 {}".format(find_peo_spgraph2(G)) )

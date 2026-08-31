@@ -40,7 +40,7 @@ class TestNodeColoring(unittest.TestCase):
 
     def test_cycle_node_coloring(self):
         gf = GraphFactory(Graph)
-        self.G = gf.make_cyclic(2 * self.N)   # bipartite
+        self.G = gf.make_cyclic(n=2 * self.N)   # bipartite
         algorithm = OuterplanarNodeColoring(self.G)
         algorithm.run()
         # Sprawdzenie, czy kazdy wierzcholek ma kolor.

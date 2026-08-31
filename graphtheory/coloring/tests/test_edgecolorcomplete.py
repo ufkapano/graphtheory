@@ -14,7 +14,7 @@ class TestEdgeColoring(unittest.TestCase):
         N = 7
         self.assertEqual(N % 2, 1)
         gf = GraphFactory(Graph)
-        G = gf.make_complete(N)
+        G = gf.make_complete(n=N)
         algorithm = CompleteGraphEdgeColoring(G)
         algorithm.run()
         for edge in G.iteredges():
@@ -36,7 +36,7 @@ class TestEdgeColoring(unittest.TestCase):
         N = 10
         self.assertEqual(N % 2, 0)
         gf = GraphFactory(Graph)
-        G = gf.make_complete(N)
+        G = gf.make_complete(n=N)
         algorithm = CompleteGraphEdgeColoring(G)
         algorithm.run()
         for edge in G.iteredges():

@@ -7,10 +7,10 @@ from graphtheory.structures.graphs import Graph
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.chordality.mcsm import MCS_M
 
-n = 10
+N = 10
 gf = GraphFactory(Graph)
-G = gf.make_cyclic(n)
-#G = gf.make_bipartite(n // 2, n-(n // 2), edge_probability=1)
+G = gf.make_cyclic(n=N)
+#G = gf.make_bipartite(n1=N // 2, n2=N-(N // 2), edge_probability=1)
 #G = gf.make_grid(size=3)   # V=size*size
 
 V = G.v()

@@ -17,7 +17,7 @@ G = gf.make_sparse(n=10, directed=False, m=12) # random undirected graph with m 
 G = gf.make_tree(n=10)             # random tree
 G = gf.make_connected(n=10, m=12)   # connected undirected graph
 G = gf.make_random(n=10, directed=False, edge_probability=0.5)      # random undirected graph
-G = gf.make_bipartite(10, 12, directed=False, edge_probability=0.5)   # random bipartite undirected graph
+G = gf.make_bipartite(n1=10, n2=12, directed=False, edge_probability=0.5)   # random bipartite undirected graph
 G = gf.make_grid(size=4)          # grid graph, size > 2
 G = gf.make_grid_periodic(size=4)   # periodic grid graph, size > 2
 G = gf.make_triangle(size=4)       # triangle graph, size > 2

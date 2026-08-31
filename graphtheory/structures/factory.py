@@ -17,7 +17,7 @@ class GraphFactory:
         """Get a graph class."""
         self.cls = graph_class
 
-    def make_complete(self, n=1, directed=False):
+    def make_complete(self, *, n=1, directed=False):
         """Create a weighted complete graph."""
         graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
@@ -32,7 +32,7 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
-    def make_path(self, n=1, directed=False):
+    def make_path(self, *, n=1, directed=False):
         """Create a weighted path graph P_n."""
         graph = self.cls(n=n, directed=directed)
         weights = list(range(1, n))   # different weights
@@ -43,7 +43,7 @@ class GraphFactory:
             graph.add_edge(Edge(i, i+1, weights.pop()))
         return graph
 
-    def make_cyclic(self, n=1, directed=False):
+    def make_cyclic(self, *, n=1, directed=False):
         """Create a weighted cyclic graph C_n."""
         if n < 3:
             raise ValueError("number of nodes must be greater than 2")
@@ -56,7 +56,7 @@ class GraphFactory:
             graph.add_edge(Edge(i, (i+1) % n, weights.pop()))
         return graph
 
-    def make_sparse(self, n=1, directed=False, m=0):
+    def make_sparse(self, *, n=1, directed=False, m=0):
         """Create a weighted sparse graph."""
         if m >= n*(n-1) // 2:
             raise ValueError("too mamy edges")
@@ -74,7 +74,7 @@ class GraphFactory:
                 n_edges += 1
         return graph
 
-    def make_tree(self, n=1, directed=False):
+    def make_tree(self, *, n=1, directed=False):
         """Create a weighted tree graph."""
         graph = self.cls(n=n, directed=directed)
         weights = list(range(1, n))   # different weights
@@ -88,7 +88,7 @@ class GraphFactory:
             graph.add_edge(Edge(parent, node, weights.pop()))
         return graph
 
-    def make_connected(self, n=1, directed=False, m=0):
+    def make_connected(self, *, n=1, directed=False, m=0):
         """Create a weighted connected graph."""
         if m < n - 1 or m >= n * (n - 1) // 2:
             raise ValueError("bad number of edges for the connected graph")
@@ -112,7 +112,7 @@ class GraphFactory:
                 n_edges += 1
         return graph
 
-    def make_random(self, n=1, directed=False, edge_probability=0.5):
+    def make_random(self, *, n=1, directed=False, edge_probability=0.5):
         """Create a weighted random graph."""
         graph = self.cls(n=n, directed=directed)
         weights = list(range(1, 1 + n * (n-1) // 2))   # different weights
@@ -129,7 +129,7 @@ class GraphFactory:
                     graph.add_edge(Edge(target, source, weights.pop()))
         return graph
 
-    def make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
+    def make_bipartite(self, *, n1=1, n2=1, directed=False, edge_probability=0.5):
         """Create a weighted random bipartite graph."""
         graph = self.cls(n=(n1 + n2), directed=directed)
         weights = list(range(1, n1 * n2 + 1))   # different weights
@@ -153,7 +153,7 @@ class GraphFactory:
 # |     |     |            |
 # 0-----1-----2-----...--(s-1)
 
-    def make_grid(self, size=3):
+    def make_grid(self, *, size=3):
         """Create a weighted grid graph with boundary
             |V|= size * size, |E| = 2 * size * (size-1).
         """
@@ -182,7 +182,7 @@ class GraphFactory:
 # --0-----1-----2---
 #   |     |     |
 
-    def make_grid_periodic(self, size=3):
+    def make_grid_periodic(self, *, size=3):
         """Create a weighted grid graph with periodic boundary conditions.
         |V| = size * size, |E| = 2 * |V|.
         """
@@ -208,7 +208,7 @@ class GraphFactory:
 # |  /  |  /  |  /     /  |
 # 0-----1-----2---...---(s-1)
 
-    def make_triangle(self, size=3):
+    def make_triangle(self, *, size=3):
         """Create a weighted triangle graph with boundary,
         |V| = size * size, |E| = 2 * size * (size-1) + (size-1) * (size-1).
         """
@@ -239,7 +239,7 @@ class GraphFactory:
 # --0-----1-----2---
 # / |  /  |  /  |
 
-    def make_triangle_periodic(self, size=3):
+    def make_triangle_periodic(self, *, size=3):
         """Create a weighted triangle network with periodic boundary 
         conditions. |V| = size * size, |E| = 3 * |V|.
         """
@@ -263,7 +263,7 @@ class GraphFactory:
 # |  |  |         |
 # 0--2--4--...--(2s-2)
 
-    def make_ladder(self, size=3):
+    def make_ladder(self, *, size=3):
         """Create a weighted ladder with boundary.
         |V| = 2 * size, |E| = 3*size - 2.
         """
@@ -287,7 +287,7 @@ class GraphFactory:
 #   |  |  |         |
 # --0--2--4--...--(2s-2)---
 
-    def make_prism(self, size=3):
+    def make_prism(self, *, size=3):
         """Create a weighted prism graph or a circular ladder graph.
         |V| = 2 * size, |E| = 3 * size.
         
@@ -311,7 +311,7 @@ class GraphFactory:
 
     make_ladder_periodic = make_prism
 
-    def make_antiprism(self, size=3):
+    def make_antiprism(self, *, size=3):
         """Create a weighted antiprism graph, |V| = 2 * size, |E| = 4 * size.
         
         Weisstein, Eric W. "Antiprism Graph." From MathWorld--A Wolfram Web Resource. 
@@ -330,7 +330,7 @@ class GraphFactory:
             graph.add_edge(Edge(node, (node + 2) % n, weights.pop())) # line ---
         return graph
 
-    def make_flow_network(self, n=1):
+    def make_flow_network(self, *, n=1):
         """Create a flow network."""
         graph = self.cls(n=n, directed=True)
         for node in range(n):
@@ -362,7 +362,7 @@ class GraphFactory:
 # |/   |  |         \ |
 # 2----4--6-...----(n-2)
 
-    def make_necklace(self, n=4, directed=False):
+    def make_necklace(self, *, n=4, directed=False):
         """Create a weighted necklace graph, |V| = 2*k, |E| = 3*k.
         The set of outer nodes is set(range(0,n,2)) | set([n-1]).
         """
@@ -388,7 +388,7 @@ class GraphFactory:
             graph.add_edge(Edge(i, i+1, weights.pop())) # |
         return graph
 
-    def make_wheel(self, n=4, directed=False):
+    def make_wheel(self, *, n=4, directed=False):
         """Create a weighted wheel graph. The hub is equal to 0."""
         if n < 4:
             raise ValueError("number of nodes must be greater than 3")
@@ -403,7 +403,7 @@ class GraphFactory:
             graph.add_edge(Edge(i, i+1 if (i < n-1) else 1, weights.pop()))
         return graph
 
-    def make_fake_wheel(self, n=7, directed=False):
+    def make_fake_wheel(self, *, n=7, directed=False):
         """Create a weighted fake wheel graph."""
         # Similar to a windmill graph,
         # http://mathworld.wolfram.com/WindmillGraph.html

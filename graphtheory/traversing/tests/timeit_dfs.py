@@ -12,7 +12,7 @@ V = 10
 #V = 1000000   # OK for DFSWithStack
 #V = 20000   # Naruszenie ochrony pamieci
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_cyclic(V, False)
+G = graph_factory.make_cyclic(n=V, directed=False)
 E = G.e()
 #G.show()
 

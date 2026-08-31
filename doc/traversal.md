@@ -12,7 +12,7 @@ from graphtheory.traversing.dfs import DFSWithDepthTracker
 
 G = Graph()
 # Add nodes and edges here.
-source = ...   # starting node
+source = ...   # a starting node
 order = []
 #algorithm = DFSWithStack(G)
 #algorithm = DFSWithRecursion(G)
@@ -24,6 +24,8 @@ algorithm.dag.show()    # DFS tree as a directed graph
 algorithm.path(source, target)   # construct a path from source to target
 
 # Finding a depth for nodes.
+source = ...   # a starting node
+order = []
 algorithm = DFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print( order )   # visited nodes with depths, a list of pairs (node, depth)
@@ -40,7 +42,7 @@ from graphtheory.traversing.bfs import BFSWithDepthTracker
 
 G = Graph()
 # Add nodes and edges here.
-source = ...   # starting node
+source = ...   # a starting node
 order = []
 #algorithm = BFSWithQueue(G)
 algorithm = SimpleBFS(G)
@@ -51,6 +53,8 @@ algorithm.dag.show()    # BFS tree as a directed graph
 algorithm.path(source, target)   # construct a path from source to target
 
 # Finding a depth for nodes.
+source = ...   # a starting node
+order = []
 algorithm = BFSWithDepthTracker(G)
 algorithm.run(source, pre_action=lambda pair: order.append(pair))
 print( order )   # visited nodes with depths, a list of pairs (node, depth)

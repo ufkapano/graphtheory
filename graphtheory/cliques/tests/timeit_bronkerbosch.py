@@ -26,9 +26,9 @@ from graphtheory.cliques.bronkerboschdeg2 import BronKerboschDegeneracyIterator
 #V = 100   # random pivot BK trwa 2/3 czasu clasic BK
 V = 100
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_random(V, False, 0.5)
-#G = graph_factory.make_complete(V, False)
-#G = graph_factory.make_cyclic(V, False)
+G = graph_factory.make_random(n=V, directed=False, edge_probability=0.5)
+#G = graph_factory.make_complete(n=V, directed=False)
+#G = graph_factory.make_cyclic(n=V, directed=False)
 #G = graph_factory.make_triangle(size=70)
 V = G.v()
 E = G.e()

@@ -76,7 +76,7 @@ for edge in G.iteredges():
 from graphtheory.structures.factory import GraphFactory
 from graphtheory.coloring.edgecolorcomplete import CompleteGraphEdgeColoring
 gf = GraphFactory(Graph)
-G = gf.make_complete(10)   # K_10 graph
+G = gf.make_complete(n=10)   # K_10 graph
 algorithm = CompleteGraphEdgeColoring(G)
 algorithm.run()
 algorithm.show_colors()

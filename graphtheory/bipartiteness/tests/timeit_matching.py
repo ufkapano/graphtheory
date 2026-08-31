@@ -15,7 +15,8 @@ from graphtheory.bipartiteness.matchingap import MatchingUsingAugmentingPath
 
 V = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_bipartite(V // 2, V // 2, False, 0.5)
+G = graph_factory.make_bipartite(n1=V // 2, n2=V // 2, directed=False,
+    edge_probability=0.5)
 #G = graph_factory.make_tree(n=V, False)
 E = G.e()
 #G.show()

@@ -10,7 +10,7 @@ from graphtheory.structures.factory import GraphFactory
 V = 1000   # liczba wierzcholkow
 E = V-1      # liczba krawedzi
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_tree(V)
+G = graph_factory.make_tree(n=V)
 #G.show()
 
 print ( "Calculate parameters ..." )

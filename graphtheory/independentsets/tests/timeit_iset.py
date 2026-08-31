@@ -27,7 +27,7 @@ from graphtheory.independentsets.isetll import LargestLastIndependentSet7
 
 V = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_random(V, False, edge_probability=0.5)
+G = graph_factory.make_random(n=V, directed=False, edge_probability=0.5)
 E = G.e()
 #G.show()
 

@@ -16,7 +16,7 @@ from graphtheory.flow.dinic import DinicSparse
 
 V = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_flow_network(V)
+G = graph_factory.make_flow_network(n=V)
 E = G.e()
 #G.show()
 

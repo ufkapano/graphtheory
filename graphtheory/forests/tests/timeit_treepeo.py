@@ -8,7 +8,7 @@ from graphtheory.forests.treepeo import find_peo_tree
 
 N = 10
 gf = GraphFactory(Graph)
-G = gf.make_tree(N)
+G = gf.make_tree(n=N)
 assert G.v() == G.e() + 1
 #G.show()
 

@@ -9,7 +9,7 @@ from graphtheory.traversing.dfs import SimpleDFS
 
 
 class StronglyConnectedComponents:
-    """Strongly connected components for directed graphs."""
+    """Strongly connected components for directed graphs, O(n+m) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -35,7 +35,7 @@ class StronglyConnectedComponents:
 
 
 class ConnectedComponentsBFS:
-    """Connected components for undirected graphs with BFS."""
+    """Connected components for undirected graphs with BFS, O(n+m) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""
@@ -56,7 +56,7 @@ class ConnectedComponentsBFS:
 
 
 class ConnectedComponentsDFS:
-    """Connected components for undirected graphs with DFS."""
+    """Connected components for undirected graphs with DFS, O(n+m) time."""
 
     def __init__(self, graph):
         """The algorithm initialization."""

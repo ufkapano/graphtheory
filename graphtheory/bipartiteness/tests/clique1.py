@@ -11,7 +11,7 @@ N = 10
 gf = GraphFactory(Graph)
 #G = gf.make_tree(N)
 # make_bipartite(self, n1=1, n2=1, directed=False, edge_probability=0.5):
-G = gf.make_bipartite(N // 2, N - N // 2)
+G = gf.make_bipartite(n1=N // 2, n2=N - N // 2)
 G.show()
 
 w = list(range(1, N+1))

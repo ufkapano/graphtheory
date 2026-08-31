@@ -5,6 +5,7 @@ from graphtheory.structures.edges import Edge
 from graphtheory.structures.graphs import Graph
 from graphtheory.connectivity.cutedges import TrivialCutEdge
 from graphtheory.connectivity.cutedges import TarjanCutEdge
+from graphtheory.connectivity.cutedges import TarjanCutEdgeWithEdges
 
 # 0---1   2---3
 # | / | / | / |
@@ -38,15 +39,28 @@ class TestCutEdge(unittest.TestCase):
         algorithm = TarjanCutEdge(self.G)
         algorithm.run(2)
         dd_expected = {0: 6, 1: 5, 2: 1, 3: 2, 4: 7, 5: 4, 6: 3, 7: 8}
-        self.assertEqual(algorithm._dd, dd_expected)
+        self.assertEqual(algorithm.dd, dd_expected)
         parent_expected = {0: 1, 1: 5, 2: None, 3: 2, 4: 0, 5: 6, 6: 3, 7: 6}
         self.assertEqual(algorithm.parent, parent_expected)
-        cut_edges_expected = [Edge(5, 1, 4)]
+        cut_edges_expected = [Edge(1, 5, 4)]
+        self.assertEqual(algorithm.cut_edges, cut_edges_expected)
+
+    def test_tarjan_cut_edges2(self):
+        algorithm = TarjanCutEdgeWithEdges(self.G)
+        algorithm.run(2)
+        dd_expected = {0: 6, 1: 5, 2: 1, 3: 2, 4: 7, 5: 4, 6: 3, 7: 8}
+        self.assertEqual(algorithm.dd, dd_expected)
+        parent_expected = {0: Edge(0, 1, 3), 1: Edge(1, 5, 4), 2: None,
+            3: Edge(3, 2, 8), 4: Edge(4, 0, 2), 5: Edge(5, 6, 6),
+            6: Edge(6, 3, 9), 7: Edge(7, 6, 10)}
+        self.assertEqual(algorithm.parent, parent_expected)
+        cut_edges_expected = [Edge(1, 5, 4)]
         self.assertEqual(algorithm.cut_edges, cut_edges_expected)
 
     def test_exceptions(self):
         self.assertRaises(ValueError, TrivialCutEdge, Graph(n=1, directed=True))
         self.assertRaises(ValueError, TarjanCutEdge, Graph(n=1, directed=True))
+        self.assertRaises(ValueError, TarjanCutEdgeWithEdges, Graph(n=1, directed=True))
 
     def tearDown(self): pass
 

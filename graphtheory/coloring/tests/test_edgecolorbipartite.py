@@ -16,7 +16,7 @@ class TestEdgeColoring(unittest.TestCase):
         N1 = 5
         N2 = 3
         gf = GraphFactory(Graph)
-        G = gf.make_bipartite(N1, N2, False, 1)
+        G = gf.make_bipartite(n1=N1, n2=N2, directed=False, edge_probability=1)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), N1 + N2)
         self.assertEqual(G.e(), N1 * N2)
@@ -41,7 +41,7 @@ class TestEdgeColoring(unittest.TestCase):
         self.assertRaises(ValueError, CompleteBipartiteGraphEdgeColoring,
             Graph(n=5, directed=True))
         gf = GraphFactory(Graph)
-        G = gf.make_bipartite(2, 2, False, 1)
+        G = gf.make_bipartite(n1=2, n2=2, directed=False, edge_probability=1)
         #G.show()
         G.del_edge(Edge(0, 2))   # nie bedzie pelny dwudzielny
         self.assertRaises(ValueError, CompleteBipartiteGraphEdgeColoring, G)
@@ -57,7 +57,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
         N = 8
         assert N % 2 == 0
         gf = GraphFactory(Graph)
-        G = gf.make_cyclic(N)
+        G = gf.make_cyclic(n=N)
         algorithm = BipartiteGraphEdgeColoring(G)
         algorithm.run()
         for edge in G.iteredges():
@@ -79,7 +79,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
         N1 = 15
         N2 = 13
         gf = GraphFactory(Graph)
-        G = gf.make_bipartite(N1, N2, False, 1)
+        G = gf.make_bipartite(n1=N1, n2=N2, directed=False, edge_probability=1)
         self.assertFalse(G.is_directed())
         self.assertEqual(G.v(), N1 + N2)
         self.assertEqual(G.e(), N1 * N2)
@@ -104,7 +104,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
         N1 = 10
         N2 = 13
         gf = GraphFactory(Graph)
-        G = gf.make_bipartite(N1, N2)
+        G = gf.make_bipartite(n1=N1, n2=N2)
         algorithm = BipartiteGraphEdgeColoring(G)
         algorithm.run()
         for edge in G.iteredges():
@@ -127,7 +127,7 @@ class TestBipartiteEdgeColoring(unittest.TestCase):
         self.assertRaises(ValueError, BipartiteGraphEdgeColoring,
             Graph(n=5, directed=True))
         gf = GraphFactory(Graph)
-        G = gf.make_cyclic(4)
+        G = gf.make_cyclic(n=4)
         #G.show()
         G.add_edge(Edge(0, 2))   # nie bedzie dwudzielny
         self.assertRaises(ValueError, BipartiteGraphEdgeColoring, G)

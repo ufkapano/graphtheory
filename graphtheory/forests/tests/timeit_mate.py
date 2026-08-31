@@ -7,15 +7,15 @@ from graphtheory.structures.factory import GraphFactory
 from graphtheory.bipartiteness.bipartite import is_bipartite
 from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpSet
 from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonSet
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonList
-from graphtheory.bipartiteness.matching import MatchingFordFulkersonColor
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonSet
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonList
+from graphtheory.bipartiteness.matchingff import MatchingFordFulkersonColor
 from graphtheory.forests.treemate import BorieMatching
 
 V = 10
 E = V-1   # drzewo
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_tree(V, False)
+G = graph_factory.make_tree(n=V, directed=False)
 #G.show()
 
 print ( "Calculate parameters ..." )

@@ -13,7 +13,7 @@ class TestTournaments(unittest.TestCase):
     def setUp(self):
         self.N = 5           # number of nodes
         graph_factory = GraphFactory(Graph)
-        self.G = graph_factory.make_complete(self.N, True)
+        self.G = graph_factory.make_complete(n=self.N, directed=True)
         #self.G.show()
 
     def test_is_transitive(self):

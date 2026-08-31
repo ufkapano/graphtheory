@@ -13,7 +13,7 @@ from graphtheory.structures.factory import GraphFactory
 # Creating bipartite graphs.
 N = 10
 gf = GraphFactory(Graph)
-G = gf.make_bipartite(N, N, directed=False, edge_probability=0.1)
+G = gf.make_bipartite(n1=N, n2=N, directed=False, edge_probability=0.1)
 #G = gf.make_tree(n=N)   # trees are bipartite
 #G = gf.make_ladder(size=N)
 assert is_bipartite(G)
@@ -39,7 +39,7 @@ from graphtheory.bipartiteness.hopcroftkarp import HopcroftKarpList
 
 N = 10
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_bipartite(N // 2, N // 2, False, 0.5)   # random bipartite
+G = graph_factory.make_bipartite(n1=N // 2, n2=N // 2, False, 0.5)   # random bipartite
 #G = graph_factory.make_tree(n=N, False)   # trees are bipartite
 
 algorithm = MatchingFordFulkersonSet(G)

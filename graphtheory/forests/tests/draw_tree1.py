@@ -11,7 +11,7 @@ from graphtheory.forests.treeplot import TreePlotRadiusAngle
 
 V = 20
 gf = GraphFactory(Graph)
-G = gf.make_tree(V)
+G = gf.make_tree(n=V)
 #G.show()
 assert G.e() == V-1
 

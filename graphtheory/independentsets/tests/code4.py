@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Kody korekcyjne. Wezly sa polaczone, jezeli roznia sie
 # na jednym lub 2 miejscach.

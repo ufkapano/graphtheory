@@ -20,9 +20,9 @@ from graphtheory.spanningtrees.kruskal import KruskalMSTSorted
 
 V = 50
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_random(V, False, 0.5)
-#G = graph_factory.make_complete(V, False)
-#G = graph_factory.make_cyclic(V, False)
+G = graph_factory.make_random(n=V, directed=False, edge_probability=0.5)
+#G = graph_factory.make_complete(n=V, directed=False)
+#G = graph_factory.make_cyclic(n=V, directed=False)
 E = G.e()
 #G.show()
 

@@ -13,7 +13,7 @@ from graphtheory.hamiltonian.tspse import SortedEdgeTSPWithGraph
 
 V = 8
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_complete(V, False)
+G = graph_factory.make_complete(n=V, directed=False)
 E = G.e()
 #G.show()
 

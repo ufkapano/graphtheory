@@ -10,7 +10,7 @@ from graphtheory.traversing.bfs import SimpleBFS
 V = 10
 #V = 1000000   # OK
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_cyclic(V, False)
+G = graph_factory.make_cyclic(n=V, directed=False)
 E = G.e()
 #G.show()
 

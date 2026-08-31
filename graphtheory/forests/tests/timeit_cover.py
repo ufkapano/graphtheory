@@ -11,7 +11,7 @@ from graphtheory.forests.treecover import TreeNodeCover2
 V = 10
 E = V-1   # tree
 graph_factory = GraphFactory(Graph)
-G = graph_factory.make_tree(V, False)
+G = graph_factory.make_tree(n=V, directed=False)
 #G.show()
 
 print ( "Calculate parameters ..." )
