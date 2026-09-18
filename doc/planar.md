@@ -27,6 +27,7 @@ print( G.e() )   # the number of edges
 print( G.f() )   # the number of faces
 for face in G.iterfaces():
     print( face )
+start_edge = next(G.iteredges())   # an exemplary start edge
 for edge in G.iterface(start_edge):
     print( edge )
 ~~~
