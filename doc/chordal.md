@@ -47,8 +47,8 @@ G = make_random_chordal(n=10)   # PEO = range(n)
 ~~~python
 from graphtheory.chordality.peotools import find_maximum_iset_chordal
 
-iset = find_maximum_iset_chordal(G, peo)   # G have to be chordal
-print( iset )   # a set of nodes
+max_iset = find_maximum_iset_chordal(G, peo)   # G has to be chordal
+print( max_iset )   # a set of nodes
 ~~~
 
 ## MINIMUM DEGREE ORDERING (MDO) OF CHORDAL GRAPHS

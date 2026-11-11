@@ -34,13 +34,13 @@ class SmallestLastNodeColoring:
         """Executable pseudocode."""
         n = self.graph.v()
         degree_dict = dict((node, self.graph.degree(node))
-            for node in self.graph.iternodes())   # O(V) time
-        order = list()
+            for node in self.graph.iternodes())   # O(n) time
+        order = []
         used = set()
-        bucket = list(set() for deg in range(n))   # O(V) time
-        for node in self.graph.iternodes():   # O(V) time
+        bucket = list(set() for deg in range(n))   # O(n) time
+        for node in self.graph.iternodes():   # O(n) time
             bucket[self.graph.degree(node)].add(node)
-        for step in range(n):   # O(V) time
+        for step in range(n):   # O(n) time
             for deg in range(n):
                 if bucket[deg]:
                     source = bucket[deg].pop()

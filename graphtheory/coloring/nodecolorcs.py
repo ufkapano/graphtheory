@@ -9,7 +9,7 @@ from graphtheory.traversing.bfs import SimpleBFS
 
 
 class ConnectedSequentialNodeColoring:
-    """Find a connected sequential (CS) node coloring.
+    """Find a connected sequential (CS) node coloring in O(n+m) time.
     
     Attributes
     ----------
@@ -34,10 +34,9 @@ class ConnectedSequentialNodeColoring:
 
     def run(self):
         """Executable pseudocode."""
-        order = list()
+        order = []
         algorithm = SimpleBFS(self.graph)
         algorithm.run(pre_action=lambda node: order.append(node))
-        #print("order {}".format(order))
         for source in order:
             self._greedy_color(source)
 

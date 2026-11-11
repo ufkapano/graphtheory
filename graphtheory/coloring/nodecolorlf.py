@@ -7,7 +7,7 @@ except NameError:   # Python 3
 
 
 class LargestFirstNodeColoring:
-    """Find a largest first (LF) node coloring.
+    """Find a largest first (LF) node coloring in O(n+m) time.
     
     Attributes
     ----------
@@ -33,7 +33,7 @@ class LargestFirstNodeColoring:
     def run(self):
         """Executable pseudocode."""
         n = self.graph.v()
-        order = list()
+        order = []
         bucket = list([] for deg in range(n))   # O(V) time
         for node in self.graph.iternodes():   # O(V) time
             bucket[self.graph.degree(node)].append(node)

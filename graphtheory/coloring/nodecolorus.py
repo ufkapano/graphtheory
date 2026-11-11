@@ -7,7 +7,7 @@ except NameError:   # Python 3
 
 
 class UnorderedSequentialNodeColoring:
-    """Find an unordered sequential (US) node coloring.
+    """Find an unordered sequential (US) node coloring in O(n+m) time.
     
     Based on
     http://eduinf.waw.pl/inf/alg/001_search/0142.php
@@ -37,7 +37,7 @@ class UnorderedSequentialNodeColoring:
 
     def run(self):
         """Executable pseudocode."""
-        for source in self.graph.iternodes():
+        for source in self.graph.iternodes():   # total O(n+m) time
             self._greedy_color(source)
 
     def _greedy_color(self, source):

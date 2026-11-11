@@ -425,7 +425,6 @@ class GraphFactory:
         graph.del_edge(edge2)
         graph.add_edge(Edge(3, 1, edge1.weight))
         graph.add_edge(Edge(n-1, 4, edge2.weight))
-        #graph.show()
         return graph
 
 # EOF

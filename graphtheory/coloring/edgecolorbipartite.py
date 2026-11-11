@@ -134,7 +134,7 @@ class BipartiteGraphEdgeColoring:
                     self._add_color(edge, c)
 
     def _add_color(self, edge, c):
-        """Add color."""
+        """Add edge color."""
         if edge.source > edge.target:
             edge = ~edge
         self.color[edge] = c
@@ -142,7 +142,7 @@ class BipartiteGraphEdgeColoring:
         self.missing[edge.target].remove(c)
 
     def _del_color(self, edge, c):
-        """Delete color."""
+        """Delete edge color."""
         if edge.source > edge.target:
             edge = ~edge
         self.color[edge] = None
@@ -150,7 +150,7 @@ class BipartiteGraphEdgeColoring:
         self.missing[edge.target].add(c)
 
     def _get_color(self, edge):
-        """Get color."""
+        """Get edge color."""
         if edge.source > edge.target:
             edge = ~edge
         return self.color[edge]

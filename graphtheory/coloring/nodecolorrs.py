@@ -9,7 +9,7 @@ import random
 
 
 class RandomSequentialNodeColoring:
-    """Find a random sequential (RS) node coloring.
+    """Find a random sequential (RS) node coloring in O(n+m) time.
     
     Based on
     http://eduinf.waw.pl/inf/alg/001_search/0142.php
@@ -38,8 +38,8 @@ class RandomSequentialNodeColoring:
     def run(self):
         """Executable pseudocode."""
         node_list = list(self.graph.iternodes())
-        random.shuffle(node_list)   # O(V) time
-        for source in node_list:
+        random.shuffle(node_list)   # O(n) time
+        for source in node_list:   # total O(n+m) time
             self._greedy_color(source)
 
     def _greedy_color(self, source):

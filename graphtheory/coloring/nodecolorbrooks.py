@@ -12,7 +12,10 @@ from graphtheory.connectivity.connected import is_connected
 
 
 class BrooksNodeColoring:
-    """Find a node coloring based on Brooks' theorem.
+    """Find a node coloring based on Brooks' theorem in O(n^2) time.
+    The implementation finds Delta-coloring in two cases:
+    (1) for connected graphs which are not Delta-regular,
+    (2) for Delta-regular 3-connected graphs.
     
     Attributes
     ----------
@@ -37,7 +40,7 @@ class BrooksNodeColoring:
         self.order = list()
         self.parent = dict()
         self.m = 0   # graph.e() is slow
-        for edge in self.graph.iteredges():
+        for edge in self.graph.iteredges():   # O(m) time
             self.m += 1
             if edge.source == edge.target:
                 raise ValueError("a loop detected")
@@ -50,21 +53,21 @@ class BrooksNodeColoring:
         Delta = max(self.graph.degree(node) for node in self.graph.iternodes())
         if Delta < 3:
             raise ValueError("trivial case with Delta less then three")
-        source = min(self.graph.iternodes(), key=self.graph.degree)
+        source = min(self.graph.iternodes(), key=self.graph.degree) # O(n) time
         if self.graph.degree(source) < Delta:
             # Wystarczy zrobic BFS zaczynajac od source.
             # Tutaj wystarczy, gdy graf jest spojny.
             # Ustalam kolejnosc kolorowania wierzcholkow za pomoca BFS.
-            self._visit(source)   # BFS in O(V+E) time
+            self._visit(source)   # BFS in O(n+m) time
         else:
             # Delta-regular graph.
             # Zakladam, ze graf jest 3-connected. Chodzi o to, aby 
             # po usunieciu neighbor1 i neighbor2 graf dalej byl spojny.
-            # Wybieram wierzcholek o najwiekszym stopniu, O(V) time.
+            # Wybieram wierzcholek o najwiekszym stopniu, O(n) time.
             #source = max(self.graph.iternodes(), key=self.graph.degree)
             #source = self.graph.iternodes().next()
             for nodes in itertools.combinations(
-                self.graph.iteradjacent(source), 2):   # O(Delta**2) time
+                self.graph.iteradjacent(source), 2):   # O(Delta^2) time
                     neighbor1, neighbor2 = nodes
                     if not self.graph.has_edge(Edge(neighbor1, neighbor2)):
                         break
@@ -72,14 +75,14 @@ class BrooksNodeColoring:
             # Mark two neighbors of source as visited.
             self.parent[neighbor1] = source
             self.parent[neighbor2] = source
-            self._visit(source)   # modified BFS in O(V+E) time
+            self._visit(source)   # modified BFS in O(n+m) time
             self.order.append(neighbor1)   # second colored, color 0
             self.order.append(neighbor2)   # first colored, color 0
         # Mozemy kolorowac zachlannie wg znalezionej kolejnosci.
         # Sprawdzenie czy wszedzie doszedl BFS.
         assert len(self.order) == self.graph.v(), "problems with a Delta-regular graph"
-        self.order.reverse()   # kolejnosc odwrotna! O(V) time
-        for source in self.order:   # O(V+E) time
+        self.order.reverse()   # kolejnosc odwrotna! O(n) time
+        for source in self.order:   # O(n+m) time
             self._greedy_color(source)
 
     def _visit(self, node):
