@@ -33,6 +33,8 @@ class TestDirectedEdge(unittest.TestCase):
         self.assertFalse(self.edge1 > self.edge3)
         self.assertTrue(self.edge3 >= self.edge4)
         self.assertFalse(self.edge1 >= self.edge3)
+        with self.assertRaises(TypeError):
+            self.edge1 < (2, 5)
 
     def test_hash(self):
         aset = set()

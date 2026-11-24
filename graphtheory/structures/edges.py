@@ -4,6 +4,7 @@
 
 from functools import total_ordering
 
+
 @total_ordering
 class Edge:
     """The class defining a directed edge.
@@ -51,6 +52,8 @@ class Edge:
 
     def __eq__(self, other):
         """Comparing of edges (the weight first)."""
+        if not isinstance(other, type(self)):
+            return False
         return (self.source, self.target, self.weight) == (
             other.source, other.target, other.weight)
 
@@ -60,6 +63,8 @@ class Edge:
 
     def __lt__(self, other):
         """Comparing of edges (the weight first)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not an 'Edge' instance")
         return (self.weight, self.source, self.target) < (
             other.weight, other.source, other.target)
 

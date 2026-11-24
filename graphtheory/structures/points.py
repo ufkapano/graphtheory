@@ -2,7 +2,10 @@
 
 import math
 from fractions import Fraction
+from functools import total_ordering
 
+
+@total_ordering
 class Point:
     """The class defining a point in the plane (2D vector)."""
 
@@ -17,10 +20,14 @@ class Point:
 
     def __add__(self, other):
         """Return a new point (point1 + point2)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not a 'Point' instance")
         return Point(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
         """Return a new point (point1 - point2)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not a 'Point' instance")
         return Point(self.x - other.x, self.y - other.y)
 
     def __mul__(self, other):
@@ -39,6 +46,8 @@ class Point:
 
     def cross(self, other):
         """Return the cross product in 2D (a number)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not a 'Point' instance")
         return (self.x * other.y - self.y * other.x)
 
     def __pos__(self):
@@ -87,30 +96,24 @@ class Point:
 
     def __eq__(self, other):
         """Points comparison (like 2-tuple)."""
+        if not isinstance(other, type(self)):
+            return False
         return self.x == other.x and self.y == other.y
 
     def __ne__(self, other):
         """Points comparison (like 2-tuple)."""
-        return not (self == other)
+        return not self == other
 
     def __lt__(self, other):
         """Points comparison (like 2-tuple)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not a 'Point' instance")
         return (self.x, self.y) < (other.x, other.y)
-
-    def __le__(self, other):
-        """Points comparison (like 2-tuple)."""
-        return (self.x, self.y) <= (other.x, other.y)
-
-    def __gt__(self, other):
-        """Points comparison (like 2-tuple)."""
-        return (self.x, self.y) > (other.x, other.y)
-
-    def __ge__(self, other):
-        """Points comparison (like 2-tuple)."""
-        return (self.x, self.y) >= (other.x, other.y)
 
     def __cmp__(self, other):   # Python 2 only
         """Points comparison (like 2-tuple)."""
+        if not isinstance(other, type(self)):
+            raise TypeError("not a 'Point' instance")
         return cmp((self.x, self.y), (other.x, other.y))
 
     def __hash__(self):
