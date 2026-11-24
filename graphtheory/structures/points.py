@@ -32,7 +32,7 @@ class Point:
 
     def __mul__(self, other):
         """Return a dot product or a new point."""
-        if isinstance(other, Point):      # point1 * point2 to iloczyn skalarny
+        if isinstance(other, type(self)):      # point1 * point2 to iloczyn skalarny
             return (self.x * other.x + self.y * other.y)
         else:   # mnozenie przez liczbe (int, float, Fraction)
             return Point(self.x * other, self.y * other)

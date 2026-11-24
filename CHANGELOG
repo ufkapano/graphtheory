@@ -1,5 +1,8 @@
 CHANGELOG
 
+2026-11-24
+* Using isinstance(other, type(self)) in many methods [Point, Edge].
+
 2026-08-31
 * GraphFactory changed, keyword arguments are mandatory.
 
